@@ -1,18 +1,17 @@
-//script,css 코드들 분할해서 정리하기
-
+//모듈
+const bodyParser = require("body-parser");
 const express = require('express');
 const hbs = require('express-handlebars');
 const userinfo = require('./db/info.json');
+const router = require('./routes/home');
 
 //db.js에서 sql받아오기
 var db_config = require(__dirname + '/db.js');
 var conn = db_config.init();
 db_config.connect(conn);
-
-
-
 const server = express();
 
+const PORT = 4000;
 server.engine("hbs", hbs.engine({
     extname: "hbs",
     defaultLayout: "layout.hbs",
@@ -20,39 +19,19 @@ server.engine("hbs", hbs.engine({
     partialsDir: __dirname + "/views/partials"
 }));
 
+//세팅
+server.set("views", __dirname + "/views");
 server.set("view engine", "hbs");
-
 server.use(express.static(__dirname + '/public'));
+server.use(bodyParser.json());
 
-server.get('/', (req, res) => {
-    res.render('adm',{
-        userinfo
-    });
-});
+server.use(bodyParser.urlencoded({ extended: true }));
 
-server.get('/member_management', (req, res) => {
-    res.render('member_management');
-});
-server.get('/regiAll', (req, res) => {
-    res.render('regiAll');
-});
-server.get('/regiMem', (req, res) => {
-    res.render('regiMem');
-});
-server.get('/revMem', (req, res) => {
-    res.render('revMem');
-});
-server.get('/deleteMem', (req, res) => {
-    res.render('deleteMem');
-});
+const home = require('./routes/home');
+server.use('/', home);
 
-
-
-server.use((req, res) => {
-    res.sendFile(__dirname + '/404.html');
-});
-
-server.listen(4000, (err) => {
+//PORT로 서버 실행
+server.listen(PORT, (err) => {
     if (err) {
         console.log(err);
     }
