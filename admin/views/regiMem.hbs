@@ -1,0 +1,113 @@
+<!--등록 다 만들고 복붙 다시할 것-->
+<script>
+    $(document).ready(function(){
+        $('.ui.dropdown').dropdown();
+    });
+    //취소 시 메인화면으로 이동
+    function cancel_mem(){
+        location.href = "/";
+    }
+    //등록
+    function regiInfo(){
+        location.href = "/";
+    }
+</script>
+
+<div class="pagename">회원 등록</div>
+<div>
+    <div class="ui form">
+        <div class="field">
+            <label>이름</label>
+            <input type="text" name="name" placeholder="이름">
+        </div>
+        <div class="field">
+            <label>아이디</label>
+            <input type="text" name="id" placeholder="아이디">
+        </div>
+        <div class="field">
+            <label>비밀번호</label>
+            <input type="password" name="password" placeholder="비밀번호">
+        </div>
+        <div class="field">
+            <label>비밀번호 확인</label>
+            <input type="password" name="password" placeholder="비밀번호 확인">
+        </div>
+        <div class="field">
+            <label>권한</label>
+            <select class="ui dropdown">
+                <option value="">권한</option>
+                <option value="1">관리자</option>
+                <option value="2">사용자</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>사용자 구분</label>
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>청소년</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>학부모</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>청소년 부모</label>
+            </div>
+        </div>
+        <div class="field">
+            <label>걱주지</label>
+            <select class="ui dropdown">
+                <option value="">영암읍</option>
+                <option value="1">삼호읍</option>
+                <option value="2">덕진면</option>
+                <option value="3">금정면</option>
+                <option value="4">신북면</option>
+                <option value="5">시종면</option>
+                <option value="6">도포면</option>
+                <option value="7">군서면</option>
+                <option value="8">서호면</option>
+                <option value="9">학산면</option>
+                <option value="10">미암면</option>
+                </select>
+        </div>
+        <div class="field">
+            <label>나이</label>
+            <input type="text" name="age" placeholder="나이">
+        </div>
+        <div class="field">
+            <label>성별</label>
+                &nbsp;
+                <input type='radio' name='gender' value='male' />남성
+                &ensp;
+                <input type='radio' name='gender' value='female' />여성 
+        </div>
+
+        <div class="field">
+            <label>전화번호</label>
+            <input type="text" name="phone" placeholder="전화번호">
+        </div>
+        <div class="field">
+            <label>이메일</label>
+            <input type="text" name="email" placeholder="이메일">
+        </div>
+        <div class="field">
+            <label>수신동의</label>
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>푸시알림</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>SMS</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>이메일</label>
+            </div>
+        </div>
+        <div id="regi_button">
+            <button class="ui button" type="submit" onclick="regiInfo()">등록</button>
+            <button class="ui button" type="submit" onclick="cancel_mem()">취소</button>
+        </div>
+</div>

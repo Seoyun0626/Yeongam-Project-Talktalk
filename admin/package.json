@@ -1,0 +1,30 @@
+{
+  "name": "first",
+  "version": "1.0.0",
+  "description": "about first page",
+  "main": "app.js",
+  
+  "scripts": {
+    "dev": "nodemon app.js -e js,json,hbs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joonw00/nodejs.git"
+  },
+  "author": "Joon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joonw00/nodejs/issues"
+  },
+  "homepage": "https://github.com/Joonw00/nodejs#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "mysql": "^2.18.1",
+    "readline-sync": "^1.4.10"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

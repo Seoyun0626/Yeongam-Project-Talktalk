@@ -1,0 +1,131 @@
+<div class="pagename">회원 정보 관리</div>
+
+<script>
+    /*
+    function search() {
+        var info = document.getElementById("search_info").value;
+        location.href = "/adm/search/" + info;
+        var query = sanitize(url.parse(request.url, true).query.query);
+        var searchType = "name"; //type 설정 받기
+        if(searchType == "name") {
+            SELECT * FROM user_table WHERE user_name '%${info}%';
+        } else if(searchType == "id") {
+            SELECT * FROM user_table WHERE user_id '%${info}%';
+        }
+    }
+    */
+    //엔터키로 검색
+    function searchEnter(e) {
+        if (e.keyCode == 13) {
+            search();
+        }
+    }
+    //화면 이동
+    //등록
+    function regiAll(){
+        location.href = "/regiAll";
+    }
+    function regiMem(){
+        location.href = "/regiMem";
+    }
+    //아이콘 : rev, delete
+    function revMem(){
+        location.href = "/revMem";
+    }
+    function deleteMem(){
+        
+    }
+</script>
+
+<div id="search_userinfo">
+    <ul>
+        <li>회원분류
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>청소년</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>학부모</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox"> 
+                <label>청소년 부모</label>
+            </div>
+        </li>
+        <li>수신동의
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>푸시알림</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>SMS</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox">
+                <label>이메일</label>
+            </div>
+        </li>
+        <li><div>검색어
+        <select>
+            <option value="id">이름</option>
+            <option value="name">아이디</option>
+        </select>
+        <input type="text" id="search_info" onkeypress="searchEnter(event)" placeholder="내용을 입력해주세요">
+        <button onclick="search()" class="ui button" id="search_button">검색</button>
+    </div>
+    </li>
+    </ul>
+</div>
+<br>
+<table>
+  <thead>
+    <tr><th>아이디</th>
+    <th>이름</th>
+    <th>권한</th>
+    <th>회원분류</th>
+    <th>최종접속</th>
+    <th>등록일시</th>
+    <th>푸시</th>
+    <th>이메일</th>
+    <th>sms</th>
+    <th>관리</th>
+  </tr></thead>
+  <tbody>
+    {{#each userinfo}}
+    <tr>
+      <td>{{this.ID}}</td>
+      <td>{{this.Name}}</td>
+      <td>{{this.auth}}</td>
+        <td>{{this.mem_class}}</td>
+        <td>{{this.last_login}}</td>
+        <td>{{this.reg_date}}</td>
+        <td>{{this.push_av}}</td>
+        <td>{{email_av}}</td>
+        <td>{{sms_av}}</td>
+      <td>
+        <button class="rev" onclick="revMem()">수정</button>
+        <button class="delete" onclick="deleteMem()">삭제</button>
+        </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+
+<div id="managep_foot">
+    <div class="ui pagination menu" id="managep_paging">
+        <a class="icon item">
+            <i class="left chevron icon"></i>
+        </a>
+        <a class="item">1</a>
+        <a class="item">2</a>
+        <a class="item">3</a>
+        <a class="item">4</a>
+        <a class="icon item">
+            <i class="right chevron icon"></i>
+    </a></div>
+    <button class="ui button" id="add_user" onclick="regiMem()">회원 등록</button>
+    <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button>
+</div>
