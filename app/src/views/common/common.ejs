@@ -1,0 +1,109 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- /#page-wrapper -->
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"-->
+<!-- 부가적인 테마 -->
+<!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"-->
+
+<!-- bootstrap-4.4.1-dist
+<link rel="stylesheet" href="/css/bootstrap-grid.css">
+<link rel="stylesheet" href="/css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="/css/bootstrap-reboot.css">
+<link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
+<link rel="stylesheet" href="/css/bootstrap.css">-->
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/bootstrap.bundle.js"></script><!--dropdown, tooltip Popper.js를 포함 https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.js -->
+<script src="/js/bs-custom-file-input.min.js"></script><!--custom-file-upload form https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js-->
+<link rel="stylesheet" href="/css/bootstrap-icons.css"><!--https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css-->
+
+<!--script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap.bundle.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script-->
+
+<!-- fileupload drag n drop
+<link rel="stylesheet" href="/css/fileinput.css">
+<script src="/js/fileinput.js"></script>
+<script src="/js/theme.js"></script>
+ -->
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<!--script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script-->
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+<script src="/js/additional-methods.min.js"></script><!--extension validation check https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/additional-methods.min.js-->
+
+<!-- datetimepicker--
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.structure.min.css">
+<!-- datetimepicker-->
+
+<script src="/js/jquery.twbsPagination.min.js"></script>
+
+<script>/*
+      $(function() {
+        $( "#strt_date" ).datepicker({
+          changeMonth: true, 
+          dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+          dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
+          monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+          monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+          showButtonPanel: true, 
+          currentText: '오늘 날짜', 
+          closeText: '닫기', 
+          dateFormat: "yymmdd",/*
+          showOn: "both",
+          buttonImage: '/img/calendar.png',
+          buttonImageOnly: true*
+        });
+        $( "#end_date" ).datepicker({
+          changeMonth: true, 
+          dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
+          dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
+          monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+          monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+          showButtonPanel: true, 
+          currentText: '오늘 날짜', 
+          closeText: '닫기', 
+          dateFormat: "yymmdd",/*
+          showOn: "both",
+          buttonImage: '/img/calendar.png',
+          buttonImageOnly: true*
+        });
+    });*/
+    var url=new URL(document.referrer).pathname+new URL(document.referrer).search;
+    function back(){
+        location.href=url;
+    }
+    function init(){
+        var pageArr=['mypage','monsensorboard','projectboard','subprojectboard'];
+        var pageNmArr=['mypage','디바이스정보','과제정보','세부주제정보'];
+        for(idx in pageArr)
+            if(url.indexOf(pageArr[idx])>-1){
+                $('#se_path').prop('href', url);
+                $('#se_path').text(pageNmArr[idx]);
+            }
+    }
+    var senData=<%-JSON.stringify(selctData.sensor.data)%>;
+    var senGrpData=<%-JSON.stringify(selctData.sensorgroup.data)%>;
+    var ifTypeData=<%-JSON.stringify(ifType.data)%>;
+    function auth(char) {
+        var arr1=[4,5,6,7,12,13,14,15];
+        var arr2=[2,3,6,7,10,11,14,15];
+        var arr3=[1,3,5,7,9,11,13,15];
+        switch (char) {
+            case "mod": return arr1;
+            case "del": return arr2;
+            default: return arr3;
+        }
+    }
+    /*
+    $(document).ajaxStart(function(){
+        $('#modal-spinner').modal('show');
+    }).ajaxStop(function() {
+        $('#modal-spinner').modal('hide');
+    })*/
+</script>

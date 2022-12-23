@@ -1,0 +1,55 @@
+body {
+  margin: 0px;
+}
+/*div 내림 방지*/
+#wapper {
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+text-decoration: none;
+color: black;
+}
+
+.header {
+color: black;
+font-size: 18px;
+font-weight: bold;
+margin-bottom: 12px;
+margin-top: 40px;
+margin-left: 10px;
+}
+
+nav{
+float: left;
+width: 15vw;
+height: 100vh;
+padding-left: 1em;
+padding-right: 1em;
+padding-top: 1em;
+background-color: gray;
+margin: 0;
+top: 0;
+left: 0;
+overflow: auto;
+}
+section{
+float: left;
+width: 85vw;
+height: 200vh;
+padding-left: 1em;
+padding-right: 1em;
+padding-top: 1em;
+background-color: white;
+margin: 0;
+top: 0;
+left: 0;
+overflow: auto; 
+}
+
+ul{
+margin-right: 10px;
+}

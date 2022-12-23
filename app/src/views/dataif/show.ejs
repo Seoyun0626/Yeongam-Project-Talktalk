@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../common/common') %>
+    <%- include('../common/head') %>
+    <script src="/js/regsensor.js"></script>
+    <script>
+      function delPost(idx){
+        var ajax = $.ajax({
+              url: "/dataif/"+idx+"?_method=delete",
+              type: 'POST',
+              success: function(result) {
+                  if(typeof result === "object") {                
+                      alert(result.msg);
+                      if(result.success) location.href="/dataif";
+                  }
+              }
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <%- include('../common/nav') %>
+
+    <div class="container mb-3">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb p-1 pl-2 pr-2">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/dataif">데이터연계 요청 관리</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= post.sen_name %></li>
+        </ol>
+      </nav>
+
+
+      <div class="form-row float-right">
+        <a class="btn btn-outline-dongguk4" href="/dataif">Back</a>&nbsp;&nbsp;&nbsp;
+        <% if(post.permit_type=='N') { %>
+        <a class="btn btn-outline-dongguk2" href="/dataif/<%= post.board_idx %>/edit">Edit</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-outline-dark" href="javascript:delPost('<%= post.board_idx %>')">Delete</a>&nbsp;&nbsp;&nbsp;
+        <% } %>
+      </div><p>&nbsp;</p><p>&nbsp;</p>
+
+    </div>
+    <%- include('../common/footer') %>
+  </body>
+</html>
+

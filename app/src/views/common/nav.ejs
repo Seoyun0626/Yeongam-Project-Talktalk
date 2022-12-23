@@ -1,0 +1,430 @@
+<script src="/js/login.js"></script>
+<script src="/js/index.js"></script>
+<script>
+  $(function () {
+    $("#modal-login").on("shown.bs.modal", function () {
+      $(this).find('form')[0].reset();
+      $("#modal-login #userid").focus();
+    });
+    $("#modal-signup").on("shown.bs.modal", function () {
+      $("#modal-accept").modal('hide');
+      $(this).find('form')[0].reset();
+      $("#modal-signup #userid").focus();
+    });
+    $("#modal-accept").on("shown.bs.modal", function () {
+      $("#modal-accept #chkaccept").prop("checked", false);
+    });
+    const encoded = encodeURI(location.pathname);
+    if(encoded==('/')){
+      $("li:nth-child(1) > .nav-link").addClass('active');
+    } else if(encoded.indexOf('projectboard')>-1 || encoded.indexOf('subprojectboard')>-1 || encoded.indexOf('monsensorboard')>-1){
+      $("li:nth-child(2) > .nav-link").addClass('active');  
+    } else if(encoded.indexOf('deviceboard')>-1 || encoded.indexOf('sensorboard')>-1){
+      $("li:nth-child(3) > .nav-link").addClass('active');
+    //} else if(encoded.indexOf('powersave')>-1){
+    //  $("li:nth-child(4) > .nav-link").addClass('active');
+    } else if(encoded.indexOf('useprocess')>-1 || encoded.indexOf('developinfo')>-1 || encoded.indexOf('useproject')>-1){
+      $("li:nth-child(4) > .nav-link").addClass('active');
+    //} else if(encoded.indexOf('usewebprocess')>-1){
+    //  $("li:nth-child(5) > .nav-link").addClass('active');
+    } else if(encoded.indexOf('mypage')>-1 || encoded.indexOf('datause')>-1 || encoded.indexOf('dataif')>-1 || encoded.indexOf('datapermit')>-1 || encoded.indexOf('dataupload')>-1 || encoded.indexOf('mnggrp')>-1 || encoded.indexOf('projectauth')>-1 || encoded.indexOf('subprojectauth')>-1 || encoded.indexOf('sensorauth')>-1 || encoded.indexOf('user')>-1){
+      $("li:nth-child(5) > .nav-link").addClass('active');
+    }
+ 
+  })
+  function goSignUp(){
+    var ischecked=$("#modal-accept #chkaccept").is(":checked");
+    if(ischecked) $("#modal-signup").modal('show');
+    else alert("개인정보 수집 및 이용에 동의합니다 체크박스 선택해 주세요");
+  }
+</script>
+<!--ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="/">Home</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Board</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/dashboard">dashbobard</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/auth/logout">Logout</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">dddddd</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+  </li>
+</ul--><% /* %>
+<p></p>
+<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+  <!--li class="nav-item">
+    <a class="nav-link" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true" href="/">Home</a>
+  </li-->
+  <li class="nav-item">
+    <a class="nav-link" href="/"><img src="/img/logo.jpg" height=32></a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">프로젝트</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/projectboard">과제 관리</a>
+      <a class="dropdown-item" href="/subprojectboard">세부주제 관리</a>
+      <!--a class="dropdown-item" href="/monsensorboard">활용센서 관리</a-->
+      <!--div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a-->
+    </div>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">테스트베드</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/deviceboard?sengrpcd=0001">센서관리</a>
+      <!--a class="dropdown-item" href="/main/useprocess">사용절차</a>
+      <a class="dropdown-item" href="/main/developinfo">개발정보</a-->
+      <!--a class="dropdown-item" href="/dashboard">dashboard</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a-->
+    </div>
+  </li>
+  <!--li class="nav-item">
+    <a class="nav-link" href="/main/powersave">전력세이빙</a>
+  </li-->
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">사용 매뉴얼</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/main/useproject">프로젝트 활용</a>
+      <a class="dropdown-item" href="/main/useprocess">IoT 플랫폼 사용</a>
+      <a class="dropdown-item" href="/main/developinfo?sengrpcd=0001&prjgrpcd=0001">센서 사용 매뉴얼</a>
+    </div>
+    <!--a class="nav-link" href="/main/usewebprocess">사용 매뉴얼</a-->
+  </li>
+  <% if(isAuthenticated){ %>
+  <!--li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">권한 관리</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/accessmng/mnggrp">사용자 그룹관리</a>
+      <a class="dropdown-item" href="/main/projectauth">프로젝트 권한관리</a>
+      <a class="dropdown-item" href="/main/subprojectauth">세부주제 권한관리</a>
+      <a class="dropdown-item" href="/main/sensorauth">세부주제센서 권한관리</a>
+    </div>
+  </li-->
+  <% } %>
+  <!--li class="nav-item">
+    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+  </li-->
+  <% if(isAuthenticated){ %> <!-- 1 -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Page</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/mypage/<%= currentUser.userid %>">등록정보</a>
+        <a class="dropdown-item" href="/datause">데이터다운로드 요청/허가</a>
+        <a class="dropdown-item" href="/dataif">데이터연계 요청/허가</a>
+        <a class="dropdown-item" href="/dataupload">데이터업로드</a>
+        <a class="dropdown-item" href="/accessmng/mnggrp">권한 관리</a>
+        <% if(currentUser.user_type=='9') { %><a class="dropdown-item" href="/user">사용자정보변경</a><% } else { %><a class="dropdown-item" href="/user/<%= currentUser.board_idx %>/update">사용자정보변경</a><% } %>
+      </div>
+    </li>
+    <!--li class="nav-item"><a href="/mypage/<%= currentUser.userid %>" class="nav-link"></a></li-->
+    <li class="nav-item"><a href="/auth/logout" class="nav-link"><%= currentUser.name %>님&nbsp;&nbsp;Logout</a></li>
+  <% } else { %>
+    <li class="nav-item"><a class="nav-link" href="/auth/signup" data-toggle="modal" data-target="#modal-signup">사용자등록</a></li>
+    <li class="nav-item"><a class="nav-link" href="/auth/login" data-toggle="modal" data-target="#modal-login">로그인</a></li>
+  <% } %>
+</ul>
+<p></p>
+<!--
+<div class="tab-content">
+  <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+  <div class="tab-pane" id="link" role="tabpanel" aria-labelledby="link-tab">...</div>
+  <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
+  <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
+</div>-->
+<% */ %>
+
+
+<div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-loginTitle" aria-hidden="true">
+  <!-- login section -->
+  <form action="/" method="post" name="frm_login" id="frm_login">
+      <div class="modal-dialog modal-login modal-dialog-centered" role="document">
+          <div class="modal-content" style="background-image: url(/img/login.png); background-color: transparent;">
+              <div class="modal-body">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button><p></p>&nbsp;<p></p>&nbsp;<p></p>&nbsp;<p></p>&nbsp;<p></p><table><tr><td width="148" rowspan="5"></td><td width="60" rowspan="4"></td><td width="220">
+                  <div>
+                      <input type="text" id="userid" name="userid" class="form-control" placeholder="E-Mail" autocomplete="off" />
+                      <!--input type="email" id="userid" name="userid" class="form-control input-lg" placeholder="E-Mail" required autocomplete="off" /-->
+                  </div></td><td width="148" style="font-size: 10px;color : orange;">&nbsp;</td></tr><tr height=12><td colspan="4"></td></tr><tr><td>
+                  <div class="form-group">
+                      <input type="password" id="password" name="password" class="form-control" placeholder="Password" autocomplete="off" />
+                      <!--input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password" minlength=4 required autocomplete="off" /-->
+                  </div></td><td></td></tr><tr height=11><td colspan="4"></td></tr><tr><td colspan="2">
+                  <div class="form-group">
+                    <!--img src="/img/login-button.png"--><input type="submit" class="btn btn-block btn-lg btn-dongguk1" value="Login" />
+                  </div>
+                  </td><td></td></tr></table>
+              </div>
+          </div>
+      </div>
+  </form>
+  <!-- // login section -->
+</div>
+
+
+<div class="modal fade" id="modal-signup" tabindex="-1" role="dialog" aria-labelledby="modal-signupTitle" aria-hidden="true">
+  <!-- login section -->
+  <form action="/" method="post" name="frm_signup" id="frm_signup">
+      <div class="modal-dialog modal-usereg modal-dialog-centered" role="document">
+          <div class="modal-content" style="background-image: url(/img/usereg.png); background-color: transparent;">
+              <div class="modal-body">
+                <a href="#" data-dismiss="modal" aria-label="Close"><img src="/img/usereg_close.png" style="position: absolute; top: 33px; right: 43px;"></a><p></p>&nbsp;<p></p>&nbsp;<p></p>&nbsp;<p></p><br><table><tr height="59"><td width="200" rowspan="8"></td><td width="870">
+                  <!--div class="form-group row">
+                      <label class="col-sm-2 col-form-label" for="lg">이메일 : </label-->
+                      <div class="col-lg-12">
+                          <input type="text" id="userid" name="userid" class="form-control input-lg" placeholder="E-Mail" autocomplete="off" />
+                      </div>
+                  <!--/div--></td></tr><tr height=23><td style="font-size: 10px;color : orange;"></td></tr><tr height="54"><td>
+                  <!--div class="form-group row">
+                      <label class="col-sm-2 col-form-label" for="lg">패스워드 : </label-->
+                      <div class="col-lg-12">
+                          <input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password" autocomplete="off" />
+                      </div>
+                  <!--/div--></td></tr><tr height=26><td style="font-size: 10px;color : orange;"></td></tr><tr height="54"><td>
+                  <!--div class="form-group row">
+                      <label class="col-sm-2 col-form-label" for="lg">이름 : </label-->
+                      <div class="col-lg-12">
+                          <input type="text" id="name" name="name" class="form-control input-lg" placeholder="Name" autocomplete="off" />
+                      </div>
+                  <!--/div--></td></tr><tr height=24><td style="font-size: 10px;color : orange;"></td></tr><tr height="54"><td>
+                  <!--div class="form-group row">
+                      <label class="col-sm-2 col-form-label" for="lg">역할 : </label-->
+                      <div class="col-lg-12">
+                          <select class="form-control" name="user_type">
+                              <option value="">선택하세요</option>
+                              <option value="0">과제 관리자</option>
+                              <option value="1">과제 참여자</option>
+                          </select>
+                      </div>
+                  <!--/div--></td></tr><tr height=22><td style="font-size: 10px;color : orange;"></td></tr><tr height=52><td colspan="2"></td></tr><tr><td colspan="2">
+                  <!--div class="form-group row"--><table width="100%"><tr><td width=30></td><td style="font-weight: bold;">
+                    <input type="submit" class="btn btn-block btn-lg btn-dongguk1" value="사용자등록" style="line-height: 48px" /></td></tr></table>
+                  <!--/div-->
+                </td></tr><tr height=50><td colspan="2"></td></tr></table>
+               </div>
+
+          </div>
+      </div>
+  </form>
+  <!-- // login section -->
+</div>
+
+
+<div class="modal fade" id="modal-accept" tabindex="-1" role="dialog" aria-labelledby="modal-acceptTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title" id="modal-acceptTitle">개인정보 수집 및 이용 동의</h1>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+            개인정보 수집 및 이용 동의<p></p>
+            동국대학교에서는 연구관리시스템 서비스 업무와 관련하여 귀하의 개인정보를 아래와 같이 수집·이용을 하고자 합니다.<br>
+            다음의 사항에 대해 충분히 읽어보신 후 동의 여부를 체크하여 주시기 바랍니다.<p></p>
+            ▶ 개인정보 수집 및 이용 동의<br>
+            <table border="1"><tr><td>수집·이용하려는 개인정보의 항목</td><td>개인정보의 수집·이용 목적</td><td>개인정보 이용기간 및 보유기간</td></tr>
+              <tr><td>성명, 이메일</td><td>연구관리시스템 정보 제공</td><td>연구관리시스템 탈퇴 전까지 정보 이용 및 보유</td></tr></table><p></p>
+            ※ 귀하께서는 개인정보 제공 및 활용에 거부할 권리가 있습니다.<br>
+            ☞ 거부에 따른 불이익 : ID발급 불가에 따른 연구관리시스템 서비스 이용이 제한됩니다.<p></p>
+            <input type="checkbox" id="chkaccept"> 개인정보 수집 및 이용에 동의합니다
+          </div>
+          <div class="modal-footer">
+            <a href="javascript:goSignUp();" class="btn btn-block btn-lg btn-dongguk1">다음</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-spinner" tabindex="-1" role="dialog" aria-labelledby="modal-spinnerTitle" aria-hidden="true" style="z-index:1060;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+              <button class="btn" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+  * {margin: 0; padding: 0; }
+  li {list-style: none; }
+  --body {font-family: 'Nanum Gothic', sans-serif; width: 1200px; margin: 0 auto; }
+  .logo {margin: 50px 0; font-size: 30px; text-align: center; font-family: 'Nanum Brush Script', cursive; }
+  .topMenu {width: 100%; position: absolute; left: 0; z-index: 20; padding-top: 0px; color: #fff; text-align: center; background-color: #655E5C; }
+  .topMenu:after {content: ""; display: block; clear: both; }
+  .menu01>li {float: left; line-height: 40px; width: 12.5%;}
+  .menu01 span {font-size: 20px; font-weight: bold; }
+  .dept01 {display: none; padding: 20px 0; background-color:#212631; }
+  .dept01>li {float: left; line-height: 24px; }
+  li img {max-width: 100%; }
+  #nop {float: none;color:white }
+  .none:after {content: ""; display: block; clear: both; }
+</style>
+<script>
+  $(document).ready(function () {
+    $(".head").mouseleave(function () {
+      $('.dept01').slideUp(300);
+    });
+    $(document).on('mouseover', '.topMenu span', function() {
+      $('.dept01').slideDown(300);
+    });
+    $(document).on('mouseover', 'table', function () {
+      if (!$(this).hasClass('topMenu')) {
+        $('.dept01').slideUp(300);
+      }
+    });
+  });
+  function goMypage(){
+    <% if(isAuthenticated) { %> location.href='/mypage/<%= currentUser.userid %>';
+    <% } else { %> alert('로그인해 주세요'); <% } %>
+  }
+  $(function () {
+    if(location.pathname=="/") {
+      $('.topMenu').css('display','none');
+      $('.none').css('display','none');
+    }
+  })
+</script>
+
+
+<div class="head">
+<table bgcolor="#F18903" width="100%"><tr><td width="40%"></td><td width="16%"><img src="/img/top_title.png" style="max-width:100%"></td><td width="20%"></td>
+  <% if(isAuthenticated){ %><td width="19%"><span onclick="javascript:location.href='/auth/logout'" style="color:white; font-size: 15px; cursor: pointer"><%= currentUser.name %>님&nbsp;&nbsp;Logout</span></td><% }else{ %><td width="11%"><a href="/auth/signup" data-toggle="modal" data-target="#modal-accept"><img src="/img/top_user.png" style="max-width:100%"></a></td><td width="8%"><a href="/auth/login" data-toggle="modal" data-target="#modal-login"><img src="/img/top_login.png" style="max-width:100%"></a></td><% } %><td width="5%"></td>
+</tr></table>
+<div class="topMenu">
+  <ul class="menu01">
+    <li><a href="/"><img src="/img/main-menu1.png"></a>
+      <ul class="dept01">
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <% if(isAuthenticated){ %>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+        <% } %>
+      </ul>
+    </li>
+    <li><a href="/"><img src="/img/main-menu2.png"></a>
+      <ul class="dept01">
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <% if(isAuthenticated){ %>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+        <% } %>
+      </ul>
+    </li>
+    <% if(!isAuthenticated){ %>
+    <li><img src="/img/main-menu0.png">
+      <ul class="dept01">
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+      </ul>
+    </li>
+    <% } %>
+    <li><span><img src="/img/main-menu3.png"></span>
+      <ul class="dept01">
+        <li id="nop"><a href="/projectboard"><img src="/img/menu3-text1.png"></a></li>
+        <li id="nop"><a href="/subprojectboard"><img src="/img/menu3-text2.png"></a></li>
+        <li id="nop"><img src="/img/menu-text1.png"></li>
+        <% if(isAuthenticated){ %>
+          <li id="nop"><img src="/img/menu-text1.png"></li>
+          <li id="nop"><img src="/img/menu-text1.png"></li>
+          <li id="nop"><img src="/img/menu-text1.png"></li>
+        <% } %>
+      </ul>
+    </li>
+    <li><span><img src="/img/main-menu4.png"></span>
+      <ul class="dept01">
+        <li id="nop"><a href="/deviceboard?sengrpcd=0001"><img src="/img/menu4-text1.png"></a></li>
+        <li id="nop"><img src="/img/menu-text1.png"></li>
+        <li id="nop"><img src="/img/menu-text1.png"></li>
+        <% if(isAuthenticated){ %>
+          <li id="nop"><img src="/img/menu-text1.png"></li>
+          <li id="nop"><img src="/img/menu-text1.png"></li>
+          <li id="nop"><img src="/img/menu-text1.png"></li>
+        <% } %>
+      </ul>
+    </li>
+    <li><span><img src="/img/main-menu5.png"></span>
+      <ul class="dept01">
+        <li id="nop"><a href="/main/useproject"><img src="/img/menu5-text1.png"></a></li>
+        <li id="nop"><a href="/main/useprocess"><img src="/img/menu5-text2.png"></a></li>
+        <li id="nop"><a href="/main/developinfo?sengrpcd=0001&prjgrpcd=0001"><img src="/img/menu5-text3.png"></a></li>
+        <% if(isAuthenticated){ %>
+          <li id="nop"><img src="/img/menu-text1.png"></li>
+          <li id="nop"><img src="/img/menu-text1.png"></li>
+          <li id="nop"><img src="/img/menu-text1.png"></li>
+        <% } %>
+      </ul>
+    </li>
+    <% if(isAuthenticated){ %>
+    <li><span><img src="/img/main-menu6.png"></span>
+      <ul class="dept01">
+        <li id="nop"><a href="/mypage/<%= currentUser.userid %>"><img src="/img/menu6-text1.png"></a></li>
+        <li id="nop"><a href="/datause"><img src="/img/menu6-text2.png"></a></li>
+        <li id="nop"><a href="/dataif"><img src="/img/menu6-text3.png"></a></li>
+        <li id="nop"><a href="/dataupload"><img src="/img/menu6-text4.png"></a></li>
+        <li id="nop"><a href="/accessmng/mnggrp"><img src="/img/menu6-text5.png"></a></li>
+        <li id="nop"><% if(currentUser.user_type=='9') { %><a href="/user"><img src="/img/menu6-text6.png"></a><% } else { %><a href="/user/<%= currentUser.board_idx %>/update"><img src="/img/menu6-text6.png"></a><% } %></li>
+      </ul>
+    </li>
+    <% } %>
+    <!--li><span>Search</span>
+      <ul class="dept01">
+        <li id="nop">&nbsp;</li>
+        <li id="nop">&nbsp;</li>
+        <li id="nop">&nbsp;</li>
+      </ul>
+    </li-->
+    <li><img src="/img/main-menu0.png">
+      <ul class="dept01">
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <% if(isAuthenticated){ %>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+        <% } %>
+      </ul>
+    </li>
+    <li><img src="/img/main-menu7.png">
+      <ul class="dept01">
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <li id="nop"><img src="/img/menu-text0.png"></li>
+        <% if(isAuthenticated){ %>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+          <li id="nop"><img src="/img/menu-text0.png"></li>
+        <% } %>
+      </ul>
+    </li>
+  </ul>
+</div>
+<div class="none"><p></p>&nbsp;<p></p>&nbsp;<br><br>
+</div></div>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/semantic/layout.css">
+  <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/mem.css">
+  <script src="/js/home/mem.js" defer></script>
+</head>
+<body>
+  <div id="wapper">
+  <nav>
+    <div id="adminpage"><h1>Admin Page</h1></div>
+    <div class="header">  회원 관리</div>
+      <ul>
+        <li><a href="/mem">회원 정보 관리</a></li>
+        <li><a href="/">회원 가입 설정</a></li>
+      </ul>
+    <div class="header">  코드 관리</div>
+      <ul>
+        <li><a href="/code_management">코드 정보 관리</a></li>
+      </ul>
+    <div class="header"> 권한 정보</div>
+</nav>
+<section>
+    <div>
+        <div class="pagename">회원 정보 관리</div>
+        <div id="search_userinfo">
+            <ul>
+                <li>회원분류
+                    <div class="ui checkbox">
+                        <input type="checkbox">
+                        <label>청소년</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox">
+                        <label>학부모</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox"> 
+                        <label>청소년 부모</label>
+                    </div>
+                </li>
+                <li>수신동의
+                    <div class="ui checkbox">
+                        <input type="checkbox">
+                        <label>푸시알림</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox">
+                        <label>SMS</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox">
+                        <label>이메일</label>
+                    </div>
+                </li>
+                <li><div>검색어
+                <select>
+                    <option value="id">이름</option>
+                    <option value="name">아이디</option>
+                </select>
+                <input type="text" id="search_info" onkeypress="searchEnter(event)" placeholder="내용을 입력해주세요">
+                <p id="search_button">검색</p>
+            </div>
+            </li>
+            </ul>
+        </div>
+        <br>
+        <table>
+          <thead>
+            <tr><th>아이디</th>
+            <th>이름</th>
+            <th>권한</th>
+            <th>회원분류</th>
+            <th>최종접속</th>
+            <th>등록일시</th>
+            <th>푸시</th>
+            <th>이메일</th>
+            <th>sms</th>
+            <th>관리</th>
+          </tr></thead>
+          <tbody>
+            
+              </td>
+          </tbody>
+        </table>
+        
+        
+        <div id="managep_foot">
+            <div class="ui pagination menu" id="managep_paging">
+                <a class="icon item">
+                    <i class="left chevron icon"></i>
+                </a>
+                <a class="item">1</a>
+                <a class="item">2</a>
+                <a class="item">3</a>
+                <a class="item">4</a>
+                <a class="icon item">
+                    <i class="right chevron icon"></i>
+            </a></div>
+            <button class="ui button" id="add_user" onclick="register()">회원 등록</button>
+            <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button>
+        </div>  
+
+    </div>
+</section>
+</div>
+</body>
+
+</html>
