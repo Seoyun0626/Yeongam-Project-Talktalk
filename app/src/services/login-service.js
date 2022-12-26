@@ -84,9 +84,16 @@ exports.signUp = async function(req, res) {
   try{
     const query = "SELECT userid, password, name, salt, user_type FROM webdb.tb_user where userid='" + req.body.userid + "';";
     //중복체크
-    const conn = await db.getConnection();
-
-    await pool.query(query, function(err, results, fields) {
+    conn = await db.getConnection(
+      function(err) {
+        if (err) {
+          console.log(err);
+        }
+      }
+      
+    );
+    console.log(conn);
+    conn.query(query, function(err, results, fields) {
       if(err) {
         console.log(err);
       }
