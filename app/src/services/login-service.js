@@ -80,6 +80,7 @@ try{
 const u = (user) => new Promise((resolve, reject) => {
   const query = "SELECT userid, password, name, salt, user_type FROM webdb.tb_user where userid='" + user.userid + "';";
   pool.query(query, function(err, results, fields) {
+    var resultcode = 0;
     if(err) {
       reject(err);
     }
@@ -95,7 +96,7 @@ exports.signUp = async function(req, res) {
   var resultcode = 0;
   var conn;
   try{
-    console.log(req.body);
+    //console.log(req.body);
     resultcode = await u(req.body);
     // 중복 체크
     if(resultcode == 100) {
