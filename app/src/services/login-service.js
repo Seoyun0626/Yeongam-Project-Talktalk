@@ -76,34 +76,34 @@ try{
   );}
 };
 
-
+// user 중복 체크
+const u = (user) => new Promise((resolve, reject) => {
+  const query = "SELECT userid, password, name, salt, user_type FROM webdb.tb_user where userid='" + user.userid + "';";
+  pool.query(query, function(err, results, fields) {
+    if(err) {
+      reject(err);
+    }
+    if(results.length > 0) {//중복이 있을 경우
+      resultcode = 100;
+      //return resultcode;
+    }
+    resolve(resultcode);
+  });
+});
 // 회원가입
 exports.signUp = async function(req, res) {
   var resultcode = 0;
   var conn;
   try{
-    const query = "SELECT userid, password, name, salt, user_type FROM webdb.tb_user where userid='" + req.body.userid + "';";
-    //중복체크
-    conn = await db.getConnection(
-      function(err) {
-        if (err) {
-          console.log(err);
-        }
-      }
-      
-    );
-    console.log(conn);
-    conn.query(query, function(err, results, fields) {
-      if(err) {
-        console.log(err);
-      }
-      if(results.length > 0) {//중복이 있을 경우
-        console.log('login-service SignUp:중복');
-        resultcode = 100;
-        return resultcode;
-      }
-  });
+    console.log(req.body);
+    resultcode = await u(req.body);
+    // 중복 체크
+    if(resultcode == 100) {
+      console.log('login-service SignUp:중복');
+      return resultcode;
+    }
   console.log('login-service SignUp:중복아님');
+
       hasher({password:req.body.password}, function(err, pass, salt, hash) {
         req.body.user_type = '9';
         const query = " insert into webdb.tb_user (userid, password, name, salt, user_type) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_type+"')";
