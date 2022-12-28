@@ -19,7 +19,7 @@ module.exports = () => {
                 }
                 conn = connection;
                 //console.log(conn);
-                const query = 'SELECT userid, password, salt, name, user_type FROM webdb.tb_user where userid="'+username+'"';
+                const query = 'SELECT userid, password, salt, name FROM webdb.tb_user where userid="'+username+'"';
                 conn.query(query, function(err, rows) {
                     if (err) {
                         console.log('db.query error:'+err);

@@ -232,10 +232,10 @@ router.post("/signup", async function(req, res) {
     
     var result = await login_controller.signUp(req, res);
     //res.send({errMsg:result});
-
-    if(result==0) res.json({success: true, msg:'등록하였습니다.'});
-    else res.json({success: false, msg:'등록실패하였습니다.'});
-
+    //if(result==0) res.json({success: true, msg:'등록하였습니다.'});
+    //else res.json({success: false, msg:'등록실패하였습니다.'});
+    if(result==0) res.redirect('/admin/login');
+    else res.redirect('/admin/signup');
   } catch(error) {
     console.log('login-router signup error:'+error);
   }

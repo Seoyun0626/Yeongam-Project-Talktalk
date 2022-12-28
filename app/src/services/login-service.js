@@ -78,7 +78,7 @@ try{
 
 // user 중복 체크
 const u = (user) => new Promise((resolve, reject) => {
-  const query = "SELECT userid, password, name, salt, user_type FROM webdb.tb_user where userid='" + user.userid + "';";
+  const query = "SELECT userid, password, name, salt FROM webdb.tb_user where userid='" + user.userid + "';";
   pool.query(query, function(err, results, fields) {
     var resultcode = 0;
     if(err) {
@@ -103,11 +103,17 @@ exports.signUp = async function(req, res) {
       console.log('login-service SignUp:중복');
       return resultcode;
     }
+    //비밀번호 확인 불일치
+    if(req.body.password != req.body.password2) {
+      console.log('login-service SignUp:비밀번호 불일치');
+      resultcode = 100;
+      return resultcode;
+    }
+    
   console.log('login-service SignUp:중복아님');
 
       hasher({password:req.body.password}, function(err, pass, salt, hash) {
-        req.body.user_type = '9';
-        const query = " insert into webdb.tb_user (userid, password, name, salt, user_type) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_type+"')";
+        const query = " insert into webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code,sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
         pool.query(query, function(err, rows, fields) {
           if(err) {
             console.log(err);

@@ -51,30 +51,35 @@
                   <div class="ui input">
                     <input type="text" name="userid" id="userid" placeholder="아이디"">
                   </div>
+                  <br>
                   <div class="ui input">
                     <input type="text" name="name" id="name" placeholder="이름"">
                   </div>
+                  <br>
                   <div class="ui input">
                     <input type="text" name="password" id="password" placeholder="비밀번호"">
                   </div>
                   <div class="ui input">
                     <input type="text" name="password2" id="password2" placeholder="비밀번호 확인"">
                   </div>
+                  <br>
                   <div class="field">
-                    <select class="ui fluid dropdown" name="role" id="role">
+                    <select class="ui fluid dropdown" name="user_role" id="user_role">
                       <option value="0">관리자</option>
                       <option value="1">사용자</option>
                     </select>
                   </div>
+                  <br>
                   <div class="field">
-                    <select class="ui fluid dropdown" name="status" id="status">
+                    <select class="ui fluid dropdown" name="age_class_code" id="age_class_code">
                       <option value="0">청소년</option>
                       <option value="1">학부모</option>
                       <option value="2">청소년 부모</option>
                     </select>
                   </div>
+                  <br>
                   <div class="field">
-                    <select class="ui fluid dropdown" name="livingplace" id="livingplace">
+                    <select class="ui fluid dropdown" name="emd_class_code" id="emd_class_code">
                       <option value="0">영암읍</option>
                       <option value="1">삼호읍</option>
                       <option value="2">덕진면</option>
@@ -88,18 +93,18 @@
                       <option value="10">미암면</option>
                     </select>
                   </div>
-                  <div class="ui input">
-                    <input type="text" name="age" id="age" placeholder="나이"">
-                  </div>
+                  <br>
                   <div class="field">
-                    <select class="ui fluid dropdown" name="sex" id="sex">
+                    <select class="ui fluid dropdown" name="sex_class_code" id="sex_class_code">
                       <option value="0">남자</option>
                       <option value="1">여자</option>
                     </select>
                   </div>
+                  <br>
                   <div class="ui input">
-                    <input type="text" name="email" id="email" placeholder="이메일"">
+                    <input type="text" name="user_email" id="user_email" placeholder="이메일"">
                   </div>
+                  <br>
                 <div>
                     <button class="ui button" type="submit">등록</button>
                     <button class="ui button" type="button" onclick="location.href='/admin/login'">취소</button>
