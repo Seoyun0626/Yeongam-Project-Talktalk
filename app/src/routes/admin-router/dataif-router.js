@@ -160,15 +160,16 @@ router.post('/login', passport.authenticate('local-login', {
 }));
 
 router.get("/loginSuccess", function(req, res) {
-  res.json({msg:'0'});
+  res.render('dataif/mem');
+  //res.json({msg:'0'});
 });
 
 router.get("/loginFailure", function(req, res) {
   var rtnMsg;
   var err = req.flash('error');
   if(err) rtnMsg = err;
-  res.json({success: false, msg: rtnMsg})
-  //res.redirect('/admin/login');
+  //res.json({success: false, msg: rtnMsg})
+  res.redirect('/admin/login');
   //res.json({errMsg:msg});
 });
 
