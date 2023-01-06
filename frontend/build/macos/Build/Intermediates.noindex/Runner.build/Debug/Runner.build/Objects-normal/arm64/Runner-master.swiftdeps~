@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)"
+options: "37e89e850442ee1a9fbf509cab552733e128f0adba200dcbc0eebce6876aeda7"
+build_start_time: [1670857160, 528822898]
+build_end_time: [1670857163, 204865932]
+inputs:
+  "/Users/taeheekim/Documents/DEV/login/macos/Flutter/GeneratedPluginRegistrant.swift": [1670857143, 69440364]
+  "/Users/taeheekim/Documents/DEV/login/macos/Runner/AppDelegate.swift": [1669220893, 0]
+  "/Users/taeheekim/Documents/DEV/login/macos/Runner/MainFlutterWindow.swift": [1669220893, 0]
