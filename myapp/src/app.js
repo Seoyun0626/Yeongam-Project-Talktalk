@@ -11,15 +11,23 @@
 // // import routesChat from './routes/chat.routes';
 // // import { socketChatMessages } from './sockets/chat_socket';
 
+
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const createServer = require('http');
+const {promisfy} = require('promisfy');
+const bodyParser = require('body-parser');
+
+
 const routeUser = require('./routes/user_routes');
 const routeAuth = require('./routes/auth_routes');
 
+const app = express();
+const port = process.env.PORT;
 
-export class App {
+
+class App {
 
     constructor() {
         this.apiRoutes = {
@@ -34,7 +42,7 @@ export class App {
         this.httpServer = createServer(this.app);
         this.middlewares();
         this.routes();
-        this.configServerSocket();
+        // this.configServerSocket();
     }
     middlewares() {
         this.app.use(cors());

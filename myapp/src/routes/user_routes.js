@@ -6,7 +6,7 @@ const verifyToken = require('../middleware/verify_token');
 
 const router = Router();
 router.post('/user', user.createUser);
-router.get('/user/get-User-By-Id', verifyToken, user.getUserById);
+// router.get('/user/get-User-By-Id', verifyToken, user.getUserById);
 router.get('/user/verify-email/:code/:email', user.verifyEmail);
 // Middleware [ Token, image ]  - Profile Image required
 // router.put('/user/update-cover', [verifyToken, uploadsCover.single('cover')], user.updatePictureCover);
@@ -22,4 +22,5 @@ router.put('/user/change-password', verifyToken, user.changePassword);
 // router.get('/user/get-all-following', verifyToken, user.getAllFollowings);
 // router.get('/user/get-all-followers', verifyToken, user.getAllFollowers);
 // router.delete('/user/delete-followers/:idUser', verifyToken, user.deleteFollowers);
-export default router;
+// export default router;
+module.exports = router;

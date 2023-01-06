@@ -2,9 +2,10 @@
 const path = require('path');
 const fs = require('fs-extra');
 const bcrypte = require('bcrypt');
-const v4 = require('uuid');
+// const v4 = require('uuid');
+const { uuid } = require('uuidv4');
 const connect = require('../database/connection');
-const sendEmailVerify = require('../lib/nodemail');
+const sendEmailVerify = require('../lib/nodemailer');
 
 // import fs from 'fs-extra';
 // import bcrypt from 'bcrypt';
@@ -13,12 +14,13 @@ const sendEmailVerify = require('../lib/nodemail');
 // import { sendEmailVerify } from '../lib/nodemail';
 
 
-const createUser = async (req, res) => {
+// const createUser = async (req, res) => {
+ const createUser = async function(req, res) {
     try {
         const { username, fullname, email, password } = req.body;
         
         const conn = await connect();
-        const [existsEmail] = await conn.query('SELECT email FROM users WHERE email = ?', [email]);
+        const [existsEmail] = await conn.query('SELECT email FROM tb_user WHERE email = ?', [email]);
         if (existsEmail.length > 0) {
             return res.status(401).json({
                 resp: false,
@@ -43,6 +45,8 @@ const createUser = async (req, res) => {
         });
     }
 };
+
+
 // export const getUserById = async (req, res) => {
 //     try {
 //         const conn = await connect();
@@ -69,7 +73,7 @@ const createUser = async (req, res) => {
 //         });
 //     }
 // };
-const verifyEmail = async (req, res) => {
+const verifyEmail = async function (req, res) {
     try {
         const conn = await connect();
         const [codedb] = await conn.query('SELECT token_temp FROM users WHERE email = ? LIMIT 1', [req.params.email]);
@@ -94,6 +98,8 @@ const verifyEmail = async (req, res) => {
         });
     }
 };
+
+
 // export const updatePictureCover = async (req, res) => {
 //     var _a;
 //     try {
@@ -161,7 +167,7 @@ const verifyEmail = async (req, res) => {
 //         });
 //     }
 // };
-const changePassword = async (req, res) => {
+const changePassword = async function(req, res) {
     try {
         const { currentPassword, newPassword } = req.body;
         const conn = await connect();
@@ -188,6 +194,14 @@ const changePassword = async (req, res) => {
         });
     }
 };
+
+module.exports = {
+    createUser,
+    verifyEmail,
+    changePassword
+}
+
+
 // export const changeAccountPrivacy = async (req, res) => {
 //     try {
 //         const conn = await connect();

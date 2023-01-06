@@ -5,8 +5,8 @@ const {promisfy} = require('promisfy');
 const bodyParser = require('body-parser');
 const http  = require('http');
 
-const routesUser =require('../myapp/src/routes/auth_routes');
-const routesAuth =  require('../myapp/src/routes/user_routes');
+const routesUser =require('./src/routes/auth_routes');
+const routesAuth =  require('./src/routes/user_routes');
 
 const app = express();
 const port = 3000;
@@ -98,18 +98,18 @@ app.listen(port, () => {
 //   console.log('connectttttted!');
 // })
 
-pool.getConnection(function(err, connection){  
-  if( err ){
-      if( err.code === 'PROTOCOL_CONNECTION_LOST' ) console.log('DATABASE CONNECTION WAS CLOSED');
-      if( err.code === 'ER_CON_COUNT_ERROR' ) console.log('DATABASE HAS TO MANY CONNECTIONS');
-      if( err.code === 'ECONNREFUSED' ) console.log('DATABASE CONNECTION WAS REFUSED');
-  }
+// pool.getConnection(function(err, connection){  
+//   if( err ){
+//       if( err.code === 'PROTOCOL_CONNECTION_LOST' ) console.log('DATABASE CONNECTION WAS CLOSED');
+//       if( err.code === 'ER_CON_COUNT_ERROR' ) console.log('DATABASE HAS TO MANY CONNECTIONS');
+//       if( err.code === 'ECONNREFUSED' ) console.log('DATABASE CONNECTION WAS REFUSED');
+//   }
   
-  if( connection ) connection.release();
+//   if( connection ) connection.release();
 
-  console.log('DataBase is connected to '+ dbConfig.DATABASE);
-  return;
-});
+//   console.log('DataBase is connected to '+ connect.DATABASE);
+//   return;
+// });
 
 
 class App {

@@ -9,13 +9,13 @@ const bcrypte = require('bcrypt');
 const connect = require('../database/connection');
 const generateJsonWebToken = require('../lib/generate_jwt');
 const sendEmailVerify = require('../lib/nodemailer')
-//asdfasdf
-const login = async (req, res) => {
+
+const login = async function (req, res) {
     try {
         const { userid, password } = req.body;
         const conn = await connect();
         // Check is exists Email on database 
-        const [verifyUserdb] = await conn.query('SELECT userid, password, email_verified FROM tb_user WHERE user_email = ?', [user_email]);
+        const [verifyUserdb] = await conn.query('SELECT userid, password, email_verified FROM tb_user WHERE userid = ?', [userid]);
         if (verifyUserdb.length == 0) {
             return res.status(401).json({
                 resp: false,
@@ -38,7 +38,7 @@ const login = async (req, res) => {
                 message: '잘못된 자격 증명'
             });
         }
-        const uidPersondb = await conn.query('SELECT person_uid as uid FROM users WHERE email = ?', [email]); //
+        const uidPersondb = await conn.query('SELECT userid as uid FROM tb_user WHERE userid = ?', [userid]); //
         const { uid } = uidPersondb[0][0]; //
         let token = generateJsonWebToken(uid);
         conn.end();
@@ -55,12 +55,12 @@ const login = async (req, res) => {
         });
     }
 };
-const renweLogin = async (req, res) => {
+const renweLogin = async function (req, res) {
     try {
         const token = generateJsonWebToken(req.idPerson);
         return res.json({
             resp: true,
-            message: 'Bienvenido a Social Frave',
+            message: '청소년 톡talk에 오신 것을 환영합니다',
             token: token
         });
     }
@@ -71,13 +71,16 @@ const renweLogin = async (req, res) => {
         });
     }
 };
-const resendCodeEmail = async (email) => {
+const resendCodeEmail = async function (email) {
     const conn = await connect();
     var randomNumber = Math.floor(10000 + Math.random() * 90000);
-    await conn.query('UPDATE users SET token_temp = ? WHERE email = ?', [randomNumber, email]);
+    await conn.query('UPDATE tb_user SET token_temp = ? WHERE email = ?', [randomNumber, email]);
     await sendEmailVerify('확인 코드', email, `<h1> 청소년톡talk </h1><hr> <b>${randomNumber} </b>`);
     conn.end();
 };
 
-
-
+module.exports = {
+    login,
+    renweLogin,
+    resendCodeEmail,
+}

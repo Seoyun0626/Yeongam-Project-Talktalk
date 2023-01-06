@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 // Generate new Json Web Token 
 const generateJsonWebToken = (idPerson) => {
     try {
-        return jwt.sign({ idPerson }, process.env.TOKEN_SECRET || 'Frave_Social', {
+        return jwt.sign({ idPerson }, process.env.TOKEN_SECRET || '청소년 톡talk', {
             expiresIn: '24h'
         });
     }
