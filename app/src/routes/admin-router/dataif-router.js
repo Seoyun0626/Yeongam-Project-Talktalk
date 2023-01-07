@@ -160,7 +160,7 @@ router.post('/login', passport.authenticate('local-login', {
 }));
 
 router.get("/loginSuccess", function(req, res) {
-  res.render('dataif/mem');
+  res.render('dataif/mem'); //redirect('/admin/login');
   //res.json({msg:'0'});
 });
 
