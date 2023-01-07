@@ -1,4 +1,4 @@
-const mysql = require('mariadb');
+const mysql = require('mysql');
 var config = require('./db-config'); // ./는 현재 디렉토리를 나타냅니다 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
