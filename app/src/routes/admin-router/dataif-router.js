@@ -2,7 +2,7 @@ const path = require("path");
 var express = require("express");
 var router = express.Router();
 //var checkAuth = require('../utils/checkauth');
-var dataif_controller = require("../../controllers/dataif-controller");
+var dataif_controller = require("../../controllers/admin-controller/dataif-controller");
 var login_controller = require("../../controllers/login-controller");
 const passport = require('passport');
 /*
