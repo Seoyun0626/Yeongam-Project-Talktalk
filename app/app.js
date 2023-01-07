@@ -55,6 +55,30 @@ const bodyParser = require('body-parser');
 const routeUser = require('./src/routes/mobile-router/user_routes');
 const routeAuth = require('./src/routes/mobile-router/auth_routes');
 
+const app = express();
+port = 3000;
+app.get('/', (req, res) => {
+  res.send('Hello World!!!')
+})
+
+app.post('/user', (req, res) => {
+  res.json({
+     resp: true,
+     message : '성공적으로 등록된 사용자'
+ });
+})
+
+app.post('/auth-login', (req, res) => {
+ res.json({
+   resp:true,
+   message : '로그인 성공'
+ })
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
 // class App {
 
 //     constructor() {
