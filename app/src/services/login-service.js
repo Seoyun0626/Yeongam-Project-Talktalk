@@ -5,14 +5,14 @@ const jwt = require('jsonwebtoken');
 
 
 //임시로 사용
-const mysql = require('mysql');
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PSWORD,
-  database: process.env.DB_DATABASE,
-  connectionLimit: 5
-});
+// const mysql = require('mysql');
+// const pool = mysql.createPool({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PSWORD,
+//   database: process.env.DB_DATABASE,
+//   connectionLimit: 5
+// });
 
 exports.SignIn = async function(req) {
   var conn;
@@ -22,13 +22,13 @@ try{
   var userid = req.body.userid;
   var password = req.body.password;
   var query = "SELECT userid, password, salt, name FROM webdb.tb_user where userid='" + userid + "' ;";
-  pool.query(query, function(err, results, fields) {
+  db.query(query, function(err, results, fields) {
     if (err) {
       console.log(err);
     }
     console.log(results);
   });
-  pool.query(query, function (err, rows) {
+  db.query(query, function (err, rows) {
       if (err) {
           console.log('login-service SignIn:'+err);
           json.code = 100;
@@ -79,7 +79,7 @@ try{
 // user 중복 체크
 const u = (user) => new Promise((resolve, reject) => {
   const query = "SELECT userid, password, name, salt FROM webdb.tb_user where userid='" + user.userid + "';";
-  pool.query(query, function(err, results, fields) {
+  db.query(query, function(err, results, fields) {
     var resultcode = 0;
     if(err) {
       reject(err);
@@ -114,7 +114,7 @@ exports.signUp = async function(req, res) {
 
       hasher({password:req.body.password}, function(err, pass, salt, hash) {
         const query = " insert into webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code,sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
-        pool.query(query, function(err, rows, fields) {
+        db.query(query, function(err, rows, fields) {
           if(err) {
             console.log(err);
           }
