@@ -1,4 +1,4 @@
-const App = require('../app');
+const App = require('../../app');
 const config = require('dotenv');
 
 const main = async() => {

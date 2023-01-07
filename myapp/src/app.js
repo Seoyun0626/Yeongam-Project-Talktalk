@@ -70,3 +70,5 @@ class App {
         console.log(`SERVER RUN ON PORT ${port}`);
     }
 }
+
+module.exports = App;

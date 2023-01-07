@@ -1,6 +1,6 @@
 const Router = require('express');
-const user = require('../controllers/user_controller');
-const verifyToken = require('../middleware/verify_token');
+const user = require('../../controllers/mobile-controller/user_controller');
+const verifyToken = require('../../middleware/verify_token');
 
 // import { uploadsCover, uploadsProfile } from '../lib/multer';
 
