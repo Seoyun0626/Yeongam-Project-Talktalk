@@ -18,6 +18,7 @@ const dotenv = require("dotenv");
 >>>>>>> Stashed changes
 dotenv.config();
 
+<<<<<<< Updated upstream
 const app = express();
 const session = require("express-session");
 const passport = require('passport');
@@ -73,6 +74,33 @@ module .exports = app;
 // const createServer = require('http');
 // const {promisfy} = require('promisfy');
 // const bodyParser = require('body-parser');
+>>>>>>> Stashed changes
+=======
+// ====test======
+// const app = express();
+// port = 3000;
+
+// app.get('/', (req, res) => {
+//   res.send('Hello World!!!')
+// })
+
+// app.post('/user', (req, res) => {
+//   res.json({
+//      resp: true,
+//      message : '성공적으로 등록된 사용자'
+//  });
+// })
+
+// app.post('/auth-login', (req, res) => {
+//  res.json({
+//    resp:true,
+//    message : '로그인 성공'
+//  })
+// })
+
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`)
+// })
 >>>>>>> Stashed changes
 
 

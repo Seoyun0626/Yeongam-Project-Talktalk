@@ -35,7 +35,7 @@ const login = async function (req, res) {
         if (!await bcrypt.compareSync(password, verifyUser.passwordd)) {
             return res.status(401).json({
                 resp: false,
-                message: '잘못된 자격 증명'
+                message: '잘못된 비밀번호'
             });
         }
         const uidPersondb = await conn.query('SELECT userid as uid FROM tb_user WHERE userid = ?', [userid]); //
