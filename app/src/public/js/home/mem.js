@@ -25,8 +25,8 @@ function searchEnter(e) {
 function regiAll(){
     location.href = "/regiAll";
 }
-function register(){
-    location.href = "/register";
+function signUp(){
+    location.href = "/admin/signUp";
 }
 //아이콘 : rev
 function revMem(){

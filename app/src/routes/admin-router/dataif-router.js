@@ -159,8 +159,10 @@ router.post('/login', passport.authenticate('local-login', {
   failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
 }));
 
+//이름 변경
 router.get("/loginSuccess", function(req, res) {
-  res.render('dataif/mem'); //redirect('/admin/login');
+  res.render('dataif/mem'); 
+  // redirect('/admin/login');
   //res.json({msg:'0'});
 });
 

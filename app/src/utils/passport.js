@@ -33,7 +33,6 @@ module.exports = () => {
                             { password: password, salt: user.salt },
                             function (err, pass, salt, hash) {
                                 if (hash === user.password) { // 사용자의 비밀번호가 올바른지 확인
-                                    console.log('passport user:', user);
                                     done(null, user); // user 라는 값을 passport.serializeUser의 첫번째 인자로 넘김
                                 } else {
                                     console.log('password error');
@@ -60,7 +59,7 @@ module.exports = () => {
     //passport.authenticate 함수가 정상 작동한다.
 
     passport.serializeUser((user,done)=>{ // user 라는 값을 passport.serializeUser의 첫번째 인자로 전송
-        console.log('serializeUser:'+user);
+        //console.log('serializeUser:'+user);
         done(null,user);
     });
 
