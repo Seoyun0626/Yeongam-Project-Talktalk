@@ -4,6 +4,8 @@ var bkfd2Password = require("pbkdf2-password");
 var hasher = bkfd2Password();
 var db = require('../utils/db');
 
+
+//변경점 있음
 module.exports = () => {
     passport.use('local-login', new LocalStrategy({
         usernameField: 'userid',

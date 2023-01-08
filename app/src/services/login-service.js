@@ -82,10 +82,70 @@ exports.signUp = async function(req, res) {
   var resultcode = 0;
   var conn;
   try{
-    conn = await db.getConnection();
     var userid = req.body.userid;
     var password = req.body.password;
     var name = req.body.name;
+    db.getConnection(async function(err, connection) {
+      if (err) {
+        console.log('login-service SignUp:'+err);
+        resultcode = 100;
+        return resultcode;
+      }
+      var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
+      await connection.query(query, function (err, rows) {
+        if (err) {
+          console.log('login-service SignUp:'+err);
+          resultcode = 100;
+          return resultcode;
+        }
+        // 아이디 중복 체크
+        if (rows[0]) {
+          resultcode = 100;
+          return resultcode;
+        }
+      });
+      /*
+      //비밀번호 확인
+      if(password.length < 8 || password.length > 20) {
+        resultcode = 100;
+        return resultcode;
+      }
+      */
+     
+      
+      await hasher({
+        password: password
+      }, async (err, pass, salt, hash) => {
+        if (err) {
+          console.log('login-service SignUp:'+err);
+          resultcode = 100;
+          return resultcode;
+        }
+        if (resultcode == 100) {
+          return resultcode;
+        }
+        req.body.password = hash;
+        req.body.salt = salt;
+        var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code, sex_class_code) values ('"+req.body.userid+"','"+req.body.password+"','"+req.body.name+"', '"+req.body.salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
+        await connection.query(query, function (err, rows) {
+          if (err) {
+            console.log('login-service SignUp:'+err);
+            resultcode = 100;
+            return resultcode;
+          }
+          resultcode = 0;
+          return resultcode;
+        });
+      });
+    });
+  } catch(error) {
+    console.log('login-service SignUp:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+};
+      
+/*
     var query = "SELECT userid, password, name, salt FROM webdb.tb_user where userid='" + userid + "';";
     var rows = await conn.query(query); // 쿼리 실행
     if (rows[0] == undefined) {
@@ -107,6 +167,7 @@ exports.signUp = async function(req, res) {
   
   return resultcode;
 }; 
+*/
 
 //로그인 체크
 exports.login_check = async function(req, res) {
