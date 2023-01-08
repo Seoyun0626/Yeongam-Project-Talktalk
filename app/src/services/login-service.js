@@ -3,17 +3,6 @@ var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
 const jwt = require('jsonwebtoken');
 
-
-//임시로 사용
-// const mysql = require('mysql');
-// const pool = mysql.createPool({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PSWORD,
-//   database: process.env.DB_DATABASE,
-//   connectionLimit: 5
-// });
-
 //conn변경
 exports.SignIn = async function(req) {
   var conn;
@@ -84,6 +73,7 @@ exports.signUp = async function(req, res) {
   try{
     var userid = req.body.userid;
     var password = req.body.password;
+    var password2 = req.body.password2;
     var name = req.body.name;
     db.getConnection(async function(err, connection) {
       if (err) {
@@ -108,11 +98,14 @@ exports.signUp = async function(req, res) {
       //비밀번호 확인
       if(password.length < 8 || password.length > 20) {
         resultcode = 100;
-        return resultcode;
       }
       */
-     
+     //비밀번호,재확인 같은 지
+     if(password != password2){
+      resultcode = 100;
+     }
       
+     //비밀번호 암호화
       await hasher({
         password: password
       }, async (err, pass, salt, hash) => {
