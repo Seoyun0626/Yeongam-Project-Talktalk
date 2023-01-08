@@ -15,23 +15,23 @@ const sendEmailVerify = require('../../lib/nodemailer');
 
 
 // const createUser = async (req, res) => {
- const createUser = async function(req, res) {
+exports.createUser = async function(req, res) {
     try {
-        const { name, userid, password, email } = req.body;
+        const { username, fullname, email, password } = req.body;
         
         const conn = await connect();
-        const [existsID] = await conn.query('SELECT user_id FROM test WHERE user_id = ?', [user_id]);
-        if (existsID.length > 0) {
+        const [existsEmail] = await conn.query('SELECT email FROM tb_user WHERE email = ?', [email]);
+        if (existsEmail.length > 0) {
             return res.status(401).json({
                 resp: false,
-                message: '아이디가 이미 존재합니다!'
+                message: '메일이 이미 존재합니다!'
             });
         }
-        let salt = bcrypt.genSaltSync();
-        const pass = bcrypt.hashSync(password, salt);
-        var randomNumber = Math.floor(10000 + Math.random() * 90000);
-        await conn.query(`CALL SP_REGISTER_USER(?,?,?,?,?,?,?);`, [uuidv4(), fullname, username, email, pass, uuidv4(), randomNumber]);
-        await sendEmailVerify('확인 코드', email, `<h1> 청소년 톡talk </h1><hr> <b>${randomNumber} </b>`);
+        // let salt = bcrypt.genSaltSync();
+        // const pass = bcrypt.hashSync(password, salt);
+        // var randomNumber = Math.floor(10000 + Math.random() * 90000);
+        // await conn.query(`CALL SP_REGISTER_USER(?,?,?,?,?,?,?);`, [uuidv4(), fullname, username, email, pass, uuidv4(), randomNumber]);
+        // await sendEmailVerify('확인 코드', email, `<h1> 청소년 톡talk </h1><hr> <b>${randomNumber} </b>`);
         conn.end();
         return res.json({
             resp: true,
@@ -73,14 +73,10 @@ const sendEmailVerify = require('../../lib/nodemailer');
 //         });
 //     }
 // };
-const verifyEmail = async function (req, res) {
+exports.verifyEmail = async function (req, res) {
     try {
         const conn = await connect();
-<<<<<<< Updated upstream
-        const [codedb] = await conn.query('SELECT token_temp FROM users WHERE email = ? LIMIT 1', [req.params.email]);
-=======
-        const [codedb] = await conn.query('SELECT token_temp FROM test WHERE user_email = ? LIMIT 1', [req.params.user_email]);
->>>>>>> Stashed changes
+        const [codedb] = await conn.query('SELECT token_temp FROM tb_user WHERE email = ? LIMIT 1', [req.params.email]);
         const { token_temp } = codedb[0];
         if (req.params.code != token_temp) {
             return res.status(401).json({
@@ -88,11 +84,7 @@ const verifyEmail = async function (req, res) {
                 message: '확인 실패'
             });
         }
-<<<<<<< Updated upstream
-        await conn.query('UPDATE users SET email_verified = ?, token_temp = ? WHERE email = ?', [true, '', req.params.email]);
-=======
-        await conn.query('UPDATE test SET email_verified = ?, token_temp = ? WHERE user_email = ?', [true, '', req.params.user_email]);
->>>>>>> Stashed changes
+        await conn.query('UPDATE tb_user SET email_verified = ?, token_temp = ? WHERE email = ?', [true, '', req.params.email]);
         conn.end();
         return res.json({
             resp: true,
@@ -175,15 +167,11 @@ const verifyEmail = async function (req, res) {
 //         });
 //     }
 // };
-const changePassword = async function(req, res) {
+exports.changePassword = async function(req, res) {
     try {
         const { currentPassword, newPassword } = req.body;
         const conn = await connect();
-<<<<<<< Updated upstream
-        const passdb = await conn.query('SELECT passwordd FROM users WHERE person_uid = ?', [req.idPerson]);
-=======
-        const passdb = await conn.query('SELECT user_pw FROM test WHERE user_id = ?', [req.idPerson]);
->>>>>>> Stashed changes
+        const passdb = await conn.query('SELECT passwordd FROM tb_user WHERE userid = ?', [req.idPerson]);
         if (!bcrypt.compareSync(currentPassword, passdb[0][0].passwordd)) {
             return res.status(400).json({
                 resp: false,
@@ -192,11 +180,7 @@ const changePassword = async function(req, res) {
         }
         const salt = bcrypt.genSaltSync();
         const newPass = bcrypt.hashSync(newPassword, salt);
-<<<<<<< Updated upstream
-        await conn.query('UPDATE users SET passwordd = ? WHERE person_uid = ?', [newPass, req.idPerson]);
-=======
-        await conn.query('UPDATE test SET user_pw = ? WHERE user_id = ?', [newPass, req.idPerson]);
->>>>>>> Stashed changes
+        await conn.query('UPDATE tb_user SET passwordd = ? WHERE userid = ?', [newPass, req.idPerson]);
         conn.end();
         return res.json({
             resp: true,
@@ -211,11 +195,11 @@ const changePassword = async function(req, res) {
     }
 };
 
-module.exports = {
-    createUser,
-    verifyEmail,
-    changePassword
-}
+// module.exports = {
+//     createUser,
+//     verifyEmail,
+//     changePassword
+// }
 
 
 // export const changeAccountPrivacy = async (req, res) => {

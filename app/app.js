@@ -12,11 +12,6 @@ const {promisfy} = require('promisfy');
 dotenv.config();
 
 const app = express();
-<<<<<<< Updated upstream
-=======
-const port = 3000;
-app.use(express.static('public'));
->>>>>>> Stashed changes
 const session = require("express-session");
 const passport = require('passport');
 const flash = require('express-flash');
@@ -26,15 +21,9 @@ const initPassport = require('./src/utils/passport');
 // const routeUser = require('./src/routes/mobile-router/user_routes');
 // const routeAuth = require('./src/routes/mobile-router/auth_routes');
 const routerAdmin = require("./src/routes/admin-router/dataif-router");
-<<<<<<< Updated upstream
 const routerMobile = require("./src/routes/mobile-router/user_routes");
 
 //앱 세팅
-=======
-// const routerMobile = require("./src/routes/mobile-router/user_routes");
-
-// //앱 세팅
->>>>>>> Stashed changes
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
@@ -58,45 +47,13 @@ app.use(express.static(`${__dirname}/src/public`)); //정적파일 경로
 app.use(bodyParser.json()); //json형식의 데이터를 받을 수 있게
 app.use(bodyParser.urlencoded({ extended: true })); //urlencoded형식의 데이터를 받을 수 있게
 app.use("/admin",routerAdmin);
-<<<<<<< Updated upstream
 app.use("/mobile",routerMobile);
-=======
-app.use("/mobile",routeUser); //routerMobile -> routeUser
 
-
-// test
-app.get('/', (req, res) => {
-  res.send('Helloooooo')
-})
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-//=====
-
-// mobile - middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-
-// mobile - routes
-apiRoutes = {
-    user : '/api',
-    auth : '/api',
-}
-app.use(apiRoutes.user, routeUser);
-app.use(apiRoutes.auth, routeAuth);
->>>>>>> Stashed changes
-
-//====
 module .exports = app;
 
 
-<<<<<<< Updated upstream
 
 // class App {
-=======
-// App = class {
->>>>>>> Stashed changes
 
 //     constructor() {
 //         this.apiRoutes = {
@@ -108,18 +65,10 @@ module .exports = app;
 //             // chat: '/api',
 //         };
 //         this.app = express();
-<<<<<<< Updated upstream
 //         this.httpServer = createServer(this.app);
 //         this.middlewares();
 //         this.routes();
 //         // this.configServerSocket();
-=======
-//         this.httpServer = http.createServer(this.app);
-//         this.middlewares();
-//         this.routes();
-//         // this.configServerSocket();
-        
->>>>>>> Stashed changes
 //     }
 //     middlewares() {
 //         this.app.use(cors());
@@ -142,19 +91,8 @@ module .exports = app;
 //     //     const io = new ServerSocket(this.httpServer);
 //     //     socketChatMessages(io);
 //     // }
-<<<<<<< Updated upstream
 //     async listen(port) {
 //         await this.httpServer.listen(port);
 //         console.log(`SERVER RUN ON PORT ${port}`);
 //     }
 // }
-=======
-
-
-//     async listen(port) {
-//         await this.httpServer.listen(port);
-//         console.log(`APP : SERVER RUN ON PORT ${port}`);
-//     }
-// }
-
->>>>>>> Stashed changes

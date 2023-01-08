@@ -14,6 +14,7 @@ const jwt = require('jsonwebtoken');
 //   connectionLimit: 5
 // });
 
+//conn변경
 exports.SignIn = async function(req) {
   var conn;
 try{
@@ -76,64 +77,36 @@ try{
   );}
 };
 
-// user 중복 체크
-const u = (user) => new Promise((resolve, reject) => {
-  const query = "SELECT userid, password, name, salt FROM webdb.tb_user where userid='" + user.userid + "';";
-  db.query(query, function(err, results, fields) {
-    var resultcode = 0;
-    if(err) {
-      reject(err);
-    }
-    if(results.length > 0) {//중복이 있을 경우
-      resultcode = 100;
-      //return resultcode;
-    }
-    resolve(resultcode);
-  });
-});
 // 회원가입
 exports.signUp = async function(req, res) {
   var resultcode = 0;
   var conn;
   try{
-    //console.log(req.body);
-    resultcode = await u(req.body);
-    // 중복 체크
-    if(resultcode == 100) {
-      console.log('login-service SignUp:중복');
-      return resultcode;
-    }
-    //비밀번호 확인 불일치
-    if(req.body.password != req.body.password2) {
-      console.log('login-service SignUp:비밀번호 불일치');
-      resultcode = 100;
-      return resultcode;
-    }
-    
-  console.log('login-service SignUp:중복아님');
-
-      hasher({password:req.body.password}, function(err, pass, salt, hash) {
-        const query = " insert into webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code,sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
-        db.query(query, function(err, rows, fields) {
-          if(err) {
-            console.log(err);
-          }
+    conn = await db.getConnection();
+    var userid = req.body.userid;
+    var password = req.body.password;
+    var name = req.body.name;
+    var query = "SELECT userid, password, name, salt FROM webdb.tb_user where userid='" + userid + "';";
+    var rows = await conn.query(query); // 쿼리 실행
+    if (rows[0] == undefined) {
+        hasher({
+            password: password
+        }, async (err, pass, salt, hash) => {
+          var query = " insert into webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code,sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
+          //var rows = await conn.query(query); // 쿼리 실행
         });
-      });
+    } else {
+        // 이미 있음
+        resultcode = 100;
+    }
   } catch(error) {
     console.log('login-service SignUp:'+error);
-    resultcode = 100;
   } finally {
-    if(db) db.end(
-      function(err) {
-        if (err) {
-          console.log(err);
-        }
-      }
-    );
+    if (conn) conn.end();
   }
+  
   return resultcode;
-};
+}; 
 
 //로그인 체크
 exports.login_check = async function(req, res) {
