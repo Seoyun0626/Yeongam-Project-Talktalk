@@ -55,7 +55,7 @@ const login = async function (req, res) {
         });
     }
 };
-const renweLogin = async function (req, res) {
+const renewLogin = async function (req, res) {
     try {
         const token = generateJsonWebToken(req.idPerson);
         return res.json({
@@ -81,6 +81,6 @@ const resendCodeEmail = async function (email) {
 
 module.exports = {
     login,
-    renweLogin,
+    renewLogin,
     resendCodeEmail,
 }

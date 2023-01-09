@@ -13,15 +13,15 @@ const passport = require('passport');
 // 로그인 라우터
 router.get('/login', function (req, res) {
   try{
-    //console.log('mobile-router login');
-    res.render('dataif/login');
+    console.log('mobile-router login');
+    // res.render('dataif/login');
   } catch(error) {
     console.log('mobile-router login error:'+error);
   }
 });
 
 
-/*
+
 router.post("/login", async function(req, res) {
   try{
     // 로그인 확인을 위해 컨트롤러 호출
@@ -32,7 +32,7 @@ router.post("/login", async function(req, res) {
     console.log('mobile-router login:'+error);
   }
 });
-
+/*
 const LocalStrategy = require('passport-local').Strategy;
 passport.use('local-login', new LocalStrategy({
   usernameField: 'userid',
@@ -80,8 +80,13 @@ router.post('/login', passport.authenticate('local-login', {
 //이름 변경
 router.get("/loginSuccess", function(req, res) {
   res.render('dataif/mem'); 
-  // redirect('/mobile/login');
+  redirect('/mobile/login');
   //res.json({msg:'0'});
+  return res.json({
+    resp: true,
+    message: '로그인 성공'
+}); // 임시
+  
 });
 
 router.get("/loginFailure", function(req, res) {
@@ -91,6 +96,10 @@ router.get("/loginFailure", function(req, res) {
   //res.json({success: false, msg: rtnMsg})
   res.redirect('/mobile/auth/login');
   //res.json({errMsg:msg});
+  return res.json({
+    resp: false,
+    message: '로그인 실패'
+}); // 임시
 });
 
 //로그인끝

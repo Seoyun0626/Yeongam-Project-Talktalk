@@ -5,7 +5,7 @@ const router = Router();
 
 
 router.post('/auth-login', auth.login);
-router.get('/auth/renew-login', verifyToken, auth.renweLogin);
+router.get('/auth/renew-login', verifyToken, auth.renewLogin);
 
 module.exports = router;
 // export default router;
