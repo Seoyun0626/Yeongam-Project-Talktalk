@@ -66,10 +66,19 @@ try{
   );}
 };
 
-u = async function(req, res) {
+// 회원가입
+exports.signUp = async function(req, res) {
+  var resultcode = 0;
+  var conn;
   try{
-    db.getConnection(async function(err, connection) {
-      console.log(1);
+    var userid = req.body.userid;
+    var password = req.body.password;
+    var password2 = req.body.password2;
+    var name = req.body.name;
+    //에러 메시지
+    var msg = "";
+    db.getConnection(function(err, connection) {
+      console.log(3);
       if (err) {
         console.log('login-service SignUp:'+err);
         resultcode = 100;
@@ -103,7 +112,7 @@ u = async function(req, res) {
      }
       
      //비밀번호 암호화
-      await hasher({
+      hasher({
         password: password
       }, async (err, pass, salt, hash) => {
         if (err) {
@@ -120,7 +129,7 @@ u = async function(req, res) {
           req.body.password = hash;
           req.body.salt = salt;
           var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code, sex_class_code) values ('"+req.body.userid+"','"+req.body.password+"','"+req.body.name+"', '"+req.body.salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
-          await connection.query(query, function (err, rows) {
+          connection.query(query, function (err, rows) {
             if (err) {
               console.log('login-service SignUp:'+err);
               resultcode = 100;
@@ -132,26 +141,6 @@ u = async function(req, res) {
       }
       });
     });
-  } catch(error) {
-    console.log('login-service SignUp:'+error);
-  } finally {
-    if(db) db.end()
-  }
-    
-
-// 회원가입
-exports.signUp = async function(req, res) {
-  var resultcode = 0;
-  var conn;
-  try{
-    var userid = req.body.userid;
-    var password = req.body.password;
-    var password2 = req.body.password2;
-    var name = req.body.name;
-    //에러 메시지
-    var msg = "";
-    await u(req, res);
-     
   } catch(error) {
     console.log('login-service SignUp:'+error);
   } finally {
@@ -244,4 +233,4 @@ exports.date_check = async function(req, res) {
   } finally {
     if (conn) conn.end();
   }
-};}
+};
