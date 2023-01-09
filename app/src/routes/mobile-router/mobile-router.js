@@ -164,7 +164,7 @@ router.post("/signup", async function(req, res) {
       return res.json({
         resp: true,
         message: '성공적으로 등록된 사용자'
-    });
+    }); // 임시
     }
     else{
       console.log('mobile-router signup fail');
@@ -172,7 +172,7 @@ router.post("/signup", async function(req, res) {
       return res.json({
         resp: false,
         message: '등록 실패'
-    });
+    }); // 임시
     }
   } catch(error) {
     console.log('mobile-router signup error:'+error);
