@@ -76,7 +76,11 @@ exports.createUser = async function(req, res) {
 exports.verifyEmail = async function (req, res) {
     try {
         const conn = await connect();
+<<<<<<< Updated upstream
         const [codedb] = await conn.query('SELECT token_temp FROM tb_user WHERE email = ? LIMIT 1', [req.params.email]);
+=======
+        const [codedb] = await conn.query('SELECT token_temp FROM users WHERE email = ? LIMIT 1', [req.params.email]);
+>>>>>>> Stashed changes
         const { token_temp } = codedb[0];
         if (req.params.code != token_temp) {
             return res.status(401).json({
@@ -84,7 +88,11 @@ exports.verifyEmail = async function (req, res) {
                 message: '확인 실패'
             });
         }
+<<<<<<< Updated upstream
         await conn.query('UPDATE tb_user SET email_verified = ?, token_temp = ? WHERE email = ?', [true, '', req.params.email]);
+=======
+        await conn.query('UPDATE users SET email_verified = ?, token_temp = ? WHERE email = ?', [true, '', req.params.email]);
+>>>>>>> Stashed changes
         conn.end();
         return res.json({
             resp: true,
@@ -171,7 +179,11 @@ exports.changePassword = async function(req, res) {
     try {
         const { currentPassword, newPassword } = req.body;
         const conn = await connect();
+<<<<<<< Updated upstream
         const passdb = await conn.query('SELECT passwordd FROM tb_user WHERE userid = ?', [req.idPerson]);
+=======
+        const passdb = await conn.query('SELECT passwordd FROM users WHERE person_uid = ?', [req.idPerson]);
+>>>>>>> Stashed changes
         if (!bcrypt.compareSync(currentPassword, passdb[0][0].passwordd)) {
             return res.status(400).json({
                 resp: false,
@@ -180,7 +192,11 @@ exports.changePassword = async function(req, res) {
         }
         const salt = bcrypt.genSaltSync();
         const newPass = bcrypt.hashSync(newPassword, salt);
+<<<<<<< Updated upstream
         await conn.query('UPDATE tb_user SET passwordd = ? WHERE userid = ?', [newPass, req.idPerson]);
+=======
+        await conn.query('UPDATE users SET passwordd = ? WHERE person_uid = ?', [newPass, req.idPerson]);
+>>>>>>> Stashed changes
         conn.end();
         return res.json({
             resp: true,
