@@ -17,6 +17,14 @@ const passport = require('passport');
 const flash = require('express-flash');
 const initPassport = require('./src/utils/passport');
 
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(`APP : SERVER RUN ON PORT ${port}`)
+})
+app.get('/welcome', (req, res)=>{
+  res.send('heehee');
+})
 //라우팅
 // const routeUser = require('./src/routes/mobile-router/user_routes');
 // const routeAuth = require('./src/routes/mobile-router/auth_routes');
@@ -48,6 +56,9 @@ app.use(bodyParser.json()); //json형식의 데이터를 받을 수 있게
 app.use(bodyParser.urlencoded({ extended: true })); //urlencoded형식의 데이터를 받을 수 있게
 app.use("/admin",routerAdmin);
 app.use("/mobile",routerMobile);
+
+
+
 
 module .exports = app;
 

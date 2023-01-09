@@ -32,7 +32,7 @@ class UserServices {
       'email': user_email,
       'password': user_pw
     });
-    print('${Environment.urlApi}/user');
+    print('${Environment.urlApi}/signup');
     print(resp.body);
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));
