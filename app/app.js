@@ -29,7 +29,7 @@ app.get('/welcome', (req, res)=>{
 // const routeUser = require('./src/routes/mobile-router/user_routes');
 // const routeAuth = require('./src/routes/mobile-router/auth_routes');
 const routerAdmin = require("./src/routes/admin-router/dataif-router");
-const routerMobile = require("./src/routes/mobile-router/dataif-router");
+const routerMobile = require("./src/routes/mobile-router/mobile-router");
 
 //앱 세팅
 app.set("views", "./src/views");

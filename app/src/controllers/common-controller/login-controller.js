@@ -48,7 +48,7 @@ exports.SignUp = async function(req, res) {
 // 회원가입 컨트롤러
 exports.signUp = async function(req, res) {
   try{
-    //console.log( req.body);
+    console.log( req.body);
     var result = await login_service.signUp(req);
     console.log(result);
     return result;

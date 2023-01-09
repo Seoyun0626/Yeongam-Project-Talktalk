@@ -66,8 +66,17 @@ try{
   );}
 };
 
-u = async function(req, res) {
+// 회원가입
+exports.signUp = async function(req, res) {
+  var resultcode = 0;
+  var conn;
   try{
+    var userid = req.body.userid;
+    var password = req.body.password;
+    // var password2 = req.body.password2;
+    var name = req.body.name;
+    //에러 메시지
+    var msg = "";
     db.getConnection(async function(err, connection) {
       console.log(1);
       if (err) {
@@ -97,10 +106,10 @@ u = async function(req, res) {
       }
       */
      //비밀번호,재확인 같은 지
-     if(password != password2){
-      msg = "비밀번호가 일치하지 않습니다.";
-      resultcode = 100;
-     }
+    //  if(password != password2){
+    //   msg = "비밀번호가 일치하지 않습니다.";
+    //   resultcode = 100;
+    //  }
       
      //비밀번호 암호화
       await hasher({
@@ -132,26 +141,6 @@ u = async function(req, res) {
       }
       });
     });
-  } catch(error) {
-    console.log('login-service SignUp:'+error);
-  } finally {
-    if(db) db.end()
-  }
-    
-
-// 회원가입
-exports.signUp = async function(req, res) {
-  var resultcode = 0;
-  var conn;
-  try{
-    var userid = req.body.userid;
-    var password = req.body.password;
-    var password2 = req.body.password2;
-    var name = req.body.name;
-    //에러 메시지
-    var msg = "";
-    await u(req, res);
-     
   } catch(error) {
     console.log('login-service SignUp:'+error);
   } finally {
@@ -244,4 +233,4 @@ exports.date_check = async function(req, res) {
   } finally {
     if (conn) conn.end();
   }
-};}
+};
