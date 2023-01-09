@@ -50,7 +50,7 @@ exports.signUp = async function(req, res) {
   try{
     //console.log( req.body);
     var result = await login_service.signUp(req);
-    console.log(result);
+    console.log(2);
     return result;
   } catch(error) {
     console.log('login-controller login_check:'+error);

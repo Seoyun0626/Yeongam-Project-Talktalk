@@ -1,7 +1,7 @@
 
-const createPool = require('mysql');
+const createPool = require('mariadb');
 const dbConfig = require('./kth.db.config');
-const mysql = require('mysql');
+const mysql = require('mariadb');
 
 
 const pool = mysql.createPool({

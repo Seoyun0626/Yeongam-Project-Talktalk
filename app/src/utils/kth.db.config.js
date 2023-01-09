@@ -9,9 +9,9 @@
 
 module.exports = {
     HOST : "127.0.0.1",
-    USER : "root",
+    USER : "webservice",
     DATABASE : "webdb",
-    PASSWORD : "1004",
+    PASSWORD : "webservice",
     PORT : "3306"
 };
 
