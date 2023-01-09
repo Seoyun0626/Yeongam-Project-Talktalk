@@ -33,7 +33,7 @@
     <div id="adminpage"><h1>Admin Page</h1></div>
     <div class="header">  회원 관리</div>
       <ul>
-        <li><a href="/admin/show">회원 정보 관리</a></li>
+        <li><a href="/auth/show">회원 정보 관리</a></li>
         <li><a href="/">회원 가입 설정</a></li>
       </ul>
     <div class="header">  정책 관리</div>
@@ -46,7 +46,7 @@
     <div>
         <div class="pagename">회원 등록</div>
         <div>
-            <form action="/admin/signup" method="post" name="frm_signup" id="frm_signup">
+            <form action="/admin/auth/signup" method="post" name="frm_signup" id="frm_signup">
                 <div>
                   <div class="ui input">
                     <input type="text" name="userid" id="userid" placeholder="아이디"">
@@ -107,7 +107,7 @@
                   <br>
                 <div>
                     <button class="ui button" type="submit">등록</button>
-                    <button class="ui button" type="button" onclick="location.href='/admin/login'">취소</button>
+                    <button class="ui button" type="button" onclick="location.href='/admin/auth/login'">취소</button>
                 </div>
             </form>
         </div>

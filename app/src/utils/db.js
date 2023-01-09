@@ -8,6 +8,7 @@ const pool = mysql.createPool({
   connectionLimit: 10
 });
 /*
+//연결 되는 지 확인
 pool.query('SELECT * FROM tb_user', function(err, results, fields) {
   if (err) {
     console.log(err);
