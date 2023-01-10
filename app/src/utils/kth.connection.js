@@ -1,3 +1,5 @@
+
+const createPool = require('mariadb');
 const dbConfig = require('./kth.db.config');
 const mysql = require('mariadb');
 
@@ -7,6 +9,7 @@ const pool = mysql.createPool({
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
   port:dbConfig.PORT,
+  allowPublicKeyRetrieval: true,
   database: dbConfig.DATABASE,
 });
 
@@ -20,6 +23,8 @@ const pool = mysql.createPool({
 //     });
 //     return connection;
 // };
+
+  
 
 
 
