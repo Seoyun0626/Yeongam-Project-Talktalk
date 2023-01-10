@@ -30,6 +30,7 @@ router.post("/login", async function(req, res) {
     var result = await login_controller.SignIn(req, res);
     // console.log("router.post-/login", result);
     // res.send(result);
+    console.log(result);
     let token = generateJsonWebToken(result);
     res.json({
       resp: true,
