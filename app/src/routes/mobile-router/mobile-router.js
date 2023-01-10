@@ -163,11 +163,7 @@ router.post("/signup", async function(req, res) {
     // 사용자등록 컨트롤러 호출
     
     var result = await login_controller.signUp(req, res);
-<<<<<<< Updated upstream
     console.log(3);
-=======
-    console.log(4);
->>>>>>> Stashed changes
     //res.send({errMsg:result});
     //if(result==0) res.json({success: true, msg:'등록하였습니다.'});
     //else res.json({success: false, msg:'등록실패하였습니다.'});
@@ -177,11 +173,7 @@ router.post("/signup", async function(req, res) {
       res.json({
         resp: true,
         message: '성공적으로 등록된 사용자'
-<<<<<<< Updated upstream
-    }); // kth
-=======
       }); // kth
->>>>>>> Stashed changes
     }
     else{
       console.log('mobile-router signup fail');
@@ -189,11 +181,7 @@ router.post("/signup", async function(req, res) {
       res.json({
         resp: false,
         message: '등록 실패'
-<<<<<<< Updated upstream
     }); // kth
-=======
-      }); // kth
->>>>>>> Stashed changes
     }
   } catch(error) {
     console.log('mobile-router signup error:'+error);
