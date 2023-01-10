@@ -11,12 +11,12 @@
 <body>
   <div class="login-page">
     <div class="form">
-      <form action="/admin/login" method="post" name="frm_login" id="frm_login">
+      <form action="/admin/auth/login" method="post" name="frm_login" id="frm_login">
         <input name="userid" id="userid" type="text" placeholder="아이디"/>
         <input name="password" id="password" type="password" placeholder="비밀번호"/>
         <div>
           <input type="submit" value="로그인" class="btn btn-primary"/>
-          <input type="button" value="회원가입" class="btn btn-primary" onclick="location.href='/admin/signup'"/>
+          <input type="button" value="회원가입" class="btn btn-primary" onclick="location.href='/admin/auth/signup'"/>
         </div>
       </form>
     </div>
