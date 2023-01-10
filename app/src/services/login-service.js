@@ -55,7 +55,9 @@ exports.signUp = async function(req, res) {
   try{
     var userid = req.body.userid;
     var password = req.body.password;
-    var password2 = req.body.password2;
+    console.log('login-service userid : ', userid);
+    console.log('login-servie password : ', password);
+    // var password2 = req.body.password2;
     var name = req.body.name;
     //에러 메시지
     var msg = "";
@@ -87,11 +89,11 @@ exports.signUp = async function(req, res) {
         resultcode = 100;
       }
       */
-     //비밀번호,재확인 같은 지
-     if(password != password2){
-      msg = "비밀번호가 일치하지 않습니다.";
-      resultcode = 100;
-     }
+    //  //비밀번호,재확인 같은 지
+    //  if(password != password2){
+    //   msg = "비밀번호가 일치하지 않습니다.";
+    //   resultcode = 100;
+    //  }
       
      //비밀번호 암호화
       await hasher({

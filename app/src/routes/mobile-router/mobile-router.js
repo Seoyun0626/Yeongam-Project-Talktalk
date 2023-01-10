@@ -162,7 +162,7 @@ router.post("/signup", async function(req, res) {
   try{
     // 사용자등록 컨트롤러 호출
     
-    var result = 0;// await login_controller.signUp(req, res);
+    var result = await login_controller.signUp(req, res);
     console.log(3);
     //res.send({errMsg:result});
     //if(result==0) res.json({success: true, msg:'등록하였습니다.'});
@@ -170,18 +170,18 @@ router.post("/signup", async function(req, res) {
     if(result==0){
       console.log('mobile-router signup success');
       // res.redirect('/mobile/auth/login');
-      return res.json({
+      res.json({
         resp: true,
         message: '성공적으로 등록된 사용자'
-    }); // 임시
+    }); // kth
     }
     else{
       console.log('mobile-router signup fail');
       // res.redirect('/mobile/auth/signup');
-      return res.json({
+      res.json({
         resp: false,
         message: '등록 실패'
-    }); // 임시
+    }); // kth
     }
   } catch(error) {
     console.log('mobile-router signup error:'+error);
