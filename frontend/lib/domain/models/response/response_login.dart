@@ -8,23 +8,23 @@ String responseLoginToJson(ResponseLogin data) => json.encode(data.toJson());
 class ResponseLogin {
   bool resp; //response
   String message;
-  String? token;
+  // String? token;
 
   ResponseLogin({
     required this.resp,
     required this.message,
-    this.token,
+    // this.token,
   });
 
   factory ResponseLogin.fromJson(Map<String, dynamic> json) => ResponseLogin(
         resp: json["resp"],
         message: json["message"],
-        token: json["token"] ?? "null",
+        // token: json["token"] ?? "null",
       );
 
   Map<String, dynamic> toJson() => {
         "resp": resp,
         "message": message,
-        "token": token,
+        // "token": token,
       };
 }
