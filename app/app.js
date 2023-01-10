@@ -28,8 +28,8 @@ const initPassport = require('./src/utils/passport');
 //라우팅
 // const routeUser = require('./src/routes/mobile-router/user_routes');
 // const routeAuth = require('./src/routes/mobile-router/auth_routes');
-const routerAdminDataif = require("./src/routes/admin-router/dataif-router");
-const routerAdminLogin = require("./src/routes/admin-router/login-router");
+const routerAdminDataif = require("./src/routes/admin-router/admin-dataif-router");
+const routerAdminLogin = require("./src/routes/admin-router/admin-login-router");
 const routerMobile = require("./src/routes/mobile-router/mobile-router");
 
 //앱 세팅
