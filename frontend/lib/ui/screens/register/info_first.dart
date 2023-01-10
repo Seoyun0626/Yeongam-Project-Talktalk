@@ -135,10 +135,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         onPressed: () {
                           if (_keyForm.currentState!.validate()) {
                             userBloc.add(OnRegisterUserEvent(
-                                userIDController.text.trim(),
-                                userPWController.text.trim(),
-                                userEmailController.text.trim(),
-                                userNameController.text.trim()));
+                              userIDController.text.trim(),
+                              userNameController.text.trim(),
+                              userEmailController.text.trim(),
+                              userPWController.text.trim(),
+                            ));
                           }
                         }),
                   ],

@@ -57,19 +57,18 @@ exports.signUp = async function(req, res) {
   try{
     conn = await db.getConnection();
     var userid = req.body.userid;
+    console.log('userid', userid);
     var password = req.body.password;
     var password2 = req.body.password2;
+    var name = req.body.name;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
-    if(password != password2){
-      resultcode = 100;
-      console.log('패스워드가 일치하지 않습니다.');
-    }
     if (rows[0] == undefined) {
         hasher({
             password: password
         }, async (err, pass, salt, hash) => {
-          var query = " insert into webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code,emd_class_code,sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
+          // var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code, sex_class_code) values ('"+req.body.userid+"','"+req.body.password+"','"+req.body.name+"', '"+req.body.salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
+          var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_email) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"',  '"+req.body.user_email+"')"; // mobile
           var rows = await conn.query(query); // 쿼리 실행
         });
     } else {

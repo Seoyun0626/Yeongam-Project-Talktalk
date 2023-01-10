@@ -12,10 +12,10 @@ const sendEmailVerify = require('../../lib/nodemailer')
 
 const login = async function (req, res) {
     try {
-        const { user_id, ueser_pw } = req.body;
+        const { userid, password } = req.body;
         const conn = await connect();
         // Check is exists Email on database 
-        const [verifyUserdb] = await conn.query('SELECT user_id, user_pw, email_verified FROM test WHERE user_id = ?', [user_id]);
+        const [verifyUserdb] = await conn.query('SELECT userid, password, email_verified FROM tb_user WHERE userid = ?', [userid]);
         if (verifyUserdb.length == 0) {
             return res.status(401).json({
                 resp: false,
@@ -25,20 +25,20 @@ const login = async function (req, res) {
         const verifyUser = verifyUserdb[0];
         // Check Email is Verified
         if (!verifyUser.email_verified) {
-            resendCodeEmail(verifyUser.user_email);
+            resendCodeEmail(verifyUser.email);
             return res.status(401).json({
                 resp: false,
                 message: '메일을 확인해주세요.'
             });
         }
         // Check Password
-        if (!await bcrypt.compareSync(user_pw, verifyUser.user_pw)) {
+        if (!await bcrypt.compareSync(password, verifyUser.passwordd)) {
             return res.status(401).json({
                 resp: false,
                 message: '잘못된 비밀번호'
             });
         }
-        const uidPersondb = await conn.query('SELECT user_id as uid FROM test WHERE user_id = ?', [user_id]); //
+        const uidPersondb = await conn.query('SELECT userid as uid FROM tb_user WHERE userid = ?', [userid]); //
         const { uid } = uidPersondb[0][0]; //
         let token = generateJsonWebToken(uid);
         conn.end();
@@ -55,7 +55,7 @@ const login = async function (req, res) {
         });
     }
 };
-const renweLogin = async function (req, res) {
+const renewLogin = async function (req, res) {
     try {
         const token = generateJsonWebToken(req.idPerson);
         return res.json({
@@ -74,13 +74,13 @@ const renweLogin = async function (req, res) {
 const resendCodeEmail = async function (email) {
     const conn = await connect();
     var randomNumber = Math.floor(10000 + Math.random() * 90000);
-    await conn.query('UPDATE test SET token_temp = ? WHERE user_email = ?', [randomNumber, email]);
+    await conn.query('UPDATE tb_user SET token_temp = ? WHERE email = ?', [randomNumber, email]);
     await sendEmailVerify('확인 코드', email, `<h1> 청소년톡talk </h1><hr> <b>${randomNumber} </b>`);
     conn.end();
 };
 
 module.exports = {
     login,
-    renweLogin,
+    renewLogin,
     resendCodeEmail,
 }

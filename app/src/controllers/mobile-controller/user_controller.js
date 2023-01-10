@@ -172,6 +172,7 @@ exports.changePassword = async function(req, res) {
         const { currentPassword, newPassword } = req.body;
         const conn = await connect();
         const passdb = await conn.query('SELECT passwordd FROM tb_user WHERE userid = ?', [req.idPerson]);
+
         if (!bcrypt.compareSync(currentPassword, passdb[0][0].passwordd)) {
             return res.status(400).json({
                 resp: false,
@@ -181,6 +182,7 @@ exports.changePassword = async function(req, res) {
         const salt = bcrypt.genSaltSync();
         const newPass = bcrypt.hashSync(newPassword, salt);
         await conn.query('UPDATE tb_user SET passwordd = ? WHERE userid = ?', [newPass, req.idPerson]);
+
         conn.end();
         return res.json({
             resp: true,

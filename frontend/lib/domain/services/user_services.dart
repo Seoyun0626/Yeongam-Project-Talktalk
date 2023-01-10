@@ -21,19 +21,20 @@ class UserServices {
     _streamController.close();
   }
 
-  Future<DefaultResponse> createdUser(String user_id, String user_name,
-      String user_email, String user_pw) async {
-    final resp =
-        await http.post(Uri.parse('${Environment.urlApi}/user'), headers: {
-      'Accept': 'application/json'
-    }, body: {
-      'user_id': user_id,
-      'user_name': user_name,
-      'email': user_email,
-      'password': user_pw
-    });
-    print('${Environment.urlApi}/user');
-    print(resp.body);
+  Future<DefaultResponse> createdUser(
+      String userid, String name, String user_email, String password) async {
+    final resp = await http.post(Uri.parse('${Environment.urlApi}/signup'),
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: {
+          'userid': userid,
+          'name': name,
+          'user_email': user_email,
+          'password': password
+        });
+    // print('${Environment.urlApi}/signup');
+    // print(resp.body);
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
