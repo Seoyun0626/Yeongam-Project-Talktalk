@@ -71,11 +71,7 @@ const renweLogin = async function (req, res) {
         });
     }
 };
-<<<<<<< Updated upstream
 const resendCodeEmail = async function (email) {
-=======
-exports.resendCodeEmail = async function (user_email) {
->>>>>>> Stashed changes
     const conn = await connect();
     var randomNumber = Math.floor(10000 + Math.random() * 90000);
     await conn.query('UPDATE test SET token_temp = ? WHERE user_email = ?', [randomNumber, email]);
