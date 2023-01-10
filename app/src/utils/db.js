@@ -1,6 +1,6 @@
-const mysql = require('mariadb');
+const mariadb = require('mariadb');
 var config = require('./db-config'); // ./는 현재 디렉토리를 나타냅니다 
-const pool = mysql.createPool({
+const pool = mariadb.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PSWORD,

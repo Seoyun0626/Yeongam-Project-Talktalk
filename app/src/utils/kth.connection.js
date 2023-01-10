@@ -1,5 +1,8 @@
 
+<<<<<<< Updated upstream
 const createPool = require('mysql');
+=======
+>>>>>>> Stashed changes
 const dbConfig = require('./kth.db.config');
 const mysql = require('mysql');
 
@@ -22,21 +25,6 @@ const pool = mysql.createPool({
 //     });
 //     return connection;
 // };
-
-pool.getConnection(function(err, connection){  
-    if( err ){
-        if( err.code === 'PROTOCOL_CONNECTION_LOST' ) console.log('DATABASE CONNECTION WAS CLOSED');
-        if( err.code === 'ER_CON_COUNT_ERROR' ) console.log('DATABASE HAS TO MANY CONNECTIONS');
-        if( err.code === 'ECONNREFUSED' ) console.log('DATABASE CONNECTION WAS REFUSED');
-    } else {
-      console.log('DataBase is connected to '+ dbConfig.DATABASE);
-    }
-    if( connection ) connection.release();
-  
-    
-    return;
-  });
-  
 
 
 
