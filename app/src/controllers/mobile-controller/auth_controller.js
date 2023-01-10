@@ -39,7 +39,7 @@ const login = async function (req, res) {
             });
         }
         const uidPersondb = await conn.query('SELECT userid as uid FROM tb_user WHERE userid = ?', [userid]); //
-        const { uid } = uidPersondb[0][0]; //
+        const { uid } = uidPersondb[0][0];
         let token = generateJsonWebToken(uid);
         conn.end();
         return res.json({

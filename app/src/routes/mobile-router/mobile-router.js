@@ -5,6 +5,7 @@ var login_controller = require("../../controllers/admin-controller/login-control
 // const routerUser = require("./src/routes/mobile-router/mobile-user-router");
 
 const passport = require('passport');
+const generateJsonWebToken = require("../../lib/generate_jwt");
 
 
 // router.use("/user",routerUser);
@@ -29,10 +30,11 @@ router.post("/login", async function(req, res) {
     var result = await login_controller.SignIn(req, res);
     // console.log("router.post-/login", result);
     // res.send(result);
+    let token = generateJsonWebToken(result);
     res.json({
       resp: true,
       message: '로그인 성공',
-      // token : token
+      token : token
   }); // 임시
 
     
@@ -40,7 +42,8 @@ router.post("/login", async function(req, res) {
     console.log('mobile-router login:'+error);
     res.json({
       resp: false,
-      message: '로그인 실패'
+      message: '로그인 실패',
+      token : token
   }); // 임시
   }
 });

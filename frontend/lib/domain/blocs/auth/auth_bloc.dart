@@ -73,6 +73,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     OnLogOutEvent event,
     Emitter<AuthState> emit,
   ) async {
+    print("_onLogOut");
     await secureStorage.deleteSecureStorage();
     emit(LogOut());
   }
