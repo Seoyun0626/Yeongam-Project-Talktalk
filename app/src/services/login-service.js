@@ -10,6 +10,7 @@ try{
   var json = {};
   json.code = 0;
   conn = await db.getConnection();
+  // console.log('login-service SignIn db getConnection');
   var userid = req.body.userid; //req.body.id -> req.body.userid
   var password = req.body.password;
   console.log('login-serive SignIn - userid', userid); // kth log
@@ -20,17 +21,19 @@ try{
       //저장된 password 와 hash password 가 같은지를 체크하여 로그은 성공, 실패 처리 
       var userSalt = rows[0].salt;
       var userPass = rows[0].password;
+      
       return new Promise((resolve, reject) => {
           hasher({
               password: password,
               salt: userSalt
           }, (err, pass, salt, hash) => {
               if (hash != userPass) {
-                  json.code = 100;
-                  json.msg = "패스워드 일치하지 않습니다.(운영환경 : ID 및 비밀번호가 일치하지 않습니다)";
-                  json.data = {};
+                json.code = 100;
+                json.msg = "패스워드 일치하지 않습니다.(운영환경 : ID 및 비밀번호가 일치하지 않습니다)";
+                json.data = {};
               } else {
-                  json.data = rows[0];
+                // console.log('login-service json.code', json.code);
+                json.data = rows[0];
               }
               resolve(json);
           });
@@ -58,6 +61,7 @@ exports.signUp = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
+    console.log('login-service SignUp db getConnection')
     var userid = req.body.userid;
     var password = req.body.password;
     var name = req.body.name;

@@ -182,7 +182,7 @@ class _RegisterPageState1 extends State<RegisterPage1> {
                         //       context, routeSlide(page: const RegisterPage2()))
                         // },
 
-                        // kth - regist test
+                        // kth - register(signup) test
                         onPressed: () {
                           if (_keyForm.currentState!.validate()) {
                             userBloc.add(OnRegisterUserEvent(
