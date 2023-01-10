@@ -1,7 +1,7 @@
 const path = require("path");
 var express = require("express");
 var router = express.Router();
-var login_controller = require("../../controllers/admin-controller/login-controller");
+var login_controller = require("../../controllers/common-controller/login-controller");
 // const routerUser = require("./src/routes/mobile-router/mobile-user-router");
 
 const passport = require('passport');
