@@ -30,22 +30,26 @@ router.post("/login", async function(req, res) {
     var result = await login_controller.SignIn(req, res);
     // console.log("router.post-/login", result);
     // res.send(result);
-    console.log(result);
+    console.log('mobile-router result : ', result);
     let token = generateJsonWebToken(result);
-    res.json({
-      resp: true,
-      message: '로그인 성공',
-      token : token
-  }); // 임시
-
+    if (result.code == 0){
+      res.json({
+        resp : true,
+        message : '로그인 성공',
+        token : token
+      })
+    }
     
   } catch(error) {
     console.log('mobile-router login:'+error);
-    res.json({
-      resp: false,
-      message: '로그인 실패',
-      token : token
-  }); // 임시
+    if (result.code == 100){
+      res.json({
+        resp : false,
+        message : '로그인 실패',
+        token : token
+      })
+    }
+
   }
 });
 /*
