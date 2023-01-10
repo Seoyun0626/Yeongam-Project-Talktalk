@@ -10,7 +10,6 @@ module.exports = () => {
         passwordfield: 'password',
         passReqToCallback: true,
     }, async function(req, username, password, done) {
-        //console.log('passport username:'+username);
         var conn;
         try{
             conn = await db.getConnection();
