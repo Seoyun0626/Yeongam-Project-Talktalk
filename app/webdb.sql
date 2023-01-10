@@ -12,6 +12,26 @@ DROP TABLE IF EXISTS webdb.`tb_user`;
 CREATE TABLE webdb.`tb_user` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `userid` varchar(255) NOT NULL,
+  `reg_no` varchar(30) NULL,
+  `password` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `user_role` int(4) NULL,
+  `age_class_code` int(4) NULL,
+  `sex_class_code` int(1) NULL,
+  `emd_class_code` int(4) NULL,
+  `user_email` varchar(50) NULL,
+  `salt` varchar(255) NOT NULL,
+  `del_chk` varchar(1) NOT NULL DEFAULT 'N',
+  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`board_idx`) USING BTREE 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE webdb.`tb_user` (
+  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` varchar(255) NOT NULL,
   `user_type` varchar(255) NOT NULL,
   `reg_no` varchar(30) NULL,
   `password` varchar(255) NOT NULL,

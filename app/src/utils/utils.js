@@ -1,10 +1,9 @@
-const { findOneAndDelete } = require("../models/Post");
 const nodemailer = require('nodemailer');
 const smtpTransport = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-      user: "tbeddgu84@gmail.com",
-      pass: "dgu12!@#"
+      user: "****@gmail.com",
+      pass: "****"
   },
   tls: {
       rejectUnauthorized: false
