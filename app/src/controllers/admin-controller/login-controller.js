@@ -24,6 +24,18 @@ exports.SignIn = async function(req, res) {
     console.log('login-controller SignIn:'+error);
   }
 };
+
+// 회원가입 컨트롤러
+exports.signUp = async function(req, res) {
+  try{
+    //console.log( req.body);
+    var result = await login_service.signUp(req);
+    return result;
+  } catch(error) {
+    console.log('login-controller login_check:'+error);
+  }
+};
+
 /*
 // 회원가입 컨트롤러
 exports.SignUp = async function(req, res) {
@@ -45,18 +57,10 @@ exports.SignUp = async function(req, res) {
   return json;
 };
 */
-// 회원가입 컨트롤러
-exports.signUp = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await login_service.signUp(req);
-    console.log(2);
-    return result;
-  } catch(error) {
-    console.log('login-controller login_check:'+error);
-  }
-};
 
+
+
+/*
 // 로그인 체크 컨트롤러
 exports.login_check = async function(req, res) {
   try{
@@ -78,3 +82,4 @@ exports.date_check = async function(req, res) {
     console.log('login-controller date_check:'+error);
   }
 };
+*/
