@@ -17,11 +17,11 @@ const passport = require('passport');
 const flash = require('express-flash');
 const initPassport = require('./src/utils/passport');
 
-const port = process.env.PORT;
+// const port = process.env.PORT;
 
-app.listen(port, () => {
-  console.log(`APP : SERVER RUN ON PORT ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`APP : SERVER RUN ON PORT ${port}`)
+// })
 // app.get('/welcome', (req, res)=>{
 //   res.send('heehee');
 // })
