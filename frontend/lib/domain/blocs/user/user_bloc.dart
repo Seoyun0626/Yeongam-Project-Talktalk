@@ -56,8 +56,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       print("_onRegisterUser");
       final resp = await userService.createdUser(
           event.user_id, event.user_name, event.user_email, event.user_pw);
-      print(resp);
       print(resp.resp);
+      print(resp.message);
 
       if (resp.resp) {
         emit(SuccessUserState());
