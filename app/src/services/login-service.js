@@ -60,7 +60,6 @@ exports.signUp = async function(req, res) {
     conn = await db.getConnection();
     var userid = req.body.userid;
     var password = req.body.password;
-    var password2 = req.body.password2;
     var name = req.body.name;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행

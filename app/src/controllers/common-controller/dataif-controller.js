@@ -3,7 +3,6 @@ var dataif_service = require("../../services/dataif-service");
 // 로그인 체크 컨트롤러
 exports.fetchData = async function(req, res) {
   try{
-    console.log( req.body);
     //req.user.userid = 'admin'; //임시
     var result = await dataif_service.fetchData(req);
     return result;

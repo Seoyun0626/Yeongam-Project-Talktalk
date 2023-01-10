@@ -38,11 +38,10 @@ exports.fetchData = async function(req, res) {
     //             +`case when permit_type="N" then "사용자요청" when permit_type="U" then "소유자허가" when permit_type="Y" then "연계준비중" when permit_type="S" then "연계중" when permit_type="E" then "연계완료" end permit_type_nm`
     //             +` FROM webdb.tb_dataif a inner join webdb.tb_sensor b on a.sensor_board_idx=b.board_idx left outer join webdb.tb_file c`
     //             +` on c.board_type="tb_dataif" and c.board_idx=a.board_idx where a.ins_id="${req.user.userid}" order by a.board_idx desc LIMIT ${start}, ${pageSize}`;
+    var query = 'SELECT * FROM tb_user';
     rows = await conn.query(query); // 쿼리 실행
-
-    rows.totalPages=totalPages;
-    rows.page=page;
-
+  // rows.totalPages=totalPages;
+  // rows.page=page;
     return rows;
   } catch(error) {
     console.log('dataif-service fetchData:'+error);
