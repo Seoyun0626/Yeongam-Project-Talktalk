@@ -9,11 +9,11 @@ class TextFieldNaru extends StatelessWidget {
 
   const TextFieldNaru(
       {Key? key,
-        required this.controller,
-        this.hintText,
-        this.isPassword = false,
-        this.keyboardType = TextInputType.text,
-        this.validator})
+      required this.controller,
+      this.hintText,
+      this.isPassword = false,
+      this.keyboardType = TextInputType.text,
+      this.validator})
       : super(key: key);
 
   @override

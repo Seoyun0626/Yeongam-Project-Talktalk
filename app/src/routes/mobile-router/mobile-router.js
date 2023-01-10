@@ -5,6 +5,7 @@ var login_controller = require("../../controllers/admin-controller/login-control
 // const routerUser = require("./src/routes/mobile-router/mobile-user-router");
 
 const passport = require('passport');
+const generateJsonWebToken = require("../../lib/generate_jwt");
 
 
 // router.use("/user",routerUser);
@@ -25,11 +26,25 @@ router.get('/login', function (req, res) {
 router.post("/login", async function(req, res) {
   try{
     // 로그인 확인을 위해 컨트롤러 호출
-    //console.log(req.body);
+    console.log('mobile-router', req.body);
     var result = await login_controller.SignIn(req, res);
-    res.send(result);
+    // console.log("router.post-/login", result);
+    // res.send(result);
+    let token = generateJsonWebToken(result);
+    res.json({
+      resp: true,
+      message: '로그인 성공',
+      token : token
+  }); // 임시
+
+    
   } catch(error) {
     console.log('mobile-router login:'+error);
+    res.json({
+      resp: false,
+      message: '로그인 실패',
+      token : token
+  }); // 임시
   }
 });
 /*
@@ -82,11 +97,6 @@ router.get("/loginSuccess", function(req, res) {
   res.render('dataif/mem'); 
   redirect('/mobile/login');
   //res.json({msg:'0'});
-  return res.json({
-    resp: true,
-    message: '로그인 성공'
-}); // 임시
-  
 });
 
 router.get("/loginFailure", function(req, res) {
@@ -96,10 +106,7 @@ router.get("/loginFailure", function(req, res) {
   //res.json({success: false, msg: rtnMsg})
   res.redirect('/mobile/login');
   //res.json({errMsg:msg});
-  return res.json({
-    resp: false,
-    message: '로그인 실패'
-}); // 임시
+  
 });
 
 //로그인끝
@@ -163,7 +170,7 @@ router.post("/signup", async function(req, res) {
     // 사용자등록 컨트롤러 호출
     
     var result = await login_controller.signUp(req, res);
-    console.log(3);
+    // console.log(3);
     //res.send({errMsg:result});
     //if(result==0) res.json({success: true, msg:'등록하였습니다.'});
     //else res.json({success: false, msg:'등록실패하였습니다.'});

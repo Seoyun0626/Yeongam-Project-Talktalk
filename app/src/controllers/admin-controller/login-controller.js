@@ -3,11 +3,12 @@ var login_service = require("../../services/login-service");
 // 회원로그인 컨트롤러, 사용 안됨..?
 exports.SignIn = async function(req, res) {
   try{
-    // console.log(req.body);
+    // console.log('login-controller', req.body);
     const result = await login_service.SignIn(req);
-    console.log(result);
+    // console.log('login-controller result', result);
     if (result.code == 0) {
-      console.log("로그인 성공");
+      console.log("login-controller SiginIn 로그인 성공");
+
       // 로그인 성공시 쿠키 생성
       res.cookie('userid', result.data.userid);
       res.cookie('username', result.data.name, {

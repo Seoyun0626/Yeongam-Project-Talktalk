@@ -19,6 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     try {
+      print("_onLogin");
       emit(LoadingAuthentication());
 
       final data = await authServices.login(event.user_id, event.user_pw);
@@ -28,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (data.resp) {
         await secureStorage.deleteSecureStorage();
 
-        await secureStorage.persistenToken(data.token!);
+        // await secureStorage.persistenToken(data.token!);
 
         emit(SuccessAuthentication());
       } else {
@@ -51,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final data = await authServices.renewLogin();
 
         if (data.resp) {
-          await secureStorage.persistenToken(data.token!);
+          // await secureStorage.persistenToken(data.token!);
 
           emit(SuccessAuthentication());
         } else {
@@ -72,6 +73,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     OnLogOutEvent event,
     Emitter<AuthState> emit,
   ) async {
+    print("_onLogOut");
     await secureStorage.deleteSecureStorage();
     emit(LogOut());
   }
