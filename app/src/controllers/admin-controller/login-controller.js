@@ -3,7 +3,7 @@ var login_service = require("../../services/login-service");
 // 회원로그인 컨트롤러
 exports.SignIn = async function(req, res) {
   try{
-    //console.log(req.body);
+    // console.log(req.body);
     const result = await login_service.SignIn(req);
     console.log(result);
     if (result.code == 0) {
@@ -28,7 +28,6 @@ exports.SignIn = async function(req, res) {
 // 회원가입 컨트롤러
 exports.signUp = async function(req, res) {
   try{
-    //console.log( req.body);
     var result = await login_service.signUp(req);
     return result;
   } catch(error) {
