@@ -18,7 +18,8 @@ router.get('/login', function (req, res) {
 
 
 router.post('/login', passport.authenticate('local-login', {
-  successRedirect: '/admin/auth/loginSuccess', //인증성공시 이동하는화면주소
+  // successRedirect: '/admin/auth/loginSuccess', //인증성공시 이동하는화면주소
+  successRedirect: '/admin/dataif', //인증성공시 이동하는화면주소
   failureRedirect: '/admin/auth/loginFailure', //인증실패시 이동하는화면주소
   failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
 }));

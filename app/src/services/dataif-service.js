@@ -1,5 +1,5 @@
 var db = require('../utils/db');
-var s_db = require('../utils/s_db');
+// var s_db = require('../utils/s_db');
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
 var utils = require('../utils/utils');
@@ -9,7 +9,8 @@ exports.fetchData = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
-
+    //페이지 설정
+    /*
     var start = 0;
     var page=0;
     var pageSize=10;
@@ -22,6 +23,7 @@ exports.fetchData = async function(req, res) {
     else start = (page - 1) * pageSize;
     var query = 'SELECT count(*) cnt FROM webdb.tb_dataif a inner join webdb.tb_sensor b on a.sensor_board_idx=b.board_idx left outer join webdb.tb_file c'
                 +' on c.board_type="tb_dataif" and c.board_idx=a.board_idx where a.ins_id="'+req.user.userid+'"';
+
     var rows = await conn.query(query);
     var totalPages=Math.ceil(rows[0].cnt / pageSize);
     if (page > totalPages) {
@@ -30,11 +32,12 @@ exports.fetchData = async function(req, res) {
       rtn.page=page;
       return rtn;
     }
+    */
 
-    query = `SELECT a.*, sen_mng_no, file_type, file_no, board_type, `
-                +`case when permit_type="N" then "사용자요청" when permit_type="U" then "소유자허가" when permit_type="Y" then "연계준비중" when permit_type="S" then "연계중" when permit_type="E" then "연계완료" end permit_type_nm`
-                +` FROM webdb.tb_dataif a inner join webdb.tb_sensor b on a.sensor_board_idx=b.board_idx left outer join webdb.tb_file c`
-                +` on c.board_type="tb_dataif" and c.board_idx=a.board_idx where a.ins_id="${req.user.userid}" order by a.board_idx desc LIMIT ${start}, ${pageSize}`;
+    // query = `SELECT a.*, sen_mng_no, file_type, file_no, board_type, `
+    //             +`case when permit_type="N" then "사용자요청" when permit_type="U" then "소유자허가" when permit_type="Y" then "연계준비중" when permit_type="S" then "연계중" when permit_type="E" then "연계완료" end permit_type_nm`
+    //             +` FROM webdb.tb_dataif a inner join webdb.tb_sensor b on a.sensor_board_idx=b.board_idx left outer join webdb.tb_file c`
+    //             +` on c.board_type="tb_dataif" and c.board_idx=a.board_idx where a.ins_id="${req.user.userid}" order by a.board_idx desc LIMIT ${start}, ${pageSize}`;
     rows = await conn.query(query); // 쿼리 실행
 
     rows.totalPages=totalPages;
@@ -336,35 +339,35 @@ exports.getClass = async function(req, res) {
   }
 };
 
-exports.s_getCount = async function(req, res) {
-  var conn;
-  try{
-    conn = await s_db.getConnection();
+// exports.s_getCount = async function(req, res) {
+//   var conn;
+//   try{
+//     conn = await s_db.getConnection();
     
-    var senId=req.body.s_senId;
-    var arrsenId=[];
-    var whereStr;
-    var queryStr='';
-    if(typeof senId=='object') arrsenId=senId;
-    else arrsenId.push(senId);
+//     var senId=req.body.s_senId;
+//     var arrsenId=[];
+//     var whereStr;
+//     var queryStr='';
+//     if(typeof senId=='object') arrsenId=senId;
+//     else arrsenId.push(senId);
 
-    for(idx in arrsenId)
-      queryStr += '"'+arrsenId[idx] + '",';
-    queryStr=queryStr.substr(0,queryStr.length-1);
-    if(arrsenId.length==1) whereStr='senid="'+queryStr+'"';
-    else whereStr='senid in ('+queryStr+')';
+//     for(idx in arrsenId)
+//       queryStr += '"'+arrsenId[idx] + '",';
+//     queryStr=queryStr.substr(0,queryStr.length-1);
+//     if(arrsenId.length==1) whereStr='senid="'+queryStr+'"';
+//     else whereStr='senid in ('+queryStr+')';
 
-    var query = 'SELECT count(senid) cnt, senid FROM appdb.sensor where '+whereStr+' and sendatetime between date("'+utils.to_date_format(req.body.strt_date,'-')+'") and date("'+utils.to_date_format(req.body.end_date,'-')+'") group by senid';
-    var rows = await conn.query(query); // 쿼리 실행
-    var post=rows;
+//     var query = 'SELECT count(senid) cnt, senid FROM appdb.sensor where '+whereStr+' and sendatetime between date("'+utils.to_date_format(req.body.strt_date,'-')+'") and date("'+utils.to_date_format(req.body.end_date,'-')+'") group by senid';
+//     var rows = await conn.query(query); // 쿼리 실행
+//     var post=rows;
 
-    return post;
-  } catch(error) {
-    console.log('dataif-service s_getCount:'+error);
-  } finally {
-    if (conn) conn.end();
-  }
-};
+//     return post;
+//   } catch(error) {
+//     console.log('dataif-service s_getCount:'+error);
+//   } finally {
+//     if (conn) conn.end();
+//   }
+// };
 
 exports.getCount = async function(req, res) {
   var conn;

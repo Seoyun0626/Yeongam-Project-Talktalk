@@ -1,6 +1,6 @@
 var login_service = require("../../services/login-service");
 
-// 회원로그인 컨트롤러
+// 회원로그인 컨트롤러, 사용 안됨..?
 exports.SignIn = async function(req, res) {
   try{
     // console.log(req.body);

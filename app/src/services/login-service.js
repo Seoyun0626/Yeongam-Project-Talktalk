@@ -57,7 +57,6 @@ exports.signUp = async function(req, res) {
   try{
     conn = await db.getConnection();
     var userid = req.body.userid;
-    console.log('userid', userid);
     var password = req.body.password;
     var password2 = req.body.password2;
     var name = req.body.name;
