@@ -68,8 +68,8 @@ passport.deserializeUser((userid,done)=>{
 //이게 동작하면 authenticate() 메서드 실행되고 이 값처리는 위의 passport부분에서 실행한다. 
 
 router.post('/login', passport.authenticate('local-login', {
-  successRedirect: '/admin/auth/loginSuccess', //인증성공시 이동하는화면주소
-  failureRedirect: '/admin/auth/loginFailure', //인증실패시 이동하는화면주소
+  successRedirect: '/admin/loginSuccess', //인증성공시 이동하는화면주소
+  failureRedirect: '/admin/loginFailure', //인증실패시 이동하는화면주소
   failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
 }));
 
@@ -85,7 +85,7 @@ router.get("/loginFailure", function(req, res) {
   var err = req.flash('error');
   if(err) rtnMsg = err;
   //res.json({success: false, msg: rtnMsg})
-  res.redirect('/admin/auth/login');
+  res.redirect('/admin/login');
   //res.json({errMsg:msg});
 });
 
@@ -156,11 +156,11 @@ router.post("/signup", async function(req, res) {
     //else res.json({success: false, msg:'등록실패하였습니다.'});
     if(result==0){
       console.log('login-router signup success');
-      res.redirect('/admin/auth/login');
+      res.redirect('/admin/login');
     }
     else{
       console.log('login-router signup fail');
-      res.redirect('/admin/auth/signup');
+      res.redirect('/admin/signup');
     }
   } catch(error) {
     console.log('login-router signup error:'+error);

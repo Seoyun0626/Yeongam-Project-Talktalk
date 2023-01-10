@@ -18,7 +18,7 @@ function login(){
     .then((response) => response.json())
     .then((res) => {
         if(res.success){ //로그인 시 조회화면으로
-            location.href = "/admin/auth";
+            location.href = "/admin";
         }else{
             alert(res.msg);
         }

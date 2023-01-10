@@ -26,7 +26,7 @@ function regiAll(){
     location.href = "/regiAll";
 }
 function signUp(){
-    location.href = "/admin/auth/signUp";
+    location.href = "/admin/signUp";
 }
 //아이콘 : rev
 function revMem(){

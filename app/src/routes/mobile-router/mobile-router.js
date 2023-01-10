@@ -1,7 +1,7 @@
 const path = require("path");
 var express = require("express");
 var router = express.Router();
-var login_controller = require("../../controllers/common-controller/login-controller");
+var login_controller = require("../../controllers/admin-controller/login-controller");
 // const routerUser = require("./src/routes/mobile-router/mobile-user-router");
 
 const passport = require('passport');
@@ -72,8 +72,8 @@ passport.deserializeUser((userid,done)=>{
 //이게 동작하면 authenticate() 메서드 실행되고 이 값처리는 위의 passport부분에서 실행한다. 
 
 router.post('/login', passport.authenticate('local-login', {
-  successRedirect: '/mobile/auth/loginSuccess', //인증성공시 이동하는화면주소
-  failureRedirect: '/mobile/auth/loginFailure', //인증실패시 이동하는화면주소
+  successRedirect: '/mobile/loginSuccess', //인증성공시 이동하는화면주소
+  failureRedirect: '/mobile/loginFailure', //인증실패시 이동하는화면주소
   failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
 }));
 
@@ -94,7 +94,7 @@ router.get("/loginFailure", function(req, res) {
   var err = req.flash('error');
   if(err) rtnMsg = err;
   //res.json({success: false, msg: rtnMsg})
-  res.redirect('/mobile/auth/login');
+  res.redirect('/mobile/login');
   //res.json({errMsg:msg});
   return res.json({
     resp: false,
