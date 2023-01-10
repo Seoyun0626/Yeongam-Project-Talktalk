@@ -17,14 +17,14 @@ const passport = require('passport');
 const flash = require('express-flash');
 const initPassport = require('./src/utils/passport');
 
-const port = 3000;
+const port = process.env.PORT;
 
 app.listen(port, () => {
   console.log(`APP : SERVER RUN ON PORT ${port}`)
 })
-app.get('/welcome', (req, res)=>{
-  res.send('heehee');
-})
+// app.get('/welcome', (req, res)=>{
+//   res.send('heehee');
+// })
 //라우팅
 // const routeUser = require('./src/routes/mobile-router/user_routes');
 // const routeAuth = require('./src/routes/mobile-router/auth_routes');

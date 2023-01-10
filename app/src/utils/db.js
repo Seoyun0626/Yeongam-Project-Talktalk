@@ -7,15 +7,15 @@ const pool = mysql.createPool({
   database: process.env.DB_DATABASE,
   connectionLimit: 10
 });
-/*
+
 //연결 되는 지 확인
-pool.query('SELECT * FROM tb_user', function(err, results, fields) {
-  if (err) {
-    console.log(err);
-  }
-  console.log(results);
-});
-*/
+// pool.query('SELECT * FROM tb_user', function(err, results, fields) {
+//   if (err) {
+//     console.log(err);
+//   }
+//   console.log(results);
+// });
+
 
 pool.getConnection(function(err, connection){  
   if( err ){
