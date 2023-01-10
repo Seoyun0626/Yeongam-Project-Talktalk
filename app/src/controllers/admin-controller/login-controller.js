@@ -50,7 +50,12 @@ exports.signUp = async function(req, res) {
   try{
     console.log( req.body);
     var result = await login_service.signUp(req);
+<<<<<<< Updated upstream:app/src/controllers/admin-controller/login-controller.js
     console.log('lgoin-controller signUP result: ', result);
+=======
+    console.log('login-controller result');
+    console.log(result);
+>>>>>>> Stashed changes:app/src/controllers/common-controller/login-controller.js
     return result;
   } catch(error) {
     console.log('login-controller login_check:'+error);

@@ -1,10 +1,11 @@
 const mariadb = require('mariadb');
 var config = require('./db-config'); // ./는 현재 디렉토리를 나타냅니다 
 const pool = mariadb.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PSWORD,
-  database: process.env.DB_DATABASE,
+  host: config.host,
+  port : config.port,
+  user: config.user,
+  password: config.password,
+  database: config.database,
   connectionLimit: 10
 });
 
