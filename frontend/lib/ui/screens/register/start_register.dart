@@ -10,6 +10,13 @@ import 'package:login/ui/widgets/widgets.dart';
 
 import '../../helpers/animation_route.dart';
 
+class Todo {
+  final String title;
+  final String description;
+
+  Todo(this.title, this.description);
+}
+
 class StartRegisterPage extends StatelessWidget {
   const StartRegisterPage({Key? key}) : super(key: key);
 

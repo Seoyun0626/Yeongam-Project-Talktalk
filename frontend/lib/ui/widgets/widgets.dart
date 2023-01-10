@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,3 +20,4 @@ part 'btnNaru.dart';
 part 'bottom_nav.dart';
 part 'shimmerNaru.dart';
 part 'item_modal.dart';
+part 'CorrectWordParameter.dart';

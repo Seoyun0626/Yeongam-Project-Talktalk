@@ -5,19 +5,21 @@ import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/helpers/helpers.dart';
 // import 'package:login/ui/screens/login/verify_email_page.dart';
 import 'package:login/ui/screens/login/login_page.dart';
+import 'package:login/ui/screens/register/info_parents.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class RegisterPage1 extends StatefulWidget {
+  const RegisterPage1({Key? key}) : super(key: key);
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterPage1> createState() => _RegisterPageState1();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState1 extends State<RegisterPage1> {
   late TextEditingController userIDController;
   late TextEditingController userPWController;
+  late TextEditingController userAgainPWController;
   late TextEditingController userEmailController;
   late TextEditingController userNameController;
 
@@ -28,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
     super.initState();
     userIDController = TextEditingController();
     userPWController = TextEditingController();
+    userAgainPWController = TextEditingController();
     userEmailController = TextEditingController();
     userNameController = TextEditingController();
   }
@@ -36,6 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void dispose() {
     userIDController.dispose();
     userPWController.dispose();
+    userAgainPWController.dispose();
     userEmailController.dispose();
     userNameController.dispose();
     super.dispose();
@@ -76,7 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
         body: SafeArea(
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                const EdgeInsets.symmetric(horizontal: 50.0, vertical: 40.0),
             child: SingleChildScrollView(
               child: Form(
                 key: _keyForm,
@@ -84,64 +88,100 @@ class _RegisterPageState extends State<RegisterPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const TextCustom(
-                        text: '안녕하세요!',
-                        letterSpacing: 1.5,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 28,
-                        color: ThemeColors.secondary),
-                    const SizedBox(height: 10.0),
+                        text: '회원가입',
+                        letterSpacing: 2.0,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 30,
+                        color: Colors.black),
+                    const SizedBox(height: 50.0),
                     const TextCustom(
-                      text: '회원가입',
+                      text: '아이디를 입력해주세요.',
                       fontSize: 17,
                       letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 1.0),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 200.0,
+                          child: TextFieldNaru(
+                            controller: userIDController,
+                            hintText: '아이디',
+                            validator: RequiredValidator(errorText: ' '),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: BtnNaru(
+                            text: '중복확인',
+                            fontSize: 17,
+                            width: 103,
+                            colorText: Colors.black,
+                            onPressed: () => Navigator.pop(context), //수정필요
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 40.0),
+                    const TextCustom(
+                      text: '비밀번호를 입력해주세요.',
+                      fontSize: 17,
+                      letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 1.0),
                     TextFieldNaru(
-                      controller: userIDController,
-                      hintText: '아이디',
-                      validator: RequiredValidator(errorText: '아이디는 필수 항목입니다'),
+                      controller: userPWController,
+                      hintText: '8자리 이상 입력',
+                      isPassword: true,
+                      validator: passwordValidator,
+                    ),
+                    const SizedBox(height: 10.0),
+                    TextFieldNaru(
+                      controller: userAgainPWController,
+                      hintText: '비밀번호 확인',
+                      isPassword: true,
+                      validator: againpasswordValidator,
                     ),
                     const SizedBox(height: 40.0),
+                    const TextCustom(
+                      text: '이름을 입력해주세요.',
+                      fontSize: 17,
+                      letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 1.0),
                     TextFieldNaru(
                       controller: userNameController,
                       hintText: '이름',
-                      validator: RequiredValidator(errorText: '이름은 필수 항목입니다.'),
+                      validator: RequiredValidator(errorText: ' '),
                     ),
                     const SizedBox(height: 40.0),
+                    const TextCustom(
+                      text: '이메일을 입력해주세요.',
+                      fontSize: 17,
+                      letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 1.0),
                     TextFieldNaru(
                       controller: userEmailController,
                       hintText: '이메일',
                       keyboardType: TextInputType.emailAddress,
                       validator: validatedEmail,
                     ),
-                    const SizedBox(height: 40.0),
-                    TextFieldNaru(
-                      controller: userPWController,
-                      hintText: '비밀번호',
-                      isPassword: true,
-                      validator: passwordValidator,
-                    ),
                     const SizedBox(height: 60.0),
-                    const TextCustom(
-                      text: '회원가입 시 서비스 약관 및 개인 정보 보호 정책에 동의하게 됩니다.',
-                      fontSize: 15,
-                      maxLines: 2,
-                    ),
-                    const SizedBox(height: 20.0),
                     BtnNaru(
-                        text: '회원가입',
-                        width: size.width,
-                        colorText: Colors.black,
-                        onPressed: () {
-                          if (_keyForm.currentState!.validate()) {
-                            userBloc.add(OnRegisterUserEvent(
-                              userIDController.text.trim(),
-                              userNameController.text.trim(),
-                              userEmailController.text.trim(),
-                              userPWController.text.trim(),
-                            ));
-                          }
-                        }),
+                      text: '다음',
+                      width: size.width,
+                      colorText: Colors.black,
+                      onPressed: () => {
+                        Navigator.push(
+                            context, routeSlide(page: const RegisterPage2()))
+                      },
+                    ),
                   ],
                 ),
               ),
