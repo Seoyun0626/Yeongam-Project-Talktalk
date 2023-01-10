@@ -44,14 +44,10 @@ try{
 } finally {
   if (conn) conn.end();
 }
-
-<<<<<<< Updated upstream
-=======
 };
 // var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
 // var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code, sex_class_code) values ('"+req.body.userid+"','"+req.body.password+"','"+req.body.name+"', '"+req.body.salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
 
->>>>>>> Stashed changes
 // 회원가입
 exports.signUp = async function(req, res) {
   var resultcode = 0;

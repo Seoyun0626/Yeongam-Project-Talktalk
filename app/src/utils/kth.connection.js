@@ -1,10 +1,5 @@
-
-<<<<<<< Updated upstream
-const createPool = require('mysql');
-=======
->>>>>>> Stashed changes
 const dbConfig = require('./kth.db.config');
-const mysql = require('mysql');
+const mysql = require('mariadb');
 
 
 const pool = mysql.createPool({
