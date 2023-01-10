@@ -25,7 +25,7 @@ router.get('/login', function (req, res) {
 router.post("/login", async function(req, res) {
   try{
     // 로그인 확인을 위해 컨트롤러 호출
-    //console.log(req.body);
+    console.log('mobile-router', req.body);
     var result = await login_controller.SignIn(req, res);
     res.send(result);
   } catch(error) {
@@ -80,11 +80,12 @@ router.post('/login', passport.authenticate('local-login', {
 //이름 변경
 router.get("/loginSuccess", function(req, res) {
   res.render('dataif/mem'); 
-  redirect('/mobile/login');
+  // redirect('/mobile/login');
   //res.json({msg:'0'});
-  return res.json({
+  res.json({
     resp: true,
-    message: '로그인 성공'
+    message: '로그인 성공',
+    token : token
 }); // 임시
   
 });
@@ -96,7 +97,7 @@ router.get("/loginFailure", function(req, res) {
   //res.json({success: false, msg: rtnMsg})
   res.redirect('/mobile/login');
   //res.json({errMsg:msg});
-  return res.json({
+  res.json({
     resp: false,
     message: '로그인 실패'
 }); // 임시
