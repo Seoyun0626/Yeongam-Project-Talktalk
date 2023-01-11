@@ -60,7 +60,7 @@ router.post("/login", async function(req, res) {
   }
 });
 
-// kth - renew login
+// kth - mobile - renew login
 // router.get('renew-login', verifyToken, login_controller.renewLogin);
 
 /*

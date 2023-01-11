@@ -10,7 +10,7 @@ try{
   var json = {};
   json.code = 0;
   conn = await db.getConnection();
-  // console.log('login-service SignIn db getConnection');
+  console.log('login-service SignIn db getConnection');
   var userid = req.body.userid; //req.body.id -> req.body.userid
   var password = req.body.password;
   console.log('login-serive SignIn - userid', userid); // kth log
