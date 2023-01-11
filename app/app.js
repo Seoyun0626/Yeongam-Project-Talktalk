@@ -31,6 +31,7 @@ app.get('/welcome', (req, res)=>{
 const routerAdminDataif = require("./src/routes/admin-router/admin-dataif-router");
 const routerAdminLogin = require("./src/routes/admin-router/admin-login-router");
 const routerMobile = require("./src/routes/mobile-router/mobile-router");
+const routerAdminMain = require("./src/routes/admin-router/admin-main-router");
 
 //앱 세팅
 app.set("views", "./src/views");
@@ -49,14 +50,26 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+/*
+app.use(express.static('src/public'))
+app.use('/js', express.static('public/js'));
+app.use('/public/upload', express.static('src/public/upload'));
+app.use('/js', express.static(path.join(__dirname, 'public/js')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// app.use(methodoverride('_method'));
+*/
 initPassport();
 app.use(flash());
 
 app.use(express.static(`${__dirname}/src/public`)); //정적파일 경로
+
 app.use(bodyParser.json()); //json형식의 데이터를 받을 수 있게
 app.use(bodyParser.urlencoded({ extended: true })); //urlencoded형식의 데이터를 받을 수 있게
 app.use("/admin/dataif",routerAdminDataif);
 app.use("/admin/auth",routerAdminLogin);
+app.use("/admin/main",routerAdminMain);
 app.use("/mobile",routerMobile);
 
 
