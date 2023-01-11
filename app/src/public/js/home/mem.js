@@ -25,7 +25,7 @@ function manage(){
     location.href = "/admin/auth/manage";
 }
 function regiAll(){
-    location.href = "/regiAll";
+    location.href = "/admin/auth/regiAll";
 }
 function signUp(){
     location.href = "/admin/auth/signUp";
