@@ -9,6 +9,8 @@ import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
+import 'info_first.dart';
+
 class RegisterPage2 extends StatefulWidget {
   const RegisterPage2({Key? key}) : super(key: key);
 
@@ -64,7 +66,7 @@ class _RegisterPageState2 extends State<RegisterPage2> {
   bool isMan = true;
   bool isWoman = false;
 
-  final List<String> _valueList = [
+  final List<String> _valueList1 = [
     '영암읍',
     '삼호읍',
     '덕진면',
@@ -77,10 +79,11 @@ class _RegisterPageState2 extends State<RegisterPage2> {
     '학산면',
     '미암면'
   ];
-  String _selectedValue = '영암읍';
+  String _selectedValue1 = '영암읍';
 
-  late List<bool> _selections1 = List.generate(4, (index) => false);
-  late List<bool> isSelected;
+  late List<bool> _selections1 = List.generate(4, (index) => false); //재학여부구분
+  late List<bool> isSelected; //성별구분
+  late List<bool> _selections2 = List.generate(6, (index) => false); //나이구분
 
   final _keyForm = GlobalKey<FormState>();
 
@@ -211,6 +214,13 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                       letterSpacing: 1.0,
                       maxLines: 2,
                     ),
+                    const SizedBox(height: 5.0),
+                    const TextCustom(
+                      text: '청소년, 청소년부모만 해당',
+                      fontSize: 13,
+                      letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
                     const SizedBox(height: 10.0),
                     ToggleButtons(
                       selectedColor: ThemeColors.primary,
@@ -242,6 +252,49 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                         });
                       },
                       isSelected: _selections1,
+                    ),
+                    const SizedBox(height: 40.0),
+                    const TextCustom(
+                      text: '나이를 선택해주세요.',
+                      fontSize: 17,
+                      letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 10.0),
+                    ToggleButtons(
+                      selectedColor: ThemeColors.primary,
+                      selectedBorderColor: ThemeColors.primary,
+                      fillColor: ThemeColors.primary.withOpacity(0.08),
+                      splashColor: ThemeColors.primary.withOpacity(0.12),
+                      hoverColor: ThemeColors.primary.withOpacity(0.04),
+                      borderRadius: BorderRadius.circular(4.0),
+                      constraints: BoxConstraints(minHeight: 40.0),
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 11),
+                            child: Text('10대', style: TextStyle(fontSize: 12))),
+                        Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 11),
+                            child: Text('20대', style: TextStyle(fontSize: 13))),
+                        Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 11),
+                            child: Text('30대', style: TextStyle(fontSize: 13))),
+                        Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 11),
+                            child: Text('40대', style: TextStyle(fontSize: 13))),
+                        Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 11),
+                            child: Text('50대', style: TextStyle(fontSize: 13))),
+                        Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 11),
+                            child: Text('60대', style: TextStyle(fontSize: 13))),
+                      ],
+                      onPressed: (int index) {
+                        setState(() {
+                          _selections2[index] = !_selections2[index];
+                        });
+                      },
+                      isSelected: _selections2,
                     ),
                     const SizedBox(height: 40.0),
                     const TextCustom(
@@ -301,8 +354,8 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                             fontSize: 17,
                             color: Colors.black,
                           ),
-                          value: _selectedValue,
-                          items: _valueList.map((value) {
+                          value: _selectedValue1,
+                          items: _valueList1.map((value) {
                             return DropdownMenuItem(
                               value: value,
                               child: Text(value),
@@ -310,7 +363,7 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                           }).toList(),
                           onChanged: (value) {
                             setState(() {
-                              _selectedValue = value!;
+                              _selectedValue1 = value!;
                             });
                           },
                           elevation: 4,
@@ -319,26 +372,13 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                     ),
                     const SizedBox(height: 60.0),
                     BtnNaru(
-                      text: '완료',
+                      text: '다음',
                       width: size.width,
                       colorText: Colors.black,
-                      // onPressed: () => {
-                      //   Navigator.push(
-                      //       context, routeSlide(page: const LoginPage()))
-                      // },
-
-                      // kth
-                      // onPressed: () {
-                      //   if (_keyForm.currentState!.validate()) {
-                      //     userBloc.add(OnRegisterUserEvent(
-                      //       userIDController.text.trim(),
-                      //       userNameController.text.trim(),
-                      //       userEmailController.text.trim(),
-                      //       userPWController.text.trim(),
-                      //       userAgainPWController.text.trim(),
-                      //     ));
-                      //   }
-                      // }
+                      onPressed: () => {
+                        Navigator.push(
+                            context, routeSlide(page: const RegisterPage1()))
+                      },
                     ),
                   ],
                 ),

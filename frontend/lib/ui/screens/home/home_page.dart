@@ -27,12 +27,23 @@ class _HomePageState extends State<HomePage> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('청소년톡talk',
-              style: TextStyle(color: Colors.black, fontSize: 20)),
-          leading: IconButton(
-            icon: const Icon(Icons.perm_identity),
-            onPressed: () =>
-                Navigator.push(context, routeSlide(page: const LoginPage())),
-          ),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              )),
+          // leading: IconButton(
+          //   icon: Image.asset("images\aco.png", width: 50, height: 50),
+          //   onPressed: () =>
+          //       Navigator.push(context, routeSlide(page: const LoginPage())),
+          // ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.perm_identity),
+              onPressed: () =>
+                  Navigator.push(context, routeSlide(page: const LoginPage())),
+            )
+          ],
           backgroundColor: ThemeColors.primary,
           centerTitle: false,
           elevation: 0.0,
@@ -50,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                     letterSpacing: 1.5,
                     fontWeight: FontWeight.w500,
                     fontSize: 28,
-                    color: ThemeColors.secondary),
+                    color: Color.fromARGB(255, 93, 73, 98)),
                 const SizedBox(height: 30.0),
                 BtnNaru(
                   text: '로그아웃',
