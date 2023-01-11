@@ -2123,4 +2123,4 @@ The root reachable resources are:
  style:NormalTheme:2131361793
  xml:flutter_image_picker_file_paths:2131492864
 Skipped unused resource res/layout/custom_dialog.xml: 711 bytes (replaced with small dummy file of size 9 bytes)
-Resource shrinking did not work (grew from 24911 to 25025); using original instead
+Resource shrinking did not work (grew from 24943 to 25057); using original instead
