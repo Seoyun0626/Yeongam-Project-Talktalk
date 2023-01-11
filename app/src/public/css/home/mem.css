@@ -100,15 +100,16 @@ body {
     font-size: 12px;
   }
   #managep_foot{
-    margin-right: 35px;
+    margin-top: 15px;
   }
   #managep_paging{
     margin-top: 15px;
-    margin-left: 35%;
   }
-  #regi_button{
-    float: right;
+  #reg_btn_set{
+    margin-top: 15px;
+    width: 40vw;
   }
+
   table {
     border: 1px #a39485 solid;
     font-size: .9em;
