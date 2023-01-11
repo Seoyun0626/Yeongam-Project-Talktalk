@@ -17,7 +17,7 @@ void modalSuccess(BuildContext context, String text,
             Row(
               children: const [
                 TextCustom(
-                    text: 'Yeaongam ',
+                    text: '청소년 톡Talk',
                     color: ThemeColors.primary,
                     fontWeight: FontWeight.w500),
                 TextCustom(text: 'Mobile App', fontWeight: FontWeight.w500),

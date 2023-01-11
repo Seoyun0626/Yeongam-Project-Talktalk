@@ -20,7 +20,7 @@ exports.SignIn = async function(req, res) {
       // console.log(req);
       req.session.user = result;
     }
-    console.log('login-controller result', result);
+    // console.log('login-controller result', result);
     return result;
   } catch(error) {
     console.log('login-controller SignIn:'+error);
