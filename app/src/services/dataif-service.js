@@ -192,6 +192,7 @@ exports.create = async function(req, res) {
 
 exports.update = async function(req, res) {
   var conn;
+  var resultcode=0;
   try{
     conn = await db.getConnection();
     // ??
@@ -208,6 +209,11 @@ exports.update = async function(req, res) {
     // 'update webdb.tb_dataif set data_cnt='+req.body.count+' where board_idx='+req.body.modal_board_idx;
     var userid = req.params.id;
     // var query = 'update webdb.tb_user set name="'+req.body.name+'", email="'+req.body.email+'", user_role="'+req.body.user_role+'", age_class_code="'+req.body.age_class_code+'", emd_class_code="'+req.body.emd_class_code+'",';
+    if(req.body.password != req.body.password2) {
+      resultcode=100;
+      console.log('dataif-service update: password not match');
+      return resultcode;
+    }
     hasher(
       {password:req.body.password}, async function(err, pass, salt, hash) {
         // query += 'password="'+hash+'", salt="'+salt+'" where userid="'+userid+'"';
@@ -215,7 +221,7 @@ exports.update = async function(req, res) {
         var rows = await conn.query(query);
       }
     );
-    // return rows;
+    return resultcode;
   } catch(error) {
     console.log('dataif-service update:'+error);
   } finally {
