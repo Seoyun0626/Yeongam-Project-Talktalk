@@ -32,21 +32,23 @@
     <div>
         <div class="pagename">회원 등록</div>
         <div>
-            <form action="/admin/auth/signup" method="post" name="frm_signup" id="frm_signup">
+            <!-- put?post? -->
+            <form action="/admin/dataif/update/<%=post.userid %>" method="post" name="frm_signup" id="frm_signup">
                 <div>
                   <div class="ui input">
-                    <input type="text" name="name" id="name" placeholder="이름"">
+                    <input type="text" name="name" id="name" value="<%= post.name %>">
                   </div>
                   <br>
                   <div class="ui input">
-                    <input type="text" name="userid" id="userid" placeholder="아이디"">
+                    <!-- 폰트 수정 -->
+                    <%= post.userid %>
                   </div>
                   <br>
                   <div class="ui input">
-                    <input type="text" name="password" id="password" placeholder="비밀번호"">
+                    <input type="text" name="password" id="password" type="password" placeholder="비밀번호"">
                   </div>
                   <div class="ui input">
-                    <input type="text" name="password2" id="password2" placeholder="비밀번호 확인"">
+                    <input type="text" name="password2" id="password2" type="password" placeholder="비밀번호 확인"">
                   </div>
                   <br>
                   <div class="field">
@@ -88,7 +90,7 @@
                   </div>
                   <br>
                   <div class="ui input">
-                    <input type="text" name="user_email" id="user_email" placeholder="이메일"">
+                    <input type="text" name="user_email" id="user_email" value="<%= post.user_email %>">
                   </div>
                   <br>
                   <!-- <input type="checkbox" name="popup_agree" id="popup_agree">
@@ -99,7 +101,6 @@
                   <label>문자</label> -->
                 <div>
                     <button class="ui button" type="submit">등록</button>
-                    <!-- <button class="ui button" type="button" onclick="location.href='/admin/auth/login'">취소</button> -->
                     <button class="ui button" type="button" onclick="location.href='/admin/dataif'">취소</button>
                 </div>
             </form>

@@ -111,6 +111,45 @@ router.get('/terms', async function(req, res){
   }
 });
 
+// update : 회원 정보 수정
+router.get('/update/:id', async function(req, res){
+  try{
+    // res.redirect("/dataif/update/"+req.user.id);
+    // console.log("update:"+req.params.id);
+    //데이터 받아오기
+    var result = await dataif_controller.fetchDataByUserid(req, res);
+    res.render('dataif/update', {post:result});
+  } catch(error) {
+    console.log('dataif-router update error:'+error);
+  }
+});
+
+router.post('/update/:id', async function(req, res){
+  try{
+    var result = await dataif_controller.update(req, res);
+    if(result == 0){ //비밀번호가 맞은 경우
+      res.redirect("/admin/dataif");
+    }
+    else{
+      res.redirect("/admin/dataif/update/"+req.params.id);
+    }
+  } catch(error) {
+    console.log('dataif-router update error:'+error);
+  }
+});
+
+router.put('/:id', async function(req, res){
+  try{
+    var result = await dataif_controller.update(req, res);
+    //console.log(result)
+    //if(result) res.render('dataif/edit', {post:result});
+    //else res.render('dataif/edit', {post:result});
+    
+    res.redirect("/dataif");
+  } catch(error) {
+    console.log('dataif-router update error:'+error);
+  }
+});
 
 // New
 router.get('/new', function(req, res){
@@ -144,19 +183,7 @@ router.get('/:id/edit', async function(req, res){
   }
 });
 
-// update
-router.put('/:id', async function(req, res){
-  try{
-    var result = await dataif_controller.update(req, res);
-    //console.log(result)
-    //if(result) res.render('dataif/edit', {post:result});
-    //else res.render('dataif/edit', {post:result});
-    
-    res.redirect("/dataif");
-  } catch(error) {
-    console.log('dataif-router update error:'+error);
-  }
-});
+
 
 // destroy
 router.delete('/:id', async function(req, res){

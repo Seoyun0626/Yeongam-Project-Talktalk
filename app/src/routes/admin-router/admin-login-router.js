@@ -150,7 +150,6 @@ router.get("/signup", function(req, res) {
 router.post("/signup", async function(req, res) {
   try{
     // 사용자등록 컨트롤러 호출
-    
     var result = await login_controller.signUp(req, res);
     //res.send({errMsg:result});
     //if(result==0) res.json({success: true, msg:'등록하였습니다.'});

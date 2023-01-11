@@ -50,6 +50,22 @@ exports.fetchData = async function(req, res) {
   }
 };
 
+// userid로 데이터 조회
+exports.fetchDataByUserid = async function(req, res) {
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var query = 'SELECT * FROM tb_user where userid="'+req.params.id+'"';
+    var rows = await conn.query(query); // 쿼리 실행
+    // console.log(rows[0]);
+    return rows[0];
+  } catch(error) {
+    console.log('dataif-service fetchDataByUserid:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+};
+
 exports.fetchDataSensor = async function(req, res) {
   var conn;
   try{
@@ -176,22 +192,36 @@ exports.create = async function(req, res) {
 
 exports.update = async function(req, res) {
   var conn;
+  var resultcode=0;
   try{
     conn = await db.getConnection();
-    if(req.body.if_type!="DBS") {
-      req.body.hostip='';
-      req.body.port='';
-      req.body.userid='';
-      req.body.password='';
-      req.body.dbname='';
-      req.body.tbname='';
+    // ??
+    // if(req.body.if_type!="DBS") {
+    //   req.body.hostip='';
+    //   req.body.port='';
+    //   req.body.userid='';
+    //   req.body.password='';
+    //   req.body.dbname='';
+    //   req.body.tbname='';
+    // }
+    // req.body.fieldArr=['dbname', 'end_date', 'hostip', 'if_subtype', 'if_type', 'password', 'port', 'req_dtl', 'sensor_board_idx', 'strt_date', 'tbname', 'userid'];
+    // var queryStr=utils.makeBoardUpdateFieldQuery(req.body);
+    // 'update webdb.tb_dataif set data_cnt='+req.body.count+' where board_idx='+req.body.modal_board_idx;
+    var userid = req.params.id;
+    // var query = 'update webdb.tb_user set name="'+req.body.name+'", email="'+req.body.email+'", user_role="'+req.body.user_role+'", age_class_code="'+req.body.age_class_code+'", emd_class_code="'+req.body.emd_class_code+'",';
+    if(req.body.password != req.body.password2) {
+      resultcode=100;
+      console.log('dataif-service update: password not match');
+      return resultcode;
     }
-    req.body.fieldArr=['dbname', 'end_date', 'hostip', 'if_subtype', 'if_type', 'password', 'port', 'req_dtl', 'sensor_board_idx', 'strt_date', 'tbname', 'userid'];
-    var queryStr=utils.makeBoardUpdateFieldQuery(req);
-    var query = 'update webdb.tb_dataif set '+queryStr;
-    var rows = await conn.query(query); // 쿼리 실행
-
-    return rows;
+    hasher(
+      {password:req.body.password}, async function(err, pass, salt, hash) {
+        // query += 'password="'+hash+'", salt="'+salt+'" where userid="'+userid+'"';
+        var query = 'update webdb.tb_user set password="'+hash+'", salt="'+salt+'", name="'+req.body.name+'", user_email="'+req.body.email+'", user_role="'+req.body.user_role+'", age_class_code="'+req.body.age_class_code+'", emd_class_code="'+req.body.emd_class_code+'" where userid="'+userid+'"';
+        var rows = await conn.query(query);
+      }
+    );
+    return resultcode;
   } catch(error) {
     console.log('dataif-service update:'+error);
   } finally {

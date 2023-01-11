@@ -22,6 +22,11 @@
         <li><a href="/admin/auth/subSetting">정책 정보 관리</a></li>
       </ul>
     <div class="header">권한 정보</div>
+    <!-- 로그 아웃 -->
+    <div id="logout">
+      <!-- <a href="/admin/auth/logout">로그아웃</a> -->
+      <a href="/admin/auth/login">로그아웃</a>
+    </div>
 </nav>
 <section>
     <div>
@@ -85,6 +90,7 @@
           </tr></thead>
           <tbody>
           <% for(var i=0; i<posts.length; i++){ %>
+            <form action="/admin/dataif/update/<%=posts[i].userid %>" method="get" >
             <tr>
               <td><%= posts[i].userid %></td>
               <td><%= posts[i].name %></td>
@@ -97,10 +103,12 @@
               <td><%= posts[i].email_yn %></td>
               <td><%= posts[i].sms_yn %></td> -->
               <td>
-                <button class="ui button" id="manage_btn" onclick="manage()">수정</button>
+                <button class="ui button" type="submit">수정</button>
+                <!-- <button class="ui button" id="manage_btn" onclick="manage()">수정</button> -->
                 <button class="ui button" id="delete_btn" onclick="deleteUser()">삭제</button>
               </td>
             </tr>
+          </form>
           <% } %>
           </tbody>
         </table>
