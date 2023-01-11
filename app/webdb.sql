@@ -28,7 +28,7 @@ CREATE TABLE webdb.`tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
+/*
 CREATE TABLE webdb.`tb_user` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `userid` varchar(255) NOT NULL,
@@ -297,9 +297,9 @@ CREATE TABLE webdb.`tb_dataupload` (
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+*/
 /* FOREIGN KEY (board_idx) REFERENCES tb_sensor (board_idx) */
-
+/*
 ALTER TABLE webdb.tb_monsensor DROP COLUMN sen_mng_no;
 
 ALTER TABLE webdb.tb_user ADD COLUMN reg_no varchar(30) NULL;
@@ -333,3 +333,4 @@ ALTER TABLE webdb.tb_user CHANGE `sn` `board_idx` int(11) NOT NULL AUTO_INCREMEN
 ALTER TABLE webdb.tb_access CHANGE `usrgrp_board_idx` `usergrp_board_idx` int(11) NULL;
 ALTER TABLE webdb.tb_project ADD COLUMN read_auth varchar(1) NOT NULL DEFAULT 'N';
 
+*/

@@ -42,7 +42,7 @@
                         <label>청소년 부모</label>
                     </div>
                 </li>
-                <li>수신동의
+                <!-- <li>수신동의
                     <div class="ui checkbox">
                         <input type="checkbox">
                         <label>푸시알림</label>
@@ -55,7 +55,7 @@
                         <input type="checkbox">
                         <label>이메일</label>
                     </div>
-                </li>
+                </li> -->
                 <li><div>검색어
                 <select>
                     <option value="id">이름</option>
@@ -69,16 +69,18 @@
             </ul>
         </div>
         <br>
-        <table>
+        <table id="mem_table">
           <thead>
             <tr><th>아이디</th>
             <th>이름</th>
             <th>권한</th>
-            <th>회원분류</th>
-            <th>등록일시</th>
-            <th>푸시</th>
+            <th>거주지</th>
+            <th>사용자 구분</th>
+            <th>등록 일시</th>
+            <th>수정 일시</th>
+            <!-- <th>푸시</th>
             <th>이메일</th>
-            <th>sms</th>
+            <th>sms</th> -->
             <th>관리</th>
           </tr></thead>
           <tbody>
@@ -86,12 +88,14 @@
             <tr>
               <td><%= posts[i].userid %></td>
               <td><%= posts[i].name %></td>
-              <td><%= posts[i].user_role %></td>
-              <td><%= posts[i].age_class_code %></td>
-              <td><%= posts[i].ins_date %></td>
-              <td><%= posts[i].push_yn %></td>
+              <td><%= role_code_to_class(posts[i].user_role) %></td>
+              <td><%= emd_code_to_name(posts[i].emd_class_code) %></td>
+              <td><%= age_code_to_class(posts[i].age_class_code) %></td>
+              <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
+              <td><%= `${posts[i].upd_date.getFullYear()}` + `-`+ `${posts[i].upd_date.getMonth()+1}` + `-`+ `${posts[i].upd_date.getDate()}`%></td>
+              <!-- <td><%= posts[i].push_yn %></td>
               <td><%= posts[i].email_yn %></td>
-              <td><%= posts[i].sms_yn %></td>
+              <td><%= posts[i].sms_yn %></td> -->
               <td>
                 <button class="ui button" id="manage_btn" onclick="manage()">수정</button>
                 <button class="ui button" id="delete_btn" onclick="deleteUser()">삭제</button>
@@ -113,9 +117,12 @@
                 <a class="item">4</a>
                 <a class="icon item">
                     <i class="right chevron icon"></i>
-            </a></div>
+            </a>
+          </div>
+          <div>
             <button class="ui button" id="add_user" onclick="signUp()">회원 등록</button>
             <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button>
+          </div>
         </div>  
 
     </div>
