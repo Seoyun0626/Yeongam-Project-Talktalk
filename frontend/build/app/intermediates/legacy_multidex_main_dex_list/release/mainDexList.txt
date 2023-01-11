@@ -1,0 +1,16 @@
+androidx/annotation/Keep.class
+androidx/core/app/CoreComponentFactory$a.class
+androidx/core/app/CoreComponentFactory.class
+androidx/lifecycle/d$b.class
+androidx/lifecycle/n.class
+androidx/window/core/ExperimentalWindowApi.class
+androidx/window/embedding/SplitRule$LayoutDir.class
+io/flutter/FlutterInjector.class
+io/flutter/app/FlutterApplication.class
+io/flutter/embedding/engine/loader/FlutterLoader.class
+k/g.class
+kotlin/coroutines/jvm/internal/f.class
+q/a.class
+s/r.class
+s/s.class
+s/t.class

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.login"
+    package="com.example.adolescent_talk"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -19,7 +19,7 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="login" >
+        android:label="adolescent_talk" >
         <activity
             android:name="com.example.login.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -55,7 +55,7 @@
 
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-            android:authorities="com.example.login.flutter.image_provider"
+            android:authorities="com.example.adolescent_talk.flutter.image_provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data

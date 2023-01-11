@@ -1,0 +1,199 @@
+-- Merging decision tree log ---
+application
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:3:4-33:19
+MERGED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-19:19
+MERGED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-19:19
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:24:5-31:19
+MERGED from [androidx.core:core:1.8.0] /Users/taeheekim/.gradle/caches/transforms-3/89a5200d8684e49abbf8d36dd3d5c89e/transformed/core-1.8.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.8.0] /Users/taeheekim/.gradle/caches/transforms-3/89a5200d8684e49abbf8d36dd3d5c89e/transformed/core-1.8.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/taeheekim/.gradle/caches/transforms-3/bd608c7e55a29bf79b99b224a4bcfd1f/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/taeheekim/.gradle/caches/transforms-3/bd608c7e55a29bf79b99b224a4bcfd1f/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.8.0] /Users/taeheekim/.gradle/caches/transforms-3/89a5200d8684e49abbf8d36dd3d5c89e/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:4:9-40
+	android:icon
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:6:9-43
+	android:name
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:5:9-42
+manifest
+ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:1:1-34:12
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:1:1-34:12
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:1:1-34:12
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:1:1-34:12
+MERGED from [:permission_handler_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/permission_handler_android/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
+MERGED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-21:12
+MERGED from [:flutter_plugin_android_lifecycle] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
+MERGED from [:path_provider_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/path_provider_android/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-9:12
+MERGED from [:flutter_secure_storage] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_secure_storage/intermediates/merged_manifest/release/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6de6e83fce0af87d8efd51a8ce7d4a1f/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.multidex:multidex:2.0.0] /Users/taeheekim/.gradle/caches/transforms-3/87a6b0773e8eb7ccf00020e1d858276e/transformed/multidex-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/taeheekim/.gradle/caches/transforms-3/c818e29450e3a4d37d1532bb4ab56b4e/transformed/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/884bcdc2b612106e43367ee4bc84eb79/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/bda77fd5ec16c23f760a224f02a66824/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/175fa3d2c1e3c67bfc7b6681e15a0443/transformed/jetified-activity-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/9f1973a25166e12bbd4244657692fbf7/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.8.0] /Users/taeheekim/.gradle/caches/transforms-3/89a5200d8684e49abbf8d36dd3d5c89e/transformed/core-1.8.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/taeheekim/.gradle/caches/transforms-3/91d4750ea8cdf12d8d727f6ae8352ef6/transformed/exifinterface-1.3.3/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.security:security-crypto:1.1.0-alpha03] /Users/taeheekim/.gradle/caches/transforms-3/52ed20c67899381ee1e2484a8748b689/transformed/jetified-security-crypto-1.1.0-alpha03/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/4090fb60ab683377d3eaacba7e60dd0b/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/taeheekim/.gradle/caches/transforms-3/fe3f2c9f5876b1816d6f4ebe101c99cf/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/taeheekim/.gradle/caches/transforms-3/bd608c7e55a29bf79b99b224a4bcfd1f/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/9a91ae5b344ee12760e882cc7594d784/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/taeheekim/.gradle/caches/transforms-3/c4181d04346b13f0a5d577ffa0ae7ad9/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/taeheekim/.gradle/caches/transforms-3/86e642a7d9bef09ab63a9e7e7934bfb8/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/taeheekim/.gradle/caches/transforms-3/63a500aa65bbf067f97f0febdb84a040/transformed/core-runtime-2.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/taeheekim/.gradle/caches/transforms-3/d65f61d4d19687c2dc0be1cb48332cc1/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/taeheekim/.gradle/caches/transforms-3/b0551724bfc2da9742ec92fa7f4c9e9d/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:1:1-34:12
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:1:1-34:12
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:1:1-34:12
+	package
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:2:5-32
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:1:1-34:12
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:1:1-34:12
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:1:11-69
+uses-sdk
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+MERGED from [:permission_handler_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/permission_handler_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:permission_handler_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/permission_handler_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_plugin_android_lifecycle] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_plugin_android_lifecycle] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:path_provider_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/path_provider_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:path_provider_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/path_provider_android/intermediates/merged_manifest/release/AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_secure_storage] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_secure_storage/intermediates/merged_manifest/release/AndroidManifest.xml:6:5-9:53
+MERGED from [:flutter_secure_storage] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_secure_storage/intermediates/merged_manifest/release/AndroidManifest.xml:6:5-9:53
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6de6e83fce0af87d8efd51a8ce7d4a1f/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6de6e83fce0af87d8efd51a8ce7d4a1f/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.multidex:multidex:2.0.0] /Users/taeheekim/.gradle/caches/transforms-3/87a6b0773e8eb7ccf00020e1d858276e/transformed/multidex-2.0.0/AndroidManifest.xml:20:5-43
+MERGED from [androidx.multidex:multidex:2.0.0] /Users/taeheekim/.gradle/caches/transforms-3/87a6b0773e8eb7ccf00020e1d858276e/transformed/multidex-2.0.0/AndroidManifest.xml:20:5-43
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/taeheekim/.gradle/caches/transforms-3/c818e29450e3a4d37d1532bb4ab56b4e/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/taeheekim/.gradle/caches/transforms-3/c818e29450e3a4d37d1532bb4ab56b4e/transformed/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/884bcdc2b612106e43367ee4bc84eb79/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/884bcdc2b612106e43367ee4bc84eb79/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/bda77fd5ec16c23f760a224f02a66824/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/bda77fd5ec16c23f760a224f02a66824/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/175fa3d2c1e3c67bfc7b6681e15a0443/transformed/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/175fa3d2c1e3c67bfc7b6681e15a0443/transformed/jetified-activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/9f1973a25166e12bbd4244657692fbf7/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/9f1973a25166e12bbd4244657692fbf7/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.8.0] /Users/taeheekim/.gradle/caches/transforms-3/89a5200d8684e49abbf8d36dd3d5c89e/transformed/core-1.8.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.8.0] /Users/taeheekim/.gradle/caches/transforms-3/89a5200d8684e49abbf8d36dd3d5c89e/transformed/core-1.8.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/taeheekim/.gradle/caches/transforms-3/91d4750ea8cdf12d8d727f6ae8352ef6/transformed/exifinterface-1.3.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/taeheekim/.gradle/caches/transforms-3/91d4750ea8cdf12d8d727f6ae8352ef6/transformed/exifinterface-1.3.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.security:security-crypto:1.1.0-alpha03] /Users/taeheekim/.gradle/caches/transforms-3/52ed20c67899381ee1e2484a8748b689/transformed/jetified-security-crypto-1.1.0-alpha03/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.security:security-crypto:1.1.0-alpha03] /Users/taeheekim/.gradle/caches/transforms-3/52ed20c67899381ee1e2484a8748b689/transformed/jetified-security-crypto-1.1.0-alpha03/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/4090fb60ab683377d3eaacba7e60dd0b/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/4090fb60ab683377d3eaacba7e60dd0b/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/taeheekim/.gradle/caches/transforms-3/fe3f2c9f5876b1816d6f4ebe101c99cf/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] /Users/taeheekim/.gradle/caches/transforms-3/fe3f2c9f5876b1816d6f4ebe101c99cf/transformed/lifecycle-runtime-2.3.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/taeheekim/.gradle/caches/transforms-3/bd608c7e55a29bf79b99b224a4bcfd1f/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/taeheekim/.gradle/caches/transforms-3/bd608c7e55a29bf79b99b224a4bcfd1f/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/9a91ae5b344ee12760e882cc7594d784/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/taeheekim/.gradle/caches/transforms-3/9a91ae5b344ee12760e882cc7594d784/transformed/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/taeheekim/.gradle/caches/transforms-3/c4181d04346b13f0a5d577ffa0ae7ad9/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/taeheekim/.gradle/caches/transforms-3/c4181d04346b13f0a5d577ffa0ae7ad9/transformed/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/taeheekim/.gradle/caches/transforms-3/86e642a7d9bef09ab63a9e7e7934bfb8/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/taeheekim/.gradle/caches/transforms-3/86e642a7d9bef09ab63a9e7e7934bfb8/transformed/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/taeheekim/.gradle/caches/transforms-3/63a500aa65bbf067f97f0febdb84a040/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/taeheekim/.gradle/caches/transforms-3/63a500aa65bbf067f97f0febdb84a040/transformed/core-runtime-2.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/taeheekim/.gradle/caches/transforms-3/d65f61d4d19687c2dc0be1cb48332cc1/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/taeheekim/.gradle/caches/transforms-3/d65f61d4d19687c2dc0be1cb48332cc1/transformed/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/taeheekim/.gradle/caches/transforms-3/b0551724bfc2da9742ec92fa7f4c9e9d/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/taeheekim/.gradle/caches/transforms-3/b0551724bfc2da9742ec92fa7f4c9e9d/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [:flutter_secure_storage] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_secure_storage/intermediates/merged_manifest/release/AndroidManifest.xml:9:9-50
+	android:targetSdkVersion
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml
+activity#com.example.login.MainActivity
+ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:7:9-27:20
+	android:launchMode
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:10:13-43
+	android:hardwareAccelerated
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:13:13-47
+	android:windowSoftInputMode
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:14:13-55
+	android:exported
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:13-36
+	android:configChanges
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:12:13-163
+	android:theme
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:11:13-47
+	android:name
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:13-41
+meta-data#io.flutter.embedding.android.NormalTheme
+ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:19:13-22:17
+	android:resource
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:21:15-52
+	android:name
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:20:15-70
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:23:13-26:29
+action#android.intent.action.MAIN
+ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:24:17-68
+	android:name
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:24:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:25:17-76
+	android:name
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:25:27-74
+meta-data#flutterEmbedding
+ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:30:9-32:33
+	android:value
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:32:13-30
+	android:name
+		ADDED from /Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:31:13-44
+provider#io.flutter.plugins.imagepicker.ImagePickerFileProvider
+ADDED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-18:20
+	android:grantUriPermissions
+		ADDED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-47
+	android:authorities
+		ADDED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-74
+	android:exported
+		ADDED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
+	android:name
+		ADDED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-82
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
+	android:resource
+		ADDED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
+	android:name
+		ADDED from [:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+	android:required
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
