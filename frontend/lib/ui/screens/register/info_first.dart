@@ -174,25 +174,27 @@ class _RegisterPageState1 extends State<RegisterPage1> {
                     ),
                     const SizedBox(height: 60.0),
                     BtnNaru(
-                        text: '다음',
-                        width: size.width,
-                        colorText: Colors.black,
-                        // onPressed: () => {
-                        //   Navigator.push(
-                        //       context, routeSlide(page: const RegisterPage2()))
-                        // },
-                        // kth - register(signup) test
-                        onPressed: () {
-                          if (_keyForm.currentState!.validate()) {
-                            userBloc.add(OnRegisterUserEvent(
-                              userIDController.text.trim(),
-                              userNameController.text.trim(),
-                              userEmailController.text.trim(),
-                              userPWController.text.trim(),
-                              userAgainPWController.text.trim(),
-                            ));
-                          }
-                        }),
+                      text: '다음',
+                      width: size.width,
+                      colorText: Colors.black,
+                      onPressed: () => {
+                        Navigator.push(
+                            context, routeSlide(page: const RegisterPage2()))
+                      },
+
+                      // kth - register(signup) test
+                      // onPressed: () {
+                      //   if (_keyForm.currentState!.validate()) {
+                      //     userBloc.add(OnRegisterUserEvent(
+                      //       userIDController.text.trim(),
+                      //       userNameController.text.trim(),
+                      //       userEmailController.text.trim(),
+                      //       userPWController.text.trim(),
+                      //       userAgainPWController.text.trim(),
+                      //     ));
+                      //   }
+                      // }
+                    ),
                   ],
                 ),
               ),

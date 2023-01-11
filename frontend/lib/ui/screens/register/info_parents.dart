@@ -319,14 +319,26 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                     ),
                     const SizedBox(height: 60.0),
                     BtnNaru(
-                      text: '완료',
-                      width: size.width,
-                      colorText: Colors.black,
-                      onPressed: () => {
-                        Navigator.push(
-                            context, routeSlide(page: const LoginPage()))
-                      },
-                    ),
+                        text: '완료',
+                        width: size.width,
+                        colorText: Colors.black,
+                        // onPressed: () => {
+                        //   Navigator.push(
+                        //       context, routeSlide(page: const LoginPage()))
+                        // },
+
+                        // kth
+                        onPressed: () {
+                          if (_keyForm.currentState!.validate()) {
+                            userBloc.add(OnRegisterUserEvent(
+                              userIDController.text.trim(),
+                              userNameController.text.trim(),
+                              userEmailController.text.trim(),
+                              userPWController.text.trim(),
+                              userAgainPWController.text.trim(),
+                            ));
+                          }
+                        }),
                   ],
                 ),
               ),
