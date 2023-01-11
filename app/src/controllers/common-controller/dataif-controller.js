@@ -11,6 +11,16 @@ exports.fetchData = async function(req, res) {
   }
 };
 
+// userid로 사용자 정보 가져오기
+exports.fetchDataByUserid = async function(req, res) {
+  try{
+    var result = await dataif_service.fetchDataByUserid(req);
+    // console.log(result);
+    return result;
+  } catch(error) {
+    console.log('dataif-controller fetchDataByUserid:'+error);
+  }
+};
 exports.retrieveData = async function(req, res) {
   try{
     //console.log( req.body);

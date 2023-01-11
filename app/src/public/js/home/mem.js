@@ -1,6 +1,6 @@
-const searchBtn = document.querySelector("#search_button");
+// const searchBtn = document.querySelector("#search_button");
 
-searchBtn.addEventListener("click", mem);
+// searchBtn.addEventListener("click", mem);
 /*
 function search() {
     var info = document.getElementById("search_info").value;
@@ -14,15 +14,16 @@ function search() {
     }
 }
 */
-//엔터키로 검색
-function searchEnter(e) {
-    if (e.keyCode == 13) {
-        search();
-    }
-}
+// //엔터키로 검색
+// function searchEnter(e) {
+//     if (e.keyCode == 13) {
+//         search();
+//     }
+// }
 //화면 이동
 function manage(){
-    location.href = "/admin/auth/manage";
+    // console.log(id);
+    location.href = "/admin/dataif/update";
 }
 function regiAll(){
     location.href = "/admin/auth/regiAll";
@@ -31,13 +32,13 @@ function signUp(){
     location.href = "/admin/auth/signUp";
 }
 
-function mem(){
-    fetch("/mem",{
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(),
-    })
-    .then((res) => res.json())
-}
+// function mem(){
+//     fetch("/mem",{
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(),
+//     })
+//     .then((res) => res.json())
+// }

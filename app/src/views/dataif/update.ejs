@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/semantic/layout.css">
+  <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/mem.css">
+  <script src="/js/home/signup.js"></script>
+</head>
+<body>
+  <div id="wapper">
+  <nav>
+    <div id="adminpage"><h1>Admin Page</h1></div>
+    <div class="header">  회원 관리</div>
+      <ul>
+        <li><a href="/">회원 정보 관리</a></li>
+        <li><a href="/">회원 가입 설정</a></li>
+      </ul>
+    <div class="header">  정책 관리</div>
+      <ul>
+        <li><a href="/">정책 정보 관리</a></li>
+      </ul>
+    <div class="header"> 권한 정보</div>
+</nav>
+<section>
+    <div>
+        <div class="pagename">회원 등록</div>
+        <div>
+            <!-- put?post? -->
+            <form action="/admin/dataif/update/<%=post.userid %>" method="post" name="frm_signup" id="frm_signup">
+                <div>
+                  <div class="ui input">
+                    <input type="text" name="name" id="name" value="<%= post.name %>">
+                  </div>
+                  <br>
+                  <div class="ui input">
+                    <!-- 폰트 수정 -->
+                    <%= post.userid %>
+                  </div>
+                  <br>
+                  <div class="ui input">
+                    <input type="text" name="password" id="password" type="password" placeholder="비밀번호"">
+                  </div>
+                  <div class="ui input">
+                    <input type="text" name="password2" id="password2" type="password" placeholder="비밀번호 확인"">
+                  </div>
+                  <br>
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="user_role" id="user_role">
+                      <option value="0">관리자</option>
+                      <option value="1">사용자</option>
+                    </select>
+                  </div>
+                  <br>
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="age_class_code" id="age_class_code">
+                      <option value="0">청소년</option>
+                      <option value="1">학부모</option>
+                      <option value="2">청소년 부모</option>
+                    </select>
+                  </div>
+                  <br>
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="emd_class_code" id="emd_class_code">
+                      <option value="0">영암읍</option>
+                      <option value="1">삼호읍</option>
+                      <option value="2">덕진면</option>
+                      <option value="3">금정면</option>
+                      <option value="4">신북면</option>
+                      <option value="5">시종면</option>
+                      <option value="6">도포면</option>
+                      <option value="7">군서면</option>
+                      <option value="8">서호면</option>
+                      <option value="9">학산면</option>
+                      <option value="10">미암면</option>
+                    </select>
+                  </div>
+                  <br>
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="sex_class_code" id="sex_class_code">
+                      <option value="0">남자</option>
+                      <option value="1">여자</option>
+                    </select>
+                  </div>
+                  <br>
+                  <div class="ui input">
+                    <input type="text" name="user_email" id="user_email" value="<%= post.user_email %>">
+                  </div>
+                  <br>
+                  <!-- <input type="checkbox" name="popup_agree" id="popup_agree">
+                  <label>팝업</label>
+                  <input type="checkbox" name="email_agree" id="email_agree">
+                  <label>이메일</label>
+                  <input type="checkbox" name="sms_agree" id="sms_agree">
+                  <label>문자</label> -->
+                <div>
+                    <button class="ui button" type="submit">등록</button>
+                    <button class="ui button" type="button" onclick="location.href='/admin/auth/login'">취소</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</div>
+</body>
+
+</html>
