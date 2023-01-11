@@ -21,22 +21,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       print("_onLogin");
       emit(LoadingAuthentication());
+      print("auth_bloc loadingAuthentication");
+      print(event.user_id);
+      print(event.user_pw);
 
       final data = await authServices.login(event.user_id, event.user_pw);
-
+      print('_onLogin data.resp');
+      print(data.resp);
       await Future.delayed(const Duration(milliseconds: 350));
 
       if (data.resp) {
         await secureStorage.deleteSecureStorage();
 
-        // await secureStorage.persistenToken(data.token!);
+        await secureStorage.persistenToken(data.token!);
 
         emit(SuccessAuthentication());
       } else {
-        emit(FailureAuthentication(data.message));
+        print('_onLogin FailureAuthentication');
+        print(data.resp);
+        // emit(FailureAuthentication(data.message));
+        emit(FailureAuthentication());
       }
     } catch (e) {
-      emit(FailureAuthentication(e.toString()));
+      // emit(FailureAuthentication(e.toString()));
+      emit(FailureAuthentication());
     }
   }
 

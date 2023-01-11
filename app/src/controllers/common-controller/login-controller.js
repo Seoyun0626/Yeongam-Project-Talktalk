@@ -5,6 +5,9 @@ exports.SignIn = async function(req, res) {
   try{
     // console.log('login-controller', req.body);
     const result = await login_service.SignIn(req);
+    console.log('login-controller SignIn');
+    
+
     
     if (result.code == 0) {
       console.log("login-controller SiginIn 로그인 성공");
@@ -20,12 +23,31 @@ exports.SignIn = async function(req, res) {
       // console.log(req);
       req.session.user = result;
     }
-    // console.log('login-controller result', result);
+    console.log('login-controller result', result);
     return result;
   } catch(error) {
     console.log('login-controller SignIn:'+error);
   }
 };
+
+// kth - mobile - renewLogin
+// exports.renewLogin = async function (req, res) {
+//   try {
+//       const token = generateJsonWebToken(req.idPerson);
+//       return res.json({
+//           resp: true,
+//           message: '청소년 톡talk에 오신 것을 환영합니다',
+//           token: token
+//       });
+//   }
+//   catch (err) {
+//       return res.status(500).json({
+//           resp: false,
+//           message: err
+//       });
+//   }
+// };
+
 
 // 회원가입 컨트롤러
 exports.signUp = async function(req, res) {

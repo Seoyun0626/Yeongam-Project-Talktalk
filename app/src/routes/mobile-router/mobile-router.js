@@ -6,6 +6,7 @@ var login_controller = require("../../controllers/common-controller/login-contro
 
 const passport = require('passport');
 const generateJsonWebToken = require("../../lib/generate_jwt");
+const verifyToken = require("../../middleware/verify_token");
 
 
 // router.use("/user",routerUser);
@@ -38,6 +39,12 @@ router.post("/login", async function(req, res) {
         message : '로그인 성공',
         token : token
       })
+    } else {
+      res.json({
+        resp : false,
+        message : '로그인 실패',
+        token : token
+      })
     }
     
   } catch(error) {
@@ -52,6 +59,10 @@ router.post("/login", async function(req, res) {
 
   }
 });
+
+// kth - renew login
+// router.get('renew-login', verifyToken, login_controller.renewLogin);
+
 /*
 const LocalStrategy = require('passport-local').Strategy;
 passport.use('local-login', new LocalStrategy({
@@ -91,11 +102,11 @@ passport.deserializeUser((userid,done)=>{
 */
 //이게 동작하면 authenticate() 메서드 실행되고 이 값처리는 위의 passport부분에서 실행한다. 
 
-router.post('/login', passport.authenticate('local-login', {
-  successRedirect: '/mobile/loginSuccess', //인증성공시 이동하는화면주소
-  failureRedirect: '/mobile/loginFailure', //인증실패시 이동하는화면주소
-  failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
-}));
+// router.post('/login', passport.authenticate('local-login', {
+//   successRedirect: '/mobile/loginSuccess', //인증성공시 이동하는화면주소
+//   failureRedirect: '/mobile/loginFailure', //인증실패시 이동하는화면주소
+//   failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
+// }));
 
 //이름 변경
 router.get("/loginSuccess", function(req, res) {
