@@ -21,16 +21,14 @@ function searchEnter(e) {
     }
 }
 //화면 이동
-//등록
+function manage(){
+    location.href = "/admin/auth/manage";
+}
 function regiAll(){
     location.href = "/regiAll";
 }
 function signUp(){
     location.href = "/admin/auth/signUp";
-}
-//아이콘 : rev
-function revMem(){
-    location.href = "/revMem";
 }
 
 function mem(){

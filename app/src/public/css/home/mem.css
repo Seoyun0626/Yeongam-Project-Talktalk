@@ -40,7 +40,7 @@ body {
   float: left;
   width: 85vw;
   height: 200vh;
-  padding-left: 1em;
+  padding-left: 2em;
   padding-right: 1em;
   padding-top: 1em;
   background-color: white;
@@ -90,15 +90,13 @@ body {
   }
   #add_user{
     margin-top:20px;
-    float: right;
-    padding: 7px;
+    /* float: right; */
     font-size: 12px;
     margin-right: 145px;
   }
   #add_users{
     margin-top:20px;
-    float: right;
-    padding: 7px;
+    /* float: right; */
     font-size: 12px;
   }
   #managep_foot{
@@ -138,3 +136,8 @@ body {
     border-bottom: 1px solid rgba(0,0,0,.1);
     background: #fff;
   }
+
+/* 테이블 설정 */
+#mem_table{
+  text-align: center;
+}

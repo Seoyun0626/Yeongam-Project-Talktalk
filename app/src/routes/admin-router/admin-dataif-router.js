@@ -3,6 +3,9 @@ var express = require("express");
 var router = express.Router();
 //var checkAuth = require('../utils/checkauth');
 var dataif_controller = require("../../controllers/common-controller/dataif-controller");
+
+//js함수
+var memFunc = require('../../public/js/home/memFunc'); //mem의 ejs에서 활용하는 함수들
 const passport = require('passport');
 /*
 var Post = require('../../models/Post');
@@ -53,6 +56,7 @@ router.post("/dataif", checkAuth, async function(req, res) {
     }
 });
 */
+//로그인 시 출력하는 화면
 router.get('/', async function(req, res){
   try{
     var result = await dataif_controller.fetchData(req, res);
@@ -64,7 +68,13 @@ router.get('/', async function(req, res){
     delete result.totalPages;
     delete result.page;
 */
-    res.render('dataif/mem', {posts:result});//, rtnparams:rtnparams
+    res.render('dataif/mem', 
+    {
+      posts:result,
+      emd_code_to_name:memFunc.emd_code_to_name, //읍면동코드
+      age_code_to_class:memFunc.age_code_to_class, //연령대
+      role_code_to_class:memFunc.role_code_to_class, //권한
+    });//, rtnparams:rtnparams
   } catch(error) {
     console.log('dataif-router / error:'+error);
   }
