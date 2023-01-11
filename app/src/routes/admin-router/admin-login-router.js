@@ -169,5 +169,19 @@ router.post("/signup", async function(req, res) {
 });
 
 
+//일괄 등록
+router.get("/regiAll", function(req, res) {
+  res.render('dataif/regiAll');
+});
+router.post("/regiAll", async function(req, res) {
+  try{
+    // 사용자등록 컨트롤러 호출
+    var result = await login_controller.regiAll(req, res);
+    res.send({errMsg:result});
+  } catch(error) {
+    console.log('login-router signup error:'+error);
+  }
+});
+
 
 module.exports = router;

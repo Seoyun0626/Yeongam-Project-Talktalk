@@ -105,10 +105,9 @@ body {
   #managep_paging{
     margin-top: 15px;
   }
-  #reg_btn_set{
+  /* #reg_btn_set{
     margin-top: 15px;
-    width: 40vw;
-  }
+  } */
 
   table {
     border: 1px #a39485 solid;

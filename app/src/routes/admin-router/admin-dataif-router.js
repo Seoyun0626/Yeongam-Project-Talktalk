@@ -101,6 +101,16 @@ router.put('/', async function(req, res){
   }
 });
 
+// terms
+router.get('/terms', async function(req, res){
+  try{
+    res.render('dataif/terms');
+  }
+  catch(error) {
+    console.log('dataif-router /terms error:'+error);
+  }
+});
+
 
 // New
 router.get('/new', function(req, res){
