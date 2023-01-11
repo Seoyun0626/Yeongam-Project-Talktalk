@@ -61,6 +61,25 @@ class _RegisterPageState2 extends State<RegisterPage2> {
   bool isMiddle = false;
   bool isHigh = false;
   bool isOutside = false;
+  bool isMan = true;
+  bool isWoman = false;
+
+  final List<String> _valueList = [
+    '영암읍',
+    '삼호읍',
+    '덕진면',
+    '금정면',
+    '신북면',
+    '시종면',
+    '도포면',
+    '군서면',
+    '서호면',
+    '학산면',
+    '미암면'
+  ];
+  String _selectedValue = '영암읍';
+
+  late List<bool> _selections1 = List.generate(4, (index) => false);
   late List<bool> isSelected;
 
   final _keyForm = GlobalKey<FormState>();
@@ -73,7 +92,7 @@ class _RegisterPageState2 extends State<RegisterPage2> {
     userAgainPWController = TextEditingController();
     userEmailController = TextEditingController();
     userNameController = TextEditingController();
-    isSelected = [isElement, isMiddle, isHigh, isOutside];
+    isSelected = [isMan, isWoman];
   }
 
   @override
@@ -94,14 +113,14 @@ class _RegisterPageState2 extends State<RegisterPage2> {
     //토글버튼 선택 시 (수정해야함)
     void toggleSelect(value) {
       if (value == 0) {
-        isElement = true;
-        isMiddle = false;
+        isMan = true;
+        isWoman = false;
       } else {
-        isElement = false;
-        isMiddle = true;
+        isMan = false;
+        isWoman = true;
       }
       setState(() {
-        isSelected = [isElement, isMiddle];
+        isSelected = [isMan, isWoman];
       });
     }
 
@@ -143,10 +162,17 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const TextCustom(
-                        text: '회원가입2 필수x',
+                        text: '회원가입',
                         letterSpacing: 2.0,
                         fontWeight: FontWeight.w900,
                         fontSize: 30,
+                        color: Colors.black),
+                    const SizedBox(height: 5.0),
+                    const TextCustom(
+                        text: '필수가 아닌 항목입니다.',
+                        letterSpacing: 2.0,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
                         color: Colors.black),
                     const SizedBox(height: 50.0),
                     const TextCustom(
@@ -180,36 +206,42 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                     ),
                     const SizedBox(height: 15.0),
                     const TextCustom(
-                      text: '나이 선택',
+                      text: '재학 여부를 선택해주세요.',
                       fontSize: 17,
                       letterSpacing: 1.0,
                       maxLines: 2,
                     ),
-                    const SizedBox(height: 1.0),
+                    const SizedBox(height: 10.0),
                     ToggleButtons(
-                      children: [
+                      selectedColor: ThemeColors.primary,
+                      selectedBorderColor: ThemeColors.primary,
+                      fillColor: ThemeColors.primary.withOpacity(0.08),
+                      splashColor: ThemeColors.primary.withOpacity(0.12),
+                      hoverColor: ThemeColors.primary.withOpacity(0.04),
+                      borderRadius: BorderRadius.circular(4.0),
+                      constraints:
+                          BoxConstraints(minWidth: 59, minHeight: 40.0),
+                      children: <Widget>[
                         Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text('미터법', style: TextStyle(fontSize: 18))),
+                            child: Text('초', style: TextStyle(fontSize: 18))),
                         Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16),
-                            child:
-                                Text('파운드법', style: TextStyle(fontSize: 18))),
+                            child: Text('중', style: TextStyle(fontSize: 18))),
                         Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16),
-                            child:
-                                Text('파운드법', style: TextStyle(fontSize: 18))),
+                            child: Text('고', style: TextStyle(fontSize: 18))),
                         Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16),
-                            child:
-                                Text('파운드법', style: TextStyle(fontSize: 18))),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child:
-                                Text('파운드법', style: TextStyle(fontSize: 18))),
+                            child: Text('기타(학교밖)',
+                                style: TextStyle(fontSize: 18))),
                       ],
-                      isSelected: isSelected,
-                      onPressed: toggleSelect,
+                      onPressed: (int index) {
+                        setState(() {
+                          _selections1[index] = !_selections1[index];
+                        });
+                      },
+                      isSelected: _selections1,
                     ),
                     const SizedBox(height: 40.0),
                     const TextCustom(
@@ -218,11 +250,32 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                       letterSpacing: 1.0,
                       maxLines: 2,
                     ),
-                    const SizedBox(height: 1.0),
-                    TextFieldNaru(
-                      controller: userNameController,
-                      hintText: '이름',
-                      validator: RequiredValidator(errorText: ' '),
+                    const SizedBox(height: 10.0),
+                    Column(
+                      children: [
+                        ToggleButtons(
+                          selectedColor: ThemeColors.primary,
+                          selectedBorderColor: ThemeColors.primary,
+                          fillColor: ThemeColors.primary.withOpacity(0.08),
+                          splashColor: ThemeColors.primary.withOpacity(0.12),
+                          hoverColor: ThemeColors.primary.withOpacity(0.04),
+                          borderRadius: BorderRadius.circular(4.0),
+                          constraints:
+                              BoxConstraints(minWidth: 154, minHeight: 40.0),
+                          children: [
+                            Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                child:
+                                    Text('남자', style: TextStyle(fontSize: 18))),
+                            Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                child:
+                                    Text('여자', style: TextStyle(fontSize: 18))),
+                          ],
+                          isSelected: isSelected,
+                          onPressed: toggleSelect,
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 40.0),
                     const TextCustom(
@@ -231,12 +284,38 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                       letterSpacing: 1.0,
                       maxLines: 2,
                     ),
-                    const SizedBox(height: 1.0),
-                    TextFieldNaru(
-                      controller: userEmailController,
-                      hintText: '이메일',
-                      keyboardType: TextInputType.emailAddress,
-                      validator: validatedEmail,
+                    const SizedBox(height: 10.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const TextCustom(
+                          text: '영암군    ',
+                          fontSize: 17,
+                          letterSpacing: 1.0,
+                          maxLines: 2,
+                        ),
+                        DropdownButton(
+                          focusColor: ThemeColors.primary,
+                          borderRadius: BorderRadius.circular(4.0),
+                          style: const TextStyle(
+                            fontSize: 17,
+                            color: Colors.black,
+                          ),
+                          value: _selectedValue,
+                          items: _valueList.map((value) {
+                            return DropdownMenuItem(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedValue = value!;
+                            });
+                          },
+                          elevation: 4,
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 60.0),
                     BtnNaru(
@@ -245,7 +324,7 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                       colorText: Colors.black,
                       onPressed: () => {
                         Navigator.push(
-                            context, routeSlide(page: const RegisterPage2()))
+                            context, routeSlide(page: const LoginPage()))
                       },
                     ),
                   ],

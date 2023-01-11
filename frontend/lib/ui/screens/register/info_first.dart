@@ -181,7 +181,6 @@ class _RegisterPageState1 extends State<RegisterPage1> {
                         //   Navigator.push(
                         //       context, routeSlide(page: const RegisterPage2()))
                         // },
-
                         // kth - register(signup) test
                         onPressed: () {
                           if (_keyForm.currentState!.validate()) {
