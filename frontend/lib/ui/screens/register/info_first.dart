@@ -191,6 +191,10 @@ class _RegisterPageState1 extends State<RegisterPage1> {
                               userEmailController.text.trim(),
                               userPWController.text.trim(),
                               userAgainPWController.text.trim(),
+                              '0',
+                              '0',
+                              '0',
+                              '0',
                             ));
                           }
                         }),

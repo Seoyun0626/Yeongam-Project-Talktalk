@@ -54,8 +54,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
       await Future.delayed(const Duration(milliseconds: 550));
       print("_onRegisterUser");
-      final resp = await userService.createdUser(event.user_id, event.user_name,
-          event.user_email, event.user_pw, event.user_pw2, event.user_role);
+      final resp = await userService.createdUser(
+          event.user_id,
+          event.user_name,
+          event.user_email,
+          event.user_pw,
+          event.user_pw2,
+          event.user_role,
+          event.age_class_code,
+          event.emd_class_code,
+          event.sex_class_code);
+      print(event);
       print(resp.resp);
       print(resp.message);
 

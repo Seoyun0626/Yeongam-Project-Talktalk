@@ -34,7 +34,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await secureStorage.deleteSecureStorage();
 
         await secureStorage.persistenToken(data.token!);
-
+        print('_onLogin SuccessAuthentication');
         emit(SuccessAuthentication());
       } else {
         print('_onLogin FailureAuthentication');

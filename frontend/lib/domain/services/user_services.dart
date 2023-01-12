@@ -22,12 +22,16 @@ class UserServices {
   }
 
   Future<DefaultResponse> createdUser(
-      String userid,
-      String name,
-      String user_email,
-      String password,
-      String password2,
-      int user_role) async {
+    String userid,
+    String name,
+    String user_email,
+    String password,
+    String password2,
+    String user_role,
+    String age_class_code,
+    String emd_class_code,
+    String sex_class_code,
+  ) async {
     final resp =
         await http.post(Uri.parse('${Environment.urlApi}/signup'), headers: {
       'Accept': 'application/json'
@@ -37,7 +41,10 @@ class UserServices {
       'user_email': user_email,
       'password': password,
       'password2': password2,
-      'user_role': 1,
+      'user_role': user_role,
+      'age_class_code': age_class_code,
+      'emd_class_code': emd_class_code,
+      'sex_class_code': sex_class_code
     });
     // print('${Environment.urlApi}/signup');
     // print(resp.body);
