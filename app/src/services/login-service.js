@@ -71,9 +71,13 @@ exports.signUp = async function(req, res) {
         hasher({
             password: password
         }, async (err, pass, salt, hash) => {
-          var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code, sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
-          // var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_email) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_email+"')"; // mobile
-          var rows = await conn.query(query); // 쿼리 실행
+          if(age_class_code == undefined){
+            var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_email) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_email+"')"; // mobile
+          }
+          else{
+            var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code, sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
+          }
+            var rows = await conn.query(query); // 쿼리 실행
         });
     } else {
         // 이미 있음
