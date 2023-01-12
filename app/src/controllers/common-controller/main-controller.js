@@ -1,4 +1,4 @@
-var main_service = require("../../services/admin-service/main-service");
+var main_service = require("../../services/main-service");
 /*
 exports.GetJsonList = async function(req, res) {
   var result = await service_main.GetJsonList();
