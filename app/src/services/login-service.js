@@ -62,6 +62,7 @@ exports.signUp = async function(req, res) {
   try{
     conn = await db.getConnection();
     console.log('login-service SignUp db getConnection')
+    console.log(req.body);
     var userid = req.body.userid;
     var password = req.body.password;
     var name = req.body.name;
@@ -72,7 +73,8 @@ exports.signUp = async function(req, res) {
             password: password
         }, async (err, pass, salt, hash) => {
           if(req.body.age_class_code == undefined){
-            var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_email) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_email+"')"; // mobile
+            console.log(req.body.user_role);
+            var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_email+"')"; // mobile
           }
           else{
             var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code, sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";

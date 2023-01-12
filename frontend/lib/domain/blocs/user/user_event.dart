@@ -11,9 +11,10 @@ class OnRegisterUserEvent extends UserEvent {
   final String user_email;
   final String user_pw;
   final String user_pw2;
+  final int user_role;
 
   OnRegisterUserEvent(this.user_id, this.user_name, this.user_email,
-      this.user_pw, this.user_pw2);
+      this.user_pw, this.user_pw2, this.user_role);
 }
 
 class OnVerifyEmailEvent extends UserEvent {
