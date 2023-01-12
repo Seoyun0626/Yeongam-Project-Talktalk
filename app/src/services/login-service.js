@@ -76,7 +76,7 @@ exports.signUp = async function(req, res) {
           console.log('age_class_code', req.body.age_class_code);
           console.log('emd_class_code', req.body.emd_class_code);
           console.log('sex_class_code', req.body.sex_class_code);
-          
+          console.log(salt);
           var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, age_class_code, emd_class_code, sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.age_class_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
 
 
