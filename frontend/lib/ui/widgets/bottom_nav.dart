@@ -1,23 +1,21 @@
 part of 'widgets.dart';
 
 class BottomNavigation extends StatelessWidget {
-
   final int index;
   final bool isReel;
 
-  const BottomNavigation({Key? key, required this.index, this.isReel = false}) : super(key: key);
+  const BottomNavigation({Key? key, required this.index, this.isReel = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       height: 55,
       decoration: BoxDecoration(
           color: isReel ? Colors.black : Colors.white,
           boxShadow: const [
             BoxShadow(color: Colors.grey, blurRadius: 9, spreadRadius: -4)
-          ]
-      ),
+          ]),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -27,7 +25,8 @@ class BottomNavigation extends StatelessWidget {
             isIcon: false,
             iconString: 'assets/img/home.png',
             isReel: isReel,
-            onPressed: () => Navigator.pushAndRemoveUntil(context, routeSlide(page: const HomePage()), (_) => false),
+            onPressed: () => Navigator.pushAndRemoveUntil(
+                context, routeSlide(page: const HomePage()), (_) => false),
           ),
           // _ItemButtom(
           //   i: 2,
@@ -82,7 +81,6 @@ class BottomNavigation extends StatelessWidget {
 // }
 
 class _ItemButtom extends StatelessWidget {
-
   final int i;
   final int index;
   final bool isIcon;
@@ -105,11 +103,25 @@ class _ItemButtom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: () {
+        onPressed();
+      },
       child: Container(
-        child: ( isIcon )
-            ? Icon(icon, color: ( i == index ) ? ThemeColors.primary : isReel ?Colors.white : Colors.black87 , size: 28)
-            : SvgPicture.asset(iconString!, height: 25, color: ( i == index ) ? ThemeColors.primary : isReel ?Colors.white : Colors.black87),
+        child: (isIcon)
+            ? Icon(icon,
+                color: (i == index)
+                    ? ThemeColors.primary
+                    : isReel
+                        ? Colors.white
+                        : Colors.black87,
+                size: 28)
+            : SvgPicture.asset(iconString!,
+                height: 25,
+                color: (i == index)
+                    ? ThemeColors.primary
+                    : isReel
+                        ? Colors.white
+                        : Colors.black87),
       ),
     );
   }
