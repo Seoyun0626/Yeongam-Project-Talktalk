@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/helpers/helpers.dart';
-// import 'package:login/ui/screens/login/verify_email_page.dart';
+import 'package:login/ui/screens/login/verify_email_page.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
@@ -136,7 +136,11 @@ class _RegisterPageState2 extends State<RegisterPage2> {
           modalSuccess(context, '회원가입이 완료되었습니다',
               onPressed: () =>
                   Navigator.push(context, routeSlide(page: const LoginPage()))
-              // VerifyEmailPage(user_email: userEmailController.text.trim())))
+              // Navigator.push(
+              //     context,
+              //     routeSlide(
+              //         page: VerifyEmailPage(
+              //             user_email: userEmailController.text.trim())))
               );
         } else if (state is FailureUserState) {
           Navigator.pop(context);

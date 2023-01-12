@@ -1,8 +1,8 @@
 const path = require("path");
 var express = require("express");
 var router = express.Router();
-var login_controller = require("../../controllers/common-controller/login-controller");
-// const routerUser = require("./src/routes/mobile-router/mobile-user-router");
+var mobile_login_controller = require("../../controllers/common-controller/login-controller");
+// const routerUser = require("./src/routes/mobile-router/mobile-router");
 
 const passport = require('passport');
 const generateJsonWebToken = require("../../lib/generate_jwt");
@@ -22,13 +22,39 @@ router.get('/login', function (req, res) {
   }
 });
 
-
+// kth - mobile - verfiy email
+router.get('/verify-email/:code/:email', async function(req, res) {
+  let code = req.params.code;
+  let email = req.params.email;
+  
+  console.log('mobile-router verifyEmail 실행');
+  try{
+    var result = await mobile_login_controller.verifyEmail(req, res);
+    console.log('mobile-router verifyEmail result:', result);
+    if (result == 0){
+      res.json({
+        resp : true,
+        message: '성공적으로 검증되었습니다'
+      });
+    } else{
+      res.json({
+        resp : false,
+        message : '확인 실패'
+      })
+    }
+  } catch(err){
+    res.json({
+      resp : false,
+      message : err
+    })
+  }
+});
 
 router.post("/login", async function(req, res) {
   try{
     // 로그인 확인을 위해 컨트롤러 호출
     console.log('mobile-router', req.body);
-    var result = await login_controller.SignIn(req, res);
+    var result = await mobile_login_controller.SignIn(req, res);
     // console.log("router.post-/login", result);
     // res.send(result);
     console.log('mobile-router result : ', result);
@@ -62,6 +88,8 @@ router.post("/login", async function(req, res) {
 
 // kth - mobile - renew login
 // router.get('renew-login', verifyToken, login_controller.renewLogin);
+
+
 
 /*
 const LocalStrategy = require('passport-local').Strategy;
@@ -132,7 +160,7 @@ router.post("/login-check", async function(req, res) {
   try{
     // 로그인 확인을 위해 컨트롤러 호출
     console.log('mobile-router login-check');
-    var result = await login_controller.login_check(req, res);
+    var result = await mobile_login_controller.login_check(req, res);
     //console.log('mobile-router login-check result:'+result);
     switch(result){
       case 1 : res.json({success: false, msg: '해당 유저가 존재하지 않습니다.'}); break;
@@ -148,7 +176,7 @@ router.post("/login-check", async function(req, res) {
 router.post("/signup-check", async function(req, res) {
   try{
     // 회원 확인을 위해 컨트롤러 호출
-    var result = await login_controller.login_check(req, res);
+    var result = await mobile_login_controller.login_check(req, res);
     //console.log('mobile-router signup-check result:'+result);
     switch(result){
       case 1 : res.json({success: true}); break;
@@ -185,7 +213,7 @@ router.post("/signup", async function(req, res) {
   try{
     // 사용자등록 컨트롤러 호출
     
-    var result = await login_controller.signUp(req, res);
+    var result = await mobile_login_controller.signUp(req, res);
     // console.log(3);
     //res.send({errMsg:result});
     //if(result==0) res.json({success: true, msg:'등록하였습니다.'});

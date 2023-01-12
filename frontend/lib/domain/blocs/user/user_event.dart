@@ -17,15 +17,16 @@ class OnRegisterUserEvent extends UserEvent {
   final String sex_class_code;
 
   OnRegisterUserEvent(
-      this.user_id,
-      this.user_name,
-      this.user_email,
-      this.user_pw,
-      this.user_pw2,
-      this.user_role,
-      this.age_class_code,
-      this.emd_class_code,
-      this.sex_class_code);
+    this.user_id,
+    this.user_name,
+    this.user_email,
+    this.user_pw,
+    this.user_pw2,
+    this.user_role,
+    this.age_class_code,
+    this.emd_class_code,
+    this.sex_class_code,
+  );
 }
 
 class OnVerifyEmailEvent extends UserEvent {

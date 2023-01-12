@@ -49,6 +49,7 @@ exports.SignIn = async function(req, res) {
 // };
 
 
+
 // 회원가입 컨트롤러
 exports.signUp = async function(req, res) {
   try{

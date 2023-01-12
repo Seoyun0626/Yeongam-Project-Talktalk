@@ -8,9 +8,9 @@ class LoadingAuthentication extends AuthState {}
 class SuccessAuthentication extends AuthState {}
 
 class FailureAuthentication extends AuthState {
-  // final String error;
+  final String error;
 
-  // FailureAuthentication(this.error);
+  FailureAuthentication(this.error);
 }
 
 class LogOut extends AuthState {}

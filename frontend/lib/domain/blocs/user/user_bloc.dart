@@ -82,6 +82,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       OnVerifyEmailEvent event, Emitter<UserState> emit) async {
     try {
       emit(LoadingUserState());
+      print("_onVerifyEmail");
 
       final resp = await userService.verifyEmail(event.user_email, event.code);
 

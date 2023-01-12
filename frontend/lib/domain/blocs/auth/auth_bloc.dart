@@ -39,12 +39,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         print('_onLogin FailureAuthentication');
         print(data.resp);
-        // emit(FailureAuthentication(data.message));
-        emit(FailureAuthentication());
+        emit(FailureAuthentication(data.message));
+        // emit(FailureAuthentication());
       }
     } catch (e) {
-      // emit(FailureAuthentication(e.toString()));
-      emit(FailureAuthentication());
+      emit(FailureAuthentication(e.toString()));
+      // emit(FailureAuthentication());
     }
   }
 

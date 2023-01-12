@@ -59,15 +59,15 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pop(context);
           modalWarning(context, '다시 로그인해주세요');
 
-          // if (state.error == '메일을 확인해주세요') {
-          //   Navigator.push(
-          //       context,
-          //       routeSlide(
-          //           page:
-          //               VerifyEmailPage(user_email: idController.text.trim())));
-          // }
+          if (state.error == '메일을 확인해주세요') {
+            Navigator.push(
+                context,
+                routeSlide(
+                    page:
+                        VerifyEmailPage(user_email: idController.text.trim())));
+          }
 
-          // errorMessageSnack(context, state.error);
+          errorMessageSnack(context, state.error);
         } else if (state is SuccessAuthentication) {
           print(state);
           userBloc.add(OnGetUserAuthenticationEvent());

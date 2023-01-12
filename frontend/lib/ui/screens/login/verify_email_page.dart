@@ -19,17 +19,21 @@ class VerifyEmailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
+    print('VerifyEmailPage!!');
 
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
+        print('verifyEmail state');
         if (state is LoadingUserState) {
           modalLoading(context, '코드 확인 중...');
         } else if (state is SuccessUserState) {
+          print('verify_eamil_page SuccessUserState');
           Navigator.pop(context);
           modalSuccess(context, '환영합니다!',
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context, routeSlide(page: const LoginPage()), (_) => false));
         } else if (state is FailureUserState) {
+          print('verify_eamil_page FailureUserState');
           Navigator.pop(context);
           errorMessageSnack(context, state.error);
         }

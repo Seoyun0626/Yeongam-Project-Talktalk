@@ -4,17 +4,20 @@ const sendEmailVerify = async (subject, to, html) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'HERE YOUR GMAIL ADRESS',
-            pass: 'HERE YOUR GMAIL PASSWORD'
+            user: 'veryycherry@gmail.com',
+            pass: 'kth1004^'
         }
     });
     const mailOptions = {
-        from: 'HERE YOUR GMAIL ADDRESS',
+        from: 'veryycherry@gmail.com',
         to: to,
         subject: subject,
         html: html,
     };
     await transporter.sendMail(mailOptions);
 };
+
+
+
 
 module.exports = sendEmailVerify
