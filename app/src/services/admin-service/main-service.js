@@ -1,6 +1,6 @@
-const { on } = require('../utils/db');
-var db = require('../utils/db');
-var utils = require('../utils/utils');
+const { on } = require('../../utils/db');
+var db = require('../../utils/db');
+var utils = require('../../utils/utils');
 
 /*
 exports.GetJsonList = async function(req, res) {

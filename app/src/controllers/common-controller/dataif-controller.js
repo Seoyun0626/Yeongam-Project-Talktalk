@@ -1,4 +1,4 @@
-var dataif_service = require("../../services/dataif-service");
+var dataif_service = require("../../services/admin-service/dataif-service");
 
 // 로그인 체크 컨트롤러
 exports.fetchData = async function(req, res) {

@@ -1,4 +1,4 @@
-var login_service = require("../../services/login-service");
+var login_service = require("../../services/admin-service/login-service");
 
 // 회원로그인 컨트롤러, 사용 안됨..?
 exports.SignIn = async function(req, res) {
