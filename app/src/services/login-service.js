@@ -71,7 +71,7 @@ exports.signUp = async function(req, res) {
         hasher({
             password: password
         }, async (err, pass, salt, hash) => {
-          if(age_class_code == undefined){
+          if(req.body.age_class_code == undefined){
             var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_email) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_email+"')"; // mobile
           }
           else{
