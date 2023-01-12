@@ -6,6 +6,8 @@
   <title>Admin Page</title>
   <link rel="stylesheet" href="/semantic/layout.css">
   <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/mem.css">
+  <script src="/js/home/mem.js" defer></script>
 </head>
 <body>
   <div id="wapper">
@@ -13,14 +15,19 @@
     <div id="adminpage"><h1>Admin Page</h1></div>
     <div class="header">  회원 관리</div>
       <ul>
-        <li><a href="/admin/auth/show">회원 정보 관리</a></li>
-        <li><a href="/auth">회원 가입 설정</a></li>
+        <li><a href="/admin/dataif">회원 정보 관리</a></li>
+        <li><a href="/admin/dataif/terms">회원 가입 설정</a></li>
       </ul>
-    <div class="header">  코드 관리</div>
+    <div class="header">정책 관리</div>
       <ul>
-        <li><a href="/code_management">코드 정보 관리</a></li>
+        <li><a href="/admin/auth/subSetting">정책 정보 관리</a></li>
       </ul>
-    <div class="header"> 권한 정보</div>
+    <div class="header">권한 정보</div>
+    <!-- 로그 아웃 -->
+    <div id="logout">
+      <!-- <a href="/admin/auth/logout">로그아웃</a> -->
+      <a href="/admin/auth/login">로그아웃</a>
+    </div>
 </nav>
 <section>
     <div></div>

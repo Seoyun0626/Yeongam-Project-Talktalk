@@ -42,6 +42,10 @@ router.get("/loginFailure", function(req, res) {
 
 //로그인끝
 
+router.get("/subSetting", function(req, res) {
+  res.render('dataif/subSetting');
+});
+
 /*
 router.post("/login", async function(req, res) {
   try{

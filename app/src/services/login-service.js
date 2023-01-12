@@ -62,12 +62,18 @@ exports.signUp = async function(req, res) {
   try{
     conn = await db.getConnection();
     console.log('login-service SignUp db getConnection')
-    console.log(req.body);
     var userid = req.body.userid;
     var password = req.body.password;
+    var password2 = req.body.password2;
     var name = req.body.name;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
+    if(password != password2) {
+        // 비밀번호가 일치하지 않음
+        console.log('비밀번호가 일치하지 않습니다.');
+        resultcode = 100;
+        return resultcode;
+    }
     if (rows[0] == undefined) {
         hasher({
             password: password
