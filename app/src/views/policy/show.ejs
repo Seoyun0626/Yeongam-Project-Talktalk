@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/semantic/layout.css">
+  <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/policyShow.css">
+  <script src="/js/home/policyShow.js" defer></script>
+</head>
+<body>
+  <div id="wapper">
+  <nav>
+    <div id="adminpage"><h1>Admin Page</h1></div>
+    <div class="header">  회원 관리</div>
+      <ul>
+        <li><a href="/admin/dataif">회원 정보 관리</a></li>
+        <li><a href="/admin/dataif/terms">회원 가입 설정</a></li>
+      </ul>
+    <div class="header">정책 관리</div>
+      <ul>
+        <li><a href="/admin/policy/show">정책 정보 관리</a></li>
+      </ul>
+    <div class="header">권한 정보</div>
+    <!-- 로그 아웃 -->
+    <div id="logout">
+      <!-- <a href="/admin/auth/logout">로그아웃</a> -->
+      <a href="/admin/auth/login">로그아웃</a>
+    </div>
+</nav>
+<section>
+    <div>
+        <div class="pagename">정책 정보 관리</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>정책 번호</th>
+                    <th>정책 이름</th>
+                    <th>정책 내용</th>
+                    <th>정책 수정</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div id="managep_foot">
+
+        <div class="ui pagination menu" id="managep_paging">
+            <a class="icon item">
+                <i class="left chevron icon"></i>
+            </a>
+            <a class="item">1</a>
+            <a class="item">2</a>
+            <a class="item">3</a>
+            <a class="item">4</a>
+            <a class="icon item">
+                <i class="right chevron icon"></i>
+        </a>
+      </div>
+      <div id="reg_btn_set">
+        <button class="ui button" id="add_user" onclick="upload()">회원 등록</button>
+        <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->
+      </div>
+    </div>  
+</section>
