@@ -1,4 +1,4 @@
-#Thu Jan 12 15:32:42 KST 2023
+#Sat Jan 14 20:14:31 KST 2023
 base.1=C\:\\Yeongam-project\\frontend\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes2.dex
 path.1=classes2.dex
 base.0=C\:\\Yeongam-project\\frontend\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex

@@ -26,17 +26,18 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          titleSpacing: 0,
           title: const Text('청소년톡talk',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
               )),
-          // leading: IconButton(
-          //   icon: Image.asset("images\aco.png", width: 50, height: 50),
-          //   onPressed: () =>
-          //       Navigator.push(context, routeSlide(page: const LoginPage())),
-          // ),
+          leading: InkWell(
+            onTap: () =>
+                Navigator.push(context, routeSlide(page: const LoginPage())),
+            child: Image.asset('images/aco.png', height: 70),
+          ),
           actions: [
             IconButton(
               icon: const Icon(Icons.perm_identity),
