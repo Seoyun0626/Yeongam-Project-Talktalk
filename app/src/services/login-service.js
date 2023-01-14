@@ -1,7 +1,7 @@
 var db = require('../utils/db');
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
 // 로그인 확인
 exports.SignIn = async function(req) {

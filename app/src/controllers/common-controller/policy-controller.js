@@ -9,3 +9,13 @@ var login_service = require("../../services/policy-service");
 //       console.log('login-controller login_check:'+error);
 //     }
 //   };
+
+exports.upload = async function(req, res) {
+    try{
+      var result = await login_service.upload(req);
+      return result;
+    } catch(error) {
+      console.log('login-controller login_check:'+error);
+    }
+  };
+  

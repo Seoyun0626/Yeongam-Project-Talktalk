@@ -22,7 +22,15 @@ router.get('/upload', function (req, res) {
         console.log('policy-router upload error:'+error);
     }
 });
-  
+
+router.post('/upload', function (req, res) {
+    try{
+        policy_controller.upload(req,res);
+        }
+    catch(error) {
+        console.log('policy-router upload error:'+error);
+    }
+});
 
 
 
