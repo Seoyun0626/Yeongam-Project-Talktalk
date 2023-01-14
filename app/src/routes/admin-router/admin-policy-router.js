@@ -25,8 +25,14 @@ router.get('/upload', function (req, res) {
 
 router.post('/upload', function (req, res) {
     try{
-        policy_controller.upload(req,res);
+        var result = policy_controller.upload(req,res);
+        console.log(result);
+        if(result == 0) { //성공
+            res.redirect('/admin/policy/show');
+        } else { //실패
+            res.redirect('/admin/policy/upload');
         }
+    }
     catch(error) {
         console.log('policy-router upload error:'+error);
     }

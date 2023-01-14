@@ -31,21 +31,31 @@
 <section>
   <div class="pagename">정책 등록</div>
   <div>
-    <form action="/admin/policy/upload" method="post" enctype="multipart/form-data">
+    <form action="/admin/policy/upload" method="post">
       <div class="ui form">
         <div class="field">
           <label>정책 이름</label>
           <input type="text" name="name" placeholder="정책 이름">
+          <label>정책 대상</label>
+          <input type="text" name="target" placeholder="정책 대상">
+          <label>주관 기관</label>
+          <input type="text" name="supervision" placeholder="주관 기관">
           <label>정책 설명</label>
           <input type="text" name="description" placeholder="정책 설명">
-          <label>정책 타입</label>
-          <input type="text" name="type" placeholder="정책 타입">
+          <!-- <label>정책 타입</label>
+          <input type="text" name="type" placeholder="정책 타입"> -->
+          <label>지원금</label>
+          <input type="text" name="fund" placeholder="지원금">
         </div>
-        <div class="field">
+        <!-- <div class="field">
           <label>정책 파일</label>
           <input type="file" name="file">
+        </div> -->
+        <div>
+          <button class="ui button" type="submit">등록</button>
+          <button class="ui button" type="reset">취소</button>
         </div>
-        <button class="ui button" type="submit">등록</button>
       </div>
+    </form>
   </div>
 </section>
