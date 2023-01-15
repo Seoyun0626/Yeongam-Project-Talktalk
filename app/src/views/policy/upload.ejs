@@ -7,7 +7,9 @@
   <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/mem.css">
   <link rel="stylesheet" href="/css/home/admin.css">
+  <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
   <script src="/js/home/mem.js" defer></script>
+  
 </head>
 <body>
   <nav>
@@ -64,6 +66,16 @@
           <input type="text" name="type" placeholder="정책 타입"> -->
           <label>지원금</label>
           <input type="text" name="fund" placeholder="지원금">
+          <br><br>
+          <textarea name="content" id="editor"></textarea>
+          <script>
+            // 3. CKEditor5를 생성할 textarea 지정
+            ClassicEditor
+                .create( document.querySelector( '#editor' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+            </script>
         </div>
         <!-- <div class="field">
           <label>정책 파일</label>
@@ -71,7 +83,8 @@
         </div> -->
         <div>
           <button class="ui button" type="submit">등록</button>
-          <button class="ui button" type="reset">취소</button>
+          <button class="ui button" type="button" onclick="location.href='/admin/policy/show'">취소</button>
+          <!-- <button class="ui button" type="reset">취소</button> -->
         </div>
       </div>
     </form>
