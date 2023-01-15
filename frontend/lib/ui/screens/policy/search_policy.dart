@@ -54,11 +54,11 @@ class _SearchPolicyPageState extends State<SearchPolicyPage> {
             centerTitle: false,
             elevation: 0.0,
           ),
-          body: Container(
-              child: Column(children: <Widget>[
+          body: Column(children: <Widget>[
+            // 검색창
             Container(
               color: ThemeColors.primary,
-              padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: Row(children: <Widget>[
                 Expanded(
                   flex: 6,
@@ -83,7 +83,7 @@ class _SearchPolicyPageState extends State<SearchPolicyPage> {
                 ),
               ]),
             )
-          ]))),
+          ])),
     );
   }
 }

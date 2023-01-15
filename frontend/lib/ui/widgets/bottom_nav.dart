@@ -28,28 +28,32 @@ class BottomNavigation extends StatelessWidget {
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context, routeSlide(page: const HomePage()), (_) => false),
           ),
-          // _ItemButtom(
-          //   i: 2,
-          //   index: index,
-          //   icon: Icons.search,
-          //   isReel: isReel,
-          //   onPressed: () => Navigator.pushAndRemoveUntil(context, routeSlide(page: const SearchPage()), (_) => false),
-          // ),
-          // _ItemButtom(
-          //   i: 3,
-          //   index: index,
-          //   isIcon: false,
-          //   isReel: isReel,
-          //   iconString: 'assets/svg/movie_reel.svg',
-          //   onPressed: () => Navigator.push(context, routeSlide(page: const ReelHomeScreen())),
-          // ),
-          // _ItemButtom(
-          //   i: 4,
-          //   index: index,
-          //   icon: Icons.favorite_border_rounded,
-          //   isReel: isReel,
-          //   onPressed: () => Navigator.pushAndRemoveUntil(context, routeSlide(page: const NotificationsPage()), (_) => false),
-          // ),
+          _ItemButtom(
+            i: 2,
+            index: index,
+            icon: Icons.search,
+            isReel: isReel,
+            onPressed: () => Navigator.pushAndRemoveUntil(
+                context, routeSlide(page: const HomePage()), (_) => false),
+          ),
+          _ItemButtom(
+            i: 3,
+            index: index,
+            icon: Icons.calendar_month,
+            // isIcon: false,
+            isReel: isReel,
+            // iconString: 'assets/svg/movie_reel.svg',
+            onPressed: () =>
+                Navigator.push(context, routeSlide(page: const HomePage())),
+          ),
+          _ItemButtom(
+            i: 4,
+            index: index,
+            icon: Icons.favorite_border_rounded,
+            isReel: isReel,
+            onPressed: () => Navigator.pushAndRemoveUntil(
+                context, routeSlide(page: const HomePage()), (_) => false),
+          ),
           // _ItemProfile()
         ],
       ),
