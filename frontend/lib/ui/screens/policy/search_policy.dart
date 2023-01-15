@@ -15,7 +15,7 @@ class SearchPolicyPage extends StatefulWidget {
 
 class _SearchPolicyPageState extends State<SearchPolicyPage> {
   final TextEditingController filter = TextEditingController(); // 검색 위젯 컨트롤
-  FocusNode focusNode = FocusNode(); // 현재 검색 위젯에 커서가 있는지에 대한 상태 등
+  final FocusNode focusNode = FocusNode(); // 현재 검색 위젯에 커서가 있는지에 대한 상태 등
   String searchText = ""; // 현재 검색어 값
 
   _SearchPolicyPageState() {
@@ -77,6 +77,7 @@ class _SearchPolicyPageState extends State<SearchPolicyPage> {
                         color: Colors.black,
                         size: 20,
                       ),
+                      suffixIcon: Icon(Icons.tune),
                     ),
                   ),
                 ),
