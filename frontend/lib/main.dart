@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: ' 영암군 청소년 복지 정책 제공',
-        home: HomePage(),
+        home: CheckingLoginPage(),
       ),
     );
   }
