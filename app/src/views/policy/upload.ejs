@@ -6,27 +6,45 @@
   <link rel="stylesheet" href="/semantic/layout.css">
   <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/mem.css">
+  <link rel="stylesheet" href="/css/home/admin.css">
   <script src="/js/home/mem.js" defer></script>
 </head>
 <body>
-  <div id="wapper">
   <nav>
-    <div id="adminpage"><h1>Admin Page</h1></div>
-    <div class="header">  회원 관리</div>
-      <ul>
-        <li><a href="/admin/dataif">회원 정보 관리</a></li>
-        <li><a href="/admin/dataif/terms">회원 가입 설정</a></li>
-      </ul>
-    <div class="header">정책 관리</div>
-      <ul>
-        <li><a href="/admin/auth/subSetting">정책 정보 관리</a></li>
-      </ul>
-    <div class="header">권한 정보</div>
-    <!-- 로그 아웃 -->
-    <div id="logout">
-      <!-- <a href="/admin/auth/logout">로그아웃</a> -->
-      <a href="/admin/auth/login">로그아웃</a>
-    </div>
+    <!-- <img id='vector' class='vector' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyUAAAArCAYAAABmdidyAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAUJSURBVHgB7d29UhtZGgbgbv04cNkUl6BNjDOzVzC9mcqFsPYKbK7AniuwyCZbT7aZ7StYDQKKbEU22bKZTbK92WbLJA4MqOc7osUwDMZ4BkTg56k6OqdP/yh+6+s+J8++UFEUi/fu3VvO8/xJHC5H69QNAAD4+pR126uqandzc3OYfaH8qhd2u91Ou91+HsNn0RYzAACA3zqINjw8PFzf2dkpr3LDZ0NJqowsLCy8jNTzYjYX43F0u9H2Wq3W3nA4LDMAAOCr0+/3O0dHR50YFtGe5Hm+fOb0m6uEk0tDycrKShEPfZ398nrWmwgkb6MkM84AAADOqUPKIHLE03qqjAyxdlmG+GQoWV1dfR43v0rjVBmJisiaiggAAHAVdTh5HeGkSMfRDzY2NtYvuvbCUBIVkpfppvrm9bh5kAEAAHyhyBapavIyjT8VTJrnJ1KFJLrv6sO10Wj0KgMAAPgd9vf3x0tLSz/FsButSOOY+/HsNb+qlNQrbP0njSeTybdbW1sCCQAA8If1er20cNbf0vj4+PjP29vbe7NzjbMXRiD5Z+rTK1sCCQAAcF3SG1hVVX2fxs1m8x9pld/ZudNQkr4jyU5W2Sp9QwIAAFy3Vqs1yE42WuwsLCycbjkyDSXpta2ojjxL47RcVwYAAHDNhsPhwSxvRP98Vi2ZhpJ2u11kJ1WSsT1IAACAm5LyRr0Z++KsWjJ7fWu6RFecXM8AAABu1jR3RP6YbrCYP378eLnZbP4rxuVoNPpTBgAAcMN6vd7/o1tMK3E1IpAU9fw4AwAAmIOokvyQ+rTje3p965t6fjcDAACYg8lkMk59o9F41IiE0kkHUTbZywAAAOZjlj+KRpRLOmn04cOHMgMAAJiDO3fulPVwMb2+NV0beDweH2QAAABzkPYsqYeLjQwAAOAWCSUAAMCtEkoAAIBbJZQAAAC3SigBAABulVACAADcqhRKpktxFUWxmAEAAMxBv9+f5Y+D01By9+7dTgYAADAHHz9+7KS+qqqyET+79fxyBgAAMAfNZnOaP/I8/28jfvbqyW8yAACA+Zjmj8lkMm4cHx+P68l+BgAAMB9F+qmqatzY3t5OlZIy2uLKykqRAQAA3KA6d3SilSmPTJcEjnTyNvV5nr/MAAAAbtYsd6ynn2koabVar7KTVbgK1RIAAOCmpLwRxZAihmWz2RynuWkoGQ6HB1Et+T6N44LX9iwBAABuQsobdf82ckiZxqc7utfVkjTZuX//vte4AACAaxVVkpQzOtHKjY2NwWz+NJSkakmUT/5aH77o9XovMgAAgGuwurr6PKojgzSO3PGXs+eaZw/evXv3v6WlpZ9i2E0tjff393/MAAAAfqcIJE+rqvp7Gk8mk29Ho9HO2fPN8zekEPLgwYO8/vik+/Dhw+z9+/e7GQAAwBeqX9lKn4qk70jWNzc3vzt/TX7JzYMzSwSPDw8P13Z2dsoMAADgM7rdbqfdbqeP2ot0nCokW1tbry66Nr/sQfVyXelBnXrqTYSTdeEEAAC4SJ0hnsbwWT1VVlW1FhWS8afuuTSUJP1+v3N0dDSoHzwVD027wP8QbdxqtcrZUl4AAMDXpc4Ly41G41HkhCKrKyNJ2nYk8sIgLap12TM+G0rO/VkKJ0/i0D4mAADARdIeiG/TliNXLV5cOZScFSWZfnaSgB5FSOlkv7zeBQAAfF3S61ll9P+ONowwsve5ysh5PwM6pacK+DMb5QAAAABJRU5ErkJggg=='/>
+    </img>
+    <img id='vector2' class='vector2' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAG1SURBVHgBrVS7dcJAEDydyI1TIrkCy3xyQmeGCixVAK4AqABcgUUFhgpMAYBVgjJSkQPyDCx+GJ2QeWLe23d7x+4wu6c9S53Bdd2y1tqzLOuFW1gZFsPCJEnGy+UyUDmwTje1Wq2DpU8iEMQgngmhA2tKWIRzfz6fz3JJq9VqD8EkDLG+nSehAqdUKnn4s54ctReLxSSTVBSOYOPtdtsNwzBWGSC5bdvf9BH7hNjoPEYziCVDQZRHSJAElbThlkE+NMVoXgoDsPp5hEdIa2gtXmyKlLdMlZcan4F3UeWlSGEuiCN1JdCqkCtyH02kRKRuCM3S1eEjvxb7XiJ/nSKFfJbhmhp+UY3WeyEyIH9/g40lqKuuAMh6rNI0AFoOOUWdRqPxrzZw+tRhdAem37Wo9Lnudruver3ezCEcyjjHWY/L7+xTJT6TTyQ42Abwp6xAHR4UDkeL1VChPDa8gwCV+pmkhMx1H+6rSQHJQD7AoIzwXgQSlyK2TMkkR3ITatjjO9ga/mSz2YSno3yJuBBIDEtgH8czWxXEarWaVCqVB7geVgf7qaVuhNNWFFZ6hCi+x2U+/wCNHcaMUrA8SgAAAABJRU5ErkJggg=='/>
+    </img> -->
+    <img id='frame' class='frame' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAQACAYAAAAgBjM/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVHgB7cRBDQAACAQgZ/+0V0DN4eBBJZmuI0mSJEmSJOlbC6N8C9SP7V1EAAAAAElFTkSuQmCC'/>
+    </img>
+    <img id='vector4' class='vector4' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABVcAAAACCAYAAABc3OxqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtSURBVHgB7cAxEQAgDASwgnKkYLEG/rBA92R19ykAAAAAAL4lubsAAAAAABh7iCsG8ZKfxPwAAAAASUVORK5CYII='/>
+    </img>
+    <div id='관리자페이지' class='관리자페이지'>
+    관리자 페이지</div>
+    <div id='청소년톡talk' class='청소년톡talk'>
+    청소년 톡Talk</div>
+    <div id='회원관리' class='회원관리'>
+    회원 관리</div>
+
+    <a href="/admin/dataif">
+    <div id='회원정보관리' class='회원정보관리'>
+    회원 정보 관리</div></a>
+
+    <a href="/admin/dataif/terms">
+    <div id='회원가입설정' class='회원가입설정'>
+    회원 가입 설정</div></a>
+
+    <a href="/admin/policy/show">
+    <div id='정책정보관리' class='정책정보관리'>
+    정책 정보 관리</div></a>
+    
+    <div id='정책관리' class='정책관리'>
+    정책 관리</div>
+    <div id='권한관리' class='권한관리'>
+    권한 관리</div>
+    <!-- <div id='admin1' class='admin1'>
+    Admin1</div>
+    <div id='ellipse5' class='ellipse5'>     -->
 </nav>
 <section>
   <div class="pagename">정책 등록</div>

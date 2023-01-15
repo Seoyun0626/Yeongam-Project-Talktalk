@@ -22,24 +22,20 @@ body {
   margin-top: 40px;
   margin-left: 10px;
   }
-  
   nav{
+    /* position:absolute; */
+  background-color:#ffffff;
+  padding:0px;
   float: left;
-  width: 15vw;
-  height: 100vh;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 1em;
-  background-color: gray;
-  margin: 0;
+  width: 20vw;
   top: 0;
   left: 0;
-  overflow: auto;
+  overflow: hidden;
   }
   section{
   float: left;
-  width: 85vw;
-  height: 200vh;
+  width: 75vw;
+  height:1024px;
   padding-left: 2em;
   padding-right: 1em;
   padding-top: 1em;
