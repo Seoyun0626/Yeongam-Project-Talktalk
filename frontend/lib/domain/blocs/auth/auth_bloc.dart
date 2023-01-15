@@ -60,7 +60,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final data = await authServices.renewLogin();
 
         if (data.resp) {
-          // await secureStorage.persistenToken(data.token!);
+          await secureStorage.persistenToken(data.token!);
 
           emit(SuccessAuthentication());
         } else {

@@ -73,18 +73,18 @@ class _HomePageState extends State<HomePage> {
                     authBloc.add(OnLogOutEvent());
                     userBloc.add(OnLogOutUser());
                     Navigator.pushAndRemoveUntil(context,
-                        routeSlide(page: const LoginPage()), (_) => false);
+                        routeSlide(page: const HomePage()), (_) => false);
+                    // if (State is LogOut) {
+                    //   Navigator.pushAndRemoveUntil(context,
+                    //       routeSlide(page: const LoginPage()), (_) => false);
+                    // } else if (State is SuccessAuthentication) {
+                    //   userBloc.add(OnGetUserAuthenticationEvent());
+                    //   Navigator.pushAndRemoveUntil(context,
+                    //       routeSlide(page: const MyPage()), (_) => false);
+                    // }
                   },
                 ),
                 const SizedBox(height: 30.0),
-                // BtnNaru(
-                //   text: '마이페이지',
-                //   backgroundColor: ThemeColors.secondary,
-                //   colorText: Colors.white,
-                //   width: size.width,
-                //   onPressed: () =>
-                //       Navigator.push(context, routeSlide(page: MyView())),
-                // ),
               ],
             ),
           ),

@@ -58,8 +58,8 @@ class _RegisterPageState1 extends State<RegisterPage1> {
         } else if (state is SuccessUserState) {
           Navigator.pop(context);
           modalSuccess(context, '회원가입이 완료되었습니다',
-              onPressed: () =>
-                  Navigator.push(context, routeSlide(page: const LoginPage())));
+              onPressed: () => Navigator.pushAndRemoveUntil(
+                  context, routeSlide(page: const LoginPage()), (_) => false));
           // Navigator.push(
           //     context,
           //     routeSlide(
