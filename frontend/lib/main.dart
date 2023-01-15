@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/screens/intro/checking_login_page.dart';
 import 'package:login/ui/screens/home/home_page.dart';
+import 'package:login/ui/screens/policy/search_policy.dart';
 
 void main() => runApp(const MyApp());
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: ' 영암군 청소년 복지 정책 제공',
-        home: CheckingLoginPage(),
+        home: SearchPolicyPage(),
       ),
     );
   }
