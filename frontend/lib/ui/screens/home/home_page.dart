@@ -47,9 +47,9 @@ class _HomePageState extends State<HomePage> {
             titleSpacing: 0,
             title: const Text('청소년톡talk',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: ThemeColors.basic,
                   fontSize: 20,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                 )),
             leading: InkWell(
               onTap: () =>
@@ -58,7 +58,11 @@ class _HomePageState extends State<HomePage> {
             ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.perm_identity),
+                icon: const Icon(
+                  Icons.perm_identity,
+                  size: 30,
+                  color: ThemeColors.basic,
+                ),
                 onPressed: () => Navigator.push(
                     context, routeSlide(page: const LoginPage())),
               )
@@ -87,10 +91,17 @@ class _HomePageState extends State<HomePage> {
                       fillColor: Colors.white,
                       prefixIcon: Icon(
                         Icons.search,
-                        color: Colors.black,
+                        color: ThemeColors.basic,
                         size: 20,
                       ),
-                      suffixIcon: Icon(Icons.tune),
+                      suffixIcon:
+                          Icon(Icons.tune, color: ThemeColors.basic, size: 25),
+                      // focusNode.hasFocus
+                      // ? IconButton(
+                      //   icon: Icon(Icons.tune), // Image.asset('images/icon_filter.png')
+                      //   onPressed: () {},
+                      //   iconSize: 50,
+                      // ),
                     ),
                   ),
                 ),
@@ -192,16 +203,18 @@ class CategoryButton extends StatelessWidget {
             children: List.generate(
               4,
               (index) => Container(
+                margin: const EdgeInsets.only(bottom: 10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(children: [
                   IconButton(
                     icon: Image.asset(pngIcons01[index]),
                     onPressed: () {},
                     iconSize: 50,
                   ),
-                  Text(textIcons01[index]),
+                  Text(
+                    textIcons01[index],
+                  ),
                 ]),
-                margin: const EdgeInsets.only(bottom: 10.0),
-                padding: const EdgeInsets.all(10.0),
                 // height: 40,
                 // width: size.width / 4,
                 // constraints: const BoxConstraints(maxWidth: 100),
