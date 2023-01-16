@@ -36,100 +36,100 @@ class _HomePageState extends State<HomePage> {
 
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          titleSpacing: 0,
-          title: const Text('청소년톡talk',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-              )),
-          leading: InkWell(
-            onTap: () =>
-                Navigator.push(context, routeSlide(page: const LoginPage())),
-            child: Image.asset('images/aco.png', height: 70),
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.perm_identity),
-              onPressed: () =>
+          appBar: AppBar(
+            titleSpacing: 0,
+            title: const Text('청소년톡talk',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                )),
+            leading: InkWell(
+              onTap: () =>
                   Navigator.push(context, routeSlide(page: const LoginPage())),
-            )
-          ],
-          backgroundColor: ThemeColors.primary,
-          centerTitle: false,
-          elevation: 0.0,
-        ),
-        body: Column(children: <Widget>[
-          // 검색창
-          Container(
-            color: ThemeColors.primary,
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-            child: Row(children: <Widget>[
-              Expanded(
-                flex: 6,
-                child: TextField(
-                  focusNode: focusNode,
-                  style: const TextStyle(
-                    fontSize: 15,
-                  ),
-                  autofocus: true,
-                  controller: filter,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.black,
-                      size: 20,
+              child: Image.asset('images/aco.png', height: 70),
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.perm_identity),
+                onPressed: () => Navigator.push(
+                    context, routeSlide(page: const LoginPage())),
+              )
+            ],
+            backgroundColor: ThemeColors.primary,
+            centerTitle: false,
+            elevation: 0.0,
+          ),
+          body: Column(children: <Widget>[
+            // 검색창
+            Container(
+              color: ThemeColors.primary,
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+              child: Row(children: <Widget>[
+                Expanded(
+                  flex: 6,
+                  child: TextField(
+                    focusNode: focusNode,
+                    style: const TextStyle(
+                      fontSize: 15,
                     ),
-                    suffixIcon: Icon(Icons.tune),
+                    autofocus: true,
+                    controller: filter,
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                        size: 20,
+                      ),
+                      suffixIcon: Icon(Icons.tune),
+                    ),
                   ),
                 ),
-              ),
-            ]),
-          ),
-          SafeArea(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 50.0),
-                  const TextCustom(
-                      text: 'MainPage',
-                      letterSpacing: 1.5,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 28,
-                      color: Color.fromARGB(255, 93, 73, 98)),
-                  const SizedBox(height: 30.0),
-                  BtnNaru(
-                    text: '로그아웃',
-                    colorText: Colors.black,
-                    width: size.width,
-                    onPressed: () {
-                      authBloc.add(OnLogOutEvent());
-                      userBloc.add(OnLogOutUser());
-                      Navigator.pushAndRemoveUntil(context,
-                          routeSlide(page: const HomePage()), (_) => false);
-                      // if (State is LogOut) {
-                      //   Navigator.pushAndRemoveUntil(context,
-                      //       routeSlide(page: const LoginPage()), (_) => false);
-                      // } else if (State is SuccessAuthentication) {
-                      //   userBloc.add(OnGetUserAuthenticationEvent());
-                      //   Navigator.pushAndRemoveUntil(context,
-                      //       routeSlide(page: const MyPage()), (_) => false);
-                      // }
-                    },
-                  ),
-                  const SizedBox(height: 30.0),
-                ],
+              ]),
+            ),
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 50.0),
+                    const TextCustom(
+                        text: 'MainPage',
+                        letterSpacing: 1.5,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 28,
+                        color: Color.fromARGB(255, 93, 73, 98)),
+                    const SizedBox(height: 30.0),
+                    BtnNaru(
+                      text: '로그아웃',
+                      colorText: Colors.black,
+                      width: size.width,
+                      onPressed: () {
+                        authBloc.add(OnLogOutEvent());
+                        userBloc.add(OnLogOutUser());
+                        Navigator.pushAndRemoveUntil(context,
+                            routeSlide(page: const HomePage()), (_) => false);
+                        // if (State is LogOut) {
+                        //   Navigator.pushAndRemoveUntil(context,
+                        //       routeSlide(page: const LoginPage()), (_) => false);
+                        // } else if (State is SuccessAuthentication) {
+                        //   userBloc.add(OnGetUserAuthenticationEvent());
+                        //   Navigator.pushAndRemoveUntil(context,
+                        //       routeSlide(page: const MyPage()), (_) => false);
+                        // }
+                      },
+                    ),
+                    const SizedBox(height: 30.0),
+                  ],
+                ),
               ),
             ),
-          ),
-        ]),
-      ),
+          ]),
+          bottomNavigationBar: const BottomNavigation(index: 1)),
     );
   }
 }
