@@ -10,14 +10,14 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55,
+      height: 90,
       decoration: BoxDecoration(
           color: isReel ? Colors.black : Colors.white,
           boxShadow: const [
-            BoxShadow(color: Colors.grey, blurRadius: 9, spreadRadius: -4)
+            BoxShadow(color: Colors.grey, blurRadius: 2, spreadRadius: -1)
           ]),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _ItemButtom(
             i: 1,
@@ -26,6 +26,7 @@ class BottomNavigation extends StatelessWidget {
             isIcon: false,
             iconString: 'images/bottom_bar/icon_menu_home.png',
             isReel: isReel,
+            iconText: '홈',
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context, routeSlide(page: const HomePage()), (_) => false),
           ),
@@ -35,6 +36,7 @@ class BottomNavigation extends StatelessWidget {
             isIcon: false,
             isReel: isReel,
             iconString: 'images/bottom_bar/icon_menu_policy.png',
+            iconText: '복지검색',
             onPressed: () => Navigator.pushAndRemoveUntil(context,
                 routeSlide(page: const SearchPolicyPage()), (_) => false),
           ),
@@ -45,6 +47,7 @@ class BottomNavigation extends StatelessWidget {
             isIcon: false,
             isReel: isReel,
             iconString: 'images/bottom_bar/icon_menu_keep.png',
+            iconText: 'keep',
             onPressed: () =>
                 Navigator.push(context, routeSlide(page: const HomePage())),
           ),
@@ -55,19 +58,22 @@ class BottomNavigation extends StatelessWidget {
             isIcon: false,
             isReel: isReel,
             iconString: 'images/bottom_bar/icon_menu_calendar.png',
+            iconText: '캘린더',
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context, routeSlide(page: const HomePage()), (_) => false),
           ),
           _ItemButtom(
-            i: 4,
+            i: 5,
             index: index,
-            // icon: Icons.more_horiz,
-            isIcon: false,
+            icon: Icons.more_horiz,
+            // isIcon: false,
             isReel: isReel,
-            iconString: 'images/bottom_bar/icon_menu_more.png',
+            // iconString: 'images/bottom_bar/icon_menu_more.png',
+            iconText: '더보기',
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context, routeSlide(page: const HomePage()), (_) => false),
           ),
+
           // _ItemProfile()
         ],
       ),
@@ -106,6 +112,7 @@ class _ItemButtom extends StatelessWidget {
   final String? iconString;
   final Function() onPressed;
   final bool isReel;
+  final String iconText;
 
   const _ItemButtom({
     Key? key,
@@ -116,31 +123,42 @@ class _ItemButtom extends StatelessWidget {
     this.iconString,
     this.isIcon = true,
     this.isReel = false,
+    required this.iconText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        onPressed();
-      },
-      child: Container(
-        child: (isIcon)
-            ? Icon(icon,
-                color: (i == index)
-                    ? ThemeColors.primary
-                    : isReel
-                        ? Colors.white
-                        : const Color.fromRGBO(77, 77, 77, 1),
-                size: 28)
-            : Image.asset(iconString!,
-                height: 25,
-                color: (i == index)
-                    ? ThemeColors.primary
-                    : isReel
-                        ? Colors.white
-                        : const Color.fromRGBO(77, 77, 77, 1)),
-      ),
-    );
+        onTap: () {
+          onPressed();
+        },
+        child: Container(
+            margin: const EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                (isIcon)
+                    ? Icon(icon,
+                        color: (i == index)
+                            ? ThemeColors.darkGreen
+                            : isReel
+                                ? Colors.white
+                                : ThemeColors.basic,
+                        size: 35)
+                    : Image.asset(
+                        iconString!,
+                        height: 35,
+                        color: (i == index)
+                            ? ThemeColors.darkGreen
+                            : isReel
+                                ? Colors.white
+                                : ThemeColors.basic,
+                      ),
+                const SizedBox(
+                  height: 6,
+                ),
+                Text(iconText),
+              ],
+            )));
   }
 }

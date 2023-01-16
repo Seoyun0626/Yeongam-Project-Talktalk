@@ -36,8 +36,6 @@ class _HomePageState extends State<HomePage> {
   } // filter가 변화를 검지하여 searchText의 상태를 변화시키는 코드
 
   Widget build(BuildContext context) {
-    // 카테고리 아이콘 메뉴
-
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
     final authBloc = BlocProvider.of<AuthBloc>(context);
@@ -216,6 +214,8 @@ class CategoryButton extends StatelessWidget {
             children: List.generate(
               4,
               (index) => Container(
+                margin: const EdgeInsets.only(bottom: 10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(children: [
                   IconButton(
                     icon: Image.asset(pngIcons02[index]),
@@ -226,8 +226,6 @@ class CategoryButton extends StatelessWidget {
                     textIcons02[index],
                   ),
                 ]),
-                margin: const EdgeInsets.only(bottom: 10.0),
-                padding: const EdgeInsets.all(10.0),
                 // height: 40,
                 // width: size.width / 4,
                 // constraints: const BoxConstraints(maxWidth: 100),
