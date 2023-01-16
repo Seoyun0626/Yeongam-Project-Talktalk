@@ -22,8 +22,9 @@ class BottomNavigation extends StatelessWidget {
           _ItemButtom(
             i: 1,
             index: index,
-            isIcon: false,
-            iconString: 'assets/img/home.png',
+            icon: Icons.home,
+            // isIcon: false,
+            // iconString: 'assets/img/home.png',
             isReel: isReel,
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context, routeSlide(page: const HomePage()), (_) => false),
@@ -33,13 +34,13 @@ class BottomNavigation extends StatelessWidget {
             index: index,
             icon: Icons.search,
             isReel: isReel,
-            onPressed: () => Navigator.pushAndRemoveUntil(
-                context, routeSlide(page: const HomePage()), (_) => false),
+            onPressed: () => Navigator.pushAndRemoveUntil(context,
+                routeSlide(page: const SearchPolicyPage()), (_) => false),
           ),
           _ItemButtom(
             i: 3,
             index: index,
-            icon: Icons.calendar_month,
+            icon: Icons.date_range,
             // isIcon: false,
             isReel: isReel,
             // iconString: 'assets/svg/movie_reel.svg',
@@ -49,7 +50,15 @@ class BottomNavigation extends StatelessWidget {
           _ItemButtom(
             i: 4,
             index: index,
-            icon: Icons.favorite_border_rounded,
+            icon: Icons.bookmark,
+            isReel: isReel,
+            onPressed: () => Navigator.pushAndRemoveUntil(
+                context, routeSlide(page: const HomePage()), (_) => false),
+          ),
+          _ItemButtom(
+            i: 4,
+            index: index,
+            icon: Icons.more_horiz,
             isReel: isReel,
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context, routeSlide(page: const HomePage()), (_) => false),
