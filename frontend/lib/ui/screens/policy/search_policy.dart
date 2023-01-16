@@ -83,7 +83,8 @@ class _SearchPolicyPageState extends State<SearchPolicyPage> {
                 ),
               ]),
             )
-          ])),
+          ]),
+          bottomNavigationBar: const BottomNavigation(index: 2)),
     );
   }
 }
