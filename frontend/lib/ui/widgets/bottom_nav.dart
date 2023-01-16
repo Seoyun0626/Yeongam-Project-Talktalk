@@ -23,8 +23,8 @@ class BottomNavigation extends StatelessWidget {
             i: 1,
             index: index,
             icon: Icons.home,
-            // isIcon: false,
-            // iconString: 'assets/img/home.png',
+            isIcon: false,
+            iconString: 'images/bottom_bar/icon_menu_home.png',
             isReel: isReel,
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context, routeSlide(page: const HomePage()), (_) => false),
@@ -32,18 +32,19 @@ class BottomNavigation extends StatelessWidget {
           _ItemButtom(
             i: 2,
             index: index,
-            icon: Icons.search,
+            isIcon: false,
             isReel: isReel,
+            iconString: 'images/bottom_bar/icon_menu_policy.png',
             onPressed: () => Navigator.pushAndRemoveUntil(context,
                 routeSlide(page: const SearchPolicyPage()), (_) => false),
           ),
           _ItemButtom(
             i: 3,
             index: index,
-            icon: Icons.date_range,
-            // isIcon: false,
+            // icon: Icons.date_range,
+            isIcon: false,
             isReel: isReel,
-            // iconString: 'assets/svg/movie_reel.svg',
+            iconString: 'images/bottom_bar/icon_menu_keep.png',
             onPressed: () =>
                 Navigator.push(context, routeSlide(page: const HomePage())),
           ),
@@ -51,15 +52,19 @@ class BottomNavigation extends StatelessWidget {
             i: 4,
             index: index,
             icon: Icons.bookmark,
+            isIcon: false,
             isReel: isReel,
+            iconString: 'images/bottom_bar/icon_menu_calendar.png',
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context, routeSlide(page: const HomePage()), (_) => false),
           ),
           _ItemButtom(
             i: 4,
             index: index,
-            icon: Icons.more_horiz,
+            // icon: Icons.more_horiz,
+            isIcon: false,
             isReel: isReel,
+            iconString: 'images/bottom_bar/icon_menu_more.png',
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context, routeSlide(page: const HomePage()), (_) => false),
           ),
@@ -126,15 +131,15 @@ class _ItemButtom extends StatelessWidget {
                     ? ThemeColors.primary
                     : isReel
                         ? Colors.white
-                        : Colors.black87,
+                        : const Color.fromRGBO(77, 77, 77, 1),
                 size: 28)
-            : SvgPicture.asset(iconString!,
+            : Image.asset(iconString!,
                 height: 25,
                 color: (i == index)
                     ? ThemeColors.primary
                     : isReel
                         ? Colors.white
-                        : Colors.black87),
+                        : const Color.fromRGBO(77, 77, 77, 1)),
       ),
     );
   }
