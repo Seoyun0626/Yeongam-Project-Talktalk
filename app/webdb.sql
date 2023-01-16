@@ -35,6 +35,7 @@ CREATE TABLE webdb.`tb_policy` (
   `policy_supervision` varchar(30) NOT NULL,
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
   `fund` int(10) NOT NULL,
+  `content` varchar(1000) NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
