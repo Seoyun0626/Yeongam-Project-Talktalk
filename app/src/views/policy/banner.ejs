@@ -47,9 +47,24 @@
     <div id='ellipse5' class='ellipse5'>     -->
 </nav>
 <section>
-    <div></div>
+    <div class="pagename">배너 등록</div>
+    <form action="/admin/policy/banner" method="post" enctype="multipart/form-data">
+        <div class="ui form">
+            <div class="field">
+                <label>제목</label>
+                <input type="text" name="title" placeholder="제목을 입력하세요">
+            </div>
+            <div class="field">
+                <label>이미지</label>
+                <input type="file" name="image">
+            </div>
+            <div class="field">
+                <label>링크</label>
+                <input type="text" name="link" placeholder="링크를 입력하세요">
+            </div>
+        </div>
+        <button class="ui button" type="submit">등록</button>
+    </form>
 </section>
-</div>
 </body>
-
 </html>
