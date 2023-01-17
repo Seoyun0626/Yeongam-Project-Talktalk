@@ -12,6 +12,7 @@ import 'package:login/ui/widgets/widgets.dart';
 final BannerImage = [
   Image.asset('images/slider_example.png', fit: BoxFit.cover),
   Image.asset('images/aco.png', fit: BoxFit.cover),
+  Image.asset('images/mou_img.png', fit: BoxFit.cover),
 ];
 
 class HomePage extends StatefulWidget {
