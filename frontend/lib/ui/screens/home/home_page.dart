@@ -115,75 +115,78 @@ class _HomePageState extends State<HomePage> {
                 ),
               ]),
             ),
-            SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // 배너 슬라이드
-                    CarouselSlider(
-                      carouselController: _controller,
-                      options: CarouselOptions(
-                        scrollDirection: Axis.horizontal,
-                        height: MediaQuery.of(context).size.height / 4,
-                        enlargeCenterPage: true,
-                        viewportFraction: 1.0,
-                        autoPlay: true,
+            Expanded(
+              child: ListView(shrinkWrap: true, children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 0.0, vertical: 0.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // 배너 슬라이드
+                      CarouselSlider(
+                        carouselController: _controller,
+                        options: CarouselOptions(
+                          scrollDirection: Axis.horizontal,
+                          height: MediaQuery.of(context).size.height / 4,
+                          enlargeCenterPage: true,
+                          viewportFraction: 1.0,
+                          autoPlay: true,
+                        ),
+                        items: BannerImage.map((image) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                // margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                child: ClipRRect(
+                                  // borderRadius: BorderRadius.circular(10.0),
+                                  child: image,
+                                ),
+                              );
+                            },
+                          );
+                        }).toList(),
                       ),
-                      items: BannerImage.map((image) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width,
-                              margin: EdgeInsets.symmetric(horizontal: 5.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0),
-                                child: image,
-                              ),
-                            );
-                          },
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    // buttonSection, // 카테고리 아이콘 메뉴
-                    CategoryButton(),
-                    // const TextCustom(
-                    //     text: 'MainPage',
-                    //     letterSpacing: 1.5,
-                    //     fontWeight: FontWeight.w500,
-                    //     fontSize: 28,
-                    //     color: Color.fromARGB(255, 93, 73, 98)),
-                    // const SizedBox(height: 30.0),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      // buttonSection, // 카테고리 아이콘 메뉴
+                      CategoryButton(),
+                      livePopularPost(),
+                      // const TextCustom(
+                      //     text: 'MainPage',
+                      //     letterSpacing: 1.5,
+                      //     fontWeight: FontWeight.w500,
+                      //     fontSize: 28,
+                      //     color: Color.fromARGB(255, 93, 73, 98)),
+                      // const SizedBox(height: 30.0),
 
-                    // 로그아웃 버튼
-                    // BtnNaru(
-                    //   text: '로그아웃',
-                    //   colorText: Colors.black,
-                    //   width: size.width,
-                    //   onPressed: () {
-                    //     authBloc.add(OnLogOutEvent());
-                    //     userBloc.add(OnLogOutUser());
-                    //     Navigator.pushAndRemoveUntil(context,
-                    //         routeSlide(page: const HomePage()), (_) => false);
-                    //   },
-                    // ),
-                    // const SizedBox(height: 30.0),
-                  ],
+                      // 로그아웃 버튼
+                      // BtnNaru(
+                      //   text: '로그아웃',
+                      //   colorText: Colors.black,
+                      //   width: size.width,
+                      //   onPressed: () {
+                      //     authBloc.add(OnLogOutEvent());
+                      //     userBloc.add(OnLogOutUser());
+                      //     Navigator.pushAndRemoveUntil(context,
+                      //         routeSlide(page: const HomePage()), (_) => false);
+                      //   },
+                      // ),
+                      // const SizedBox(height: 30.0),
+                    ],
+                  ),
                 ),
-              ),
-            ),
+              ]),
+            )
           ]),
           bottomNavigationBar: const BottomNavigation(index: 1)),
     );
   }
 }
 
-// buttonSection
+// 카테고리 아이콘 버튼
 class CategoryButton extends StatelessWidget {
   final List<String> pngIcons01 = [
     'images/category_icon/icon_study.png', // 학업
@@ -212,7 +215,7 @@ class CategoryButton extends StatelessWidget {
             children: List.generate(
               4,
               (index) => Container(
-                margin: const EdgeInsets.only(bottom: 10.0),
+                margin: const EdgeInsets.only(bottom: 5.0),
                 padding: const EdgeInsets.all(10.0),
                 child: Column(children: [
                   IconButton(
@@ -236,7 +239,7 @@ class CategoryButton extends StatelessWidget {
             children: List.generate(
               4,
               (index) => Container(
-                margin: const EdgeInsets.only(bottom: 10.0),
+                margin: const EdgeInsets.only(bottom: 5.0),
                 padding: const EdgeInsets.all(10.0),
                 child: Column(children: [
                   IconButton(
@@ -256,5 +259,172 @@ class CategoryButton extends StatelessWidget {
             ),
           ),
         ]);
+  }
+}
+
+// 실시간 인기 글
+class livePopularPost extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.all(5),
+        margin: const EdgeInsets.all(20),
+        child: Column(children: [
+          Row(children: const [
+            Icon(
+              Icons.auto_awesome,
+              color: ThemeColors.darkGreen,
+            ),
+            // Image.asset('images/icon_sparkel.png'),
+            SizedBox(
+              width: 5,
+            ),
+            Text('실시간 인기 글',
+                style: TextStyle(
+                  color: ThemeColors.basic,
+                  fontSize: 19,
+                  fontWeight: FontWeight.w600,
+                )),
+          ]),
+          const SizedBox(
+            height: 7,
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.looks_one,
+                color: ThemeColors.primary,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text('국민취업지원제도 (취업성공패키지, 최대300만원)',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.looks_two,
+                color: ThemeColors.primary,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text('월세자금보증(청년월세)',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.looks_3,
+                color: ThemeColors.primary,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text('가정양육수당 지원(월~20만원)',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.looks_3,
+                color: ThemeColors.primary,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text('가정양육수당 지원(월~20만원)',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.looks_3,
+                color: ThemeColors.primary,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text('가정양육수당 지원(월~20만원)',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.looks_3,
+                color: ThemeColors.primary,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text('가정양육수당 지원(월~20만원)',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.looks_3,
+                color: ThemeColors.primary,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text('가정양육수당 지원(월~20만원)',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ],
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.looks_3,
+                color: ThemeColors.primary,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text('가정양육수당 지원(월~20만원)',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ],
+          )
+        ]));
   }
 }
