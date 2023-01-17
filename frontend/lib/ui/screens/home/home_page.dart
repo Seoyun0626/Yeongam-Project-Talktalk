@@ -64,7 +64,14 @@ class _HomePageState extends State<HomePage> {
                   color: ThemeColors.basic,
                 ),
                 onPressed: () => Navigator.push(
-                    context, routeSlide(page: const LoginPage())),
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    )),
+                // onPressed: () => Navigator.push(
+                //   context, routeSlide(page: const LoginPage())),
+
+                // }
               )
             ],
             backgroundColor: ThemeColors.primary,
@@ -114,6 +121,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // 배너 슬라이드
                     CarouselSlider(
                       carouselController: _controller,
                       options: CarouselOptions(

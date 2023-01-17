@@ -88,7 +88,10 @@ class StartRegisterPage extends StatelessWidget {
                 child: const TextCustom(
                     text: '개인 회원가입', color: Colors.black, fontSize: 20),
                 onPressed: () => Navigator.push(
-                    context, routeSlide(page: const userTypePage())),
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const userTypePage(),
+                    )),
               ),
             ),
           ),
@@ -107,7 +110,10 @@ class StartRegisterPage extends StatelessWidget {
                 child: const TextCustom(
                     text: '카카오톡 회원가입', color: Colors.black, fontSize: 20),
                 onPressed: () => Navigator.push(
-                    context, routeSlide(page: const LoginPage())),
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const userTypePage(),
+                    )),
               ),
             ),
           ),

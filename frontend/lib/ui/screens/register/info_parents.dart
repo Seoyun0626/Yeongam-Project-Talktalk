@@ -379,10 +379,11 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                       text: '다음',
                       width: size.width,
                       colorText: Colors.black,
-                      onPressed: () => {
-                        Navigator.push(
-                            context, routeSlide(page: const RegisterPage1()))
-                      },
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegisterPage1(),
+                          )),
                     ),
                   ],
                 ),
