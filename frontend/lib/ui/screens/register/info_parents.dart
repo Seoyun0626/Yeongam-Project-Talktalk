@@ -81,7 +81,7 @@ class _RegisterPageState2 extends State<RegisterPage2> {
   ];
   String _selectedValue1 = '영암읍';
 
-  late List<bool> _selections1 = List.generate(4, (index) => false); //재학여부구분
+  late List<bool> _selections1 = List.generate(5, (index) => false); //재학여부구분
   late List<bool> isSelected; //성별구분
   late List<bool> _selections2 = List.generate(6, (index) => false); //나이구분
 
@@ -233,22 +233,50 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                       splashColor: ThemeColors.primary.withOpacity(0.12),
                       hoverColor: ThemeColors.primary.withOpacity(0.04),
                       borderRadius: BorderRadius.circular(4.0),
-                      constraints:
-                          BoxConstraints(minWidth: 59, minHeight: 40.0),
+                      // constraints:
+                      //     BoxConstraints(minWidth: 59, minHeight: 40.0),
                       children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text('초', style: TextStyle(fontSize: 18))),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text('중', style: TextStyle(fontSize: 18))),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text('고', style: TextStyle(fontSize: 18))),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Text('기타(학교밖)',
-                                style: TextStyle(fontSize: 18))),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 5,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('초', style: TextStyle(fontSize: 15))
+                                ])),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 5,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('중', style: TextStyle(fontSize: 15))
+                                ])),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 5,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('고', style: TextStyle(fontSize: 15))
+                                ])),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 5,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('대', style: TextStyle(fontSize: 15))
+                                ])),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 5,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('학교 밖',
+                                      style: TextStyle(fontSize: 15))
+                                ])),
                       ],
                       onPressed: (int index) {
                         setState(() {
@@ -274,24 +302,60 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                       borderRadius: BorderRadius.circular(4.0),
                       constraints: BoxConstraints(minHeight: 40.0),
                       children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 11),
-                            child: Text('10대', style: TextStyle(fontSize: 12))),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 11),
-                            child: Text('20대', style: TextStyle(fontSize: 13))),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 11),
-                            child: Text('30대', style: TextStyle(fontSize: 13))),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 11),
-                            child: Text('40대', style: TextStyle(fontSize: 13))),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 11),
-                            child: Text('50대', style: TextStyle(fontSize: 13))),
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 11),
-                            child: Text('60대', style: TextStyle(fontSize: 13))),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 6,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('10대',
+                                      style: TextStyle(fontSize: 15))
+                                ])),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 6,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('20대',
+                                      style: TextStyle(fontSize: 15))
+                                ])),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 6,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('30대',
+                                      style: TextStyle(fontSize: 15))
+                                ])),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 6,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('40대',
+                                      style: TextStyle(fontSize: 15))
+                                ])),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 6,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('50대',
+                                      style: TextStyle(fontSize: 15))
+                                ])),
+                        Container(
+                            width:
+                                (MediaQuery.of(context).size.width - 108) / 6,
+                            child: new Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  new Text('60대',
+                                      style: TextStyle(fontSize: 15))
+                                ])),
                       ],
                       onPressed: (int index) {
                         setState(() {
@@ -320,14 +384,26 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                           constraints:
                               BoxConstraints(minWidth: 154, minHeight: 40.0),
                           children: [
-                            Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                child:
-                                    Text('남자', style: TextStyle(fontSize: 18))),
-                            Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 16),
-                                child:
-                                    Text('여자', style: TextStyle(fontSize: 18))),
+                            Container(
+                                width:
+                                    (MediaQuery.of(context).size.width - 108) /
+                                        2,
+                                child: new Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      new Text('남자',
+                                          style: TextStyle(fontSize: 17))
+                                    ])),
+                            Container(
+                                width:
+                                    (MediaQuery.of(context).size.width - 108) /
+                                        2,
+                                child: new Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      new Text('여자',
+                                          style: TextStyle(fontSize: 17))
+                                    ])),
                           ],
                           isSelected: isSelected,
                           onPressed: toggleSelect,
