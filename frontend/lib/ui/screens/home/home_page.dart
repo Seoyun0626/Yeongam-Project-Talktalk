@@ -306,6 +306,9 @@ class livePopularPost extends StatelessWidget {
                   )),
             ],
           ),
+          const SizedBox(
+            height: 5,
+          ),
           Row(
             children: const [
               Icon(
@@ -323,22 +326,8 @@ class livePopularPost extends StatelessWidget {
                   )),
             ],
           ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_3,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('가정양육수당 지원(월~20만원)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
+          const SizedBox(
+            height: 5,
           ),
           Row(
             children: const [
@@ -357,10 +346,53 @@ class livePopularPost extends StatelessWidget {
                   )),
             ],
           ),
+          const SizedBox(
+            height: 5,
+          ),
           Row(
             children: const [
               Icon(
-                Icons.looks_3,
+                Icons.looks_4,
+                color: ThemeColors.primary,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text('생계지원비 융자',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.looks_5,
+                color: ThemeColors.primary,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text('임신부 가사돌봄 서비스',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            children: const [
+              Icon(
+                Icons.looks_6,
                 color: ThemeColors.primary,
               ),
               SizedBox(
@@ -374,10 +406,13 @@ class livePopularPost extends StatelessWidget {
                   )),
             ],
           ),
+          const SizedBox(
+            height: 5,
+          ),
           Row(
             children: const [
               Icon(
-                Icons.looks_3,
+                Icons.looks_6,
                 color: ThemeColors.primary,
               ),
               SizedBox(
@@ -391,27 +426,13 @@ class livePopularPost extends StatelessWidget {
                   )),
             ],
           ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_3,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('가정양육수당 지원(월~20만원)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
+          const SizedBox(
+            height: 5,
           ),
           Row(
             children: const [
               Icon(
-                Icons.looks_3,
+                Icons.looks_6,
                 color: ThemeColors.primary,
               ),
               SizedBox(
