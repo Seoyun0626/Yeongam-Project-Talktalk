@@ -38,6 +38,12 @@ router.post('/upload', async function (req, res) {
     try{
         // console.log(req.body);
         // 이미지 업로드
+        var upload = multer({ 
+            storage: storage,
+            rename: function (fieldname, filename) {
+                return filename;
+            }
+        }).single('imgFile');
         var upload = multer({ storage: storage }).single('imgFile');
         upload(req, res, function (err) {
             if (err instanceof multer.MulterError) {
@@ -56,6 +62,15 @@ router.post('/upload', async function (req, res) {
     }
     catch(error) {
         console.log('policy-router upload error:'+error);
+    }
+});
+
+router.get('/banner', function (req, res) {
+    try{
+        res.render('policy/banner');
+        }
+    catch(error) {
+        console.log('policy-router banner error:'+error);
     }
 });
 
