@@ -82,6 +82,8 @@ flutter:
   assets:
     - images/
     - images/slider_example.png
+    - images/category_icon/
+    - images/bottom_bar/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

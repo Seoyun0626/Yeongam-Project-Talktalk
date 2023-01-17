@@ -36,7 +36,7 @@ class _SearchPolicyPageState extends State<SearchPolicyPage> {
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                 )),
             leading: InkWell(
               onTap: () =>
@@ -45,7 +45,11 @@ class _SearchPolicyPageState extends State<SearchPolicyPage> {
             ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.perm_identity),
+                icon: const Icon(
+                  Icons.perm_identity,
+                  size: 30,
+                  color: ThemeColors.basic,
+                ),
                 onPressed: () => Navigator.push(
                     context, routeSlide(page: const LoginPage())),
               )

@@ -8,11 +8,11 @@ import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 final BannerImage = [
   Image.asset('images/slider_example.png', fit: BoxFit.cover),
   Image.asset('images/aco.png', fit: BoxFit.cover),
+  Image.asset('images/mou_img.png', fit: BoxFit.cover),
 ];
 
 class HomePage extends StatefulWidget {
@@ -37,32 +37,6 @@ class _HomePageState extends State<HomePage> {
   } // filter가 변화를 검지하여 searchText의 상태를 변화시키는 코드
 
   Widget build(BuildContext context) {
-    // 카테고리 아이콘 메뉴
-    Widget buttonSection = Container(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildButtonColumn(Icons.school, '학업'),
-            _buildButtonColumn(Icons.volunteer_activism, '상담'),
-            _buildButtonColumn(Icons.work, '취업/이직'),
-            _buildButtonColumn(Icons.wallet, '생활비'),
-          ],
-        ),
-        const SizedBox(height: 30.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildButtonColumn(Icons.health_and_safety, '건강'),
-            _buildButtonColumn(Icons.maps_home_work, '주거'),
-            _buildButtonColumn(Icons.family_restroom, '결혼/양육'),
-            _buildButtonColumn(Icons.widgets, '전체보기'),
-          ],
-        ),
-      ],
-    ));
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
     final authBloc = BlocProvider.of<AuthBloc>(context);
@@ -74,9 +48,9 @@ class _HomePageState extends State<HomePage> {
             titleSpacing: 0,
             title: const Text('청소년톡talk',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: ThemeColors.basic,
                   fontSize: 20,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                 )),
             leading: InkWell(
               onTap: () =>
@@ -85,9 +59,20 @@ class _HomePageState extends State<HomePage> {
             ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.perm_identity),
+                icon: const Icon(
+                  Icons.perm_identity,
+                  size: 30,
+                  color: ThemeColors.basic,
+                ),
                 onPressed: () => Navigator.push(
-                    context, routeSlide(page: const LoginPage())),
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    )),
+                // onPressed: () => Navigator.push(
+                //   context, routeSlide(page: const LoginPage())),
+
+                // }
               )
             ],
             backgroundColor: ThemeColors.primary,
@@ -114,10 +99,17 @@ class _HomePageState extends State<HomePage> {
                       fillColor: Colors.white,
                       prefixIcon: Icon(
                         Icons.search,
-                        color: Colors.black,
+                        color: ThemeColors.basic,
                         size: 20,
                       ),
-                      suffixIcon: Icon(Icons.tune),
+                      suffixIcon:
+                          Icon(Icons.tune, color: ThemeColors.basic, size: 25),
+                      // focusNode.hasFocus
+                      // ? IconButton(
+                      //   icon: Icon(Icons.tune), // Image.asset('images/icon_filter.png')
+                      //   onPressed: () {},
+                      //   iconSize: 50,
+                      // ),
                     ),
                   ),
                 ),
@@ -130,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // 배너 슬라이드
                     CarouselSlider(
                       carouselController: _controller,
                       options: CarouselOptions(
@@ -158,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                       height: 20,
                     ),
                     // buttonSection, // 카테고리 아이콘 메뉴
-                    buttonSection,
+                    CategoryButton(),
                     // const TextCustom(
                     //     text: 'MainPage',
                     //     letterSpacing: 1.5,
@@ -190,64 +183,78 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// 카테고리 아이콘 메뉴
-Column _buildButtonColumn(IconData icon, String label) {
-  return Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      IconButton(
-        icon: Icon(
-          icon,
-          size: 30,
-        ),
-        onPressed: () {},
-      ),
-      Container(
-        margin: const EdgeInsets.only(top: 8),
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
 // buttonSection
-// class CategoryButton extends StatelessWidget {
-//   final List<String> svgIcons01 = [
-//     'images/category_icon/icon_study.svg', // 학업
-//     'images/category_icon/icon_counseling.svg', // 상담
-//     'images/category_icon/icon_job.svg', // 취업/이직
-//     'images/category_icon/icon_living.svg', // 생활비
-//   ];
+class CategoryButton extends StatelessWidget {
+  final List<String> pngIcons01 = [
+    'images/category_icon/icon_study.png', // 학업
+    'images/category_icon/icon_counseling.png', // 상담
+    'images/category_icon/icon_job.png', // 취업/이직
+    'images/category_icon/icon_living.png', // 생활비
+  ];
+  final List<String> textIcons01 = ['학업', '상담', '취업/이직', '생활비'];
+  final List<String> textIcons02 = ['건강', '주거', '결혼/양육', '전체보기'];
 
-//   final List<String> svgIcons02 = [
-//     'images/category_icon/icon_study.svg', // 건강
-//     'images/category_icon/icon_counseling.svg', // 주거
-//     'images/category_icon/icon_job.svg', // 결혼/양육
-//     'images/category_icon/icon_living.svg', // 전체보기
-//   ];
+  final List<String> pngIcons02 = [
+    'images/category_icon/icon_health.png', // 건강
+    'images/category_icon/icon_house.png', // 주거
+    'images/category_icon/icon_baby.png', // 결혼/양육
+    'images/category_icon/icon_allsee.png', // 전체보기
+  ];
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final size = MediaQuery.of(context).size;
-//     return Row(
-//       children: List.generate(
-//         3,
-//         (index) => Container(
-//           margin: const EdgeInsets.only(bottom: 20.0),
-//           padding: const EdgeInsets.all(10.0),
-//           height: 350,
-//           width: size.width,
-//           // color: Colors.amber,
-//           child: SvgPicture.asset(svgIcons01[index], height: 15),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: List.generate(
+              4,
+              (index) => Container(
+                margin: const EdgeInsets.only(bottom: 10.0),
+                padding: const EdgeInsets.all(10.0),
+                child: Column(children: [
+                  IconButton(
+                    icon: Image.asset(pngIcons01[index]),
+                    onPressed: () {},
+                    iconSize: 50,
+                  ),
+                  Text(
+                    textIcons01[index],
+                  ),
+                ]),
+                // height: 40,
+                // width: size.width / 4,
+                // constraints: const BoxConstraints(maxWidth: 100),
+                // color: Colors.amber,
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: List.generate(
+              4,
+              (index) => Container(
+                margin: const EdgeInsets.only(bottom: 10.0),
+                padding: const EdgeInsets.all(10.0),
+                child: Column(children: [
+                  IconButton(
+                    icon: Image.asset(pngIcons02[index]),
+                    onPressed: () {},
+                    iconSize: 50,
+                  ),
+                  Text(
+                    textIcons02[index],
+                  ),
+                ]),
+                // height: 40,
+                // width: size.width / 4,
+                // constraints: const BoxConstraints(maxWidth: 100),
+                // color: Colors.amber,
+              ),
+            ),
+          ),
+        ]);
+  }
+}

@@ -183,10 +183,11 @@ class _termsAgreePageState extends State<termsAgreePage> {
                   height: 40,
                   fontSize: 18,
                   colorText: Colors.black,
-                  onPressed: () => {
-                    Navigator.push(
-                        context, routeSlide(page: const RegisterPage2()))
-                  },
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterPage2(),
+                      )),
                 ),
               ],
             ),
