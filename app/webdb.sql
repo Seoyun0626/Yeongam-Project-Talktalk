@@ -31,11 +31,12 @@ CREATE TABLE webdb.`tb_policy` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `policy_name` varchar(50) NOT NULL,
   `policy_target` varchar(50) NOT NULL,
-  `description` longtext NOT NULL,
+  `description` longtext NULL,
   `policy_supervision` varchar(30) NOT NULL,
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
   `fund` int(10) NOT NULL,
   `content` varchar(1000) NULL,
+  `img` int(20) NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
