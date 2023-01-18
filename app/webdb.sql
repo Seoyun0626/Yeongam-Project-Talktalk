@@ -42,6 +42,14 @@ CREATE TABLE webdb.`tb_policy` (
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE webdb.`tb_terms` (
+  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `terms` varchar(1000) NOT NULL,
+  `privacy` varchar(1000) NOT NULL,
+  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`board_idx`) USING BTREE 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*

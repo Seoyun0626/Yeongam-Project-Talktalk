@@ -104,12 +104,33 @@ router.put('/', async function(req, res){
 // terms
 router.get('/terms', async function(req, res){
   try{
-    res.render('dataif/terms');
+    var result = await dataif_controller.fetchTermData(req, res);
+    res.render('dataif/terms', {posts:result});
   }
   catch(error) {
     console.log('dataif-router /terms error:'+error);
   }
 });
+
+router.post('/terms', async function(req, res){
+  try{
+    var result = await dataif_controller.updateTermData(req, res);
+    res.redirect('/admin/dataif/terms');
+  } catch(error) {
+    console.log('dataif-router /terms error:'+error);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
 
 // update : 회원 정보 수정
 router.get('/update/:id', async function(req, res){

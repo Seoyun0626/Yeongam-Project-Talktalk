@@ -50,18 +50,11 @@
     <div>
       <div class="pagename">회원 가입 설정</div>
       <!-- 약관 테이블 -->
-      <table>
-        <tbody>
-          <tr>
-            <td>회원 가입 약관</td>
-            <td><textarea name="terms" id="terms" cols="30" rows="10"></textarea></td>
-          </tr>
-          <tr>
-            <td>개인정보 처리 방침</td>
-            <td><textarea name="privacy" id="privacy" cols="30" rows="10"></textarea></td>
-          </tr>
-        </tbody>
-      </table>
+      <form action="/admin/dataif/terms" method="post">
+        <textarea name="terms" id="terms" cols="30" rows="10" ><%= posts[0].terms %></textarea><br>
+        <textarea name="privacy" id="privacy" cols="30" rows="10"><%= posts[0].privacy %></textarea><br>
+        <input type="submit" value="저장">
+      </form>
     </div>
 </section>
 </div>

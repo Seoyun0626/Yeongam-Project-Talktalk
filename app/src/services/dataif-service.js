@@ -50,6 +50,40 @@ exports.fetchData = async function(req, res) {
   }
 };
 
+// 회원가입 약관 가져오기
+exports.fetchTermData = async function(req, res) {
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var query = 'SELECT * FROM webdb.tb_terms';
+    var rows = await conn.query(query); // 쿼리 실행
+    return rows;
+  } catch(error) {
+    console.log('dataif-service fetchTermData:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+};
+
+//다 저장? 업데이트?
+exports.updateTermData = async function(req, res) {
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var idx = 1;
+    var query = 'update webdb.tb_terms set terms="'+req.body.terms+'", privacy="'+req.body.privacy+'" where board_idx="'+idx+'"';
+    var rows = await conn.query(query); // 쿼리 실행
+    return rows;
+  } catch(error) {
+    console.log('dataif-service updateTermData:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+};
+        
+
+
+
 // userid로 데이터 조회
 exports.fetchDataByUserid = async function(req, res) {
   var conn;

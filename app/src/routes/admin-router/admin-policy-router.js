@@ -31,7 +31,7 @@ router.post('/upload', async function (req, res) {
         var upload = multer({ 
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
-                    cb(null, 'src/public/upload/policy');
+                    cb(null, '../frontend/images/policy');
                 },
                 filename: function (req, file, cb) {
                     cb(null, temp + path.extname(file.originalname));
@@ -70,7 +70,7 @@ router.get('/banner', function (req, res) {
 
 let banner_storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'src/public/upload/banner');
+        cb(null, '../frontend/images/policy');
     },
     filename: function (req, file, cb) {
         // cb(null, file.originalname);

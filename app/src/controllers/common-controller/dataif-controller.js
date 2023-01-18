@@ -31,6 +31,27 @@ exports.retrieveData = async function(req, res) {
   }
 };
 
+// 회원 가입 약관 가져오기
+exports.fetchTermData = async function(req, res) {
+  try{
+    var result = await dataif_service.fetchTermData(req);
+    return result;
+  } catch(error) {
+    console.log('dataif-controller fetchTermData:'+error);
+  }
+};
+
+exports.updateTermData = async function(req, res) {
+  try{
+    var result = await dataif_service.updateTermData(req);
+    return result;
+  } catch(error) {
+    console.log('dataif-controller updateTermData:'+error);
+  }
+};
+
+
+
 exports.create = async function(req, res) {
   try{
     /*
