@@ -36,7 +36,7 @@ CREATE TABLE webdb.`tb_policy` (
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
   `fund` int(10) NOT NULL,
   `content` varchar(1000) NULL,
-  `img` int(20) NULL,
+  `img` varchar(30) NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
@@ -50,6 +50,7 @@ CREATE TABLE webdb.`tb_terms` (
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert into tb_terms (terms,privacy) value('회원 가입 약관','개인 정보 처리 방침');
 
 
 /*

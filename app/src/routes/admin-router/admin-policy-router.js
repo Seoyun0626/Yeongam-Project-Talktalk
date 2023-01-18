@@ -1,7 +1,6 @@
 const path = require("path");
 var express = require("express");
 var router = express.Router();
-var multer = require('multer');
 var policy_controller = require("../../controllers/common-controller/policy-controller");
 
 const passport = require('passport');
@@ -26,25 +25,6 @@ router.get('/upload', function (req, res) {
 
 router.post('/upload', async function (req, res) {
     try{
-        var temp = Date.now();
-        // 이미지 업로드
-        var upload = multer({ 
-            storage: multer.diskStorage({
-                destination: function (req, file, cb) {
-                    cb(null, '../frontend/images/policy');
-                },
-                filename: function (req, file, cb) {
-                    cb(null, temp + path.extname(file.originalname));
-                }
-            })
-        }).single('imgFile');
-        upload(req, res, function (err) {
-            if (err instanceof multer.MulterError) {
-                console.log('multer error:' + err);
-            } else if (err) {
-                console.log('multer error:' + err);
-            }
-        });
         // DB에 저장
         var result = await policy_controller.upload(req,res);
         if(result == 0) { //성공
@@ -68,33 +48,10 @@ router.get('/banner', function (req, res) {
 });
 
 
-let banner_storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, '../frontend/images/policy');
-    },
-    filename: function (req, file, cb) {
-        // cb(null, file.originalname);
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
+
 router.post('/banner', async function (req, res) {
     try{
         // console.log(req.body);
-        // 이미지 업로드
-        var upload = multer({ 
-            storage: banner_storage,
-            rename: function (fieldname, filename) {
-                return filename;
-            }
-        }).single('imgFile');
-        var upload = multer({ storage: banner_storage }).single('imgFile');
-        upload(req, res, function (err) {
-            if (err instanceof multer.MulterError) {
-                console.log('multer error:'+err);
-            } else if (err) {
-                console.log('multer error:'+err);
-            }
-        });
         // DB에 저장
         var result = await policy_controller.banner(req,res);
         if(result == 0) { //성공
