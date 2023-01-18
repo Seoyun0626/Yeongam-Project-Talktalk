@@ -19,3 +19,11 @@ exports.upload = async function(req, res) {
     }
   };
   
+exports.banner = async function(req, res) {
+    try{
+      var result = await login_service.banner(req);
+      return result;
+    } catch(error) {
+      console.log('login-controller login_check:'+error);
+    }
+  };

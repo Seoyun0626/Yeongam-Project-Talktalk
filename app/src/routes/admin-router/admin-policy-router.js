@@ -24,32 +24,25 @@ router.get('/upload', function (req, res) {
     }
 });
 
-let storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'src/public/upload/policy');
-    },
-    filename: function (req, file, cb) {
-        // cb(null, file.originalname);
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-
 router.post('/upload', async function (req, res) {
     try{
-        // console.log(req.body);
+        var temp = Date.now();
         // 이미지 업로드
         var upload = multer({ 
-            storage: storage,
-            rename: function (fieldname, filename) {
-                return filename;
-            }
+            storage: multer.diskStorage({
+                destination: function (req, file, cb) {
+                    cb(null, 'src/public/upload/policy');
+                },
+                filename: function (req, file, cb) {
+                    cb(null, temp + path.extname(file.originalname));
+                }
+            })
         }).single('imgFile');
-        var upload = multer({ storage: storage }).single('imgFile');
         upload(req, res, function (err) {
             if (err instanceof multer.MulterError) {
-                console.log('multer error:'+err);
+                console.log('multer error:' + err);
             } else if (err) {
-                console.log('multer error:'+err);
+                console.log('multer error:' + err);
             }
         });
         // DB에 저장
@@ -74,6 +67,46 @@ router.get('/banner', function (req, res) {
     }
 });
 
+
+let banner_storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'src/public/upload/banner');
+    },
+    filename: function (req, file, cb) {
+        // cb(null, file.originalname);
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+router.post('/banner', async function (req, res) {
+    try{
+        // console.log(req.body);
+        // 이미지 업로드
+        var upload = multer({ 
+            storage: banner_storage,
+            rename: function (fieldname, filename) {
+                return filename;
+            }
+        }).single('imgFile');
+        var upload = multer({ storage: banner_storage }).single('imgFile');
+        upload(req, res, function (err) {
+            if (err instanceof multer.MulterError) {
+                console.log('multer error:'+err);
+            } else if (err) {
+                console.log('multer error:'+err);
+            }
+        });
+        // DB에 저장
+        var result = await policy_controller.banner(req,res);
+        if(result == 0) { //성공
+            res.redirect('/admin/policy/show');
+        } else { //실패
+            res.redirect('/admin/policy/banner');
+        }
+    }
+    catch(error) {
+        console.log('policy-router banner error:'+error);
+    }
+});
 
 
 
