@@ -60,8 +60,8 @@ class _RegisterPageState2 extends State<RegisterPage2> {
   late TextEditingController userEmailController;
   late TextEditingController userNameController;
   late int attending;
-  late int age; //
-  late int sex; // 0 - 남, 1 - 여
+  late int age;
+  late int sex;
   late int emd;
   String result = '';
   bool isElement = true;
