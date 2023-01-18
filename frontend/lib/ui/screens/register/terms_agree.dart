@@ -10,7 +10,7 @@ import 'package:login/ui/widgets/widgets.dart';
 
 import 'package:login/ui/helpers/animation_route.dart';
 
-// kth 수정
+// kth 수정 : 밑에 수정 전 코드 주석처리 해놓음
 class termsAgreePage extends StatefulWidget {
   const termsAgreePage({Key? key}) : super(key: key);
 

@@ -8,6 +8,7 @@ import 'package:login/ui/screens/login/verify_email_page.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 import 'info_first.dart';
 
@@ -58,6 +59,10 @@ class _RegisterPageState2 extends State<RegisterPage2> {
   late TextEditingController userAgainPWController;
   late TextEditingController userEmailController;
   late TextEditingController userNameController;
+  late int attending;
+  late int age; //
+  late int sex; // 0 - 남, 1 - 여
+  late int emd;
   String result = '';
   bool isElement = true;
   bool isMiddle = false;
@@ -161,7 +166,7 @@ class _RegisterPageState2 extends State<RegisterPage2> {
         body: SafeArea(
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 50.0, vertical: 40.0),
+                const EdgeInsets.symmetric(horizontal: 40.0, vertical: 40.0),
             child: SingleChildScrollView(
               child: Form(
                 key: _keyForm,
@@ -190,7 +195,8 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                           child: TextFieldNaru(
                             controller: userIDController,
                             hintText: '아이디',
-                            validator: RequiredValidator(errorText: ' '),
+                            validator:
+                                RequiredValidator(errorText: '아이디를 입력해주세요'),
                           ),
                         ),
                         Container(
@@ -237,7 +243,7 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                     TextFieldNaru(
                       controller: userNameController,
                       hintText: '이름',
-                      validator: RequiredValidator(errorText: ' '),
+                      validator: RequiredValidator(errorText: '이름을 입력해주세요.'),
                     ),
                     const SizedBox(height: 40.0),
                     const TextCustom(
@@ -277,7 +283,7 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                     const SizedBox(height: 1.0),
                     TextFormField(
                       keyboardType: TextInputType.phone,
-                      maxLength: 15,
+                      maxLength: 13,
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly, //숫자만!
                         NumberFormatter(), // 자동하이픈
@@ -312,65 +318,91 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                       maxLines: 2,
                     ),
                     const SizedBox(height: 10.0),
-                    ToggleButtons(
-                      selectedColor: ThemeColors.primary,
-                      selectedBorderColor: ThemeColors.primary,
-                      fillColor: ThemeColors.primary.withOpacity(0.08),
-                      splashColor: ThemeColors.primary.withOpacity(0.12),
-                      hoverColor: ThemeColors.primary.withOpacity(0.04),
-                      borderRadius: BorderRadius.circular(4.0),
-                      // constraints:
-                      //     BoxConstraints(minWidth: 59, minHeight: 40.0),
-                      children: <Widget>[
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 5,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('초', style: TextStyle(fontSize: 15))
-                                ])),
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 5,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('중', style: TextStyle(fontSize: 15))
-                                ])),
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 5,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('고', style: TextStyle(fontSize: 15))
-                                ])),
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 5,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('대', style: TextStyle(fontSize: 15))
-                                ])),
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 5,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('학교 밖',
-                                      style: TextStyle(fontSize: 15))
-                                ])),
-                      ],
-                      onPressed: (int index) {
-                        setState(() {
-                          _selections1[index] = !_selections1[index];
-                        });
-                      },
-                      isSelected: _selections1,
-                    ),
+                    ToggleSwitch(
+                        minWidth: (MediaQuery.of(context).size.width - 87) / 5,
+                        minHeight: 50.0,
+                        fontSize: 15,
+                        initialLabelIndex: 0,
+                        activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
+                        activeFgColor: ThemeColors.darkGreen,
+                        inactiveBgColor: Colors.white,
+                        borderColor: const [Color.fromARGB(255, 184, 183, 183)],
+                        borderWidth: 0.45,
+                        activeBorders: [
+                          Border.all(
+                            color: ThemeColors.primary,
+                            width: 1,
+                          )
+                        ],
+                        dividerColor: const Color.fromARGB(255, 184, 183, 183),
+                        totalSwitches: 5,
+                        labels: const ['초', '중', '고', '대', '학교밖'],
+                        animate: true,
+                        animationDuration: 200,
+                        cornerRadius: 7,
+                        onToggle: (index) {
+                          print('school - switched to : $index');
+                          attending = index!;
+                        }),
+                    // ToggleButtons(
+                    //   selectedColor: ThemeColors.primary,
+                    //   selectedBorderColor: ThemeColors.primary,
+                    //   fillColor: ThemeColors.primary.withOpacity(0.08),
+                    //   splashColor: ThemeColors.primary.withOpacity(0.12),
+                    //   hoverColor: ThemeColors.primary.withOpacity(0.04),
+                    //   borderRadius: BorderRadius.circular(4.0),
+                    //   // constraints:
+                    //   //     BoxConstraints(minWidth: 59, minHeight: 40.0),
+                    //   children: <Widget>[
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 5,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('초', style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 5,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('중', style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 5,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('고', style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 5,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('대', style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 5,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('학교 밖',
+                    //                   style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //   ],
+                    //   onPressed: (int index) {
+                    //     setState(() {
+                    //       _selections1[index] = !_selections1[index];
+                    //     });
+                    //   },
+                    //   isSelected: _selections1,
+                    // ),
                     const SizedBox(height: 40.0),
                     const TextCustom(
                       text: '나이를 선택해주세요.',
@@ -379,77 +411,104 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                       maxLines: 2,
                     ),
                     const SizedBox(height: 10.0),
-                    ToggleButtons(
-                      selectedColor: ThemeColors.primary,
-                      selectedBorderColor: ThemeColors.primary,
-                      fillColor: ThemeColors.primary.withOpacity(0.08),
-                      splashColor: ThemeColors.primary.withOpacity(0.12),
-                      hoverColor: ThemeColors.primary.withOpacity(0.04),
-                      borderRadius: BorderRadius.circular(4.0),
-                      constraints: BoxConstraints(minHeight: 40.0),
-                      children: <Widget>[
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 6,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('10대',
-                                      style: TextStyle(fontSize: 15))
-                                ])),
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 6,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('20대',
-                                      style: TextStyle(fontSize: 15))
-                                ])),
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 6,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('30대',
-                                      style: TextStyle(fontSize: 15))
-                                ])),
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 6,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('40대',
-                                      style: TextStyle(fontSize: 15))
-                                ])),
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 6,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('50대',
-                                      style: TextStyle(fontSize: 15))
-                                ])),
-                        Container(
-                            width:
-                                (MediaQuery.of(context).size.width - 108) / 6,
-                            child: new Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  new Text('60대',
-                                      style: TextStyle(fontSize: 15))
-                                ])),
+                    ToggleSwitch(
+                      minWidth: (MediaQuery.of(context).size.width - 87) / 6,
+                      minHeight: 50.0,
+                      fontSize: 15,
+                      initialLabelIndex: 0,
+                      activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
+                      activeFgColor: ThemeColors.darkGreen,
+                      inactiveBgColor: Colors.white,
+                      borderColor: const [Color.fromARGB(255, 184, 183, 183)],
+                      borderWidth: 0.45,
+                      activeBorders: [
+                        Border.all(
+                          color: ThemeColors.primary,
+                          width: 1,
+                        )
                       ],
-                      onPressed: (int index) {
-                        setState(() {
-                          _selections2[index] = !_selections2[index];
-                        });
+                      dividerColor: const Color.fromARGB(255, 184, 183, 183),
+                      totalSwitches: 6,
+                      labels: const ['10대', '20대', '30대', '40대', '50대', '60대'],
+                      animate: true,
+                      animationDuration: 200,
+                      cornerRadius: 7,
+                      onToggle: (index) {
+                        print('age - switched to : $index');
+                        age = index!;
                       },
-                      isSelected: _selections2,
                     ),
+                    // ToggleButtons(
+                    //   selectedColor: ThemeColors.primary,
+                    //   selectedBorderColor: ThemeColors.primary,
+                    //   fillColor: ThemeColors.primary.withOpacity(0.08),
+                    //   splashColor: ThemeColors.primary.withOpacity(0.12),
+                    //   hoverColor: ThemeColors.primary.withOpacity(0.04),
+                    //   borderRadius: BorderRadius.circular(4.0),
+                    //   constraints: BoxConstraints(minHeight: 40.0),
+                    //   children: <Widget>[
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 6,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('10대',
+                    //                   style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 6,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('20대',
+                    //                   style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 6,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('30대',
+                    //                   style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 6,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('40대',
+                    //                   style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 6,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('50대',
+                    //                   style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //     Container(
+                    //         width:
+                    //             (MediaQuery.of(context).size.width - 108) / 6,
+                    //         child: new Column(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: <Widget>[
+                    //               new Text('60대',
+                    //                   style: TextStyle(fontSize: 15))
+                    //             ])),
+                    //   ],
+                    //   onPressed: (int index) {
+                    //     setState(() {
+                    //       _selections2[index] = !_selections2[index];
+                    //     });
+                    //   },
+                    //   isSelected: _selections2,
+                    // ),
                     const SizedBox(height: 40.0),
                     const TextCustom(
                       text: '성별을 선택해주세요.',
@@ -458,44 +517,71 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                       maxLines: 2,
                     ),
                     const SizedBox(height: 10.0),
-                    Column(
-                      children: [
-                        ToggleButtons(
-                          selectedColor: ThemeColors.primary,
-                          selectedBorderColor: ThemeColors.primary,
-                          fillColor: ThemeColors.primary.withOpacity(0.08),
-                          splashColor: ThemeColors.primary.withOpacity(0.12),
-                          hoverColor: ThemeColors.primary.withOpacity(0.04),
-                          borderRadius: BorderRadius.circular(4.0),
-                          constraints:
-                              BoxConstraints(minWidth: 154, minHeight: 40.0),
-                          children: [
-                            Container(
-                                width:
-                                    (MediaQuery.of(context).size.width - 108) /
-                                        2,
-                                child: new Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      new Text('남자',
-                                          style: TextStyle(fontSize: 17))
-                                    ])),
-                            Container(
-                                width:
-                                    (MediaQuery.of(context).size.width - 108) /
-                                        2,
-                                child: new Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      new Text('여자',
-                                          style: TextStyle(fontSize: 17))
-                                    ])),
-                          ],
-                          isSelected: isSelected,
-                          onPressed: toggleSelect,
-                        ),
+                    ToggleSwitch(
+                      minWidth: (MediaQuery.of(context).size.width - 87) / 2,
+                      minHeight: 50.0,
+                      fontSize: 15,
+                      initialLabelIndex: 0,
+                      activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
+                      activeFgColor: ThemeColors.darkGreen,
+                      inactiveBgColor: Colors.white,
+                      borderColor: const [Color.fromARGB(255, 184, 183, 183)],
+                      borderWidth: 0.45,
+                      activeBorders: [
+                        Border.all(
+                          color: ThemeColors.primary,
+                          width: 1,
+                        )
                       ],
+                      dividerColor: const Color.fromARGB(255, 184, 183, 183),
+                      totalSwitches: 2,
+                      labels: const ['남자', '여자'],
+                      animate: true,
+                      animationDuration: 200,
+                      cornerRadius: 7,
+                      onToggle: (index) {
+                        print('sex - switched to : $index');
+                        sex = index!;
+                      },
                     ),
+                    // Column(
+                    //   children: [
+                    //     ToggleButtons(
+                    //       selectedColor: ThemeColors.primary,
+                    //       selectedBorderColor: ThemeColors.primary,
+                    //       fillColor: ThemeColors.primary.withOpacity(0.08),
+                    //       splashColor: ThemeColors.primary.withOpacity(0.12),
+                    //       hoverColor: ThemeColors.primary.withOpacity(0.04),
+                    //       borderRadius: BorderRadius.circular(4.0),
+                    //       constraints:
+                    //           BoxConstraints(minWidth: 154, minHeight: 40.0),
+                    //       children: [
+                    //         Container(
+                    //             width:
+                    //                 (MediaQuery.of(context).size.width - 108) /
+                    //                     2,
+                    //             child: new Column(
+                    //                 mainAxisAlignment: MainAxisAlignment.center,
+                    //                 children: <Widget>[
+                    //                   new Text('남자',
+                    //                       style: TextStyle(fontSize: 17))
+                    //                 ])),
+                    //         Container(
+                    //             width:
+                    //                 (MediaQuery.of(context).size.width - 108) /
+                    //                     2,
+                    //             child: new Column(
+                    //                 mainAxisAlignment: MainAxisAlignment.center,
+                    //                 children: <Widget>[
+                    //                   new Text('여자',
+                    //                       style: TextStyle(fontSize: 17))
+                    //                 ])),
+                    //       ],
+                    //       isSelected: isSelected,
+                    //       onPressed: toggleSelect,
+                    //     ),
+                    //   ],
+                    // ),
                     const SizedBox(height: 40.0),
                     const TextCustom(
                       text: '거주지를 선택해주세요.',
@@ -530,6 +616,8 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                           onChanged: (value) {
                             setState(() {
                               _selectedValue1 = value!;
+                              print('emd $_selectedValue1');
+                              // emd = _selectedValue1;
                             });
                           },
                           elevation: 4,
@@ -554,10 +642,10 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                               userEmailController.text.trim(),
                               userPWController.text.trim(),
                               userAgainPWController.text.trim(),
-                              '0',
-                              '0',
-                              '0',
-                              '0',
+                              '1',
+                              age.toString(),
+                              attending.toString(),
+                              sex.toString(),
                             ));
                           }
                         }),
