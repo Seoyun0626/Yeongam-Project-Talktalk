@@ -90,7 +90,7 @@ class StartRegisterPage extends StatelessWidget {
                 onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const userTypePage(),
+                      builder: (context) => const termsAgreePage(),
                     )),
               ),
             ),
@@ -112,7 +112,7 @@ class StartRegisterPage extends StatelessWidget {
                 onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const userTypePage(),
+                      builder: (context) => const termsAgreePage(),
                     )),
               ),
             ),

@@ -174,6 +174,92 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                         fontWeight: FontWeight.w900,
                         fontSize: 30,
                         color: Colors.black),
+                    const SizedBox(height: 50.0),
+                    const TextCustom(
+                      text: '아이디를 입력해주세요.',
+                      fontSize: 17,
+                      letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 1.0),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 200.0,
+                          child: TextFieldNaru(
+                            controller: userIDController,
+                            hintText: '아이디',
+                            validator: RequiredValidator(errorText: ' '),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: BtnNaru(
+                            text: '중복확인',
+                            fontSize: 17,
+                            width: 103,
+                            colorText: Colors.black,
+                            onPressed: () => Navigator.pop(context), //수정필요
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 40.0),
+                    const TextCustom(
+                      text: '비밀번호를 입력해주세요.',
+                      fontSize: 17,
+                      letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 1.0),
+                    TextFieldNaru(
+                      controller: userPWController,
+                      hintText: '8자리 이상 입력',
+                      isPassword: true,
+                      validator: passwordValidator,
+                    ),
+                    const SizedBox(height: 10.0),
+                    TextFieldNaru(
+                      controller: userAgainPWController,
+                      hintText: '비밀번호 확인',
+                      isPassword: true,
+                      validator: againpasswordValidator,
+                    ),
+                    const SizedBox(height: 40.0),
+                    const TextCustom(
+                      text: '이름을 입력해주세요.',
+                      fontSize: 17,
+                      letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 1.0),
+                    TextFieldNaru(
+                      controller: userNameController,
+                      hintText: '이름',
+                      validator: RequiredValidator(errorText: ' '),
+                    ),
+                    const SizedBox(height: 40.0),
+                    const TextCustom(
+                      text: '이메일을 입력해주세요.',
+                      fontSize: 17,
+                      letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 1.0),
+                    TextFieldNaru(
+                      controller: userEmailController,
+                      hintText: '이메일',
+                      keyboardType: TextInputType.emailAddress,
+                      validator: validatedEmail,
+                    ),
+                    const SizedBox(height: 60.0),
+                    const TextCustom(
+                        text: '추가정보',
+                        letterSpacing: 2.0,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 30,
+                        color: Colors.black),
                     const SizedBox(height: 5.0),
                     const TextCustom(
                         text: '필수가 아닌 항목입니다.',
@@ -452,15 +538,29 @@ class _RegisterPageState2 extends State<RegisterPage2> {
                     ),
                     const SizedBox(height: 60.0),
                     BtnNaru(
-                      text: '다음',
-                      width: size.width,
-                      colorText: Colors.black,
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const RegisterPage1(),
-                          )),
-                    ),
+                        text: '완료',
+                        width: size.width,
+                        colorText: Colors.black,
+                        // onPressed: () => Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => const RegisterPage1(),
+                        //     )),
+                        onPressed: () {
+                          if (_keyForm.currentState!.validate()) {
+                            userBloc.add(OnRegisterUserEvent(
+                              userIDController.text.trim(),
+                              userNameController.text.trim(),
+                              userEmailController.text.trim(),
+                              userPWController.text.trim(),
+                              userAgainPWController.text.trim(),
+                              '0',
+                              '0',
+                              '0',
+                              '0',
+                            ));
+                          }
+                        }),
                   ],
                 ),
               ),
