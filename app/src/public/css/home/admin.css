@@ -169,6 +169,22 @@ line-height:auto;
 border-style:hidden;
 outline:none;
 }
+.배너등록
+{
+color:#000000;
+text-align:left;
+vertical-align:text-top;
+font-size:16px;
+font-family:Inter;
+left:63px;
+top:387px;
+width:122px;
+height:24px;
+position:absolute;
+line-height:auto;
+border-style:hidden;
+outline:none;
+}
 .정책관리
 {
 color:#000000;
@@ -195,7 +211,8 @@ font-size:20px;
 font-weight: bold;
 font-family:Inter;
 left:43px;
-top:421px;
+/* top:421px; */
+top: 481px;
 width:95px;
 height:29px;
 position:absolute;

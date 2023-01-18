@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/semantic/layout.css">
+  <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/mem.css">
+  <link rel="stylesheet" href="/css/home/admin.css">
+  <script src="/ckeditor/build/ckeditor.js"></script>
+  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
+  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
+  <script src="/js/home/mem.js" defer></script>
+</head>
+<body>
+  <nav>
+    <img id='frame' class='frame' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAQACAYAAAAgBjM/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVHgB7cRBDQAACAQgZ/+0V0DN4eBBJZmuI0mSJEmSJOlbC6N8C9SP7V1EAAAAAElFTkSuQmCC'/>
+    </img>
+    <img id='vector4' class='vector4' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABVcAAAACCAYAAABc3OxqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtSURBVHgB7cAxEQAgDASwgnKkYLEG/rBA92R19ykAAAAAAL4lubsAAAAAABh7iCsG8ZKfxPwAAAAASUVORK5CYII='/>
+    </img>
+    <div id='관리자페이지' class='관리자페이지'>
+    관리자 페이지</div>
+    <div id='청소년톡talk' class='청소년톡talk'>
+    청소년 톡Talk</div>
+    <div id='회원관리' class='회원관리'>
+    회원 관리</div>
+
+    <a href="/admin/dataif">
+    <div id='회원정보관리' class='회원정보관리'>
+    회원 정보 관리</div></a>
+
+    <a href="/admin/dataif/terms">
+    <div id='회원가입설정' class='회원가입설정'>
+    회원 가입 설정</div></a>
+
+    <a href="/admin/policy/show">
+    <div id='정책정보관리' class='정책정보관리'>
+    정책 정보 관리</div></a>
+    
+    <div id='정책관리' class='정책관리'>
+    정책 관리</div>
+    <div id='권한관리' class='권한관리'>
+    권한 관리</div>
+    <!-- <div id='admin1' class='admin1'>
+    Admin1</div>
+    <div id='ellipse5' class='ellipse5'>     -->
+</nav>
+<div id='line26' class='line26'></div>
+<section>
+    <%= body %>
+</section>
+</body>
+</html>

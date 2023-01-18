@@ -36,7 +36,8 @@
     <a href="/admin/policy/show">
     <div id='정책정보관리' class='정책정보관리'>
     정책 정보 관리</div></a>
-    
+    <a href="/admin/policy/banner">
+    <div id="배너등록" class="배너등록">배너 등록</div></a>
     <div id='정책관리' class='정책관리'>
     정책 관리</div>
     <div id='권한관리' class='권한관리'>
@@ -45,7 +46,7 @@
     Admin1</div>
     <div id='ellipse5' class='ellipse5'>     -->
 </nav>
-<div id='line26' class='line26'></div>
+<!-- <div id='line26' class='line26'></div> -->
 <section>
   <div class="pagename">정책 등록</div>
   <div>
@@ -66,6 +67,21 @@
           <input type="text" name="fund" placeholder="지원금">
           <label>정책 사진</label>
           <input type="file" name="imgFile" accept="image/*">
+          <img id="preview" />
+          <script>
+            function readURL(input) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                  $('#preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+              }
+            }
+            $("#imgFile").change(function(){
+              readURL(this);
+            });
+          </script>
           <br><br>
           <textarea name="content" id="editor"></textarea>
           <script>
@@ -96,3 +112,5 @@
     </form>
   </div>
 </section>
+</body>
+</html>
