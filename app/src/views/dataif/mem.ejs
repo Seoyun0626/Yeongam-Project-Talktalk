@@ -114,7 +114,7 @@
               <td><%= posts[i].name %></td>
               <td><%= role_code_to_class(posts[i].user_role) %></td>
               <td><%= emd_code_to_name(posts[i].emd_class_code) %></td>
-              <td><%= age_code_to_class(posts[i].age_class_code) %></td>
+              <td><%= age_code_to_class(posts[i].user_type) %></td>
               <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
               <td><%= `${posts[i].upd_date.getFullYear()}` + `-`+ `${posts[i].upd_date.getMonth()+1}` + `-`+ `${posts[i].upd_date.getDate()}`%></td>
               <!-- <td><%= posts[i].push_yn %></td>
