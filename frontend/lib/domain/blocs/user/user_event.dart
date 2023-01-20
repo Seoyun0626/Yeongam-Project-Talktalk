@@ -12,8 +12,9 @@ class OnRegisterUserEvent extends UserEvent {
   final String user_pw;
   final String user_pw2;
   final String user_role;
-  // final String user_type;
-  final String age_class_code;
+  final String user_type;
+  final String youthAge_code;
+  final String parentsAge_code;
   final String emd_class_code;
   final String sex_class_code;
 
@@ -24,10 +25,12 @@ class OnRegisterUserEvent extends UserEvent {
     this.user_pw,
     this.user_pw2,
     this.user_role,
-    // this.user_type,
-    this.age_class_code,
+    this.user_type,
+    this.youthAge_code,
+    this.parentsAge_code,
     this.emd_class_code,
     this.sex_class_code,
+    // String string,
   );
 }
 

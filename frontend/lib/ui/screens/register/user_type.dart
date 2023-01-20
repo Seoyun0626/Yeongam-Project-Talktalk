@@ -166,7 +166,7 @@ class userTypePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       // builder: (context) => termsAgreePage(todo: todos[1]),
-                      builder: (context) => const InfoInputPage(1),
+                      builder: (context) => const InfoInputPage(2),
                     )),
               ),
             ),
@@ -201,7 +201,7 @@ class userTypePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         // builder: (context) => termsAgreePage(todo: todos[2]),
-                        builder: (context) => const InfoInputPage(2),
+                        builder: (context) => const InfoInputPage(1),
                       )),
                 )),
           ),

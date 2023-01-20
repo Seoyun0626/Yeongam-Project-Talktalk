@@ -28,8 +28,9 @@ class UserServices {
     String password,
     String password2,
     String user_role,
-    // String user_type,
-    String age_class_code,
+    String user_type,
+    String youthAge_code,
+    String parentsAge_code,
     String emd_class_code,
     String sex_class_code,
   ) async {
@@ -43,8 +44,9 @@ class UserServices {
       'password': password,
       'password2': password2,
       'user_role': user_role,
-      // 'user_type' : user_type,
-      'age_class_code': age_class_code,
+      'user_type': user_type,
+      'youthAge_code': youthAge_code,
+      'parentsAge_code': parentsAge_code,
       'emd_class_code': emd_class_code,
       'sex_class_code': sex_class_code
     });

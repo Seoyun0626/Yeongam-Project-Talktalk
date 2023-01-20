@@ -27,10 +27,11 @@ class _InfoInputPageState extends State<InfoInputPage> {
   late TextEditingController userAgainPWController;
   late TextEditingController userEmailController;
   late TextEditingController userNameController;
-  late String userType; // 사용자 유형
-  late int age; // 나이
+  late int userTypeCode; // 사용자 유형
+  late int youthAge = 0; // 청소년/청소년부모 나이
+  late int parentsAge = 0; // 부모 나이
   late int sex; // 성별
-  late String emd; // 영암군 읍면동 주소
+  late int emd; // 영암군 읍면동 주소
 
   final List<String> _emdList = [
     '영암읍',
@@ -300,7 +301,9 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           cornerRadius: 7,
                           onToggle: (index) {
                             print('school - switched to : $index');
-                            age = index!;
+                            youthAge = index!;
+                            // ignore: null_check_always_fails
+                            // parentsAge = null!;
                           }),
                     ] else if (userTypeCode == 2) ...[
                       const TextCustom(
@@ -334,7 +337,9 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         cornerRadius: 7,
                         onToggle: (index) {
                           print('age - switched to : $index');
-                          age = index!;
+                          parentsAge = index!;
+                          // ignore: null_check_always_fails
+                          // youthAge = null!;
                         },
                       ),
                     ],
@@ -407,7 +412,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                             setState(() {
                               _selectedEMD = value!;
                               print('emd $_selectedEMD');
-                              emd = _selectedEMD;
+                              emd = 0; //_selectedEMD;
                             });
                           },
                           elevation: 4,
@@ -432,10 +437,11 @@ class _InfoInputPageState extends State<InfoInputPage> {
                                 userEmailController.text.trim(),
                                 userPWController.text.trim(),
                                 userAgainPWController.text.trim(),
-                                '1', // user_role
-                                // userType, // user_type
-                                age.toString(), // age_class_code
-                                sex.toString(), //emd_class_code
+                                '1', // user_role - 사용자
+                                userTypeCode.toString(), // user_type
+                                youthAge.toString(), // youthAge_code
+                                parentsAge.toString(), // parentsAge_code
+                                emd.toString(), //emd_class_code // 자료형 해결해야 함
                                 sex.toString() // sex_class_code
                                 ));
                           }
