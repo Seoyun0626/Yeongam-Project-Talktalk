@@ -61,6 +61,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           event.user_pw,
           event.user_pw2,
           event.user_role,
+          // event.user_type,
           event.age_class_code,
           event.emd_class_code,
           event.sex_class_code);

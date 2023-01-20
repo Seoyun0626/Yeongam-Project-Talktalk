@@ -27,10 +27,10 @@ class _InfoInputPageState extends State<InfoInputPage> {
   late TextEditingController userAgainPWController;
   late TextEditingController userEmailController;
   late TextEditingController userNameController;
-  late int attending;
-  late int age;
-  late int sex;
-  late String emd;
+  late String userType; // 사용자 유형
+  late int age; // 나이
+  late int sex; // 성별
+  late String emd; // 영암군 읍면동 주소
 
   final List<String> _emdList = [
     '영암읍',
@@ -72,6 +72,9 @@ class _InfoInputPageState extends State<InfoInputPage> {
   @override
   Widget build(BuildContext context) {
     final userTypeCode = widget.userTypeCode;
+    const youthAgeList = ['초', '중', '고', '대', '학교밖'];
+    const parentsAgeList = ['10대', '20대', '30대', '40대', '50대', '60대'];
+    const sexList = ['남자', '여자'];
     print(userTypeCode);
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
@@ -249,12 +252,124 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       ),
                     ),
                     const SizedBox(height: 15.0),
+
                     // 재학여부(청소년 0, 청소년부모 1) / 나이(부모 2)
-                    AgeToggleButton(userTypeCode),
+                    // AgeToggleButton(userTypeCode), // 토글버튼 클래스
+                    if (userTypeCode == 0 || userTypeCode == 1) ...[
+                      const TextCustom(
+                        text: '재학 여부를 선택해주세요.',
+                        fontSize: 17,
+                        letterSpacing: 1.0,
+                        maxLines: 2,
+                      ),
+                      const SizedBox(height: 5.0),
+                      const TextCustom(
+                        text: '청소년, 청소년부모만 해당',
+                        fontSize: 13,
+                        letterSpacing: 1.0,
+                        maxLines: 2,
+                      ),
+                      const SizedBox(height: 10.0),
+                      ToggleSwitch(
+                          minWidth:
+                              (MediaQuery.of(context).size.width - 87) / 5,
+                          minHeight: 50.0,
+                          fontSize: 15,
+                          initialLabelIndex: 0,
+                          activeBgColor: const [
+                            Color.fromARGB(40, 204, 221, 90)
+                          ],
+                          activeFgColor: ThemeColors.darkGreen,
+                          inactiveBgColor: Colors.white,
+                          borderColor: const [
+                            Color.fromARGB(255, 184, 183, 183)
+                          ],
+                          borderWidth: 0.45,
+                          activeBorders: [
+                            Border.all(
+                              color: ThemeColors.primary,
+                              width: 1,
+                            )
+                          ],
+                          dividerColor:
+                              const Color.fromARGB(255, 184, 183, 183),
+                          totalSwitches: 5,
+                          labels: youthAgeList,
+                          animate: true,
+                          animationDuration: 200,
+                          cornerRadius: 7,
+                          onToggle: (index) {
+                            print('school - switched to : $index');
+                            age = index!;
+                          }),
+                    ] else if (userTypeCode == 2) ...[
+                      const TextCustom(
+                        text: '나이를 선택해주세요.',
+                        fontSize: 17,
+                        letterSpacing: 1.0,
+                        maxLines: 2,
+                      ),
+                      const SizedBox(height: 10.0),
+                      ToggleSwitch(
+                        minWidth: (MediaQuery.of(context).size.width - 87) / 6,
+                        minHeight: 50.0,
+                        fontSize: 15,
+                        initialLabelIndex: 0,
+                        activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
+                        activeFgColor: ThemeColors.darkGreen,
+                        inactiveBgColor: Colors.white,
+                        borderColor: const [Color.fromARGB(255, 184, 183, 183)],
+                        borderWidth: 0.45,
+                        activeBorders: [
+                          Border.all(
+                            color: ThemeColors.primary,
+                            width: 1,
+                          )
+                        ],
+                        dividerColor: const Color.fromARGB(255, 184, 183, 183),
+                        totalSwitches: 6,
+                        labels: parentsAgeList,
+                        animate: true,
+                        animationDuration: 200,
+                        cornerRadius: 7,
+                        onToggle: (index) {
+                          print('age - switched to : $index');
+                          age = index!;
+                        },
+                      ),
+                    ],
 
                     const SizedBox(height: 40.0),
+
                     // 성별
-                    const SexToggleButton(),
+                    // const SexToggleButton(),
+                    ToggleSwitch(
+                      minWidth: (MediaQuery.of(context).size.width - 87) / 2,
+                      minHeight: 50.0,
+                      fontSize: 15,
+                      initialLabelIndex: 0,
+                      activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
+                      activeFgColor: ThemeColors.darkGreen,
+                      inactiveBgColor: Colors.white,
+                      borderColor: const [Color.fromARGB(255, 184, 183, 183)],
+                      borderWidth: 0.45,
+                      activeBorders: [
+                        Border.all(
+                          color: ThemeColors.primary,
+                          width: 1,
+                        )
+                      ],
+                      dividerColor: const Color.fromARGB(255, 184, 183, 183),
+                      totalSwitches: 2,
+                      labels: sexList,
+                      animate: true,
+                      animationDuration: 200,
+                      cornerRadius: 7,
+                      onToggle: (index) {
+                        print('sex - switched to : $index');
+                        sex = index!;
+                      },
+                    ),
 
                     const SizedBox(height: 40.0),
                     // 거주지
@@ -317,10 +432,12 @@ class _InfoInputPageState extends State<InfoInputPage> {
                                 userEmailController.text.trim(),
                                 userPWController.text.trim(),
                                 userAgainPWController.text.trim(),
-                                '1',
-                                '0',
-                                '0',
-                                '0'));
+                                '1', // user_role
+                                // userType, // user_type
+                                age.toString(), // age_class_code
+                                sex.toString(), //emd_class_code
+                                sex.toString() // sex_class_code
+                                ));
                           }
                         }),
                   ],
@@ -370,255 +487,200 @@ class NumberFormatter extends TextInputFormatter {
 }
 
 // 나이 선택 토글 버튼
-const List<Widget> youthAgeList = <Widget>[
-  Text('초'),
-  Text('중'),
-  Text('고'),
-  Text('대'),
-  Text('기타'),
-];
-const List<Widget> parentsAgeList = <Widget>[
-  Text('10대'),
-  Text('20대'),
-  Text('30대'),
-  Text('40대'),
-  Text('50대'),
-  Text('60대'),
-];
+// const List<Widget> youthAgeList = <Widget>[
+//   Text('초'),
+//   Text('중'),
+//   Text('고'),
+//   Text('대'),
+//   Text('기타'),
+// ];
+// const List<Widget> parentsAgeList = <Widget>[
+//   Text('10대'),
+//   Text('20대'),
+//   Text('30대'),
+//   Text('40대'),
+//   Text('50대'),
+//   Text('60대'),
+// ];
 
-class AgeToggleButton extends StatefulWidget {
-  final int typeCode;
-  const AgeToggleButton(this.typeCode, {Key? key}) : super(key: key);
+// class AgeToggleButton extends StatefulWidget {
+//   final int typeCode;
+//   const AgeToggleButton(this.typeCode, {Key? key}) : super(key: key);
 
-  @override
-  State<AgeToggleButton> createState() => _AgeToggleButtonState();
-}
+//   @override
+//   State<AgeToggleButton> createState() => _AgeToggleButtonState();
+// }
 
-class _AgeToggleButtonState extends State<AgeToggleButton> {
-  final List<bool> _selectedYouthAge = <bool>[true, false, false, false, false];
-  final List<bool> _selectedParentsAge = <bool>[
-    true,
-    false,
-    false,
-    false,
-    false,
-    false
-  ];
-  late int attending;
-  late int age;
+// class _AgeToggleButtonState extends State<AgeToggleButton> {
+//   final List<bool> _selectedYouthAge = <bool>[true, false, false, false, false];
+//   final List<bool> _selectedParentsAge = <bool>[
+//     true,
+//     false,
+//     false,
+//     false,
+//     false,
+//     false
+//   ];
 
-  @override
-  Widget build(BuildContext context) {
-    final int code = widget.typeCode;
-    print(code);
-    final size = MediaQuery.of(context).size;
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      if (code == 0 || code == 1) ...[
-        const TextCustom(
-          text: '재학 여부를 선택해주세요.',
-          fontSize: 17,
-          letterSpacing: 1.0,
-          maxLines: 2,
-        ),
-        const SizedBox(height: 5.0),
-        const TextCustom(
-          text: '청소년, 청소년부모만 해당',
-          fontSize: 13,
-          letterSpacing: 1.0,
-          maxLines: 2,
-        ),
-        const SizedBox(height: 10.0),
-        ToggleSwitch(
-            minWidth: (MediaQuery.of(context).size.width - 87) / 5,
-            minHeight: 50.0,
-            fontSize: 15,
-            initialLabelIndex: 0,
-            activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
-            activeFgColor: ThemeColors.darkGreen,
-            inactiveBgColor: Colors.white,
-            borderColor: const [Color.fromARGB(255, 184, 183, 183)],
-            borderWidth: 0.45,
-            activeBorders: [
-              Border.all(
-                color: ThemeColors.primary,
-                width: 1,
-              )
-            ],
-            dividerColor: const Color.fromARGB(255, 184, 183, 183),
-            totalSwitches: 5,
-            labels: const ['초', '중', '고', '대', '학교밖'],
-            animate: true,
-            animationDuration: 200,
-            cornerRadius: 7,
-            onToggle: (index) {
-              print('school - switched to : $index');
-              attending = index!;
-            }),
-        // ToggleButtons(
-        //   onPressed: (int index) {
-        //     setState(() {
-        //       // The button that is tapped is set to true, and the others to false.
-        //       for (int i = 0; i < _selectedYouthAge.length; i++) {
-        //         _selectedYouthAge[i] = i == index;
-        //       }
-        //       print('Age $_selectedYouthAge');
-        //     });
-        //   },
-        //   borderRadius: const BorderRadius.all(Radius.circular(8)),
-        //   selectedColor: ThemeColors.darkGreen,
-        //   selectedBorderColor: ThemeColors.primary,
-        //   fillColor: ThemeColors.primary.withOpacity(0.08),
-        //   splashColor: ThemeColors.primary.withOpacity(0.12),
-        //   hoverColor: ThemeColors.primary.withOpacity(0.04),
-        //   color: ThemeColors.basic,
-        //   constraints: const BoxConstraints(
-        //     minHeight: 40.0,
-        //     minWidth: (330 - 108) / 5,
-        //   ),
-        //   isSelected: _selectedYouthAge,
-        //   children: youthAgeList,
-        // )
-      ] else if (code == 2) ...[
-        const TextCustom(
-          text: '나이를 선택해주세요.',
-          fontSize: 17,
-          letterSpacing: 1.0,
-          maxLines: 2,
-        ),
-        const SizedBox(height: 10.0),
-        ToggleSwitch(
-          minWidth: (MediaQuery.of(context).size.width - 87) / 6,
-          minHeight: 50.0,
-          fontSize: 15,
-          initialLabelIndex: 0,
-          activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
-          activeFgColor: ThemeColors.darkGreen,
-          inactiveBgColor: Colors.white,
-          borderColor: const [Color.fromARGB(255, 184, 183, 183)],
-          borderWidth: 0.45,
-          activeBorders: [
-            Border.all(
-              color: ThemeColors.primary,
-              width: 1,
-            )
-          ],
-          dividerColor: const Color.fromARGB(255, 184, 183, 183),
-          totalSwitches: 6,
-          labels: const ['10대', '20대', '30대', '40대', '50대', '60대'],
-          animate: true,
-          animationDuration: 200,
-          cornerRadius: 7,
-          onToggle: (index) {
-            print('age - switched to : $index');
-            age = index!;
-          },
-        ),
-        // ToggleButtons(
-        //     onPressed: (int index) {
-        //       setState(() {
-        //         // The button that is tapped is set to true, and the others to false.
-        //         for (int i = 0; i < _selectedParentsAge.length; i++) {
-        //           _selectedParentsAge[i] = i == index;
-        //         }
-        //         print('Age $_selectedParentsAge');
-        //       });
-        //     },
-        //     borderRadius: const BorderRadius.all(Radius.circular(8)),
-        //     selectedColor: ThemeColors.darkGreen,
-        //     selectedBorderColor: ThemeColors.primary,
-        //     fillColor: ThemeColors.primary.withOpacity(0.08),
-        //     splashColor: ThemeColors.primary.withOpacity(0.12),
-        //     hoverColor: ThemeColors.primary.withOpacity(0.04),
-        //     color: ThemeColors.basic,
-        //     constraints: const BoxConstraints(
-        //       minHeight: 40.0,
-        //       minWidth: 40.0,
-        //     ),
-        //     isSelected: _selectedParentsAge,
-        //     children: parentsAgeList)
-      ],
-    ]);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final int code = widget.typeCode;
+//     print(code);
+//     final size = MediaQuery.of(context).size;
+//     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+//       if (code == 0 || code == 1) ...[
+//         const TextCustom(
+//           text: '재학 여부를 선택해주세요.',
+//           fontSize: 17,
+//           letterSpacing: 1.0,
+//           maxLines: 2,
+//         ),
+//         const SizedBox(height: 5.0),
+//         const TextCustom(
+//           text: '청소년, 청소년부모만 해당',
+//           fontSize: 13,
+//           letterSpacing: 1.0,
+//           maxLines: 2,
+//         ),
+//         const SizedBox(height: 10.0),
+//         ToggleButtons(
+//           onPressed: (int index) {
+//             setState(() {
+//               // The button that is tapped is set to true, and the others to false.
+//               for (int i = 0; i < _selectedYouthAge.length; i++) {
+//                 _selectedYouthAge[i] = i == index;
+//               }
+//               print('Age $_selectedYouthAge');
+//             });
+//           },
+//           borderRadius: const BorderRadius.all(Radius.circular(8)),
+//           selectedColor: ThemeColors.darkGreen,
+//           selectedBorderColor: ThemeColors.primary,
+//           fillColor: ThemeColors.primary.withOpacity(0.08),
+//           splashColor: ThemeColors.primary.withOpacity(0.12),
+//           hoverColor: ThemeColors.primary.withOpacity(0.04),
+//           color: ThemeColors.basic,
+//           constraints: const BoxConstraints(
+//             minHeight: 40.0,
+//             minWidth: (330 - 108) / 5,
+//           ),
+//           isSelected: _selectedYouthAge,
+//           children: youthAgeList,
+//         )
+//       ] else if (code == 2) ...[
+//         const TextCustom(
+//           text: '나이를 선택해주세요.',
+//           fontSize: 17,
+//           letterSpacing: 1.0,
+//           maxLines: 2,
+//         ),
+//         const SizedBox(height: 10.0),
+//         ToggleButtons(
+//             onPressed: (int index) {
+//               setState(() {
+//                 // The button that is tapped is set to true, and the others to false.
+//                 for (int i = 0; i < _selectedParentsAge.length; i++) {
+//                   _selectedParentsAge[i] = i == index;
+//                 }
+//                 print('Age $_selectedParentsAge');
+//               });
+//             },
+//             borderRadius: const BorderRadius.all(Radius.circular(8)),
+//             selectedColor: ThemeColors.darkGreen,
+//             selectedBorderColor: ThemeColors.primary,
+//             fillColor: ThemeColors.primary.withOpacity(0.08),
+//             splashColor: ThemeColors.primary.withOpacity(0.12),
+//             hoverColor: ThemeColors.primary.withOpacity(0.04),
+//             color: ThemeColors.basic,
+//             constraints: const BoxConstraints(
+//               minHeight: 40.0,
+//               minWidth: 40.0,
+//             ),
+//             isSelected: _selectedParentsAge,
+//             children: parentsAgeList)
+//       ],
+//     ]);
+//   }
+// }
 
-// 성별 선택 토글 버튼
-const List<Widget> sexList = <Widget>[
-  Text('남'),
-  Text('여'),
-];
+// // 성별 선택 토글 버튼
+// // const List<Widget> sexList = <Widget>[
+// //   Text('남'),
+// //   Text('여'),
+// // ];
 
-class SexToggleButton extends StatefulWidget {
-  const SexToggleButton({Key? key}) : super(key: key);
+// // class SexToggleButton extends StatefulWidget {
+// //   const SexToggleButton({Key? key}) : super(key: key);
 
-  @override
-  State<SexToggleButton> createState() => _SexToggleButtonState();
-}
+// //   @override
+// //   State<SexToggleButton> createState() => _SexToggleButtonState();
+// // }
 
-class _SexToggleButtonState extends State<SexToggleButton> {
-  final List<bool> _selectedSex = <bool>[true, false];
-  late int sex;
+// // class _SexToggleButtonState extends State<SexToggleButton> {
+//   final List<bool> _selectedSex = <bool>[true, false];
+//   late int sex;
 
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const TextCustom(
-        text: '성별을 선택해주세요.',
-        fontSize: 17,
-        letterSpacing: 1.0,
-        maxLines: 2,
-      ),
-      const SizedBox(height: 10.0),
-      ToggleSwitch(
-        minWidth: (MediaQuery.of(context).size.width - 87) / 2,
-        minHeight: 50.0,
-        fontSize: 15,
-        initialLabelIndex: 0,
-        activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
-        activeFgColor: ThemeColors.darkGreen,
-        inactiveBgColor: Colors.white,
-        borderColor: const [Color.fromARGB(255, 184, 183, 183)],
-        borderWidth: 0.45,
-        activeBorders: [
-          Border.all(
-            color: ThemeColors.primary,
-            width: 1,
-          )
-        ],
-        dividerColor: const Color.fromARGB(255, 184, 183, 183),
-        totalSwitches: 2,
-        labels: const ['남자', '여자'],
-        animate: true,
-        animationDuration: 200,
-        cornerRadius: 7,
-        onToggle: (index) {
-          print('sex - switched to : $index');
-          sex = index!;
-        },
-      ),
-      // ToggleButtons(
-      //     onPressed: (int index) {
-      //       setState(() {
-      //         // The button that is tapped is set to true, and the others to false.
-      //         for (int i = 0; i < _selectedSex.length; i++) {
-      //           _selectedSex[i] = i == index;
-      //         }
-      //         print('Age $_selectedSex');
-      //       });
-      //     },
-      //     borderRadius: const BorderRadius.all(Radius.circular(8)),
-      //     selectedColor: ThemeColors.darkGreen,
-      //     selectedBorderColor: ThemeColors.primary,
-      //     fillColor: ThemeColors.primary.withOpacity(0.08),
-      //     splashColor: ThemeColors.primary.withOpacity(0.12),
-      //     hoverColor: ThemeColors.primary.withOpacity(0.04),
-      //     color: ThemeColors.basic,
-      //     constraints: const BoxConstraints(
-      //       minHeight: 40.0,
-      //       minWidth: 80,
-      //     ),
-      //     isSelected: _selectedSex,
-      //     children: sexList)
-    ]);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final size = MediaQuery.of(context).size;
+//     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+//       const TextCustom(
+//         text: '성별을 선택해주세요.',
+//         fontSize: 17,
+//         letterSpacing: 1.0,
+//         maxLines: 2,
+//       ),
+//       const SizedBox(height: 10.0),
+//       ToggleSwitch(
+//         minWidth: (MediaQuery.of(context).size.width - 87) / 2,
+//         minHeight: 50.0,
+//         fontSize: 15,
+//         initialLabelIndex: 0,
+//         activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
+//         activeFgColor: ThemeColors.darkGreen,
+//         inactiveBgColor: Colors.white,
+//         borderColor: const [Color.fromARGB(255, 184, 183, 183)],
+//         borderWidth: 0.45,
+//         activeBorders: [
+//           Border.all(
+//             color: ThemeColors.primary,
+//             width: 1,
+//           )
+//         ],
+//         dividerColor: const Color.fromARGB(255, 184, 183, 183),
+//         totalSwitches: 2,
+//         labels: const ['남자', '여자'],
+//         animate: true,
+//         animationDuration: 200,
+//         cornerRadius: 7,
+//         onToggle: (index) {
+//           print('sex - switched to : $index');
+//           sex = index!;
+//         },
+//       ),
+//       // ToggleButtons(
+//       //     onPressed: (int index) {
+//       //       setState(() {
+//       //         // The button that is tapped is set to true, and the others to false.
+//       //         for (int i = 0; i < _selectedSex.length; i++) {
+//       //           _selectedSex[i] = i == index;
+//       //         }
+//       //         print('Age $_selectedSex');
+//       //       });
+//       //     },
+//       //     borderRadius: const BorderRadius.all(Radius.circular(8)),
+//       //     selectedColor: ThemeColors.darkGreen,
+//       //     selectedBorderColor: ThemeColors.primary,
+//       //     fillColor: ThemeColors.primary.withOpacity(0.08),
+//       //     splashColor: ThemeColors.primary.withOpacity(0.12),
+//       //     hoverColor: ThemeColors.primary.withOpacity(0.04),
+//       //     color: ThemeColors.basic,
+//       //     constraints: const BoxConstraints(
+//       //       minHeight: 40.0,
+//       //       minWidth: 80,
+//       //     ),
+//       //     isSelected: _selectedSex,
+//       //     children: sexList)
+//     ]);
+//   }
+// }
