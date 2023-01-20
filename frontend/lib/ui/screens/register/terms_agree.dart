@@ -66,6 +66,8 @@ class _termsAgreePageState extends State<termsAgreePage> {
                   onTap: () => onAllClicked(allChecked),
                   leading: Checkbox(
                     value: allChecked.value,
+                    // checkColor: ThemeColors.basic,
+                    activeColor: ThemeColors.primary,
                     onChanged: (value) => onAllClicked(allChecked),
                   ),
                   title: Text(allChecked.title,
@@ -77,6 +79,8 @@ class _termsAgreePageState extends State<termsAgreePage> {
                     .map((item) => ListTile(
                           onTap: () => onItemClicked(item),
                           leading: Checkbox(
+                            checkColor: ThemeColors.basic,
+                            activeColor: ThemeColors.primary,
                             value: item.value,
                             onChanged: (value) => onItemClicked(item),
                           ),
