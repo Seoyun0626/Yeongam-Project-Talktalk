@@ -28,10 +28,11 @@ class _InfoInputPageState extends State<InfoInputPage> {
   late TextEditingController userEmailController;
   late TextEditingController userNameController;
   late int userTypeCode; // 사용자 유형
+  late int userRole = 1;
   late int youthAge = 0; // 청소년/청소년부모 나이
   late int parentsAge = 0; // 부모 나이
   late int sex; // 성별
-  late int emd; // 영암군 읍면동 주소
+  late int emd = 0; // 영암군 읍면동 주소
 
   final List<String> _emdList = [
     '영암읍',
@@ -46,7 +47,6 @@ class _InfoInputPageState extends State<InfoInputPage> {
     '학산면',
     '미암면'
   ];
-  String _selectedEMD = '영암읍';
 
   final _keyForm = GlobalKey<FormState>();
 
@@ -73,10 +73,11 @@ class _InfoInputPageState extends State<InfoInputPage> {
   @override
   Widget build(BuildContext context) {
     final userTypeCode = widget.userTypeCode;
+
     const youthAgeList = ['초', '중', '고', '대', '학교밖'];
     const parentsAgeList = ['10대', '20대', '30대', '40대', '50대', '60대'];
     const sexList = ['남자', '여자'];
-    print(userTypeCode);
+    // print('user type code - $userTypeCode');
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
 
@@ -401,7 +402,8 @@ class _InfoInputPageState extends State<InfoInputPage> {
                             fontSize: 17,
                             color: Colors.black,
                           ),
-                          value: _selectedEMD,
+                          // ignore: unnecessary_null_comparison
+                          value: _emdList[emd],
                           items: _emdList.map((value) {
                             return DropdownMenuItem(
                               value: value,
@@ -410,9 +412,11 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           }).toList(),
                           onChanged: (value) {
                             setState(() {
-                              _selectedEMD = value!;
-                              print('emd $_selectedEMD');
-                              emd = 0; //_selectedEMD;
+                              emd = _emdList.indexOf(value!);
+                              // _selectedEMD =
+                              //     _emdList.indexOf(value!).toString(); //value!;
+                              // print('emd $_selectedEMD');
+                              // emd = _selectedEMD; //_selectedEMD;
                             });
                           },
                           elevation: 4,
@@ -437,7 +441,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                                 userEmailController.text.trim(),
                                 userPWController.text.trim(),
                                 userAgainPWController.text.trim(),
-                                '1', // user_role - 사용자
+                                userRole.toString(), // user_role - 사용자
                                 userTypeCode.toString(), // user_type
                                 youthAge.toString(), // youthAge_code
                                 parentsAge.toString(), // parentsAge_code
