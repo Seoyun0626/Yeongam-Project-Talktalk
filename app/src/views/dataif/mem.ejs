@@ -105,7 +105,8 @@
             <th>이메일</th>
             <th>sms</th> -->
             <th>관리</th>
-          </tr></thead>
+          </tr>
+        </thead>
           <tbody>
           <% for(var i=0; i<posts.length; i++){ %>
             <form action="/admin/dataif/update/<%=posts[i].userid %>" method="get" >
@@ -147,7 +148,7 @@
             </a>
           </div>
           <div id="reg_btn_set">
-            <button class="ui button" id="add_user" onclick="signUp()">회원 등록</button>
+            <!-- <button class="ui button" id="add_user" onclick="signUp()">회원 등록</button> -->
             <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button>
           </div>
         </div>  

@@ -60,6 +60,22 @@
                     <th>정책 수정</th>
                 </tr>
             </thead>
+            <tbody>
+            <% for(var i=0; i<posts.length; i++){ %>
+              <!-- <form action="/admin/policy/update/<%=posts[i].userid %>" method="get" > -->
+              <tr>
+                <td><%= posts[i].board_idx %></td>
+                <td><%= posts[i].policy_name %></td>
+                <td><%= posts[i].description %></td>
+                <td><%= posts[i].policy_target %></td>
+                <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
+                <td>
+                  <button class="ui button" type="submit">수정</button>
+                </td>
+              </tr>
+            <!-- </form> -->
+            <% } %>
+            </tbody>
         </table>
     </div>
     <div id="managep_foot">

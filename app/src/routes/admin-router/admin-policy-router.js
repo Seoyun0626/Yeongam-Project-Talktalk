@@ -6,9 +6,14 @@ var policy_controller = require("../../controllers/common-controller/policy-cont
 const passport = require('passport');
 
 // const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
-router.get('/show', function (req, res) {
+router.get('/show', async function (req, res) {
     try{
-      res.render('policy/show');
+        var result = await policy_controller.fetchData(req,res);
+        console.log(result[0]);
+        res.render('policy/show', {
+            posts:result,
+            user:req.user
+        });
     } catch(error) {
         console.log('policy-router show error:'+error);
     }

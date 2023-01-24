@@ -2,6 +2,22 @@ var db = require('../utils/db');
 var multer = require('multer');
 const path = require("path");
 
+exports.fetchData = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service fetchData db getConnection');
+        var query = "SELECT * FROM webdb.tb_policy;";
+        var rows = await conn.query(query); // 쿼리 실행
+        return rows;
+    } catch(error) {
+        console.log('policy-service fetchData:'+error);
+    } finally {
+        conn.release();
+    }
+}
+
+
 
 exports.upload = async function(req, res) {
     var conn;
