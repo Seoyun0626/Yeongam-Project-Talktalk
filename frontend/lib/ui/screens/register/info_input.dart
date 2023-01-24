@@ -74,8 +74,8 @@ class _InfoInputPageState extends State<InfoInputPage> {
   Widget build(BuildContext context) {
     final userTypeCode = widget.userTypeCode;
 
-    const youthAgeList = ['초', '중', '고', '대', '학교밖'];
-    const parentsAgeList = ['10대', '20대', '30대', '40대', '50대', '60대'];
+    const youthAgeList = ['초', '중', '고', '대', '학교밖', '선택 안함'];
+    const parentsAgeList = ['10대', '20대', '30대', '40대', '50대', '60대', '선택 안함'];
     const sexList = ['남자', '여자'];
     // print('user type code - $userTypeCode');
     final size = MediaQuery.of(context).size;
@@ -274,7 +274,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       const SizedBox(height: 10.0),
                       ToggleSwitch(
                           minWidth:
-                              (MediaQuery.of(context).size.width - 87) / 5,
+                              (MediaQuery.of(context).size.width - 87) / 6,
                           minHeight: 50.0,
                           fontSize: 15,
                           initialLabelIndex: 0,
@@ -303,8 +303,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           onToggle: (index) {
                             print('school - switched to : $index');
                             youthAge = index!;
-                            // ignore: null_check_always_fails
-                            // parentsAge = null!;
+                            parentsAge = 5;
                           }),
                     ] else if (userTypeCode == 2) ...[
                       const TextCustom(
@@ -315,7 +314,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       ),
                       const SizedBox(height: 10.0),
                       ToggleSwitch(
-                        minWidth: (MediaQuery.of(context).size.width - 87) / 6,
+                        minWidth: (MediaQuery.of(context).size.width - 87) / 7,
                         minHeight: 50.0,
                         fontSize: 15,
                         initialLabelIndex: 0,
@@ -339,8 +338,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         onToggle: (index) {
                           print('age - switched to : $index');
                           parentsAge = index!;
-                          // ignore: null_check_always_fails
-                          // youthAge = null!;
+                          youthAge = 6;
                         },
                       ),
                     ],
