@@ -75,6 +75,7 @@ exports.signUp = async function(req, res) {
         resultcode = 100;
         return resultcode;
     }
+    console.log(req.body);
     if (rows[0] == undefined) {
         hasher({
             password: password
