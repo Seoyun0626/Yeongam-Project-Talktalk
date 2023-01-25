@@ -74,8 +74,8 @@ class _InfoInputPageState extends State<InfoInputPage> {
   Widget build(BuildContext context) {
     final userTypeCode = widget.userTypeCode;
 
-    const youthAgeList = ['초', '중', '고', '대', '학교밖', '선택 안함'];
-    const parentsAgeList = ['10대', '20대', '30대', '40대', '50대', '60대', '선택 안함'];
+    const youthAgeList = ['초', '중', '고', '대', '학교밖', '선택X'];
+    const parentsAgeList = ['10대', '20대', '30대', '40대', '50대', '60대', '선택X'];
     const sexList = ['남자', '여자'];
     // print('user type code - $userTypeCode');
     final size = MediaQuery.of(context).size;
@@ -276,7 +276,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           minWidth:
                               (MediaQuery.of(context).size.width - 87) / 6,
                           minHeight: 50.0,
-                          fontSize: 15,
+                          fontSize: 13,
                           initialLabelIndex: 0,
                           activeBgColor: const [
                             Color.fromARGB(40, 204, 221, 90)
@@ -295,7 +295,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           ],
                           dividerColor:
                               const Color.fromARGB(255, 184, 183, 183),
-                          totalSwitches: 5,
+                          totalSwitches: 6,
                           labels: youthAgeList,
                           animate: true,
                           animationDuration: 200,
@@ -303,7 +303,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           onToggle: (index) {
                             print('school - switched to : $index');
                             youthAge = index!;
-                            parentsAge = 5;
+                            parentsAge = 6;
                           }),
                     ] else if (userTypeCode == 2) ...[
                       const TextCustom(
@@ -316,7 +316,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       ToggleSwitch(
                         minWidth: (MediaQuery.of(context).size.width - 87) / 7,
                         minHeight: 50.0,
-                        fontSize: 15,
+                        fontSize: 12,
                         initialLabelIndex: 0,
                         activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
                         activeFgColor: ThemeColors.darkGreen,
@@ -330,7 +330,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           )
                         ],
                         dividerColor: const Color.fromARGB(255, 184, 183, 183),
-                        totalSwitches: 6,
+                        totalSwitches: 7,
                         labels: parentsAgeList,
                         animate: true,
                         animationDuration: 200,
