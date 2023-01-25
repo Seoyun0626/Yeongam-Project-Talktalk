@@ -36,6 +36,7 @@ CREATE TABLE webdb.`tb_policy` (
   `description` longtext NULL,
   `policy_supervision` varchar(30) NOT NULL,
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
+  `application_date` timestamp NULL DEFAULT NULL,
   `fund` int(10) NOT NULL,
   `content` varchar(1000) NULL,
   `img` varchar(30) NULL,

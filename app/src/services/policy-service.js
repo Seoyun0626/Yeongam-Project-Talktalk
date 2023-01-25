@@ -43,6 +43,7 @@ exports.upload = async function(req, res) {
                 console.log('multer error:' + err);
             }
         });
+        // DB에 저장
         conn = await db.getConnection();
         console.log('policy-service upload db getConnection');
         var name = req.body.name;
@@ -51,7 +52,8 @@ exports.upload = async function(req, res) {
         var description = req.body.description;
         var fund = req.body.fund;
         var content = req.body.content;
-        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target, policy_supervision, description, fund, content, img) VALUES ('" + name + "', '" + target + "', '" + supervision + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "');";
+        var application_date = req.body.application_date;
+        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target, policy_supervision, description, fund, content, img, application_date) VALUES ('" + name + "', '" + target + "', '" + supervision + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_date + "');";
         var rows = await conn.query(query); // 쿼리 실행
         console.log('policy-service upload success');
         return resultcode; //0이면 성공
