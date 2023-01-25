@@ -13,39 +13,7 @@
   <script src="/js/home/mem.js" defer></script>
 </head>
 <body>
-  <nav>
-    <img id='frame' class='frame' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAQACAYAAAAgBjM/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVHgB7cRBDQAACAQgZ/+0V0DN4eBBJZmuI0mSJEmSJOlbC6N8C9SP7V1EAAAAAElFTkSuQmCC'/>
-    </img>
-    <img id='vector4' class='vector4' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABVcAAAACCAYAAABc3OxqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtSURBVHgB7cAxEQAgDASwgnKkYLEG/rBA92R19ykAAAAAAL4lubsAAAAAABh7iCsG8ZKfxPwAAAAASUVORK5CYII='/>
-    </img>
-    <div id='관리자페이지' class='관리자페이지'>
-    관리자 페이지</div>
-    <div id='청소년톡talk' class='청소년톡talk'>
-    청소년 톡Talk</div>
-    <div id='회원관리' class='회원관리'>
-    회원 관리</div>
-
-    <a href="/admin/dataif">
-    <div id='회원정보관리' class='회원정보관리'>
-    회원 정보 관리</div></a>
-
-    <a href="/admin/dataif/terms">
-    <div id='회원가입설정' class='회원가입설정'>
-    회원 가입 설정</div></a>
-
-    <a href="/admin/policy/show">
-    <div id='정책정보관리' class='정책정보관리'>
-    정책 정보 관리</div></a>
-    <a href="/admin/policy/banner">
-    <div id="배너등록" class="배너등록">배너 등록</div></a>
-    <div id='정책관리' class='정책관리'>
-    정책 관리</div>
-    <div id='권한관리' class='권한관리'>
-    권한 관리</div>
-    <!-- <div id='admin1' class='admin1'>
-    Admin1</div>
-    <div id='ellipse5' class='ellipse5'>     -->
-</nav>
+    <%- include('../layout.ejs') %>
 <section>
     <div class="pagename">배너 등록</div>
     <form action="/admin/policy/banner" method="post" enctype="multipart/form-data">

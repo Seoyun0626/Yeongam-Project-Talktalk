@@ -1,53 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>Admin Page</title>
-  <link rel="stylesheet" href="/semantic/layout.css">
-  <link rel="stylesheet" href="/semantic/semantic.min.css">
-  <link rel="stylesheet" href="/css/home/mem.css">
-  <link rel="stylesheet" href="/css/home/admin.css">
-  <script src="/ckeditor/build/ckeditor.js"></script>
-  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
-  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
-  <script src="/js/home/mem.js" defer></script>
-</head>
-<body>
-  <nav>
-    <img id='frame' class='frame' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAQACAYAAAAgBjM/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVHgB7cRBDQAACAQgZ/+0V0DN4eBBJZmuI0mSJEmSJOlbC6N8C9SP7V1EAAAAAElFTkSuQmCC'/>
-    </img>
-    <img id='vector4' class='vector4' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABVcAAAACCAYAAABc3OxqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtSURBVHgB7cAxEQAgDASwgnKkYLEG/rBA92R19ykAAAAAAL4lubsAAAAAABh7iCsG8ZKfxPwAAAAASUVORK5CYII='/>
-    </img>
-    <div id='관리자페이지' class='관리자페이지'>
-    관리자 페이지</div>
-    <div id='청소년톡talk' class='청소년톡talk'>
-    청소년 톡Talk</div>
-    <div id='회원관리' class='회원관리'>
-    회원 관리</div>
+<nav>
+  <!-- if문 사용, 선택 처리 -->
+  <div id='rectangle39' class='rectangle39'></div>
+  <div id='rectangle40' class='rectangle40'></div>
+  <img id='frame' class='frame' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAQACAYAAAAgBjM/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVHgB7cRBDQAACAQgZ/+0V0DN4eBBJZmuI0mSJEmSJOlbC6N8C9SP7V1EAAAAAElFTkSuQmCC'/>
+  </img>
+  <img id='vector4' class='vector4' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABVcAAAACCAYAAABc3OxqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtSURBVHgB7cAxEQAgDASwgnKkYLEG/rBA92R19ykAAAAAAL4lubsAAAAAABh7iCsG8ZKfxPwAAAAASUVORK5CYII='/>
+  </img>
+  <div id='관리자페이지' class='관리자페이지'>
+  관리자 페이지</div>
+  <div id='청소년톡talk' class='청소년톡talk'>
+  청소년 톡Talk</div>
+  <div id='회원관리' class='회원관리'>
+  회원 관리</div>
 
-    <a href="/admin/dataif">
-    <div id='회원정보관리' class='회원정보관리'>
-    회원 정보 관리</div></a>
+  <a href="/admin/dataif">
+  <div id='회원정보관리' class='회원정보관리'>
+  회원 정보 관리</div></a>
 
-    <a href="/admin/dataif/terms">
-    <div id='회원가입설정' class='회원가입설정'>
-    회원 가입 설정</div></a>
+  <a href="/admin/dataif/terms">
+  <div id='회원가입설정' class='회원가입설정'>
+  회원 가입 설정</div></a>
 
-    <a href="/admin/policy/show">
-    <div id='정책정보관리' class='정책정보관리'>
-    정책 정보 관리</div></a>
-    
-    <div id='정책관리' class='정책관리'>
-    정책 관리</div>
-    <div id='권한관리' class='권한관리'>
-    권한 관리</div>
-    <!-- <div id='admin1' class='admin1'>
-    Admin1</div>
-    <div id='ellipse5' class='ellipse5'>     -->
+  <a href="/admin/policy/show">
+  <div id='정책정보관리' class='정책정보관리'>
+  정책 정보 관리</div></a>
+  <a href="/admin/policy/banner">
+  <div id="배너등록" class="배너등록">배너 등록</div></a>
+  <div id='정책관리' class='정책관리'>
+  정책 관리</div>
+  <div id='권한관리' class='권한관리'>
+  이벤트 관리</div>
+  <div id='admin1' class='admin1'>
+  Admin1</div>
+  <div id='ellipse5' class='ellipse5'> </div>
+  <div id='line26' class='line26'></div>
+  <img id='vector' class='vector' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyUAAAArCAYAAABmdidyAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAATySURBVHgB7d09clvXGQbgcy+oni2HDbICwQALdUY6d3JWIHEFklcgsHMXqksncwWRu3QBO84IQpAVBGlIdaZ6AvD3QRcamJIoykOCBZ9nBjg/969+5zv33Kp8o06ns53N1tbW48Vi0Ylfu6qqdgEAAO6dyAPTyAP5m1xcXBxPJpPX5RtV1z0xwkg7gsizeOjTGG4XAACAT53H7/VsNjuIgDK9zgVfDSVZGanr+kUkn+dr08MYH0dAmTx48GBycnIyLQAAwL3z6NGjdlRI2vP5vB8Z4XFMddYO/3KdcHJlKIlA0m+1Wq+i217dNB50NBqNhgUAAOCSXGEVGWIQ3SfNVC7t2r8qQ3wxlPR6vWfRHDbDYSSc/euWXwAAgPutCSdZ4OjneLFYDMbj8cHnzm19brLb7eZyrZ+zH+3B27dv99+9e3deAAAAriHzw9nZ2dHu7m4WQnJpV39nZ6fE3PHlcz8JJVkhWQWSuq6zzHJYAAAA/oTT09NhhJH3kTF+aILJ+wgmJ+vn/GH5VlNi+d/yQFX9JJAAAAA3odvtPo+M8ffsR/Hjuzdv3kxWx+r1EyOQ/DvbXLIlkAAAADdlPB5nvniZ/fl8/s/m+4dLH0NJvkcSTTs/fhKBZFAAAABu0Gw2G2TeiG47qiUfPzmyDCW5bCuqI0+XE3W9XwAAAG7YZDI5X+WNyB/PVtWSZSiJA/3y4VskQ98gAQAAbkuTN/K3vaqWLENJpJQXTXtQAAAAbtEqd0S7/MBiFSWTTqvV+k+u7RqPx38pAAAAt6zX6/0WzfZsNvuubpZuZUoZFgAAgA2Yz+e/Zpt5pI4w8n0OolJyXAAAADZgVRSJ9mG+U9LOQSSVSQEAANiAtfzR/xhKwrQAAABsxrRptzOULPcGzj2DCwAAwAas5Y/tugAAANwhoQQAALhTQgkAAHCnhBIAAOBOCSUAAMCdEkoAAIA7laFkuRVXp9PZLgAAABuwlj/O68VisdofuF0AAAA2o9200wwlx9mr67pTAAAANmAtf/y/rqpqkr1ovy8AAAAbsMofUSQZ1vP5fNjM/1gAAAA2o59/mUfqSYh0Mo3x9t7eXr8AAADcok6n04+mnTkk88hqS+Cj/IvJFwUAAOAWtVqtVe44yL9lKImSyWH5sDVwX7UEAAC4LU2VpJ9VktWrJMtQEhWT85h8mf1oX/lmCQAAcBuiSvIq27qujyKHTJf91cGsljTvlrS3trYs4wIAAG5Ut9vNnLF8l2Q0Gg1W8x9DSVZLIrX8Lftx0vO44HkBAAC4Ab1e71lVVYPsR0Hkr+vHWuuD09PTdzs7O+/j5B/yl/2zs7OTAgAA8CdFIHkSzT+yHznjp/F4/K/1463LF2QI2d3draLbb4JJzh0XAACAb5RLtiJX5MZaGUgORqPRz5fPqb508d7e3mBti+DhbDbbX72IAgAAcJVOp9NuXmrv5zgrJBFIDj93bnXVjXJ74Pl8/ipu0G6mfolwciCcAAAAn5Nb/kYYyeVaT3OcL7XXdb0fgWT4pWuqa9w0E84guk/WpvMr8L82+wpPhRQAALifMi9kE8HjYRQz+qWpjDReRlFjkJtqXXWPr4aS9YdlOIkw8jge5jsmAADAJyIvnEdeOIowcnjd4sW1Q8m6Xq/3Y/mQgB7GQ9try7sAAIB7JJdnRR6YRve/0b6+uLiYfK0yctnvlUC/zp4GSTsAAAAASUVORK5CYII='/></img>
 </nav>
-<div id='line26' class='line26'></div>
-<section>
-    <%= body %>
-</section>
-</body>
-</html>

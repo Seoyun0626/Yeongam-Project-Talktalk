@@ -39,10 +39,9 @@ body {
   height:1024px;
   padding-left: 2em;
   padding-right: 1em;
-  padding-top: 1em;
+  padding-top: 10em;
   background-color: white;
   margin: 0;
-  top: 0;
   left: 0;
   overflow: auto; 
   }

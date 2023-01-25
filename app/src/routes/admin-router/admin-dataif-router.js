@@ -59,6 +59,7 @@ router.post("/dataif", checkAuth, async function(req, res) {
 //로그인 시 출력하는 화면
 router.get('/', async function(req, res){
   try{
+    console.log(req.body);
     var result = await dataif_controller.fetchData(req, res);
 /*
     var rtnparams=[];
