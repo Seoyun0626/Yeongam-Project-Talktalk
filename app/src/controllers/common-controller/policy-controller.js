@@ -15,7 +15,7 @@ exports.upload = async function(req, res) {
       var result = await policy_service.upload(req);
       return result;
     } catch(error) {
-      console.log('login-controller login_check:'+error);
+      console.log('policy-controller login_check:'+error);
     }
   };
   
@@ -24,7 +24,7 @@ exports.banner = async function(req, res) {
       var result = await policy_service.banner(req);
       return result;
     } catch(error) {
-      console.log('login-controller login_check:'+error);
+      console.log('policy-controller login_check:'+error);
     }
   };
 
@@ -33,6 +33,6 @@ exports.fetchData = async function(req, res) {
       var result = await policy_service.fetchData(req);
       return result;
     } catch(error) {
-      console.log('login-controller login_check:'+error);
+      console.log('policy-controller login_check:'+error);
     }
   };

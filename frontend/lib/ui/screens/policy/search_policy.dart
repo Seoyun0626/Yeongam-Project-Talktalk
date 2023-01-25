@@ -55,84 +55,67 @@ class _SearchPolicyPageState extends State<SearchPolicyPage> {
                 elevation: 0.0,
               ),
               body: SafeArea(
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  children: [
-                    FutureBuilder<List<Policy>>(
-                      future: policyService.getAllPolicy(),
-                      builder: (_, snapshot) {
-                        if (snapshot.data != null && snapshot.data!.isEmpty) {
-                          return _ListWithoutPolicy();
-                        }
-                        return !snapshot.hasData
-                            ? Column(
-                                children: const [
-                                  ShimmerNaru(),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  ShimmerNaru(),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  ShimmerNaru(),
-                                ],
-                              )
-                            : ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (_, i) => _ListViewPolicy(
-                                    policies: snapshot.data![i]));
-                      },
+                child: Column(
+                  children: <Widget>[
+                    const SearchBar(),
+                    Container(
+                      color: Colors.white,
+                      height: 43,
+                      padding: const EdgeInsets.all(13),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            TextCustom(
+                              text: "검색결과",
+                              color: ThemeColors.basic,
+                              fontSize: 15.0,
+                            ),
+                            Icon(
+                              Icons.arrow_drop_down_circle_outlined,
+                              color: ThemeColors.basic,
+                            ),
+                          ]),
+                    ),
+                    Expanded(
+                      child: ListView(
+                        physics: const BouncingScrollPhysics(),
+                        children: [
+                          FutureBuilder<List<Policy>>(
+                            future: policyService.getAllPolicy(),
+                            builder: (_, snapshot) {
+                              if (snapshot.data != null &&
+                                  snapshot.data!.isEmpty) {
+                                return _ListWithoutPolicy();
+                              }
+                              return !snapshot.hasData
+                                  ? Column(
+                                      children: const [
+                                        ShimmerNaru(),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        ShimmerNaru(),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        ShimmerNaru(),
+                                      ],
+                                    )
+                                  : ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: snapshot.data!.length,
+                                      itemBuilder: (_, i) => _ListViewPolicy(
+                                          policies: snapshot.data![i]));
+                            },
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
               ),
-              // body: Column(
-              //   children: <Widget>[
-              //     const SearchBar(),
-              //     Container(
-              //       color: Colors.white,
-              //       height: 43,
-              //       padding: const EdgeInsets.all(13),
-              //       child: Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //           children: const [
-              //             TextCustom(
-              //               text: "검색결과",
-              //               color: ThemeColors.basic,
-              //               fontSize: 15.0,
-              //             ),
-              //             Icon(
-              //               Icons.arrow_drop_down_circle_outlined,
-              //               color: ThemeColors.basic,
-              //             ),
-              //           ]),
-              //     ),
-              //     ListView(shrinkWrap: true, children: const <Widget>[
-              //       // Card(
-              //       //   child: ListTile(
-              //       //     leading: FlutterLogo(size: 72.0),
-              //       //     title: Text('Three-line ListTile'),
-              //       //     subtitle: Text(
-              //       //         'A sufficiently long subtitle warrants three lines.'),
-              //       //     trailing: Icon(Icons.more_vert),
-              //       //     isThreeLine: true,
-              //       //   ),
-              //       // ),
-              //       CustomListItem(
-              //         thumbnail: Icon(
-              //           Icons.abc,
-              //           size: 72.0,
-              //         ),
-              //         policy_organizer: '영암군청소년수련관',
-              //         policy_name: '2022년 3차 청소년문화의집 모집 안내',
-              //       ),
-
-              //     ])
-              //   ],
-              // ),
               bottomNavigationBar: const BottomNavigation(index: 2)),
         ));
   }
@@ -193,99 +176,6 @@ class _SearchBar extends State<SearchBar> {
 }
 
 // 정책 리스트
-class _PolicyList extends StatelessWidget {
-  const _PolicyList({
-    required this.policy_organizer, //주최측
-    required this.policy_name, // 제목
-  });
-
-  final String policy_organizer;
-  final String policy_name;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Expanded(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              policy_organizer,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 12.0, color: ThemeColors.basic),
-            ),
-            const Padding(padding: EdgeInsets.only(bottom: 2.0)),
-            Text(
-              policy_name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-          ],
-        )),
-      ],
-    );
-  }
-}
-
-class CustomListItem extends StatelessWidget {
-  const CustomListItem({
-    super.key,
-    required this.thumbnail,
-    required this.policy_organizer, //주최측
-    required this.policy_name, // 제목
-  });
-
-  final Widget thumbnail;
-  final String policy_organizer;
-  final String policy_name;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(5), //symmetric(vertical: 10.0),
-        child: SizedBox(
-          height: 100,
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 0.2,
-                    blurRadius: 2,
-                    offset: const Offset(0, 2),
-                  )
-                ]),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                AspectRatio(
-                  aspectRatio: 1.0,
-                  child: thumbnail,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
-                    child: _PolicyList(
-                      policy_organizer: policy_organizer,
-                      policy_name: policy_name,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
-  }
-}
-
-// 정책 리스트 22
 class _ListViewPolicy extends StatelessWidget {
   final Policy policies;
 
@@ -300,7 +190,8 @@ class _ListViewPolicy extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        padding: const EdgeInsets.all(10),
+        height: 100,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -308,34 +199,42 @@ class _ListViewPolicy extends StatelessWidget {
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 0.2,
-                blurRadius: 2,
+                blurRadius: 1,
                 offset: const Offset(0, 2),
               )
             ]),
         child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const AspectRatio(
-                aspectRatio: 1.0,
-                child: Icon(
-                  Icons.stars_outlined,
-                  size: 72.0,
-                  color: Colors.amber,
-                ),
+              Container(
+                decoration: BoxDecoration(color: Colors.blue),
+                width: 80.0,
+                height: 80.0,
               ),
+              // const AspectRatio(
+              //   aspectRatio: 1,
+              //   child: Icon(
+              //     Icons.abc,
+              //     size: 72.0,
+              //     color: Colors.amber,
+              //   ),
+              // ),
               Expanded(
                 child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
+                    padding: const EdgeInsets.fromLTRB(13.0, 0.0, 2.0, 0.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          policies.policy_organizer,
+                          policies.policy_supervision,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                               fontSize: 12.0, color: ThemeColors.basic),
                         ), // 주최측
+                        const SizedBox(
+                          height: 3,
+                        ),
                         Text(
                           policies.policy_name,
                           maxLines: 1,

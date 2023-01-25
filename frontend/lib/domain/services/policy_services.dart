@@ -9,11 +9,13 @@ import 'package:login/domain/models/response/response_policy.dart';
 
 class PolicyServices {
   Future<List<Policy>> getAllPolicy() async {
-    final token = await secureStorage.readToken();
+    // final token = await secureStorage.readToken();
+    // print(token);
 
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/policy/get-all-policy'),
-        headers: {'Accept': 'application/json', 'xxx-token': token!});
+        headers: {'Accept': 'application/json'}); //, 'xxx-token': token!});
+    print('policy_services');
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
 }

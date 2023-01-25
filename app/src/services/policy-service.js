@@ -113,3 +113,21 @@ exports.banner = async function(req, res) {
         resultcode = 100;
     }
 };
+
+exports.getAllPolicy = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service getAllPolicy db getConnection');
+        var query = "SELECT policy_name, policy_supervision FROM webdb.tb_policy;";
+        var rows = await conn.query(query); // 쿼리 실행
+        console.log(rows[0]);
+        console.log(rows[1]);
+        console.log(rows[2]); 
+        return rows;
+    } catch(error) {
+        console.log('policy-service getAllPolicy:'+error);
+    } finally {
+        conn.release();
+    }
+}

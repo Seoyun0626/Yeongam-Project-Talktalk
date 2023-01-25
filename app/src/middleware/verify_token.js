@@ -1,9 +1,11 @@
 
 const jwt = require('jsonwebtoken');
 
+
 // Verify token to Routes
 const verifyToken = function (req, res, next) {
     let token = req.header('xxx-token');
+    print('verify-token', token);
     if (!token) {
         return res.status(401).json({
             resp: false,
@@ -11,7 +13,7 @@ const verifyToken = function (req, res, next) {
         });
     }
     try {
-        const payload = jwt.verify(token, process.env.TOKEN_SECRET || 'Yeongam Yeongam');
+        const payload = jwt.verify(token, process.env.TOKEN_SECRET || '청소년 톡Talk');
         req.idPerson = payload.idPerson;
         next();
     }
