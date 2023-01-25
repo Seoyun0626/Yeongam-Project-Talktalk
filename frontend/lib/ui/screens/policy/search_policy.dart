@@ -15,80 +15,96 @@ class _SearchPolicyPageState extends State<SearchPolicyPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-              titleSpacing: 0,
-              title: const Text('청소년톡talk',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  )),
-              leading: InkWell(
-                onTap: () => Navigator.push(
-                    context, routeSlide(page: const LoginPage())),
-                child: Image.asset('images/aco.png', height: 70),
-              ),
-              actions: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.perm_identity,
-                    size: 30,
-                    color: ThemeColors.basic,
-                  ),
-                  onPressed: () => Navigator.push(
-                      context, routeSlide(page: const LoginPage())),
-                )
-              ],
-              backgroundColor: ThemeColors.primary,
-              centerTitle: false,
-              elevation: 0.0,
+      home: Scaffold(
+          appBar: AppBar(
+            titleSpacing: 0,
+            title: const Text('청소년톡talk',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                )),
+            leading: InkWell(
+              onTap: () =>
+                  Navigator.push(context, routeSlide(page: const LoginPage())),
+              child: Image.asset('images/aco.png', height: 70),
             ),
-            body: Column(
-              children: <Widget>[
-                const SearchBar(),
-                Container(
-                  color: Colors.white,
-                  height: 43,
-                  padding: const EdgeInsets.all(13),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        TextCustom(
-                          text: "검색결과",
-                          color: ThemeColors.basic,
-                          fontSize: 15.0,
-                        ),
-                        Icon(
-                          Icons.arrow_drop_down_circle_outlined,
-                          color: ThemeColors.basic,
-                        ),
-                      ]),
+            actions: [
+              IconButton(
+                icon: const Icon(
+                  Icons.perm_identity,
+                  size: 30,
+                  color: ThemeColors.basic,
                 ),
-                ListView(shrinkWrap: true, children: const <Widget>[
-                  Card(
-                    child: ListTile(
-                      leading: FlutterLogo(size: 72.0),
-                      title: Text('Three-line ListTile'),
-                      subtitle: Text(
-                          'A sufficiently long subtitle warrants three lines.'),
-                      trailing: Icon(Icons.more_vert),
-                      isThreeLine: true,
-                    ),
-                  ),
-                  CustomListItem(
-                      thumbnail: Icon(
-                        Icons.abc,
-                        size: 72.0,
+                onPressed: () => Navigator.push(
+                    context, routeSlide(page: const LoginPage())),
+              )
+            ],
+            backgroundColor: ThemeColors.primary,
+            centerTitle: false,
+            elevation: 0.0,
+          ),
+          body: Column(
+            children: <Widget>[
+              const SearchBar(),
+              Container(
+                color: Colors.white,
+                height: 43,
+                padding: const EdgeInsets.all(13),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      TextCustom(
+                        text: "검색결과",
+                        color: ThemeColors.basic,
+                        fontSize: 15.0,
                       ),
-                      policy_organizer: '영암군청소년수련관',
-                      policy_name: '2022년 3차 청소년문화',
-                      policy_startDate: '22.11.29',
-                      policy_endDate: '22.12.01',
-                      policy_category: '문화')
-                ])
-              ],
-            )));
+                      Icon(
+                        Icons.arrow_drop_down_circle_outlined,
+                        color: ThemeColors.basic,
+                      ),
+                    ]),
+              ),
+              ListView(shrinkWrap: true, children: const <Widget>[
+                // Card(
+                //   child: ListTile(
+                //     leading: FlutterLogo(size: 72.0),
+                //     title: Text('Three-line ListTile'),
+                //     subtitle: Text(
+                //         'A sufficiently long subtitle warrants three lines.'),
+                //     trailing: Icon(Icons.more_vert),
+                //     isThreeLine: true,
+                //   ),
+                // ),
+                CustomListItem(
+                  thumbnail: Icon(
+                    Icons.abc,
+                    size: 72.0,
+                  ),
+                  policy_organizer: '영암군청소년수련관',
+                  policy_name: '2022년 3차 청소년문화어쩌구저쩌구블라블라',
+                ),
+                CustomListItem(
+                  thumbnail: Icon(
+                    Icons.abc,
+                    size: 72.0,
+                  ),
+                  policy_organizer: '영암군청소년수련관',
+                  policy_name: '2022년 3차 청소년문화어쩌구저쩌구블라블라',
+                ),
+                CustomListItem(
+                  thumbnail: Icon(
+                    Icons.abc,
+                    size: 72.0,
+                  ),
+                  policy_organizer: '영암군청소년수련관',
+                  policy_name: '2022년 3차 청소년문화어쩌구저쩌구블라블라',
+                ),
+              ])
+            ],
+          ),
+          bottomNavigationBar: const BottomNavigation(index: 2)),
+    );
   }
 }
 
@@ -151,16 +167,10 @@ class _PolicyList extends StatelessWidget {
   const _PolicyList({
     required this.policy_organizer, //주최측
     required this.policy_name, // 제목
-    required this.policy_startDate, // 모집 시작 날짜
-    required this.policy_endDate, // 모집 마감 날짜
-    required this.policy_category, // 카테고리
   });
 
   final String policy_organizer;
   final String policy_name;
-  final String policy_startDate;
-  final String policy_endDate;
-  final String policy_category;
 
   @override
   Widget build(BuildContext context) {
@@ -173,34 +183,19 @@ class _PolicyList extends StatelessWidget {
           children: <Widget>[
             Text(
               policy_organizer,
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 12.0, color: ThemeColors.basic),
             ),
             const Padding(padding: EdgeInsets.only(bottom: 2.0)),
             Text(
               policy_name,
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
           ],
         )),
-        Expanded(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Text(
-                  '$policy_startDate ~ $policy_endDate',
-                  style: const TextStyle(
-                      fontSize: 12.0, color: ThemeColors.darkGreen),
-                ),
-                Row(
-                  children: const [Text('문화')],
-                )
-              ]),
-        )
       ],
     );
   }
@@ -212,46 +207,52 @@ class CustomListItem extends StatelessWidget {
     required this.thumbnail,
     required this.policy_organizer, //주최측
     required this.policy_name, // 제목
-    required this.policy_startDate, // 모집 시작 날짜
-    required this.policy_endDate, // 모집 마감 날짜
-    required this.policy_category, // 카테고리
   });
 
   final Widget thumbnail;
   final String policy_organizer;
   final String policy_name;
-  final String policy_startDate;
-  final String policy_endDate;
-  final String policy_category;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: SizedBox(
-        height: 100,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            AspectRatio(
-              aspectRatio: 1.0,
-              child: thumbnail,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
-                child: _PolicyList(
-                  policy_organizer: policy_organizer,
-                  policy_name: policy_name,
-                  policy_startDate: policy_startDate,
-                  policy_endDate: policy_endDate,
-                  policy_category: policy_category,
+        padding: const EdgeInsets.all(5), //symmetric(vertical: 10.0),
+        child: SizedBox(
+          height: 100,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 0.2,
+                    blurRadius: 2,
+                    offset: const Offset(0, 2),
+                  )
+                ]),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                AspectRatio(
+                  aspectRatio: 1.0,
+                  child: thumbnail,
                 ),
-              ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
+                    child: _PolicyList(
+                      policy_organizer: policy_organizer,
+                      policy_name: policy_name,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
+
+// 제목 오버플로우 
