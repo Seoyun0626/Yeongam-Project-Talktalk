@@ -36,14 +36,13 @@ body {
   section{
   float: left;
   width: 75vw;
-  height:1024px;
   padding-left: 2em;
   padding-right: 1em;
   padding-top: 10em;
   background-color: white;
   margin: 0;
   left: 0;
-  overflow: auto; 
+  overflow:hidden;
   }
   
   ul{
@@ -136,6 +135,7 @@ body {
 /* 테이블 설정 */
 #mem_table{
   text-align: center;
+  width: 65em;
 }
 #policy_table{
   text-align: center;

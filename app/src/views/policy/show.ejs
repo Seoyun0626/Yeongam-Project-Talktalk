@@ -25,7 +25,8 @@
                     <th>정책 이름</th>
                     <th>정책 내용</th>
                     <th>정책 대상</th>
-                    <th>접수 기간</th>
+                    <th>접수 시작일</th>
+                    <th>접수 마감일</th>
                     <th>정책 수정</th>
                 </tr>
             </thead>
@@ -37,7 +38,8 @@
                 <td><%= posts[i].policy_name %></td>
                 <td><%= posts[i].description %></td>
                 <td><%= posts[i].policy_target %></td>
-                <td><%= `${posts[i].application_date.getFullYear()}` + `-`+ `${posts[i].application_date.getMonth()+1}` + `-`+ `${posts[i].application_date.getDate()}`%></td>
+                <td><%= `${posts[i].application_start_date.getFullYear()}` + `-`+ `${posts[i].application_start_date.getMonth()+1}` + `-`+ `${posts[i].application_start_date.getDate()}`%></td>
+                <td><%= `${posts[i].application_end_date.getFullYear()}` + `-`+ `${posts[i].application_end_date.getMonth()+1}` + `-`+ `${posts[i].application_end_date.getDate()}`%></td>
                 <td>
                   <button class="ui button" type="submit">수정</button>
                 </td>
