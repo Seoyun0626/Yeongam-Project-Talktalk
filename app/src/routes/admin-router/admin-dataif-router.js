@@ -56,10 +56,21 @@ router.post("/dataif", checkAuth, async function(req, res) {
     }
 });
 */
+
+router.get('/search=:search', async function(req, res){
+  try{
+    console.log(1);
+    // var result = await dataif_controller.fetchData(req, res);
+    res.render('dataif/');
+  }
+  catch(error) {
+    console.log('dataif-router /mem?search= :search error:'+error);
+  }
+});
+
 //로그인 시 출력하는 화면
 router.get('/', async function(req, res){
   try{
-    console.log(req.body);
     var result = await dataif_controller.fetchData(req, res);
 /*
     var rtnparams=[];
@@ -80,6 +91,9 @@ router.get('/', async function(req, res){
     console.log('dataif-router / error:'+error);
   }
 });
+
+
+
 
 router.post('/', async function(req, res){
   try{
@@ -219,6 +233,7 @@ router.delete('/:id', async function(req, res){
     console.log('dataif-router destroy error:'+error);
   }
 });
+
 
 router.get('/datapermit', async function(req, res){
   try{

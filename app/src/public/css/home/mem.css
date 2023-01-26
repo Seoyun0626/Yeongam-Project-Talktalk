@@ -58,7 +58,7 @@ body {
     border: 1px solid;
     border-radius: 3px;
     height: 8em;
-    width: 70.5em;
+    width: 58em;
   }
   #search_userinfo select{
     margin-left: 25px;
@@ -135,5 +135,8 @@ body {
 
 /* 테이블 설정 */
 #mem_table{
+  text-align: center;
+}
+#policy_table{
   text-align: center;
 }
