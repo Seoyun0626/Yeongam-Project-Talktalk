@@ -76,7 +76,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
 
     const youthAgeList = ['초', '중', '고', '대', '학교밖', '선택X'];
     const parentsAgeList = ['10대', '20대', '30대', '40대', '50대', '60대', '선택X'];
-    const sexList = ['남자', '여자'];
+    const sexList = ['남자', '여자', '선택X'];
     // print('user type code - $userTypeCode');
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
@@ -303,7 +303,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           onToggle: (index) {
                             print('school - switched to : $index');
                             youthAge = index!;
-                            parentsAge = 6;
+                            parentsAge = 6; // 선택안함
                           }),
                     ] else if (userTypeCode == 2) ...[
                       const TextCustom(
@@ -338,7 +338,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         onToggle: (index) {
                           print('age - switched to : $index');
                           parentsAge = index!;
-                          youthAge = 6;
+                          youthAge = 6; // 선택안함
                         },
                       ),
                     ],
@@ -348,7 +348,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                     // 성별
                     // const SexToggleButton(),
                     ToggleSwitch(
-                      minWidth: (MediaQuery.of(context).size.width - 87) / 2,
+                      minWidth: (MediaQuery.of(context).size.width - 87) / 3,
                       minHeight: 50.0,
                       fontSize: 15,
                       initialLabelIndex: 0,
@@ -364,7 +364,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         )
                       ],
                       dividerColor: const Color.fromARGB(255, 184, 183, 183),
-                      totalSwitches: 2,
+                      totalSwitches: 3,
                       labels: sexList,
                       animate: true,
                       animationDuration: 200,
