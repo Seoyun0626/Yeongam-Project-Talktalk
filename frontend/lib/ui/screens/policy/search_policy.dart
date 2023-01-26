@@ -207,7 +207,7 @@ class _ListViewPolicy extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                decoration: BoxDecoration(color: Colors.blue),
+                decoration: BoxDecoration(color: Colors.grey[350]),
                 width: 80.0,
                 height: 80.0,
               ),
