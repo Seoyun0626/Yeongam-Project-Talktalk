@@ -11,7 +11,7 @@ import 'package:login/ui/widgets/widgets.dart';
 
 final BannerImage = [
   Image.asset('images/banner/slider_example.png', fit: BoxFit.fill),
-  Image.asset('images/banner/aco.png', fit: BoxFit.cover),
+  // Image.asset('images/banner/aco.png', fit: BoxFit.cover),
   Image.asset('images/banner/mou_img.png', fit: BoxFit.fill),
 ];
 
