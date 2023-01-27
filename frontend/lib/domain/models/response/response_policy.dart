@@ -32,23 +32,22 @@ class ResponsePolicy {
 class Policy {
   String policy_supervision; // 주최측
   String policy_name;
-  // String images;
+  String img;
 
   Policy({
     required this.policy_supervision,
     required this.policy_name,
-    // required this.images,
+    required this.img,
   });
 
   factory Policy.fromJson(Map<String, dynamic> json) => Policy(
-        policy_supervision: json["policy_supervision"],
-        policy_name: json["policy_name"],
-        // images: json["images"]
-      );
+      policy_supervision: json["policy_supervision"],
+      policy_name: json["policy_name"],
+      img: json["img"]);
 
   Map<String, dynamic> toJson() => {
         "policy_supervision": policy_supervision,
-        "policy_name": policy_name
-        // "images:": images
+        "policy_name": policy_name,
+        "img:": img
       };
 }

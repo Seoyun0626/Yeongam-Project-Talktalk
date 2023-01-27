@@ -87,6 +87,7 @@ class _SearchPolicyPageState extends State<SearchPolicyPage> {
                                   snapshot.data!.isEmpty) {
                                 return _ListWithoutPolicy();
                               }
+
                               return !snapshot.hasData
                                   ? Column(
                                       children: const [
@@ -185,69 +186,95 @@ class _ListViewPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
     // final policyBloc = BlocProvider.of<PolicyBloc>(context);
+    final imgName = policies.img;
+    final String imgUrl = "images/policy/$imgName";
 
     // final List<String> listImages = policies.images.split(',');
     return Padding(
-      padding: const EdgeInsets.all(5),
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        height: 100,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 0.2,
-                blurRadius: 1,
-                offset: const Offset(0, 2),
-              )
-            ]),
-        child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(color: Colors.grey[350]),
-                width: 80.0,
-                height: 80.0,
-              ),
-              // const AspectRatio(
-              //   aspectRatio: 1,
-              //   child: Icon(
-              //     Icons.abc,
-              //     size: 72.0,
-              //     color: Colors.amber,
-              //   ),
-              // ),
-              Expanded(
-                child: Padding(
-                    padding: const EdgeInsets.fromLTRB(13.0, 0.0, 2.0, 0.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          policies.policy_supervision,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              fontSize: 12.0, color: ThemeColors.basic),
-                        ), // 주최측
-                        const SizedBox(
-                          height: 3,
+        padding: const EdgeInsets.fromLTRB(3, 3, 3, 0), // 카드 바깥쪽
+        child: Card(
+          // // Card -> Container 속성
+          // padding: const EdgeInsets.all(10),
+          // height: 100,
+          // decoration: BoxDecoration(
+          //     color: Colors.white,
+          //     borderRadius: BorderRadius.circular(10),
+          //     boxShadow: [
+          //       BoxShadow(
+          //         color: Colors.grey.withOpacity(0.5),
+          //         spreadRadius: 0.2,
+          //         blurRadius: 1,
+          //         offset: const Offset(0, 2),
+          //       )
+          //     ]),
+
+          child: Padding(
+              padding: const EdgeInsets.all(7), // 카드 안쪽
+              child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: SizedBox(
+                        // decoration: BoxDecoration(color: Colors.grey[350]),
+                        width: 80.0,
+                        height: 80.0,
+                        child: Image(
+                          image: AssetImage(imgUrl),
+                          fit: BoxFit.fitWidth,
                         ),
-                        Text(
-                          policies.policy_name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ), // 정책 제목
-                      ],
-                    )),
-              )
-            ]),
-      ),
-    );
+                      ),
+                    ),
+                    Expanded(
+                        child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  policies.policy_supervision,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontSize: 12.0, color: ThemeColors.basic),
+                                ), // 주최측
+                                const SizedBox(
+                                  height: 3,
+                                ),
+                                Text(
+                                  policies.policy_name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ), // 정책 제목
+                              ],
+                            ))),
+                    SizedBox(
+                      // decoration: BoxDecoration(color: Colors.grey[350]),
+                      width: 80.0,
+                      height: 80.0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.bookmark,
+                              size: 30,
+                              color: ThemeColors.basic,
+                            ),
+                            onPressed: () {},
+                          ),
+                          const Text('스크랩수 :',
+                              style: TextStyle(
+                                  color: ThemeColors.basic, fontSize: 10))
+                        ],
+                      ),
+                    ),
+                  ])),
+        ));
   }
 }
 
@@ -260,7 +287,7 @@ class _ListWithoutPolicy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
