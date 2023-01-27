@@ -23,9 +23,17 @@
           <label>정책 이름</label>
           <input type="text" name="name" placeholder="정책 이름">
           <label>정책 대상</label>
-          <input type="text" name="target" placeholder="정책 대상">
+          <div class="field">
+            <select class="ui fluid dropdown" name="target" id="target">
+              <option value="0">청소년</option>
+            </select>
+          </div>
           <label>주관 기관</label>
-          <input type="text" name="supervision" placeholder="주관 기관">
+          <div class="field">
+            <select class="ui fluid dropdown" name="supervision" id="supervision">
+              <option value="0">청소년 수련관</option>
+            </select>
+          </div>
           <label>정책 설명</label>
           <input type="text" name="description" placeholder="정책 설명">
           <!-- <label>정책 타입</label>
