@@ -4,6 +4,7 @@ import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/policy_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/login/login_page.dart';
+import 'package:login/ui/screens/policy/policy_detail.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:login/domain/blocs/policy/policy_bloc.dart';
@@ -186,7 +187,7 @@ class _ListViewPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
     // final policyBloc = BlocProvider.of<PolicyBloc>(context);
-    final imgName = policies.img;
+    final String imgName = policies.img;
     final String imgUrl = "images/policy/$imgName";
 
     // 모집 기간
@@ -210,7 +211,12 @@ class _ListViewPolicy extends StatelessWidget {
               padding: const EdgeInsets.all(7), // 카드 안쪽
               child: InkWell(
                   splashColor: ThemeColors.primary.withAlpha(30),
-                  onTap: () {},
+                  onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailPolicyPage(policies),
+                        ),
+                      ),
                   child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -234,7 +240,7 @@ class _ListViewPolicy extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      policies.policy_supervision,
+                                      '영암군청소년수련관', //policies.policy_supervision,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
