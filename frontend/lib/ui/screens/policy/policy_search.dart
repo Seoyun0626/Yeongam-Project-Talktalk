@@ -287,7 +287,7 @@ class _ListViewPolicy extends StatelessWidget {
                             children: [
                               IconButton(
                                 icon: const Icon(
-                                  Icons.bookmark,
+                                  Icons.bookmark_border,
                                   size: 30,
                                   color: ThemeColors.basic,
                                 ),
