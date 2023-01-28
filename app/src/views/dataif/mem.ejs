@@ -13,43 +13,12 @@
   <script src="/js/home/mem.js" defer></script>
 </head>
 <body>
-  <nav>
-    <img id='frame' class='frame' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAQACAYAAAAgBjM/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVHgB7cRBDQAACAQgZ/+0V0DN4eBBJZmuI0mSJEmSJOlbC6N8C9SP7V1EAAAAAElFTkSuQmCC'/>
-    </img>
-    <img id='vector4' class='vector4' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABVcAAAACCAYAAABc3OxqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtSURBVHgB7cAxEQAgDASwgnKkYLEG/rBA92R19ykAAAAAAL4lubsAAAAAABh7iCsG8ZKfxPwAAAAASUVORK5CYII='/>
-    </img>
-    <div id='관리자페이지' class='관리자페이지'>
-    관리자 페이지</div>
-    <div id='청소년톡talk' class='청소년톡talk'>
-    청소년 톡Talk</div>
-    <div id='회원관리' class='회원관리'>
-    회원 관리</div>
-
-    <a href="/admin/dataif">
-    <div id='회원정보관리' class='회원정보관리'>
-    회원 정보 관리</div></a>
-
-    <a href="/admin/dataif/terms">
-    <div id='회원가입설정' class='회원가입설정'>
-    회원 가입 설정</div></a>
-
-    <a href="/admin/policy/show">
-    <div id='정책정보관리' class='정책정보관리'>
-    정책 정보 관리</div></a>
-    <a href="/admin/policy/banner">
-    <div id="배너등록" class="배너등록">배너 등록</div></a>
-    <div id='정책관리' class='정책관리'>
-    정책 관리</div>
-    <div id='권한관리' class='권한관리'>
-    권한 관리</div>
-    <!-- <div id='admin1' class='admin1'>
-    Admin1</div>
-    <div id='ellipse5' class='ellipse5'>     -->
-</nav>
+  <%- include('../layout.ejs') %>
 <section>
     <div>
         <div class="pagename">회원 정보 관리</div>
         <div id="search_userinfo">
+          <form action="/admin/dataif" method="get">
             <ul>
                 <li>회원분류
                     <div class="ui checkbox">
@@ -84,12 +53,12 @@
                     <option value="id">이름</option>
                     <option value="name">아이디</option>
                 </select>
-                
-                <input type="text" id="search_info" onkeypress="searchEnter(event)" placeholder="내용을 입력해주세요">
-                <button class="ui button" id="search_btn" onclick="search()">검색</button>
+                <input type="text" name="search" id="search" placeholder="검색어를 입력하세요">
+                <button class="ui button" id="search_btn" type="submit">검색</button>
             </div>
             </li>
             </ul>
+          </form>
         </div>
         <br>
         <table id="mem_table">
@@ -105,7 +74,8 @@
             <th>이메일</th>
             <th>sms</th> -->
             <th>관리</th>
-          </tr></thead>
+          </tr>
+        </thead>
           <tbody>
           <% for(var i=0; i<posts.length; i++){ %>
             <form action="/admin/dataif/update/<%=posts[i].userid %>" method="get" >
@@ -114,7 +84,7 @@
               <td><%= posts[i].name %></td>
               <td><%= role_code_to_class(posts[i].user_role) %></td>
               <td><%= emd_code_to_name(posts[i].emd_class_code) %></td>
-              <td><%= age_code_to_class(posts[i].age_class_code) %></td>
+              <td><%= age_code_to_class(posts[i].user_type) %></td>
               <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
               <td><%= `${posts[i].upd_date.getFullYear()}` + `-`+ `${posts[i].upd_date.getMonth()+1}` + `-`+ `${posts[i].upd_date.getDate()}`%></td>
               <!-- <td><%= posts[i].push_yn %></td>
@@ -123,7 +93,7 @@
               <td>
                 <button class="ui button" type="submit">수정</button>
                 <!-- <button class="ui button" id="manage_btn" onclick="manage()">수정</button> -->
-                <button class="ui button" id="delete_btn" onclick="deleteUser()">삭제</button>
+                <!-- <button class="ui button" id="delete_btn" onclick="deleteUser()">삭제</button> -->
               </td>
             </tr>
           </form>
@@ -134,7 +104,7 @@
         
         <div id="managep_foot">
 
-            <div class="ui pagination menu" id="managep_paging">
+            <!-- <div class="ui pagination menu" id="managep_paging">
                 <a class="icon item">
                     <i class="left chevron icon"></i>
                 </a>
@@ -145,10 +115,10 @@
                 <a class="icon item">
                     <i class="right chevron icon"></i>
             </a>
-          </div>
+          </div> -->
           <div id="reg_btn_set">
             <button class="ui button" id="add_user" onclick="signUp()">회원 등록</button>
-            <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button>
+            <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->
           </div>
         </div>  
 

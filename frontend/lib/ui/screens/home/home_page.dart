@@ -10,9 +10,9 @@ import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
 final BannerImage = [
-  Image.asset('images/slider_example.png', fit: BoxFit.fill),
-  Image.asset('images/aco.png', fit: BoxFit.cover),
-  Image.asset('images/mou_img.png', fit: BoxFit.fill),
+  Image.asset('images/banner/slider_example.png', fit: BoxFit.fill),
+  // Image.asset('images/banner/aco.png', fit: BoxFit.cover),
+  Image.asset('images/banner/mou_img.png', fit: BoxFit.fill),
 ];
 
 class HomePage extends StatefulWidget {
@@ -23,19 +23,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // 검색창
-  final TextEditingController filter = TextEditingController(); // 검색 위젯 컨트롤
-  final FocusNode focusNode = FocusNode(); // 현재 검색 위젯에 커서가 있는지에 대한 상태 등
-  String searchText = ""; // 현재 검색어 값
-
-  _HomePageState() {
-    filter.addListener(() {
-      setState(() {
-        searchText = filter.text;
-      });
-    });
-  } // filter가 변화를 검지하여 searchText의 상태를 변화시키는 코드
-
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
@@ -80,41 +67,7 @@ class _HomePageState extends State<HomePage> {
             elevation: 0.0,
           ),
           body: Column(children: <Widget>[
-            // 검색창
-            Container(
-              color: ThemeColors.primary,
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: Row(children: <Widget>[
-                Expanded(
-                  flex: 6,
-                  child: TextField(
-                    focusNode: focusNode,
-                    style: const TextStyle(
-                      fontSize: 15,
-                    ),
-                    autofocus: true,
-                    controller: filter,
-                    decoration: const InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: ThemeColors.basic,
-                        size: 20,
-                      ),
-                      suffixIcon:
-                          Icon(Icons.tune, color: ThemeColors.basic, size: 25),
-                      // focusNode.hasFocus
-                      // ? IconButton(
-                      //   icon: Icon(Icons.tune), // Image.asset('images/icon_filter.png')
-                      //   onPressed: () {},
-                      //   iconSize: 50,
-                      // ),
-                    ),
-                  ),
-                ),
-              ]),
-            ),
+            const SearchBar(),
             Expanded(
               child: ListView(shrinkWrap: true, children: [
                 Padding(
@@ -182,6 +135,61 @@ class _HomePageState extends State<HomePage> {
             )
           ]),
           bottomNavigationBar: const BottomNavigation(index: 1)),
+    );
+  }
+}
+
+// 검색창
+class SearchBar extends StatefulWidget {
+  const SearchBar({Key? key}) : super(key: key);
+
+  @override
+  State<SearchBar> createState() => _SearchBar();
+}
+
+class _SearchBar extends State<SearchBar> {
+  final TextEditingController filter = TextEditingController(); // 검색 위젯 컨트롤
+  final FocusNode focusNode = FocusNode(); // 현재 검색 위젯에 커서가 있는지에 대한 상태 등
+  String searchText = ""; // 현재 검색어 값
+
+  _SearchBar() {
+    filter.addListener(() {
+      setState(() {
+        searchText = filter.text;
+      });
+    });
+  } // filter가 변화를 검지하여 searchText의 상태를 변화시키는 코드
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return // 검색창
+        Container(
+      color: ThemeColors.primary,
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      child: Row(children: <Widget>[
+        Expanded(
+          flex: 6,
+          child: TextField(
+            focusNode: focusNode,
+            style: const TextStyle(
+              fontSize: 15,
+            ),
+            autofocus: true,
+            controller: filter,
+            decoration: const InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              prefixIcon: Icon(
+                Icons.search,
+                color: Colors.black,
+                size: 20,
+              ),
+              suffixIcon: Icon(Icons.tune),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }

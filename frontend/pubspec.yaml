@@ -45,6 +45,7 @@ dependencies:
   
 #  photo_manager: ^2.3.0
   carousel_slider: ^4.0.0
+  toggle_switch : ^2.0.1
   shimmer: ^2.0.0
 #  timeago: ^3.2.2
 #  cached_network_image: ^3.2.0
@@ -82,9 +83,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/
-    - images/slider_example.png
+    - images/banner/
     - images/category_icon/
     - images/bottom_bar/
+    - images/policy/
 
 
 

@@ -2,6 +2,7 @@ const path = require("path");
 var express = require("express");
 var router = express.Router();
 var mobile_login_controller = require("../../controllers/common-controller/login-controller");
+var mobile_policy_controller = require("../../controllers/mobile-controller/mobile-policy-controller");
 // const routerUser = require("./src/routes/mobile-router/mobile-router");
 
 const passport = require('passport');
@@ -239,6 +240,31 @@ router.post("/signup", async function(req, res) {
   }
 });
 
+// router.get('/policy/get-all-policy', mobile_policy_controller.getAllPolicy); // verifyToken
 
+router.get('/policy/get-all-policy', async function(req, res){
+  try{
+    var result = await mobile_policy_controller.getAllPolicy(req,res);
+    console.log('mobile-router get-all-policy result : ', result);
+    // res.render('policy/get-all-policy', {
+    //     posts:result,
+    //     user:req.user
+    // }
+    // );
+
+
+    res.json({
+      resp:true,
+      message : 'get all policies',
+      policies : result
+    })
+} catch(error) {
+    console.log('policy-router get-all-plicy error:'+error);
+    res.json({
+      resp:false,
+      message : 'Failure get all policies'
+    })
+}
+});
 
 module.exports = router;

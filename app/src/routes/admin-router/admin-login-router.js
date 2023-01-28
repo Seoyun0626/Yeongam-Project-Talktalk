@@ -160,7 +160,7 @@ router.post("/signup", async function(req, res) {
     //else res.json({success: false, msg:'등록실패하였습니다.'});
     if(result==0){
       console.log('login-router signup success');
-      res.redirect('/admin/auth/login');
+      res.redirect('/admin/dataif');
     }
     else{
       console.log('login-router signup fail');

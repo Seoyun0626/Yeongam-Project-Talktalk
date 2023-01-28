@@ -7,5 +7,5 @@ final passwordValidator =
     MultiValidator([MinLengthValidator(8, errorText: '8자 이상 입력해주세요.')]);
 
 final againpasswordValidator = MultiValidator([
-  RequiredValidator(errorText: '일치하지 않습니다.'),
+  RequiredValidator(errorText: '비밀번호가 일치하지 않습니다.'),
 ]);

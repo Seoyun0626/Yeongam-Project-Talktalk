@@ -566,6 +566,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "toggle_switch",
+      "rootUri": "file:///C:/Users/USER/Downloads/flutter_windows_3.3.10-stable/flutter/.pub-cache/hosted/pub.dartlang.org/toggle_switch-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "typed_data",
       "rootUri": "file:///C:/Users/USER/Downloads/flutter_windows_3.3.10-stable/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.1",
       "packageUri": "lib/",
@@ -602,7 +608,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-01-25T10:25:05.366171Z",
+  "generated": "2023-01-28T14:22:38.110324Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }

@@ -36,15 +36,13 @@ body {
   section{
   float: left;
   width: 75vw;
-  height:1024px;
   padding-left: 2em;
   padding-right: 1em;
-  padding-top: 1em;
+  padding-top: 10em;
   background-color: white;
   margin: 0;
-  top: 0;
   left: 0;
-  overflow: auto; 
+  overflow:hidden;
   }
   
   ul{
@@ -59,7 +57,7 @@ body {
     border: 1px solid;
     border-radius: 3px;
     height: 8em;
-    width: 70.5em;
+    width: 58em;
   }
   #search_userinfo select{
     margin-left: 25px;
@@ -136,5 +134,9 @@ body {
 
 /* 테이블 설정 */
 #mem_table{
+  text-align: center;
+  width: 65em;
+}
+#policy_table{
   text-align: center;
 }

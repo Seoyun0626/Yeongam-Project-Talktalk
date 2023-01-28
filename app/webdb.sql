@@ -15,10 +15,12 @@ CREATE TABLE webdb.`tb_user` (
   `reg_no` varchar(30) NULL,
   `password` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `user_role` int(4) NULL,
-  `age_class_code` int(4) NULL,
-  `sex_class_code` int(1) NULL,
-  `emd_class_code` int(4) NULL,
+  `user_role` varchar(1) NULL,
+  `user_type` varchar(1) NOT NULL,
+  `youthAge_code` varchar(1) NULL,
+  `parentsAge_code` varchar(1) NULL,
+  `sex_class_code` varchar(1) NULL,
+  `emd_class_code` varchar(2) NULL,
   `user_email` varchar(50) NULL,
   `salt` varchar(255) NOT NULL,
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
@@ -30,19 +32,40 @@ CREATE TABLE webdb.`tb_user` (
 CREATE TABLE webdb.`tb_policy` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `policy_name` varchar(50) NOT NULL,
-  `policy_target` varchar(50) NOT NULL,
+  `policy_target` varchar(2) NOT NULL,
   `description` longtext NULL,
-  `policy_supervision` varchar(30) NOT NULL,
+  `policy_supervision` varchar(2) NOT NULL,
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
+  `application_start_date` timestamp NULL,
+  `application_end_date` timestamp NULL,
   `fund` int(10) NOT NULL,
   `content` varchar(1000) NULL,
-  `img` int(20) NULL,
+  `img` varchar(30) NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE webdb.`tb_terms` (
+  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `terms` varchar(1000) NOT NULL,
+  `privacy` varchar(1000) NOT NULL,
+  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`board_idx`) USING BTREE 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert into tb_terms (terms,privacy) value('회원 가입 약관','개인 정보 처리 방침');
 
+
+CREATE TABLE webdb.`tb_banner` (
+  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `banner_name` varchar(30) NULL,
+  `img` varchar(30) NOT NULL,
+  `link` varchar(100) NULL,
+  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`board_idx`) USING BTREE 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
 CREATE TABLE webdb.`tb_user` (

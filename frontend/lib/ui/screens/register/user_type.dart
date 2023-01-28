@@ -3,18 +3,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/screens/register//terms_agree.dart';
+import 'package:login/ui/screens/register/info_input.dart';
 import 'package:login/ui/screens/register/info_parents.dart';
-import 'package:login/ui/screens/register/terms_agree_test.dart';
+
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
 import 'package:login/ui/helpers/animation_route.dart';
 
-// class Todo {
-//   final String title;
-//   final String description;
+// class typeCodes {
+//   // final String title;
+//   // final String description;
+//   final List<int> codes = [0, 1, 2];
 
-//   Todo(this.title, this.description);
+//   // Todo(this.title, this.description);
+//   typeCodes(List<int> codes);
 // }
 
 // void main() {
@@ -25,14 +28,17 @@ import 'package:login/ui/helpers/animation_route.dart';
 // }
 
 class userTypePage extends StatelessWidget {
+  // final List<typeCodes> code;
+
   const userTypePage({Key? key}) : super(key: key);
   // static final todos = List<Todo>.generate(
-  //   20,
+  //   3,
   //   (i) => Todo(
   //     'Todo $i',
   //     'A description of what needs to be done for Todo $i',
   //   ),
   // );
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -125,7 +131,9 @@ class userTypePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       // builder: (context) => termsAgreePage(todo: todos[0]),
-                      builder: (context) => const RegisterPage2(),
+                      // builder: (context) => const RegisterPage2(),
+
+                      builder: (context) => const InfoInputPage(0),
                     )),
               ),
             ),
@@ -158,7 +166,7 @@ class userTypePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       // builder: (context) => termsAgreePage(todo: todos[1]),
-                      builder: (context) => const RegisterPage2(),
+                      builder: (context) => const InfoInputPage(1),
                     )),
               ),
             ),
@@ -193,7 +201,7 @@ class userTypePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         // builder: (context) => termsAgreePage(todo: todos[2]),
-                        builder: (context) => const RegisterPage2(),
+                        builder: (context) => const InfoInputPage(2),
                       )),
                 )),
           ),

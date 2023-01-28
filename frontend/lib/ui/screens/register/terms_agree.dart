@@ -10,7 +10,7 @@ import 'package:login/ui/widgets/widgets.dart';
 
 import 'package:login/ui/helpers/animation_route.dart';
 
-// kth 수정
+// kth 수정 : 밑에 수정 전 코드 주석처리 해놓음
 class termsAgreePage extends StatefulWidget {
   const termsAgreePage({Key? key}) : super(key: key);
 
@@ -66,6 +66,8 @@ class _termsAgreePageState extends State<termsAgreePage> {
                   onTap: () => onAllClicked(allChecked),
                   leading: Checkbox(
                     value: allChecked.value,
+                    // checkColor: ThemeColors.basic,
+                    activeColor: ThemeColors.primary,
                     onChanged: (value) => onAllClicked(allChecked),
                   ),
                   title: Text(allChecked.title,
@@ -77,6 +79,8 @@ class _termsAgreePageState extends State<termsAgreePage> {
                     .map((item) => ListTile(
                           onTap: () => onItemClicked(item),
                           leading: Checkbox(
+                            checkColor: ThemeColors.basic,
+                            activeColor: ThemeColors.primary,
                             value: item.value,
                             onChanged: (value) => onItemClicked(item),
                           ),

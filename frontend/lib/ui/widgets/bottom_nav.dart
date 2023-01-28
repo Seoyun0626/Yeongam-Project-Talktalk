@@ -49,7 +49,7 @@ class BottomNavigation extends StatelessWidget {
             iconString: 'images/bottom_bar/icon_menu_keep.png',
             iconText: 'keep',
             onPressed: () =>
-                Navigator.push(context, routeSlide(page: const HomePage())),
+                Navigator.push(context, routeSlide(page: const KeepPage())),
           ),
           _ItemButtom(
             i: 4,
@@ -60,7 +60,7 @@ class BottomNavigation extends StatelessWidget {
             iconString: 'images/bottom_bar/icon_menu_calendar.png',
             iconText: '캘린더',
             onPressed: () => Navigator.pushAndRemoveUntil(
-                context, routeSlide(page: const HomePage()), (_) => false),
+                context, routeSlide(page: const CalendarPage()), (_) => false),
           ),
           _ItemButtom(
             i: 5,
