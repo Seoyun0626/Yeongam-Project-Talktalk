@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     final CarouselController _controller = CarouselController(); // 배너 슬라이드
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
             titleSpacing: 0,
@@ -173,44 +174,90 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBar extends State<SearchBar> {
-  final TextEditingController filter = TextEditingController(); // 검색 위젯 컨트롤
-  final FocusNode focusNode = FocusNode(); // 현재 검색 위젯에 커서가 있는지에 대한 상태 등
-  String searchText = ""; // 현재 검색어 값
+  final TextEditingController _filter = TextEditingController(); // 검색 위젯 컨트롤
+  late FocusNode myFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    myFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    myFocusNode.dispose();
+    super.dispose();
+  }
+
+  String _searchText = ""; // 현재 검색어 값
 
   _SearchBar() {
-    filter.addListener(() {
+    _filter.addListener(() {
       setState(() {
-        searchText = filter.text;
+        _searchText = _filter.text;
       });
     });
   } // filter가 변화를 검지하여 searchText의 상태를 변화시키는 코드
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return // 검색창
-        Container(
+    return Container(
       color: ThemeColors.primary,
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
       child: Row(children: <Widget>[
         Expanded(
           flex: 6,
           child: TextField(
-            focusNode: focusNode,
+            focusNode: myFocusNode,
+            cursorColor: ThemeColors.darkGreen,
             style: const TextStyle(
               fontSize: 15,
             ),
-            autofocus: true,
-            controller: filter,
-            decoration: const InputDecoration(
+            autofocus: false,
+            controller: _filter,
+            decoration: InputDecoration(
               filled: true,
               fillColor: Colors.white,
-              prefixIcon: Icon(
+              prefixIcon: const Icon(
                 Icons.search,
-                color: Colors.black,
+                color: ThemeColors.darkGreen,
                 size: 20,
               ),
-              suffixIcon: Icon(Icons.tune),
+              suffixIcon: myFocusNode.hasFocus
+                  ? IconButton(
+                      icon: const Icon(
+                        Icons.cancel,
+                        size: 20,
+                        color: ThemeColors.darkGreen,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _filter.clear();
+                          _searchText = "";
+                          myFocusNode.unfocus();
+                        });
+                      },
+                    )
+                  : IconButton(
+                      icon: const Icon(
+                        Icons.tune,
+                        color: ThemeColors.darkGreen,
+                        size: 20,
+                      ),
+                      onPressed: (() {})),
+              hintText: '복지 검색',
+              labelStyle: const TextStyle(color: ThemeColors.darkGreen),
+              focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              border: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              contentPadding: const EdgeInsets.symmetric(vertical: 10),
             ),
           ),
         ),

@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/wakelock/intermediates/merged_res/release/values-vi/values-vi.xml",
+            "map": [
+                {
+                    "source": "/Users/taeheekim/.gradle/caches/transforms-3/022dd61e788bc9d9008affaf60b694b4/transformed/core-1.6.0/res/values-vi/values-vi.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/wakelock/intermediates/incremental/mergeReleaseResources/merged.dir/values-vi/values-vi.xml",
+            "map": [
+                {
+                    "source": "/Users/taeheekim/.gradle/caches/transforms-3/022dd61e788bc9d9008affaf60b694b4/transformed/core-1.6.0/res/values-vi/values-vi.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}
