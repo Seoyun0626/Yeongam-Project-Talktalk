@@ -110,7 +110,7 @@ class DetailPolicyPage extends StatelessWidget {
                     width: size / 20,
                   ),
                   Text(
-                    policySupervison, //'관내 초등학생',
+                    '관내 초등학생',
                     style: const TextStyle(
                       color: ThemeColors.basic,
                       fontSize: 18,

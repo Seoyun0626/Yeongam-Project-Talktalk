@@ -222,7 +222,7 @@ class _ListViewPolicy extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(0),
                           child: SizedBox(
-                            // decoration: BoxDecoration(color: Colors.grey[350]),
+                            // 이미지
                             width: 80.0,
                             height: 80.0,
                             child: Image(
