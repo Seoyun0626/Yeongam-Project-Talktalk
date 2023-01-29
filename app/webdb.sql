@@ -134,6 +134,7 @@ create table webdb.`tb_policy_target_code`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 insert into tb_policy_target_code (policy_target_code, policy_target_name) values('0','부부/임산부'),('1','영유아'),('2','청소년/학생'),('3','청년/대학생'),('4','직장인'),('5','중장년'),('6','노인'),('7','선택 안함');
 
+
 create table webdb.`tb_policy_institution_code`(
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `policy_institution_code` varchar(2) NOT NULL,

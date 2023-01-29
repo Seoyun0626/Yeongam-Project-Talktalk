@@ -30,7 +30,7 @@ class ResponsePolicy {
 }
 
 class Policy {
-  String policy_supervision; // 주최측
+  String policy_institution_code; // 주최측
   String policy_name; // 정책 이름
   String application_start_date; // 모집 시작 날짜
   String application_end_date; // 모집 마감 날짜
@@ -39,7 +39,7 @@ class Policy {
   String img; // 정책 대표 이미지
 
   Policy({
-    required this.policy_supervision,
+    required this.policy_institution_code,
     required this.policy_name,
     required this.application_start_date,
     required this.application_end_date,
@@ -49,7 +49,7 @@ class Policy {
   });
 
   factory Policy.fromJson(Map<String, dynamic> json) => Policy(
-      policy_supervision: json["policy_supervision"],
+      policy_institution_code: json["policy_institution_code"],
       policy_name: json["policy_name"],
       application_start_date: json["application_start_date"],
       application_end_date: json["application_end_date"],
@@ -58,7 +58,7 @@ class Policy {
       img: json["img"]);
 
   Map<String, dynamic> toJson() => {
-        "policy_supervision": policy_supervision,
+        "policy_supervision": policy_institution_code,
         "policy_name": policy_name,
         "application_start_date": application_start_date,
         "application_end_date": application_end_date,

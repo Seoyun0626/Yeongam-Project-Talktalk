@@ -11,7 +11,7 @@ class DetailPolicyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final String imgName = policies.img;
     final String imgUrl = "images/policy/$imgName";
-    final String policySupervison = policies.policy_supervision;
+    final String policySupervison = policies.policy_institution_code;
     final String policyName = policies.policy_name;
     final String policyContent = policies.content;
 
@@ -110,7 +110,7 @@ class DetailPolicyPage extends StatelessWidget {
                     width: size / 20,
                   ),
                   Text(
-                    '관내 초등학생',
+                    policies.policy_institution_code,
                     style: const TextStyle(
                       color: ThemeColors.basic,
                       fontSize: 18,

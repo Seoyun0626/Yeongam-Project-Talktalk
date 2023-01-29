@@ -239,7 +239,7 @@ class _ListViewPolicy extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      policies.policy_supervision,
+                                      policies.policy_institution_code,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
