@@ -34,7 +34,8 @@ class Policy {
   String policy_name; // 정책 이름
   String application_start_date; // 모집 시작 날짜
   String application_end_date; // 모집 마감 날짜
-  // String policy_target,
+  // String policy_target, // 모집 대상
+  String content; // 상세내용
   String img; // 정책 대표 이미지
 
   Policy({
@@ -43,6 +44,7 @@ class Policy {
     required this.application_start_date,
     required this.application_end_date,
     // required this.policy_target,
+    required this.content,
     required this.img,
   });
 
@@ -52,6 +54,7 @@ class Policy {
       application_start_date: json["application_start_date"],
       application_end_date: json["application_end_date"],
       // policy_target: json["policy_target"],
+      content: json["content"],
       img: json["img"]);
 
   Map<String, dynamic> toJson() => {
@@ -60,6 +63,7 @@ class Policy {
         "application_start_date": application_start_date,
         "application_end_date": application_end_date,
         // "policy_target" : policy_target,
+        "content": content,
         "img:": img
       };
 }
