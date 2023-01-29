@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/domain/services/policy_services.dart';
-import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
-import 'package:login/domain/blocs/policy/policy_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class DetailPolicyPage extends StatelessWidget {
   const DetailPolicyPage(this.policies, {Key? key}) : super(key: key);
@@ -18,6 +13,20 @@ class DetailPolicyPage extends StatelessWidget {
     final String imgUrl = "images/policy/$imgName";
     final String policySupervison = policies.policy_supervision;
     final String policyName = policies.policy_name;
+    final String policyContent = policies.content;
+
+    //모집기간
+    final String startDateYear =
+        policies.application_start_date.substring(0, 4);
+    final String endDateYear = policies.application_end_date.substring(0, 4);
+    final String startDateMonth =
+        policies.application_start_date.substring(5, 7);
+    final String endDateMonth = policies.application_end_date.substring(5, 7);
+    final String startDateDay =
+        policies.application_start_date.substring(8, 10);
+    final String endDateDay = policies.application_end_date.substring(8, 10);
+    final String startDate = '$startDateYear.$startDateMonth.$startDateDay';
+    final String endDate = '$endDateYear.$endDateMonth.$endDateDay';
 
     final size = MediaQuery.of(context).size.width;
 
@@ -57,12 +66,11 @@ class DetailPolicyPage extends StatelessWidget {
             ]),
           ),
           Container(
-            // 주최측
-            padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
-            width: size,
-            color: Colors.white,
-            child: const Text('영암군청소년수련관'), //Text(policySupervison)
-          ),
+              // 주최측
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
+              width: size,
+              color: Colors.white,
+              child: Text(policySupervison)),
           Container(
               // 정책 이름
               padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
@@ -75,6 +83,84 @@ class DetailPolicyPage extends StatelessWidget {
                     fontSize: 25,
                     fontWeight: FontWeight.bold),
               )),
+          Container(
+              // 카테고리
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+              width: size,
+              color: Colors.white,
+              child: const Text(
+                '카테고리',
+                style: TextStyle(color: Colors.black, fontSize: 15),
+              )),
+          Container(
+              // 모집대상
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+              width: size,
+              color: Colors.white,
+              child: Row(
+                children: [
+                  const Text(
+                    '모집대상',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: size / 20,
+                  ),
+                  Text(
+                    policySupervison, //'관내 초등학생',
+                    style: const TextStyle(
+                      color: ThemeColors.basic,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              )),
+          Container(
+              // 모집기간
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+              width: size,
+              color: Colors.white,
+              child: Row(
+                children: [
+                  const Text(
+                    '모집기간',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
+                  SizedBox(
+                    width: size / 20,
+                  ),
+                  Text(
+                    '$startDate ~ $endDate', //'관내 초등학생',
+                    style: const TextStyle(
+                      color: ThemeColors.basic,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              )),
+          Container(
+            // 상세내용
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+            width: size,
+            color: Colors.white,
+            child: Html(
+              data: policyContent,
+              style: {
+                'p': Style(
+                    color: Colors.black,
+                    fontSize: FontSize.large,
+                    lineHeight: LineHeight.percent(120)),
+              },
+            ),
+          ),
         ],
       )))),
     ));

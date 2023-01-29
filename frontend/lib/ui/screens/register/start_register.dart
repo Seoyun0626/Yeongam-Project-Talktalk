@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/screens/register//info_first.dart';

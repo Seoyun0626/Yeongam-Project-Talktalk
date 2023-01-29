@@ -38,10 +38,12 @@ dependencies:
   form_field_validator: ^1.1.0
   google_fonts: ^2.3.1
   http: ^0.13.4
+  flutter_html: ^2.2.1
   image_picker: ^0.8.4+9
   permission_handler: ^9.2.0
   pin_code_fields: ^7.3.0
-  flutter_svg: ^1.1.6
+  # flutter_svg: ^1.1.6
+  
   
 #  photo_manager: ^2.3.0
   carousel_slider: ^4.0.0
