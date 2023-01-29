@@ -54,7 +54,7 @@ exports.upload = async function(req, res) {
         var content = req.body.content;
         var application_start_date = req.body.application_start_date;
         var application_end_date = req.body.application_end_date;
-        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target, policy_supervision, description, fund, content, img, application_start_date, application_end_date) VALUES ('" + name + "', '" + target + "', '" + supervision + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "');";
+        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, description, fund, content, img, application_start_date, application_end_date) VALUES ('" + name + "', '" + target + "', '" + supervision + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "');";
         var rows = await conn.query(query); // 쿼리 실행
         console.log('policy-service upload success');
         return resultcode; //0이면 성공
