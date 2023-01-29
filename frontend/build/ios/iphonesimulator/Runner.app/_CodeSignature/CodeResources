@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		x7P7x7hMEZ5rnGdUpJdv2VGi8SA=
+		685gjjPFLcwZeSQqETqCGVsC0xM=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,19 +54,19 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		fiPY1542nN0NNCIx5g1PFw3ny6E=
+		NLGsQkH2IvnOWnjFu8CaI6ZDWrk=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		cXdigKbkt5hu4qvZX4UqFe4npbI=
+		MS9I0VsZ3TyKmsJHAocrVLhrs98=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
-		vKJkVIcw+LGHFnKJGwrQwCREv68=
+		f1D/YFGe+tOaSlRslzU0WcFtvN0=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		Wq83g8Lv4hOXZY2iYB0WV2VNjZw=
+		+rFqHuRELTchkBKzNCz/uU7djOo=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -210,11 +210,95 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		oqSxU4o8SOaCT4BXRkWIsBFsZtw=
+		fDloBNqeO+FMV9b1JU4X/VBJ3fA=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
 		P7bb/oR3EhwqCIH1M6LyTuBIWYU=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_AMS-Regular.ttf</key>
+		<data>
+		jLEYenrrwywd6geSl2moSelD/08=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Caligraphic-Bold.ttf</key>
+		<data>
+		PqqDAykNlGTU/nOXBgeIuGs5ego=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Caligraphic-Regular.ttf</key>
+		<data>
+		IouOybFaKIVLW3bZb4jL8q2wzng=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Fraktur-Bold.ttf</key>
+		<data>
+		++7e6p6itiOrZisMT9gFdqCh3rg=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Fraktur-Regular.ttf</key>
+		<data>
+		9E7ZGhxbIkKdaGS3Cgca7UKTouY=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-Bold.ttf</key>
+		<data>
+		lmVQInlzfThmItFUeXtv3Lol9BM=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-BoldItalic.ttf</key>
+		<data>
+		feolgbw+wXNqdx2vFu9Emh0W7fg=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-Italic.ttf</key>
+		<data>
+		RkZrGwfb//UhZjbNrbTvf9ZNrsc=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-Regular.ttf</key>
+		<data>
+		D+1uLbcWs4g0jBzL9gxekoXrfZw=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Math-BoldItalic.ttf</key>
+		<data>
+		ir7aGCiPc1mC8eU63hKIdo0uZZs=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Math-Italic.ttf</key>
+		<data>
+		PM+pj61qWohcZ6+BFmTGWY5Ev2o=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_SansSerif-Bold.ttf</key>
+		<data>
+		70ihQLtcOmFm2lMLLKRw2ay1kOM=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_SansSerif-Italic.ttf</key>
+		<data>
+		1SaCTrRWLkq0fARSaHp1Z42lFuo=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_SansSerif-Regular.ttf</key>
+		<data>
+		1ovkUgW6Fznp9olk/Wo6pFRwQkY=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Script-Regular.ttf</key>
+		<data>
+		hYINNHvTTWOnApsTL7ny7uX/2nI=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size1-Regular.ttf</key>
+		<data>
+		DzqKyIJ0ld1K0bZVslsJubPzr5g=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size2-Regular.ttf</key>
+		<data>
+		ViU/GeXQGT/5DqhLIBbhhs7HQSg=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size3-Regular.ttf</key>
+		<data>
+		ZICMN4NDLicD137YvFXcJ3jQ+mQ=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size4-Regular.ttf</key>
+		<data>
+		FFCzbiqpMa1vgFnFJSpvXexZX/c=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Typewriter-Regular.ttf</key>
+		<data>
+		HQs50swkhGUKEizNysX/ez0DRnc=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/wakelock_web/assets/no_sleep.js</key>
+		<data>
+		4X7PZ95hkgUE15GU2+5c1VKgHP0=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -332,6 +416,18 @@
 		<data>
 		KbfPt2HVP97/JNIURbZNoHIaKpw=
 		</data>
+		<key>Frameworks/kakao_flutter_sdk_common.framework/Info.plist</key>
+		<data>
+		grwYV7Qe8S4Rfu+sWYQUY2PM5kc=
+		</data>
+		<key>Frameworks/kakao_flutter_sdk_common.framework/_CodeSignature/CodeResources</key>
+		<data>
+		Xjem44GDorzjKqkQT052O/QMIt4=
+		</data>
+		<key>Frameworks/kakao_flutter_sdk_common.framework/kakao_flutter_sdk_common</key>
+		<data>
+		LIAzOWQEvvPjdeEGv6UBJnofKMY=
+		</data>
 		<key>Frameworks/path_provider_ios.framework/Info.plist</key>
 		<data>
 		Rt/lOQSC+TiE0nDGqORRcmi3Nyw=
@@ -344,9 +440,57 @@
 		<data>
 		Tq3l8XlxohwMOgUugKrvKSCYPcM=
 		</data>
+		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
+		<data>
+		dTDQIBW5RpPsCzbmkNGtBeCMfNQ=
+		</data>
+		<key>Frameworks/shared_preferences_foundation.framework/_CodeSignature/CodeResources</key>
+		<data>
+		y7y4Sh2GsyyjYYWITnWMhoDcMTQ=
+		</data>
+		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation</key>
+		<data>
+		hnJRbTInsNPWNwKwaXB1/veqz1E=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/Info.plist</key>
+		<data>
+		a/yyE5QzdtF9oKu3+HbflJOfEfA=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/_CodeSignature/CodeResources</key>
+		<data>
+		n6y/2MGsnG+Xdxz5G+MhKZdbOZw=
+		</data>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation</key>
+		<data>
+		8WmH2bifwT96pyPNu9HY2spoN5M=
+		</data>
+		<key>Frameworks/wakelock.framework/Info.plist</key>
+		<data>
+		Bt9wo6myJ5YZGYDczU/M7wwCfQI=
+		</data>
+		<key>Frameworks/wakelock.framework/_CodeSignature/CodeResources</key>
+		<data>
+		Cmhb/vWtyAyWwXtr8kwhtrf09Js=
+		</data>
+		<key>Frameworks/wakelock.framework/wakelock</key>
+		<data>
+		3gsmvGQ0eDVS26HlM5pJRuscbpc=
+		</data>
+		<key>Frameworks/webview_flutter_wkwebview.framework/Info.plist</key>
+		<data>
+		l9eolNkSnpWfCE/VEcpx/E9906E=
+		</data>
+		<key>Frameworks/webview_flutter_wkwebview.framework/_CodeSignature/CodeResources</key>
+		<data>
+		bRUqC5QWuzayVqEz5eF+tZRN3DE=
+		</data>
+		<key>Frameworks/webview_flutter_wkwebview.framework/webview_flutter_wkwebview</key>
+		<data>
+		Ux2vHB6GgHj8Th8qVl23TktIEr4=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		ojB8PUcAAq0bztlfn/6cMMwzwSI=
+		fvPxYfQNfO69iOsDW2ty8XFwyNk=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -429,7 +573,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			pdAafdNZ0n0sP/DYguQCXYRcEloOnwxWAyUD8dEf4Sw=
+			tbfXEWmRryBVpJIPK1U6XTP2dzXxzBMlrXICeLLqCFU=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -443,28 +587,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			3OXjg1amkDD2C0pnXyTH6/gS2UAR3jvKV/XWFLBMTvg=
+			wrI9wlpm6m0b0F/mpdn6nqojeyDSm3nMHYSn8sTHoeI=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			CmpB5e9otUEuhsK6ZG+2UJ4ynC6o8YscGDrCVshbajI=
+			TdTbdQWB00F7phKd3ryp0q3jFgBwcuKcF3QEuLzwiSA=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zX4DZFvESy3Ue3y2JvUcTsv1Whl6t3JBYotHrBZfviE=
+			PlOeuOExht2BHiP/Or2bZ/uG2h69rSJj732Dv3XCM8A=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cKjQFa5jYHLPV8p1kEd5CVWkxIK+eD5zmm1wP/Wn/co=
+			DgjhA4TgGac0WyRucWyJ/zedNh+mdUwm7bvfXSx9Dfc=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -716,7 +860,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			tPx0AMX3GxCuLZum01OBCJzfU1tH5GYFxqbKp4+7mZQ=
+			IiINsx6TE1qhb+KquA+B9hh32TmBSE+zeM3hL1z5Q0I=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -724,6 +868,153 @@
 			<key>hash2</key>
 			<data>
 			x6NX+tjyECiQtyzbbjyY8U2zoZ7GDbJtE+T+k/dzgI0=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_AMS-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			hfnyIk+dMEkQOUI72TY0BznGpP3PbzE7/dmiNzF4XGw=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Caligraphic-Bold.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			7W87XgQdFpKG22bQi0iHlZ0Sr/obOUKL4Dz/PfCwDgw=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Caligraphic-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Dqk4aEZqvdqdinreVCnDM9cmBMuAJ/RaiRCfrVbzfbI=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Fraktur-Bold.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HHQignD/9racESB68ZO6Sp3zIFZ50rWlnqTGr6R9UzA=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Fraktur-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			f7Q+O8RgyRjMG8KFujM9kYqpT/14XGF0bwQhfSoHxWE=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-Bold.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			r7p3knaruQ0B191PtWkIQnOJAHSQdBBqstle/eTzWGM=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-BoldItalic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			j33tBnmqvwecZR4APXvQK3SdYrBv62fLegiVhLyLdNk=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XR9pPTq7/jgOwXWH0BJ6FDidXZrWMmVXXv1pK5fHsEY=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Main-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			M0+TOnLQWLbEiv/6y9vCbYdqWDbKqzrZowU+ZasAzZA=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Math-BoldItalic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			MKNA574GM8RqsC6MeFtwoMKvlTWyBzHu9G7assuOmrk=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Math-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			2IZHA6Rvj4SAzlWfC0XkJ+pF3Ilsg7aWULjWmWsZImE=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_SansSerif-Bold.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			LhZyTMRjRTEbm7od9wMFy91afXwC+tuAEjiOO4aoBaE=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_SansSerif-Italic.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			GB92EmGmHCrKkJUZ8QoWUOXVxFe/irJy2SGLtPaPyzs=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_SansSerif-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tDzsx4L+p8H3ZePNQ0xyQjDz1CfYyP2MMhEtgpIPUZ0=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Script-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			B27KzM7clTeZCby3eugyGzyE4kasWF161IsNLdTOfqc=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size1-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			VdVvWpmJt1AVBg4HgKZ9B3o+OE3FPurHUPRbH8O/gNA=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size2-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ep9RyjQbqTZ9fdaJeoDH+jcWlLD6l//UREJWz4sADGg=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size3-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			gq8FK2FkeKpGppCh9jN/I7Up7m/X9qWPqJOf7jHHcuQ=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Size4-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			u1hwnda6vIgxy81xTbaakO1g2iD043v3sG5oDuAHoYA=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_math_fork/lib/katex_fonts/fonts/KaTeX_Typewriter-Regular.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			74u9kdMj/vHsQLwEb+HpDfxsMyYZxZ2RKok+uan86h0=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/wakelock_web/assets/no_sleep.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3OTu8LGXtkCtaqqyIo7h7n3M+L1ta13lSE3RvRZDCng=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/shaders/ink_sparkle.frag</key>
@@ -929,6 +1220,27 @@
 			HIstnQGE3CTD6gN25vPkd04QA+ZwlMcp600vV+DWGog=
 			</data>
 		</dict>
+		<key>Frameworks/kakao_flutter_sdk_common.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			duwiQXEh3w+rP8TesjM8hgCVTP9t0wyBr4HpcWt+C8c=
+			</data>
+		</dict>
+		<key>Frameworks/kakao_flutter_sdk_common.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xsAtalblaq5V3xiciT6gEoboUx8lMaeXvBPTaJh0RPA=
+			</data>
+		</dict>
+		<key>Frameworks/kakao_flutter_sdk_common.framework/kakao_flutter_sdk_common</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rg2hV0VvO5IKCjnQ04pxNHc1Ga3Q4i64bHscQKpWkDk=
+			</data>
+		</dict>
 		<key>Frameworks/path_provider_ios.framework/Info.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -948,6 +1260,90 @@
 			<key>hash2</key>
 			<data>
 			GaDzXOOye2++I8XB+g7Pi6WZQujl3ubKRkpz5bFP5xo=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			QpZS+WIeew2SrEIV7OE2c/CECku1r27Xj97GpYXXRFQ=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_foundation.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HO2aoAsfAJ5rgi8TdFP3TCDZsNblpJ5GXbA/pICaMhg=
+			</data>
+		</dict>
+		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			o79ls5LE4kUlj58DRbe8xnOpjdsPFhY1REn2qWIO4g8=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			OHZcUBuk/vmTp52uQpOL1a/935BAQKbUUg2zh1zuIog=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			NwgF8avxBqcmPqy/hdlxRW73Q71rFVcbczZpCFcXZ7w=
+			</data>
+		</dict>
+		<key>Frameworks/video_player_avfoundation.framework/video_player_avfoundation</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			9V7NxPYYhO/NSjFPMCIQiLpYFJyddvEJ69OS5kCpMeE=
+			</data>
+		</dict>
+		<key>Frameworks/wakelock.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			2TJsGItfuuiaklR6VpzSqdW3R6Ym5L9ejqkVdXuceFg=
+			</data>
+		</dict>
+		<key>Frameworks/wakelock.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DE+YgPEIu9ZnAKBu245V8/MxYA8VErsMGQwRoXTgAK4=
+			</data>
+		</dict>
+		<key>Frameworks/wakelock.framework/wakelock</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			85w6qE6MvYWToKPhRkMqH+KrIt1MvVshHSA5oDnczho=
+			</data>
+		</dict>
+		<key>Frameworks/webview_flutter_wkwebview.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RFIUXAoQpjwCaTPxFd5mCOgcEp0jkZeSG8E3UEHb1DU=
+			</data>
+		</dict>
+		<key>Frameworks/webview_flutter_wkwebview.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			8SkiJnuEP1en8YElI1j8A+bPLzYzsvraCgHAnI8N9tY=
+			</data>
+		</dict>
+		<key>Frameworks/webview_flutter_wkwebview.framework/webview_flutter_wkwebview</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			FtJVLyfEL5541kRmXpKTs2lK8n2MxdovVOgwRM8furE=
 			</data>
 		</dict>
 	</dict>
