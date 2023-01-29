@@ -85,6 +85,7 @@ flutter:
     - images/
     - images/banner/
     - images/category_icon/
+    - images/main_icon/
     - images/bottom_bar/
     - images/policy/
 

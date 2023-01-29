@@ -99,8 +99,8 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     defaultConfig {
-        minSdkVersion 18
+        minSdkVersion 19
     }
 }
