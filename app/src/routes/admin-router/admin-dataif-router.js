@@ -64,11 +64,11 @@ router.get('/', async function(req, res){
     var urltype = req.url.split('/')[1].split('=')[0];
     var crtpage = 1;
     var totalPage = 1;
+    var pageSize = 6; //한 페이지에 보여줄 회원 정보 수
     if(urltype == '?search'){ //검색어 입력
       var result = await dataif_controller.fetchDataByUserid(req, res);
     } else if (urltype == '?page'){ //페이지 이동
       crtpage = req.url.split('=')[1]; //현재 페이지
-      var pageSize = 5; //한 페이지에 보여줄 회원 정보 수
       var result = await dataif_controller.fetchData(req, res);
       if(crtpage == undefined) crtpage = 1; //현재 페이지가 없으면 1페이지로 설정
       if(crtpage < 1) crtpage = 1; //현재 페이지가 1보다 작으면 1페이지로 설정
@@ -78,12 +78,12 @@ router.get('/', async function(req, res){
       // rtnparams.page=crtpage;
       var start = (crtpage-1)*pageSize;
       var end = crtpage*pageSize;
-      totalPage = Math.ceil(result.length/5);
+      totalPage = Math.ceil(result.length/pageSize);
       result = result.slice(start, end); //현재 페이지에 해당하는 회원 정보만 가져옴
     } else { //일반 접속
       var result = await dataif_controller.fetchData(req, res);
-      totalPage = Math.ceil(result.length/5);
-      result = result.slice(0, 5);
+      totalPage = Math.ceil(result.length/pageSize);
+      result = result.slice(0, pageSize);
     }
     res.render('dataif/mem', 
     {
@@ -93,7 +93,7 @@ router.get('/', async function(req, res){
       role_code_to_class:memFunc.role_code_to_class, //권한
       page:crtpage, //현재 페이지
       totalPage: totalPage //총 페이지 수
-    });//, rtnparams:rtnparams
+    });
   } catch(error) {
     console.log('dataif-router / error:'+error);
   }
@@ -142,18 +142,6 @@ router.post('/terms', async function(req, res){
     console.log('dataif-router /terms error:'+error);
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
 // update : 회원 정보 수정
 router.get('/update/:id', async function(req, res){
   try{
@@ -178,6 +166,16 @@ router.post('/update/:id', async function(req, res){
     }
   } catch(error) {
     console.log('dataif-router update error:'+error);
+  }
+});
+
+// 회원 정보 삭제
+router.get('/delete/:id', async function(req, res){
+  try{
+    var result = await dataif_controller.deleteUser(req, res);
+    res.redirect("/admin/dataif");
+  } catch(error) {
+    console.log('dataif-router delete error:'+error);
   }
 });
 
@@ -228,18 +226,18 @@ router.get('/:id/edit', async function(req, res){
 
 
 
-// destroy
-router.delete('/:id', async function(req, res){
-  try{
-    var result = await dataif_controller.delete(req, res);
+// // destroy
+// router.delete('/:id', async function(req, res){
+//   try{
+//     var result = await dataif_controller.delete(req, res);
 
-    if(result) res.json({success: true, msg:'삭제하였습니다.'});
-    else res.json({success: false, msg:'삭제실패하였습니다.'});
+//     if(result) res.json({success: true, msg:'삭제하였습니다.'});
+//     else res.json({success: false, msg:'삭제실패하였습니다.'});
 
-  } catch(error) {
-    console.log('dataif-router destroy error:'+error);
-  }
-});
+//   } catch(error) {
+//     console.log('dataif-router destroy error:'+error);
+//   }
+// });
 
 
 router.get('/datapermit', async function(req, res){

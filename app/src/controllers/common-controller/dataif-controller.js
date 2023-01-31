@@ -101,12 +101,12 @@ exports.update = async function(req, res) {
   }
 };
 
-exports.delete = async function(req, res) {
+exports.deleteUser = async function(req, res) {
   try{
-    var result = await dataif_service.delete(req);
+    var result = await dataif_service.deleteUser(req);
     return result;
   } catch(error) {
-    console.log('dataif-controller delete:'+error);
+    console.log('dataif-controller deleteUser:'+error);
   }
 };
 

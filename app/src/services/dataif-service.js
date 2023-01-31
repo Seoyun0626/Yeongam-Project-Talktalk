@@ -90,7 +90,7 @@ exports.fetchDataByUserid = async function(req, res) {
   try{
     conn = await db.getConnection();
     // console.log(req.url.split('?')[1].split('=')[0]);
-    if(req.params.id==undefined || req.url.split('?')[1].split('=')[0] == "search") req.params.id=req.url.split('/')[1].split('=')[1];
+    // if(req.params.id==undefined || req.url.split('?')[1].split('=')[0] == "search") req.params.id=req.url.split('/')[1].split('=')[1];
     var query = 'SELECT * FROM webdb.tb_user where userid="'+req.params.id+'"';
     var rows = await conn.query(query); // 쿼리 실행
     // console.log(rows[0]);
@@ -264,43 +264,19 @@ exports.update = async function(req, res) {
     if (conn) conn.end();
   }
 };
-
-exports.delete = async function(req, res) {
-  var rowsFle;
+exports.deleteUser = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
-    await conn.beginTransaction() // 트랜잭션 적용 시작
-
-    var query = 'select file_path from webdb.tb_file where board_type="tb_dataif" and board_idx='+req.params.id;
-    rowsFle = await conn.query(query); // 쿼리 실행
-
-    query = 'delete from webdb.tb_file where board_type="tb_dataif" and board_idx='+req.params.id;
-    var rows = await conn.query(query); // 쿼리 실행
-
-    query = 'delete from webdb.tb_dataif where board_idx='+req.params.id;
-    rows = await conn.query(query); // 쿼리 실행
-
-    if(req.body.count>0){
-      query = 'delete from webdb.tb_monsensor where sub_board_idx='+req.params.id;
-      rows = await conn.query(query);
-    }
-
-    await conn.commit() // 커밋
-    for(var idx=0;idx<rowsFle.length;idx++){
-      var rowdata=rowsFle[idx];
-      var filePath = __dirname + "/../" + rowdata.file_path; // 삭제할 파일의 위치​
-      fs.unlink(filePath, function(err){});
-    }
-
+    console.log('dataif-service delete:'+req.params.id);
+    var query = 'delete from webdb.tb_user where userid="'+req.params.id+'"';
+    var rows = await conn.query(query);
     return rows;
   } catch(error) {
-    if (conn) await conn.rollback(); // 롤백
-    //return res.status(500).json(err)
     console.log('dataif-service delete:'+error);
   } finally {
-    if (conn) conn.release();
-  }  
+    if (conn) conn.end();
+  }
 };
 
 exports.retrieveDataProject = async function(req, res) {

@@ -33,8 +33,21 @@ exports.fetchCodeData = async function(req, res) {
         conn.release();
     }
 };
-        
 
+exports.fetchpolicyByidx = async function(req, res) {
+    var conn;
+    try{
+      conn = await db.getConnection();
+      var query = 'SELECT * FROM webdb.tb_policy where board_idx="'+req.params.id+'"';
+      var rows = await conn.query(query); // 쿼리 실행
+    //   console.log(rows[0]);
+      return rows;
+    } catch(error) {
+      console.log('dataif-service fetchpolicyByidx:'+error);
+    } finally {
+      if (conn) conn.end();
+    }
+  };
 
 
 exports.upload = async function(req, res) {
@@ -133,6 +146,37 @@ exports.banner = async function(req, res) {
     } catch(error) {
         console.log('policy-service banner:'+error);
         resultcode = 100;
+    }
+};
+exports.fetchBannerData = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service fetchBannerData db getConnection');
+        var query = "SELECT * FROM webdb.tb_banner;";
+        var rows = await conn.query(query); // 쿼리 실행
+        return rows;
+    } catch(error) {
+        console.log('policy-service fetchBannerData:'+error);
+    } finally {
+        conn.release();
+    }
+};
+
+exports.deleteBanner = async function(req, res) {
+    var conn;
+    var resultcode = 0;
+    try{
+        conn = await db.getConnection();
+        var query = 'delete from webdb.tb_banner where board_idx="'+req.params.id+'"';
+        var rows =  await conn.query(query); // 쿼리 실행
+        console.log('policy-service deleteBanner success');
+        return resultcode; //0이면 성공
+    } catch(error) {
+        console.log('policy-service deleteBanner:'+error);
+        resultcode = 100;
+    } finally {
+        conn.release();
     }
 };
 
