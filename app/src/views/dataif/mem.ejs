@@ -18,7 +18,7 @@
     <div>
         <div class="pagename">회원 정보 관리</div>
         <div id="search_userinfo">
-          <form action="/admin/dataif" method="get">
+          <form action="/admin/dataif/" method="search">
             <ul>
                 <li>회원분류
                     <div class="ui checkbox">
@@ -50,10 +50,10 @@
                 </li> -->
                 <li><div>검색어
                 <select>
-                    <option value="id">이름</option>
-                    <option value="name">아이디</option>
+                    <!-- <option value="name">이름</option> -->
+                    <option value="id">아이디</option>
                 </select>
-                <input type="text" name="search" id="search" placeholder="검색어를 입력하세요">
+                <input type="search" name="search" id="search" placeholder="검색어를 입력하세요">
                 <button class="ui button" id="search_btn" type="submit">검색</button>
             </div>
             </li>

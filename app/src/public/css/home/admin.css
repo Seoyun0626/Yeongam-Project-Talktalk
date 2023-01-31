@@ -225,7 +225,7 @@ line-height:auto;
 border-style:hidden;
 outline:none;
 }
-.권한관리
+.코드관리
 {
 color:#000000;
 text-align:left;
@@ -239,6 +239,22 @@ top: 481px;
 /* width:95px; */
 width: 110px;
 height:29px;
+position:absolute;
+line-height:auto;
+border-style:hidden;
+outline:none;
+}
+.코드정보관리
+{
+color:#000000;
+text-align:left;
+vertical-align:text-top;
+font-size:16px;
+font-family:Inter;
+left:63px;
+top:534px;
+width:122px;
+height:24px;
 position:absolute;
 line-height:auto;
 border-style:hidden;

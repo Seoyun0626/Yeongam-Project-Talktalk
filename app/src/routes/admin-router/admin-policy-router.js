@@ -3,8 +3,6 @@ var express = require("express");
 var router = express.Router();
 var policy_controller = require("../../controllers/common-controller/policy-controller");
 
-const passport = require('passport');
-
 // const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 router.get('/show', async function (req, res) {
     try{
@@ -20,6 +18,8 @@ router.get('/show', async function (req, res) {
 
 router.get('/upload', function (req, res) {
     try{
+        var result = policy_controller.fetchCodeData(req,res);
+        console.log(result[0]);
         res.render('policy/upload');
         }
     catch(error) {

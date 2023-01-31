@@ -89,10 +89,11 @@ exports.fetchDataByUserid = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
+    if(req.params.id==undefined) req.params.id=req.url.split('/')[1].split('=')[1];
     var query = 'SELECT * FROM tb_user where userid="'+req.params.id+'"';
     var rows = await conn.query(query); // 쿼리 실행
     // console.log(rows[0]);
-    return rows[0];
+    return rows;
   } catch(error) {
     console.log('dataif-service fetchDataByUserid:'+error);
   } finally {

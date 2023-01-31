@@ -36,3 +36,12 @@ exports.fetchData = async function(req, res) {
       console.log('policy-controller login_check:'+error);
     }
   };
+
+exports.fetchCodeData = async function(req, res) {
+    try{
+      var result = await policy_service.fetchCodeData(req);
+      return result;
+    } catch(error) {
+      console.log('policy-controller login_check:'+error);
+    }
+  };

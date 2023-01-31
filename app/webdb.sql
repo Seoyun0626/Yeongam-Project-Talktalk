@@ -35,7 +35,6 @@ CREATE TABLE webdb.`tb_policy` (
   `policy_target_code` varchar(2) NOT NULL,
   `policy_institution_code` varchar(2) NOT NULL,
   `description` longtext NULL,
-  `policy_supervision` varchar(2) NOT NULL,
   `policy_field_code` varchar(20) NOT NULL,
   `policy_character_code` varchar(2) NOT NULL,
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',

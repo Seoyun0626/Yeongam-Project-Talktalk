@@ -15,7 +15,25 @@ exports.fetchData = async function(req, res) {
     } finally {
         conn.release();
     }
-}
+};
+
+
+//policy-upload창에서 필요한 코드 정보들 가져오기
+exports.fetchCodeData = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service fetchCodeData db getConnection');
+        var query = "SELECT * FROM webdb.tb_policy_target_code,tb_policy_institution_code except  board_idx;";
+        var rows = await conn.query(query); // 쿼리 실행
+        return rows;
+    } catch(error) {
+        console.log('policy-service fetchCodeData:'+error);
+    } finally {
+        conn.release();
+    }
+};
+        
 
 
 

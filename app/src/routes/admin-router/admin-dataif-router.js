@@ -57,21 +57,15 @@ router.post("/dataif", checkAuth, async function(req, res) {
 });
 */
 
-router.get('/search=:search', async function(req, res){
-  try{
-    console.log(1);
-    // var result = await dataif_controller.fetchData(req, res);
-    res.render('dataif/');
-  }
-  catch(error) {
-    console.log('dataif-router /mem?search= :search error:'+error);
-  }
-});
 
 //로그인 시 출력하는 화면
 router.get('/', async function(req, res){
   try{
-    var result = await dataif_controller.fetchData(req, res);
+    if(req.url == '/'){
+      var result = await dataif_controller.fetchData(req, res);
+    } else {
+      var result = await dataif_controller.fetchDataByUserid(req, res);
+    }
 /*
     var rtnparams=[];
     rtnparams.totalPages=result.totalPages;
@@ -154,7 +148,7 @@ router.get('/update/:id', async function(req, res){
     // console.log("update:"+req.params.id);
     //데이터 받아오기
     var result = await dataif_controller.fetchDataByUserid(req, res);
-    res.render('dataif/update', {post:result});
+    res.render('dataif/update', {post:result[0]});
   } catch(error) {
     console.log('dataif-router update error:'+error);
   }

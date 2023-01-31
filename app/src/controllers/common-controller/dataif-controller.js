@@ -11,6 +11,8 @@ exports.fetchData = async function(req, res) {
   }
 };
 
+
+
 // userid로 사용자 정보 가져오기
 exports.fetchDataByUserid = async function(req, res) {
   try{
