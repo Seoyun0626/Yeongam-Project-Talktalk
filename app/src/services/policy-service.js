@@ -66,13 +66,16 @@ exports.upload = async function(req, res) {
         console.log('policy-service upload db getConnection');
         var name = req.body.name;
         var target = req.body.target;
-        var supervision = req.body.supervision;
+        var policy_institution_code = req.body.policy_institution_code;
         var description = req.body.description;
         var fund = req.body.fund;
         var content = req.body.content;
         var application_start_date = req.body.application_start_date;
         var application_end_date = req.body.application_end_date;
-        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, description, fund, content, img, application_start_date, application_end_date) VALUES ('" + name + "', '" + target + "', '" + supervision + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "');";
+        var policy_field_code = req.body.policy_field_code;
+        var policy_character_code = req.body.policy_character_code;
+        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, description, fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code) VALUES "
+          + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "');";
         var rows = await conn.query(query); // 쿼리 실행
         console.log('policy-service upload success');
         return resultcode; //0이면 성공

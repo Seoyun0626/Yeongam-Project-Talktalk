@@ -18,8 +18,8 @@ router.get('/show', async function (req, res) {
 
 router.get('/upload', function (req, res) {
     try{
-        var result = policy_controller.fetchCodeData(req,res);
-        console.log(result[0]);
+        // var result = policy_controller.fetchCodeData(req,res);
+        // console.log(result[0]);
         res.render('policy/upload');
         }
     catch(error) {

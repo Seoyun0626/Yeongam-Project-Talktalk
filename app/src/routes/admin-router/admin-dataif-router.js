@@ -82,7 +82,7 @@ router.get('/', async function(req, res){
       result = result.slice(start, end); //현재 페이지에 해당하는 회원 정보만 가져옴
     } else { //일반 접속
       var result = await dataif_controller.fetchData(req, res);
-      totalPage = result.length/5;
+      totalPage = Math.ceil(result.length/5);
       result = result.slice(0, 5);
     }
     res.render('dataif/mem', 

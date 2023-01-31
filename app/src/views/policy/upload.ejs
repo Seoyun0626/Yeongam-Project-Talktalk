@@ -30,7 +30,7 @@
           </div>
           <label>주관 기관</label>
           <div class="field">
-            <select class="ui fluid dropdown" name="supervision" id="supervision">
+            <select class="ui fluid dropdown" name="policy_institution_code" id="policy_institution_code">
               <option value="0">청소년 수련관</option>
             </select>
           </div>
@@ -44,6 +44,18 @@
           <input type="date" name="application_start_date">
           <label>접수 마감일</label>
           <input type="date" name="application_end_date">
+          <label>정책 분야</label>
+          <div class="field">
+            <select class="ui fluid dropdown" name="policy_field_code" id="policy_field_code">
+              <option value="0">정책 분야</option>
+            </select>
+          </div>
+          <label>정책 성격</label>
+          <div class="field">
+            <select class="ui fluid dropdown" name="policy_character_code" id="policy_character_code">
+              <option value="0">정책 성격</option>
+            </select>
+          </div>
           <label>정책 사진</label>
           <input type="file" name="imgFile" accept="image/*">
           <br><br>
