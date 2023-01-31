@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
     final CarouselController _controller = CarouselController(); // 배너 슬라이드
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
             titleSpacing: 0,
@@ -105,6 +106,31 @@ class _HomePageState extends State<HomePage> {
                         height: 20,
                       ),
                       // buttonSection, // 카테고리 아이콘 메뉴
+                      Container(
+                          padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                          margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+                          child: Column(children: [
+                            Row(children: const [
+                              Icon(
+                                Icons.auto_awesome,
+                                color: ThemeColors.darkGreen,
+                              ),
+                              // Image.asset('images/icon_sparkel.png'),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text('기관별 정책을 확인하세요!',
+                                  style: TextStyle(
+                                    color: ThemeColors.basic,
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                            ])
+                          ])),
+
+                      SizedBox(
+                        width: 5,
+                      ),
                       CategoryButton(),
                       livePopularPost(),
                       // const TextCustom(
@@ -148,44 +174,90 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBar extends State<SearchBar> {
-  final TextEditingController filter = TextEditingController(); // 검색 위젯 컨트롤
-  final FocusNode focusNode = FocusNode(); // 현재 검색 위젯에 커서가 있는지에 대한 상태 등
-  String searchText = ""; // 현재 검색어 값
+  final TextEditingController _filter = TextEditingController(); // 검색 위젯 컨트롤
+  late FocusNode myFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    myFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    myFocusNode.dispose();
+    super.dispose();
+  }
+
+  String _searchText = ""; // 현재 검색어 값
 
   _SearchBar() {
-    filter.addListener(() {
+    _filter.addListener(() {
       setState(() {
-        searchText = filter.text;
+        _searchText = _filter.text;
       });
     });
   } // filter가 변화를 검지하여 searchText의 상태를 변화시키는 코드
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return // 검색창
-        Container(
+    return Container(
       color: ThemeColors.primary,
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
       child: Row(children: <Widget>[
         Expanded(
           flex: 6,
           child: TextField(
-            focusNode: focusNode,
+            focusNode: myFocusNode,
+            cursorColor: ThemeColors.darkGreen,
             style: const TextStyle(
               fontSize: 15,
             ),
-            autofocus: true,
-            controller: filter,
-            decoration: const InputDecoration(
+            autofocus: false,
+            controller: _filter,
+            decoration: InputDecoration(
               filled: true,
               fillColor: Colors.white,
-              prefixIcon: Icon(
+              prefixIcon: const Icon(
                 Icons.search,
-                color: Colors.black,
+                color: ThemeColors.darkGreen,
                 size: 20,
               ),
-              suffixIcon: Icon(Icons.tune),
+              suffixIcon: myFocusNode.hasFocus
+                  ? IconButton(
+                      icon: const Icon(
+                        Icons.cancel,
+                        size: 20,
+                        color: ThemeColors.darkGreen,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _filter.clear();
+                          _searchText = "";
+                          myFocusNode.unfocus();
+                        });
+                      },
+                    )
+                  : IconButton(
+                      icon: const Icon(
+                        Icons.tune,
+                        color: ThemeColors.darkGreen,
+                        size: 20,
+                      ),
+                      onPressed: (() {})),
+              hintText: '복지 검색',
+              labelStyle: const TextStyle(color: ThemeColors.darkGreen),
+              focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              border: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              contentPadding: const EdgeInsets.symmetric(vertical: 10),
             ),
           ),
         ),
@@ -197,19 +269,21 @@ class _SearchBar extends State<SearchBar> {
 // 카테고리 아이콘 버튼
 class CategoryButton extends StatelessWidget {
   final List<String> pngIcons01 = [
-    'images/category_icon/icon_study.png', // 학업
-    'images/category_icon/icon_counseling.png', // 상담
-    'images/category_icon/icon_job.png', // 취업/이직
-    'images/category_icon/icon_living.png', // 생활비
+    'images/main_icon/icon_main_1.png', // 영암군
+    'images/main_icon/icon_main_2.png', // 청소년수련관
+    'images/main_icon/icon_main_3.png', // 방과후아카데미
   ];
-  final List<String> textIcons01 = ['학업', '상담', '취업/이직', '생활비'];
-  final List<String> textIcons02 = ['건강', '주거', '결혼/양육', '전체보기'];
+  final List<String> textIcons01 = ['영암군', '청소년수련관', '방과후아카데미'];
+  final List<String> textIcons02 = [
+    '청소년상담\n복지센터',
+    '학교밖청소년\n지원센터',
+    '삼호읍청소년\n문화의집'
+  ];
 
   final List<String> pngIcons02 = [
-    'images/category_icon/icon_health.png', // 건강
-    'images/category_icon/icon_house.png', // 주거
-    'images/category_icon/icon_baby.png', // 결혼/양육
-    'images/category_icon/icon_allsee.png', // 전체보기
+    'images/main_icon/icon_main_4.png', // 청소년상담복지센터
+    'images/main_icon/icon_main_5.png', // 학교밖청소년지원센터
+    'images/main_icon/icon_main_6.png', // 삼호읍청소년문화의집
   ];
 
   @override
@@ -221,7 +295,7 @@ class CategoryButton extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: List.generate(
-              4,
+              3,
               (index) => Container(
                 margin: const EdgeInsets.only(bottom: 5.0),
                 padding: const EdgeInsets.all(10.0),
@@ -232,6 +306,7 @@ class CategoryButton extends StatelessWidget {
                     iconSize: 50,
                   ),
                   Text(
+                    style: TextStyle(fontWeight: FontWeight.w500),
                     textIcons01[index],
                   ),
                 ]),
@@ -245,7 +320,7 @@ class CategoryButton extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: List.generate(
-              4,
+              3,
               (index) => Container(
                 margin: const EdgeInsets.only(bottom: 5.0),
                 padding: const EdgeInsets.all(10.0),
@@ -256,6 +331,8 @@ class CategoryButton extends StatelessWidget {
                     iconSize: 50,
                   ),
                   Text(
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.w500),
                     textIcons02[index],
                   ),
                 ]),

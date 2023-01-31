@@ -1,0 +1,68 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/video_player_android/intermediates/incremental/mergeReleaseResources/merged.dir/values-mn/values-mn.xml",
+            "map": [
+                {
+                    "source": "/Users/taeheekim/.gradle/caches/transforms-3/c6e3882a5477e2ea39dbfbcddb47c342/transformed/core-1.7.0/res/values-mn/values-mn.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "11",
+                        "startColumns": "4",
+                        "startOffsets": "716",
+                        "endColumns": "100",
+                        "endOffsets": "812"
+                    }
+                },
+                {
+                    "source": "/Users/taeheekim/.gradle/caches/transforms-3/7508187e2bc56a5799b02477153b7597/transformed/jetified-exoplayer-core-2.18.1/res/values-mn/values-mn.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,120,179,244,308,382,456,547,635",
+                        "endColumns": "64,58,64,63,73,73,90,87,80",
+                        "endOffsets": "115,174,239,303,377,451,542,630,711"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/video_player_android/intermediates/merged_res/release/values-mn/values-mn.xml",
+            "map": [
+                {
+                    "source": "/Users/taeheekim/.gradle/caches/transforms-3/c6e3882a5477e2ea39dbfbcddb47c342/transformed/core-1.7.0/res/values-mn/values-mn.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "11",
+                        "startColumns": "4",
+                        "startOffsets": "716",
+                        "endColumns": "100",
+                        "endOffsets": "812"
+                    }
+                },
+                {
+                    "source": "/Users/taeheekim/.gradle/caches/transforms-3/7508187e2bc56a5799b02477153b7597/transformed/jetified-exoplayer-core-2.18.1/res/values-mn/values-mn.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,120,179,244,308,382,456,547,635",
+                        "endColumns": "64,58,64,63,73,73,90,87,80",
+                        "endOffsets": "115,174,239,303,377,451,542,630,711"
+                    }
+                }
+            ]
+        }
+    ]
+}

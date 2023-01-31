@@ -74,6 +74,19 @@ androidx/annotation/XmlRes.class
 androidx/annotation/experimental/Experimental$Level.class
 androidx/annotation/experimental/Experimental.class
 androidx/annotation/experimental/UseExperimental.class
+androidx/appcompat/app/ActionBar$DisplayOptions.class
+androidx/appcompat/app/ActionBar$NavigationMode.class
+androidx/appcompat/app/AppCompatDelegate$NightMode.class
+androidx/appcompat/graphics/drawable/DrawerArrowDrawable$ArrowDirection.class
+androidx/appcompat/view/menu/CascadingMenuPopup$HorizPosition.class
+androidx/appcompat/widget/LinearLayoutCompat$DividerMode.class
+androidx/appcompat/widget/LinearLayoutCompat$OrientationMode.class
+androidx/browser/browseractions/BrowserActionsIntent$BrowserActionsItemId.class
+androidx/browser/browseractions/BrowserActionsIntent$BrowserActionsUrlType.class
+androidx/browser/customtabs/CustomTabsService$Relation.class
+androidx/browser/customtabs/CustomTabsService$Result.class
+androidx/coordinatorlayout/widget/CoordinatorLayout$DefaultBehavior.class
+androidx/coordinatorlayout/widget/CoordinatorLayout$DispatchChangeEvent.class
 androidx/core/app/CoreComponentFactory$CompatWrapped.class
 androidx/core/app/CoreComponentFactory.class
 androidx/core/app/FrameMetricsAggregator$MetricType.class
@@ -129,6 +142,7 @@ androidx/multidex/MultiDexExtractor$ExtractedDex.class
 androidx/multidex/MultiDexExtractor.class
 androidx/multidex/ZipUtil$CentralDirectory.class
 androidx/multidex/ZipUtil.class
+androidx/swiperefreshlayout/widget/CircularProgressDrawable$ProgressDrawableSize.class
 androidx/versionedparcelable/NonParcelField.class
 androidx/versionedparcelable/ParcelField.class
 androidx/versionedparcelable/VersionedParcelize.class
