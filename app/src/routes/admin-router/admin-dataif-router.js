@@ -61,25 +61,38 @@ router.post("/dataif", checkAuth, async function(req, res) {
 //로그인 시 출력하는 화면
 router.get('/', async function(req, res){
   try{
-    if(req.url == '/'){
-      var result = await dataif_controller.fetchData(req, res);
-    } else {
+    var urltype = req.url.split('/')[1].split('=')[0];
+    var crtpage = 1;
+    var totalPage = 1;
+    if(urltype == '?search'){ //검색어 입력
       var result = await dataif_controller.fetchDataByUserid(req, res);
+    } else if (urltype == '?page'){ //페이지 이동
+      crtpage = req.url.split('=')[1]; //현재 페이지
+      var pageSize = 5; //한 페이지에 보여줄 회원 정보 수
+      var result = await dataif_controller.fetchData(req, res);
+      if(crtpage == undefined) crtpage = 1; //현재 페이지가 없으면 1페이지로 설정
+      if(crtpage < 1) crtpage = 1; //현재 페이지가 1보다 작으면 1페이지로 설정
+      if(crtpage > Math.ceil(result.length/pageSize)) crtpage = Math.ceil(result.length/pageSize); //현재 페이지가 마지막 페이지보다 크면 마지막 페이지로 설정
+      // var rtnparams=[];
+      // rtnparams.totalPages=result.length/pageSize;
+      // rtnparams.page=crtpage;
+      var start = (crtpage-1)*pageSize;
+      var end = crtpage*pageSize;
+      totalPage = Math.ceil(result.length/5);
+      result = result.slice(start, end); //현재 페이지에 해당하는 회원 정보만 가져옴
+    } else { //일반 접속
+      var result = await dataif_controller.fetchData(req, res);
+      totalPage = result.length/5;
+      result = result.slice(0, 5);
     }
-/*
-    var rtnparams=[];
-    rtnparams.totalPages=result.totalPages;
-    rtnparams.page=result.page;
-    rtnparams.srchword=req.query.srchword;
-    delete result.totalPages;
-    delete result.page;
-*/
     res.render('dataif/mem', 
     {
       posts:result,
       emd_code_to_name:memFunc.emd_code_to_name, //읍면동코드
       age_code_to_class:memFunc.age_code_to_class, //연령대
       role_code_to_class:memFunc.role_code_to_class, //권한
+      page:crtpage, //현재 페이지
+      totalPage: totalPage //총 페이지 수
     });//, rtnparams:rtnparams
   } catch(error) {
     console.log('dataif-router / error:'+error);
