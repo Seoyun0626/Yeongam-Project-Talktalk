@@ -27,6 +27,15 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Бөлүшүү"</string>
     <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g> аркылуу бөлүшүү"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Жыйнап коюу"</string>
+    <string name="exo_download_completed">Жүктөп алуу аяктады</string>
+    <string name="exo_download_description">Жүктөп алуу</string>
+    <string name="exo_download_downloading">Жүктөлүп алынууда</string>
+    <string name="exo_download_failed">Жүктөлүп алынбай калды</string>
+    <string name="exo_download_notification_channel_name">Жүктөлүп алынгандар</string>
+    <string name="exo_download_paused">Жүктөп алуу тындырылды</string>
+    <string name="exo_download_paused_for_network">Тармакка туташуу күтүлүүдө</string>
+    <string name="exo_download_paused_for_wifi">WiFi\'га туташуу күтүлүүдө</string>
+    <string name="exo_download_removing">Жүктөлүп алынгандар өчүрүлүүдө</string>
     <string msgid="146198913615257606" name="search_menu_title">"Издөө"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

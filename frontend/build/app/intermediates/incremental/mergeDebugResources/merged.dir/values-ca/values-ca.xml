@@ -27,6 +27,15 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Comparteix amb"</string>
     <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Comparteix amb <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Replega"</string>
+    <string name="exo_download_completed">S\'ha completat la baixada</string>
+    <string name="exo_download_description">Baixa</string>
+    <string name="exo_download_downloading">S\'està baixant</string>
+    <string name="exo_download_failed">No s\'ha pogut baixar</string>
+    <string name="exo_download_notification_channel_name">Baixades</string>
+    <string name="exo_download_paused">Les baixades estan en pausa</string>
+    <string name="exo_download_paused_for_network">Les baixades estan esperant una xarxa</string>
+    <string name="exo_download_paused_for_wifi">Les baixades estan esperant una Wi‑Fi</string>
+    <string name="exo_download_removing">S\'estan suprimint les baixades</string>
     <string msgid="146198913615257606" name="search_menu_title">"Cerca"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>
