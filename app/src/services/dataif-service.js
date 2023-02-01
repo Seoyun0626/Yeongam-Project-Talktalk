@@ -38,7 +38,7 @@ exports.fetchData = async function(req, res) {
     //             +`case when permit_type="N" then "사용자요청" when permit_type="U" then "소유자허가" when permit_type="Y" then "연계준비중" when permit_type="S" then "연계중" when permit_type="E" then "연계완료" end permit_type_nm`
     //             +` FROM webdb.tb_dataif a inner join webdb.tb_sensor b on a.sensor_board_idx=b.board_idx left outer join webdb.tb_file c`
     //             +` on c.board_type="tb_dataif" and c.board_idx=a.board_idx where a.ins_id="${req.user.userid}" order by a.board_idx desc LIMIT ${start}, ${pageSize}`;
-    var query = 'SELECT * FROM tb_user';
+    var query = 'SELECT * FROM webdb.tb_user';
     rows = await conn.query(query); // 쿼리 실행
   // rows.totalPages=totalPages;
   // rows.page=page;
@@ -89,10 +89,12 @@ exports.fetchDataByUserid = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
-    var query = 'SELECT * FROM tb_user where userid="'+req.params.id+'"';
+    // console.log(req.url.split('?')[1].split('=')[0]);
+    // if(req.params.id==undefined || req.url.split('?')[1].split('=')[0] == "search") req.params.id=req.url.split('/')[1].split('=')[1];
+    var query = 'SELECT * FROM webdb.tb_user where userid="'+req.params.id+'"';
     var rows = await conn.query(query); // 쿼리 실행
     // console.log(rows[0]);
-    return rows[0];
+    return rows;
   } catch(error) {
     console.log('dataif-service fetchDataByUserid:'+error);
   } finally {
@@ -262,43 +264,19 @@ exports.update = async function(req, res) {
     if (conn) conn.end();
   }
 };
-
-exports.delete = async function(req, res) {
-  var rowsFle;
+exports.deleteUser = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
-    await conn.beginTransaction() // 트랜잭션 적용 시작
-
-    var query = 'select file_path from webdb.tb_file where board_type="tb_dataif" and board_idx='+req.params.id;
-    rowsFle = await conn.query(query); // 쿼리 실행
-
-    query = 'delete from webdb.tb_file where board_type="tb_dataif" and board_idx='+req.params.id;
-    var rows = await conn.query(query); // 쿼리 실행
-
-    query = 'delete from webdb.tb_dataif where board_idx='+req.params.id;
-    rows = await conn.query(query); // 쿼리 실행
-
-    if(req.body.count>0){
-      query = 'delete from webdb.tb_monsensor where sub_board_idx='+req.params.id;
-      rows = await conn.query(query);
-    }
-
-    await conn.commit() // 커밋
-    for(var idx=0;idx<rowsFle.length;idx++){
-      var rowdata=rowsFle[idx];
-      var filePath = __dirname + "/../" + rowdata.file_path; // 삭제할 파일의 위치​
-      fs.unlink(filePath, function(err){});
-    }
-
+    console.log('dataif-service delete:'+req.params.id);
+    var query = 'delete from webdb.tb_user where userid="'+req.params.id+'"';
+    var rows = await conn.query(query);
     return rows;
   } catch(error) {
-    if (conn) await conn.rollback(); // 롤백
-    //return res.status(500).json(err)
     console.log('dataif-service delete:'+error);
   } finally {
-    if (conn) conn.release();
-  }  
+    if (conn) conn.end();
+  }
 };
 
 exports.retrieveDataProject = async function(req, res) {

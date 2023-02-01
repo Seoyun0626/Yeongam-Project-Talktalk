@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/semantic/layout.css">
+  <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/mem.css">
+  <link rel="stylesheet" href="/css/home/admin.css">
+  <script src="/ckeditor/build/ckeditor.js"></script>
+  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
+  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
+  <script src="/js/home/policy-upload.js" defer></script>
+</head>
+<body>
+  <%- include('../layout.ejs') %>
+<section>
+  <div class="pagename">정책 등록</div>
+  <div>
+    <form action="/admin/policy/upload/<%=post.board_idx %>" method="post" enctype="multipart/form-data">
+      <div class="ui form">
+        <div class="field">
+          <label>정책 이름</label>
+          <input type="text" name="name" placeholder="<%= post.policy_name %>">
+          <label>정책 대상</label>
+          <div class="field">
+            <select class="ui fluid dropdown" name="target" id="target">
+              <option value="0">청소년</option>
+            </select>
+          </div>
+          <label>주관 기관</label>
+          <div class="field">
+            <select class="ui fluid dropdown" name="policy_institution_code" id="policy_institution_code">
+              <option value="0">청소년 수련관</option>
+            </select>
+          </div>
+          <label>정책 설명</label>
+          <input type="text" name="description" placeholder="<%= post.description %>">
+          <!-- <label>정책 타입</label>
+          <input type="text" name="type" placeholder="정책 타입"> -->
+          <label>지원금</label>
+          <input type="text" name="fund" placeholder="<%= post.fund %>">
+          <label>접수 시작일</label>
+          <input type="date" name="application_start_date">
+          <label>접수 마감일</label>
+          <input type="date" name="application_end_date">
+          <label>정책 분야</label>
+          <div class="field">
+            <select class="ui fluid dropdown" name="policy_field_code" id="policy_field_code">
+              <option value="0">정책 분야</option>
+            </select>
+          </div>
+          <label>정책 성격</label>
+          <div class="field">
+            <select class="ui fluid dropdown" name="policy_character_code" id="policy_character_code">
+              <option value="0">정책 성격</option>
+            </select>
+          </div>
+          <label>정책 사진</label>
+          <input type="file" name="imgFile" accept="image/*">
+          <br><br>
+          <textarea name="content" id="editor"></textarea>
+          <script>
+            // 3. CKEditor5를 생성할 textarea 지정
+            ClassicEditor
+                .create( document.querySelector( '#editor' ), {
+                  language: "ko",
+                  simpleUpload: {
+                    uploadUrl: '/upload/image',
+                    withCredentials: true,
+                  }
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+            </script>
+        </div>
+        <!-- <div class="field">
+          <label>정책 파일</label>
+          <input type="file" name="file">
+        </div> -->
+        <div>
+          <button class="ui button" type="submit">등록</button>
+          <button class="ui button" type="button" onclick="location.href='/admin/policy/show'">취소</button>
+          <!-- <button class="ui button" type="reset">취소</button> -->
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+</body>
+</html>

@@ -15,8 +15,39 @@ exports.fetchData = async function(req, res) {
     } finally {
         conn.release();
     }
-}
+};
 
+
+//policy-upload창에서 필요한 코드 정보들 가져오기
+exports.fetchCodeData = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service fetchCodeData db getConnection');
+        var query = "SELECT * FROM webdb.tb_policy_target_code,tb_policy_institution_code except  board_idx;";
+        var rows = await conn.query(query); // 쿼리 실행
+        return rows;
+    } catch(error) {
+        console.log('policy-service fetchCodeData:'+error);
+    } finally {
+        conn.release();
+    }
+};
+
+exports.fetchpolicyByidx = async function(req, res) {
+    var conn;
+    try{
+      conn = await db.getConnection();
+      var query = 'SELECT * FROM webdb.tb_policy where board_idx="'+req.params.id+'"';
+      var rows = await conn.query(query); // 쿼리 실행
+    //   console.log(rows[0]);
+      return rows;
+    } catch(error) {
+      console.log('dataif-service fetchpolicyByidx:'+error);
+    } finally {
+      if (conn) conn.end();
+    }
+  };
 
 
 exports.upload = async function(req, res) {
@@ -48,13 +79,16 @@ exports.upload = async function(req, res) {
         console.log('policy-service upload db getConnection');
         var name = req.body.name;
         var target = req.body.target;
-        var supervision = req.body.supervision;
+        var policy_institution_code = req.body.policy_institution_code;
         var description = req.body.description;
         var fund = req.body.fund;
         var content = req.body.content;
         var application_start_date = req.body.application_start_date;
         var application_end_date = req.body.application_end_date;
-        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, description, fund, content, img, application_start_date, application_end_date) VALUES ('" + name + "', '" + target + "', '" + supervision + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "');";
+        var policy_field_code = req.body.policy_field_code;
+        var policy_character_code = req.body.policy_character_code;
+        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, description, fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code) VALUES "
+          + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "');";
         var rows = await conn.query(query); // 쿼리 실행
         console.log('policy-service upload success');
         return resultcode; //0이면 성공
@@ -112,6 +146,37 @@ exports.banner = async function(req, res) {
     } catch(error) {
         console.log('policy-service banner:'+error);
         resultcode = 100;
+    }
+};
+exports.fetchBannerData = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service fetchBannerData db getConnection');
+        var query = "SELECT * FROM webdb.tb_banner;";
+        var rows = await conn.query(query); // 쿼리 실행
+        return rows;
+    } catch(error) {
+        console.log('policy-service fetchBannerData:'+error);
+    } finally {
+        conn.release();
+    }
+};
+
+exports.deleteBanner = async function(req, res) {
+    var conn;
+    var resultcode = 0;
+    try{
+        conn = await db.getConnection();
+        var query = 'delete from webdb.tb_banner where board_idx="'+req.params.id+'"';
+        var rows =  await conn.query(query); // 쿼리 실행
+        console.log('policy-service deleteBanner success');
+        return resultcode; //0이면 성공
+    } catch(error) {
+        console.log('policy-service deleteBanner:'+error);
+        resultcode = 100;
+    } finally {
+        conn.release();
     }
 };
 

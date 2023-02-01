@@ -30,6 +30,7 @@ const routerAdminDataif = require("./src/routes/admin-router/admin-dataif-router
 const routerAdminLogin = require("./src/routes/admin-router/admin-login-router");
 const routerAdminMain = require("./src/routes/admin-router/admin-main-router");
 const routerAdminpolicy = require("./src/routes/admin-router/admin-policy-router");
+const routerAdminCode = require("./src/routes/admin-router/admin-codeData-router");
 
 const routerMobile = require("./src/routes/mobile-router/mobile-router");
 
@@ -74,6 +75,7 @@ app.use("/admin/auth",routerAdminLogin); //관리자 로그인
 app.use("/admin/dataif",routerAdminDataif); //관리자 데이터 인터페이스
 app.use("/admin/main",routerAdminMain); //관리자 메인
 app.use("/admin/policy",routerAdminpolicy); //관리자 정책
+app.use("/admin/codeData",routerAdminCode); //관리자 코드데이터(공통코드)
 
 app.use("/mobile",routerMobile); // 모바일
 

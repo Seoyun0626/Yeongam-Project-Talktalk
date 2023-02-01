@@ -15,6 +15,36 @@
 <body>
     <%- include('../layout.ejs') %>
 <section>
+    <div class="pagename">배너 정보</div>
+    <table id="banner_table">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <!-- <th>이미지</th> -->
+                <th>링크</th>
+                <th>등록일</th>
+                <th>수정일</th>
+                <!-- <th>수정</th> -->
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i=0; i<banner.length; i++) { %>
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td><%= banner[i].banner_name %></td>
+                    <!-- <td><img src="<%= banner[i].img %>" alt="1"></td> -->
+                    <td><%= banner[i].link %></td>
+                    <td><%= `${banner[i].ins_date.getFullYear()}` + `-`+ `${banner[i].ins_date.getMonth()+1}` + `-`+ `${banner[i].ins_date.getDate()}`%></td>
+                    <td><%= `${banner[i].upd_date.getFullYear()}` + `-`+ `${banner[i].upd_date.getMonth()+1}` + `-`+ `${banner[i].upd_date.getDate()}`%></td>
+                    <!-- <td><a href="/admin/policy/banner/<%= banner[i].id %>/edit">수정</a></td> -->
+                    <td><a href="/admin/policy/banner/delete/<%= banner[i].board_idx %>">삭제</a></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <br><br>
     <div class="pagename">배너 등록</div>
     <form action="/admin/policy/banner" method="post" enctype="multipart/form-data">
         <div class="ui form">

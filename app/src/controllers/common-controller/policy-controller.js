@@ -18,10 +18,38 @@ exports.upload = async function(req, res) {
       console.log('policy-controller login_check:'+error);
     }
   };
-  
+
+exports.fetchpolicyByidx = async function(req, res) {
+  try{
+    var result = await policy_service.fetchpolicyByidx(req);
+    // console.log(result);
+    return result;
+  } catch(error) {
+    console.log('policy-controller fetchpolicyByidx:'+error);
+  }
+};
+
+
 exports.banner = async function(req, res) {
     try{
       var result = await policy_service.banner(req);
+      return result;
+    } catch(error) {
+      console.log('policy-controller login_check:'+error);
+    }
+  };
+exports.fetchBannerData = async function(req, res) {
+    try{
+      var result = await policy_service.fetchBannerData(req);
+      return result;
+    } catch(error) {
+      console.log('policy-controller login_check:'+error);
+    }
+  };
+
+exports.deleteBanner = async function(req, res) {
+    try{
+      var result = await policy_service.deleteBanner(req);
       return result;
     } catch(error) {
       console.log('policy-controller login_check:'+error);
@@ -31,6 +59,15 @@ exports.banner = async function(req, res) {
 exports.fetchData = async function(req, res) {
     try{
       var result = await policy_service.fetchData(req);
+      return result;
+    } catch(error) {
+      console.log('policy-controller login_check:'+error);
+    }
+  };
+
+exports.fetchCodeData = async function(req, res) {
+    try{
+      var result = await policy_service.fetchCodeData(req);
       return result;
     } catch(error) {
       console.log('policy-controller login_check:'+error);

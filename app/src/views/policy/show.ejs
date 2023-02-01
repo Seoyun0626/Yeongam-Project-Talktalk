@@ -27,22 +27,21 @@
                     <th>정책 대상</th>
                     <th>접수 시작일</th>
                     <th>접수 마감일</th>
-                    <th>정책 수정</th>
+                    <th>수정</th>
+                    <th>삭제</th>
                 </tr>
             </thead>
             <tbody>
             <% for(var i=0; i<posts.length; i++){ %>
-              <!-- <form action="/admin/policy/update/<%=posts[i].userid %>" method="get" > -->
               <tr>
-                <td><%= posts[i].board_idx %></td>
+                <td><%= i+1 %></td>
                 <td><%= posts[i].policy_name %></td>
                 <td><%= posts[i].description %></td>
                 <td><%= posts[i].policy_target_code %></td>
                 <td><%= `${posts[i].application_start_date.getFullYear()}` + `-`+ `${posts[i].application_start_date.getMonth()+1}` + `-`+ `${posts[i].application_start_date.getDate()}`%></td>
                 <td><%= `${posts[i].application_end_date.getFullYear()}` + `-`+ `${posts[i].application_end_date.getMonth()+1}` + `-`+ `${posts[i].application_end_date.getDate()}`%></td>
-                <td>
-                  <button class="ui button" type="submit">수정</button>
-                </td>
+                <td><a href="/admin/policy/update/<%=posts[i].board_idx %>">수정</a></td>
+                <td><a href="/admin/policy/delete/<%= posts[i].board_idx %>">삭제</a></td>
               </tr>
             <!-- </form> -->
             <% } %>
@@ -50,19 +49,17 @@
         </table>
     </div>
     <div id="managep_foot">
-
-        <!-- <div class="ui pagination menu" id="managep_paging">
-            <a class="icon item">
-                <i class="left chevron icon"></i>
-            </a>
-            <a class="item">1</a>
-            <a class="item">2</a>
-            <a class="item">3</a>
-            <a class="item">4</a>
-            <a class="icon item">
-                <i class="right chevron icon"></i>
-        </a>
-      </div> -->
+      <div id="paging">
+        <div class="ui pagination menu">
+          <!-- <a class="icon item" href="/admin/policy/show/?page=1">처음</a> -->
+          <a class="icon item" href="/admin/policy/show/?page=<%=page-1 %>">이전</a>
+          <% for(var i=1; i<=totalPage; i++){ %>
+            <a class="item" href="/admin/policy/show/?page=<%=i %>"><%=i %></a>
+          <% } %>
+          <a class="icon item" href="/admin/policy/show/?page=<%=page+1 %>">다음</a>
+          <!-- <a class="icon item" href="/admin/policy/show/?page=<%=totalPage %>">끝</a> -->
+        </div>
+      </div>
       <div id="reg_btn_set">
         <button class="ui button" id="add_user" onclick="upload()">정책 등록</button>
         <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->

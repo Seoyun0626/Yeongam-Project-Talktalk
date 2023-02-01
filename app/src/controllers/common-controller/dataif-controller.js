@@ -11,6 +11,8 @@ exports.fetchData = async function(req, res) {
   }
 };
 
+
+
 // userid로 사용자 정보 가져오기
 exports.fetchDataByUserid = async function(req, res) {
   try{
@@ -99,12 +101,12 @@ exports.update = async function(req, res) {
   }
 };
 
-exports.delete = async function(req, res) {
+exports.deleteUser = async function(req, res) {
   try{
-    var result = await dataif_service.delete(req);
+    var result = await dataif_service.deleteUser(req);
     return result;
   } catch(error) {
-    console.log('dataif-controller delete:'+error);
+    console.log('dataif-controller deleteUser:'+error);
   }
 };
 

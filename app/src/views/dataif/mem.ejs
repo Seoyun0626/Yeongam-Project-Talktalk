@@ -18,7 +18,7 @@
     <div>
         <div class="pagename">회원 정보 관리</div>
         <div id="search_userinfo">
-          <form action="/admin/dataif" method="get">
+          <form action="/admin/dataif/" method="search">
             <ul>
                 <li>회원분류
                     <div class="ui checkbox">
@@ -50,10 +50,10 @@
                 </li> -->
                 <li><div>검색어
                 <select>
-                    <option value="id">이름</option>
-                    <option value="name">아이디</option>
+                    <!-- <option value="name">이름</option> -->
+                    <option value="id">아이디</option>
                 </select>
-                <input type="text" name="search" id="search" placeholder="검색어를 입력하세요">
+                <input type="search" name="search" id="search" placeholder="검색어를 입력하세요">
                 <button class="ui button" id="search_btn" type="submit">검색</button>
             </div>
             </li>
@@ -73,12 +73,13 @@
             <!-- <th>푸시</th>
             <th>이메일</th>
             <th>sms</th> -->
-            <th>관리</th>
+            <th>수정</th>
+            <th>삭제</th>
           </tr>
         </thead>
           <tbody>
+            <!-- 페이지 별로 -->
           <% for(var i=0; i<posts.length; i++){ %>
-            <form action="/admin/dataif/update/<%=posts[i].userid %>" method="get" >
             <tr>
               <td><%= posts[i].userid %></td>
               <td><%= posts[i].name %></td>
@@ -90,32 +91,30 @@
               <!-- <td><%= posts[i].push_yn %></td>
               <td><%= posts[i].email_yn %></td>
               <td><%= posts[i].sms_yn %></td> -->
-              <td>
+              <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
+              <td><a href="/admin/dataif/delete/<%= posts[i].userid %>">삭제</a></td>
+              <!-- <td>
                 <button class="ui button" type="submit">수정</button>
-                <!-- <button class="ui button" id="manage_btn" onclick="manage()">수정</button> -->
-                <!-- <button class="ui button" id="delete_btn" onclick="deleteUser()">삭제</button> -->
-              </td>
+              </td> -->
             </tr>
-          </form>
           <% } %>
           </tbody>
         </table>
         
         
         <div id="managep_foot">
-
-            <!-- <div class="ui pagination menu" id="managep_paging">
-                <a class="icon item">
-                    <i class="left chevron icon"></i>
-                </a>
-                <a class="item">1</a>
-                <a class="item">2</a>
-                <a class="item">3</a>
-                <a class="item">4</a>
-                <a class="icon item">
-                    <i class="right chevron icon"></i>
-            </a>
-          </div> -->
+          <!-- 페이징 아이콘 -->
+          <div id="paging">
+            <div class="ui pagination menu">
+              <!-- <a class="icon item" href="/admin/dataif/?page=1">처음</a> -->
+              <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">이전</a>
+              <% for(var i=1; i<=totalPage; i++){ %>
+                <a class="item" href="/admin/dataif/?page=<%=i %>"><%=i %></a>
+              <% } %>
+              <a class="icon item" href="/admin/dataif/?page=<%=page+1 %>">다음</a>
+              <!-- <a class="icon item" href="/admin/dataif/?page=<%=totalPage %>">끝</a> -->
+            </div>
+          </div>
           <div id="reg_btn_set">
             <button class="ui button" id="add_user" onclick="signUp()">회원 등록</button>
             <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->
