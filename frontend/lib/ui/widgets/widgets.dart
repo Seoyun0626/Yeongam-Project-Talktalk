@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login/ui/screens/calendar/calendar.dart';
 import 'package:login/ui/screens/keep/keep.dart';
-import 'package:login/ui/screens/policy/policy_search.dart';
+import 'package:login/ui/screens/policy/policy_list.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/data/env/env.dart';

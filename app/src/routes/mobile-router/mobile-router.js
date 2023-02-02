@@ -251,8 +251,6 @@ router.get('/policy/get-all-policy', async function(req, res){
     //     user:req.user
     // }
     // );
-
-
     res.json({
       resp:true,
       message : 'get all policies',
@@ -266,5 +264,43 @@ router.get('/policy/get-all-policy', async function(req, res){
     })
 }
 });
+
+router.get('/policy/get-search-policy/:policyName', async function(req, res) {
+  try{
+    var result = await mobile_policy_controller.getSearchPolicy(req,res);
+    console.log('mobile-router get-search-policy result : ', result);
+
+    res.json({
+      resp:true,
+      message : 'get search policies',
+      policies : result
+    })
+} catch(error) {
+    console.log('policy-router get-search-policy error:'+error);
+    res.json({
+      resp:false,
+      message : 'Failure get search policies'
+    })
+}
+})
+
+router.get('/policy/get-all-policy-for-search', async function(req, res) {
+  try{
+    var result = await mobile_policy_controller.getAllPolicyForSearch(req,res);
+    // console.log('mobile-router get-all-posts-for-search result : ', result);
+
+    res.json({
+      resp:true,
+      message : 'get et-all-posts-for-search policies',
+      policies : result
+    })
+} catch(error) {
+    console.log('policy-router get-search-policy error:'+error);
+    res.json({
+      resp:false,
+      message : 'Failure get-search-policy policies'
+    })
+}
+})
 
 module.exports = router;

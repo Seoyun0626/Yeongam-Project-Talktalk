@@ -38,7 +38,7 @@ class BottomNavigation extends StatelessWidget {
             iconString: 'images/bottom_bar/icon_menu_policy.png',
             iconText: '복지검색',
             onPressed: () => Navigator.pushAndRemoveUntil(context,
-                routeSlide(page: const SearchPolicyPage()), (_) => false),
+                routeSlide(page: const PolicyListPage()), (_) => false),
           ),
           _ItemButtom(
             i: 3,

@@ -13,13 +13,13 @@ import 'package:login/domain/models/response/response_user_search.dart';
 
 class UserServices {
   final debouncer = DeBouncer(duration: const Duration(milliseconds: 800));
-  final StreamController<List<UserFind>> _streamController =
-      StreamController<List<UserFind>>.broadcast();
-  Stream<List<UserFind>> get searchProducts => _streamController.stream;
+  // final StreamController<List<UserFind>> _streamController =
+  //     StreamController<List<UserFind>>.broadcast();
+  // Stream<List<UserFind>> get searchProducts => _streamController.stream;
 
-  void dispose() {
-    _streamController.close();
-  }
+  // void dispose() {
+  //   _streamController.close();
+  // }
 
   Future<DefaultResponse> createdUser(
     String userid,
