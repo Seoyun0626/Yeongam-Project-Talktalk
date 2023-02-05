@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/policy/policy_bloc.dart';
 import 'package:login/domain/models/response/response_policy.dart';
+import 'package:login/domain/models/response/response_search.dart';
 import 'package:login/domain/services/policy_services.dart';
 import 'package:login/domain/services/user_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
@@ -78,22 +79,22 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             const SizedBox(height: 10.0),
-            // BlocBuilder<PolicyBloc, PolicyState>(
-            //     buildWhen: (previous, current) => previous != current,
-            //     builder: (context, state) => !state.isSearchPolicy
-            //         ? FutureBuilder<List<Policy>>(
-            //             future: policyService.getAllPolicyForSearch(),
-            //             builder: (_, snapshot) {
-            //               if (snapshot.data != null && snapshot.data!.isEmpty) {
-            //                 return _ListWithoutPolicySearch();
-            //               }
+            BlocBuilder<PolicyBloc, PolicyState>(
+                buildWhen: (previous, current) => previous != current,
+                builder: (context, state) => !state.isSearchPolicy
+                    ? FutureBuilder<List<Policy>>(
+                        future: policyService.getAllPolicyForSearch(),
+                        builder: (_, snapshot) {
+                          if (snapshot.data != null && snapshot.data!.isEmpty) {
+                            return _ListWithoutPolicySearch();
+                          }
 
-            //               return !snapshot.hasData
-            //                   ? const _ShimerSearch()
-            //                   : _ListPolicySearch(policies: snapshot.data!);
-            //             },
-            //           )
-            //         : streamSearchPolicy())
+                          return !snapshot.hasData
+                              ? const _ShimerSearch()
+                              : _ListPolicySearch(policies: snapshot.data!);
+                        },
+                      )
+                    : streamSearchPolicy())
           ],
         ),
       ),
@@ -208,13 +209,13 @@ class _ListPolicySearch extends StatelessWidget {
                     padding: const EdgeInsets.all(7), // 카드 안쪽
                     child: InkWell(
                         splashColor: ThemeColors.primary.withAlpha(30),
-                        // onTap: () => Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             DetailPolicyPage(policies[i]),
-                        //       ),
-                        //     ),
+                        onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailPolicyPage(policies[i]),
+                              ),
+                            ),
                         child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
