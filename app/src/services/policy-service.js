@@ -180,6 +180,7 @@ exports.deleteBanner = async function(req, res) {
     }
 };
 
+
 exports.getAllPolicy = async function(req, res) {
     var conn;
     try{
@@ -187,12 +188,49 @@ exports.getAllPolicy = async function(req, res) {
         console.log('policy-service getAllPolicy db getConnection');
         var query = "SELECT * FROM webdb.tb_policy;";
         var rows = await conn.query(query); // 쿼리 실행
-        console.log(rows[0]);
+        // console.log(rows[0]);
         // console.log(rows[1]);
         // console.log(rows[2]); 
         return rows;
     } catch(error) {
         console.log('policy-service getAllPolicy:'+error);
+    } finally {
+        conn.release();
+    }
+}
+
+exports.getSearchPolicy = async function(req, res) {
+    console.log('policy-service getSearchPolicy : ',req.policyName);
+    var conn;
+    var searchValue = "%" + req.policyName +"%";
+    console.log('policy-service getSearchPolicy : ',searchValue);
+    try {
+        conn = await db.getConnection();
+        console.log('policy-service getSearchPolicy db getConnecton');
+        var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE"+searchValue;
+        var rows =  await conn.query(query); // 쿼리 실행
+        console.log('policy-service getSerachPolicy success');
+        return rows;
+    } catch(error){
+        console.log('policy-service getSearchPolicy:'+error);
+    } finally {
+        conn.release();
+    }
+}
+
+exports.getAllPolicyForSearch = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service getAllPolicyForSearch db getConnection');
+        var query = "SELECT * FROM webdb.tb_policy;";
+        var rows = await conn.query(query); // 쿼리 실행
+        // console.log(rows[0]);
+        // console.log(rows[1]);
+        // console.log(rows[2]); 
+        return rows;
+    } catch(error) {
+        console.log('policy-service getAllPolicyForSearch:'+error);
     } finally {
         conn.release();
     }

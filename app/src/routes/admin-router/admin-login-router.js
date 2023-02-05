@@ -9,7 +9,6 @@ const passport = require('passport');
 // 로그인 라우터
 router.get('/login', function (req, res) {
   try{
-    // console.log('login-router login');
     res.render('dataif/login');
   } catch(error) {
     console.log('login-router login error:'+error);

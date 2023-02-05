@@ -27,6 +27,15 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"இதனுடன் பகிர்"</string>
     <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g> மூலம் பகிர்"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"சுருக்கு"</string>
+    <string name="exo_download_completed">பதிவிறக்கப்பட்டது</string>
+    <string name="exo_download_description">பதிவிறக்கும் பட்டன்</string>
+    <string name="exo_download_downloading">பதிவிறக்குகிறது</string>
+    <string name="exo_download_failed">பதிவிறக்க முடியவில்லை</string>
+    <string name="exo_download_notification_channel_name">பதிவிறக்கங்கள்</string>
+    <string name="exo_download_paused">பதிவிறக்கங்கள் இடைநிறுத்தப்பட்டன</string>
+    <string name="exo_download_paused_for_network">நெட்வொர்க்கிற்காகக் காத்திருக்கின்றன</string>
+    <string name="exo_download_paused_for_wifi">Wi-Fiகாகக் காத்திருக்கின்றன</string>
+    <string name="exo_download_removing">பதிவிறக்கங்கள் அகற்றப்படுகின்றன</string>
     <string msgid="146198913615257606" name="search_menu_title">"தேடு"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

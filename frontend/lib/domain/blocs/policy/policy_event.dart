@@ -9,6 +9,14 @@ class OnSelectedImageEvent extends PolicyEvent {
   OnSelectedImageEvent(this.imageSelected);
 }
 
+// 정책 검색
+class OnIsSearchPolicyEvent extends PolicyEvent {
+  final bool isSearchPolicy;
+
+  OnIsSearchPolicyEvent(this.isSearchPolicy);
+}
+
+
 // // 정책 스크랩
 // class OnScrapEvent extends PolicyEvent {
 //   final int scrapNumber;

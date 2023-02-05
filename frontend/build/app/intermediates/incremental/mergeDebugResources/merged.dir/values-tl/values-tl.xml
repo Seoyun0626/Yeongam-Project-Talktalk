@@ -27,6 +27,15 @@
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Ibahagi sa/kay"</string>
     <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Ibahagi gamit ang <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
     <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"I-collapse"</string>
+    <string name="exo_download_completed">Tapos na ang pag-download</string>
+    <string name="exo_download_description">I-download</string>
+    <string name="exo_download_downloading">Nagda-download</string>
+    <string name="exo_download_failed">Hindi na-download</string>
+    <string name="exo_download_notification_channel_name">Mga Download</string>
+    <string name="exo_download_paused">Na-pause ang mga pag-download</string>
+    <string name="exo_download_paused_for_network">Naghihintay ng network ang pag-download</string>
+    <string name="exo_download_paused_for_wifi">Naghihintay ng WiFi ang mga pag-download</string>
+    <string name="exo_download_removing">Inaalis ang mga na-download</string>
     <string msgid="146198913615257606" name="search_menu_title">"Maghanap"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>
