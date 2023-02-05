@@ -10,7 +10,7 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 90,
+      height: MediaQuery.of(context).size.height / 9,
       decoration: BoxDecoration(
           color: isReel ? Colors.black : Colors.white,
           boxShadow: const [
@@ -133,8 +133,8 @@ class _ItemButtom extends StatelessWidget {
           onPressed();
         },
         child: Container(
-            margin: const EdgeInsets.only(bottom: 10.0),
-            padding: const EdgeInsets.all(10.0),
+            //margin: const EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 (isIcon)
@@ -144,10 +144,10 @@ class _ItemButtom extends StatelessWidget {
                             : isReel
                                 ? Colors.white
                                 : ThemeColors.basic,
-                        size: 35)
+                        size: MediaQuery.of(context).size.width / 13)
                     : Image.asset(
                         iconString!,
-                        height: 35,
+                        height: MediaQuery.of(context).size.width / 13,
                         color: (i == index)
                             ? ThemeColors.darkGreen
                             : isReel
