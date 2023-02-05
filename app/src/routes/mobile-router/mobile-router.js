@@ -265,10 +265,11 @@ router.get('/policy/get-all-policy', async function(req, res){
 }
 });
 
-router.get('/policy/get-search-policy/:policyName', async function(req, res) {
+router.get('/policy/get-search-policy/:searchValue', async function(req, res) {
+  console.log('mobile-router', req.params.searchValue );
   try{
     var result = await mobile_policy_controller.getSearchPolicy(req,res);
-    console.log('mobile-router get-search-policy result : ', result);
+    // console.log('mobile-router get-search-policy result : ', result);
 
     res.json({
       resp:true,
