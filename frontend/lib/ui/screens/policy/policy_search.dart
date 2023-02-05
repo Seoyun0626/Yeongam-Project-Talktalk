@@ -10,6 +10,7 @@ import 'package:login/domain/services/user_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
 // import 'package:login/domain/models/response/response_search.dart';
 import 'package:login/ui/screens/policy/policy_detail.dart';
+import 'package:login/ui/screens/policy/policy_list.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
@@ -22,17 +23,20 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   late TextEditingController _searchController;
+  late FocusNode myFocusNode;
 
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
+    myFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
     _searchController.clear();
     _searchController.dispose();
+    myFocusNode.dispose();
     super.dispose();
   }
 
@@ -42,42 +46,97 @@ class _SearchPageState extends State<SearchPage> {
     final policyBloc = BlocProvider.of<PolicyBloc>(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: ThemeColors.primary,
+        toolbarHeight: 10,
+        elevation: 0,
+        // leading: IconButton(
+        //   icon:
+        //       const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
+        //   onPressed: () => Navigator.pop(context),
+        // ),
+      ),
       body: SafeArea(
         child: ListView(
           physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.only(top: 10.0),
+          // padding: const EdgeInsets.only(top: 10.0),
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Container(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                height: 45,
-                width: size.width,
-                decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: BlocBuilder<PolicyBloc, PolicyState>(
-                  builder: (context, state) => TextField(
-                    controller: _searchController,
-                    onChanged: (value) {
-                      print(value);
-                      if (value.isNotEmpty) {
-                        policyBloc.add(OnIsSearchPolicyEvent(true));
-                        policyService.searchPolicy(value);
-                      } else {
-                        policyBloc.add(OnIsSearchPolicyEvent(false));
-                      }
-                    },
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: '복지 검색',
-                        hintStyle: GoogleFonts.roboto(fontSize: 17),
-                        suffixIcon: const Icon(Icons.search_rounded)),
-                  ),
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                child: Container(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    color: ThemeColors.primary,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            color: ThemeColors.darkGreen,
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                        Container(
+                          padding:
+                              const EdgeInsets.only(left: 10.0, right: 10.0),
+                          height: 45,
+                          width: size.width / 1.2,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[100],
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: BlocBuilder<PolicyBloc, PolicyState>(
+                            builder: (context, state) => TextField(
+                              focusNode: myFocusNode,
+                              autofocus: false,
+                              controller: _searchController,
+                              onChanged: (value) {
+                                // print(value);
+                                if (value.isNotEmpty) {
+                                  policyBloc.add(OnIsSearchPolicyEvent(true));
+                                  policyService.searchPolicy(value);
+                                } else {
+                                  policyBloc.add(OnIsSearchPolicyEvent(false));
+                                }
+                              },
+                              cursorColor: ThemeColors.darkGreen,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: '복지 검색',
+                                  // hintStyle: GoogleFonts.roboto(fontSize: 17),
+                                  suffixIcon: myFocusNode.hasFocus
+                                      ? IconButton(
+                                          icon: const Icon(
+                                            Icons.cancel,
+                                            size: 20,
+                                            color: ThemeColors.darkGreen,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              _searchController.clear();
+                                              // _searchText = "";
+                                              myFocusNode.unfocus();
+                                            });
+                                          },
+                                        )
+                                      : IconButton(
+                                          icon: const Icon(
+                                            Icons.search_rounded,
+                                            color: ThemeColors.darkGreen,
+                                          ),
+                                          onPressed: () {},
+                                          // onPressed: () => Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) =>
+                                          //         const PolicyListPage(),
+                                          //   ),
+                                          // ),
+                                        )),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ))),
             const SizedBox(height: 10.0),
             BlocBuilder<PolicyBloc, PolicyState>(
                 buildWhen: (previous, current) => previous != current,
@@ -113,7 +172,10 @@ class _SearchPageState extends State<SearchPage> {
 
         if (snapshot.data!.isEmpty) {
           return ListTile(
-            title: TextCustom(text: '${_searchController.text}에 대한 검색 결과 없음'),
+            title: Text(
+              '${_searchController.text}에 대한 검색 결과 없음',
+              style: const TextStyle(color: ThemeColors.basic),
+            ),
           );
         }
 
@@ -122,56 +184,6 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 }
-
-// class _ListPolicies extends StatelessWidget {
-// final List<PolicyFind> listPolicy;
-
-// const _ListPolicies({
-//   Key? key,
-//   required this.listPolicy,
-// }) : super(key: key);
-
-// @override
-// Widget build(BuildContext context) {
-
-//   return ListView.builder(
-//     // padding: const EdgeInsets.symmetric(horizontal: 5),
-//     physics: const NeverScrollableScrollPhysics(),
-//     shrinkWrap: true,
-//     itemCount: listPolicy.length,
-//     itemBuilder: (context, i) {
-//       return
-//       // return InkWell(
-//       //   onTap: () {
-//       //     Navigator.push(
-//       //         context, routeSlide(page: DetailPolicyPage(listPolicy[i])));
-//       //   },
-//       //   child: Padding(
-//       //     padding: const EdgeInsets.only(bottom: 8.0),
-//       //     child: Container(
-//       //       padding: const EdgeInsets.only(left: 5.0),
-//       //       height: 70,
-//       //       child: Row(
-//       //         children: [
-
-//       //           Column(
-//       //             crossAxisAlignment: CrossAxisAlignment.start,
-//       //             mainAxisAlignment: MainAxisAlignment.center,
-//       //             children: [
-//       //               TextCustom(text: listPolicy.policy_name),
-//       //               TextCustom(
-//       //                   text: listPolicy.policy_institution_code,
-//       //                   color: Colors.grey),
-//       //             ],
-//       //           )
-//       //         ],
-//       //       ),
-//       //     ),
-//       //   ),
-//       // );
-//     },
-//   );
-// }
 
 class _ListPolicySearch extends StatelessWidget {
   final List<Policy> policies;
