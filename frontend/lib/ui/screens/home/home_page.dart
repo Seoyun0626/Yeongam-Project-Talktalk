@@ -121,15 +121,16 @@ class _HomePageState extends State<HomePage> {
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
                       child: Column(children: [
                         Row(children: const [
-                          Icon(
-                            Icons.auto_awesome,
+                          ImageIcon(
+                            AssetImage("images/icon_check.png"),
                             color: ThemeColors.darkGreen,
+                            size: 20,
                           ),
                           // Image.asset('images/icon_sparkel.png'),
                           SizedBox(
                             width: 5,
                           ),
-                          Text('기관별 정책을 확인하세요!',
+                          Text('카테고리별 정책을 확인하세요!',
                               style: TextStyle(
                                 color: ThemeColors.basic,
                                 fontSize: 19,
@@ -282,21 +283,19 @@ class _HomePageState extends State<HomePage> {
 // 카테고리 아이콘 버튼
 class CategoryButton extends StatelessWidget {
   final List<String> pngIcons01 = [
-    'images/main_icon/icon_main_1.png', // 영암군
-    'images/main_icon/icon_main_2.png', // 청소년수련관
-    'images/main_icon/icon_main_3.png', // 방과후아카데미
+    'images/category_icon/icon_study.png', // 학업
+    'images/category_icon/icon_counseling.png', // 상담
+    'images/category_icon/icon_job.png', // 취업/이직
+    'images/category_icon/icon_living.png', // 생활비
   ];
-  final List<String> textIcons01 = ['영암군', '청소년수련관', '방과후아카데미'];
-  final List<String> textIcons02 = [
-    '청소년상담\n복지센터',
-    '학교밖청소년\n지원센터',
-    '삼호읍청소년\n문화의집'
-  ];
+  final List<String> textIcons01 = ['학업', '상담', '취업/이직', '생활비'];
+  final List<String> textIcons02 = ['건강', '주거', '결혼/양육', '전체보기'];
 
   final List<String> pngIcons02 = [
-    'images/main_icon/icon_main_4.png', // 청소년상담복지센터
-    'images/main_icon/icon_main_5.png', // 학교밖청소년지원센터
-    'images/main_icon/icon_main_6.png', // 삼호읍청소년문화의집
+    'images/category_icon/icon_health.png', // 건강
+    'images/category_icon/icon_house.png', // 주거
+    'images/category_icon/icon_baby.png', // 결혼/양육
+    'images/category_icon/icon_allsee.png', // 전체보기
   ];
 
   @override
@@ -308,18 +307,16 @@ class CategoryButton extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: List.generate(
-              3,
+              4,
               (index) => Container(
                 margin: const EdgeInsets.only(bottom: 5.0),
                 padding: const EdgeInsets.all(10.0),
                 child: Column(children: [
                   IconButton(
-                    icon: Image.asset(pngIcons01[index]),
-                    onPressed: () {},
-                    iconSize: 50,
-                  ),
+                      icon: Image.asset(pngIcons01[index]),
+                      onPressed: () {},
+                      iconSize: MediaQuery.of(context).size.width / 8),
                   Text(
-                    style: TextStyle(fontWeight: FontWeight.w500),
                     textIcons01[index],
                   ),
                 ]),
@@ -333,7 +330,7 @@ class CategoryButton extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: List.generate(
-              3,
+              4,
               (index) => Container(
                 margin: const EdgeInsets.only(bottom: 5.0),
                 padding: const EdgeInsets.all(10.0),
@@ -341,11 +338,9 @@ class CategoryButton extends StatelessWidget {
                   IconButton(
                     icon: Image.asset(pngIcons02[index]),
                     onPressed: () {},
-                    iconSize: 50,
+                    iconSize: MediaQuery.of(context).size.width / 8,
                   ),
                   Text(
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.w500),
                     textIcons02[index],
                   ),
                 ]),
@@ -377,7 +372,7 @@ class livePopularPost extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-            Text('실시간 인기 글',
+            Text('지금 인기있는 정책은?',
                 style: TextStyle(
                   color: ThemeColors.basic,
                   fontSize: 19,
