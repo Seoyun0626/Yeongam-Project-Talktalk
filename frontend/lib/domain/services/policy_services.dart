@@ -18,11 +18,8 @@ class PolicyServices {
       StreamController<List<Policy>>.broadcast();
   Stream<List<Policy>> get searchProducts => _streamController.stream;
 
-  _setHeaders() => {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-        'Charset': 'utf-8',
-      };
+  Map<String, String> _setHeaders() =>
+      {'Content-Type': 'application/json;charset=UTF-8', 'Charset': 'utf-8'};
 
   Future<List<Policy>> getAllPolicy() async {
     // final token = await secureStorage.readToken();
@@ -36,23 +33,25 @@ class PolicyServices {
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
 
-  void searchPolicy(String policyName) async {
-    debouncer.value = '';
+  void searchPolicy(String searchValue) async {
+    debouncer.value = "";
     debouncer.onValue = (value) async {
       // final token = await secureStorage.readToken();
       final resp = await http.get(
           Uri.parse(
-              '${Environment.urlApi}/policy/get-search-policy' + policyName),
+              '${Environment.urlApi}/policy/get-search-policy/' + searchValue),
           headers:
               _setHeaders()); //{'Accept': 'application/json'}); //, 'xxx-token': token! });
 
+      print(resp.body);
       final listPolicies =
-          ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+          ResponsePolicy.fromJson(json.decode(resp.body)).policies;
 
       _streamController.add(listPolicies);
     };
+
     final timer = Timer(
-        const Duration(milliseconds: 200), () => debouncer.value = policyName);
+        const Duration(milliseconds: 200), () => debouncer.value = searchValue);
     Future.delayed(const Duration(milliseconds: 400))
         .then((_) => timer.cancel());
   }

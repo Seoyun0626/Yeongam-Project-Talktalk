@@ -200,14 +200,14 @@ exports.getAllPolicy = async function(req, res) {
 }
 
 exports.getSearchPolicy = async function(req, res) {
-    console.log('policy-service getSearchPolicy : ',req.policyName);
+    console.log('policy-service getSearchPolicy : ',req.params.searchValue);
     var conn;
-    var searchValue = "%" + req.policyName +"%";
+    var searchValue = '%' + req.params.searchValue + '%';
     console.log('policy-service getSearchPolicy : ',searchValue);
     try {
         conn = await db.getConnection();
         console.log('policy-service getSearchPolicy db getConnecton');
-        var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE"+searchValue;
+        var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE" + "'"+searchValue+"'" + ";"; 
         var rows =  await conn.query(query); // 쿼리 실행
         console.log('policy-service getSerachPolicy success');
         return rows;
