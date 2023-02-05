@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/domain/models/response/response_user.dart';
 import 'package:login/ui/screens/login/login_page.dart';
+import 'package:login/ui/screens/policy/policy_search.dart';
+import 'package:login/ui/screens/policy/search_condition.dart';
 import 'package:login/ui/screens/user/my_page.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/domain/blocs/blocs.dart';
@@ -61,210 +63,221 @@ class _HomePageState extends State<HomePage> {
                 //   context, routeSlide(page: const LoginPage())),
 
                 // }
+              ),
+              IconButton(
+                icon: const Icon(Icons.search,
+                    size: 30, color: ThemeColors.basic),
+                onPressed: () => Navigator.push(
+                    context, routeSlide(page: const SearchPage())),
+                // onPressed: () => Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const SearchPage(),
+                //     )),
               )
             ],
             backgroundColor: ThemeColors.primary,
             centerTitle: false,
             elevation: 0.0,
           ),
-          body: Column(children: <Widget>[
-            const SearchBar(),
-            Expanded(
-              child: ListView(shrinkWrap: true, children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 0.0, vertical: 0.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // 배너 슬라이드
-                      CarouselSlider(
-                        carouselController: _controller,
-                        options: CarouselOptions(
-                          scrollDirection: Axis.horizontal,
-                          height: MediaQuery.of(context).size.height / 4,
-                          enlargeCenterPage: true,
-                          viewportFraction: 1.0,
-                          autoPlay: true,
-                        ),
-                        items: BannerImage.map((image) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                // margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                child: ClipRRect(
-                                  // borderRadius: BorderRadius.circular(10.0),
-                                  child: image,
-                                ),
-                              );
-                            },
+          body: SingleChildScrollView(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 배너 슬라이드
+                  CarouselSlider(
+                    carouselController: _controller,
+                    options: CarouselOptions(
+                      scrollDirection: Axis.horizontal,
+                      height: MediaQuery.of(context).size.height / 4,
+                      enlargeCenterPage: true,
+                      viewportFraction: 1.0,
+                      autoPlay: true,
+                    ),
+                    items: BannerImage.map((image) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            // margin: EdgeInsets.symmetric(horizontal: 5.0),
+                            child: ClipRRect(
+                              // borderRadius: BorderRadius.circular(10.0),
+                              child: image,
+                            ),
                           );
-                        }).toList(),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      // buttonSection, // 카테고리 아이콘 메뉴
-                      Container(
-                          padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
-                          margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-                          child: Column(children: [
-                            Row(children: const [
-                              Icon(
-                                Icons.auto_awesome,
-                                color: ThemeColors.darkGreen,
-                              ),
-                              // Image.asset('images/icon_sparkel.png'),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text('기관별 정책을 확인하세요!',
-                                  style: TextStyle(
-                                    color: ThemeColors.basic,
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                            ])
-                          ])),
-
-                      SizedBox(
-                        width: 5,
-                      ),
-                      CategoryButton(),
-                      livePopularPost(),
-                      // const TextCustom(
-                      //     text: 'MainPage',
-                      //     letterSpacing: 1.5,
-                      //     fontWeight: FontWeight.w500,
-                      //     fontSize: 28,
-                      //     color: Color.fromARGB(255, 93, 73, 98)),
-                      // const SizedBox(height: 30.0),
-
-                      // 로그아웃 버튼
-                      // BtnNaru(
-                      //   text: '로그아웃',
-                      //   colorText: Colors.black,
-                      //   width: size.width,
-                      //   onPressed: () {
-                      //     authBloc.add(OnLogOutEvent());
-                      //     userBloc.add(OnLogOutUser());
-                      //     Navigator.pushAndRemoveUntil(context,
-                      //         routeSlide(page: const HomePage()), (_) => false);
-                      //   },
-                      // ),
-                      // const SizedBox(height: 30.0),
-                    ],
+                        },
+                      );
+                    }).toList(),
                   ),
-                ),
-              ]),
-            )
-          ]),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // buttonSection, // 카테고리 아이콘 메뉴
+                  Container(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+                      child: Column(children: [
+                        Row(children: const [
+                          Icon(
+                            Icons.auto_awesome,
+                            color: ThemeColors.darkGreen,
+                          ),
+                          // Image.asset('images/icon_sparkel.png'),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('기관별 정책을 확인하세요!',
+                              style: TextStyle(
+                                color: ThemeColors.basic,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w600,
+                              )),
+                        ])
+                      ])),
+
+                  SizedBox(
+                    width: 5,
+                  ),
+                  CategoryButton(),
+                  livePopularPost(),
+                  // const TextCustom(
+                  //     text: 'MainPage',
+                  //     letterSpacing: 1.5,
+                  //     fontWeight: FontWeight.w500,
+                  //     fontSize: 28,
+                  //     color: Color.fromARGB(255, 93, 73, 98)),
+                  // const SizedBox(height: 30.0),
+
+                  // 로그아웃 버튼
+                  // BtnNaru(
+                  //   text: '로그아웃',
+                  //   colorText: Colors.black,
+                  //   width: size.width,
+                  //   onPressed: () {
+                  //     authBloc.add(OnLogOutEvent());
+                  //     userBloc.add(OnLogOutUser());
+                  //     Navigator.pushAndRemoveUntil(context,
+                  //         routeSlide(page: const HomePage()), (_) => false);
+                  //   },
+                  // ),
+                  // const SizedBox(height: 30.0),
+                ],
+              ),
+            ),
+          ),
           bottomNavigationBar: const BottomNavigation(index: 1)),
     );
   }
 }
 
-// 검색창
-class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
+// // 검색창
+// class SearchBar extends StatefulWidget {
+//   const SearchBar({Key? key}) : super(key: key);
 
-  @override
-  State<SearchBar> createState() => _SearchBar();
-}
+//   @override
+//   State<SearchBar> createState() => _SearchBar();
+// }
 
-class _SearchBar extends State<SearchBar> {
-  final TextEditingController _filter = TextEditingController(); // 검색 위젯 컨트롤
-  late FocusNode myFocusNode;
+// class _SearchBar extends State<SearchBar> {
+//   final TextEditingController _filter = TextEditingController(); // 검색 위젯 컨트롤
+//   late FocusNode myFocusNode;
 
-  @override
-  void initState() {
-    super.initState();
-    myFocusNode = FocusNode();
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     myFocusNode = FocusNode();
+//   }
 
-  @override
-  void dispose() {
-    // Clean up the focus node when the Form is disposed.
-    myFocusNode.dispose();
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     // Clean up the focus node when the Form is disposed.
+//     myFocusNode.dispose();
+//     super.dispose();
+//   }
 
-  String _searchText = ""; // 현재 검색어 값
+//   String _searchText = ""; // 현재 검색어 값
 
-  _SearchBar() {
-    _filter.addListener(() {
-      setState(() {
-        _searchText = _filter.text;
-      });
-    });
-  } // filter가 변화를 검지하여 searchText의 상태를 변화시키는 코드
+//   _SearchBar() {
+//     _filter.addListener(() {
+//       setState(() {
+//         _searchText = _filter.text;
+//       });
+//     });
+//   } // filter가 변화를 검지하여 searchText의 상태를 변화시키는 코드
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: ThemeColors.primary,
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-      child: Row(children: <Widget>[
-        Expanded(
-          flex: 6,
-          child: TextField(
-            focusNode: myFocusNode,
-            cursorColor: ThemeColors.darkGreen,
-            style: const TextStyle(
-              fontSize: 15,
-            ),
-            autofocus: false,
-            controller: _filter,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white,
-              prefixIcon: const Icon(
-                Icons.search,
-                color: ThemeColors.darkGreen,
-                size: 20,
-              ),
-              suffixIcon: myFocusNode.hasFocus
-                  ? IconButton(
-                      icon: const Icon(
-                        Icons.cancel,
-                        size: 20,
-                        color: ThemeColors.darkGreen,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _filter.clear();
-                          _searchText = "";
-                          myFocusNode.unfocus();
-                        });
-                      },
-                    )
-                  : IconButton(
-                      icon: const Icon(
-                        Icons.tune,
-                        color: ThemeColors.darkGreen,
-                        size: 20,
-                      ),
-                      onPressed: (() {})),
-              hintText: '복지 검색',
-              labelStyle: const TextStyle(color: ThemeColors.darkGreen),
-              focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              enabledBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              border: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              contentPadding: const EdgeInsets.symmetric(vertical: 10),
-            ),
-          ),
-        ),
-      ]),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: ThemeColors.primary,
+//       padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+//       child: Row(children: <Widget>[
+//         Expanded(
+//           flex: 6,
+//           child: TextField(
+//             focusNode: myFocusNode,
+//             cursorColor: ThemeColors.darkGreen,
+//             style: const TextStyle(
+//               fontSize: 15,
+//             ),
+//             autofocus: false,
+//             controller: _filter,
+//             decoration: InputDecoration(
+//               filled: true,
+//               fillColor: Colors.white,
+//               prefixIcon: const Icon(
+//                 Icons.search,
+//                 color: ThemeColors.darkGreen,
+//                 size: 20,
+//               ),
+//               suffixIcon: myFocusNode.hasFocus
+//                   ? IconButton(
+//                       // 포커스 잡혔을 때 : 취소버튼
+//                       icon: const Icon(
+//                         Icons.cancel,
+//                         size: 20,
+//                         color: ThemeColors.darkGreen,
+//                       ),
+//                       onPressed: () {
+//                         setState(() {
+//                           _filter.clear();
+//                           _searchText = "";
+//                           myFocusNode.unfocus();
+//                         });
+//                       },
+//                     )
+//                   : IconButton(
+//                       //포커스 없을 때  : 검색 조건 버튼
+//                       icon: const Icon(
+//                         Icons.tune,
+//                         color: ThemeColors.darkGreen,
+//                         size: 20,
+//                       ),
+//                       onPressed: (() {
+//                         Navigator.push(context,
+//                             routeSlide(page: const SearchConditionPage()));
+//                       })),
+//               hintText: '복지 검색',
+//               labelStyle: const TextStyle(color: ThemeColors.darkGreen),
+//               focusedBorder: const OutlineInputBorder(
+//                   borderSide: BorderSide(color: Colors.transparent),
+//                   borderRadius: BorderRadius.all(Radius.circular(10))),
+//               enabledBorder: const OutlineInputBorder(
+//                   borderSide: BorderSide(color: Colors.transparent),
+//                   borderRadius: BorderRadius.all(Radius.circular(10))),
+//               border: const OutlineInputBorder(
+//                   borderSide: BorderSide(color: Colors.transparent),
+//                   borderRadius: BorderRadius.all(Radius.circular(10))),
+//               contentPadding: const EdgeInsets.symmetric(vertical: 10),
+//             ),
+//           ),
+//         ),
+//       ]),
+//     );
+//   }
+// }
 
 // 카테고리 아이콘 버튼
 class CategoryButton extends StatelessWidget {
