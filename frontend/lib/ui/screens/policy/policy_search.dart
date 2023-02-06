@@ -44,6 +44,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final policyBloc = BlocProvider.of<PolicyBloc>(context);
+    String inputText = "";
 
     return Scaffold(
       // backgroundColor: Colors.white,
@@ -86,6 +87,16 @@ class _SearchPageState extends State<SearchPage> {
                               borderRadius: BorderRadius.circular(10.0)),
                           child: BlocBuilder<PolicyBloc, PolicyState>(
                             builder: (context, state) => TextField(
+                              textInputAction: TextInputAction.go,
+                              onSubmitted: (value) {
+                                inputText = value;
+                                setState(() {
+                                  Navigator.push(
+                                      context,
+                                      routeSlide(
+                                          page: PolicyListPage(inputText)));
+                                });
+                              },
                               focusNode: myFocusNode,
                               autofocus: false,
                               controller: _searchController,
