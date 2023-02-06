@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/video_player_android/intermediates/merged_res/release/values-lt/values-lt.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/video_player_android/intermediates/merged_res/release/values-lt/values-lt.xml",
             "map": [
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/7508187e2bc56a5799b02477153b7597/transformed/jetified-exoplayer-core-2.18.1/res/values-lt/values-lt.xml",
@@ -33,7 +33,7 @@
             ]
         },
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/video_player_android/intermediates/incremental/mergeReleaseResources/merged.dir/values-lt/values-lt.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/video_player_android/intermediates/incremental/mergeReleaseResources/merged.dir/values-lt/values-lt.xml",
             "map": [
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/7508187e2bc56a5799b02477153b7597/transformed/jetified-exoplayer-core-2.18.1/res/values-lt/values-lt.xml",

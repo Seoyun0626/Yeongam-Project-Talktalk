@@ -64,7 +64,7 @@ android {
         multiDexEnabled true
     }
     // start of signingConfigs
-    /*signingConfigs {
+    signingConfigs {
        release {
            keyAlias keystoreProperties['keyAlias']
            keyPassword keystoreProperties['keyPassword']
@@ -76,19 +76,20 @@ android {
 
     buildTypes {
         release {
+
 //             TODO: Add your own signing config for the release build.
 //             Signing with the debug keys for now, so `flutter run --release` works.
             // signingConfig signingConfigs.debug
             signingConfig signingConfigs.release
 
             // start of 코드난독화 및 사이즈 축소
-           minifyEnabled true
-        //    useProguard true
+            minifyEnabled true
+            // useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // end of 코드난독화 및 사이즈 축소
         }
     }
-    */
+
 }
 
 flutter {
