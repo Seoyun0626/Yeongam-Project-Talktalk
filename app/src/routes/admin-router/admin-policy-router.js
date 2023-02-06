@@ -71,6 +71,32 @@ router.get('/update/:id', async function(req, res){
     }
   });
 
+router.post('/update/:id', async function(req, res){
+    try{
+        // console.log(req.params);
+        var result = await policy_controller.updatePolicy(req, res);
+        if(result == 0) { //성공
+            res.redirect('/admin/policy/show');
+        } else { //실패
+            res.redirect('/admin/policy/update/'+req.params.id);
+        }
+    } catch(error) {
+        console.log('policy-router update error:'+error);
+    }
+});
+
+router.get('/delete/:id', async function(req, res){
+    try{
+        var result = await policy_controller.deletePolicy(req, res);
+        if(result == 0) { //성공
+            res.redirect('/admin/policy/show');
+        } else { //실패
+            res.redirect('/admin/policy/show');
+        }
+    } catch(error) {
+        console.log('policy-router delete error:'+error);
+    }
+});
 
 
 router.get('/banner', async function (req, res) {

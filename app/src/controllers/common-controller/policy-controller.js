@@ -29,6 +29,26 @@ exports.fetchpolicyByidx = async function(req, res) {
   }
 };
 
+exports.updatePolicy = async function(req, res) {
+  try{
+    var result = await policy_service.updatePolicy(req);
+    // console.log(result);
+    return result;
+  } catch(error) {
+    console.log('policy-controller updatePolicy:'+error);
+  }
+};
+
+exports.deletePolicy = async function(req, res) {
+  try{
+    var result = await policy_service.deletePolicy(req);
+    // console.log(result);
+    return result;
+  } catch(error) {
+    console.log('policy-controller deletePolicy:'+error);
+  }
+};
+
 
 exports.banner = async function(req, res) {
     try{
