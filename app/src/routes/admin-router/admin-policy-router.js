@@ -113,7 +113,6 @@ router.get('/banner', async function (req, res) {
 
 router.post('/banner', async function (req, res) {
     try{
-        // console.log(req.body);
         // DB에 저장
         var result = await policy_controller.banner(req,res);
         if(result == 0) { //성공

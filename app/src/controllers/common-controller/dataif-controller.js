@@ -52,6 +52,15 @@ exports.updateTermData = async function(req, res) {
   }
 };
 
+exports.fetchDataUserUpdate = async function(req, res) {
+  try{
+    var result = await dataif_service.fetchDataUserUpdate(req);
+    return result;
+  } catch(error) {
+    console.log('dataif-controller fetchDataUserUpdate:'+error);
+  }
+};
+
 
 
 exports.create = async function(req, res) {

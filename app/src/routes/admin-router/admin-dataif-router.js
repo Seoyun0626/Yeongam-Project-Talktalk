@@ -148,7 +148,7 @@ router.get('/update/:id', async function(req, res){
     // res.redirect("/dataif/update/"+req.user.id);
     // console.log("update:"+req.params.id);
     //데이터 받아오기
-    var result = await dataif_controller.fetchDataByUserid(req, res);
+    var result = await dataif_controller.fetchDataUserUpdate(req, res);
     res.render('dataif/update', {post:result[0]});
   } catch(error) {
     console.log('dataif-router update error:'+error);

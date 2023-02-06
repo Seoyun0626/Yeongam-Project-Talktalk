@@ -7,11 +7,10 @@
   <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/mem.css">
   <link rel="stylesheet" href="/css/home/admin.css">
-  <!-- <link rel="stylesheet" href="/css/home/policyShow.css"> -->
+  <link rel="stylesheet" href="/css/home/policy.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
-  <script src="/js/home/policyShow.js" defer></script>
 </head>
 <body>
   <div id='rectanglel3' class='rectanglel3'></div>
@@ -34,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-            <% for(var i=0; i<posts.length; i++){ %>
+            <% for(var i=0; i< posts.length; i++){ %>
               <tr>
                 <td><%= i+1 %></td>
                 <td><%= posts[i].policy_name %></td>
@@ -50,21 +49,17 @@
             </tbody>
         </table>
     </div>
-    <div id="managep_foot">
-      <div id="paging">
-        <div class="ui pagination menu">
-          <!-- <a class="icon item" href="/admin/policy/show/?page=1">처음</a> -->
-          <a class="icon item" href="/admin/policy/show/?page=<%=page-1 %>">이전</a>
-          <% for(var i=1; i<=totalPage; i++){ %>
-            <a class="item" href="/admin/policy/show/?page=<%=i %>"><%=i %></a>
-          <% } %>
-          <a class="icon item" href="/admin/policy/show/?page=<%=page+1 %>">다음</a>
-          <!-- <a class="icon item" href="/admin/policy/show/?page=<%=totalPage %>">끝</a> -->
-        </div>
+    <button class="ui button" id="policy_reg_btn" onclick="location.href='/admin/policy/upload'">등록</button>
+    <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->
+    <div id="policy_paging">
+      <div class="ui pagination menu">
+        <!-- <a class="icon item" href="/admin/policy/show/?page=1">처음</a> -->
+        <a class="icon item" href="/admin/policy/show/?page=<%=page-1 %>">이전</a>
+        <% for(var i=1; i<=totalPage; i++){ %>
+          <a class="item" href="/admin/policy/show/?page=<%=i %>"><%=i %></a>
+        <% } %>
+        <a class="icon item" href="/admin/policy/show/?page=<%=page+1 %>">다음</a>
+        <!-- <a class="icon item" href="/admin/policy/show/?page=<%=totalPage %>">끝</a> -->
       </div>
-      <div id="reg_btn_set">
-        <button class="ui button" id="add_user" onclick="upload()">정책 등록</button>
-        <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->
-      </div>
-    </div>  
+    </div>
 </section>

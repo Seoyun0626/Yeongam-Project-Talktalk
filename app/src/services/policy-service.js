@@ -151,15 +151,6 @@ exports.upload = async function(req, res) {
 };
 
 
-let banner_storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, '../frontend/images/policy');
-    },
-    filename: function (req, file, cb) {
-        // cb(null, file.originalname);
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
 
 exports.banner = async function(req, res) {
     var conn;
@@ -176,17 +167,19 @@ exports.banner = async function(req, res) {
                     temp = temp + path.extname(file.originalname);
                     cb(null, temp);
                 }
-            })}).single('imgFile');
+            })
+        }).single('imgFile');
         upload(req, res, function (err) {
             if (err instanceof multer.MulterError) {
-                console.log('multer error:'+err);
+                console.log('multer error:' + err);
             } else if (err) {
-                console.log('multer error:'+err);
+                console.log('multer error:' + err);
             }
         });
 
         conn = await db.getConnection();
         console.log('policy-service banner db getConnection');
+        console.log(req.body);
         var name = req.body.name;
         var link = req.body.link;
         var query = "INSERT INTO webdb.tb_banner (banner_name, img, link) VALUES ('" + name + "', '" + temp + "', '" + link + "');";

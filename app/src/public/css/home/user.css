@@ -1,0 +1,12 @@
+#mem_paging {
+    padding-left: 380px;
+    margin-top: 15px;
+  }
+#mem_table{
+    text-align: center;
+    width: 945px;
+}
+#mem_reg_btn{
+    float: left;
+    margin-top: 15px;
+}
