@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/kakao_flutter_sdk_common/intermediates/merged_res/release/values-ldltr-v21/values-ldltr-v21.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_res/release/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/721af5cb1377ecd00b0f2eaaa8841448/transformed/appcompat-1.0.2/res/values-ldltr-v21/values-ldltr-v21.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/kakao_flutter_sdk_common/intermediates/incremental/mergeReleaseResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/incremental/mergeReleaseResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/721af5cb1377ecd00b0f2eaaa8841448/transformed/appcompat-1.0.2/res/values-ldltr-v21/values-ldltr-v21.xml",

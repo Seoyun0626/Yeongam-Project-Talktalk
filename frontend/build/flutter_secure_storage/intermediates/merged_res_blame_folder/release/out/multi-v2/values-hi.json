@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/flutter_secure_storage/intermediates/incremental/mergeReleaseResources/merged.dir/values-hi/values-hi.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_secure_storage/intermediates/merged_res/release/values-hi/values-hi.xml",
             "map": [
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/022dd61e788bc9d9008affaf60b694b4/transformed/core-1.6.0/res/values-hi/values-hi.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/flutter_secure_storage/intermediates/merged_res/release/values-hi/values-hi.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_secure_storage/intermediates/incremental/mergeReleaseResources/merged.dir/values-hi/values-hi.xml",
             "map": [
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/022dd61e788bc9d9008affaf60b694b4/transformed/core-1.6.0/res/values-hi/values-hi.xml",
