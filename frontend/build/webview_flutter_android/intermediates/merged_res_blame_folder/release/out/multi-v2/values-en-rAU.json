@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/webview_flutter_android/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/webview_flutter_android/intermediates/merged_res/release/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/022dd61e788bc9d9008affaf60b694b4/transformed/core-1.6.0/res/values-en-rAU/values-en-rAU.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/webview_flutter_android/intermediates/merged_res/release/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/webview_flutter_android/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/022dd61e788bc9d9008affaf60b694b4/transformed/core-1.6.0/res/values-en-rAU/values-en-rAU.xml",

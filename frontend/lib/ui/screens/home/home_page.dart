@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:login/domain/models/response/response_user.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/screens/policy/policy_search.dart';
@@ -36,11 +37,12 @@ class _HomePageState extends State<HomePage> {
       home: Scaffold(
           appBar: AppBar(
             titleSpacing: 0,
-            title: const Text('청소년톡talk',
+            title: const Text('청소년톡 Talk',
                 style: TextStyle(
                   color: ThemeColors.basic,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+                  fontFamily: 'KOTRAHOPE',
+                  fontSize: 30,
+                  fontWeight: FontWeight.w300,
                 )),
             leading: InkWell(
               onTap: () =>
@@ -67,13 +69,13 @@ class _HomePageState extends State<HomePage> {
               IconButton(
                 icon: const Icon(Icons.search,
                     size: 30, color: ThemeColors.basic),
-                onPressed: () => Navigator.push(
-                    context, routeSlide(page: const SearchPage())),
                 // onPressed: () => Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const SearchPage(),
-                //     )),
+                //     context, routeSlide(page: const SearchPage())),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchPage(),
+                    )),
               )
             ],
             backgroundColor: ThemeColors.primary,

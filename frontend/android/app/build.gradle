@@ -64,7 +64,7 @@ android {
         multiDexEnabled true
     }
     // start of signingConfigs
-    signingConfigs {
+    /*signingConfigs {
        release {
            keyAlias keystoreProperties['keyAlias']
            keyPassword keystoreProperties['keyPassword']
@@ -88,6 +88,7 @@ android {
             // end of 코드난독화 및 사이즈 축소
         }
     }
+    */
 }
 
 flutter {
