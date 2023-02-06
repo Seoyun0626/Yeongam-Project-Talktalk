@@ -13,11 +13,13 @@
   <script src="/js/home/policy-upload.js" defer></script>
 </head>
 <body>
+  <div id='rectanglel3' class='rectanglel3'></div>
+  <div id='rectangleb3' class='rectangleb3'></div>
   <%- include('../layout.ejs') %>
 <section>
-  <div class="pagename">정책 등록</div>
+  <div class="pagename">정책 수정</div>
   <div>
-    <form action="/admin/policy/upload/<%=post.board_idx %>" method="post" enctype="multipart/form-data">
+    <form action="/admin/policy/update/<%=post.board_idx %>" method="post" enctype="multipart/form-data">
       <div class="ui form">
         <div class="field">
           <label>정책 이름</label>
