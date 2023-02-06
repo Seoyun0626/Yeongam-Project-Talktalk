@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("dotenv").config();
 module.exports = (function() {
     return {
         host: process.env.DB_HOST,
@@ -6,5 +6,5 @@ module.exports = (function() {
         user: process.env.DB_USER,
         password: process.env.DB_PSWORD,
         database: process.env.DB_DATABASE,
-        connectionLimit: 5
+        connectionLimit: 10
     }})();

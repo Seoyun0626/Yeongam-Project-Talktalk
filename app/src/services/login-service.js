@@ -97,6 +97,10 @@ exports.signUp = async function(req, res) {
   
   return resultcode;
 };
+
+
+    
+
 /*
 //로그인 체크
 exports.login_check = async function(req, res) {

@@ -2,6 +2,7 @@ const path = require("path");
 var express = require("express");
 var router = express.Router();
 var login_controller = require("../../controllers/common-controller/login-controller");
+var code_controller = require("../../controllers/common-controller/codeData-controller");
 
 const passport = require('passport');
 
@@ -143,8 +144,20 @@ router.get("/logout", function(req, res) {
 
 
 // 사용자등록
-router.get("/signup", function(req, res) {
-  res.render('dataif/signup');
+router.get("/signup", async function(req, res) {
+  // var sess = req.session;
+  //console.log('login-router signup sess:'+sess);
+  //res.sendFile(path.join(__dirname, "../public/signup.html"));
+  var user_type = await code_controller.getUserType(req, res);
+  var parentsAge_code = await code_controller.getParentsAgeCode(req, res);
+  var youthAge_code = await code_controller.getYouthAgeCode(req, res);
+  var emd_class_code = await code_controller.getEmdClassCode(req, res);
+  res.render('dataif/signup', {
+    user_type:user_type,
+    parentsAge:parentsAge_code,
+    youthAge:youthAge_code,
+    emd:emd_class_code
+  });
 });
 
 router.post("/signup", async function(req, res) {

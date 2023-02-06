@@ -2,6 +2,7 @@ const path = require("path");
 var express = require("express");
 var router = express.Router();
 var policy_controller = require("../../controllers/common-controller/policy-controller");
+var code_controller = require("../../controllers/common-controller/codeData-controller");
 
 // const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 router.get('/show', async function (req, res) {
@@ -35,11 +36,20 @@ router.get('/show', async function (req, res) {
     }
   });
 
-router.get('/upload', function (req, res) {
+router.get('/upload', async function (req, res) {
     try{
         // var result = policy_controller.fetchCodeData(req,res);
         // console.log(result[0]);
-        res.render('policy/upload');
+        var policy_field_code = await code_controller.getPolicyField(req,res);
+        var policy_character_code = await code_controller.getPolicyCharacter(req,res);
+        var policy_institution_code = await code_controller.getPolicyInstitution(req,res);
+        var target = await code_controller.getTarget(req,res);
+        res.render('policy/upload', {
+            field:policy_field_code,
+            character:policy_character_code,
+            institution:policy_institution_code,
+            target:target
+        });
         }
     catch(error) {
         console.log('policy-router upload error:'+error);
@@ -65,7 +75,18 @@ router.post('/upload', async function (req, res) {
 router.get('/update/:id', async function(req, res){
     try{
       var result = await policy_controller.fetchpolicyByidx(req, res);
-      res.render('policy/policy-update', {post:result[0]});
+      var policy_field_code = await code_controller.getPolicyField(req,res);
+      var policy_character_code = await code_controller.getPolicyCharacter(req,res);
+      var policy_institution_code = await code_controller.getPolicyInstitution(req,res);
+      var target = await code_controller.getTarget(req,res);
+
+      res.render('policy/policy-update', {
+        field:policy_field_code,
+        character:policy_character_code,
+        institution:policy_institution_code,
+        target:target,
+        post:result[0]
+    });
     } catch(error) {
       console.log('policy-router update error:'+error);
     }
