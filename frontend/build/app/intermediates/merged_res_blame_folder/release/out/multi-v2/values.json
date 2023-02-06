@@ -1,27 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values/values.xml",
             "map": [
-                {
-                    "source": "/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "173,818",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "476,982"
-                    },
-                    "to": {
-                        "startLines": "1512,1517",
-                        "startColumns": "4,4",
-                        "startOffsets": "95186,95494",
-                        "endLines": "1516,1519",
-                        "endColumns": "12,12",
-                        "endOffsets": "95489,95658"
-                    }
-                },
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/res/values/values.xml",
                     "from": {
@@ -59,25 +40,6 @@
                     }
                 },
                 {
-                    "source": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/packaged_res/release/values/values.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "100",
-                        "endLines": "12",
-                        "endColumns": "12",
-                        "endOffsets": "773"
-                    },
-                    "to": {
-                        "startLines": "1822",
-                        "startColumns": "4",
-                        "startOffsets": "118874",
-                        "endLines": "1832",
-                        "endColumns": "12",
-                        "endOffsets": "119547"
-                    }
-                },
-                {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/fe3f2c9f5876b1816d6f4ebe101c99cf/transformed/lifecycle-runtime-2.3.1/res/values/values.xml",
                     "from": {
                         "startLines": "2",
@@ -111,6 +73,25 @@
                         "endLines": "15,1931,2659,2748",
                         "endColumns": "60,12,24,24",
                         "endOffsets": "765,127401,172159,177370"
+                    }
+                },
+                {
+                    "source": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,818",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "476,982"
+                    },
+                    "to": {
+                        "startLines": "1512,1517",
+                        "startColumns": "4,4",
+                        "startOffsets": "95186,95494",
+                        "endLines": "1516,1519",
+                        "endColumns": "12,12",
+                        "endOffsets": "95489,95658"
                     }
                 },
                 {
@@ -185,6 +166,25 @@
                         "startOffsets": "8190,8248,8314,8377,16562,16633",
                         "endColumns": "57,65,62,61,70,71",
                         "endOffsets": "8243,8309,8372,8434,16628,16700"
+                    }
+                },
+                {
+                    "source": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/kakao_flutter_sdk_common/intermediates/packaged_res/release/values/values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "100",
+                        "endLines": "12",
+                        "endColumns": "12",
+                        "endOffsets": "773"
+                    },
+                    "to": {
+                        "startLines": "1822",
+                        "startColumns": "4",
+                        "startOffsets": "118874",
+                        "endLines": "1832",
+                        "endColumns": "12",
+                        "endOffsets": "119547"
                     }
                 }
             ]

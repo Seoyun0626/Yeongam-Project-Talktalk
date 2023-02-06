@@ -69,13 +69,13 @@ class _HomePageState extends State<HomePage> {
               IconButton(
                 icon: const Icon(Icons.search,
                     size: 30, color: ThemeColors.basic),
-                onPressed: () => Navigator.push(
-                    context, routeSlide(page: const SearchPage())),
                 // onPressed: () => Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const SearchPage(),
-                //     )),
+                //     context, routeSlide(page: const SearchPage())),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchPage(),
+                    )),
               )
             ],
             backgroundColor: ThemeColors.primary,

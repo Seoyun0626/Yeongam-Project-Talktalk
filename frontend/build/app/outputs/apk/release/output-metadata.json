@@ -18,7 +18,7 @@
       "attributes": [],
       "versionCode": 4001,
       "versionName": "1.0.0",
-      "outputFile": "app-x86_64-release.apk"
+      "outputFile": "app-x86_64-release-unsigned.apk"
     },
     {
       "type": "ONE_OF_MANY",
@@ -31,7 +31,7 @@
       "attributes": [],
       "versionCode": 2001,
       "versionName": "1.0.0",
-      "outputFile": "app-arm64-v8a-release.apk"
+      "outputFile": "app-arm64-v8a-release-unsigned.apk"
     },
     {
       "type": "ONE_OF_MANY",
@@ -44,7 +44,7 @@
       "attributes": [],
       "versionCode": 1001,
       "versionName": "1.0.0",
-      "outputFile": "app-armeabi-v7a-release.apk"
+      "outputFile": "app-armeabi-v7a-release-unsigned.apk"
     }
   ],
   "elementType": "File"

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/permission_handler_android/intermediates/incremental/mergeReleaseResources/merged.dir/values-ar/values-ar.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/permission_handler_android/intermediates/merged_res/release/values-ar/values-ar.xml",
             "map": [
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/022dd61e788bc9d9008affaf60b694b4/transformed/core-1.6.0/res/values-ar/values-ar.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/permission_handler_android/intermediates/merged_res/release/values-ar/values-ar.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/Yeongam-project/frontend/build/permission_handler_android/intermediates/incremental/mergeReleaseResources/merged.dir/values-ar/values-ar.xml",
             "map": [
                 {
                     "source": "/Users/taeheekim/.gradle/caches/transforms-3/022dd61e788bc9d9008affaf60b694b4/transformed/core-1.6.0/res/values-ar/values-ar.xml",
