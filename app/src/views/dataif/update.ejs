@@ -125,8 +125,53 @@
                   <input type="checkbox" name="sms_agree" id="sms_agree">
                   <label>문자</label> -->
                 <div>
-                    <button class="ui button" type="submit">등록</button>
-                    <button class="ui button" type="button" onclick="location.href='/admin/dataif'">취소</button>
+                    <button class="ui button" type="submit" onclick="btn()">등록</button>
+                    <script>
+                      function btn() {
+                          if (!confirm("수정 하시겠습니까??")) {
+                              alert("취소 하였습니다.");
+                              return false;
+                          } else {
+                            if(document.getElementById("name").value == ""){
+                              alert("이름을 입력해주세요.");
+                              return false;
+                            }
+                            else if(document.getElementById("password").value == ""){
+                              alert("비밀번호를 입력해주세요.");
+                              return false;
+                            }
+                            else if(document.getElementById("password2").value == ""){
+                              alert("비밀번호를 확인을 입력해주세요.");
+                              return false;
+                            }
+                            else if(document.getElementById("password").value != document.getElementById("password2").value){
+                              alert("비밀번호가 일치하지 않습니다.");
+                              return false;
+                            }
+                            else if(document.getElementById("user_email").value == ""){
+                              alert("이메일을 입력해주세요.");
+                              return false;
+                            }
+                            // if(document.getElementById("user_email").value.indexOf("@") == -1){
+                            //   alert("이메일 형식이 아닙니다.");
+                            //   return false;
+                            // }
+                            else{alert($("#name").value+"님 회원 수정 되었습니다.");
+                            return true;}
+                          }
+                      }
+                    </script>
+                    <button class="ui button" type="button" onclick="cancel()">취소</button>
+                    <script>
+                      function cancel() {
+                          if (!confirm("취소 하시겠습니까??")) {
+                              return false;
+                          } else {
+                            alert("취소 하였습니다.");
+                            location.href='/admin/dataif';
+                          }
+                      }
+                    </script>
                 </div>
             </form>
         </div>

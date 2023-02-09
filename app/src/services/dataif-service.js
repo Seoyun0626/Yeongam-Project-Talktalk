@@ -259,6 +259,11 @@ exports.update = async function(req, res) {
     // var queryStr=utils.makeBoardUpdateFieldQuery(req.body);
     // 'update webdb.tb_dataif set data_cnt='+req.body.count+' where board_idx='+req.body.modal_board_idx;
     var userid = req.params.id;
+    if(req.body.name=='' || req.body.email=='' || req.body.password=='' || req.body.password2=='') {
+      resultcode=100;
+      console.log('dataif-service update: empty data');
+      return resultcode;
+    }
     // var query = 'update webdb.tb_user set name="'+req.body.name+'", email="'+req.body.email+'", user_role="'+req.body.user_role+'", age_class_code="'+req.body.age_class_code+'", emd_class_code="'+req.body.emd_class_code+'",';
     if(req.body.password != req.body.password2) {
       resultcode=100;

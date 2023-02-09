@@ -69,6 +69,11 @@ exports.signUp = async function(req, res) {
     var name = req.body.name;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
+    if(req.body.name=='' || req.body.email=='' || req.body.password=='' || req.body.password2=='') {
+      resultcode=100;
+      console.log('dataif-service update: empty data');
+      return resultcode;
+    }
     if(password != password2) {
         // 비밀번호가 일치하지 않음
         console.log('비밀번호가 일치하지 않습니다.');

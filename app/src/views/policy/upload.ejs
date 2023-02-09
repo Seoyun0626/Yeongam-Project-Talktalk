@@ -128,7 +128,42 @@
           <input type="file" name="file">
         </div> -->
         <div>
-          <button class="ui button" type="submit">등록</button>
+          <button class="ui button" type="submit" onclick="btn()">등록</button>
+          <script>
+            function btn(){
+              if(!confirm("등록하시겠습니까?")){
+                alert("취소되었습니다.");
+                return false;
+              } else {
+                if(document.getElementById("name").value == ""){
+                  alert("정책 이름을 입력해주세요.");
+                  return false;
+                }
+                if(document.getElementById("description").value == ""){
+                  alert("정책 설명을 입력해주세요.");
+                  return false;
+                }
+                if(document.getElementById("fund").value == ""){
+                  alert("지원금을 입력해주세요.");
+                  return false;
+                }
+                if(document.getElementById("application_start_date").value == ""){
+                  alert("접수 시작일을 입력해주세요.");
+                  return false;
+                }
+                if(document.getElementById("application_end_date").value == ""){
+                  alert("접수 마감일을 입력해주세요.");
+                  return false;
+                }
+                if(document.getElementById("editor").value == ""){
+                  alert("정책 내용을 입력해주세요.");
+                  return false;
+                }
+                alert("등록되었습니다.");
+                return true;
+              }
+            }
+          </script>
           <button class="ui button" type="button" onclick="location.href='/admin/policy/show'">취소</button>
           <!-- <button class="ui button" type="reset">취소</button> -->
         </div>

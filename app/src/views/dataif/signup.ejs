@@ -11,50 +11,6 @@
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
   <script src="/js/home/mem.js" defer></script>
-  <script>
-    function regi(){
-      if($('#name').val() == ''){
-        alert('이름을 입력해주세요.');
-        $('#name').focus();
-        return false;
-      }
-      if($('#userid').val() == ''){
-        alert('아이디를 입력해주세요.');
-        $('#userid').focus();
-        return false;
-      }
-      if($('#password').val() == ''){
-        alert('비밀번호를 입력해주세요.');
-        $('#password').focus();
-        return false;
-      }
-      if($('#password2').val() == ''){
-        alert('비밀번호 확인을 입력해주세요.');
-        $('#password2').focus();
-        return false;
-      }
-      if($('#password').val() != $('#password2').val()){
-        alert('비밀번호가 일치하지 않습니다.');
-        $('#password2').focus();
-        return false;
-      }
-      if($('#user_email').val() == ''){
-        alert('이메일을 입력해주세요.');
-        $('#user_email').focus();
-        return false;
-      }
-      if($('#user_email').val() != ''){
-        var email = $('#user_email').val();
-        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-        if(!emailReg.test(email)){
-          alert('이메일 형식이 올바르지 않습니다.');
-          $('#user_email').focus();
-          return false;
-        }
-      }
-      return true;
-    }
-  </script>
 </head>
 <body>
   <div id='rectanglel1' class='rectanglel1'></div>
@@ -169,9 +125,59 @@
                   <input type="checkbox" name="sms_agree" id="sms_agree">
                   <label>문자</label> -->
                 <div>
-                    <button class="ui button" type="submit" onclick="return regi()">등록</button>
+                    <button class="ui button" type="submit" onclick="return btn()">등록</button>
+                    <!-- 회원 등록 버튼 경고창 -->
+                    <script>
+                      function btn() {
+                          if (!confirm("회원 등록 하시겠습니까??")) {
+                              alert("취소 하였습니다.");
+                              return false;
+                          } else {
+                            if(document.getElementById("name").value == ""){
+                              alert("이름을 입력해주세요.");
+                              return false;
+                            }
+                            if(document.getElementById("user_id").value == ""){
+                              alert("아이디를 입력해주세요.");
+                              return false;
+                            }
+                            if(document.getElementById("password").value == ""){
+                              alert("비밀번호를 입력해주세요.");
+                              return false;
+                            }
+                            if(document.getElementById("password2").value == ""){
+                              alert("비밀번호를 확인을 입력해주세요.");
+                              return false;
+                            }
+                            if(document.getElementById("password").value != document.getElementById("password2").value){
+                              alert("비밀번호가 일치하지 않습니다.");
+                              return false;
+                            }
+                            if(document.getElementById("user_email").value == ""){
+                              alert("이메일을 입력해주세요.");
+                              return false;
+                            }
+                            // if(document.getElementById("user_email").value.indexOf("@") == -1){
+                            //   alert("이메일 형식이 아닙니다.");
+                            //   return false;
+                            // }
+                            alert($("#name").value+"님 회원 등록 되었습니다.");
+                            return true;
+                          }
+                      }
+                    </script>
                     <!-- <button class="ui button" type="button" onclick="location.href='/admin/auth/login'">취소</button> -->
-                    <button class="ui button" type="button" onclick="location.href='/admin/dataif'">취소</button>
+                    <button class="ui button" type="button" onclick="return cancel()">취소</button>
+                    <script>
+                      function cancel() {
+                          if (!confirm("취소 하시겠습니까??")) {
+                              return false;
+                          } else {
+                            alert("취소 하였습니다.");
+                            location.href='/admin/dataif';
+                          }
+                      }
+                    </script>
                 </div>
             </form>
         </div>
