@@ -81,6 +81,20 @@ exports.updateTermData = async function(req, res) {
   }
 };
         
+exports.fetchDataUserUpdate = async function(req, res) {
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var query = 'SELECT * FROM webdb.tb_user where userid="'+req.params.id+'"';
+    var rows = await conn.query(query); // 쿼리 실행
+    // console.log(rows[0]);
+    return rows;
+  } catch(error) {
+    console.log('dataif-service fetchDataUserUpdate:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+};
 
 
 
@@ -89,9 +103,10 @@ exports.fetchDataByUserid = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
-    // console.log(req.url.split('?')[1].split('=')[0]);
+    var searchUser = req.url.split('=')[1]; //바꿔야 하나?
+    // console.log(searchUser);
     // if(req.params.id==undefined || req.url.split('?')[1].split('=')[0] == "search") req.params.id=req.url.split('/')[1].split('=')[1];
-    var query = 'SELECT * FROM webdb.tb_user where userid="'+req.params.id+'"';
+    var query = 'SELECT * FROM webdb.tb_user where userid="'+searchUser+'"';
     var rows = await conn.query(query); // 쿼리 실행
     // console.log(rows[0]);
     return rows;

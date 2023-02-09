@@ -51,6 +51,7 @@ exports.fetchpolicyByidx = async function(req, res) {
 
 exports.updatePolicy = async function(req, res) {
     var conn;
+    var resultcode = 0;
     try{
         var temp = Date.now();
         // 이미지 업로드
@@ -77,9 +78,10 @@ exports.updatePolicy = async function(req, res) {
         console.log('policy-service updatePolicy db getConnection');
         var query = "UPDATE webdb.tb_policy SET img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', fund='"+req.body.fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
         var rows = await conn.query(query); // 쿼리 실행
-        return rows;
+        return resultcode;
     } catch(error) {
         console.log('policy-service updatePolicy:'+error);
+        resultcode = 1;
     } finally {
         conn.release();
     }
@@ -151,15 +153,6 @@ exports.upload = async function(req, res) {
 };
 
 
-let banner_storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, '../frontend/images/policy');
-    },
-    filename: function (req, file, cb) {
-        // cb(null, file.originalname);
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
 
 exports.banner = async function(req, res) {
     var conn;
@@ -176,17 +169,19 @@ exports.banner = async function(req, res) {
                     temp = temp + path.extname(file.originalname);
                     cb(null, temp);
                 }
-            })}).single('imgFile');
+            })
+        }).single('imgFile');
         upload(req, res, function (err) {
             if (err instanceof multer.MulterError) {
-                console.log('multer error:'+err);
+                console.log('multer error:' + err);
             } else if (err) {
-                console.log('multer error:'+err);
+                console.log('multer error:' + err);
             }
         });
 
         conn = await db.getConnection();
         console.log('policy-service banner db getConnection');
+        console.log(req.body);
         var name = req.body.name;
         var link = req.body.link;
         var query = "INSERT INTO webdb.tb_banner (banner_name, img, link) VALUES ('" + name + "', '" + temp + "', '" + link + "');";

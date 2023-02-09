@@ -3,6 +3,7 @@ var express = require("express");
 var router = express.Router();
 //var checkAuth = require('../utils/checkauth');
 var dataif_controller = require("../../controllers/common-controller/dataif-controller");
+var code_controller = require("../../controllers/common-controller/codeData-controller");
 
 //js함수
 var memFunc = require('../../public/js/home/memFunc'); //mem의 ejs에서 활용하는 함수들
@@ -148,8 +149,18 @@ router.get('/update/:id', async function(req, res){
     // res.redirect("/dataif/update/"+req.user.id);
     // console.log("update:"+req.params.id);
     //데이터 받아오기
-    var result = await dataif_controller.fetchDataByUserid(req, res);
-    res.render('dataif/update', {post:result[0]});
+    var result = await dataif_controller.fetchDataUserUpdate(req, res);
+    var user_type = await code_controller.getUserType(req, res);
+    var parentsAge_code = await code_controller.getParentsAgeCode(req, res);
+    var youthAge_code = await code_controller.getYouthAgeCode(req, res);
+    var emd_class_code = await code_controller.getEmdClassCode(req, res);
+    res.render('dataif/update', {
+      user_type:user_type,
+      parentsAge:parentsAge_code,
+      youthAge:youthAge_code,
+      emd:emd_class_code,
+      post:result[0]
+    });
   } catch(error) {
     console.log('dataif-router update error:'+error);
   }

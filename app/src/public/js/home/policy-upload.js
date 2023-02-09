@@ -6,6 +6,3 @@ function manage(){
 function regiAll(){
     location.href = "/admin/auth/regiAll";
 }
-function signUp(){
-    location.href = "/admin/auth/signUp";
-}

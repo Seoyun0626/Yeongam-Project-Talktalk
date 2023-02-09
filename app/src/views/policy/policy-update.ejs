@@ -21,46 +21,92 @@
   <div>
     <form action="/admin/policy/update/<%=post.board_idx %>" method="post" enctype="multipart/form-data">
       <div class="ui form">
-        <div class="field">
+        <div class="inline fields">
           <label>정책 이름</label>
-          <input type="text" name="name" placeholder="<%= post.policy_name %>">
+          <div class="four wide field">
+            <input type="text" name="name" value="<%= post.policy_name %>">
+          </div>
+      </div>
+      <br>
+      <div class="ui form">
+        <div class="inline fields">
+          <label>정책 설명</label>
+          <div class="four wide field">
+            <input type="text" name="description" value="<%= post.description %>">
+          </div>
+          <label>지원금</label>
+          <div class="four wide field">
+            <input type="text" name="fund" value="<%= post.fund %>">
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="ui form">
+        <div class="inline fields">
           <label>정책 대상</label>
-          <div class="field">
-            <select class="ui fluid dropdown" name="target" id="target">
-              <option value="0">청소년</option>
-            </select>
+          <div class="four wide field">
+              <select class="ui fluid dropdown" name="target" id="target">
+                <%for(var i=0; i<target.length; i++){%>
+                  <option value="<%=target[i].policy_target_code%>"><%=target[i].policy_target_name%></option>
+                <%}%>
+              </select>
           </div>
           <label>주관 기관</label>
-          <div class="field">
+          <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_institution_code" id="policy_institution_code">
-              <option value="0">청소년 수련관</option>
+              <%for(var i=0; i<institution.length; i++){%>
+                <option value="<%=institution[i].policy_institution_code%>"><%=institution[i].policy_institution_name%></option>
+              <%}%>
             </select>
           </div>
-          <label>정책 설명</label>
-          <input type="text" name="description" placeholder="<%= post.description %>">
-          <!-- <label>정책 타입</label>
-          <input type="text" name="type" placeholder="정책 타입"> -->
-          <label>지원금</label>
-          <input type="text" name="fund" placeholder="<%= post.fund %>">
+        </div>
+      </div>
+      <br>
+      <div class="ui form">
+        <div class="inline fields">
           <label>접수 시작일</label>
-          <input type="date" name="application_start_date">
+          <div class="four wide field">
+            <input type="date" name="application_start_date">
+          </div>
           <label>접수 마감일</label>
-          <input type="date" name="application_end_date">
+          <div class="four wide field">
+            <input type="date" name="application_end_date">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="ui form">
+        <div class="inline fields">
           <label>정책 분야</label>
-          <div class="field">
+          <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_field_code" id="policy_field_code">
-              <option value="0">정책 분야</option>
+              <%for(var i=0; i<field.length; i++){%>
+                <option value="<%=field[i].policy_field_code%>"><%=field[i].policy_field_name%></option>
+              <%}%>
             </select>
           </div>
           <label>정책 성격</label>
-          <div class="field">
+          <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_character_code" id="policy_character_code">
-              <option value="0">정책 성격</option>
+              <%for(var i=0; i<character.length; i++){%>
+                <option value="<%=character[i].policy_character_code%>"><%=character[i].policy_character_name%></option>
+              <%}%>
             </select>
           </div>
+        </div>
+      </div>
+      <br>
+      <div class="ui form">
+        <div class="inline fields">
           <label>정책 사진</label>
-          <input type="file" name="imgFile" accept="image/*">
-          <br><br>
+          <div class="nine wide field">
+            <input type="file" name="imgFile" accept="image/*">
+          </div>
+        </div>
+
+      </div>
+      <div class="ui form">
           <textarea name="content" id="editor"></textarea>
           <script>
             // 3. CKEditor5를 생성할 textarea 지정
@@ -77,6 +123,7 @@
                 } );
             </script>
         </div>
+      <br>
         <!-- <div class="field">
           <label>정책 파일</label>
           <input type="file" name="file">

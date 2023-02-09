@@ -21,87 +21,102 @@
         <div class="pagename">회원 등록</div>
         <div>
             <form action="/admin/auth/signup" method="post" name="frm_signup" id="frm_signup">
-                <div>
-                  <div class="ui input">
+              <div class="ui form">
+                <div class="inline fields">
+                  <label>이름  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
+                  <div class="four wide field">
                     <input type="text" name="name" id="name" placeholder="이름"">
                   </div>
-                  <br>
-                  <div class="ui input">
+                  <label>아이디</label>
+                  <div class="four wide field">
                     <input type="text" name="userid" id="userid" placeholder="아이디"">
                   </div>
-                  <br>
-                  <div class="ui input">
+                </div>
+              </div>
+              <br>
+              <div class="ui form">
+                <div class="inline fields">
+                  <label>비밀번호</label>
+                  <div class="four wide field">
                     <input name="password" id="password" type="password" placeholder="비밀번호"">
                   </div>
-                  <div class="ui input">
-                    <input name="password2" id="password2" type="password" placeholder="비밀번호 확인"">
+                  <div class="four wide field">
+                  <input name="password2" id="password2" type="password" placeholder="비밀번호 확인"">
                   </div>
-                  <br>
-                  <div class="field">
+                </div>
+              </div>
+              <br>
+              <!-- 드롭다운 -->
+              <div class="ui form">
+                <div class="inline fields">
+                  <label>권한구분</label>
+                  <div class="four wide field">
                     <select class="ui fluid dropdown" name="user_role" id="user_role">
                       <option value="0">관리자</option>
                       <option value="1">사용자</option>
                     </select>
                   </div>
-                  <br>
-                  <div class="field">
+                  <label>회원구분</label>
+                  <div class="four wide field">
                     <select class="ui fluid dropdown" name="user_type" id="user_type">
-                      <option value="0">청소년</option>
-                      <option value="1">청소년 부모</option>
-                      <option value="2">학부모</option>
+                      <%for(var i=0; i<user_type.length; i++){%>
+                        <option value="<%=user_type[i].user_type_code%>"><%=user_type[i].user_type_name%></option>
+                      <%}%>
                     </select>
                   </div>
-                  <br>
-                  <div class="field">
+                </div>
+              </div>
+              <br>
+              <div class="ui form">
+                <div class="inline fields">
+                  <label>연령대</label>
+                  <div class="four wide field">
                     <select class="ui fluid dropdown" name="parentsAge_code" id="parentsAge_code">
-                      <option value="0">10대</option>
-                      <option value="1">20대</option>
-                      <option value="2">30대</option>
-                      <option value="3">40대</option>
-                      <option value="4">50대</option>
-                      <option value="5">60대</option>
-                      <option value="6" selected>선택 안함</option>
+                      <%for(var i=0; i<parentsAge.length; i++){%>
+                        <option value="<%=parentsAge[i].parentsAge_code%>"><%=parentsAge[i].parentsAge_name%></option>
+                      <%}%>
                     </select>
                   </div>
-                  <br>
-                  <div class="field">
+                  <label>학교</label>
+                  <div class="four wide field">
                     <select class="ui fluid dropdown" name="youthAge_code" id="youthAge_code">
-                      <option value="0">초등학생</option>
-                      <option value="1">중학생</option>
-                      <option value="2">고등학생</option>
-                      <option value="3">대학생</option>
-                      <option value="4">기타</option>
-                      <option value="5" selected>선택 안함</option>
+                      <%for(var i=0; i<youthAge.length; i++){%>
+                        <option value="<%=youthAge[i].youthAge_code%>"><%=youthAge[i].youthAge_name%></option>
+                      <%}%>
                     </select>
                   </div>
-                  <br>
-                  <div class="field">
+                </div>
+              </div>
+              <br>
+              <div class="ui form">
+                <div class="inline fields">
+                  <label>거주지</label>
+                  <div class="four wide field">
                     <select class="ui fluid dropdown" name="emd_class_code" id="emd_class_code">
-                      <option value="0">영암읍</option>
-                      <option value="1">삼호읍</option>
-                      <option value="2">덕진면</option>
-                      <option value="3">금정면</option>
-                      <option value="4">신북면</option>
-                      <option value="5">시종면</option>
-                      <option value="6">도포면</option>
-                      <option value="7">군서면</option>
-                      <option value="8">서호면</option>
-                      <option value="9">학산면</option>
-                      <option value="10">미암면</option>
+                      <%for(var i=0; i<emd.length; i++){%>
+                        <option value="<%=emd[i].emd_class_code%>"><%=emd[i].emd_class_name%></option>
+                      <%}%>
                     </select>
                   </div>
-                  <br>
-                  <div class="field">
+                  <label>성별</label>
+                  <div class="four wide field">
                     <select class="ui fluid dropdown" name="sex_class_code" id="sex_class_code">
                       <option value="0">남자</option>
                       <option value="1">여자</option>
                       <option value="2">선택 안함</option>
                     </select>
                   </div>
-                  <br>
-                  <div class="ui input">
+                </div>
+              </div>
+              <br>
+              <div class="ui form">
+                <div class="inline fields">
+                  <label>이메일</label>
+                  <div class="four wide field">
                     <input type="text" name="user_email" id="user_email" placeholder="이메일"">
                   </div>
+                </div>
+              </div>
                   <br><br>
                   <!-- <input type="checkbox" name="popup_agree" id="popup_agree">
                   <label>팝업</label>

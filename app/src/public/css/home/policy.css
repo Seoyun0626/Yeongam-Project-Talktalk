@@ -1,0 +1,12 @@
+#policy_paging {
+  padding-left: 380px;
+  margin-top: 15px;
+}
+#policy_table{
+  text-align: center;
+  width: 900px;
+}
+#policy_reg_btn{
+  float: left;
+  margin-top: 15px;
+}

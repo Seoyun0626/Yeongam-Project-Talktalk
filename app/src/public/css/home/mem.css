@@ -23,28 +23,6 @@ body {
   margin-left: 10px;
   }
   
-  nav{
-    /* position:absolute; */
-  background-color:#ffffff;
-  padding:0px;
-  float: left;
-  width: 20vw;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  }
-  section{
-  float: left;
-  width: 75vw;
-  padding-left: 2em;
-  padding-right: 1em;
-  padding-top: 10em;
-  background-color: white;
-  margin: 0;
-  left: 0;
-  overflow:hidden;
-  }
-  
   ul{
   margin-right: 10px;
   }
@@ -57,7 +35,7 @@ body {
     border: 1px solid;
     border-radius: 3px;
     height: 8em;
-    width: 58em;
+    width: 945px;
   }
   #search_userinfo select{
     margin-left: 25px;
@@ -94,15 +72,9 @@ body {
     /* float: right; */
     font-size: 12px;
   }
-  #managep_foot{
-    margin-top: 15px;
-  }
   #managep_paging{
     margin-top: 15px;
   }
-  /* #reg_btn_set{
-    margin-top: 15px;
-  } */
 
   table {
     border: 1px #a39485 solid;
@@ -133,10 +105,8 @@ body {
   }
 
 /* 테이블 설정 */
-#mem_table{
+
+#banner_table{
   text-align: center;
-  width: 75em;
-}
-#policy_table{
-  text-align: center;
+  width: 50em;
 }

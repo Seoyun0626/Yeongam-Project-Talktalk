@@ -245,7 +245,7 @@ router.post("/signup", async function(req, res) {
 router.get('/policy/get-all-policy', async function(req, res){
   try{
     var result = await mobile_policy_controller.getAllPolicy(req,res);
-    console.log('mobile-router get-all-policy result : ', result);
+    // console.log('mobile-router get-all-policy result : ', result);
     // res.render('policy/get-all-policy', {
     //     posts:result,
     //     user:req.user
