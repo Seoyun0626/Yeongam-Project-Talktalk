@@ -44,6 +44,7 @@ router.get('/upload', async function (req, res) {
         var policy_character_code = await code_controller.getPolicyCharacter(req,res);
         var policy_institution_code = await code_controller.getPolicyInstitution(req,res);
         var target = await code_controller.getTarget(req,res);
+        // var result = await code_controller.fetchPolicyData(req, res);
         res.render('policy/upload', {
             field:policy_field_code,
             character:policy_character_code,

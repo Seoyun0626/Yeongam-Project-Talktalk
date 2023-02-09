@@ -11,6 +11,18 @@
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
   <script src="/js/home/mem.js" defer></script>
+  <script> 
+    function btn() {
+        if (!confirm("설정을 저장하시겠습니까?")) {
+            // 현재 페이지로
+            alert("취소 하였습니다.");
+            return false;
+        } else {
+            alert("저장 되었습니다.");
+            return true;
+        }
+    }
+   </script> 
 </head>
 <body>
   <div id='rectanglel2' class='rectanglel2'></div>
@@ -23,7 +35,9 @@
       <form action="/admin/dataif/terms" method="post">
         <textarea name="terms" id="terms" cols="100" rows="10" ><%= posts[0].terms %></textarea><br>
         <textarea name="privacy" id="privacy" cols="100" rows="10"><%= posts[0].privacy %></textarea><br>
-        <input type="submit" value="저장">
+        <!-- alert 버튼 -->
+        <input type="submit" value="저장" onclick="return btn()">
+        <!-- <input type="submit" value="저장""> -->
       </form>
     </div>
 </section>

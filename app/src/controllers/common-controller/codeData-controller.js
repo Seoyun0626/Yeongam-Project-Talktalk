@@ -86,3 +86,13 @@ exports.getTarget = async function(req, res) {
         console.log('code-controller getTarget:'+error);
     }
 };
+
+exports.fetchPolicyData = async function(req, res) {
+    try{
+        var result = await code_service.fetchPolicyData(req, res);
+        return result;
+    }
+    catch(error) {
+        console.log('code-controller fetchPolicyData:'+error);
+    }
+};

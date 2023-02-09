@@ -11,6 +11,50 @@
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
   <script src="/js/home/mem.js" defer></script>
+  <script>
+    function regi(){
+      if($('#name').val() == ''){
+        alert('이름을 입력해주세요.');
+        $('#name').focus();
+        return false;
+      }
+      if($('#userid').val() == ''){
+        alert('아이디를 입력해주세요.');
+        $('#userid').focus();
+        return false;
+      }
+      if($('#password').val() == ''){
+        alert('비밀번호를 입력해주세요.');
+        $('#password').focus();
+        return false;
+      }
+      if($('#password2').val() == ''){
+        alert('비밀번호 확인을 입력해주세요.');
+        $('#password2').focus();
+        return false;
+      }
+      if($('#password').val() != $('#password2').val()){
+        alert('비밀번호가 일치하지 않습니다.');
+        $('#password2').focus();
+        return false;
+      }
+      if($('#user_email').val() == ''){
+        alert('이메일을 입력해주세요.');
+        $('#user_email').focus();
+        return false;
+      }
+      if($('#user_email').val() != ''){
+        var email = $('#user_email').val();
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        if(!emailReg.test(email)){
+          alert('이메일 형식이 올바르지 않습니다.');
+          $('#user_email').focus();
+          return false;
+        }
+      }
+      return true;
+    }
+  </script>
 </head>
 <body>
   <div id='rectanglel1' class='rectanglel1'></div>
@@ -125,7 +169,7 @@
                   <input type="checkbox" name="sms_agree" id="sms_agree">
                   <label>문자</label> -->
                 <div>
-                    <button class="ui button" type="submit">등록</button>
+                    <button class="ui button" type="submit" onclick="return regi()">등록</button>
                     <!-- <button class="ui button" type="button" onclick="location.href='/admin/auth/login'">취소</button> -->
                     <button class="ui button" type="button" onclick="location.href='/admin/dataif'">취소</button>
                 </div>

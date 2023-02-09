@@ -1,6 +1,7 @@
 var db = require('../utils/db');
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
+var utils = require('../utils/utils');
 
 
 exports.fetchData = async function(req, res) {
@@ -125,3 +126,13 @@ exports.getTarget = async function(req, res) {
     console.log('code-service getTarget:'+error);
   }
 };
+
+exports.fetchPolicyData = async function(req, res) {
+    try {
+        var result = await db.query('SELECT policy_target_code,policy_target_name,policy_institution_code,policy_institution_name FROM webdb.tb_policy_target_code, webdb.tb_policy_institution_code');
+        // var result = await db.query('SELECT policy_target_code,policy_target_name FROM webdb.tb_policy_target_code,webdb.tb_policy_institution_code,webdb.tb_policy_character_code,webdb.tb_policy_field_code');
+        return result;
+    } catch (error) {
+        console.log('codeData-controller fetchPolicyData error:'+error);
+    }
+}
