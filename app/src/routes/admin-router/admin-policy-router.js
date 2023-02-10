@@ -62,6 +62,7 @@ router.post('/upload', async function (req, res) {
     try{
         // DB에 저장
         var result = await policy_controller.upload(req,res);
+        console.log(result);
         if(result == 0) { //성공
             res.redirect('/admin/policy/show');
         } else { //실패

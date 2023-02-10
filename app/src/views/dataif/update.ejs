@@ -25,7 +25,7 @@
               <div class="inline fields">
                 <label>이름  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
                 <div class="four wide field">
-                  <input type="text" name="name" id="name" value="<%= post.name %>">
+                  <input type="text" name="name" id="update_name" value="<%= post.name %>">
                 </div>
                 <label>아이디</label>
                 <div class="four wide field">
@@ -38,10 +38,10 @@
               <div class="inline fields">
                 <label>비밀번호</label>
                 <div class="four wide field">
-                  <input name="password" id="password" type="password" placeholder="비밀번호"">
+                  <input name="password" id="update_password" type="password" placeholder="비밀번호"">
                 </div>
                 <div class="four wide field">
-                <input name="password2" id="password2" type="password" placeholder="비밀번호 확인"">
+                <input name="password2" id="update_password2" type="password" placeholder="비밀번호 확인"">
                 </div>
               </div>
             </div>
@@ -113,7 +113,7 @@
               <div class="inline fields">
                 <label>이메일</label>
                 <div class="four wide field">
-                  <input type="text" name="user_email" id="user_email" value="<%= post.user_email %>">
+                  <input type="text" name="user_email" id="update_email" value="<%= post.user_email %>">
                 </div>
               </div>
             </div>
@@ -132,23 +132,23 @@
                               alert("취소 하였습니다.");
                               return false;
                           } else {
-                            if(document.getElementById("name").value == ""){
+                            if(document.getElementById("update_name").value == ""){
                               alert("이름을 입력해주세요.");
                               return false;
                             }
-                            else if(document.getElementById("password").value == ""){
+                            else if(document.getElementById("update_password").value == ""){
                               alert("비밀번호를 입력해주세요.");
                               return false;
                             }
-                            else if(document.getElementById("password2").value == ""){
+                            else if(document.getElementById("update_password2").value == ""){
                               alert("비밀번호를 확인을 입력해주세요.");
                               return false;
                             }
-                            else if(document.getElementById("password").value != document.getElementById("password2").value){
+                            else if(document.getElementById("update_password").value != document.getElementById("update_password2").value){
                               alert("비밀번호가 일치하지 않습니다.");
                               return false;
                             }
-                            else if(document.getElementById("user_email").value == ""){
+                            else if(document.getElementById("update_email").value == ""){
                               alert("이메일을 입력해주세요.");
                               return false;
                             }
@@ -156,7 +156,7 @@
                             //   alert("이메일 형식이 아닙니다.");
                             //   return false;
                             // }
-                            else{alert($("#name").value+"님 회원 수정 되었습니다.");
+                            else{alert($("#update_name").value+"님 회원 수정 되었습니다.");
                             return true;}
                           }
                       }

@@ -52,18 +52,40 @@
         <div class="ui form">
             <div class="field">
                 <label>제목</label>
-                <input type="text" name="name" placeholder="제목을 입력하세요">
+                <input type="text" name="name" id="banner_id" placeholder="제목을 입력하세요">
             </div>
             <div class="field">
                 <label>이미지</label>
-                <input type="file" name="imgFile">
+                <input type="file" name="imgFile" id="banner_imgFile">
             </div>
             <div class="field">
                 <label>링크</label>
-                <input type="text" name="link" placeholder="링크를 입력하세요">
+                <input type="text" name="link" id="banner_link" placeholder="링크를 입력하세요">
             </div>
         </div>
-        <button class="ui button" type="submit">등록</button>
+        <button class="ui button" type="submit" onclick="return btn()">등록</button>
+        <script>
+            function btn() {
+                if(confirm("등록하시겠습니까?")) {
+                    if(document.getElementById("banner_id").value == "") {
+                        alert("제목을 입력해주세요.");
+                        return false;
+                    }
+                    if(document.getElementById("banner_imgFile").value == "") {
+                        alert("이미지를 등록해주세요.");
+                        return false;
+                    }
+                    if(document.getElementById("banner_link").value == "") {
+                        alert("링크를 입력해주세요.");
+                        return false;
+                    }
+                    return true;
+                } else {
+                    alert("취소되었습니다.");
+                    return false;
+                }
+            }
+        </script>
     </form>
 </section>
 </body>
