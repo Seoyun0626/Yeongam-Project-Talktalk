@@ -66,6 +66,9 @@ C:/Yeongam-project/frontend/build/windows/runner/Debug/data/flutter_assets/image
 C:/Yeongam-project/frontend/build/windows/runner/Debug/data/flutter_assets/images/policy/1675592629301.jpg
 C:/Yeongam-project/frontend/build/windows/runner/Debug/data/flutter_assets/images/policy/1675601719944.png
 C:/Yeongam-project/frontend/build/windows/runner/Debug/data/flutter_assets/images/policy/1675601749805.png
+C:/Yeongam-project/frontend/build/windows/runner/Debug/data/flutter_assets/images/policy/1675927536501.jpg
+C:/Yeongam-project/frontend/build/windows/runner/Debug/data/flutter_assets/images/policy/1675927578632.jpg
+C:/Yeongam-project/frontend/build/windows/runner/Debug/data/flutter_assets/images/policy/1675927694626.jpg
 C:/Yeongam-project/frontend/build/windows/runner/Debug/data/flutter_assets/images/slider_example.png
 C:/Yeongam-project/frontend/build/windows/runner/Debug/data/flutter_assets/kernel_blob.bin
 C:/Yeongam-project/frontend/build/windows/runner/Debug/data/flutter_assets/NOTICES
