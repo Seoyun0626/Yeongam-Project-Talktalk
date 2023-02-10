@@ -183,6 +183,7 @@ router.post('/update/:id', async function(req, res){
 // 회원 정보 삭제
 router.get('/delete/:id', async function(req, res){
   try{
+    // alert창 띄우기
     var result = await dataif_controller.deleteUser(req, res);
     res.redirect("/admin/dataif");
   } catch(error) {

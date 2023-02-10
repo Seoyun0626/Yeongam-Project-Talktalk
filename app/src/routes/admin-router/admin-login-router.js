@@ -167,6 +167,7 @@ router.post("/signup", async function(req, res) {
     //res.send({errMsg:result});
     //if(result==0) res.json({success: true, msg:'등록하였습니다.'});
     //else res.json({success: false, msg:'등록실패하였습니다.'});
+    console.log('login-router signup result:'+result);
     if(result==0){
       console.log('login-router signup success');
       res.redirect('/admin/dataif');

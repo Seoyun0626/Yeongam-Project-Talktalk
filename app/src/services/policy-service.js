@@ -139,6 +139,34 @@ exports.upload = async function(req, res) {
         var application_end_date = req.body.application_end_date;
         var policy_field_code = req.body.policy_field_code;
         var policy_character_code = req.body.policy_character_code;
+        if(name == null || name == undefined || name == '') {
+            resultcode = 1;
+            return resultcode;
+        }
+        if(description == null || description == undefined || description == '') {
+            resultcode = 2;
+            return resultcode;
+        }
+        if(fund == null || fund == undefined || fund == '') {
+            resultcode = 3;
+            return resultcode;
+        }
+        if(content == null || content == undefined || content == '') {
+            resultcode = 4;
+            return resultcode;
+        }
+        if(application_start_date == null || application_start_date == undefined || application_start_date == '') {
+            resultcode = 5;
+            return resultcode;
+        }
+        if(application_end_date == null || application_end_date == undefined || application_end_date == '') {
+            resultcode = 6;
+            return resultcode;
+        }
+        if(content == null || content == undefined || content == '') {
+            resultcode = 7;
+            return resultcode;
+        }
         var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, description, fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code) VALUES "
           + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "');";
         var rows = await conn.query(query); // 쿼리 실행
