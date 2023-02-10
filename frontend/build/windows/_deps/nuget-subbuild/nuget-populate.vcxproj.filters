@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\26540d57f85eaece73807e50dbd39b9e\nuget-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\26540d57f85eaece73807e50dbd39b9e\nuget-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\26540d57f85eaece73807e50dbd39b9e\nuget-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\26540d57f85eaece73807e50dbd39b9e\nuget-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\26540d57f85eaece73807e50dbd39b9e\nuget-populate-copyfile.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\26540d57f85eaece73807e50dbd39b9e\nuget-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\26540d57f85eaece73807e50dbd39b9e\nuget-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\26540d57f85eaece73807e50dbd39b9e\nuget-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\26540d57f85eaece73807e50dbd39b9e\nuget-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\abcdd32a44175506bd5af79b13b8be58\nuget-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\9ecd7edefd7e8e7c25a7dee09165c8b6\nuget-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Yeongam-project\frontend\build\windows\_deps\nuget-subbuild\CMakeFiles\nuget-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{EABD220C-A2D6-32E4-AC40-8241BDAE1674}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

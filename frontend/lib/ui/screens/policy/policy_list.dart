@@ -418,7 +418,7 @@ class _ListViewPolicy extends StatelessWidget {
     // final size = MediaQuery.of(context).size;
     // final policyBloc = BlocProvider.of<PolicyBloc>(context);
     final String imgName = policies.img;
-    final String imgUrl = "images/policy/$imgName";
+    final String imgUrl = "app/src/public/upload/policy/$imgName";
 
     // 모집 기간
     final String startDateYear =
