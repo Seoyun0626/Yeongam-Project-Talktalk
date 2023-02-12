@@ -5,25 +5,19 @@ exports.SignIn = async function(req, res) {
   try{
     // console.log('login-controller', req.body);
     const result = await login_service.SignIn(req);
-    console.log('login-controller SignIn');
-    
-
-    
+    console.log('login-controller SignIn');    
     if (result.code == 0) {
       console.log("login-controller SiginIn 로그인 성공");
-
       // 로그인 성공시 쿠키 생성
       res.cookie('userid', result.data.userid);
       res.cookie('username', result.data.name, {
-        maxAge: 60 * 60 * 1000,
-        path: "/"
+        maxAge: 60 * 60 * 1000, // 만료 시간
+        path: "/" // 쿠키가 전송될 경로
       });
-      
       // 로그인 후 사용자 정보를 세션에 저장
-      // console.log(req);
       req.session.user = result;
     }
-    console.log('login-controller result', result);
+    // console.log('login-controller result', result);
     return result;
   } catch(error) {
     console.log('login-controller SignIn:'+error);
@@ -85,7 +79,7 @@ exports.SignUp = async function(req, res) {
 
 
 
-/*
+
 // 로그인 체크 컨트롤러
 exports.login_check = async function(req, res) {
   try{
@@ -97,7 +91,7 @@ exports.login_check = async function(req, res) {
   }
 };
 
-
+/*
 exports.date_check = async function(req, res) {
   try{
     //console.log( req.body);

@@ -16,45 +16,52 @@ router.get('/login', function (req, res) {
   }
 });
 
-
-router.post('/login', passport.authenticate('local-login', {
-  // successRedirect: '/admin/auth/loginSuccess', //인증성공시 이동하는화면주소
-  successRedirect: '/admin/dataif', //인증성공시 이동하는화면주소
-  failureRedirect: '/admin/auth/loginFailure', //인증실패시 이동하는화면주소
-  failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
-}));
-
-//이름 변경
-router.get("/loginSuccess", function(req, res) {
-  res.render('dataif/mem'); 
-  // redirect('/admin/login');
-  //res.json({msg:'0'});
-});
-
-router.get("/loginFailure", function(req, res) {
-  var rtnMsg;
-  var err = req.flash('error');
-  if(err) rtnMsg = err;
-  //res.json({success: false, msg: rtnMsg})
-  res.redirect('/admin/auth/login');
-  //res.json({errMsg:msg});
-});
-
-//로그인끝
-
-
-/*
+// 로그인 라우터
 router.post("/login", async function(req, res) {
   try{
     // 로그인 확인을 위해 컨트롤러 호출
-    //console.log(req.body);
+    // console.log(req.body);
     var result = await login_controller.SignIn(req, res);
-    res.send(result);
+    // console.log(result);
+    // res.send(result);
+    if(result.code == 0){
+      res.redirect('/admin/dataif');
+    } else {
+      res.redirect('/admin/auth/login');
+    }
   } catch(error) {
     console.log('login-router login:'+error);
   }
 });
 
+// router.post('/login', passport.authenticate('local-login', {
+//   // successRedirect: '/admin/auth/loginSuccess', //인증성공시 이동하는화면주소
+//   successRedirect: '/admin/dataif', //인증성공시 이동하는화면주소
+//   failureRedirect: '/admin/auth/loginFailure', //인증실패시 이동하는화면주소
+//   failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
+// }));
+
+// //이름 변경
+// router.get("/loginSuccess", function(req, res) {
+//   res.render('dataif/mem'); 
+//   // redirect('/admin/login');
+//   //res.json({msg:'0'});
+// });
+
+// router.get("/loginFailure", function(req, res) {
+//   var rtnMsg;
+//   var err = req.flash('error');
+//   if(err) rtnMsg = err;
+//   //res.json({success: false, msg: rtnMsg})
+//   res.redirect('/admin/auth/login');
+//   //res.json({errMsg:msg});
+// });
+
+//로그인끝
+
+
+
+/*
 const LocalStrategy = require('passport-local').Strategy;
 passport.use('local-login', new LocalStrategy({
   usernameField: 'userid',

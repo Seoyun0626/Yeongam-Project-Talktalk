@@ -13,8 +13,8 @@ try{
   console.log('login-service SignIn db getConnection');
   var userid = req.body.userid; //req.body.id -> req.body.userid
   var password = req.body.password;
-  console.log('login-serive SignIn - userid', userid); // kth log
-  console.log('login-serive SignIn - password', password); // kth log
+  // console.log('login-serive SignIn - userid', userid); // kth log
+  // console.log('login-serive SignIn - password', password); // kth log
   var query = "SELECT userid, password, salt, name FROM webdb.tb_user where userid='" + userid + "' ;";
   var rows = await conn.query(query); // 쿼리 실행 
   if (rows[0]) {
@@ -106,7 +106,7 @@ exports.signUp = async function(req, res) {
 
     
 
-/*
+
 //로그인 체크
 exports.login_check = async function(req, res) {
   var resultcode = 0;
@@ -139,6 +139,7 @@ exports.login_check = async function(req, res) {
   }
 };
 
+/*
 exports.date_check = async function(req, res) {
   var resultcode = 0;
   var conn;
