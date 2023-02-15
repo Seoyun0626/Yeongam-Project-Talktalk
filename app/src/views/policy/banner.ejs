@@ -41,7 +41,16 @@
                     <td><%= `${banner[i].ins_date.getFullYear()}` + `-`+ `${banner[i].ins_date.getMonth()+1}` + `-`+ `${banner[i].ins_date.getDate()}`%></td>
                     <td><%= `${banner[i].upd_date.getFullYear()}` + `-`+ `${banner[i].upd_date.getMonth()+1}` + `-`+ `${banner[i].upd_date.getDate()}`%></td>
                     <!-- <td><a href="/admin/policy/banner/<%= banner[i].id %>/edit">수정</a></td> -->
-                    <td><a href="/admin/policy/banner/delete/<%= banner[i].board_idx %>">삭제</a></td>
+                    <td><a href="/admin/policy/banner/delete/<%= banner[i].board_idx %>" onclick="return delBan()">삭제</a></td>
+                    <script>
+                      function delBan(){
+                        if(confirm("정말 삭제하시겠습니까?")){
+                          return true;
+                        }else{
+                          return false;
+                        }
+                      }
+                    </script>
                 </tr>
             <% } %>
         </tbody>

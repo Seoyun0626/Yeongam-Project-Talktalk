@@ -95,7 +95,16 @@
               <td><%= posts[i].email_yn %></td>
               <td><%= posts[i].sms_yn %></td> -->
               <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
-              <td><a href="/admin/dataif/delete/<%= posts[i].userid %>">삭제</a></td>
+              <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
+              <script>
+                function delMem(){
+                  if(confirm("정말 삭제하시겠습니까?")){
+                    return true;
+                  }else{
+                    return false;
+                  }
+                }
+              </script>
               <!-- <td>
                 <button class="ui button" type="submit">수정</button>
               </td> -->
@@ -111,10 +120,17 @@
           <div class="ui pagination menu">
             <!-- <a class="icon item" href="/admin/dataif/?page=1">처음</a> -->
             <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">이전</a>
-            <% for(var i=1; i<=totalPage; i++){ %>
+            <!-- 현재 페이지 기준 5페이지만 보여주기 -->
+            <% var startPage = page-3; %>
+            <% var endPage = page+3; %>
+            <% if(startPage < 1){ startPage = 1; } %>
+            <% if(endPage > totalPage){ endPage = totalPage; } %>
+            <% for(var i=startPage; i<=endPage; i++){ %>
               <a class="item" href="/admin/dataif/?page=<%=i %>"><%=i %></a>
             <% } %>
-            <a class="icon item" href="/admin/dataif/?page=<%=page+1 %>">다음</a>
+            <% var next = page+1; %>
+            <% if(next > totalPage){ next = totalPage; } %>
+            <a class="icon item" href="/admin/dataif/?page=<%=next %>">다음</a>
             <!-- <a class="icon item" href="/admin/dataif/?page=<%=totalPage %>">끝</a> -->
           </div>
         </div>
