@@ -29,6 +29,7 @@ CREATE TABLE webdb.`tb_user` (
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 CREATE TABLE webdb.`tb_policy` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `policy_name` varchar(50) NOT NULL,
@@ -49,6 +50,41 @@ CREATE TABLE webdb.`tb_policy` (
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 공통 코드 설계
+create table webdb.`tb_common_code`(
+  `code` varchar(2) NOT NULL,
+  `code_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`code`) USING BTREE 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 공통 코드 유형
+insert into tb_common_code (code,code_name) values('01','사용자 유형');
+insert into tb_common_code (code,code_name) values('02','청소년/청소년부모 나이');
+insert into tb_common_code (code,code_name) values('03','학부모  나이 코드');
+insert into tb_common_code (code,code_name) values('04','성별');
+insert into tb_common_code (code,code_name) values('05','읍면동');
+insert into tb_common_code (code,code_name) values('06','정책 대상');
+insert into tb_common_code (code,code_name) values('07','기관');
+insert into tb_common_code (code,code_name) values('08','분야');
+insert into tb_common_code (code,code_name) values('09','정책 성격');
+
+-- 공통 코드 설계
+create table webdb.`tb_common_code_detail`(
+  `code` varchar(2) NOT NULL,
+  `code_detail` varchar(2) NOT NULL,
+  `code_detail_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`code`,`code_detail`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 공통 코드 유형
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('01','0','청소년'),('01','1','청소년 부모'),('01','2','학부모');
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('02','0','초등학교'),('02','1','중학교'),('02','2','고등학교'),('02','3','대학교'),('02','4','기타(학교밖)'),('02','5','선택 안함'); 
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('03','0','10대'),('03','1','20대'),('03','2','30대'),('03','3','40대'),('03','4','50대'),('03','5','60대 이상'),('03','6','선택 안함');
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('04','0','남자'),('04','1','여자'),('04','2','선택 안함');
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('05','00','영암읍'),('05','01','삼호읍'),('05','02','덕진면'),('05','03','금정면'),('05','04','신북면'),('05','05','시종면'),('05','06','도표면'),('05','07','군서면'),('05','08','서호면'),('05','09','학산면'),('05','10','미암면');
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('06','00','부부/임산부'),('06','01','영유아'),('06','02','청소년/학생'),('06','03','청년/대학생'),('06','04','직장인'),('06','05','중장년'),('06','06','노인'),('06','07','선택 안함');
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('07','00','영암군'),('07','01','청소년 수련관'),('07','02','방과후 아카데미'),('07','03','청소년상담복지센터'),('07','04','학교밖지원센터'),('07','05','삼호읍청소년문화의집');
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('08','00','학업'),('08','01','상담'),('08','02','취업/이직'),('08','03','생활비'),('08','04','건강'),('08','05','주거'),('08','06','결혼/양육'),('08','07','청소년활동'),('08','08','학교밖청소년'),('08','09','돌봄');
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('09','00','지원.보조금/연금'),('09','01','도움/서비스'),('09','02','장학제도'),('09','03','분양/임대'),('09','04','공모전'),('09','05','대출/금융');
 
 CREATE TABLE webdb.`tb_terms` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
@@ -72,95 +108,11 @@ CREATE TABLE webdb.`tb_banner` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
--- join
-create table webdb.`tb_user_type`(
+CREATE TABLE webdb.`tb_policy_scrap` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `user_type` varchar(1) NOT NULL,
-  `user_type_name` varchar(10) NOT NULL,
+  `policy_idx` int(11) NOT NULL,
+  `user_idx` int(11) NOT NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into tb_user_type (user_type,user_type_name) values('0','청소년'),('1','청소년 부모'),('2','학부모');
-
-create table webdb.`tb_youthAge_code` (
-  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `youthAge_code` varchar(1) NOT NULL,
-  `youthAge_name` varchar(10) NOT NULL,
-  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`board_idx`) USING BTREE 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into tb_youthAge_code (youthAge_code,youthAge_name) values('0','초등학교'),('1','중학교'),('2','고등학교'),('3','대학교'),('4','기타(학교밖)'),('5','선택 안함');
-
-create table webdb.`tb_parentsAge_code` (
-  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `parentsAge_code` varchar(1) NOT NULL,
-  `parentsAge_name` varchar(10) NOT NULL,
-  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`board_idx`) USING BTREE 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into tb_parentsAge_code (parentsAge_code,parentsAge_name) values('0','10대'),('1','20대'),('2','30대'),('3','40대'),('4','50대'),('5','60'),('6','선택 안함');
-
-create table webdb.`tb_sex_class_code`(
-  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `sex_class_code` varchar(1) NOT NULL,
-  `sex_class_name` varchar(10) NOT NULL,
-  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`board_idx`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into tb_sex_class_code (sex_class_code,sex_class_name) values('0','남자'),('1','여자'),('2','선택 안함');
-
-create table webdb.`tb_emd_class_code`(
-  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `emd_class_code` varchar(2) NOT NULL,
-  `emd_class_name` varchar(20) NOT NULL,
-  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`board_idx`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into tb_emd_class_code (emd_class_code, emd_class_name) values('0','영암읍'),('1','삼호읍'),('2','덕진면'),('3','금정면'),('4','신북면'),('5','시종면'),('6','도표면')
-,('7','군서면'),('8','서호면'),('9','학산면'),('10','미암면');
-
-create table webdb.`tb_policy_target_code`(
-  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `policy_target_code` varchar(2) NOT NULL,
-  `policy_target_name` varchar(10) NOT NULL,
-  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`board_idx`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into tb_policy_target_code (policy_target_code, policy_target_name) values('0','부부/임산부'),('1','영유아'),('2','청소년/학생'),('3','청년/대학생'),('4','직장인'),('5','중장년'),('6','노인'),('7','선택 안함');
-
-
-create table webdb.`tb_policy_institution_code`(
-  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `policy_institution_code` varchar(2) NOT NULL,
-  `policy_institution_name` varchar(20) NOT NULL,
-  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`board_idx`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into tb_policy_institution_code (policy_institution_code, policy_institution_name) values('0','영암군'),('1','청소년 수련관'),('2','방과후 아카데미'),('3','청소년상담복지센터'),('4','학교밖지원센터'),('5','삼호읍청소년문화의집');
-
-create table webdb.`tb_policy_field_code`(
-  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `policy_field_code` varchar(20) NOT NULL,
-  `policy_field_name` varchar(10) NOT NULL,
-  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`board_idx`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into tb_policy_field_code (policy_field_code, policy_field_name) values('0','학업'),('1','상담'),('2','취업/이직'),('3','생활비'),('4','건강'),('5','주거'),('6','결혼/양육'),('7','청소년활동'),('8','학교밖청소년'),('9','돌봄');
-
-create table webdb.`tb_policy_character_code`(
-  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `policy_character_code` varchar(2) NOT NULL,
-  `policy_character_name` varchar(20) NOT NULL,
-  `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`board_idx`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into tb_policy_character_code (policy_character_code, policy_character_name) values('0','지원.보조금/연금'),('1','도움/서비스'),('2','장학제도'),('3','분양/임대'),('4','공모전'),('5','대출/금융');
