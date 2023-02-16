@@ -172,8 +172,10 @@ class _ListPolicySearch extends StatelessWidget {
         itemCount: policies.length,
         itemBuilder: (context, i) {
           final String imgName = policies[i].img;
+
           final String imgUrl = "images/policy/$imgName";
           // "app/src/public/upload/policy/$imgName";
+
           final String startDateYear =
               policies[i].application_start_date.substring(0, 4);
           final String endDateYear =

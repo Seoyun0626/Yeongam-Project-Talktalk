@@ -92,6 +92,7 @@ flutter:
     - images/main_icon/
     - images/bottom_bar/
     - images/policy/
+    - app/src/public/upload/policy/
 
 
 
