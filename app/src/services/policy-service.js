@@ -58,7 +58,8 @@ exports.updatePolicy = async function(req, res) {
         var upload = multer({ 
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
-                    cb(null, '../app/src/public/upload/policy');
+                    cb(null, '../frontend/images/policy');
+                    // cb(null, '../app/src/public/upload/policy');
                 },
                 filename: function (req, file, cb) {
                     temp = temp + path.extname(file.originalname);
@@ -111,7 +112,9 @@ exports.upload = async function(req, res) {
         var upload = multer({ 
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
-                    cb(null, '../app/src/public/upload/policy');
+                    cb(null, '../frontend/images/policy');
+                    // cb(null, '../app/src/public/upload/policy');
+                    
                 },
                 filename: function (req, file, cb) {
                     temp = temp + path.extname(file.originalname);
@@ -191,7 +194,8 @@ exports.banner = async function(req, res) {
         var upload = multer({ 
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
-                    cb(null, '../app/src/public/upload/banner');
+                    cb(null, '../frontend/images/banner');
+                    // cb(null, '../app/src/public/upload/banner');
                 },
                 filename: function (req, file, cb) {
                     temp = temp + path.extname(file.originalname);
@@ -208,8 +212,8 @@ exports.banner = async function(req, res) {
         });
 
         conn = await db.getConnection();
-        console.log('policy-service banner db getConnection');
-        console.log(req.body);
+        console.log('policy-service banner db getConnection:', req.body);
+        // console.log(req.body);
         var name = req.body.name;
         var link = req.body.link;
         var query = "INSERT INTO webdb.tb_banner (banner_name, banner_img, banner_link) VALUES ('" + name + "', '" + temp + "', '" + link + "');";
@@ -308,3 +312,19 @@ exports.getAllPolicyForSearch = async function(req, res) {
         conn.release();
     }
 }
+
+exports.getBannerData = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service getBannerData db getConnection');
+        var query = "SELECT banner_name, banner_img, banner_link FROM webdb.tb_banner;";
+        var rows = await conn.query(query); // 쿼리 실행
+        console.log(rows);
+        return rows;
+    } catch(error) {
+        console.log('policy-service fetchBannerData:'+error);
+    } finally {
+        conn.release();
+    }
+};

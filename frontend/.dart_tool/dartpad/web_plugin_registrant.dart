@@ -11,6 +11,7 @@ import 'package:flutter_secure_storage_web/flutter_secure_storage_web.dart';
 import 'package:image_picker_for_web/image_picker_for_web.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_plugin.dart';
 import 'package:shared_preferences_web/shared_preferences_web.dart';
+import 'package:url_launcher_web/url_launcher_web.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 void registerPlugins([final Registrar? pluginRegistrar]) {
@@ -20,5 +21,6 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   ImagePickerPlugin.registerWith(registrar);
   KakaoFlutterSdkPlugin.registerWith(registrar);
   SharedPreferencesPlugin.registerWith(registrar);
+  UrlLauncherPlugin.registerWith(registrar);
   registrar.registerMessageHandler();
 }

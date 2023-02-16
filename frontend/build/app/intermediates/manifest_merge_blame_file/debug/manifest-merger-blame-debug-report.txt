@@ -8,152 +8,183 @@
 8        android:minSdkVersion="19"
 9        android:targetSdkVersion="31" />
 10
-11    <uses-permission android:name="android.permission.INTERNET" />
-11-->C:\Yeongam-project\frontend\android\app\src\main\AndroidManifest.xml:3:5-67
-11-->C:\Yeongam-project\frontend\android\app\src\main\AndroidManifest.xml:3:22-64
-12
-13    <queries>
-13-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-22:15
-14        <package android:name="com.kakao.talk" />
-14-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-50
-14-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:10:18-47
-15        <package android:name="com.kakao.onetalk" />
-15-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:11:9-53
-15-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:11:18-50
-16        <package android:name="com.locnall.KimGiSa" />
-16-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:12:9-55
-16-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:12:18-52
-17        <package android:name="com.lguplus.navi" />
-17-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:13:9-52
-17-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:13:18-49
-18
-19        <intent>
-19-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-21:18
-20            <action android:name="android.intent.action.VIEW" />
-20-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-65
-20-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:16:21-62
-21
-22            <category android:name="android.intent.category.BROWSABLE" />
-22-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-74
-22-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:18:23-71
+11    <uses-permission android:name="android.permission.INTERNET" /> <!-- Provide required visibility configuration for API level 30 and above -->
+11-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:3:5-67
+11-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:3:22-64
+12    <queries>
+12-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:5:5-16:15
+13
+14        <!-- If your app checks for SMS support -->
+15        <intent>
+15-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:7:9-10:18
+16            <action android:name="android.intent.action.VIEW" />
+16-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:13-65
+16-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:21-62
+17
+18            <data android:scheme="sms" />
+18-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:13-42
+18-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:19-39
+19        </intent>
+20        <!-- If your app checks for call support -->
+21        <intent>
+21-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:12:9-15:18
+22            <action android:name="android.intent.action.VIEW" />
+22-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:13-65
+22-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:21-62
 23
-24            <data android:scheme="https" />
-24-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-44
-24-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:20:19-41
+24            <data android:scheme="tel" />
+24-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:13-42
+24-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:19-39
 25        </intent>
-26    </queries>
-27
-28    <application
-29        android:name="android.app.Application"
-30        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-30-->[androidx.core:core:1.8.0] C:\Users\USER\.gradle\caches\transforms-3\89a5200d8684e49abbf8d36dd3d5c89e\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
-31        android:debuggable="true"
-32        android:icon="@mipmap/ic_launcher"
-33        android:label="adolescent_talk" >
-34        <activity
-35            android:name="com.example.login.MainActivity"
-36            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-37            android:exported="true"
-38            android:hardwareAccelerated="true"
-39            android:launchMode="singleTop"
-40            android:theme="@style/LaunchTheme"
-41            android:windowSoftInputMode="adjustResize" >
-42
-43            <!--
-44                 Specifies an Android theme to apply to this Activity as soon as
-45                 the Android process has started. This theme is visible to the user
-46                 while the Flutter UI initializes. After that, this theme continues
-47                 to determine the Window background behind the Flutter UI.
-48            -->
-49            <meta-data
-50                android:name="io.flutter.embedding.android.NormalTheme"
-51                android:resource="@style/NormalTheme" />
-52
-53            <intent-filter>
-54                <action android:name="android.intent.action.MAIN" />
+26
+27        <package android:name="com.kakao.talk" />
+27-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-50
+27-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-47
+28        <package android:name="com.kakao.onetalk" />
+28-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-53
+28-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:11:18-50
+29        <package android:name="com.locnall.KimGiSa" />
+29-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:12:9-55
+29-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:12:18-52
+30        <package android:name="com.lguplus.navi" />
+30-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:13:9-52
+30-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:13:18-49
+31
+32        <intent>
+32-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:15:9-21:18
+33            <action android:name="android.intent.action.VIEW" />
+33-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:13-65
+33-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:21-62
+34
+35            <category android:name="android.intent.category.BROWSABLE" />
+35-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-74
+35-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:18:23-71
+36
+37            <data android:scheme="https" />
+37-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:13-42
+37-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:19-39
+38        </intent>
+39    </queries>
+40
+41    <application
+42        android:name="android.app.Application"
+43        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+43-->[androidx.core:core:1.8.0] /Users/taeheekim/.gradle/caches/transforms-3/89a5200d8684e49abbf8d36dd3d5c89e/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
+44        android:debuggable="true"
+45        android:icon="@mipmap/ic_launcher"
+46        android:label="청소년 톡talk" >
+47        <activity
+48            android:name="com.example.login.MainActivity"
+49            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+50            android:exported="true"
+51            android:hardwareAccelerated="true"
+52            android:launchMode="singleTop"
+53            android:theme="@style/LaunchTheme"
+54            android:windowSoftInputMode="adjustResize" >
 55
-56                <category android:name="android.intent.category.LAUNCHER" />
-57            </intent-filter>
-58        </activity>
-59        <!--
-60             Don't delete the meta-data below.
-61             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-62        -->
-63        <meta-data
-64            android:name="flutterEmbedding"
-65            android:value="2" />
-66
-67        <provider
-67-->[:image_picker_android] C:\Yeongam-project\frontend\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
-68            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-68-->[:image_picker_android] C:\Yeongam-project\frontend\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
-69            android:authorities="com.example.adolescent_talk.flutter.image_provider"
-69-->[:image_picker_android] C:\Yeongam-project\frontend\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
-70            android:exported="false"
-70-->[:image_picker_android] C:\Yeongam-project\frontend\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
-71            android:grantUriPermissions="true" >
-71-->[:image_picker_android] C:\Yeongam-project\frontend\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
-72            <meta-data
-72-->[:image_picker_android] C:\Yeongam-project\frontend\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
-73                android:name="android.support.FILE_PROVIDER_PATHS"
-73-->[:image_picker_android] C:\Yeongam-project\frontend\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
-74                android:resource="@xml/flutter_image_picker_file_paths" />
-74-->[:image_picker_android] C:\Yeongam-project\frontend\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
-75        </provider>
-76
-77        <activity
-77-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:25:9-30:56
-78            android:name="com.kakao.sdk.flutter.TalkAuthCodeActivity"
-78-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:26:13-70
-79            android:configChanges="orientation|screenSize|keyboardHidden|uiMode"
-79-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-81
-80            android:exported="false"
-80-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-37
-81            android:launchMode="singleTask"
-81-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-44
-82            android:theme="@style/TransparentCompat" />
-82-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-53
-83        <activity
-83-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:31:9-35:56
-84            android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
-84-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:32:13-76
-85            android:exported="true"
-85-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:33:13-36
-86            android:launchMode="singleTask"
-86-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:34:13-44
-87            android:theme="@style/TransparentCompat" />
-87-->[:kakao_flutter_sdk_common] C:\Yeongam-project\frontend\build\kakao_flutter_sdk_common\intermediates\merged_manifest\debug\AndroidManifest.xml:35:13-53
-88
-89        <uses-library
-89-->[androidx.window:window:1.0.0-beta04] C:\Users\USER\.gradle\caches\transforms-3\6e951e46e213cb9f2e945851dbb4819c\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
-90            android:name="androidx.window.extensions"
-90-->[androidx.window:window:1.0.0-beta04] C:\Users\USER\.gradle\caches\transforms-3\6e951e46e213cb9f2e945851dbb4819c\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
-91            android:required="false" />
-91-->[androidx.window:window:1.0.0-beta04] C:\Users\USER\.gradle\caches\transforms-3\6e951e46e213cb9f2e945851dbb4819c\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
-92        <uses-library
-92-->[androidx.window:window:1.0.0-beta04] C:\Users\USER\.gradle\caches\transforms-3\6e951e46e213cb9f2e945851dbb4819c\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
-93            android:name="androidx.window.sidecar"
-93-->[androidx.window:window:1.0.0-beta04] C:\Users\USER\.gradle\caches\transforms-3\6e951e46e213cb9f2e945851dbb4819c\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
-94            android:required="false" />
-94-->[androidx.window:window:1.0.0-beta04] C:\Users\USER\.gradle\caches\transforms-3\6e951e46e213cb9f2e945851dbb4819c\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
-95    </application>
-96
-97</manifest><!--
-98 <activity 
-99    android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
-100    android:exported="true">
-101    <intent-filter android:label="flutter_web_auth">
-102        <action android:name="android.intent.action.VIEW" />
-103        <category android:name="android.intent.category.DEFAULT" />
-104        <category android:name="android.intent.category.BROWSABLE" />
+56            <!--
+57                 Specifies an Android theme to apply to this Activity as soon as
+58                 the Android process has started. This theme is visible to the user
+59                 while the Flutter UI initializes. After that, this theme continues
+60                 to determine the Window background behind the Flutter UI.
+61            -->
+62            <meta-data
+63                android:name="io.flutter.embedding.android.NormalTheme"
+64                android:resource="@style/NormalTheme" />
+65
+66            <intent-filter>
+67                <action android:name="android.intent.action.MAIN" />
+68
+69                <category android:name="android.intent.category.LAUNCHER" />
+70            </intent-filter>
+71        </activity>
+72        <!--
+73             Don't delete the meta-data below.
+74             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+75        -->
+76        <meta-data
+77            android:name="flutterEmbedding"
+78            android:value="2" />
+79
+80        <provider
+80-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
+81            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+81-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
+82            android:authorities="com.example.adolescent_talk.flutter.image_provider"
+82-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
+83            android:exported="false"
+83-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+84            android:grantUriPermissions="true" >
+84-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
+85            <meta-data
+85-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
+86                android:name="android.support.FILE_PROVIDER_PATHS"
+86-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
+87                android:resource="@xml/flutter_image_picker_file_paths" />
+87-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
+88        </provider>
+89
+90        <activity
+90-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-13:74
+91            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+91-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
+92            android:exported="false"
+92-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
+93            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+93-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
+94        <activity
+94-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:25:9-30:56
+95            android:name="com.kakao.sdk.flutter.TalkAuthCodeActivity"
+95-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-70
+96            android:configChanges="orientation|screenSize|keyboardHidden|uiMode"
+96-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-81
+97            android:exported="false"
+97-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-37
+98            android:launchMode="singleTask"
+98-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-44
+99            android:theme="@style/TransparentCompat" />
+99-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-53
+100        <activity
+100-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:31:9-35:56
+101            android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
+101-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-76
+102            android:exported="true"
+102-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:33:13-36
+103            android:launchMode="singleTask"
+103-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:34:13-44
+104            android:theme="@style/TransparentCompat" />
+104-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:35:13-53
 105
-106         Redirect URI, "kakao${YOUR_NATIVE_APP_KEY}://oauth" 형식
-107        <data android:scheme="kakao${0bbf7ab39e609d6bc349bf5603977a13}" android:host="oauth"/>
-108    </intent-filter>
-109    </activity>
-110    The INTERNET permission is required for development. Specifically,
-111         the Flutter tool needs it to communicate with the running application
-112         to allow setting breakpoints, to provide hot reload, etc.
-113    
-114    <uses-permission android:name="android.permission.INTERNET"/>
-115-->
+106        <uses-library
+106-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+107            android:name="androidx.window.extensions"
+107-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+108            android:required="false" />
+108-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+109        <uses-library
+109-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+110            android:name="androidx.window.sidecar"
+110-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+111            android:required="false" />
+111-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+112    </application>
+113
+114</manifest><!--
+115 <activity 
+116    android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
+117    android:exported="true">
+118    <intent-filter android:label="flutter_web_auth">
+119        <action android:name="android.intent.action.VIEW" />
+120        <category android:name="android.intent.category.DEFAULT" />
+121        <category android:name="android.intent.category.BROWSABLE" />
+122
+123         Redirect URI, "kakao${YOUR_NATIVE_APP_KEY}://oauth" 형식
+124        <data android:scheme="kakao${0bbf7ab39e609d6bc349bf5603977a13}" android:host="oauth"/>
+125    </intent-filter>
+126    </activity>
+127    The INTERNET permission is required for development. Specifically,
+128         the Flutter tool needs it to communicate with the running application
+129         to allow setting breakpoints, to provide hot reload, etc.
+130    
+131    <uses-permission android:name="android.permission.INTERNET"/>
+132-->

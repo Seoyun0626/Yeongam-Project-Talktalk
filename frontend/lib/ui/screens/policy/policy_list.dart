@@ -172,7 +172,10 @@ class _ListPolicySearch extends StatelessWidget {
         itemCount: policies.length,
         itemBuilder: (context, i) {
           final String imgName = policies[i].img;
+
           final String imgUrl = "images/policy/$imgName";
+          // "app/src/public/upload/policy/$imgName";
+
           final String startDateYear =
               policies[i].application_start_date.substring(0, 4);
           final String endDateYear =
@@ -418,7 +421,8 @@ class _ListViewPolicy extends StatelessWidget {
     // final size = MediaQuery.of(context).size;
     // final policyBloc = BlocProvider.of<PolicyBloc>(context);
     final String imgName = policies.img;
-    final String imgUrl = "app/src/public/upload/policy/$imgName";
+    final String imgUrl =
+        "images/policy/$imgName"; //"app/src/public/upload/policy/$imgName";
 
     // 모집 기간
     final String startDateYear =

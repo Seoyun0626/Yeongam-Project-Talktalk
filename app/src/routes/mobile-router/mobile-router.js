@@ -292,7 +292,7 @@ router.get('/policy/get-all-policy-for-search', async function(req, res) {
 
     res.json({
       resp:true,
-      message : 'get et-all-posts-for-search policies',
+      message : 'get-all-posts-for-search policies',
       policies : result
     })
 } catch(error) {
@@ -303,5 +303,25 @@ router.get('/policy/get-all-policy-for-search', async function(req, res) {
     })
 }
 })
+
+// 배너 이미지, 링크
+router.get('/banner', async function (req, res) {
+  try{
+      var result = await mobile_policy_controller.getBannerData(req,res);
+      // res.render('policy/banner', {banner:result});
+      res.json({
+        resp:true,
+        message : 'get banner data',
+        banners : result
+      })
+      }
+  catch(error) {
+      console.log('mobile-router banner error:'+error);
+      res.json({
+        resp:false,
+        message : 'Failure get-policy-banner policies'
+      })
+  }
+});
 
 module.exports = router;

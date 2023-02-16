@@ -103,8 +103,8 @@ insert into tb_terms (terms,privacy) value('회원 가입 약관','개인 정보
 CREATE TABLE webdb.`tb_banner` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `banner_name` varchar(30) NULL,
-  `img` varchar(30) NOT NULL,
-  `link` varchar(100) NULL,
+  `banner_img` varchar(30) NOT NULL,
+  `banner_link` varchar(100) NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
