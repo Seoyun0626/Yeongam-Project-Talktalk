@@ -155,15 +155,11 @@ router.get("/signup", async function(req, res) {
   // var sess = req.session;
   //console.log('login-router signup sess:'+sess);
   //res.sendFile(path.join(__dirname, "../public/signup.html"));
-  var user_type = await code_controller.getUserType(req, res);
-  var parentsAge_code = await code_controller.getParentsAgeCode(req, res);
-  var youthAge_code = await code_controller.getYouthAgeCode(req, res);
-  var emd_class_code = await code_controller.getEmdClassCode(req, res);
-  res.render('dataif/signup', {
-    user_type:user_type,
-    parentsAge:parentsAge_code,
-    youthAge:youthAge_code,
-    emd:emd_class_code
+  var code_data = await code_controller.getCodeData(req, res);
+  res.render('dataif/signup', {title: '회원가입', sess: req.session,
+    //success: req.flash('success'),
+    //error: req.flash('error')
+    code_data: code_data
   });
 });
 

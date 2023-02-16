@@ -150,16 +150,10 @@ router.get('/update/:id', async function(req, res){
     // console.log("update:"+req.params.id);
     //데이터 받아오기
     var result = await dataif_controller.fetchDataUserUpdate(req, res);
-    var user_type = await code_controller.getUserType(req, res);
-    var parentsAge_code = await code_controller.getParentsAgeCode(req, res);
-    var youthAge_code = await code_controller.getYouthAgeCode(req, res);
-    var emd_class_code = await code_controller.getEmdClassCode(req, res);
+    var code_data = await code_controller.getCodeData(req, res);
     res.render('dataif/update', {
-      user_type:user_type,
-      parentsAge:parentsAge_code,
-      youthAge:youthAge_code,
-      emd:emd_class_code,
-      post:result[0]
+      post:result[0],
+      code_data:code_data
     });
   } catch(error) {
     console.log('dataif-router update error:'+error);

@@ -59,8 +59,8 @@
                   <label>회원구분</label>
                   <div class="four wide field">
                     <select class="ui fluid dropdown" name="user_type" id="user_type">
-                      <%for(var i=0; i<user_type.length; i++){%>
-                        <option value="<%=user_type[i].user_type_code%>"><%=user_type[i].user_type_name%></option>
+                      <%for(var i=0; i<code_data.user_type.length; i++){%>
+                        <option value="<%=code_data.user_type[i].code_detail%>"><%=code_data.user_type[i].code_detail_name%></option>
                       <%}%>
                     </select>
                   </div>
@@ -72,16 +72,16 @@
                   <label>연령대</label>
                   <div class="four wide field">
                     <select class="ui fluid dropdown" name="parentsAge_code" id="parentsAge_code">
-                      <%for(var i=0; i<parentsAge.length; i++){%>
-                        <option value="<%=parentsAge[i].parentsAge_code%>"><%=parentsAge[i].parentsAge_name%></option>
+                      <%for(var i=0; i<code_data.parentsAge_code.length; i++){%>
+                        <option value="<%=code_data.parentsAge_code[i].code_detail%>"><%=code_data.parentsAge_code[i].code_detail_name%></option>
                       <%}%>
                     </select>
                   </div>
                   <label>학교</label>
                   <div class="four wide field">
                     <select class="ui fluid dropdown" name="youthAge_code" id="youthAge_code">
-                      <%for(var i=0; i<youthAge.length; i++){%>
-                        <option value="<%=youthAge[i].youthAge_code%>"><%=youthAge[i].youthAge_name%></option>
+                      <%for(var i=0; i<code_data.youthAge_code.length; i++){%>
+                        <option value="<%=code_data.youthAge_code[i].code_detail%>"><%=code_data.youthAge_code[i].code_detail_name%></option>
                       <%}%>
                     </select>
                   </div>
@@ -93,8 +93,8 @@
                   <label>거주지</label>
                   <div class="four wide field">
                     <select class="ui fluid dropdown" name="emd_class_code" id="emd_class_code">
-                      <%for(var i=0; i<emd.length; i++){%>
-                        <option value="<%=emd[i].emd_class_code%>"><%=emd[i].emd_class_name%></option>
+                      <%for(var i=0; i<code_data.emd_class_code.length; i++){%>
+                        <option value="<%=code_data.emd_class_code[i].code_detail%>"><%=code_data.emd_class_code[i].code_detail_name%></option>
                       <%}%>
                     </select>
                   </div>
