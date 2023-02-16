@@ -11,6 +11,7 @@ class DetailPolicyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final String imgName = policies.img;
     final String imgUrl = "images/policy/$imgName";
+    //"app/src/public/upload/policy/$imgName";
     final String policySupervison = policies.policy_institution_code;
     final String policyName = policies.policy_name;
     final String policyContent = policies.content;

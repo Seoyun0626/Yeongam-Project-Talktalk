@@ -1,22 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:login/domain/models/response/response_user.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:login/domain/models/response/response_banner.dart';
+import 'package:login/domain/services/banner_services.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/screens/policy/policy_search.dart';
-import 'package:login/ui/screens/policy/search_condition.dart';
-import 'package:login/ui/screens/user/my_page.dart';
 import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
-
-final BannerImage = [
-  Image.asset('images/banner/slider_example.png', fit: BoxFit.fill),
-  // Image.asset('images/banner/aco.png', fit: BoxFit.cover),
-  Image.asset('images/banner/mou_img.png', fit: BoxFit.fill),
-];
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,11 +17,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final userBloc = BlocProvider.of<UserBloc>(context);
-    final authBloc = BlocProvider.of<AuthBloc>(context);
-    final CarouselController _controller = CarouselController(); // 배너 슬라이드
+    // final size = MediaQuery.of(context).size;
+    // final userBloc = BlocProvider.of<UserBloc>(context);
+    // final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -90,30 +81,33 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 배너 슬라이드
-                  CarouselSlider(
-                    carouselController: _controller,
-                    options: CarouselOptions(
-                      scrollDirection: Axis.horizontal,
-                      height: MediaQuery.of(context).size.height / 4,
-                      enlargeCenterPage: true,
-                      viewportFraction: 1.0,
-                      autoPlay: true,
-                    ),
-                    items: BannerImage.map((image) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                            width: MediaQuery.of(context).size.width,
-                            // margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            child: ClipRRect(
-                              // borderRadius: BorderRadius.circular(10.0),
-                              child: image,
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
+                  FutureBuilder<List<Banners>>(
+                    future: bannerService.getBannerData(),
+                    builder: (_, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Column(
+                          children: const [
+                            ShimmerNaru(),
+                          ],
+                        );
+                      } else {
+                        return CarouselSlider.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: ((context, index, realIndex) =>
+                              BannerSlide(
+                                  policyBanners: snapshot.data![index])),
+                          options: CarouselOptions(
+                            scrollDirection: Axis.horizontal,
+                            height: MediaQuery.of(context).size.height / 4,
+                            enlargeCenterPage: true,
+                            viewportFraction: 1.0,
+                            autoPlay: true,
+                          ),
+                        );
+                      }
+                    },
                   ),
+
                   const SizedBox(
                     height: 20,
                   ),
@@ -141,18 +135,11 @@ class _HomePageState extends State<HomePage> {
                         ])
                       ])),
 
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   CategoryButton(),
                   livePopularPost(),
-                  // const TextCustom(
-                  //     text: 'MainPage',
-                  //     letterSpacing: 1.5,
-                  //     fontWeight: FontWeight.w500,
-                  //     fontSize: 28,
-                  //     color: Color.fromARGB(255, 93, 73, 98)),
-                  // const SizedBox(height: 30.0),
 
                   // 로그아웃 버튼
                   // BtnNaru(
@@ -176,111 +163,58 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// // 검색창
-// class SearchBar extends StatefulWidget {
-//   const SearchBar({Key? key}) : super(key: key);
+// 배너 슬라이드
+class BannerSlide extends StatelessWidget {
+  final Banners policyBanners;
+  BannerSlide({super.key, required this.policyBanners});
 
-//   @override
-//   State<SearchBar> createState() => _SearchBar();
-// }
+  // final BannerImage = [
+  //   Image.asset('images/banner/slider_example.png', fit: BoxFit.fill),
+  //   Image.asset('images/banner/mou_img.png', fit: BoxFit.fill),
+  // ];
+  final CarouselController _bannerController = CarouselController();
 
-// class _SearchBar extends State<SearchBar> {
-//   final TextEditingController _filter = TextEditingController(); // 검색 위젯 컨트롤
-//   late FocusNode myFocusNode;
+  @override
+  Widget build(BuildContext context) {
+    final bannerImgName = policyBanners.banner_img;
+    final bannerImgUrl = "images/banner/$bannerImgName";
+    final bannerLink = policyBanners.banner_link;
+    // print(bannerImgUrl);
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     myFocusNode = FocusNode();
-//   }
+    return InkWell(
+      onTap: () {
+        launchUrl(Uri.parse(bannerLink));
+      },
+      child: Image.asset(bannerImgUrl, fit: BoxFit.fitWidth),
+    );
 
-//   @override
-//   void dispose() {
-//     // Clean up the focus node when the Form is disposed.
-//     myFocusNode.dispose();
-//     super.dispose();
-//   }
-
-//   String _searchText = ""; // 현재 검색어 값
-
-//   _SearchBar() {
-//     _filter.addListener(() {
-//       setState(() {
-//         _searchText = _filter.text;
-//       });
-//     });
-//   } // filter가 변화를 검지하여 searchText의 상태를 변화시키는 코드
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       color: ThemeColors.primary,
-//       padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-//       child: Row(children: <Widget>[
-//         Expanded(
-//           flex: 6,
-//           child: TextField(
-//             focusNode: myFocusNode,
-//             cursorColor: ThemeColors.darkGreen,
-//             style: const TextStyle(
-//               fontSize: 15,
-//             ),
-//             autofocus: false,
-//             controller: _filter,
-//             decoration: InputDecoration(
-//               filled: true,
-//               fillColor: Colors.white,
-//               prefixIcon: const Icon(
-//                 Icons.search,
-//                 color: ThemeColors.darkGreen,
-//                 size: 20,
-//               ),
-//               suffixIcon: myFocusNode.hasFocus
-//                   ? IconButton(
-//                       // 포커스 잡혔을 때 : 취소버튼
-//                       icon: const Icon(
-//                         Icons.cancel,
-//                         size: 20,
-//                         color: ThemeColors.darkGreen,
-//                       ),
-//                       onPressed: () {
-//                         setState(() {
-//                           _filter.clear();
-//                           _searchText = "";
-//                           myFocusNode.unfocus();
-//                         });
-//                       },
-//                     )
-//                   : IconButton(
-//                       //포커스 없을 때  : 검색 조건 버튼
-//                       icon: const Icon(
-//                         Icons.tune,
-//                         color: ThemeColors.darkGreen,
-//                         size: 20,
-//                       ),
-//                       onPressed: (() {
-//                         Navigator.push(context,
-//                             routeSlide(page: const SearchConditionPage()));
-//                       })),
-//               hintText: '복지 검색',
-//               labelStyle: const TextStyle(color: ThemeColors.darkGreen),
-//               focusedBorder: const OutlineInputBorder(
-//                   borderSide: BorderSide(color: Colors.transparent),
-//                   borderRadius: BorderRadius.all(Radius.circular(10))),
-//               enabledBorder: const OutlineInputBorder(
-//                   borderSide: BorderSide(color: Colors.transparent),
-//                   borderRadius: BorderRadius.all(Radius.circular(10))),
-//               border: const OutlineInputBorder(
-//                   borderSide: BorderSide(color: Colors.transparent),
-//                   borderRadius: BorderRadius.all(Radius.circular(10))),
-//               contentPadding: const EdgeInsets.symmetric(vertical: 10),
-//             ),
-//           ),
-//         ),
-//       ]),
-//     );
-//   }
-// }
+    // CarouselSlider(
+    //     carouselController: _bannerController,
+    //     options: CarouselOptions(
+    //       scrollDirection: Axis.horizontal,
+    //       height: MediaQuery.of(context).size.height / 4,
+    //       enlargeCenterPage: true,
+    //       viewportFraction: 1.0,
+    //       autoPlay: true,
+    //     ),
+    //     items: bannerImgAsset
+    //     // bannerImgAsset.map((image) {
+    //   return Builder(
+    //     builder: (BuildContext context) {
+    //       return SizedBox(
+    //         width: MediaQuery.of(context).size.width,
+    //         // margin: EdgeInsets.symmetric(horizontal: 5.0),
+    //         child: ClipRRect(
+    //           // borderRadius: BorderRadius.circular(10.0),
+    //           child: image,
+    //         ),
+    //       );
+    //     },
+    //   );
+    // }).toList(),
+    // );
+  }
+}
 
 // 카테고리 아이콘 버튼
 class CategoryButton extends StatelessWidget {
@@ -299,6 +233,8 @@ class CategoryButton extends StatelessWidget {
     'images/category_icon/icon_baby.png', // 결혼/양육
     'images/category_icon/icon_allsee.png', // 전체보기
   ];
+
+  CategoryButton({super.key});
 
   @override
   Widget build(BuildContext context) {

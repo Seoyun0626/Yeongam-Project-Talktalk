@@ -49,13 +49,16 @@ class Policy {
   });
 
   factory Policy.fromJson(Map<String, dynamic> json) => Policy(
-      policy_institution_code: json["policy_institution_code"],
-      policy_name: json["policy_name"],
-      application_start_date: json["application_start_date"],
-      application_end_date: json["application_end_date"],
-      // policy_target: json["policy_target"],
-      content: json["content"],
-      img: json["img"]);
+        application_start_date: json["application_start_date"],
+        application_end_date: json["application_end_date"],
+        img: json["img"],
+        policy_name: json["policy_name"],
+
+        // policy_target: json["policy_target"],
+        content: json["content"],
+
+        policy_institution_code: json["policy_institution_code"],
+      );
 
   Map<String, dynamic> toJson() => {
         "policy_supervision": policy_institution_code,
@@ -64,6 +67,6 @@ class Policy {
         "application_end_date": application_end_date,
         // "policy_target" : policy_target,
         "content": content,
-        "img:": img
+        "img:": img,
       };
 }
