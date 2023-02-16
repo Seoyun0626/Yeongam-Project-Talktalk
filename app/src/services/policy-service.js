@@ -212,7 +212,7 @@ exports.banner = async function(req, res) {
         console.log(req.body);
         var name = req.body.name;
         var link = req.body.link;
-        var query = "INSERT INTO webdb.tb_banner (banner_name, img, link) VALUES ('" + name + "', '" + temp + "', '" + link + "');";
+        var query = "INSERT INTO webdb.tb_banner (banner_name, banner_img, banner_link) VALUES ('" + name + "', '" + temp + "', '" + link + "');";
         var rows = await conn.query(query); // 쿼리 실행
         console.log('policy-service banner success');
         return resultcode; //0이면 성공

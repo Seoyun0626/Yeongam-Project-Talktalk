@@ -51,22 +51,24 @@ CREATE TABLE webdb.`tb_policy` (
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 -- 공통 코드 설계
 create table webdb.`tb_common_code`(
   `code` varchar(2) NOT NULL,
   `code_name` varchar(30) NOT NULL,
+  `code_englist_name` varchar(30) NULL,
   PRIMARY KEY (`code`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 공통 코드 유형
-insert into tb_common_code (code,code_name) values('01','사용자 유형');
-insert into tb_common_code (code,code_name) values('02','청소년/청소년부모 나이');
-insert into tb_common_code (code,code_name) values('03','학부모  나이 코드');
-insert into tb_common_code (code,code_name) values('04','성별');
-insert into tb_common_code (code,code_name) values('05','읍면동');
-insert into tb_common_code (code,code_name) values('06','정책 대상');
-insert into tb_common_code (code,code_name) values('07','기관');
-insert into tb_common_code (code,code_name) values('08','분야');
-insert into tb_common_code (code,code_name) values('09','정책 성격');
+insert into tb_common_code (code,code_name) values('01','사용자 유형','user_type');
+insert into tb_common_code (code,code_name) values('02','청소년/청소년부모 나이','youthAge_code');
+insert into tb_common_code (code,code_name) values('03','학부모  나이 코드','parentsAge_code');
+insert into tb_common_code (code,code_name) values('04','성별','sex_class_code');
+insert into tb_common_code (code,code_name) values('05','읍면동','emd_class_code');
+insert into tb_common_code (code,code_name) values('06','정책 대상','policy_target_code');
+insert into tb_common_code (code,code_name) values('07','기관','policy_institution_code');
+insert into tb_common_code (code,code_name) values('08','분야','policy_field_code');
+insert into tb_common_code (code,code_name) values('09','정책 성격','policy_character_code');
 
 -- 공통 코드 설계
 create table webdb.`tb_common_code_detail`(
@@ -85,6 +87,7 @@ insert into tb_common_code_detail (code,code_detail,code_detail_name) values('06
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('07','00','영암군'),('07','01','청소년 수련관'),('07','02','방과후 아카데미'),('07','03','청소년상담복지센터'),('07','04','학교밖지원센터'),('07','05','삼호읍청소년문화의집');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('08','00','학업'),('08','01','상담'),('08','02','취업/이직'),('08','03','생활비'),('08','04','건강'),('08','05','주거'),('08','06','결혼/양육'),('08','07','청소년활동'),('08','08','학교밖청소년'),('08','09','돌봄');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('09','00','지원.보조금/연금'),('09','01','도움/서비스'),('09','02','장학제도'),('09','03','분양/임대'),('09','04','공모전'),('09','05','대출/금융');
+
 
 CREATE TABLE webdb.`tb_terms` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
