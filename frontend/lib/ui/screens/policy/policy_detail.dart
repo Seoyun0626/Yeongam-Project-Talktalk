@@ -132,7 +132,7 @@ class DetailPolicyPage extends StatelessWidget {
                         width: size / 20,
                       ),
                       Text(
-                        policies.policy_institution_code,
+                        policies.policy_target_code,
                         style: const TextStyle(
                           color: ThemeColors.basic,
                           fontSize: 18,

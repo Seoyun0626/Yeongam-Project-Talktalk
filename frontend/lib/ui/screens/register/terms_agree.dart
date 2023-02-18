@@ -1,8 +1,8 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/login/login_page.dart';
-import 'package:login/ui/screens/register/info_first.dart';
-import 'package:login/ui/screens/register/info_parents.dart';
 import 'package:login/ui/screens/register/user_type.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
@@ -10,6 +10,7 @@ import 'package:login/ui/widgets/widgets.dart';
 import 'package:login/ui/helpers/animation_route.dart';
 
 // kth 수정 : 밑에 수정 전 코드 주석처리 해놓음
+
 class termsAgreePage extends StatefulWidget {
   const termsAgreePage({Key? key}) : super(key: key);
 
@@ -22,10 +23,11 @@ class _termsAgreePageState extends State<termsAgreePage> {
     title: '약관 전체 동의',
   );
   final checkboxList = [
-    CheckBoxModal(title: '이용약관 동의 (필수)'),
-    CheckBoxModal(title: '개인정보침해방침 동의 (필수)'),
-    CheckBoxModal(title: '마케팅 정보 수신 동의'),
+    CheckBoxModal(title: '회원 가입 약관 동의 (필수)'),
+    CheckBoxModal(title: '개인 정보 처리 방침 동의 (필수)'),
+    // CheckBoxModal(title: '마케팅 정보 수신 동의'),
   ];
+  bool completeAgree = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +69,9 @@ class _termsAgreePageState extends State<termsAgreePage> {
                     value: allChecked.value,
                     // checkColor: ThemeColors.basic,
                     activeColor: ThemeColors.primary,
-                    onChanged: (value) => onAllClicked(allChecked),
+                    onChanged: (value) {
+                      onAllClicked(allChecked);
+                    },
                   ),
                   title: Text(allChecked.title,
                       style: const TextStyle(
@@ -78,10 +82,12 @@ class _termsAgreePageState extends State<termsAgreePage> {
                     .map((item) => ListTile(
                           onTap: () => onItemClicked(item),
                           leading: Checkbox(
-                            checkColor: ThemeColors.basic,
+                            checkColor: Colors.white,
                             activeColor: ThemeColors.primary,
                             value: item.value,
-                            onChanged: (value) => onItemClicked(item),
+                            onChanged: (value) {
+                              onItemClicked(item);
+                            },
                           ),
                           title: Text(item.title,
                               style: const TextStyle(fontSize: 18)),
@@ -96,11 +102,22 @@ class _termsAgreePageState extends State<termsAgreePage> {
                   height: 40,
                   fontSize: 18,
                   colorText: Colors.black,
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const userTypePage(),
-                      )),
+                  onPressed: () {
+                    print('약관 전체 동의');
+                    print(completeAgree);
+                    if (completeAgree == true) {
+                      // DB 저장 : tb_terms
+
+                      // 다음 페이지
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const userTypePage(),
+                          ));
+                    } else {
+                      modalWarning(context, '약관에 동의해주세요');
+                    }
+                  },
                 ),
               ],
             )),
@@ -116,6 +133,9 @@ class _termsAgreePageState extends State<termsAgreePage> {
       checkBoxItem.value = newValue;
       checkboxList.forEach((element) {
         element.value = newValue;
+        // print('onAllClicked');
+        // print(element.value);
+        completeAgree = element.value;
       });
     });
   }
@@ -132,6 +152,9 @@ class _termsAgreePageState extends State<termsAgreePage> {
         // This is List checkbox checked full => So need checked allChecked
         final allListChecked = checkboxList.every((element) => element.value);
         allChecked.value = allListChecked;
+        // print('onItemClicked');
+        // print(allChecked.value); // true
+        completeAgree = allChecked.value;
       }
     });
   }

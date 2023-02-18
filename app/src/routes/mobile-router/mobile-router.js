@@ -1,7 +1,7 @@
 const path = require("path");
 var express = require("express");
 var router = express.Router();
-var mobile_login_controller = require("../../controllers/common-controller/login-controller");
+var mobile_login_controller = require("../../controllers/mobile-controller/mobile-login-controller");
 var mobile_policy_controller = require("../../controllers/mobile-controller/mobile-policy-controller");
 // const routerUser = require("./src/routes/mobile-router/mobile-router");
 

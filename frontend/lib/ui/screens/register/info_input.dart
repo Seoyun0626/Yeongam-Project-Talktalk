@@ -11,8 +11,6 @@ import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-import 'info_first.dart';
-
 class InfoInputPage extends StatefulWidget {
   const InfoInputPage(this.userTypeCode, {Key? key}) : super(key: key);
   final int userTypeCode;
@@ -27,26 +25,13 @@ class _InfoInputPageState extends State<InfoInputPage> {
   late TextEditingController userAgainPWController;
   late TextEditingController userEmailController;
   late TextEditingController userNameController;
+  // late TextEditingController userPhoneNumberController;
   late int userTypeCode; // 사용자 유형
   late int userRole = 1;
+  late int emd = 0; // 영암군 읍면동 주소
   late int youthAge = 0; // 청소년/청소년부모 나이
   late int parentsAge = 0; // 부모 나이
-  late int sex; // 성별
-  late int emd = 0; // 영암군 읍면동 주소
-
-  final List<String> _emdList = [
-    '영암읍',
-    '삼호읍',
-    '덕진면',
-    '금정면',
-    '신북면',
-    '시종면',
-    '도포면',
-    '군서면',
-    '서호면',
-    '학산면',
-    '미암면'
-  ];
+  late int sex = 0; // 성별
 
   final _keyForm = GlobalKey<FormState>();
 
@@ -58,6 +43,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
     userAgainPWController = TextEditingController();
     userEmailController = TextEditingController();
     userNameController = TextEditingController();
+    // userPhoneNumberController = TextEditingController();
   }
 
   @override
@@ -67,6 +53,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
     userAgainPWController.dispose();
     userEmailController.dispose();
     userNameController.dispose();
+    // userPhoneNumberController.dispose();
     super.dispose();
   }
 
@@ -77,6 +64,19 @@ class _InfoInputPageState extends State<InfoInputPage> {
     const youthAgeList = ['초', '중', '고', '대', '학교밖', '선택X'];
     const parentsAgeList = ['10대', '20대', '30대', '40대', '50대', '60대', '선택X'];
     const sexList = ['남자', '여자', '선택X'];
+    final List<String> _emdList = [
+      '영암읍',
+      '삼호읍',
+      '덕진면',
+      '금정면',
+      '신북면',
+      '시종면',
+      '도포면',
+      '군서면',
+      '서호면',
+      '학산면',
+      '미암면'
+    ];
     // print('user type code - $userTypeCode');
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
@@ -87,15 +87,23 @@ class _InfoInputPageState extends State<InfoInputPage> {
           modalLoading(context, '로드 중');
         } else if (state is SuccessUserState) {
           Navigator.pop(context);
-          modalSuccess(context, '회원가입이 완료되었습니다',
-              onPressed: () => Navigator.pushAndRemoveUntil(
-                  context, routeSlide(page: const LoginPage()), (_) => false)
-              // Navigator.push(
-              //     context,
-              //     routeSlide(
-              //         page: VerifyEmailPage(
-              //             user_email: userEmailController.text.trim())))
-              );
+          modalSuccess(
+            context, '회원가입이 완료되었습니다',
+            onPressed: () => Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LoginPage(),
+                ),
+                (_) => false),
+
+            // Navigator.pushAndRemoveUntil(
+            //     context, routeSlide(page: const LoginPage()), (_) => false)
+            // Navigator.push(
+            //     context,
+            //     routeSlide(
+            //         page: VerifyEmailPage(
+            //             user_email: userEmailController.text.trim())))
+          );
         } else if (state is FailureUserState) {
           Navigator.pop(context);
           errorMessageSnack(context, state.error);
@@ -140,7 +148,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 200.0,
+                          width: size.width / 2,
                           child: TextFieldNaru(
                             controller: userIDController,
                             hintText: '아이디',
@@ -152,8 +160,8 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           margin: const EdgeInsets.symmetric(horizontal: 4.0),
                           child: BtnNaru(
                             text: '중복확인',
-                            fontSize: 17,
-                            width: 103,
+                            fontSize: 15,
+                            width: size.width / 5,
                             colorText: Colors.black,
                             onPressed: () => Navigator.pop(context), //수정필요
                           ),
@@ -222,38 +230,87 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
                         color: Colors.black),
-                    const SizedBox(height: 50.0),
-                    // 전화번호
+                    const SizedBox(height: 30.0),
+                    // // 전화번호
+                    // const TextCustom(
+                    //   text: '전화번호를 입력해주세요.',
+                    //   fontSize: 17,
+                    //   letterSpacing: 1.0,
+                    //   maxLines: 2,
+                    // ),
+                    // const SizedBox(height: 1.0),
+                    // TextFormField(
+                    //   keyboardType: TextInputType.phone,
+                    //   maxLength: 13,
+                    //   inputFormatters: [
+                    //     FilteringTextInputFormatter.digitsOnly, //숫자만!
+                    //     NumberFormatter(), // 자동하이픈
+                    //     LengthLimitingTextInputFormatter(13),
+                    //     //13자리만 입력받도록 하이픈 2개+숫자 11개
+                    //   ],
+                    //   // controller: userPhoneNumberController,
+                    //   // ignore: prefer_const_constructors
+                    //   decoration: InputDecoration(
+                    //     // ignore: prefer_const_constructors
+                    //     icon: Icon(
+                    //       Icons.phone_iphone,
+                    //       color: ThemeColors.primary,
+                    //     ),
+                    //     hintText: "010-xxxx-xxxx",
+                    //     focusedBorder: const UnderlineInputBorder(
+                    //       borderSide: BorderSide(color: ThemeColors.primary),
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 15.0),
+
+                    // 거주지
                     const TextCustom(
-                      text: '전화번호를 입력해주세요.',
+                      text: '거주지를 선택해주세요.',
                       fontSize: 17,
                       letterSpacing: 1.0,
                       maxLines: 2,
                     ),
-                    const SizedBox(height: 1.0),
-                    TextFormField(
-                      keyboardType: TextInputType.phone,
-                      maxLength: 13,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly, //숫자만!
-                        NumberFormatter(), // 자동하이픈
-                        LengthLimitingTextInputFormatter(
-                            13) //13자리만 입력받도록 하이픈 2개+숫자 11개
+                    const SizedBox(height: 10.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const TextCustom(
+                          text: '영암군    ',
+                          fontSize: 17,
+                          color: ThemeColors.basic,
+                          letterSpacing: 1.0,
+                          maxLines: 2,
+                        ),
+                        DropdownButton(
+                          focusColor: ThemeColors.primary,
+                          borderRadius: BorderRadius.circular(4.0),
+                          style: const TextStyle(
+                            fontSize: 17,
+                            color: Colors.black,
+                          ),
+                          // ignore: unnecessary_null_comparison
+                          value: _emdList[emd],
+                          items: _emdList.map((value) {
+                            return DropdownMenuItem(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              emd = _emdList.indexOf(value!);
+                              // _selectedEMD =
+                              //     _emdList.indexOf(value!).toString(); //value!;
+                              // print('emd $_selectedEMD');
+                              // emd = _selectedEMD; //_selectedEMD;
+                            });
+                          },
+                          elevation: 4,
+                        ),
                       ],
-                      // ignore: prefer_const_constructors
-                      decoration: InputDecoration(
-                        // ignore: prefer_const_constructors
-                        icon: Icon(
-                          Icons.phone_iphone,
-                          color: ThemeColors.primary,
-                        ),
-                        hintText: "010-xxxx-xxxx",
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: ThemeColors.primary),
-                        ),
-                      ),
                     ),
-                    const SizedBox(height: 15.0),
+                    const SizedBox(height: 40.0),
 
                     // 재학여부(청소년 0, 청소년부모 1) / 나이(부모 2)
                     // AgeToggleButton(userTypeCode), // 토글버튼 클래스
@@ -276,7 +333,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           minWidth:
                               (MediaQuery.of(context).size.width - 87) / 6,
                           minHeight: 50.0,
-                          fontSize: 13,
+                          fontSize: 12,
                           initialLabelIndex: 0,
                           activeBgColor: const [
                             Color.fromARGB(40, 204, 221, 90)
@@ -316,7 +373,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       ToggleSwitch(
                         minWidth: (MediaQuery.of(context).size.width - 87) / 7,
                         minHeight: 50.0,
-                        fontSize: 12,
+                        fontSize: 11,
                         initialLabelIndex: 0,
                         activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
                         activeFgColor: ThemeColors.darkGreen,
@@ -347,6 +404,13 @@ class _InfoInputPageState extends State<InfoInputPage> {
 
                     // 성별
                     // const SexToggleButton(),
+                    const TextCustom(
+                      text: '성별을 선택해주세요.',
+                      fontSize: 17,
+                      letterSpacing: 1.0,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 10.0),
                     ToggleSwitch(
                       minWidth: (MediaQuery.of(context).size.width - 87) / 3,
                       minHeight: 50.0,
@@ -375,52 +439,6 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       },
                     ),
 
-                    const SizedBox(height: 40.0),
-                    // 거주지
-                    const TextCustom(
-                      text: '거주지를 선택해주세요.',
-                      fontSize: 17,
-                      letterSpacing: 1.0,
-                      maxLines: 2,
-                    ),
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const TextCustom(
-                          text: '영암군    ',
-                          fontSize: 17,
-                          letterSpacing: 1.0,
-                          maxLines: 2,
-                        ),
-                        DropdownButton(
-                          focusColor: ThemeColors.primary,
-                          borderRadius: BorderRadius.circular(4.0),
-                          style: const TextStyle(
-                            fontSize: 17,
-                            color: Colors.black,
-                          ),
-                          // ignore: unnecessary_null_comparison
-                          value: _emdList[emd],
-                          items: _emdList.map((value) {
-                            return DropdownMenuItem(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              emd = _emdList.indexOf(value!);
-                              // _selectedEMD =
-                              //     _emdList.indexOf(value!).toString(); //value!;
-                              // print('emd $_selectedEMD');
-                              // emd = _selectedEMD; //_selectedEMD;
-                            });
-                          },
-                          elevation: 4,
-                        ),
-                      ],
-                    ),
                     const SizedBox(height: 60.0),
                     BtnNaru(
                         text: '완료',
@@ -441,6 +459,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                                 userAgainPWController.text.trim(),
                                 userRole.toString(), // user_role - 사용자
                                 userTypeCode.toString(), // user_type
+                                // userPhoneNumberController.text.trim(),
                                 youthAge.toString(), // youthAge_code
                                 parentsAge.toString(), // parentsAge_code
                                 emd.toString(), //emd_class_code // 자료형 해결해야 함

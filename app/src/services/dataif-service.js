@@ -50,6 +50,7 @@ exports.fetchData = async function(req, res) {
   }
 };
 
+
 // 회원가입 약관 가져오기
 exports.fetchTermData = async function(req, res) {
   var conn;
@@ -80,6 +81,7 @@ exports.updateTermData = async function(req, res) {
     if (conn) conn.end();
   }
 };
+
         
 exports.fetchDataUserUpdate = async function(req, res) {
   var conn;

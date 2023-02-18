@@ -299,7 +299,6 @@ class _ListPolicySearch extends StatelessWidget {
 }
 
 // 검색창
-
 class SearchBar extends StatefulWidget {
   const SearchBar(this.inputText, {Key? key}) : super(key: key);
   final String inputText;

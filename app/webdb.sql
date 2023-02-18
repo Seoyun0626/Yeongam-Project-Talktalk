@@ -22,6 +22,7 @@ CREATE TABLE webdb.`tb_user` (
   `sex_class_code` varchar(1) NULL,
   `emd_class_code` varchar(2) NULL,
   `user_email` varchar(50) NULL,
+  `terms_agree` varchar(2) NOT NULL DEFAULT 'x',
   `salt` varchar(255) NOT NULL,
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -56,19 +57,19 @@ CREATE TABLE webdb.`tb_policy` (
 create table webdb.`tb_common_code`(
   `code` varchar(2) NOT NULL,
   `code_name` varchar(30) NOT NULL,
-  `code_englist_name` varchar(30) NULL,
+  `code_english_name` varchar(30) NULL,
   PRIMARY KEY (`code`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 공통 코드 유형
-insert into tb_common_code (code,code_name) values('01','사용자 유형','user_type');
-insert into tb_common_code (code,code_name) values('02','청소년/청소년부모 나이','youthAge_code');
-insert into tb_common_code (code,code_name) values('03','학부모  나이 코드','parentsAge_code');
-insert into tb_common_code (code,code_name) values('04','성별','sex_class_code');
-insert into tb_common_code (code,code_name) values('05','읍면동','emd_class_code');
-insert into tb_common_code (code,code_name) values('06','정책 대상','policy_target_code');
-insert into tb_common_code (code,code_name) values('07','기관','policy_institution_code');
-insert into tb_common_code (code,code_name) values('08','분야','policy_field_code');
-insert into tb_common_code (code,code_name) values('09','정책 성격','policy_character_code');
+insert into tb_common_code (code,code_name,code_english_name) values('01','사용자 유형','user_type');
+insert into tb_common_code (code,code_name,code_english_name) values('02','청소년/청소년부모 나이','youthAge_code');
+insert into tb_common_code (code,code_name,code_english_name) values('03','학부모  나이 코드','parentsAge_code');
+insert into tb_common_code (code,code_name,code_english_name) values('04','성별','sex_class_code');
+insert into tb_common_code (code,code_name,code_english_name) values('05','읍면동','emd_class_code');
+insert into tb_common_code (code,code_name,code_english_name) values('06','정책 대상','policy_target_code');
+insert into tb_common_code (code,code_name,code_english_name) values('07','기관','policy_institution_code');
+insert into tb_common_code (code,code_name,code_english_name) values('08','분야','policy_field_code');
+insert into tb_common_code (code,code_name,code_english_name) values('09','정책 성격','policy_character_code');
 
 -- 공통 코드 설계
 create table webdb.`tb_common_code_detail`(
