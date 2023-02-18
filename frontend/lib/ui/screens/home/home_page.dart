@@ -45,8 +45,11 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.w300,
                 )),
             leading: InkWell(
-              onTap: () =>
-                  Navigator.push(context, routeSlide(page: const LoginPage())),
+              // onTap: () => Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const LoginPage(),
+              //     )),
               child: Image.asset('images/aco.png', height: 70),
             ),
             actions: [

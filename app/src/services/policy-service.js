@@ -151,10 +151,10 @@ exports.upload = async function(req, res) {
             resultcode = 3;
             return resultcode;
         }
-        if(content == null || content == undefined || content == '') {
-            resultcode = 4;
-            return resultcode;
-        }
+        // if(content == null || content == undefined || content == '') {
+        //     resultcode = 4;
+        //     return resultcode;
+        // }
         if(application_start_date == null || application_start_date == undefined || application_start_date == '') {
             resultcode = 5;
             return resultcode;
@@ -163,10 +163,10 @@ exports.upload = async function(req, res) {
             resultcode = 6;
             return resultcode;
         }
-        if(content == null || content == undefined || content == '') {
-            resultcode = 7;
-            return resultcode;
-        }
+        // if(content == null || content == undefined || content == '') {
+        //     resultcode = 7;
+        //     return resultcode;
+        // }
         var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, description, fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code) VALUES "
           + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "');";
         var rows = await conn.query(query); // 쿼리 실행
