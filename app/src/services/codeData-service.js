@@ -46,6 +46,7 @@ exports.fetchData = async function(req, res) {
       conn = await db.getConnection();
       var query = "SELECT policy_institution_code,policy_institution_name FROM webdb.tb_policy_institution_code";
       var rows = await conn.query(query); // 쿼리 실행
+      console.log('codeData-service-getPolicyInstitution', rows);
       return rows;
     } catch(error) {
       console.log('code-service getPolicyInstitution:'+error);

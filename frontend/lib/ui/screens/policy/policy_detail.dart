@@ -70,12 +70,12 @@ class DetailPolicyPage extends StatelessWidget {
                   ),
                 ]),
               ),
-              Container(
-                  // 주최측
-                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
-                  width: size,
-                  color: Colors.white,
-                  child: Text(policySupervison)),
+              // Container(
+              //     // 주최측
+              //     padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
+              //     width: size,
+              //     color: Colors.white,
+              //     child: Text(policySupervison)),
               Container(
                   // 정책 이름
                   padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),

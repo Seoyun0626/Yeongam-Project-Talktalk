@@ -436,6 +436,10 @@ class _ListViewPolicy extends StatelessWidget {
     final String startDate = '$startDateYear.$startDateMonth.$startDateDay';
     final String endDate = '$endDateYear.$endDateMonth.$endDateDay';
 
+    final String policy_institution_code = policies.policy_institution_code;
+
+    policyService.getCodeData();
+
     return Padding(
         padding: const EdgeInsets.fromLTRB(3, 3, 3, 0), // 카드 바깥쪽
         child: Card(
@@ -472,7 +476,7 @@ class _ListViewPolicy extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      policies.policy_institution_code,
+                                      policy_institution_code,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
