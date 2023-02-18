@@ -3,6 +3,7 @@ var express = require("express");
 var router = express.Router();
 var mobile_login_controller = require("../../controllers/mobile-controller/mobile-login-controller");
 var mobile_policy_controller = require("../../controllers/mobile-controller/mobile-policy-controller");
+var codeData_controller = require("../../controllers/common-controller/codeData-controller")
 // const routerUser = require("./src/routes/mobile-router/mobile-router");
 
 const passport = require('passport');
@@ -254,15 +255,33 @@ router.get('/policy/get-all-policy', async function(req, res){
     res.json({
       resp:true,
       message : 'get all policies',
-      policies : result
+      policies : result,
     })
 } catch(error) {
-    console.log('policy-router get-all-plicy error:'+error);
+    console.log('policy-router get-all-policy error:'+error);
     res.json({
       resp:false,
       message : 'Failure get all policies'
     })
 }
+});
+
+router.get('/policy/get-code-data', async function(req, res){
+  try{
+    var result = await codeData_controller.getCodeData(req, res);
+    console.log(result);
+    res.json({
+      resp:true,
+      message : 'get code data',
+      policies : result
+    })
+  } catch(error){
+    console.log('policy-router get-code-data error:'+error);
+    res.json({
+      resp:false,
+      message : 'Failure get code data'
+    })
+  }
 });
 
 router.get('/policy/get-search-policy/:searchValue', async function(req, res) {
