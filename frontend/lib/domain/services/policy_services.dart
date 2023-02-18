@@ -1,16 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:login/data/env/env.dart';
-import 'package:login/data/storage/secure_storage.dart';
-import 'package:login/domain/models/response/response_search.dart';
+import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/models/response/response_policy.dart';
-
 import 'package:login/ui/helpers/debouncer.dart';
-
-import 'package:login/domain/models/response/default_response.dart';
-import 'package:login/domain/models/response/response_policy.dart';
 
 class PolicyServices {
   final debouncer = DeBouncer(duration: const Duration(milliseconds: 800));

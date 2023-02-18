@@ -11,69 +11,7 @@ exports.fetchData = async function(req, res) {
     } catch (error) {
         console.log('codeData-controller fetchData error:'+error);
     }
-}
-
-
-exports.getEmdClassCode = async function(req, res) {
-    var resultcode = 0;
-    var conn;
-    try{
-      conn = await db.getConnection();
-      var query = "SELECT emd_class_code,emd_class_name FROM webdb.tb_emd_class_code";
-      var rows = await conn.query(query); // 쿼리 실행
-      return rows;
-    } catch(error) {
-      console.log('code-service getEmdClassCode:'+error);
-    } finally {
-      if (conn) conn.end();
-    }
-  };
-
-  exports.getUserType = async function(req, res) {
-    var resultcode = 0;
-    var conn;
-    try{
-      conn = await db.getConnection();
-      var query = "SELECT user_type,user_type_name FROM webdb.tb_user_type";
-      var rows = await conn.query(query); // 쿼리 실행
-      return rows;
-    } catch(error) {
-      console.log('code-service getUserType:'+error);
-    } finally {
-      if (conn) conn.end();
-    }
-  };
-  
-  exports.getParentsAgeCode = async function(req, res) {
-    var resultcode = 0;
-    var conn;
-    try{
-      conn = await db.getConnection();
-      var query = "SELECT parentsAge_code,parentsAge_name FROM webdb.tb_parentsAge_code";
-      var rows = await conn.query(query); // 쿼리 실행
-      return rows;
-    } catch(error) {
-      console.log('code-service getParentsAgeCode:'+error);
-    } finally {
-      if (conn) conn.end();
-    }
-  };
-  
-  exports.getYouthAgeCode = async function(req, res) {
-    var resultcode = 0;
-    var conn;
-    try{
-      conn = await db.getConnection();
-      var query = "SELECT youthAge_code,youthAge_name FROM webdb.tb_youthAge_code";
-      var rows = await conn.query(query); // 쿼리 실행
-      return rows;
-    } catch(error) {
-      console.log('code-service getYouthAgeCode:'+error);
-    } finally {
-      if (conn) conn.end();
-    }
-  };
-
+};
   exports.getPolicyField = async function(req, res) {
     var resultcode = 0;
     var conn;
@@ -136,3 +74,50 @@ exports.fetchPolicyData = async function(req, res) {
         console.log('codeData-controller fetchPolicyData error:'+error);
     }
 }
+
+
+exports.getCodeData = async function(req, res) {
+    try {
+      conn = await db.getConnection();
+      // 공통코드별로 상세코드를 가져와 json으로 만들어서 리턴
+      var json = {};
+      var query = "SELECT b.code_detail, b.code_detail_name FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 1";
+      json.user_type = await conn.query(query); // 쿼리 실행
+      var query = "SELECT b.code_detail, b.code_detail_name FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 2";
+      json.youthAge_code = await conn.query(query);
+      var query = "SELECT b.code_detail, b.code_detail_name FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 3";
+      json.parentsAge_code = await conn.query(query);
+      var query = "SELECT b.code_detail, b.code_detail_name FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 4";
+      json.sex_class_code = await conn.query(query);
+      var query = "SELECT b.code_detail, b.code_detail_name FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 5";
+      json.emd_class_code = await conn.query(query);
+      var query = "SELECT b.code_detail, b.code_detail_name FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 6";
+      json.policy_target_code = await conn.query(query);
+      var query = "SELECT b.code_detail, b.code_detail_name FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 7";
+      json.policy_institution_code = await conn.query(query);
+      var query = "SELECT b.code_detail, b.code_detail_name FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 8";
+      json.policy_field_code = await conn.query(query);
+      var query = "SELECT b.code_detail, b.code_detail_name FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 9";
+      json.policy_character_code = await conn.query(query);
+      var query = "select code,code_name from webdb.tb_common_code;"
+      json.code_data_name = await conn.query(query);
+      return json;
+    } catch (error) {
+        console.log('codeData-controller getCodeData error:'+error);
+    }
+};
+
+exports.getCodedetail = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var code = req.params.id;
+    var query = "SELECT code_detail,code_detail_name FROM webdb.tb_common_code_detail where code = '" + code + "'";
+    var rows = await conn.query(query); // 쿼리 실행
+    // console.log(rows[1].code_detail);
+    // console.log(rows);
+    return rows;
+  }
+  catch(error){
+    console.log('codeData-controller getCodedetail error:'+error);
+  }
+};

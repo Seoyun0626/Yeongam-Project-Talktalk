@@ -47,16 +47,16 @@
           <label>정책 대상</label>
           <div class="four wide field">
               <select class="ui fluid dropdown" name="target" id="target">
-                <%for(var i=0; i<target.length; i++){%>
-                  <option value="<%=target[i].policy_target_code%>"><%=target[i].policy_target_name%></option>
+                <%for(var i=0; i<code_data.policy_target_code.length; i++){%>
+                  <option value="<%=code_data.policy_target_code[i].code_detail%>"><%=code_data.policy_target_code[i].code_detail_name%></option>
                 <%}%>
               </select>
           </div>
           <label>주관 기관</label>
           <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_institution_code" id="policy_institution_code">
-              <%for(var i=0; i<institution.length; i++){%>
-                <option value="<%=institution[i].policy_institution_code%>"><%=institution[i].policy_institution_name%></option>
+              <%for(var i=0; i<code_data.policy_institution_code.length; i++){%>
+                <option value="<%=code_data.policy_institution_code[i].code_detail%>"><%=code_data.policy_institution_code[i].code_detail_name%></option>
               <%}%>
             </select>
           </div>
@@ -65,11 +65,11 @@
       <br>
       <div class="ui form">
         <div class="inline fields">
-          <label>접수 시작일</label>
+          <label>접수 시작</label>
           <div class="four wide field">
             <input type="date" name="application_start_date" id="policy_application_start_date">
           </div>
-          <label>접수 마감일</label>
+          <label>접수 마감</label>
           <div class="four wide field">
             <input type="date" name="application_end_date" id="policy_application_end_date">
           </div>
@@ -81,16 +81,16 @@
           <label>정책 분야</label>
           <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_field_code" id="policy_field_code">
-              <%for(var i=0; i<field.length; i++){%>
-                <option value="<%=field[i].policy_field_code%>"><%=field[i].policy_field_name%></option>
+              <%for(var i=0; i<code_data.policy_field_code.length; i++){%>
+                <option value="<%=code_data.policy_field_code[i].code_detail%>"><%=code_data.policy_field_code[i].code_detail_name%></option>
               <%}%>
             </select>
           </div>
           <label>정책 성격</label>
           <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_character_code" id="policy_character_code">
-              <%for(var i=0; i<character.length; i++){%>
-                <option value="<%=character[i].policy_character_code%>"><%=character[i].policy_character_name%></option>
+              <%for(var i=0; i<code_data.policy_character_code.length; i++){%>
+                <option value="<%=code_data.policy_character_code[i].code_detail%>"><%=code_data.policy_character_code[i].code_detail_name%></option>
               <%}%>
             </select>
           </div>
@@ -132,7 +132,7 @@
           <button class="ui button" type="submit" onclick="return btn()">등록</button>
           <script>
             function btn(){
-                if (!confirm("회원 등록 하시겠습니까??")) {
+                if (!confirm("정책 등록 하시겠습니까??")) {
                     alert("취소 하였습니다.");
                     return false;
                 } else {

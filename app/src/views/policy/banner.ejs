@@ -41,7 +41,16 @@
                     <td><%= `${banner[i].ins_date.getFullYear()}` + `-`+ `${banner[i].ins_date.getMonth()+1}` + `-`+ `${banner[i].ins_date.getDate()}`%></td>
                     <td><%= `${banner[i].upd_date.getFullYear()}` + `-`+ `${banner[i].upd_date.getMonth()+1}` + `-`+ `${banner[i].upd_date.getDate()}`%></td>
                     <!-- <td><a href="/admin/policy/banner/<%= banner[i].id %>/edit">수정</a></td> -->
-                    <td><a href="/admin/policy/banner/delete/<%= banner[i].board_idx %>">삭제</a></td>
+                    <td><a href="/admin/policy/banner/delete/<%= banner[i].board_idx %>" onclick="return delBan()">삭제</a></td>
+                    <script>
+                      function delBan(){
+                        if(confirm("정말 삭제하시겠습니까?")){
+                          return true;
+                        }else{
+                          return false;
+                        }
+                      }
+                    </script>
                 </tr>
             <% } %>
         </tbody>
@@ -50,17 +59,23 @@
     <div class="pagename">배너 등록</div>
     <form action="/admin/policy/banner" method="post" enctype="multipart/form-data">
         <div class="ui form">
-            <div class="field">
-                <label>제목</label>
+            <div class="inline fields">
+              <label>제목</label>
+              <div class="four wide field">
                 <input type="text" name="name" id="banner_id" placeholder="제목을 입력하세요">
-            </div>
-            <div class="field">
-                <label>이미지</label>
-                <input type="file" name="imgFile" id="banner_imgFile">
-            </div>
-            <div class="field">
-                <label>링크</label>
+              </div>
+              <label>링크</label>
+              <div class="four wide field">
                 <input type="text" name="link" id="banner_link" placeholder="링크를 입력하세요">
+              </div>
+            </div>
+        </div>
+        <div class="ui form">
+            <div class="inline fields">
+                <label>사진</label>
+                <div class="four wide field">
+                    <input type="file" name="imgFile" id="banner_imgFile">
+                </div>
             </div>
         </div>
         <button class="ui button" type="submit" onclick="return btn()">등록</button>

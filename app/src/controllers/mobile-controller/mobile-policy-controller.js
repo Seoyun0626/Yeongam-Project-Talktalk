@@ -33,3 +33,12 @@ exports.getAllPolicyForSearch = async function(req, res) {
       console.log('policy-controller getAllPolicyForSearch:'+error);
     }
   };
+
+exports.getBannerData = async function(req, res) {
+  try{
+    var result = await policy_service.getBannerData(req);
+    return result;
+  } catch(error) {
+    console.log('mobile-policy-controller fetchBannerData:'+error);
+  }
+};

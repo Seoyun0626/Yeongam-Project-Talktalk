@@ -13,11 +13,19 @@ try{
   console.log('login-service SignIn db getConnection');
   var userid = req.body.userid; //req.body.id -> req.body.userid
   var password = req.body.password;
-  console.log('login-serive SignIn - userid', userid); // kth log
-  console.log('login-serive SignIn - password', password); // kth log
-  var query = "SELECT userid, password, salt, name FROM webdb.tb_user where userid='" + userid + "' ;";
+  // console.log('login-serive SignIn - userid', userid); // kth log
+  // console.log('login-serive SignIn - password', password); // kth log
+  var query = "SELECT userid, password, salt, name, user_role FROM webdb.tb_user where userid='" + userid + "' ;";
   var rows = await conn.query(query); // 쿼리 실행 
   if (rows[0]) {
+      // 관리자만 접속 가능하도록 처리
+      if(rows[0].user_role != 0) {
+        json.code = 100;
+        json.msg = "관리자만 접속 가능합니다.";
+        json.data = {};
+        console.log('login-service SignIn - 관리자만 접속 가능합니다.');
+        return json;
+      }
       //저장된 password 와 hash password 가 같은지를 체크하여 로그인 성공, 실패 처리 
       var userSalt = rows[0].salt;
       var userPass = rows[0].password;
@@ -51,6 +59,7 @@ try{
 }
 
 };
+
 
 
 
@@ -106,7 +115,7 @@ exports.signUp = async function(req, res) {
 
     
 
-/*
+
 //로그인 체크
 exports.login_check = async function(req, res) {
   var resultcode = 0;
@@ -139,6 +148,11 @@ exports.login_check = async function(req, res) {
   }
 };
 
+
+
+
+
+/*
 exports.date_check = async function(req, res) {
   var resultcode = 0;
   var conn;

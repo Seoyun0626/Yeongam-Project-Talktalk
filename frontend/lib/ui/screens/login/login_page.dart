@@ -82,10 +82,10 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                color: Colors.black),
-            onPressed: () => Navigator.pop(context),
-          ),
+              icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                  color: Colors.black),
+              onPressed: () => Navigator.pushAndRemoveUntil(
+                  context, routeFade(page: const HomePage()), (_) => false)),
         ),
         body: SafeArea(
           child: Padding(

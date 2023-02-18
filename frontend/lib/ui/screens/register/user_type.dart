@@ -3,11 +3,8 @@ import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/screens/register//terms_agree.dart';
 import 'package:login/ui/screens/register/info_input.dart';
-import 'package:login/ui/screens/register/info_parents.dart';
-
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
-
 import 'package:login/ui/helpers/animation_route.dart';
 
 // class typeCodes {

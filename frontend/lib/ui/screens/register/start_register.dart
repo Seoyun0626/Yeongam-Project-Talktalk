@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/login/login_page.dart';
-import 'package:login/ui/screens/register//info_first.dart';
 import 'package:login/ui/screens/register/terms_agree.dart';
 import 'package:login/ui/screens/register/user_type.dart';
 import 'package:login/ui/themes/theme_colors.dart';

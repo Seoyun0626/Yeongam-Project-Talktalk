@@ -42,7 +42,16 @@
                 <td><%= `${posts[i].application_start_date.getFullYear()}` + `-`+ `${posts[i].application_start_date.getMonth()+1}` + `-`+ `${posts[i].application_start_date.getDate()}`%></td>
                 <td><%= `${posts[i].application_end_date.getFullYear()}` + `-`+ `${posts[i].application_end_date.getMonth()+1}` + `-`+ `${posts[i].application_end_date.getDate()}`%></td>
                 <td><a href="/admin/policy/update/<%=posts[i].board_idx %>">수정</a></td>
-                <td><a href="/admin/policy/delete/<%= posts[i].board_idx %>">삭제</a></td>
+                <td><a href="/admin/policy/delete/<%= posts[i].board_idx %>" onclick="return delPol()">삭제</a></td>
+                <script>
+                  function delPol(){
+                    if(confirm("정말 삭제하시겠습니까?")){
+                      return true;
+                    }else{
+                      return false;
+                    }
+                  }
+                </script>
               </tr>
             <!-- </form> -->
             <% } %>
@@ -54,11 +63,20 @@
     <div id="policy_paging">
       <div class="ui pagination menu">
         <!-- <a class="icon item" href="/admin/policy/show/?page=1">처음</a> -->
-        <a class="icon item" href="/admin/policy/show/?page=<%=page-1 %>">이전</a>
-        <% for(var i=1; i<=totalPage; i++){ %>
+        <% var prev = page-1; %>
+        <% if(prev < 1){ prev = 1; } %>
+        <a class="icon item" href="/admin/policy/show/?page=<%=prev %>">이전</a>
+        <!-- 현재 페이지 기준 5페이지만 보여주기 -->
+        <% var startPage = page-3; %>
+        <% var endPage = page+3; %>
+        <% if(startPage < 1){ startPage = 1; } %>
+        <% if(endPage > totalPage){ endPage = totalPage; } %>
+        <% for(var i=startPage; i<=endPage; i++){ %>
           <a class="item" href="/admin/policy/show/?page=<%=i %>"><%=i %></a>
         <% } %>
-        <a class="icon item" href="/admin/policy/show/?page=<%=page+1 %>">다음</a>
+        <% var next = page+1; %>
+        <% if(next > totalPage){ next = totalPage; } %>
+        <a class="icon item" href="/admin/policy/show/?page=<%=next %>">다음</a>
         <!-- <a class="icon item" href="/admin/policy/show/?page=<%=totalPage %>">끝</a> -->
       </div>
     </div>
