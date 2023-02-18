@@ -23,6 +23,7 @@
         <table id="code_detail_table">
             <thead>
                 <tr>
+                    <!-- <th>공통 코드</th> -->
                     <th>코드</th>
                     <th>코드명</th>
                     <th>코드설명</th>
@@ -36,12 +37,14 @@
                         <td><%=code_data[i].code_detail%></td>
                         <td><%=code_data[i].code_detail_name%> </td>
                         <td><%=code_data[i].code_detail_desc%> </td>
-                        <td><%=code_data[i].code_detail_yn%> </td>
-                        <td><a href="/admin/codeData/detail/<%=code_data[i].code_detail %>">수정</a></td>
+                        <td><%=code_data[i].code_detail_use_yn%> </td>
+                        <td><a href="/admin/codeData/detail/?<%=params%>:<%=code_data[i].code_detail %>">수정</a></td>
                     </tr>  
                 <% } %>
             </tbody>
         </table>
+        <br>
+        <button id="code_detail_regist_btn" class="ui button">등록</button>
     </div>
 </section>
 </div>

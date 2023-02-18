@@ -6,7 +6,6 @@ var code_controller = require("../../controllers/common-controller/codeData-cont
 router.get('/show', async function (req, res) {
     try{
         var code_data = await code_controller.getCodeData(req, res);
-        // console.log(code_data);
         res.render('codeData/show', {
             code_data:code_data,
         });
@@ -24,6 +23,7 @@ router.get('/detail/:id', async function (req, res) {
         // console.log(code_data);
         res.render('codeData/detail', {
             code_data:code_data,
+            params:req.params.id,
             // posts:result,
             // user:req.user
         });
