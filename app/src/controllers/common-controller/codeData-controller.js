@@ -27,6 +27,17 @@ exports.getCodeData = async function(req, res) {
     try{
       //console.log( req.body);
       var result = await code_service.getCodeData(req);
+      // console.log(result.code_data_name[0]);
+      return result;
+    } catch(error) {
+      console.log('code-controller getUserData:'+error);
+    }
+  };
+
+exports.getCodedetail = async function(req, res) {
+    try{
+      //console.log( req.body);
+      var result = await code_service.getCodedetail(req);
       return result;
     } catch(error) {
       console.log('code-controller getUserData:'+error);

@@ -58,6 +58,8 @@ create table webdb.`tb_common_code`(
   `code` varchar(2) NOT NULL,
   `code_name` varchar(30) NOT NULL,
   `code_english_name` varchar(30) NULL,
+  `code_desc` varchar(100) NULL,
+  `use_yn` varchar(1) NOT NULL DEFAULT 'Y',
   PRIMARY KEY (`code`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 공통 코드 유형
@@ -76,6 +78,8 @@ create table webdb.`tb_common_code_detail`(
   `code` varchar(2) NOT NULL,
   `code_detail` varchar(2) NOT NULL,
   `code_detail_name` varchar(30) NOT NULL,
+  `code_detail_desc` varchar(100) NULL,
+  `use_yn` varchar(1) NOT NULL DEFAULT 'Y',
   PRIMARY KEY (`code`,`code_detail`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 공통 코드 유형

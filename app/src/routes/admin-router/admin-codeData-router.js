@@ -1,16 +1,34 @@
 const path = require("path");
 var express = require("express");
 var router = express.Router();
-var codeData_controller = require("../../controllers/common-controller/codeData-controller");
+var code_controller = require("../../controllers/common-controller/codeData-controller");
 
 router.get('/show', async function (req, res) {
     try{
-        // var result = await codeData_controller.fetchData(req,res);
+        var code_data = await code_controller.getCodeData(req, res);
+        // console.log(code_data);
         res.render('codeData/show', {
+            code_data:code_data,
+        });
+    } catch(error) {
+        console.log('policy-router show error:'+error);
+    }
+  }
+);
+
+router.get('/detail/:id', async function (req, res) {
+    try{
+        // console.log(req.params.id);
+        var code_data = await code_controller.getCodedetail(req, res);
+        // var result = await code_controller.fetchData(req,res);
+        // console.log(code_data);
+        res.render('codeData/detail', {
+            code_data:code_data,
             // posts:result,
             // user:req.user
         });
-    } catch(error) {
+    }
+    catch(error) {
         console.log('policy-router show error:'+error);
     }
   }

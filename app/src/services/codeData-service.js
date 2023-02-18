@@ -99,8 +99,25 @@ exports.getCodeData = async function(req, res) {
       json.policy_field_code = await conn.query(query);
       var query = "SELECT b.code_detail, b.code_detail_name FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 9";
       json.policy_character_code = await conn.query(query);
+      var query = "select code,code_name from webdb.tb_common_code;"
+      json.code_data_name = await conn.query(query);
       return json;
     } catch (error) {
         console.log('codeData-controller getCodeData error:'+error);
     }
+};
+
+exports.getCodedetail = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var code = req.params.id;
+    var query = "SELECT code_detail,code_detail_name FROM webdb.tb_common_code_detail where code = '" + code + "'";
+    var rows = await conn.query(query); // 쿼리 실행
+    // console.log(rows[1].code_detail);
+    // console.log(rows);
+    return rows;
+  }
+  catch(error){
+    console.log('codeData-controller getCodedetail error:'+error);
+  }
 };
