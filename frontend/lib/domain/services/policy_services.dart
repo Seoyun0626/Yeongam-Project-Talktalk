@@ -23,7 +23,19 @@ class PolicyServices {
         Uri.parse('${Environment.urlApi}/policy/get-all-policy'),
         headers:
             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
-    print('policy_services');
+    // print('policy_services');
+    return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+  }
+
+  // 코드 데이터
+  Future getCodeData() async {
+    final resp = await http.get(
+        Uri.parse('${Environment.urlApi}/policy/get-code-data'),
+        headers:
+            _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
+    print('policy_services : institution code');
+    print(resp.body);
+
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
 

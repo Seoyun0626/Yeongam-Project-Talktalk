@@ -154,10 +154,10 @@ exports.upload = async function(req, res) {
             resultcode = 3;
             return resultcode;
         }
-        if(content == null || content == undefined || content == '') {
-            resultcode = 4;
-            return resultcode;
-        }
+        // if(content == null || content == undefined || content == '') {
+        //     resultcode = 4;
+        //     return resultcode;
+        // }
         if(application_start_date == null || application_start_date == undefined || application_start_date == '') {
             resultcode = 5;
             return resultcode;
@@ -166,10 +166,10 @@ exports.upload = async function(req, res) {
             resultcode = 6;
             return resultcode;
         }
-        if(content == null || content == undefined || content == '') {
-            resultcode = 7;
-            return resultcode;
-        }
+        // if(content == null || content == undefined || content == '') {
+        //     resultcode = 7;
+        //     return resultcode;
+        // }
         var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, description, fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code) VALUES "
           + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "');";
         var rows = await conn.query(query); // 쿼리 실행
@@ -320,7 +320,7 @@ exports.getBannerData = async function(req, res) {
         console.log('policy-service getBannerData db getConnection');
         var query = "SELECT banner_name, banner_img, banner_link FROM webdb.tb_banner;";
         var rows = await conn.query(query); // 쿼리 실행
-        console.log(rows);
+        // console.log(rows);
         return rows;
     } catch(error) {
         console.log('policy-service fetchBannerData:'+error);

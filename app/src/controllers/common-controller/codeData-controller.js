@@ -25,7 +25,7 @@ exports.fetchPolicyData = async function(req, res) {
 
 exports.getCodeData = async function(req, res) {
     try{
-      //console.log( req.body);
+      console.log( req.body);
       var result = await code_service.getCodeData(req);
       // console.log(result.code_data_name[0]);
       return result;

@@ -22,7 +22,6 @@ CREATE TABLE webdb.`tb_user` (
   `sex_class_code` varchar(1) NULL,
   `emd_class_code` varchar(2) NULL,
   `user_email` varchar(50) NULL,
-  `terms_agree` varchar(2) NOT NULL DEFAULT 'x',
   `salt` varchar(255) NOT NULL,
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
