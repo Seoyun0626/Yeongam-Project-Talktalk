@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/domain/models/response/response_policy.dart';
+import 'package:login/domain/services/code_service.dart';
 import 'package:login/domain/services/policy_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/login/login_page.dart';
@@ -436,9 +439,24 @@ class _ListViewPolicy extends StatelessWidget {
     final String startDate = '$startDateYear.$startDateMonth.$startDateDay';
     final String endDate = '$endDateYear.$endDateMonth.$endDateDay';
 
-    final String policy_institution_code = policies.policy_institution_code;
+    // 코드 받아오기
+    // String name;
+    // String policy_institution_code = policies.policy_institution_code;
+    // print(policy_institution_code);
 
-    policyService.getCodeData();
+    // Future<String> getCodeData() async {
+    //   var data = await codeService.getCodeData();
+    //   // print(data); // 잘 나옴
+    //   return data;
+    // }
+
+    // Test() async {
+    //   name = await getCodeData();
+    //   // print('dd' + name);
+    //   return name; // Instance of  'Future<dynamic>'
+    // }
+
+    // print(Test());
 
     return Padding(
         padding: const EdgeInsets.fromLTRB(3, 3, 3, 0), // 카드 바깥쪽
@@ -476,7 +494,8 @@ class _ListViewPolicy extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      policy_institution_code,
+                                      // policyCodeData.toString(),
+                                      policies.policy_institution_code,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
@@ -521,6 +540,7 @@ class _ListViewPolicy extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              // 스크랩
                               IconButton(
                                 icon: const Icon(
                                   Icons.bookmark_border,
@@ -529,8 +549,8 @@ class _ListViewPolicy extends StatelessWidget {
                                 ),
                                 onPressed: () {},
                               ),
-                              const Text('0',
-                                  style: TextStyle(
+                              Text(policies.scrap.toString(),
+                                  style: const TextStyle(
                                       color: ThemeColors.basic, fontSize: 10))
                             ],
                           ),

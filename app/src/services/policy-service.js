@@ -268,6 +268,7 @@ exports.getAllPolicy = async function(req, res) {
         // console.log(rows[0]);
         // console.log(rows[1]);
         // console.log(rows[2]); 
+        console.log(rows);
         return rows;
     } catch(error) {
         console.log('policy-service getAllPolicy:'+error);

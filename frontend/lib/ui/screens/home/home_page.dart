@@ -45,21 +45,23 @@ class _HomePageState extends State<HomePage> {
             ),
             actions: [
               IconButton(
-                icon: const Icon(
-                  Icons.perm_identity,
-                  size: 30,
-                  color: ThemeColors.basic,
-                ),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
-                    )),
-                // onPressed: () => Navigator.push(
-                //   context, routeSlide(page: const LoginPage())),
+                  icon: const Icon(
+                    Icons.perm_identity,
+                    size: 30,
+                    color: ThemeColors.basic,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ));
+                  }
+                  // onPressed: () => Navigator.push(
+                  //   context, routeSlide(page: const LoginPage())),
 
-                // }
-              ),
+                  // }
+                  ),
               IconButton(
                 icon: const Icon(Icons.search,
                     size: 30, color: ThemeColors.basic),

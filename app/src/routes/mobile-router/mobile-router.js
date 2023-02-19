@@ -3,7 +3,7 @@ var express = require("express");
 var router = express.Router();
 var mobile_login_controller = require("../../controllers/mobile-controller/mobile-login-controller");
 var mobile_policy_controller = require("../../controllers/mobile-controller/mobile-policy-controller");
-var codeData_controller = require("../../controllers/common-controller/codeData-controller")
+var mobile_codeData_controller = require("../../controllers/mobile-controller/mobile-codeData-controller")
 // const routerUser = require("./src/routes/mobile-router/mobile-router");
 
 const passport = require('passport');
@@ -268,7 +268,7 @@ router.get('/policy/get-all-policy', async function(req, res){
 
 router.get('/policy/get-code-data', async function(req, res){
   try{
-    var result = await codeData_controller.getCodeData(req, res);
+    var result = await mobile_codeData_controller.getCodeData(req, res);
     console.log(result);
     res.json({
       resp:true,
