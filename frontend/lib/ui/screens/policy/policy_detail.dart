@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:login/ui/widgets/widgets.dart';
 
 class DetailPolicyPage extends StatelessWidget {
   const DetailPolicyPage(this.policies, {Key? key}) : super(key: key);
@@ -70,12 +71,12 @@ class DetailPolicyPage extends StatelessWidget {
                   ),
                 ]),
               ),
-              // Container(
-              //     // 주최측
-              //     padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
-              //     width: size,
-              //     color: Colors.white,
-              //     child: Text(policySupervison)),
+              Container(
+                  // 주최측
+                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
+                  width: size,
+                  color: Colors.white,
+                  child: Text(policySupervison)),
               Container(
                   // 정책 이름
                   padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
@@ -170,7 +171,7 @@ class DetailPolicyPage extends StatelessWidget {
                   )),
               Container(
                 // 상세내용
-                padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                 width: size,
                 color: Colors.white,
                 child: Html(
@@ -183,6 +184,17 @@ class DetailPolicyPage extends StatelessWidget {
                   },
                 ),
               ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
+                width: size,
+                color: Colors.white,
+                child: BtnNaru(
+                  text: '신청하기',
+                  colorText: Colors.black,
+                  width: size,
+                  onPressed: () {},
+                ),
+              )
             ],
           )))),
         ));

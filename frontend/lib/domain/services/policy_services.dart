@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:login/data/env/env.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/ui/helpers/debouncer.dart';
+// import 'package:login/ui/helpers/response_code.dart';
 
 class PolicyServices {
   final debouncer = DeBouncer(duration: const Duration(milliseconds: 800));
@@ -24,6 +26,7 @@ class PolicyServices {
         headers:
             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
     // print('policy_services');
+    print(resp.body);
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
 
@@ -33,10 +36,12 @@ class PolicyServices {
         Uri.parse('${Environment.urlApi}/policy/get-code-data'),
         headers:
             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
-    print('policy_services : institution code');
-    print(resp.body);
+    print('policy_services getCodeData');
+    // print(resp.body);
+    Map<String, dynamic> data = json.decode(resp.body);
+    // List result = data['policies'] as List;
 
-    return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+    return data; //ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
 
   void searchPolicy(String searchValue) async {
