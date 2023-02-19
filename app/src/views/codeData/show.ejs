@@ -40,12 +40,13 @@
             <tr>
               <th>코드</th>
               <th>코드명</th>
+              <th>영문명</th>
               <th>코드설명</th>
               <!-- <th>코드값설명</th> -->
               <!-- <th>순서</th> -->
-              <!-- <th>사용여부</th> -->
-              <th>상세 코드 조회</th>
-              <th>수정</th>
+              <th>사용여부</th>
+              <th>상세 코드</th>
+              <!-- <th>수정</th> -->
             </tr>
           </thead>
           <tbody>
@@ -53,9 +54,11 @@
               <tr>
                 <td><%=code_data.code_data_name[i].code%></td>
                 <td><%=code_data.code_data_name[i].code_name%> </td>
+                <td><%=code_data.code_data_name[i].code_english_name%> </td>
                 <td><%=code_data.code_data_name[i].code_desc%> </td>
-                <td><a href="/admin/codeData/detail/<%=code_data.code_data_name[i].code %>">조회</a></td>
-                <td><a href="/admin/codeData/update/<%=code_data.code_data_name[i].code %>">수정</a></td>
+                <td><%=code_data.code_data_name[i].code_use_yn%> </td>
+                <td><a href="/admin/codeData/detail/update/<%=code_data.code_data_name[i].code %>">조회</a></td>
+                <!-- <td><a href="/admin/codeData/update/<%=code_data.code_data_name[i].code %>">수정</a></td> -->
               </tr>  
             <% } %>
         </table>
