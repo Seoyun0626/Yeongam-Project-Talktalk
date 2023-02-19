@@ -1,5 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login/domain/blocs/auth/auth_bloc.dart';
+import 'package:login/domain/blocs/user/user_bloc.dart';
+import 'package:login/domain/models/response/response_policy.dart';
+import 'package:login/ui/screens/user/my_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/services/banner_services.dart';
@@ -17,11 +22,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late bool loginSuccessState = false;
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
-    // final userBloc = BlocProvider.of<UserBloc>(context);
-    // final authBloc = BlocProvider.of<AuthBloc>(context);
+    final size = MediaQuery.of(context).size;
+    final userBloc = BlocProvider.of<UserBloc>(context);
+    final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -54,25 +60,34 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
+                          builder: (context) => const LoginPage(), // MyPage
                         ));
-                  }
-                  // onPressed: () => Navigator.push(
-                  //   context, routeSlide(page: const LoginPage())),
 
-                  // }
-                  ),
-              IconButton(
-                icon: const Icon(Icons.search,
-                    size: 30, color: ThemeColors.basic),
-                // onPressed: () => Navigator.push(
-                //     context, routeSlide(page: const SearchPage())),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SearchPage(),
-                    )),
-              )
+                    // if (loginSuccessState == true) {
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const MyPage(),
+                    //       ));
+                    // } else if (loginSuccessState == false) {
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const LoginPage(),
+                    //       ));
+                    // }
+                  }),
+              // IconButton(
+              //   icon: const Icon(Icons.search,
+              //       size: 30, color: ThemeColors.basic),
+              //   // onPressed: () => Navigator.push(
+              //   //     context, routeSlide(page: const SearchPage())),
+              //   onPressed: () => Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => const SearchPage(),
+              //       )),
+              // )
             ],
             backgroundColor: ThemeColors.primary,
             centerTitle: false,
@@ -147,18 +162,18 @@ class _HomePageState extends State<HomePage> {
                   livePopularPost(),
 
                   // 로그아웃 버튼
-                  // BtnNaru(
-                  //   text: '로그아웃',
-                  //   colorText: Colors.black,
-                  //   width: size.width,
-                  //   onPressed: () {
-                  //     authBloc.add(OnLogOutEvent());
-                  //     userBloc.add(OnLogOutUser());
-                  //     Navigator.pushAndRemoveUntil(context,
-                  //         routeSlide(page: const HomePage()), (_) => false);
-                  //   },
-                  // ),
-                  // const SizedBox(height: 30.0),
+                  BtnNaru(
+                    text: '로그아웃',
+                    colorText: Colors.black,
+                    width: size.width,
+                    onPressed: () {
+                      authBloc.add(OnLogOutEvent());
+                      userBloc.add(OnLogOutUser());
+                      Navigator.pushAndRemoveUntil(context,
+                          routeSlide(page: const HomePage()), (_) => false);
+                    },
+                  ),
+                  const SizedBox(height: 30.0),
                 ],
               ),
             ),
@@ -425,63 +440,6 @@ class livePopularPost extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_6,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('가정양육수당 지원(월~20만원)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_6,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('가정양육수당 지원(월~20만원)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_6,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('가정양육수당 지원(월~20만원)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          )
         ]));
   }
 }

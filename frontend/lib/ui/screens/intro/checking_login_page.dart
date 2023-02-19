@@ -53,7 +53,7 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
       listener: (context, state) {
         if (state is LogOut) {
           Navigator.pushAndRemoveUntil(
-              context, routeSlide(page: const HomePage()), (_) => false);
+              context, routeSlide(page: const LoginPage()), (_) => false);
         } else if (state is SuccessAuthentication) {
           userBloc.add(OnGetUserAuthenticationEvent());
           Navigator.pushAndRemoveUntil(
