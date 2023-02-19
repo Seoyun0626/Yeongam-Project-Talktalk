@@ -71,3 +71,59 @@ exports.getCodedetail = async function(req, res) {
   }
 };
 
+
+exports.getCodedetail_update = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var code = req.params.id.split(":")[1];
+    var detail = req.params.id.split(":")[2];
+    var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn from webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = '" + code + "' and b.code_detail = '" + detail + "'";
+    var rows = await conn.query(query); // 쿼리 실행
+    // console.log(rows);
+    return rows;
+  }
+  catch(error){
+    console.log('codeData-controller getCodedetail_update error:'+error);
+  }
+};
+
+exports.updateCodeDetail = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var code = req.params.id.split(":")[1];
+    var detail = req.params.id.split(":")[2];
+    // console.log(req.params.id);
+    var code_detail_name = req.body.code_detail_name;
+    var code_detail_desc = req.body.code_detail_desc;
+    var code_detail_use_yn = req.body.code_detail_use_yn;
+    var query = "update webdb.tb_common_code_detail set code_detail_name = '" + code_detail_name + "', code_detail_desc = '" + code_detail_desc + "', code_detail_use_yn = '" + code_detail_use_yn + "' where code = '" + code + "' and code_detail = '" + detail + "'";
+    // console.log(query);
+    var rows = await conn.query(query); // 쿼리 실행
+    // console.log(rows);
+    return rows;
+  } catch(error){
+    console.log('codeData-controller updateCodeDetail error:'+error);
+    }
+  };
+
+exports.insertCodeDetail = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var code = req.params.id.split(":")[1];
+    var code_detail_name = req.body.code_detail_name;
+    var code_detail_desc = req.body.code_detail_desc;
+    var code_detail_use_yn = req.body.code_detail_use_yn;
+    // code_detail 최댓값 받아 오기
+    var query = "select max(code_detail) from webdb.tb_common_code_detail where code = '" + code + "'";
+    var max_codeDetail = await conn.query(query);
+    max_codeDetail = Number(max_codeDetail[0]['max(code_detail)']) + 1;
+    // console.log(max_codeDetail);
+    var query = "insert into webdb.tb_common_code_detail (code, code_detail, code_detail_name, code_detail_desc, code_detail_use_yn) values ('" + code + "', '" + max_codeDetail + "', '" + code_detail_name + "', '" + code_detail_desc + "', '" + code_detail_use_yn + "')";    
+    // console.log(query);
+    var rows = await conn.query(query); // 쿼리 실행
+    // console.log(rows);
+    return rows;
+  } catch(error){
+    console.log('codeData-controller insertCodeDetail error:'+error);
+    }
+  };
