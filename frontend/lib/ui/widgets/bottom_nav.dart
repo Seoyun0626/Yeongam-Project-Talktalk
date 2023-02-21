@@ -41,7 +41,10 @@ class BottomNavigation extends StatelessWidget {
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const PolicyListPage('')),
+                      builder: (context) => const PolicyListPage(
+                            categoryName: '',
+                            categoryValue: '',
+                          )),
                   (_) => false)),
           _ItemButtom(
               i: 3,

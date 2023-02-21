@@ -268,7 +268,7 @@ exports.getAllPolicy = async function(req, res) {
         // console.log(rows[0]);
         // console.log(rows[1]);
         // console.log(rows[2]); 
-        console.log(rows);
+        // console.log(rows);
         return rows;
     } catch(error) {
         console.log('policy-service getAllPolicy:'+error);
@@ -276,6 +276,8 @@ exports.getAllPolicy = async function(req, res) {
         conn.release();
     }
 }
+
+
 
 exports.getSearchPolicy = async function(req, res) {
     console.log('policy-service getSearchPolicy : ',req.params.searchValue);
@@ -286,6 +288,23 @@ exports.getSearchPolicy = async function(req, res) {
         conn = await db.getConnection();
         console.log('policy-service getSearchPolicy db getConnecton');
         var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE" + "'"+searchValue+"'" + ";"; 
+        var rows =  await conn.query(query); // 쿼리 실행
+        console.log('policy-service getSerachPolicy success');
+        return rows;
+    } catch(error){
+        console.log('policy-service getSearchPolicy:'+error);
+    } finally {
+        conn.release();
+    }
+}
+exports.getPolicyBySelect = async function(req, res){
+    var conn;
+    var code = req.params.code;
+    console.log('policy-service getPolicyBySelect : ',code);
+    try {
+        conn = await db.getConnection();
+        console.log('policy-service getSearchPolicy db getConnecton');
+        var query = "SELECT * FROM webdb.tb_policy WHERE policy_field_code = " + "'"+code+"'" + ";"; 
         var rows =  await conn.query(query); // 쿼리 실행
         console.log('policy-service getSerachPolicy success');
         return rows;
