@@ -15,6 +15,25 @@ router.get('/show', async function (req, res) {
   }
 );
 
+router.get('/update/:id', async function (req, res) {
+    try{
+        // console.log(req.params.id);
+        var code_data = await code_controller.getCodeData_update(req, res);
+        // var result = await code_controller.fetchData(req,res);
+        // console.log(code_data);
+        res.render('codeData/update', {
+            code_data:code_data,
+            params:req.params.id,
+            // posts:result,
+            // user:req.user
+        });
+    }
+    catch(error) {
+        console.log('policy-router show error:'+error);
+    }
+    }
+);
+
 router.get('/detail/update/:id', async function (req, res) {
     try{
         // console.log(req.params.id);

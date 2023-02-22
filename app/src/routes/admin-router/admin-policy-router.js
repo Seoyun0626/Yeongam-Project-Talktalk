@@ -70,11 +70,20 @@ router.post('/upload', async function (req, res) {
 
 router.get('/update/:id', async function(req, res){
     try{
-      var result = await policy_controller.fetchpolicyByidx(req, res);
-      var code_data = await code_controller.getCodeData(req, res);
-      res.render('policy/policy-update', {
-        post:result[0],
-        code_data:code_data
+        var result = await policy_controller.fetchpolicyByidx(req, res);
+        // 접수 기간
+        var start_month = result[0].application_start_date.getMonth()+1;
+        if(start_month < 10) start_month = '0'+start_month;
+        var start_date = result[0].application_start_date.getFullYear()+'-'+start_month+'-'+result[0].application_start_date.getDate();
+        var end_month = result[0].application_end_date.getMonth()+1;
+        if(end_month < 10) end_month = '0'+end_month;
+        var end_date = result[0].application_end_date.getFullYear()+'-'+end_month+'-'+result[0].application_end_date.getDate();
+        var code_data = await code_controller.getCodeData(req, res);
+        res.render('policy/policy-update', {
+            post:result[0],
+            code_data:code_data,
+            start_date:start_date,
+            end_date:end_date
     });
     } catch(error) {
       console.log('policy-router update error:'+error);

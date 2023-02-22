@@ -73,3 +73,13 @@ exports.insertCodeDetail = async function(req, res) {
     console.log('code-controller getUserData:'+error);
   }
 };
+
+exports.getCodeData_update = async function(req, res) {
+  try{
+    //console.log( req.body);
+    var result = await code_service.getCodeData_update(req);
+    return result;
+  } catch(error) {
+    console.log('code-controller getUserData:'+error);
+  }
+};

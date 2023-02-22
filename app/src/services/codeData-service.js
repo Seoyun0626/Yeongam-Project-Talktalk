@@ -127,3 +127,16 @@ exports.insertCodeDetail = async function(req, res) {
     console.log('codeData-controller insertCodeDetail error:'+error);
     }
   };
+
+exports.getCodeData_update = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var code = req.params.id;
+    var query = "select code,code_name,code_english_name, code_desc, code_use_yn from webdb.tb_common_code where code = '" + code + "'";
+    var rows = await conn.query(query); // 쿼리 실행
+    // console.log(rows);
+    return rows;
+  } catch(error){
+    console.log('codeData-controller getCodeData_update error:'+error);
+    }
+  };
