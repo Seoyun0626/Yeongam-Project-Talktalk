@@ -9,7 +9,7 @@ class AuthServices {
     final resp = await http.post(Uri.parse('${Environment.urlApi}/login'),
         headers: {'Accept': 'application/json'},
         body: {'userid': userid, 'password': password});
-    print('auth_services login');
+    // print('auth_services login');
     // print(resp.body);
 
     return ResponseLogin.fromJson(jsonDecode(resp.body));

@@ -302,10 +302,10 @@ exports.getPolicyBySelect = async function(req, res){
         console.log('policy-service getSearchPolicy db getConnecton');
         var query = "SELECT * FROM webdb.tb_policy WHERE policy_field_code = " + "'"+code+"'" + ";"; 
         var rows =  await conn.query(query); // 쿼리 실행
-        console.log('policy-service getSerachPolicy success');
+        console.log('policy-service getSelectPolicy success');
         return rows;
     } catch(error){
-        console.log('policy-service getSearchPolicy:'+error);
+        console.log('policy-service getSelectPolicy:'+error);
     } finally {
         conn.release();
     }

@@ -16,171 +16,178 @@ import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  late bool loginSuccessState = false;
   @override
   Widget build(BuildContext context) {
+    late bool isLogin = false;
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
     final authBloc = BlocProvider.of<AuthBloc>(context);
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(
-            titleSpacing: 0,
-            title: const Text('청소년톡 Talk',
-                style: TextStyle(
-                  color: ThemeColors.basic,
-                  fontFamily: 'KOTRAHOPE',
-                  fontSize: 30,
-                  fontWeight: FontWeight.w300,
-                )),
-            leading: InkWell(
-              // onTap: () => Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const LoginPage(),
-              //     )),
-              child: Image.asset('images/aco.png', height: 70),
-            ),
-            actions: [
-              IconButton(
-                  icon: const Icon(
-                    Icons.perm_identity,
-                    size: 30,
-                    color: ThemeColors.basic,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(), // MyPage
-                        ));
-
-                    // if (loginSuccessState == true) {
-                    //   Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => const MyPage(),
-                    //       ));
-                    // } else if (loginSuccessState == false) {
-                    //   Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => const LoginPage(),
-                    //       ));
-                    // }
-                  }),
-              // IconButton(
-              //   icon: const Icon(Icons.search,
-              //       size: 30, color: ThemeColors.basic),
-              //   // onPressed: () => Navigator.push(
-              //   //     context, routeSlide(page: const SearchPage())),
-              //   onPressed: () => Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => const SearchPage(),
-              //       )),
-              // )
-            ],
-            backgroundColor: ThemeColors.primary,
-            centerTitle: false,
-            elevation: 0.0,
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 배너 슬라이드
-                  FutureBuilder<List<Banners>>(
-                    future: bannerService.getBannerData(),
-                    builder: (_, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Column(
-                          children: const [
-                            ShimmerNaru(),
-                          ],
-                        );
-                      } else {
-                        return CarouselSlider.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: ((context, index, realIndex) =>
-                              BannerSlide(
-                                  policyBanners: snapshot.data![index])),
-                          options: CarouselOptions(
-                            scrollDirection: Axis.horizontal,
-                            height: MediaQuery.of(context).size.height / 4,
-                            enlargeCenterPage: true,
-                            viewportFraction: 1.0,
-                            autoPlay: true,
-                          ),
-                        );
-                      }
-                    },
-                  ),
-
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // buttonSection, // 카테고리 아이콘 메뉴
-                  Container(
-                      padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
-                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-                      child: Column(children: [
-                        Row(children: const [
-                          ImageIcon(
-                            AssetImage("images/icon_check.png"),
-                            color: ThemeColors.darkGreen,
-                            size: 20,
-                          ),
-                          // Image.asset('images/icon_sparkel.png'),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('카테고리별 정책을 확인하세요!',
-                              style: TextStyle(
-                                color: ThemeColors.basic,
-                                fontSize: 19,
-                                fontWeight: FontWeight.w600,
-                              )),
-                        ])
-                      ])),
-
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  CategoryButton(),
-                  livePopularPost(),
-
-                  // 로그아웃 버튼
-                  BtnNaru(
-                    text: '로그아웃',
-                    colorText: Colors.black,
-                    width: size.width,
-                    onPressed: () {
-                      authBloc.add(OnLogOutEvent());
-                      userBloc.add(OnLogOutUser());
-                      Navigator.pushAndRemoveUntil(context,
-                          routeSlide(page: const HomePage()), (_) => false);
-                    },
-                  ),
-                  const SizedBox(height: 30.0),
+    return BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is SuccessAuthentication) {
+            isLogin = true;
+            print(isLogin);
+          } else if (state is LogOut) {
+            isLogin = false;
+            print(isLogin);
+          }
+        },
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+              appBar: AppBar(
+                titleSpacing: 0,
+                title: const Text('청소년톡 Talk',
+                    style: TextStyle(
+                      color: ThemeColors.basic,
+                      fontFamily: 'KOTRAHOPE',
+                      fontSize: 30,
+                      fontWeight: FontWeight.w300,
+                    )),
+                leading: InkWell(
+                  // onTap: () => Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const LoginPage(),
+                  //     )),
+                  child: Image.asset('images/aco.png', height: 70),
+                ),
+                actions: [
+                  IconButton(
+                      icon: const Icon(
+                        Icons.perm_identity,
+                        size: 30,
+                        color: ThemeColors.basic,
+                      ),
+                      onPressed: () {
+                        if (isLogin == true) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyPage(),
+                              ));
+                        } else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginPage(),
+                              ));
+                        }
+                      }),
+                  // // 검색 페이지
+                  // IconButton(
+                  //   icon: const Icon(Icons.search,
+                  //       size: 30, color: ThemeColors.basic),
+                  //   // onPressed: () => Navigator.push(
+                  //   //     context, routeSlide(page: const SearchPage())),
+                  //   onPressed: () => Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => const SearchPage(),
+                  //       )),
+                  // )
                 ],
+                backgroundColor: ThemeColors.primary,
+                centerTitle: false,
+                elevation: 0.0,
               ),
-            ),
-          ),
-          bottomNavigationBar: const BottomNavigation(index: 1)),
-    );
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 0.0, vertical: 0.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // 배너 슬라이드
+                      FutureBuilder<List<Banners>>(
+                        future: bannerService.getBannerData(),
+                        builder: (_, snapshot) {
+                          if (!snapshot.hasData) {
+                            return Column(
+                              children: const [
+                                ShimmerNaru(),
+                              ],
+                            );
+                          } else {
+                            return CarouselSlider.builder(
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: ((context, index, realIndex) =>
+                                  BannerSlide(
+                                      policyBanners: snapshot.data![index])),
+                              options: CarouselOptions(
+                                scrollDirection: Axis.horizontal,
+                                height: MediaQuery.of(context).size.height / 4,
+                                enlargeCenterPage: true,
+                                viewportFraction: 1.0,
+                                autoPlay: true,
+                              ),
+                            );
+                          }
+                        },
+                      ),
+
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      // buttonSection, // 카테고리 아이콘 메뉴
+                      Container(
+                          padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                          margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+                          child: Column(children: [
+                            Row(children: const [
+                              ImageIcon(
+                                AssetImage("images/icon_check.png"),
+                                color: ThemeColors.darkGreen,
+                                size: 20,
+                              ),
+                              // Image.asset('images/icon_sparkel.png'),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text('카테고리별 정책을 확인하세요!',
+                                  style: TextStyle(
+                                    color: ThemeColors.basic,
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                            ])
+                          ])),
+
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      CategoryButton(),
+                      livePopularPost(),
+
+                      // 로그아웃 버튼
+                      BtnNaru(
+                        text: '로그아웃',
+                        colorText: Colors.black,
+                        width: size.width,
+                        onPressed: () {
+                          authBloc.add(OnLogOutEvent());
+                          userBloc.add(OnLogOutUser());
+                          Navigator.pushAndRemoveUntil(context,
+                              routeSlide(page: const HomePage()), (_) => false);
+                        },
+                      ),
+                      const SizedBox(height: 30.0),
+                    ],
+                  ),
+                ),
+              ),
+              bottomNavigationBar: const BottomNavigation(index: 1)),
+        ));
   }
 }
 

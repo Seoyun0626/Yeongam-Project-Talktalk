@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:filter_list/filter_list.dart';
+import 'package:flutter_html/style.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/code_service.dart';
 import 'package:login/domain/services/policy_services.dart';
@@ -27,15 +28,15 @@ class PolicyListPage extends StatefulWidget {
 class _PolicyListPageState extends State<PolicyListPage> {
   @override
   Widget build(BuildContext context) {
-    late bool isSelectingCategory = false;
+    late bool isSelectingCategory = false; // 홈페이지 카테고리 아이콘 선택 여부
+
     String categoryName = widget.categoryName;
     String categoryCode = widget.categoryValue; // 홈페이지 카테고리 아이콘 코드
-    // print(categoryCode);
 
     if (categoryCode != '') {
       isSelectingCategory = true;
-      // print(isSelectingCategory);
     }
+
     return BlocListener<PolicyBloc, PolicyState>(
         listener: (context, state) {
           if (state is LoadingPolicy) {
@@ -54,27 +55,8 @@ class _PolicyListPageState extends State<PolicyListPage> {
                   child: Column(
                 children: <Widget>[
                   const SearchBar(), // 검색창
-                  // selectedSearchFilter(
-                  //   categoryName: categoryName,
-                  // ), // 카테고리 선택
-                  Container(
-                    color: Colors.white,
-                    height: 43,
-                    padding: const EdgeInsets.all(13),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          TextCustom(
-                            text: "검색결과",
-                            color: ThemeColors.basic,
-                            fontSize: 15.0,
-                          ),
-                          // Icon(
-                          //   Icons.arrow_drop_down_circle_outlined,
-                          //   color: ThemeColors.basic,
-                          // ),
-                        ]),
-                  ),
+                  const selectedSearchFilter(), // 기본 카테고리 선택
+
                   Expanded(
                     child: ListView(
                       physics: const BouncingScrollPhysics(),
@@ -110,9 +92,39 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                                             categoryCode,
                                                       ));
                                         }))
+                                    // : isDefaultSelectingCategory
+                                    //     ? FutureBuilder<List<Policy>>(
+                                    //         future:
+                                    //             policyService.getPolicyBySelect(
+                                    //                 deafultCategoryCode),
+                                    //         builder: ((_, snapshot) {
+                                    //           // print('future default');
+                                    //           // print(deafultCategoryCode);
+                                    //           if (snapshot.data != null &&
+                                    //               snapshot.data!.isEmpty) {
+                                    //             return _ListWithoutPolicySearch();
+                                    //           }
+
+                                    //           return !snapshot.hasData
+                                    //               ? const _ShimerLoading()
+                                    //               : ListView.builder(
+                                    //                   physics:
+                                    //                       const NeverScrollableScrollPhysics(),
+                                    //                   shrinkWrap: true,
+                                    //                   itemCount:
+                                    //                       snapshot.data!.length,
+                                    //                   itemBuilder: (_, i) =>
+                                    //                       ListViewPolicy(
+                                    //                         policies: snapshot
+                                    //                             .data![i],
+                                    //                         categoryCode:
+                                    //                             categoryCode,
+                                    //                       ));
+                                    //         }))
                                     : FutureBuilder<List<Policy>>(
                                         future: policyService.getAllPolicy(),
                                         builder: ((_, snapshot) {
+                                          // print(isDefaultSelectingCategory);
                                           if (snapshot.data != null &&
                                               snapshot.data!.isEmpty) {
                                             return _ListWithoutPolicySearch();
@@ -253,12 +265,12 @@ class _SearchBar extends State<SearchBar> {
                     ),
                     onPressed: () {
                       // searchFilterDialog();
-                      Navigator.push(
-                        context,
-                        routeSlide(
-                          page: PolicySearchFilterPage(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   routeSlide(
+                      //     page: PolicySearchFilterPage(),
+                      //   ),
+                      // );
                     },
                   ),
                   suffixIcon: myFocusNode.hasFocus
@@ -290,77 +302,147 @@ class _SearchBar extends State<SearchBar> {
   }
 }
 
+// 카테고리 버튼 선택
+class SelectableButton extends StatefulWidget {
+  const SelectableButton({
+    super.key,
+    required this.selected,
+    this.style,
+    required this.onPressed,
+    required this.child,
+  });
+
+  final bool selected;
+  final ButtonStyle? style;
+  final VoidCallback? onPressed;
+  final Widget child;
+
+  @override
+  State<SelectableButton> createState() => _SelectableButtonState();
+}
+
+class _SelectableButtonState extends State<SelectableButton> {
+  late final MaterialStatesController statesController;
+
+  @override
+  void initState() {
+    super.initState();
+    statesController = MaterialStatesController(
+        <MaterialState>{if (widget.selected) MaterialState.selected});
+  }
+
+  @override
+  void didUpdateWidget(SelectableButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.selected != oldWidget.selected) {
+      statesController.update(MaterialState.selected, widget.selected);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      statesController: statesController,
+      style: widget.style,
+      onPressed: widget.onPressed,
+      child: widget.child,
+    );
+  }
+}
+
+// 기본 검색 조건
 class selectedSearchFilter extends StatefulWidget {
-  const selectedSearchFilter({Key? key, required this.categoryName})
-      : super(key: key);
-  final String categoryName;
+  const selectedSearchFilter({
+    Key? key,
+    // required this.categoryCode,
+  }) : super(key: key);
+  // final String categoryCode;
 
   @override
   State<selectedSearchFilter> createState() => _selectedSearchFilter();
 }
 
-class _selectedSearchFilter extends State<selectedSearchFilter> {
-  bool _visibility = true;
-  void _show() {
-    setState(() {
-      _visibility = true;
-    });
-  }
+class Category {
+  final String name;
+  final String code;
+  late bool selected = false;
+  Category({required this.name, required this.code});
+}
 
-  void _hide() {
-    setState(() {
-      _visibility = false;
-    });
-  }
+class _selectedSearchFilter extends State<selectedSearchFilter> {
+  // bool selected = false;
+
+  List<Category> defaultCategoryList = [
+    Category(name: '전체보기', code: ''),
+    Category(name: '청소년활동', code: '07'),
+    Category(name: '학교밖청소년', code: '08'),
+    Category(name: '돌봄', code: '09')
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final String name = widget.categoryName;
+    // final String categoryCode = widget.categoryCode;
+    bool isDuplicated; // 기본카테고리 중복 확인
+    late String deafultCategoryCode = '';
+
     return Container(
-        height: 50,
+        // height: 50,
         padding: const EdgeInsets.all(10),
-        // ignore: prefer_const_constructors
-        decoration: BoxDecoration(
-            color: Colors.white,
-            border: const Border(
-                bottom: BorderSide(color: ThemeColors.basic, width: 0.7))),
+        // decoration: const BoxDecoration(
+        //     color: Colors.white,
+        //     border: const Border(bottom: BorderSide(color: ThemeColors.basic))
+        //     ),
         child: Row(
-          children: [
-            Visibility(
-                visible: _visibility,
-                child: Expanded(
-                  child: FloatingActionButton(
-                    backgroundColor: Colors.transparent,
-                    elevation: 0.0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: ThemeColors.primary,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      padding: const EdgeInsets.all(5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Text(
-                            name,
-                            style: const TextStyle(
-                                color: ThemeColors.basic, fontSize: 15),
-                          ),
-                          const Icon(
-                            Icons.close,
-                            size: 15,
-                            color: ThemeColors.basic,
-                          ),
-                        ],
-                      ),
-                    ),
-                    onPressed: () {
-                      _visibility ? _hide() : _show();
-                    },
-                  ),
-                ))
-          ],
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: List.generate(
+            defaultCategoryList.length,
+            (index) => SelectableButton(
+              selected: defaultCategoryList[index].selected,
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.selected)) {
+                      return ThemeColors.basic;
+                    }
+                    return null; // defer to the defaults
+                  },
+                ),
+                backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.selected)) {
+                      return ThemeColors.primary;
+                    }
+                    return null; // defer to the defaults
+                  },
+                ),
+              ),
+              onPressed: () {
+                setState(() {
+                  defaultCategoryList[index].selected =
+                      !defaultCategoryList[index].selected;
+
+                  // 중복 선택 불가
+                  var select = defaultCategoryList[index].selected;
+                  var length = defaultCategoryList.length;
+
+                  if (select) {
+                    isDuplicated = true;
+                    for (int i = 0; i < length; i++) {
+                      defaultCategoryList[(i + length) % length].selected =
+                          false;
+                    }
+                    defaultCategoryList[index].selected = true;
+                  }
+
+                  // print(defaultCategoryList[index].name);
+                  // print(defaultCategoryList[index].selected);
+                });
+
+                deafultCategoryCode = defaultCategoryList[index].code;
+              },
+              child: Text(defaultCategoryList[index].name),
+            ),
+          ),
         ));
   }
 }
