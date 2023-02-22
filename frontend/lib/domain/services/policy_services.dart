@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:login/data/env/env.dart';
+import 'package:login/data/storage/secure_storage.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/ui/helpers/debouncer.dart';
@@ -26,7 +27,7 @@ class PolicyServices {
         headers:
             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
     // print('policy_services');
-    print(resp.body);
+    // print(resp.body);
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
 
@@ -47,7 +48,7 @@ class PolicyServices {
   void searchPolicy(String searchValue) async {
     debouncer.value = "";
     debouncer.onValue = (value) async {
-      // final token = await secureStorage.readToken();
+      final token = await secureStorage.readToken();
       final resp = await http.get(
           Uri.parse(
               '${Environment.urlApi}/policy/get-search-policy/' + searchValue),
@@ -67,17 +68,30 @@ class PolicyServices {
         .then((_) => timer.cancel());
   }
 
-  Future<List<Policy>> getAllPolicyForSearch() async {
+  Future<List<Policy>> getPolicyBySelect(String code) async {
     // final token = await secureStorage.readToken();
-
+    // print(token);
+    print('getPolicyBySelect');
     final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/policy/get-all-policy-for-search'),
+        Uri.parse('${Environment.urlApi}/policy/get-select-policy/' + code),
         headers:
-            _setHeaders() //{'Accept': 'application/json'} //, 'xxx-token' : token!}
-        );
-
+            _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
+    // print('policy_services');
+    // print(resp.body);
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
+
+  // Future<List<Policy>> getAllPolicyForSearch() async {
+  //   // final token = await secureStorage.readToken();
+
+  //   final resp = await http.get(
+  //       Uri.parse('${Environment.urlApi}/policy/get-all-policy-for-search'),
+  //       headers:
+  //           _setHeaders() //{'Accept': 'application/json'} //, 'xxx-token' : token!}
+  //       );
+
+  //   return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+  // }
 }
 
 final policyService = PolicyServices();

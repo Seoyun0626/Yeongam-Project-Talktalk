@@ -14,7 +14,8 @@ class CalendarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
           appBar: AppBar(
             titleSpacing: 0,
             title: const Text('캘린더',
@@ -73,7 +74,7 @@ class CalendarPage extends StatelessWidget {
               ]),
             )
           ]),
-          bottomNavigationBar: const BottomNavigation(index: 4)),
-    );
+          bottomNavigationBar: const BottomNavigation(index: 4),
+        ));
   }
 }

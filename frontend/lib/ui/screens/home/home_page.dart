@@ -1,5 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login/domain/blocs/auth/auth_bloc.dart';
+import 'package:login/domain/blocs/user/user_bloc.dart';
+import 'package:login/domain/models/response/response_policy.dart';
+import 'package:login/ui/screens/policy/policy_list.dart';
+import 'package:login/ui/screens/user/my_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/services/banner_services.dart';
@@ -17,11 +23,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late bool loginSuccessState = false;
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
-    // final userBloc = BlocProvider.of<UserBloc>(context);
-    // final authBloc = BlocProvider.of<AuthBloc>(context);
+    final size = MediaQuery.of(context).size;
+    final userBloc = BlocProvider.of<UserBloc>(context);
+    final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -54,25 +61,34 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
+                          builder: (context) => const LoginPage(), // MyPage
                         ));
-                  }
-                  // onPressed: () => Navigator.push(
-                  //   context, routeSlide(page: const LoginPage())),
 
-                  // }
-                  ),
-              IconButton(
-                icon: const Icon(Icons.search,
-                    size: 30, color: ThemeColors.basic),
-                // onPressed: () => Navigator.push(
-                //     context, routeSlide(page: const SearchPage())),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SearchPage(),
-                    )),
-              )
+                    // if (loginSuccessState == true) {
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const MyPage(),
+                    //       ));
+                    // } else if (loginSuccessState == false) {
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => const LoginPage(),
+                    //       ));
+                    // }
+                  }),
+              // IconButton(
+              //   icon: const Icon(Icons.search,
+              //       size: 30, color: ThemeColors.basic),
+              //   // onPressed: () => Navigator.push(
+              //   //     context, routeSlide(page: const SearchPage())),
+              //   onPressed: () => Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => const SearchPage(),
+              //       )),
+              // )
             ],
             backgroundColor: ThemeColors.primary,
             centerTitle: false,
@@ -147,18 +163,18 @@ class _HomePageState extends State<HomePage> {
                   livePopularPost(),
 
                   // 로그아웃 버튼
-                  // BtnNaru(
-                  //   text: '로그아웃',
-                  //   colorText: Colors.black,
-                  //   width: size.width,
-                  //   onPressed: () {
-                  //     authBloc.add(OnLogOutEvent());
-                  //     userBloc.add(OnLogOutUser());
-                  //     Navigator.pushAndRemoveUntil(context,
-                  //         routeSlide(page: const HomePage()), (_) => false);
-                  //   },
-                  // ),
-                  // const SizedBox(height: 30.0),
+                  BtnNaru(
+                    text: '로그아웃',
+                    colorText: Colors.black,
+                    width: size.width,
+                    onPressed: () {
+                      authBloc.add(OnLogOutEvent());
+                      userBloc.add(OnLogOutUser());
+                      Navigator.pushAndRemoveUntil(context,
+                          routeSlide(page: const HomePage()), (_) => false);
+                    },
+                  ),
+                  const SizedBox(height: 30.0),
                 ],
               ),
             ),
@@ -221,24 +237,38 @@ class BannerSlide extends StatelessWidget {
   }
 }
 
+class Category {
+  final String name;
+  final String code;
+  final String icon;
+  Category({required this.name, required this.code, required this.icon});
+}
+
 // 카테고리 아이콘 버튼
 class CategoryButton extends StatelessWidget {
-  final List<String> pngIcons01 = [
-    'images/category_icon/icon_study.png', // 학업
-    'images/category_icon/icon_counseling.png', // 상담
-    'images/category_icon/icon_job.png', // 취업/이직
-    'images/category_icon/icon_living.png', // 생활비
-  ];
-  final List<String> textIcons01 = ['학업', '상담', '취업/이직', '생활비'];
-  final List<String> textIcons02 = ['건강', '주거', '결혼/양육', '전체보기'];
-
-  final List<String> pngIcons02 = [
-    'images/category_icon/icon_health.png', // 건강
-    'images/category_icon/icon_house.png', // 주거
-    'images/category_icon/icon_baby.png', // 결혼/양육
-    'images/category_icon/icon_allsee.png', // 전체보기
+  final List<Category> categoryIcons01 = [
+    Category(
+        name: '학업', code: '00', icon: 'images/category_icon/icon_study.png'),
+    Category(
+        name: '상담',
+        code: '01',
+        icon: 'images/category_icon/icon_counseling.png'),
+    Category(
+        name: '취업/이직', code: '02', icon: 'images/category_icon/icon_job.png'),
+    Category(
+        name: '생활비', code: '03', icon: 'images/category_icon/icon_living.png'),
   ];
 
+  final List<Category> categoryIcons02 = [
+    Category(
+        name: '건강', code: '04', icon: 'images/category_icon/icon_health.png'),
+    Category(
+        name: '주거', code: '05', icon: 'images/category_icon/icon_house.png'),
+    Category(
+        name: '결혼/양육', code: '06', icon: 'images/category_icon/icon_baby.png'),
+    Category(
+        name: '전체보기', code: '', icon: 'images/category_icon/icon_allsee.png'),
+  ];
   CategoryButton({super.key});
 
   @override
@@ -256,17 +286,25 @@ class CategoryButton extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(children: [
                   IconButton(
-                      icon: Image.asset(pngIcons01[index]),
-                      onPressed: () {},
+                      icon: Image.asset(
+                          categoryIcons01[index].icon), //pngIcons01[index]
+                      onPressed: () {
+                        var codeName = categoryIcons01[index].name;
+                        var codeValue = categoryIcons01[index].code;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PolicyListPage(
+                                categoryName: codeName,
+                                categoryValue: codeValue,
+                              ), // 복지검색 탭
+                            ));
+                      },
                       iconSize: MediaQuery.of(context).size.width / 8),
                   Text(
-                    textIcons01[index],
+                    categoryIcons01[index].name,
                   ),
                 ]),
-                // height: 40,
-                // width: size.width / 4,
-                // constraints: const BoxConstraints(maxWidth: 100),
-                // color: Colors.amber,
               ),
             ),
           ),
@@ -279,12 +317,24 @@ class CategoryButton extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(children: [
                   IconButton(
-                    icon: Image.asset(pngIcons02[index]),
-                    onPressed: () {},
+                    icon: Image.asset(categoryIcons02[index].icon),
+                    onPressed: () {
+                      var codeName = categoryIcons02[index].name;
+                      var codeValue = categoryIcons02[index].code;
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PolicyListPage(
+                              categoryName: codeName,
+                              categoryValue: codeValue,
+                            ), // 복지검색 탭
+                          ));
+                    },
                     iconSize: MediaQuery.of(context).size.width / 8,
                   ),
                   Text(
-                    textIcons02[index],
+                    categoryIcons02[index].name,
                   ),
                 ]),
                 // height: 40,
@@ -425,63 +475,6 @@ class livePopularPost extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_6,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('가정양육수당 지원(월~20만원)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_6,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('가정양육수당 지원(월~20만원)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_6,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('가정양육수당 지원(월~20만원)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          )
         ]));
   }
 }

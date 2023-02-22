@@ -18,6 +18,7 @@ class DetailPolicyPage extends StatelessWidget {
     final String policySupervison = policies.policy_institution_code;
     final String policyName = policies.policy_name;
     final String policyContent = policies.content;
+    final String policyCategory = policies.policy_field_code;
 
     //모집기간
     final String startDateYear =
@@ -102,11 +103,11 @@ class DetailPolicyPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         color: ThemeColors.secondary,
                       ),
-                      child: const Text(
-                        '카테고리',
+                      child: Text(
+                        policyCategory,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15.0,
                           color: Colors.white,
                         ),
