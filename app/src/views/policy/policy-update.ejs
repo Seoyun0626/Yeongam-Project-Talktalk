@@ -40,7 +40,11 @@
           <div class="four wide field">
               <select class="ui fluid dropdown" name="target" id="target">
                 <%for(var i=0; i<code_data.policy_target_code.length; i++){%>
-                  <option value="<%=code_data.policy_target_code[i].code_detail%>"><%=code_data.policy_target_code[i].code_detail_name%></option>
+                  <%if(code_data.policy_target_code[i].code_detail == post.policy_target_code){%>
+                    <option value="<%=code_data.policy_target_code[i].code_detail%>" selected><%=code_data.policy_target_code[i].code_detail_name%></option>
+                  <%}else{%>
+                    <option value="<%=code_data.policy_target_code[i].code_detail%>"><%=code_data.policy_target_code[i].code_detail_name%></option>
+                  <%}%>
                 <%}%>
               </select>
           </div>
@@ -48,7 +52,11 @@
           <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_institution_code" id="policy_institution_code">
               <%for(var i=0; i<code_data.policy_institution_code.length; i++){%>
-                <option value="<%=code_data.policy_institution_code[i].code_detail%>"><%=code_data.policy_institution_code[i].code_detail_name%></option>
+                <%if(code_data.policy_institution_code[i].code_detail == post.policy_institution_code){%>
+                  <option value="<%=code_data.policy_institution_code[i].code_detail%>" selected><%=code_data.policy_institution_code[i].code_detail_name%></option>
+                <%}else{%>
+                  <option value="<%=code_data.policy_institution_code[i].code_detail%>"><%=code_data.policy_institution_code[i].code_detail_name%></option>
+                <%}%>
               <%}%>
             </select>
           </div>
@@ -74,15 +82,23 @@
           <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_field_code" id="policy_field_code">
               <%for(var i=0; i<code_data.policy_field_code.length; i++){%>
-                <option value="<%=code_data.policy_field_code[i].code_detail%>"><%=code_data.policy_field_code[i].code_detail_name%></option>
+                <%if(code_data.policy_field_code[i].code_detail == post.policy_field_code){%>
+                  <option value="<%=code_data.policy_field_code[i].code_detail%>" selected><%=code_data.policy_field_code[i].code_detail_name%></option>
+                <%}else{%>
+                  <option value="<%=code_data.policy_field_code[i].code_detail%>"><%=code_data.policy_field_code[i].code_detail_name%></option>
+                <%}%>
               <%}%>
             </select>
           </div>
           <label>정책 성격</label>
           <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_character_code" id="policy_character_code">
-              <%for(var i=0; i<code_data.policy_character_code.length; i++){%>
-                <option value="<%=code_data.policy_character_code[i].code_detail%>"><%=code_data.policy_character_code[i].code_detail_name%></option>
+              <% for(var i=0; i<code_data.policy_character_code.length; i++){%>
+                <%if(code_data.policy_character_code[i].code_detail == post.policy_character_code){%>
+                  <option value="<%=code_data.policy_character_code[i].code_detail%>" selected><%=code_data.policy_character_code[i].code_detail_name%></option>
+                <%}else{%>
+                  <option value="<%=code_data.policy_character_code[i].code_detail%>"><%=code_data.policy_character_code[i].code_detail_name%></option>
+                <%}%>
               <%}%>
             </select>
           </div>

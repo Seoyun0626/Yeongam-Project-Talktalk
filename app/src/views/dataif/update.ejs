@@ -60,7 +60,11 @@
                 <div class="four wide field">
                   <select class="ui fluid dropdown" name="user_type" id="user_type">
                     <%for(var i=0; i<code_data.user_type.length; i++){%>
-                      <option value="<%=code_data.user_type[i].code_detail%>"><%=code_data.user_type[i].code_detail_name%></option>                      
+                      <%if(code_data.user_type[i].code_detail == post.user_type){%>
+                        <option value="<%=code_data.user_type[i].code_detail%>" selected><%=code_data.user_type[i].code_detail_name%></option>
+                      <%}else{%>
+                        <option value="<%=code_data.user_type[i].code_detail%>"><%=code_data.user_type[i].code_detail_name%></option>
+                      <%}%>
                     <%}%>
                   </select>
                 </div>
@@ -73,7 +77,11 @@
                 <div class="four wide field">
                   <select class="ui fluid dropdown" name="parentsAge_code" id="parentsAge_code">
                     <%for(var i=0; i<code_data.parentsAge_code.length; i++){%>
-                      <option value="<%=code_data.parentsAge_code[i].code_detail%>"><%=code_data.parentsAge_code[i].code_detail_name%></option>
+                      <%if(code_data.parentsAge_code[i].code_detail == post.parentsAge_code){%>
+                        <option value="<%=code_data.parentsAge_code[i].code_detail%>" selected><%=code_data.parentsAge_code[i].code_detail_name%></option>
+                      <%}else{%>
+                        <option value="<%=code_data.parentsAge_code[i].code_detail%>"><%=code_data.parentsAge_code[i].code_detail_name%></option>
+                      <%}%>
                     <%}%>
                   </select>
                 </div>
@@ -81,7 +89,11 @@
                 <div class="four wide field">
                   <select class="ui fluid dropdown" name="youthAge_code" id="youthAge_code">
                     <%for(var i=0; i<code_data.youthAge_code.length; i++){%>
-                      <option value="<%=code_data.youthAge_code[i].code_detail%>"><%=code_data.youthAge_code[i].code_detail_name%></option>
+                      <%if(code_data.youthAge_code[i].code_detail == post.youthAge_code){%>
+                        <option value="<%=code_data.youthAge_code[i].code_detail%>" selected><%=code_data.youthAge_code[i].code_detail_name%></option>
+                      <%}else{%>
+                        <option value="<%=code_data.youthAge_code[i].code_detail%>"><%=code_data.youthAge_code[i].code_detail_name%></option>
+                      <%}%>
                     <%}%>
                   </select>
                 </div>
@@ -94,7 +106,11 @@
                 <div class="four wide field">
                   <select class="ui fluid dropdown" name="emd_class_code" id="emd_class_code">
                     <%for(var i=0; i<code_data.emd_class_code.length; i++){%>
-                      <option value="<%=code_data.emd_class_code[i].code_detail%>"><%=code_data.emd_class_code[i].code_detail_name%></option>
+                      <%if(code_data.emd_class_code[i].code_detail == post.emd_class_code){%>
+                        <option value="<%=code_data.emd_class_code[i].code_detail%>" selected><%=code_data.emd_class_code[i].code_detail_name%></option>
+                      <%}else{%>
+                        <option value="<%=code_data.emd_class_code[i].code_detail%>"><%=code_data.emd_class_code[i].code_detail_name%></option>
+                      <%}%>
                     <%}%>
                   </select>
                 </div>

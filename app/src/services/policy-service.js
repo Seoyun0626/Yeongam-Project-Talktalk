@@ -141,6 +141,7 @@ exports.upload = async function(req, res) {
         var application_end_date = req.body.application_end_date;
         var policy_field_code = req.body.policy_field_code;
         var policy_character_code = req.body.policy_character_code;
+        var policy_link = req.body.policy_link;
         if(name == null || name == undefined || name == '') {
             resultcode = 1;
             return resultcode;
@@ -165,8 +166,8 @@ exports.upload = async function(req, res) {
         //     resultcode = 7;
         //     return resultcode;
         // }
-        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code) VALUES "
-          + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "');";
+        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link) VALUES "
+          + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "', '" + policy_link + "');";
         var rows = await conn.query(query); // 쿼리 실행
         console.log('policy-service upload success');
         return resultcode; //0이면 성공

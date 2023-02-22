@@ -275,7 +275,7 @@ exports.update = async function(req, res) {
     hasher(
       {password:req.body.password}, async function(err, pass, salt, hash) {
         // query += 'password="'+hash+'", salt="'+salt+'" where userid="'+userid+'"';
-        var query = 'update webdb.tb_user set password="'+hash+'", salt="'+salt+'", name="'+req.body.name+'", user_email="'+req.body.email+'", user_role="'+req.body.user_role+'", user_type="'+req.body.user_type+'", emd_class_code="'+req.body.emd_class_code+'" where userid="'+userid+'"';
+        var query = 'update webdb.tb_user set password="'+hash+'", salt="'+salt+'", name="'+req.body.name+'", user_email="'+req.body.user_email+'", user_role="'+req.body.user_role+'", user_type="'+req.body.user_type+'", emd_class_code="'+req.body.emd_class_code+'", youthAge_code = "'+req.body.youthAge_code+'", parentsAge_code = "'+req.body.parentsAge_code+'" where userid="'+userid+'"';
         var rows = await conn.query(query);
       }
     );
