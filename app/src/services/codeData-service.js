@@ -25,6 +25,45 @@ exports.fetchPolicyData = async function(req, res) {
 }
 
 
+exports.getPolicyName = async function(req, res) {
+    try {
+        conn = await db.getConnection();
+        var json = {};
+        //정책 대상 코드
+        var query = "SELECT code_detail_name, code_detail FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 6";
+        json.policy_target_code = await conn.query(query);
+        return json;
+    } catch (error) {
+        console.log('codeData-controller getPolicyName error:'+error);
+    }
+};
+
+exports.getUserCodeName = async function(req, res) {
+    try {
+        conn = await db.getConnection();
+        var json = {};
+        //사용자 유형 코드
+        var query = "SELECT code_detail_name, code_detail FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 1";
+        json.user_type = await conn.query(query);
+        var query = "SELECT code_detail_name, code_detail FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 5";
+        json.emd_class_code = await conn.query(query);
+        // //청소년,청소년 부모 나이 코드
+        // var query = "SELECT code_detail_name, code_detail FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 2";
+        // json.youthAge_code = await conn.query(query);
+        // //학부모 나이 코드
+        // var query = "SELECT code_detail_name, code_detail FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 3";
+        // json.parentsAge_code = await conn.query(query);
+        // //성별 코드
+        // var query = "SELECT code_detail_name, code_detail FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 4";
+        // json.sex_class_code = await conn.query(query);
+        //읍면동 코드
+        // console.log(json);
+        return json;
+    } catch (error) {
+        console.log('codeData-controller getUserCodeName error:'+error);
+    }
+};
+
 exports.getCodeData = async function(req, res) {
     try {
       conn = await db.getConnection();

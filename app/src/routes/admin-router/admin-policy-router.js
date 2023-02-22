@@ -4,6 +4,8 @@ var router = express.Router();
 var policy_controller = require("../../controllers/common-controller/policy-controller");
 var code_controller = require("../../controllers/common-controller/codeData-controller");
 
+var codeName = require('../../public/js/home/getCodeName');
+
 // const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 router.get('/show', async function (req, res) {
     try{
@@ -25,11 +27,14 @@ router.get('/show', async function (req, res) {
             totalPage = Math.ceil(result.length/pageSize);
             result = result.slice(start, end); //현재 페이지에 해당하는 회원 정보만 가져옴
         }
+        var code_data = await code_controller.getPolicyName();
         res.render('policy/show', {
             posts:result,
             user:req.user,
             page:crtpage, //현재 페이지
-            totalPage: totalPage //총 페이지 수
+            totalPage: totalPage, //총 페이지 수
+            code_data:code_data,
+            codeName:codeName.policy_code_to_name //정책 대상만 설정 해 놨음
         });
     } catch(error) {
         console.log('policy-router show error:'+error);

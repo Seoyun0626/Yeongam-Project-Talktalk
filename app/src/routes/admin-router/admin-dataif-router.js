@@ -5,8 +5,9 @@ var router = express.Router();
 var dataif_controller = require("../../controllers/common-controller/dataif-controller");
 var code_controller = require("../../controllers/common-controller/codeData-controller");
 
+var codeName = require('../../public/js/home/getCodeName');
+
 //js함수
-var memFunc = require('../../public/js/home/memFunc'); //mem의 ejs에서 활용하는 함수들
 const passport = require('passport');
 /*
 var Post = require('../../models/Post');
@@ -86,14 +87,17 @@ router.get('/', async function(req, res){
       totalPage = Math.ceil(result.length/pageSize);
       result = result.slice(0, pageSize);
     }
+    var code_data = await code_controller.getUserCodeName();
     res.render('dataif/mem', 
     {
       posts:result,
-      emd_code_to_name:memFunc.emd_code_to_name, //읍면동코드
-      age_code_to_class:memFunc.age_code_to_class, //연령대
-      role_code_to_class:memFunc.role_code_to_class, //권한
+      code_data:code_data,
       page:crtpage, //현재 페이지
-      totalPage: totalPage //총 페이지 수
+      totalPage: totalPage, //총 페이지 수
+      codeName : codeName.user_code_to_name,
+      emd_code_to_name:codeName.emd_code_to_name,
+      user_type_to_name:codeName.user_type_to_name,
+      role_code_to_class:codeName.role_code_to_class, //권한
     });
   } catch(error) {
     console.log('dataif-router / error:'+error);

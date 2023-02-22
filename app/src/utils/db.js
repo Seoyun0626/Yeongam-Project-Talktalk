@@ -6,7 +6,8 @@ const pool = mariadb.createPool({
   password: config.password,
   database: config.database,
   allowPublicKeyRetrieval: true,
-  connectionLimit: 30
+  connectionLimit: 50,
+  // autoreconnect: true,
 });
 
 pool.getConnection(function(err, connection){  

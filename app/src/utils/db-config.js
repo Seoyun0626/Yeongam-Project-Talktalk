@@ -6,5 +6,6 @@ module.exports = (function() {
         user: process.env.DB_USER,
         password: process.env.DB_PSWORD,
         database: process.env.DB_DATABASE,
-        connectionLimit: 30
+        connectionLimit: 50,
+        // autoreconnect: true,
     }})();

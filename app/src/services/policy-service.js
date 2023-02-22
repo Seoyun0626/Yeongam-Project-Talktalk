@@ -135,7 +135,6 @@ exports.upload = async function(req, res) {
         var name = req.body.name;
         var target = req.body.target;
         var policy_institution_code = req.body.policy_institution_code;
-        var description = req.body.description;
         var fund = req.body.fund;
         var content = req.body.content;
         var application_start_date = req.body.application_start_date;
@@ -144,10 +143,6 @@ exports.upload = async function(req, res) {
         var policy_character_code = req.body.policy_character_code;
         if(name == null || name == undefined || name == '') {
             resultcode = 1;
-            return resultcode;
-        }
-        if(description == null || description == undefined || description == '') {
-            resultcode = 2;
             return resultcode;
         }
         if(fund == null || fund == undefined || fund == '') {
@@ -170,8 +165,8 @@ exports.upload = async function(req, res) {
         //     resultcode = 7;
         //     return resultcode;
         // }
-        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, description, fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code) VALUES "
-          + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + description + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "');";
+        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code) VALUES "
+          + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "');";
         var rows = await conn.query(query); // 쿼리 실행
         console.log('policy-service upload success');
         return resultcode; //0이면 성공

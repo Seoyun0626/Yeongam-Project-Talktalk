@@ -26,15 +26,7 @@
           <div class="four wide field">
             <input type="text" name="name" id="policy_name" value="<%= post.policy_name %>">
           </div>
-      </div>
-      <br>
-      <div class="ui form">
-        <div class="inline fields">
-          <label>정책 설명</label>
-          <div class="four wide field">
-            <input type="text" name="description" id="policy_description" value="<%= post.description %>">
-          </div>
-          <label>지원금</label>
+          <label>지원금&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
           <div class="four wide field">
             <input type="text" name="fund" id="fund" value="<%= post.fund %>">
           </div>
@@ -140,11 +132,6 @@
                     alert("이름을 입력해주세요.");
                     // 마우스를 name에 놓는다.
                     document.getElementById("policy_name").focus();
-                    return false;
-                  }
-                  if(document.getElementById("policy_description").value == ""){
-                    alert("정책 설명을 입력해주세요.");
-                    document.getElementById("policy_description").focus();
                     return false;
                   }
                   if(document.getElementById("fund").value == ""){
