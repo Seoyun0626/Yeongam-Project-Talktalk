@@ -107,9 +107,18 @@
       <br>
       <div class="ui form">
         <div class="inline fields">
+          <label>정책 링크</label>
+          <div class="nine wide field">
+            <input type="text" name="policy_link" id="policy_link" value="<%= post.policy_link %>">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="ui form">
+        <div class="inline fields">
           <label>정책 사진</label>
           <div class="nine wide field">
-            <input type="file" name="imgFile" id="policy_imgFile" accept="image/*">
+            <input type="file" name="imgFile" id="policy_imgFile" accept="image/*" src="<%= post.img%>">
           </div>
         </div>
 
@@ -118,13 +127,17 @@
           <textarea name="content" id="editor"></textarea>
           <script>
             // 3. CKEditor5를 생성할 textarea 지정
+            // db에 저장된 데이터를 가져와서 textarea에 넣는다.
             ClassicEditor
                 .create( document.querySelector( '#editor' ), {
                   language: "ko",
-                  simpleUpload: {
-                    uploadUrl: '/upload/image',
-                    withCredentials: true,
-                  }
+                  plugins: [ 'Essentials', 'Paragraph', 'Bold', 'Italic', 'Link' ]
+                } )
+                // textarea에 db에 저장된 내용을 불러온다.
+                .then( editor => {
+                    const content = "<%= content %>";
+                    // const content = "<p>asdfasdfasd</p><ul><li>asdfasd</li><li>asdfasd</li></ul>";
+                    editor.setData( content );
                 } )
                 .catch( error => {
                     console.error( error );

@@ -5,6 +5,7 @@ var policy_controller = require("../../controllers/common-controller/policy-cont
 var code_controller = require("../../controllers/common-controller/codeData-controller");
 
 var codeName = require('../../public/js/home/getCodeName');
+const { json } = require("body-parser");
 
 // const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 router.get('/show', async function (req, res) {
@@ -84,11 +85,15 @@ router.get('/update/:id', async function(req, res){
         if(end_month < 10) end_month = '0'+end_month;
         var end_date = result[0].application_end_date.getFullYear()+'-'+end_month+'-'+result[0].application_end_date.getDate();
         var code_data = await code_controller.getCodeData(req, res);
+        // console.log(result[0].img);
+        var content = result[0].content;
+        // content를 string으로 변환
         res.render('policy/policy-update', {
             post:result[0],
             code_data:code_data,
             start_date:start_date,
-            end_date:end_date
+            end_date:end_date,
+            content:content
     });
     } catch(error) {
       console.log('policy-router update error:'+error);

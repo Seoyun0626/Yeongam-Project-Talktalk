@@ -18,9 +18,7 @@ pool.getConnection(function(err, connection){
   } else {
     console.log('DataBase is connected to '+ config.database);
   }
-  
   if( connection ) connection.release();
-
   return;
 });
 
