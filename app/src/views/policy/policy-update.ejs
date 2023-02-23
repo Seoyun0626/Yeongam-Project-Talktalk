@@ -136,8 +136,10 @@
                 // textarea에 db에 저장된 내용을 불러온다.
                 .then( editor => {
                     const content = "<%= content %>";
-                    // const content = "<p>asdfasdfasd</p><ul><li>asdfasd</li><li>asdfasd</li></ul>";
-                    editor.setData( content );
+                    const parser = new DOMParser();
+                    const decodedContent = parser.parseFromString(`<!doctype html><body>${content}`, 'text/html').body.textContent;
+
+                    editor.setData( decodedContent );
                 } )
                 .catch( error => {
                     console.error( error );
