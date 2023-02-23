@@ -321,11 +321,11 @@ router.get('/policy/get-select-policy/:code', async function(req, res){
 router.get('/policy/get-code-data', async function(req, res){
   try{
     var result = await mobile_codeData_controller.getCodeData(req, res);
-    console.log(result);
+    // console.log(result);
     res.json({
       resp:true,
       message : 'get code data',
-      policies : result
+      codes : result
     })
   } catch(error){
     console.log('policy-router get-code-data error:'+error);

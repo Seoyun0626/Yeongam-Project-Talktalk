@@ -1,15 +1,96 @@
 import 'package:flutter/material.dart';
 import 'package:login/domain/models/response/response_policy.dart';
+import 'package:login/domain/services/code_service.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:login/ui/widgets/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class DetailPolicyPage extends StatelessWidget {
+class DetailPolicyPage extends StatefulWidget {
   const DetailPolicyPage(this.policies, {Key? key}) : super(key: key);
   final Policy policies;
 
   @override
+  State<DetailPolicyPage> createState() => _DetailPolicyState();
+}
+
+class _DetailPolicyState extends State<DetailPolicyPage> {
+  late String policyInstitution = '';
+  late String policyTarget = '';
+  late String policyField = '';
+  late String policyCharacter = '';
+
+  @override
+  void initState() {
+    final Policy policies = widget.policies;
+    final String institutionCode = policies.policy_institution_code; // 기관 코드
+    final String targetCode = policies.policy_target_code; // 적용 대상 코드
+    final String fieldCode = policies.policy_field_code; // 분야 코드
+    final String characterCode = policies.policy_character_code;
+
+    codeService.getCodeData().then((value) {
+      setState(() {
+        var institutionLen = value['codes']['policy_institution_code'].length;
+        var targetLen = value['codes']['policy_target_code'].length;
+        var fieldLen = value['codes']['policy_field_code'].length;
+        var charLen = value['codes']['policy_character_code'].length;
+
+        // 기관
+        for (int i = 0; i < institutionLen; i++) {
+          var codeDetail =
+              value['codes']['policy_institution_code'][i]['code_detail'];
+          if (codeDetail == institutionCode) {
+            var codeDetailName = value['codes']['policy_institution_code'][i]
+                ['code_detail_name'];
+            policyInstitution = codeDetailName;
+            // print(policyInstitution);
+          }
+        }
+
+        // 대상
+        for (int i = 0; i < targetLen; i++) {
+          var codeDetail =
+              value['codes']['policy_target_code'][i]['code_detail'];
+          if (codeDetail == targetCode) {
+            var codeDetailName =
+                value['codes']['policy_target_code'][i]['code_detail_name'];
+            policyTarget = codeDetailName;
+            // print(policyInstitution);
+          }
+        }
+
+        // 분야
+        for (int i = 0; i < fieldLen; i++) {
+          var codeDetail =
+              value['codes']['policy_field_code'][i]['code_detail'];
+          if (codeDetail == fieldCode) {
+            var codeDetailName =
+                value['codes']['policy_field_code'][i]['code_detail_name'];
+            policyField = codeDetailName;
+            // print(policyInstitution);
+          }
+        }
+
+        // 정책 성격
+        for (int i = 0; i < charLen; i++) {
+          var codeDetail =
+              value['codes']['policy_character_code'][i]['code_detail'];
+          if (codeDetail == characterCode) {
+            var codeDetailName =
+                value['codes']['policy_character_code'][i]['code_detail_name'];
+            policyCharacter = codeDetailName;
+            // print(policyInstitution);
+          }
+        }
+      });
+    });
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final Policy policies = widget.policies;
     final String imgName = policies.img;
 
     final String imgUrl = "images/policy/$imgName";
@@ -19,6 +100,7 @@ class DetailPolicyPage extends StatelessWidget {
     final String policyName = policies.policy_name;
     final String policyContent = policies.content;
     final String policyCategory = policies.policy_field_code;
+    final String policyLink = policies.policy_link;
 
     //모집기간
     final String startDateYear =
@@ -77,7 +159,7 @@ class DetailPolicyPage extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
                   width: size,
                   color: Colors.white,
-                  child: Text(policySupervison)),
+                  child: Text(policyInstitution)),
               Container(
                   // 정책 이름
                   padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
@@ -104,7 +186,8 @@ class DetailPolicyPage extends StatelessWidget {
                         color: ThemeColors.secondary,
                       ),
                       child: Text(
-                        policyCategory,
+                        policyField,
+                        // policyCategory,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -134,7 +217,8 @@ class DetailPolicyPage extends StatelessWidget {
                         width: size / 20,
                       ),
                       Text(
-                        policies.policy_target_code,
+                        policyTarget,
+                        // policies.policy_target_code,
                         style: const TextStyle(
                           color: ThemeColors.basic,
                           fontSize: 18,
@@ -193,7 +277,9 @@ class DetailPolicyPage extends StatelessWidget {
                   text: '신청하기',
                   colorText: Colors.black,
                   width: size,
-                  onPressed: () {},
+                  onPressed: () {
+                    launchUrl(Uri.parse(policyLink));
+                  },
                 ),
               )
             ],

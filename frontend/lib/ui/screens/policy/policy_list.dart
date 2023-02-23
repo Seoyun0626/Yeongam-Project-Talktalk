@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter_html/style.dart';
+import 'package:login/domain/models/response/response_code.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/code_service.dart';
 import 'package:login/domain/services/policy_services.dart';
@@ -88,8 +89,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                                       ListViewPolicy(
                                                         policies:
                                                             snapshot.data![i],
-                                                        categoryCode:
-                                                            categoryCode,
                                                       ));
                                         }))
                                     // : isDefaultSelectingCategory
@@ -142,8 +141,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                                       ListViewPolicy(
                                                         policies:
                                                             snapshot.data![i],
-                                                        categoryCode:
-                                                            categoryCode,
                                                       ));
                                         }))))
                       ],
@@ -184,7 +181,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
             itemCount: snapshot.data!.length,
             itemBuilder: (_, i) => ListViewPolicy(
                   policies: snapshot.data![i],
-                  categoryCode: 'n',
                 ));
       },
     );
@@ -450,81 +446,102 @@ class _selectedSearchFilter extends State<selectedSearchFilter> {
 // 정책 리스트
 class ListViewPolicy extends StatefulWidget {
   final Policy policies;
-  final String categoryCode;
-  const ListViewPolicy(
-      {Key? key, required this.policies, required this.categoryCode})
-      : super(key: key);
+  // final String categoryCode;
+  const ListViewPolicy({Key? key, required this.policies}) : super(key: key);
 
   @override
   State<ListViewPolicy> createState() => _ListViewPolicyState();
 }
 
 class _ListViewPolicyState extends State<ListViewPolicy> {
-  // final String policy_institution_code = 'policy_institution_code';
-  // // final String policy_target_code = 'policy_target_code';
-  // // final String policy_field_code = 'policy_field_code';
-  // // final String policy_character_code = 'policy_character_code';
-  // late String institution = '';
-  // // late String target = '';
-  // // late String field = '';
-  // // late String character = '';
+  late String policyInstitution = '';
+  // late String policyTarget = '';
+  late String policyField = '';
+  // late String policyCharacter = '';
 
-  // getInstitutionCodeData(String code) async {
-  //   var data = await codeService.getCodeData(policy_institution_code, code);
-  //   // print(data);
-  //   return data;
-  // }
+  @override
+  void initState() {
+    final Policy policies = widget.policies;
+    final String institutionCode = policies.policy_institution_code; // 기관 코드
+    // final String targetCode = policies.policy_target_code; // 적용 대상 코드
+    final String fieldCode = policies.policy_field_code; // 분야 코드
+    // final String characterCode = policies.policy_character_code;
 
-  // // getTargetCodeData() async {
-  // //   var data = await codeService.getCodeData(policy_target_code);
-  // //   // print(data);
-  // //   return data;
-  // // }
+    codeService.getCodeData().then((value) {
+      setState(() {
+        var institutionLen = value['codes']['policy_institution_code'].length;
+        // var targetLen = value['codes']['policy_target_code'].length;
+        var fieldLen = value['codes']['policy_field_code'].length;
+        // var charLen = value['codes']['policy_character_code'].length;
 
-  // // getFieldCodeData(String code) async {
-  // //   var data = await codeService.getCodeData(policy_field_code, code);
-  // //   // print(data);
-  // //   return data;
-  // // }
+        // 기관
+        for (int i = 0; i < institutionLen; i++) {
+          var codeDetail =
+              value['codes']['policy_institution_code'][i]['code_detail'];
+          if (codeDetail == institutionCode) {
+            var codeDetailName = value['codes']['policy_institution_code'][i]
+                ['code_detail_name'];
+            policyInstitution = codeDetailName;
+            print(policyInstitution);
+          }
+        }
 
-  // // getCharacterCodeData() async {
-  // //   var data = await codeService.getCodeData(policy_character_code);
-  // //   // print(data);
-  // //   return data;
-  // // }
+        // 대상
+        // for (int i = 0; i < targetLen; i++) {
+        //   var codeDetail =
+        //       value['codes']['policy_target_code'][i]['code_detail'];
+        //   if (codeDetail == targetCode) {
+        //     var codeDetailName =
+        //         value['codes']['policy_target_code'][i]['code_detail_name'];
+        //     policyTarget = codeDetailName;
+        //     // print(policyInstitution);
+        //   }
+        // }
 
+        // 분야
+        for (int i = 0; i < fieldLen; i++) {
+          var codeDetail =
+              value['codes']['policy_field_code'][i]['code_detail'];
+          if (codeDetail == fieldCode) {
+            var codeDetailName =
+                value['codes']['policy_field_code'][i]['code_detail_name'];
+            policyField = codeDetailName;
+            // print(policyInstitution);
+          }
+        }
+
+        // 정책 성격
+        // for (int i = 0; i < charLen; i++) {
+        //   var codeDetail =
+        //       value['codes']['policy_character_code'][i]['code_detail'];
+        //   if (codeDetail == characterCode) {
+        //     var codeDetailName =
+        //         value['codes']['policy_character_code'][i]['code_detail_name'];
+        //     policyCharacter = codeDetailName;
+        //     // print(policyInstitution);
+        //   }
+        // }
+      });
+    });
+
+    super.initState();
+  }
+
+  // print(institution);
   // @override
-  // void initState() {
-  //   var institutionCode = getInstitutionCodeData('00').then((value) {
-  //     setState(() {
-  //       institution = value;
-  //     });
-  //   });
-  //   // getTargetCodeData().then((value) {
-  //   //   setState(() {
-  //   //     target = value;
-  //   //   });
-  //   // });
-  //   // getFieldCodeData('00').then((value) {
-  //   //   setState(() {
-  //   //     field = value;
-  //   //   });
-  //   // });
-  //   // getCharacterCodeData().then((value) {
-  //   //   setState(() {
-  //   //     character = value;
-  //   //   });
-  //   // });
-
-  //   super.initState();
+  // void dispose() {
+  //   institution;
+  //   super.dispose();
   // }
 
   @override
   Widget build(BuildContext context) {
-    final String categoryCode = widget.categoryCode; // 카테고리(분야) 코드
+    // String categoryCode = widget.categoryCode; // 카테고리(분야) 코드
+
     final Policy policies = widget.policies;
     // final size = MediaQuery.of(context).size;
     // final policyBloc = BlocProvider.of<PolicyBloc>(context);
+
     final String imgName = policies.img;
     final String imgUrl =
         "images/policy/$imgName"; //"app/src/public/upload/policy/$imgName";
@@ -542,10 +559,14 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
     final String startDate = '$startDateYear.$startDateMonth.$startDateDay';
     final String endDate = '$endDateYear.$endDateMonth.$endDateDay';
 
-    final String institutionCode = policies.policy_institution_code; // 기관 코드
-    final String targetCode = policies.policy_target_code; // 적용 대상 코드
-    final String fieldCode = policies.policy_field_code; // 분야 코드
-    final String characterCode = policies.policy_character_code;
+    // var test;
+
+    // final data = codeService.getCodeData().then((value) {
+    //   test = value['codes']['policy_institution_code'][0]['code_detail_name'];
+    //   print(test);
+    //   return test;
+    // });
+    // print(test);
 
     return Padding(
         padding: const EdgeInsets.fromLTRB(3, 3, 3, 0), // 카드 바깥쪽
@@ -583,9 +604,8 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      // test,
-                                      // institution,
-                                      policies.policy_institution_code,
+                                      policyInstitution,
+                                      // policies.policy_institution_code,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
@@ -625,8 +645,8 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                                     ),
 
                                     Text(
-                                      // field,
-                                      policies.policy_field_code,
+                                      policyField,
+                                      // policies.policy_field_code,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
