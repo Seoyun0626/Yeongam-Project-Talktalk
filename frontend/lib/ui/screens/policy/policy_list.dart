@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter_html/style.dart';
+import 'package:login/data/env/env.dart';
 import 'package:login/domain/models/response/response_code.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/code_service.dart';
@@ -543,8 +544,7 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
     // final policyBloc = BlocProvider.of<PolicyBloc>(context);
 
     final String imgName = policies.img;
-    final String imgUrl =
-        "images/policy/$imgName"; //"app/src/public/upload/policy/$imgName";
+    final String imgUrl = '${Environment.urlApiServer}/upload/policy/$imgName';
 
     // 모집 기간
     final String startDateYear =
@@ -590,10 +590,14 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                             // 이미지
                             width: 80.0,
                             height: 80.0,
-                            child: Image(
-                              image: AssetImage(imgUrl),
-                              fit: BoxFit.fitWidth,
+                            child: Image.network(
+                              imgUrl,
+                              fit: BoxFit.fill,
                             ),
+                            // Image(
+                            //   image: AssetImage(imgUrl),
+                            //   fit: BoxFit.fitWidth,
+                            // ),
                           ),
                         ),
                         Expanded(

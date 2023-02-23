@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
 import 'package:login/domain/blocs/user/user_bloc.dart';
 import 'package:login/domain/models/response/response_policy.dart';
@@ -205,16 +206,21 @@ class BannerSlide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bannerImgName = policyBanners.banner_img;
-    final bannerImgUrl = "images/banner/$bannerImgName";
+
+    //app/src/public/upload/policy
+    final bannerImgUrl =
+        '${Environment.urlApiServer}/upload/banner/$bannerImgName';
+    // final bannerImgUrl = "images/banner/$bannerImgName";
     final bannerLink = policyBanners.banner_link;
     // print(bannerImgUrl);
 
     return InkWell(
-      onTap: () {
-        launchUrl(Uri.parse(bannerLink));
-      },
-      child: Image.asset(bannerImgUrl, fit: BoxFit.fitWidth),
-    );
+        onTap: () {
+          launchUrl(Uri.parse(bannerLink));
+        },
+        child: Image.network(
+            bannerImgUrl) //Image.asset(bannerImgUrl, fit: BoxFit.fitWidth),
+        );
 
     // CarouselSlider(
     //     carouselController: _bannerController,
