@@ -69,23 +69,23 @@ exports.getCodeData = async function(req, res) {
       conn = await db.getConnection();
       // 공통코드별로 상세코드를 가져와 json으로 만들어서 리턴
       var json = {};
-      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 1";
+      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = '01'";
       json.user_type = await conn.query(query); // 쿼리 실행
-      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 2";
+      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = '02'";
       json.youthAge_code = await conn.query(query);
-      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 3";
+      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = '03'";
       json.parentsAge_code = await conn.query(query);
-      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 4";
+      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = '04'";
       json.sex_class_code = await conn.query(query);
-      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 5";
+      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = '05'";
       json.emd_class_code = await conn.query(query);
-      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 6";
+      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = '06'";
       json.policy_target_code = await conn.query(query);
-      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 7";
+      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = '07'";
       json.policy_institution_code = await conn.query(query);
-      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 8";
+      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = '08'";
       json.policy_field_code = await conn.query(query);
-      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 9";
+      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = '09'";
       json.policy_character_code = await conn.query(query);
       var query = "select code,code_name,code_english_name, code_desc, code_use_yn from webdb.tb_common_code;"
       json.code_data_name = await conn.query(query);

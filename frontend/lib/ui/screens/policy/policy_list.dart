@@ -56,7 +56,7 @@ class _PolicyListPageState extends State<PolicyListPage> {
                   child: Column(
                 children: <Widget>[
                   const SearchBar(), // 검색창
-                  const selectedSearchFilter(), // 기본 카테고리 선택
+                  // const selectedSearchFilter(), // 기본 카테고리 선택
 
                   Expanded(
                     child: ListView(

@@ -363,22 +363,32 @@ class livePopularPost extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         margin: const EdgeInsets.all(20),
         child: Column(children: [
-          Row(children: const [
-            Icon(
-              Icons.auto_awesome,
-              color: ThemeColors.darkGreen,
-            ),
-            // Image.asset('images/icon_sparkel.png'),
-            SizedBox(
-              width: 5,
-            ),
-            Text('지금 인기있는 정책은?',
-                style: TextStyle(
-                  color: ThemeColors.basic,
-                  fontSize: 19,
-                  fontWeight: FontWeight.w600,
+          InkWell(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PolicyListPage(
+                    categoryName: '',
+                    categoryValue: '',
+                  ), // 복지검색 탭
                 )),
-          ]),
+            child: Row(children: const [
+              Icon(
+                Icons.auto_awesome,
+                color: ThemeColors.darkGreen,
+              ),
+              // Image.asset('images/icon_sparkel.png'),
+              SizedBox(
+                width: 5,
+              ),
+              Text('지금 인기있는 정책은?',
+                  style: TextStyle(
+                    color: ThemeColors.basic,
+                    fontSize: 19,
+                    fontWeight: FontWeight.w600,
+                  )),
+            ]),
+          ),
           const SizedBox(
             height: 7,
           ),
