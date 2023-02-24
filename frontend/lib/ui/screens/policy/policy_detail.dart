@@ -29,6 +29,7 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
     final String fieldCode = policies.policy_field_code; // 분야 코드
     final String characterCode = policies.policy_character_code;
 
+    // 수정 필요
     codeService.getCodeData().then((value) {
       setState(() {
         var institutionLen = value['codes']['policy_institution_code'].length;
