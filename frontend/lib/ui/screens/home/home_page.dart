@@ -210,7 +210,7 @@ class BannerSlide extends StatelessWidget {
     //app/src/public/upload/policy
     final bannerImgUrl =
         '${Environment.urlApiServer}/upload/banner/$bannerImgName';
-    print(bannerImgUrl);
+    // print(bannerImgUrl);
     // final bannerImgUrl = "images/banner/$bannerImgName";
     final bannerLink = policyBanners.banner_link;
     // print(bannerImgUrl);

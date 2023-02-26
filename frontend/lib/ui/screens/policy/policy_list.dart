@@ -483,7 +483,7 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
             var codeDetailName = value['codes']['policy_institution_code'][i]
                 ['code_detail_name'];
             policyInstitution = codeDetailName;
-            print(policyInstitution);
+            // print(policyInstitution);
           }
         }
 
