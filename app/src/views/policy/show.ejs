@@ -24,7 +24,6 @@
                 <tr>
                     <th>정책 번호</th>
                     <th>정책 이름</th>
-                    <th>정책 내용</th>
                     <th>정책 대상</th>
                     <th>접수 시작일</th>
                     <th>접수 마감일</th>
@@ -37,8 +36,8 @@
               <tr>
                 <td><%= i+1 %></td>
                 <td><%= posts[i].policy_name %></td>
-                <td><%= posts[i].description %></td>
-                <td><%= posts[i].policy_target_code %></td>
+                <!-- <td><%= posts[i].policy_target_code %></td> -->
+                <td><%= codeName(posts[i].policy_target_code,code_data).policy_target_code_name %></td>
                 <td><%= `${posts[i].application_start_date.getFullYear()}` + `-`+ `${posts[i].application_start_date.getMonth()+1}` + `-`+ `${posts[i].application_start_date.getDate()}`%></td>
                 <td><%= `${posts[i].application_end_date.getFullYear()}` + `-`+ `${posts[i].application_end_date.getMonth()+1}` + `-`+ `${posts[i].application_end_date.getDate()}`%></td>
                 <td><a href="/admin/policy/update/<%=posts[i].board_idx %>">수정</a></td>

@@ -26,15 +26,7 @@
           <div class="four wide field">
             <input type="text" name="name" id="policy_name" value="<%= post.policy_name %>">
           </div>
-      </div>
-      <br>
-      <div class="ui form">
-        <div class="inline fields">
-          <label>정책 설명</label>
-          <div class="four wide field">
-            <input type="text" name="description" id="policy_description" value="<%= post.description %>">
-          </div>
-          <label>지원금</label>
+          <label>지원금&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
           <div class="four wide field">
             <input type="text" name="fund" id="fund" value="<%= post.fund %>">
           </div>
@@ -48,7 +40,11 @@
           <div class="four wide field">
               <select class="ui fluid dropdown" name="target" id="target">
                 <%for(var i=0; i<code_data.policy_target_code.length; i++){%>
-                  <option value="<%=code_data.policy_target_code[i].code_detail%>"><%=code_data.policy_target_code[i].code_detail_name%></option>
+                  <%if(code_data.policy_target_code[i].code_detail == post.policy_target_code){%>
+                    <option value="<%=code_data.policy_target_code[i].code_detail%>" selected><%=code_data.policy_target_code[i].code_detail_name%></option>
+                  <%}else{%>
+                    <option value="<%=code_data.policy_target_code[i].code_detail%>"><%=code_data.policy_target_code[i].code_detail_name%></option>
+                  <%}%>
                 <%}%>
               </select>
           </div>
@@ -56,7 +52,11 @@
           <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_institution_code" id="policy_institution_code">
               <%for(var i=0; i<code_data.policy_institution_code.length; i++){%>
-                <option value="<%=code_data.policy_institution_code[i].code_detail%>"><%=code_data.policy_institution_code[i].code_detail_name%></option>
+                <%if(code_data.policy_institution_code[i].code_detail == post.policy_institution_code){%>
+                  <option value="<%=code_data.policy_institution_code[i].code_detail%>" selected><%=code_data.policy_institution_code[i].code_detail_name%></option>
+                <%}else{%>
+                  <option value="<%=code_data.policy_institution_code[i].code_detail%>"><%=code_data.policy_institution_code[i].code_detail_name%></option>
+                <%}%>
               <%}%>
             </select>
           </div>
@@ -67,11 +67,11 @@
         <div class="inline fields">
           <label>접수 시작</label>
           <div class="four wide field">
-            <input type="date" name="application_start_date" id="policy_application_start_date">
+            <input type="date" name="application_start_date" id="policy_application_start_date" value="<%=start_date%>">
           </div>
           <label>접수 마감</label>
           <div class="four wide field">
-            <input type="date" name="application_end_date" id="policy_application_end_date">
+            <input type="date" name="application_end_date" id="policy_application_end_date" value="<%=end_date%>">
           </div>
         </div>
       </div>
@@ -82,15 +82,23 @@
           <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_field_code" id="policy_field_code">
               <%for(var i=0; i<code_data.policy_field_code.length; i++){%>
-                <option value="<%=code_data.policy_field_code[i].code_detail%>"><%=code_data.policy_field_code[i].code_detail_name%></option>
+                <%if(code_data.policy_field_code[i].code_detail == post.policy_field_code){%>
+                  <option value="<%=code_data.policy_field_code[i].code_detail%>" selected><%=code_data.policy_field_code[i].code_detail_name%></option>
+                <%}else{%>
+                  <option value="<%=code_data.policy_field_code[i].code_detail%>"><%=code_data.policy_field_code[i].code_detail_name%></option>
+                <%}%>
               <%}%>
             </select>
           </div>
           <label>정책 성격</label>
           <div class="four wide field">
             <select class="ui fluid dropdown" name="policy_character_code" id="policy_character_code">
-              <%for(var i=0; i<code_data.policy_character_code.length; i++){%>
-                <option value="<%=code_data.policy_character_code[i].code_detail%>"><%=code_data.policy_character_code[i].code_detail_name%></option>
+              <% for(var i=0; i<code_data.policy_character_code.length; i++){%>
+                <%if(code_data.policy_character_code[i].code_detail == post.policy_character_code){%>
+                  <option value="<%=code_data.policy_character_code[i].code_detail%>" selected><%=code_data.policy_character_code[i].code_detail_name%></option>
+                <%}else{%>
+                  <option value="<%=code_data.policy_character_code[i].code_detail%>"><%=code_data.policy_character_code[i].code_detail_name%></option>
+                <%}%>
               <%}%>
             </select>
           </div>
@@ -99,9 +107,18 @@
       <br>
       <div class="ui form">
         <div class="inline fields">
+          <label>정책 링크</label>
+          <div class="nine wide field">
+            <input type="text" name="policy_link" id="policy_link" value="<%= post.policy_link %>">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="ui form">
+        <div class="inline fields">
           <label>정책 사진</label>
           <div class="nine wide field">
-            <input type="file" name="imgFile" id="policy_imgFile" accept="image/*">
+            <input type="file" name="imgFile" id="policy_imgFile" accept="image/*" src="<%= post.img%>">
           </div>
         </div>
 
@@ -110,13 +127,19 @@
           <textarea name="content" id="editor"></textarea>
           <script>
             // 3. CKEditor5를 생성할 textarea 지정
+            // db에 저장된 데이터를 가져와서 textarea에 넣는다.
             ClassicEditor
                 .create( document.querySelector( '#editor' ), {
                   language: "ko",
-                  simpleUpload: {
-                    uploadUrl: '/upload/image',
-                    withCredentials: true,
-                  }
+                  plugins: [ 'Essentials', 'Paragraph', 'Bold', 'Italic', 'Link' ]
+                } )
+                // textarea에 db에 저장된 내용을 불러온다.
+                .then( editor => {
+                    const content = "<%= content %>";
+                    const parser = new DOMParser();
+                    const decodedContent = parser.parseFromString(`<!doctype html><body>${content}`, 'text/html').body.textContent;
+
+                    editor.setData( decodedContent );
                 } )
                 .catch( error => {
                     console.error( error );
@@ -140,11 +163,6 @@
                     alert("이름을 입력해주세요.");
                     // 마우스를 name에 놓는다.
                     document.getElementById("policy_name").focus();
-                    return false;
-                  }
-                  if(document.getElementById("policy_description").value == ""){
-                    alert("정책 설명을 입력해주세요.");
-                    document.getElementById("policy_description").focus();
                     return false;
                   }
                   if(document.getElementById("fund").value == ""){

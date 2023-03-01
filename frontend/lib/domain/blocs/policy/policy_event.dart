@@ -4,10 +4,10 @@ part of 'policy_bloc.dart';
 abstract class PolicyEvent {}
 
 // 이미지 선택
-class OnSelectedImageEvent extends PolicyEvent {
-  final File imageSelected;
-  OnSelectedImageEvent(this.imageSelected);
-}
+// class OnSelectedImageEvent extends PolicyEvent {
+//   final File imageSelected;
+//   OnSelectedImageEvent(this.imageSelected);
+// }
 
 // 정책 검색
 class OnIsSearchPolicyEvent extends PolicyEvent {
@@ -16,6 +16,12 @@ class OnIsSearchPolicyEvent extends PolicyEvent {
   OnIsSearchPolicyEvent(this.isSearchPolicy);
 }
 
+// 정책 검색 조건 선택
+// class OnIsSelectPolicyEvent extends PolicyEvent {
+//   final bool isSelectPolicy;
+
+//   OnIsSelectPolicyEvent(this.isSelectPolicy);
+// }
 
 // // 정책 스크랩
 // class OnScrapEvent extends PolicyEvent {

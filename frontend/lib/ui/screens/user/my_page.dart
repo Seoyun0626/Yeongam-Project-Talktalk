@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/domain/models/response/response_user.dart';
+import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/domain/blocs/blocs.dart';
@@ -24,17 +25,18 @@ class _MyPageState extends State<MyPage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('청소년톡talk',
+          title: const Text('마이 페이지',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
               )),
-          // leading: IconButton(
-          //   icon: Image.asset("images\aco.png", width: 50, height: 50),
-          //   onPressed: () =>
-          //       Navigator.push(context, routeSlide(page: const LoginPage())),
-          // ),
+          leading: IconButton(
+              icon: const Icon(Icons
+                  .arrow_back_ios), //Image.asset("images\aco.png", width: 50, height: 50),
+              onPressed: () => Navigator.pop(context)
+              // Navigator.push(context, routeSlide(page: const LoginPage())),
+              ),
           // actions: [
           //   IconButton(
           //     icon: const Icon(Icons.perm_identity),
@@ -58,7 +60,7 @@ class _MyPageState extends State<MyPage> {
               children: [
                 const SizedBox(height: 50.0),
                 const TextCustom(
-                    text: 'MainPage',
+                    text: 'MyPage',
                     letterSpacing: 1.5,
                     fontWeight: FontWeight.w500,
                     fontSize: 28,
@@ -71,8 +73,9 @@ class _MyPageState extends State<MyPage> {
                   onPressed: () {
                     authBloc.add(OnLogOutEvent());
                     userBloc.add(OnLogOutUser());
+                    // Navigator.pop(context);
                     Navigator.pushAndRemoveUntil(context,
-                        routeSlide(page: const MyPage()), (_) => false);
+                        routeFade(page: const HomePage()), (_) => false);
                   },
                 ),
                 const SizedBox(height: 30.0),

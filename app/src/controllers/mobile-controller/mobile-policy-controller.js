@@ -25,6 +25,16 @@ exports.getSearchPolicy = async function(req, res) {
   }
 }
 
+exports.getPolicyBySelect = async function(req, res) {
+  try{
+    var result = await policy_service.getPolicyBySelect(req, res);
+    console.log('mobile-policy-controller getPolicyBySelect');
+    return result;
+  } catch (error){
+    console.log('policy-controller getPolicyBySelect:'+error);
+  }
+}
+
 exports.getAllPolicyForSearch = async function(req, res) {
   try{
       var result = await policy_service.getAllPolicyForSearch(req,res);

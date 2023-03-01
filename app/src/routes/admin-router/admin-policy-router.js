@@ -4,6 +4,9 @@ var router = express.Router();
 var policy_controller = require("../../controllers/common-controller/policy-controller");
 var code_controller = require("../../controllers/common-controller/codeData-controller");
 
+var codeName = require('../../public/js/home/getCodeName');
+const { json } = require("body-parser");
+
 // const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 router.get('/show', async function (req, res) {
     try{
@@ -25,11 +28,14 @@ router.get('/show', async function (req, res) {
             totalPage = Math.ceil(result.length/pageSize);
             result = result.slice(start, end); //현재 페이지에 해당하는 회원 정보만 가져옴
         }
+        var code_data = await code_controller.getPolicyName();
         res.render('policy/show', {
             posts:result,
             user:req.user,
             page:crtpage, //현재 페이지
-            totalPage: totalPage //총 페이지 수
+            totalPage: totalPage, //총 페이지 수
+            code_data:code_data,
+            codeName:codeName.policy_code_to_name //정책 대상만 설정 해 놨음
         });
     } catch(error) {
         console.log('policy-router show error:'+error);
@@ -55,6 +61,7 @@ router.get('/upload', async function (req, res) {
 router.post('/upload', async function (req, res) {
     try{
         // DB에 저장
+        console.log(req.body);
         var result = await policy_controller.upload(req,res);
         console.log('router-upload', result);
         if(result == 0) { //성공
@@ -70,11 +77,24 @@ router.post('/upload', async function (req, res) {
 
 router.get('/update/:id', async function(req, res){
     try{
-      var result = await policy_controller.fetchpolicyByidx(req, res);
-      var code_data = await code_controller.getCodeData(req, res);
-      res.render('policy/policy-update', {
-        post:result[0],
-        code_data:code_data
+        var result = await policy_controller.fetchpolicyByidx(req, res);
+        // 접수 기간
+        var start_month = result[0].application_start_date.getMonth()+1;
+        if(start_month < 10) start_month = '0'+start_month;
+        var start_date = result[0].application_start_date.getFullYear()+'-'+start_month+'-'+result[0].application_start_date.getDate();
+        var end_month = result[0].application_end_date.getMonth()+1;
+        if(end_month < 10) end_month = '0'+end_month;
+        var end_date = result[0].application_end_date.getFullYear()+'-'+end_month+'-'+result[0].application_end_date.getDate();
+        var code_data = await code_controller.getCodeData(req, res);
+        // console.log(result[0].img);
+        var content = result[0].content;
+        // content를 string으로 변환
+        res.render('policy/policy-update', {
+            post:result[0],
+            code_data:code_data,
+            start_date:start_date,
+            end_date:end_date,
+            content:content
     });
     } catch(error) {
       console.log('policy-router update error:'+error);

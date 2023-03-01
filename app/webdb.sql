@@ -39,6 +39,7 @@ CREATE TABLE webdb.`tb_policy` (
   `policy_field_code` varchar(2) NOT NULL,
   `policy_character_code` varchar(2) NOT NULL,
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
+  `policy_link` varchar(100) NULL,
   `application_start_date` timestamp NULL,
   `application_end_date` timestamp NULL,
   `scrap` int(4) NOT NULL DEFAULT '0',

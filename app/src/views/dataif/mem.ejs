@@ -51,7 +51,8 @@
                         <label>이메일</label>
                     </div>
                 </li> -->
-                <li><div>검색어
+                <li>
+              <div>검색어
                 <select>
                     <!-- <option value="name">이름</option> -->
                     <option value="id">아이디</option>
@@ -87,8 +88,8 @@
               <td><%= posts[i].userid %></td>
               <td><%= posts[i].name %></td>
               <td><%= role_code_to_class(posts[i].user_role) %></td>
-              <td><%= emd_code_to_name(posts[i].emd_class_code) %></td>
-              <td><%= age_code_to_class(posts[i].user_type) %></td>
+              <td><%= emd_code_to_name(posts[i].emd_class_code,code_data) %></td>
+              <td><%= user_type_to_name(posts[i].user_type,code_data) %></td>
               <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
               <td><%= `${posts[i].upd_date.getFullYear()}` + `-`+ `${posts[i].upd_date.getMonth()+1}` + `-`+ `${posts[i].upd_date.getDate()}`%></td>
               <!-- <td><%= posts[i].push_yn %></td>

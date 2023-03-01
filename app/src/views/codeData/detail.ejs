@@ -38,13 +38,27 @@
                         <td><%=code_data[i].code_detail_name%> </td>
                         <td><%=code_data[i].code_detail_desc%> </td>
                         <td><%=code_data[i].code_detail_use_yn%> </td>
-                        <td><a href="/admin/codeData/detail/?<%=params%>:<%=code_data[i].code_detail %>">수정</a></td>
-                    </tr>  
+                        <td><a href="/admin/codeData/detail/update/:<%=params%>:<%=code_data[i].code_detail %>">수정</a></td>
+                    </tr> 
                 <% } %>
+                <tr>
+                    <form action="/admin/codeData/detail/insert/:<%=params%>" method="post">
+                    <td><%= Number(code_data[code_data.length-1].code_detail) + 1 %></td>
+                    <td><input type="text" id="code_detail_name" name="code_detail_name" value=""></td>
+                    <td><input type="text" id="code_detail_desc" name="code_detail_desc" value=""></td>
+                    <td>
+                        <select name="code_detail_use_yn" id="code_detail_use_yn">
+                            <option value="Y">Y</option>
+                            <option value="N">N</option>
+                        </select>
+                    </td>
+                    <td><button id="code_detail_regist_btn" type="submit">등록</button></td>
+                    </form>
+                </tr>
             </tbody>
         </table>
         <br>
-        <button id="code_detail_regist_btn" class="ui button">등록</button>
+        <!-- <button id="code_detail_regist_btn" class="ui button" onclick="">등록</button> -->
     </div>
 </section>
 </div>

@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
           // print(context);
           // print(state);
           // print('login-page');
-          // modalWarning(context, '로그인 실패');
+          modalWarning(context, '로그인 실패');
 
           Navigator.pop(context);
           modalWarning(context, '다시 로그인해주세요');
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
 
           errorMessageSnack(context, state.error);
         } else if (state is SuccessAuthentication) {
-          print(state);
+          // print(state);
           userBloc.add(OnGetUserAuthenticationEvent());
           Navigator.pop(context);
           Navigator.pushAndRemoveUntil(

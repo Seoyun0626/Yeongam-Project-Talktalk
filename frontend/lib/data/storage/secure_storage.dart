@@ -8,9 +8,9 @@ class SecureStorageYeongam {
   }
 
   Future<String?> readToken() async {
-    print('secure_storage.dart : readToken');
+    // print('secure_storage.dart : readToken');
     var result = await secureStorage.read(key: 'token');
-    print(result);
+    // print(result);
     return result;
   }
 

@@ -122,6 +122,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "filter_list",
+      "rootUri": "file:///C:/Users/USER/Downloads/flutter_windows_3.3.10-stable/flutter/.pub-cache/hosted/pub.dartlang.org/filter_list-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///C:/Users/USER/Downloads/flutter_windows_3.3.10-stable/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -692,7 +698,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-02-19T07:16:27.332689Z",
+  "generated": "2023-03-01T09:47:12.961610Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }

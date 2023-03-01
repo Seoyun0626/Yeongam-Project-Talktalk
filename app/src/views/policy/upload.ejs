@@ -26,15 +26,7 @@
           <div class="four wide field">
             <input type="text" name="name" id="name" placeholder="정책 이름">
           </div>
-      </div>
-      <br>
-      <div class="ui form">
-        <div class="inline fields">
-          <label>정책 설명</label>
-          <div class="four wide field">
-            <input type="text" name="description" id="description" placeholder="정책 설명">
-          </div>
-          <label>지원금</label>
+          <label>지원금&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
           <div class="four wide field">
             <input type="text" name="fund" id="fund" placeholder="지원금">
           </div>
@@ -99,6 +91,15 @@
       <br>
       <div class="ui form">
         <div class="inline fields">
+          <label>정책 링크</label>
+          <div class="nine wide field">
+            <input type="text" name="policy_link" id="policy_link" placeholder="정책 링크">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="ui form">
+        <div class="inline fields">
           <label>정책 사진</label>
           <div class="nine wide field">
             <input type="file" name="imgFile" id="imgFile" accept="image/*">
@@ -139,11 +140,6 @@
                     alert("이름을 입력해주세요.");
                     // 마우스를 name에 놓는다.
                     document.getElementById("name").focus();
-                    return false;
-                  }
-                  if(document.getElementById("description").value == ""){
-                    alert("정책 설명을 입력해주세요.");
-                    document.getElementById("description").focus();
                     return false;
                   }
                   if(document.getElementById("fund").value == ""){

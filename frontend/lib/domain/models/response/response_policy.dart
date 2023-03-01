@@ -43,7 +43,7 @@ class Policy {
   int fund; // 지원금
   String content; // 상세내용
   String img; // 정책 대표 이미지
-  // String policy_link; // 정책 신청 링크
+  String policy_link; // 정책 신청 링크
 
   Policy({
     required this.policy_institution_code,
@@ -58,24 +58,23 @@ class Policy {
     required this.views,
     required this.content,
     required this.img,
-    // required this.policy_link,
+    required this.policy_link,
   });
 
   factory Policy.fromJson(Map<String, dynamic> json) => Policy(
-        application_start_date: json["application_start_date"],
-        application_end_date: json["application_end_date"],
-        img: json["img"],
-        policy_name: json["policy_name"],
-        policy_target_code: json["policy_target_code"],
-        content: json["content"],
-        policy_institution_code: json["policy_institution_code"],
-        policy_character_code: json["policy_character_code"],
-        policy_field_code: json["policy_field_code"],
-        scrap: json["scrap"],
-        views: json["views"],
-        fund: json["fund"],
-        // policy_link: json["policy_link"]
-      );
+      application_start_date: json["application_start_date"],
+      application_end_date: json["application_end_date"],
+      img: json["img"],
+      policy_name: json["policy_name"],
+      policy_target_code: json["policy_target_code"],
+      content: json["content"],
+      policy_institution_code: json["policy_institution_code"],
+      policy_character_code: json["policy_character_code"],
+      policy_field_code: json["policy_field_code"],
+      scrap: json["scrap"],
+      views: json["views"],
+      fund: json["fund"],
+      policy_link: json["policy_link"]);
 
   Map<String, dynamic> toJson() => {
         "policy_supervision": policy_institution_code,
@@ -90,6 +89,6 @@ class Policy {
         "fund": fund,
         "content": content,
         "img:": img,
-        // "policy_link": policy_link
+        "policy_link": policy_link
       };
 }

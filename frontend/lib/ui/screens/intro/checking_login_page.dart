@@ -52,44 +52,49 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LogOut) {
+          print(state);
           Navigator.pushAndRemoveUntil(
-              context, routeSlide(page: const HomePage()), (_) => false);
+              context, routeFade(page: const HomePage()), (_) => false);
         } else if (state is SuccessAuthentication) {
+          print(state);
           userBloc.add(OnGetUserAuthenticationEvent());
           Navigator.pushAndRemoveUntil(
-              context, routeSlide(page: const HomePage()), (_) => false);
+              context, routeFade(page: const HomePage()), (_) => false);
         }
       },
       child: Scaffold(
-        body: Container(
+        body: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: const BoxDecoration(
-            color: Colors.red,
-            gradient: LinearGradient(begin: Alignment.bottomCenter, colors: [
-              ThemeColors.secondary,
-              ThemeColors.primary,
-              Colors.white
-            ]),
+          child: Image.asset(
+            'images/splash.png',
+            fit: BoxFit.fill,
           ),
-          child: Center(
-            child: SizedBox(
-              height: 200,
-              width: 150,
-              child: Column(
-                children: [
-                  AnimatedBuilder(
-                      animation: _animationController,
-                      builder: (_, child) => Transform.scale(
-                            scale: _scaleAnimation.value,
-                            // child: Image.asset('assets/img/yeongam_logo.jpeg')
-                          )),
-                  const SizedBox(height: 10.0),
-                  const TextCustom(text: '확인중...', color: Colors.white)
-                ],
-              ),
-            ),
-          ),
+
+          // decoration: const BoxDecoration(
+          //   color: Colors.red,
+          //   gradient: LinearGradient(begin: Alignment.bottomCenter, colors: [
+          //     ThemeColors.secondary,
+          //     ThemeColors.primary,
+          //     Colors.white
+          //   ]),
+          // ),
+          // Center(
+          //   child: SizedBox(
+          //     height: 200,
+          //     width: 150,
+
+          // child: Column(
+          //   children: [
+          //     AnimatedBuilder(
+          //         animation: _animationController,
+          //         builder: (_, child) => Transform.scale(
+          //               scale: _scaleAnimation.value,
+          //               // child: Image.asset('assets/img/yeongam_logo.jpeg')
+          //             )),
+          //     const SizedBox(height: 10.0),
+          //     const TextCustom(text: '확인중...', color: Colors.black)
+          //   ],
         ),
       ),
     );

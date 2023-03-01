@@ -266,24 +266,9 @@ router.get('/policy/get-all-policy', async function(req, res){
 }
 });
 
-router.get('/policy/get-code-data', async function(req, res){
-  try{
-    var result = await mobile_codeData_controller.getCodeData(req, res);
-    console.log(result);
-    res.json({
-      resp:true,
-      message : 'get code data',
-      policies : result
-    })
-  } catch(error){
-    console.log('policy-router get-code-data error:'+error);
-    res.json({
-      resp:false,
-      message : 'Failure get code data'
-    })
-  }
-});
 
+
+// 정책 텍스트-제목 검색
 router.get('/policy/get-search-policy/:searchValue', async function(req, res) {
   console.log('mobile-router', req.params.searchValue );
   try{
@@ -304,6 +289,54 @@ router.get('/policy/get-search-policy/:searchValue', async function(req, res) {
 }
 })
 
+// 검색 조건 선택 결과
+router.get('/policy/get-select-policy/:code', async function(req, res){
+  console.log('mobile-router get-select-policy', req.params.code);
+  try{
+    var result = await mobile_policy_controller.getPolicyBySelect(req,res);
+    // console.log('mobile-router get-all-policy result : ', result);
+    // res.render('policy/get-all-policy', {
+    //     posts:result,
+    //     user:req.user
+    // }
+    // );
+    res.json({
+      resp:true,
+      message : 'get all policies',
+      policies : result,
+    })
+} catch(error) {
+    console.log('policy-router get-all-policy error:'+error);
+    res.json({
+      resp:false,
+      message : 'Failure get all policies'
+    })
+}
+  
+
+})
+
+
+// 정책 코드
+router.get('/policy/get-code-data', async function(req, res){
+  try{
+    var result = await mobile_codeData_controller.getCodeData(req, res);
+    // console.log(result);
+    res.json({
+      resp:true,
+      message : 'get code data',
+      codes : result
+    })
+  } catch(error){
+    console.log('policy-router get-code-data error:'+error);
+    res.json({
+      resp:false,
+      message : 'Failure get code data'
+    })
+  }
+});
+
+// 필요없음
 router.get('/policy/get-all-policy-for-search', async function(req, res) {
   try{
     var result = await mobile_policy_controller.getAllPolicyForSearch(req,res);

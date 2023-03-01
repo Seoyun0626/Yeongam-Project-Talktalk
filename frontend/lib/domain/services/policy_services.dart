@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:login/data/env/env.dart';
+import 'package:login/data/storage/secure_storage.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/ui/helpers/debouncer.dart';
@@ -13,6 +14,7 @@ class PolicyServices {
   final StreamController<List<Policy>> _streamController =
       StreamController<List<Policy>>.broadcast();
   Stream<List<Policy>> get searchProducts => _streamController.stream;
+  Stream<List<Policy>> get selectProducts => _streamController.stream;
 
   Map<String, String> _setHeaders() =>
       {'Content-Type': 'application/json;charset=UTF-8', 'Charset': 'utf-8'};
@@ -26,7 +28,7 @@ class PolicyServices {
         headers:
             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
     // print('policy_services');
-    print(resp.body);
+    // print(resp.body);
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
 
@@ -67,17 +69,59 @@ class PolicyServices {
         .then((_) => timer.cancel());
   }
 
-  Future<List<Policy>> getAllPolicyForSearch() async {
+  Future<List<Policy>> getPolicyBySelect(String code) async {
+    //
     // final token = await secureStorage.readToken();
+    // print(token);
+    print('getPolicyBySelect');
 
     final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/policy/get-all-policy-for-search'),
+        Uri.parse('${Environment.urlApi}/policy/get-select-policy/' + code),
         headers:
-            _setHeaders() //{'Accept': 'application/json'} //, 'xxx-token' : token!}
-        );
+            _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
 
+    // print('policy_services');
+    // print(resp.body);
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
+
+  void selectPolicy(String code) async {
+    //Future<List<Policy>>
+    // final token = await secureStorage.readToken();
+    // print(token);
+    print('getPolicyBySelect');
+    debouncer.value = "";
+    debouncer.onValue = (value) async {
+      final resp = await http.get(
+          Uri.parse('${Environment.urlApi}/policy/get-select-policy/' + code),
+          headers:
+              _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
+      final listPolicies =
+          ResponsePolicy.fromJson(json.decode(resp.body)).policies;
+
+      _streamController.add(listPolicies);
+    };
+
+    final timer =
+        Timer(const Duration(milliseconds: 200), () => debouncer.value = code);
+    Future.delayed(const Duration(milliseconds: 400))
+        .then((_) => timer.cancel());
+    // print('policy_services');
+    // print(resp.body);
+    // return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+  }
+
+  // Future<List<Policy>> getAllPolicyForSearch() async {
+  //   // final token = await secureStorage.readToken();
+
+  //   final resp = await http.get(
+  //       Uri.parse('${Environment.urlApi}/policy/get-all-policy-for-search'),
+  //       headers:
+  //           _setHeaders() //{'Accept': 'application/json'} //, 'xxx-token' : token!}
+  //       );
+
+  //   return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+  // }
 }
 
 final policyService = PolicyServices();
