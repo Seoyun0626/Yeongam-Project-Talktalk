@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/data/env/env.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/code_service.dart';
 import 'package:login/ui/themes/theme_colors.dart';
@@ -28,6 +29,7 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
     final String fieldCode = policies.policy_field_code; // 분야 코드
     final String characterCode = policies.policy_character_code;
 
+    // 수정 필요
     codeService.getCodeData().then((value) {
       setState(() {
         var institutionLen = value['codes']['policy_institution_code'].length;
@@ -93,8 +95,7 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
     final Policy policies = widget.policies;
     final String imgName = policies.img;
 
-    final String imgUrl = "images/policy/$imgName";
-    //"app/src/public/upload/policy/$imgName";
+    final String imgUrl = '${Environment.urlApiServer}/upload/policy/$imgName';
 
     final String policySupervison = policies.policy_institution_code;
     final String policyName = policies.policy_name;
@@ -147,9 +148,9 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                 child: Column(children: [
                   SizedBox(
                     width: size / 1.5,
-                    child: Image(
-                      image: AssetImage(imgUrl),
-                      fit: BoxFit.fitWidth,
+                    child: Image.network(
+                      imgUrl,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ]),

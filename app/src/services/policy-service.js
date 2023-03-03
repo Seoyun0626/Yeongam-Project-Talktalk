@@ -58,8 +58,8 @@ exports.updatePolicy = async function(req, res) {
         var upload = multer({ 
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
-                    cb(null, '../frontend/images/policy');
-                    // cb(null, '../app/src/public/upload/policy');
+                    // cb(null, '../frontend/images/policy');
+                    cb(null, '../app/src/public/upload/policy');
                 },
                 filename: function (req, file, cb) {
                     temp = temp + path.extname(file.originalname);
@@ -112,8 +112,8 @@ exports.upload = async function(req, res) {
         var upload = multer({ 
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
-                    cb(null, '../frontend/images/policy');
-                    // cb(null, '../app/src/public/upload/policy');
+                    // cb(null, '../frontend/images/policy');
+                    cb(null, '../app/src/public/upload/policy');
                     
                 },
                 filename: function (req, file, cb) {
@@ -143,6 +143,7 @@ exports.upload = async function(req, res) {
         var policy_field_code = req.body.policy_field_code;
         var policy_character_code = req.body.policy_character_code;
         var policy_link = req.body.policy_link;
+        console.log(req.body);
         if(name == null || name == undefined || name == '') {
             resultcode = 1;
             return resultcode;
@@ -195,8 +196,8 @@ exports.banner = async function(req, res) {
         var upload = multer({ 
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
-                    cb(null, '../frontend/images/banner');
-                    // cb(null, '../app/src/public/upload/banner');
+                    // cb(null, '../frontend/images/banner');
+                    cb(null, '../app/src/public/upload/banner');
                 },
                 filename: function (req, file, cb) {
                     temp = temp + path.extname(file.originalname);

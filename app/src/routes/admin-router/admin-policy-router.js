@@ -61,6 +61,7 @@ router.get('/upload', async function (req, res) {
 router.post('/upload', async function (req, res) {
     try{
         // DB에 저장
+        console.log(req.body);
         var result = await policy_controller.upload(req,res);
         console.log('router-upload', result);
         if(result == 0) { //성공
