@@ -80,10 +80,15 @@ router.get('/update/:id', async function(req, res){
         // 접수 기간
         var start_month = result[0].application_start_date.getMonth()+1;
         if(start_month < 10) start_month = '0'+start_month;
-        var start_date = result[0].application_start_date.getFullYear()+'-'+start_month+'-'+result[0].application_start_date.getDate();
+        var start_date = result[0].application_start_date.getDate();
+        if(start_date < 10) start_date = '0'+start_date;
+        var start_day = result[0].application_start_date.getFullYear()+'-'+start_month+'-'+start_date;
+
         var end_month = result[0].application_end_date.getMonth()+1;
         if(end_month < 10) end_month = '0'+end_month;
-        var end_date = result[0].application_end_date.getFullYear()+'-'+end_month+'-'+result[0].application_end_date.getDate();
+        var end_date = result[0].application_end_date.getDate();
+        if(end_date < 10) end_date = '0'+end_date;
+        var end_day = result[0].application_end_date.getFullYear()+'-'+end_month+'-'+end_date;
         var code_data = await code_controller.getCodeData(req, res);
         // console.log(result[0].img);
         var content = result[0].content;
@@ -91,8 +96,8 @@ router.get('/update/:id', async function(req, res){
         res.render('policy/policy-update', {
             post:result[0],
             code_data:code_data,
-            start_date:start_date,
-            end_date:end_date,
+            start_date:start_day,
+            end_date:end_day,
             content:content
     });
     } catch(error) {

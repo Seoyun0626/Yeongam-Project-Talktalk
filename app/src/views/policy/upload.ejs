@@ -26,14 +26,22 @@
           <div class="four wide field">
             <input type="text" name="name" id="name" placeholder="정책 이름">
           </div>
+        </div>
+      </div>
+      <br>
+      <div class="ui form">
+        <div class="inline fields">
           <label>지원금&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
           <div class="four wide field">
-            <input type="text" name="fund" id="fund" placeholder="지원금">
+            <input type="text" name="min_fund" id="min_fund" placeholder="최소 금액">
+          </div>
+          <label>~</label>
+          <div class="four wide field">
+            <input type="text" name="max_fund" id="max_fund" placeholder="최대 금액">
           </div>
         </div>
       </div>
       <br>
-
       <div class="ui form">
         <div class="inline fields">
           <label>정책 대상</label>
@@ -142,15 +150,26 @@
                     document.getElementById("name").focus();
                     return false;
                   }
-                  if(document.getElementById("fund").value == ""){
+                  if(document.getElementById("min_fund").value == ""){
                     alert("지원금을 입력해주세요.");
-                    document.getElementById("fund").focus();
+                    document.getElementById("min_fund").focus();
                     return false;
                   }
                   // 지원금이 숫자가 아니면
-                  if(isNaN(document.getElementById("fund").value)){
+                  if(isNaN(document.getElementById("min_fund").value)){
                     alert("지원금은 숫자만 입력해주세요.");
-                    document.getElementById("fund").focus();
+                    document.getElementById("min_fund").focus();
+                    return false;
+                  }
+                  if(document.getElementById("max_fund").value == ""){
+                    alert("지원금을 입력해주세요.");
+                    document.getElementById("max_fund").focus();
+                    return false;
+                  }
+                  // 지원금이 숫자가 아니면
+                  if(isNaN(document.getElementById("max_fund").value)){
+                    alert("지원금은 숫자만 입력해주세요.");
+                    document.getElementById("max_fund").focus();
                     return false;
                   }
                   if(document.getElementById("imgFile").value == ""){

@@ -26,14 +26,22 @@
           <div class="four wide field">
             <input type="text" name="name" id="policy_name" value="<%= post.policy_name %>">
           </div>
+        </div>
+      </div>
+      <br>
+      <div class="ui form">
+        <div class="inline fields">
           <label>지원금&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
           <div class="four wide field">
-            <input type="text" name="fund" id="fund" value="<%= post.fund %>">
+            <input type="text" name="min_fund" id="up_min_fund" value="<%= post.min_fund %>">
+          </div>
+          <label>~</label>
+          <div class="four wide field">
+            <input type="text" name="max_fund" id="up_max_fund" value="<%= post.max_fund %>">
           </div>
         </div>
       </div>
       <br>
-
       <div class="ui form">
         <div class="inline fields">
           <label>정책 대상</label>
@@ -131,14 +139,17 @@
             ClassicEditor
                 .create( document.querySelector( '#editor' ), {
                   language: "ko",
-                  plugins: [ 'Essentials', 'Paragraph', 'Bold', 'Italic', 'Link' ]
+                  simpleUpload: {
+                    uploadUrl: '/upload/image',
+                    withCredentials: true,
+                  }
+                  // plugins: [ 'Essentials', 'Paragraph', 'Bold', 'Italic', 'Link' ]
                 } )
                 // textarea에 db에 저장된 내용을 불러온다.
                 .then( editor => {
                     const content = "<%= content %>";
                     const parser = new DOMParser();
                     const decodedContent = parser.parseFromString(`<!doctype html><body>${content}`, 'text/html').body.textContent;
-
                     editor.setData( decodedContent );
                 } )
                 .catch( error => {
@@ -165,15 +176,25 @@
                     document.getElementById("policy_name").focus();
                     return false;
                   }
-                  if(document.getElementById("fund").value == ""){
+                  if(document.getElementById("min_fund").value == ""){
                     alert("지원금을 입력해주세요.");
-                    document.getElementById("fund").focus();
+                    document.getElementById("min_fund").focus();
                     return false;
                   }
                   // 지원금이 숫자가 아니면
-                  if(isNaN(document.getElementById("fund").value)){
+                  if(isNaN(document.getElementById("min_fund").value)){
                     alert("지원금은 숫자만 입력해주세요.");
-                    document.getElementById("fund").focus();
+                    document.getElementById("min_fund").focus();
+                    return false;
+                  }
+                  if(document.getElementById("max_fund").value == ""){
+                    alert("지원금을 입력해주세요.");
+                    document.getElementById("max_fund").focus();
+                    return false;
+                  }
+                  if(isNaN(document.getElementById("max_fund").value)){
+                    alert("지원금은 숫자만 입력해주세요.");
+                    document.getElementById("max_fund").focus();
                     return false;
                   }
                   if(document.getElementById("policy_imgFile").value == ""){
