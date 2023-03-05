@@ -119,6 +119,47 @@ exports.fetchDataByUserid = async function(req, res) {
   }
 };
 
+exports.excelData = async function(req, res,xlData) {
+  var conn;
+  var query;
+  var rows;
+  try{
+    conn = await db.getConnection();
+    //엑셀에 저장된 사용자 수
+    var total_length = xlData.length;
+    // 엑셀 파일 데이터 DB에 저장
+    for(var i=0; i<total_length; i++){
+      hasher({
+        password: xlData[i].password
+      }, async function(err, pass, salt, hash) {
+        if (err) throw err;
+        // Store the password, salt, and hash in the "db"
+        var userid = xlData[i].userid;
+        var password = hash;
+        var name = xlData[i].name;
+        var salt = salt;
+        var user_role = xlData[i].user_role;
+        var user_email = xlData[i].user_email;
+        var user_type = xlData[i].user_type;
+        var youthAge_code = xlData[i].youthAge_code;
+        var parentsAge_code = xlData[i].parentsAge_code;
+        var emd_class_code = xlData[i].emd_class_code;
+        var sex_class_code = xlData[i].sex_class_code;
+        var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code) values ('"+userid+"', '"+password+"', '"+name+"', '"+salt+"', '"+user_role+"', '"+user_email+"', '"+user_type+"', '"+youthAge_code+"', '"+parentsAge_code+"', '"+emd_class_code+"', '"+sex_class_code+"')";
+        rows = await conn.query(query); // 쿼리 실행
+      });
+    }
+    return rows;
+  } catch(error) {
+    console.log('dataif-service excelData:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+};
+      
+    
+
+
 exports.fetchDataSensor = async function(req, res) {
   var conn;
   try{

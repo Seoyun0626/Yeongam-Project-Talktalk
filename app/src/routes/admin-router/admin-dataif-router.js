@@ -1,5 +1,8 @@
 const path = require("path");
 var express = require("express");
+var json2xls = require('json2xls'); 
+var fs = require('fs');
+var XLSX = require('xlsx');
 var router = express.Router();
 //var checkAuth = require('../utils/checkauth');
 var dataif_controller = require("../../controllers/common-controller/dataif-controller");
@@ -199,6 +202,33 @@ router.put('/:id', async function(req, res){
     res.redirect("/dataif");
   } catch(error) {
     console.log('dataif-router update error:'+error);
+  }
+});
+
+router.get('/excel', async function(req, res){
+  try{
+    var result = await dataif_controller.fetchData(req, res);
+    // 엑셀로 다운로드
+    var xls = json2xls(result);
+    fs.writeFileSync('user_data.xlsx', xls, 'binary');
+    res.download('user_data.xlsx');
+    // res.redirect('/admin/dataif');
+  } catch(error) {
+    console.log('dataif-router / error:'+error);
+  }
+});
+
+router.get('/excelup', async function(req, res){
+  try{
+    // 엑셀 파일 읽기
+    var workbook = XLSX.readFile('user_data.xlsx');
+    var sheet_name_list = workbook.SheetNames;
+    var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+    // 엑셀 파일 데이터 DB에 저장
+    var result = await dataif_controller.excelData(req, res, xlData);
+    res.redirect('/admin/dataif');
+  } catch(error) {
+    console.log('dataif-router / error:'+error);
   }
 });
 
