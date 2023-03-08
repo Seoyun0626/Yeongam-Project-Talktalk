@@ -268,8 +268,7 @@ exports.getAllPolicy = async function(req, res) {
         var query = "SELECT * FROM webdb.tb_policy;";
         var rows = await conn.query(query); // 쿼리 실행
         // console.log(rows[0]);
-        // console.log(rows[1]);
-        // console.log(rows[2]); 
+
         // console.log(rows);
         return rows;
     } catch(error) {
@@ -278,6 +277,8 @@ exports.getAllPolicy = async function(req, res) {
         conn.release();
     }
 }
+
+
 
 
 

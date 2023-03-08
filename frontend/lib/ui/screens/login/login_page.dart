@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
 
           errorMessageSnack(context, state.error);
         } else if (state is SuccessAuthentication) {
-          // print(state);
+          print(state);
           userBloc.add(OnGetUserAuthenticationEvent());
           Navigator.pop(context);
           Navigator.pushAndRemoveUntil(

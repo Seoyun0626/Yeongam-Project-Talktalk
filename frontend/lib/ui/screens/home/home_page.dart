@@ -5,6 +5,8 @@ import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
 import 'package:login/domain/blocs/user/user_bloc.dart';
 import 'package:login/domain/models/response/response_policy.dart';
+import 'package:login/domain/services/policy_services.dart';
+import 'package:login/ui/screens/policy/policy_detail.dart';
 import 'package:login/ui/screens/policy/policy_list.dart';
 import 'package:login/ui/screens/user/my_page.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -37,10 +39,10 @@ class _HomePageState extends State<HomePage> {
         listener: (context, state) {
           if (state is SuccessAuthentication) {
             isLogin = true;
-            print(isLogin);
+            // print(isLogin);
           } else if (state is LogOut) {
             isLogin = false;
-            print(isLogin);
+            // print(isLogin);
           }
         },
         child: MaterialApp(
@@ -85,18 +87,6 @@ class _HomePageState extends State<HomePage> {
                               ));
                         }
                       }),
-                  // // 검색 페이지
-                  // IconButton(
-                  //   icon: const Icon(Icons.search,
-                  //       size: 30, color: ThemeColors.basic),
-                  //   // onPressed: () => Navigator.push(
-                  //   //     context, routeSlide(page: const SearchPage())),
-                  //   onPressed: () => Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: (context) => const SearchPage(),
-                  //       )),
-                  // )
                 ],
                 backgroundColor: ThemeColors.primary,
                 centerTitle: false,
@@ -140,18 +130,21 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      // buttonSection, // 카테고리 아이콘 메뉴
                       Container(
                           padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
                           margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
                           child: Column(children: [
                             Row(children: const [
-                              ImageIcon(
-                                AssetImage("images/icon_check.png"),
+                              Icon(
+                                Icons.category,
                                 color: ThemeColors.darkGreen,
-                                size: 20,
+                                size: 25,
                               ),
-                              // Image.asset('images/icon_sparkel.png'),
+                              // ImageIcon(
+                              //   AssetImage("images/icon_check.png"),
+                              //   color: ThemeColors.darkGreen,
+                              //   size: 20,
+                              // ),
                               SizedBox(
                                 width: 5,
                               ),
@@ -167,21 +160,75 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(
                         width: 5,
                       ),
+                      // 카테고리 아이콘
                       CategoryButton(),
-                      livePopularPost(),
-
-                      // 로그아웃 버튼
-                      BtnNaru(
-                        text: '로그아웃',
-                        colorText: Colors.black,
-                        width: size.width,
-                        onPressed: () {
-                          authBloc.add(OnLogOutEvent());
-                          userBloc.add(OnLogOutUser());
-                          Navigator.pushAndRemoveUntil(context,
-                              routeSlide(page: const HomePage()), (_) => false);
-                        },
+                      const SizedBox(
+                        height: 20,
                       ),
+                      // 실시간 인기글
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                        margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+                        child: InkWell(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const PolicyListPage(
+                                  categoryName: '',
+                                  categoryValue: '',
+                                ), // 복지검색 탭
+                              )),
+                          child: Row(children: const [
+                            Icon(
+                              Icons.auto_awesome,
+                              color: ThemeColors.darkGreen,
+                            ),
+                            // Image.asset('images/icon_sparkel.png'),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text('지금 인기있는 정책은?',
+                                style: TextStyle(
+                                  color: ThemeColors.basic,
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                          ]),
+                        ),
+                      ),
+
+                      // livePopularPost(),
+                      FutureBuilder<List<Policy>>(
+                          future: policyService.getAllPolicy(),
+                          builder: ((_, snapshot) {
+                            if (snapshot.data != null &&
+                                snapshot.data!.isEmpty) {
+                              return _ListWithoutPopularPolicy();
+                            }
+                            return !snapshot.hasData
+                                ? const _ShimerLoadingPopularPolicy()
+                                : ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: 5,
+                                    itemBuilder: (_, i) => livePopularPost(
+                                        ranking: i,
+                                        policies: snapshot.data![i]));
+                          })),
+
+                      // // 로그아웃 버튼
+                      // BtnNaru(
+                      //   text: '로그아웃',
+                      //   colorText: Colors.black,
+                      //   width: size.width,
+                      //   onPressed: () {
+                      //     authBloc.add(OnLogOutEvent());
+                      //     userBloc.add(OnLogOutUser());
+                      //     Navigator.pushAndRemoveUntil(context,
+                      //         routeSlide(page: const HomePage()), (_) => false);
+                      //   },
+                      // ),
                       const SizedBox(height: 30.0),
                     ],
                   ),
@@ -195,59 +242,25 @@ class _HomePageState extends State<HomePage> {
 // 배너 슬라이드
 class BannerSlide extends StatelessWidget {
   final Banners policyBanners;
-  BannerSlide({super.key, required this.policyBanners});
-
-  // final BannerImage = [
-  //   Image.asset('images/banner/slider_example.png', fit: BoxFit.fill),
-  //   Image.asset('images/banner/mou_img.png', fit: BoxFit.fill),
-  // ];
-  final CarouselController _bannerController = CarouselController();
+  const BannerSlide({super.key, required this.policyBanners});
 
   @override
   Widget build(BuildContext context) {
     final bannerImgName = policyBanners.banner_img;
 
-    //app/src/public/upload/policy
     final bannerImgUrl =
         '${Environment.urlApiServer}/upload/banner/$bannerImgName';
-    // print(bannerImgUrl);
-    // final bannerImgUrl = "images/banner/$bannerImgName";
     final bannerLink = policyBanners.banner_link;
-    // print(bannerImgUrl);
 
     return InkWell(
         onTap: () {
           launchUrl(Uri.parse(bannerLink));
         },
         child: Image.network(
-            bannerImgUrl) //Image.asset(bannerImgUrl, fit: BoxFit.fitWidth),
+          bannerImgUrl,
+          fit: BoxFit.fitWidth,
+        ) //Image.asset(bannerImgUrl, fit: BoxFit.fitWidth),
         );
-
-    // CarouselSlider(
-    //     carouselController: _bannerController,
-    //     options: CarouselOptions(
-    //       scrollDirection: Axis.horizontal,
-    //       height: MediaQuery.of(context).size.height / 4,
-    //       enlargeCenterPage: true,
-    //       viewportFraction: 1.0,
-    //       autoPlay: true,
-    //     ),
-    //     items: bannerImgAsset
-    //     // bannerImgAsset.map((image) {
-    //   return Builder(
-    //     builder: (BuildContext context) {
-    //       return SizedBox(
-    //         width: MediaQuery.of(context).size.width,
-    //         // margin: EdgeInsets.symmetric(horizontal: 5.0),
-    //         child: ClipRRect(
-    //           // borderRadius: BorderRadius.circular(10.0),
-    //           child: image,
-    //         ),
-    //       );
-    //     },
-    //   );
-    // }).toList(),
-    // );
   }
 }
 
@@ -364,141 +377,75 @@ class CategoryButton extends StatelessWidget {
 
 // 실시간 인기 글
 class livePopularPost extends StatelessWidget {
+  final Policy policies;
+  final int ranking;
+  const livePopularPost(
+      {super.key, required this.policies, required this.ranking});
+
   @override
   Widget build(BuildContext context) {
+    final iconList = [
+      Icons.looks_one,
+      Icons.looks_two,
+      Icons.looks_3,
+      Icons.looks_4,
+      Icons.looks_5,
+    ];
+
     return Container(
-        padding: const EdgeInsets.all(5),
-        margin: const EdgeInsets.all(20),
-        child: Column(children: [
-          InkWell(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PolicyListPage(
-                    categoryName: '',
-                    categoryValue: '',
-                  ), // 복지검색 탭
-                )),
-            child: Row(children: const [
-              Icon(
-                Icons.auto_awesome,
-                color: ThemeColors.darkGreen,
-              ),
-              // Image.asset('images/icon_sparkel.png'),
-              SizedBox(
-                width: 5,
-              ),
-              Text('지금 인기있는 정책은?',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 19,
-                    fontWeight: FontWeight.w600,
-                  )),
-            ]),
-          ),
-          const SizedBox(
-            height: 7,
-          ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_one,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('국민취업지원제도 (취업성공패키지, 최대300만원)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_two,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('월세자금보증(청년월세)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_3,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('가정양육수당 지원(월~20만원)',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_4,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('생계지원비 융자',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Row(
-            children: const [
-              Icon(
-                Icons.looks_5,
-                color: ThemeColors.primary,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text('임신부 가사돌봄 서비스',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-        ]));
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+        child: ListTile(
+            minLeadingWidth: 0,
+            contentPadding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
+            visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailPolicyPage(policies),
+                  ));
+            },
+            leading: Icon(
+              iconList[ranking],
+              //Icons.looks_one,
+              color: ThemeColors.primary,
+            ),
+            title: Text(policies.policy_name,
+                style: const TextStyle(
+                  color: ThemeColors.basic,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                ))));
+  }
+}
+
+class _ListWithoutPopularPolicy extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // final size = MediaQuery.of(context).size;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [
+        TextCustom(text: "등록된 정책이 없습니다."),
+      ],
+    );
+  }
+}
+
+class _ShimerLoadingPopularPolicy extends StatelessWidget {
+  const _ShimerLoadingPopularPolicy({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        ShimmerNaru(),
+        SizedBox(height: 10.0),
+        ShimmerNaru(),
+        SizedBox(height: 10.0),
+        ShimmerNaru(),
+      ],
+    );
   }
 }

@@ -15,6 +15,9 @@ exports.getAllPolicy = async function(req, res) {
     };
 
 
+
+
+
 exports.getSearchPolicy = async function(req, res) {
   try{
     var result = await policy_service.getSearchPolicy(req, res);

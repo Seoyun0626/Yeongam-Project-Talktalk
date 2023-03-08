@@ -268,6 +268,8 @@ router.get('/policy/get-all-policy', async function(req, res){
 
 
 
+
+
 // 정책 텍스트-제목 검색
 router.get('/policy/get-search-policy/:searchValue', async function(req, res) {
   console.log('mobile-router', req.params.searchValue );

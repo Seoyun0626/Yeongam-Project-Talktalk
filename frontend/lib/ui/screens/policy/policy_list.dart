@@ -124,7 +124,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                     : FutureBuilder<List<Policy>>(
                                         future: policyService.getAllPolicy(),
                                         builder: ((_, snapshot) {
-                                          // print(isDefaultSelectingCategory);
                                           if (snapshot.data != null &&
                                               snapshot.data!.isEmpty) {
                                             return _ListWithoutPolicySearch();
@@ -456,24 +455,19 @@ class ListViewPolicy extends StatefulWidget {
 
 class _ListViewPolicyState extends State<ListViewPolicy> {
   late String policyInstitution = '';
-  // late String policyTarget = '';
   late String policyField = '';
-  // late String policyCharacter = '';
 
   @override
   void initState() {
     final Policy policies = widget.policies;
     final String institutionCode = policies.policy_institution_code; // 기관 코드
-    // final String targetCode = policies.policy_target_code; // 적용 대상 코드
     final String fieldCode = policies.policy_field_code; // 분야 코드
-    // final String characterCode = policies.policy_character_code;
 
     codeService.getCodeData().then((value) {
       setState(() {
+        // test = value['codes'];
         var institutionLen = value['codes']['policy_institution_code'].length;
-        // var targetLen = value['codes']['policy_target_code'].length;
         var fieldLen = value['codes']['policy_field_code'].length;
-        // var charLen = value['codes']['policy_character_code'].length;
 
         // 기관
         for (int i = 0; i < institutionLen; i++) {
@@ -487,18 +481,6 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
           }
         }
 
-        // 대상
-        // for (int i = 0; i < targetLen; i++) {
-        //   var codeDetail =
-        //       value['codes']['policy_target_code'][i]['code_detail'];
-        //   if (codeDetail == targetCode) {
-        //     var codeDetailName =
-        //         value['codes']['policy_target_code'][i]['code_detail_name'];
-        //     policyTarget = codeDetailName;
-        //     // print(policyInstitution);
-        //   }
-        // }
-
         // 분야
         for (int i = 0; i < fieldLen; i++) {
           var codeDetail =
@@ -510,30 +492,17 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
             // print(policyInstitution);
           }
         }
-
-        // 정책 성격
-        // for (int i = 0; i < charLen; i++) {
-        //   var codeDetail =
-        //       value['codes']['policy_character_code'][i]['code_detail'];
-        //   if (codeDetail == characterCode) {
-        //     var codeDetailName =
-        //         value['codes']['policy_character_code'][i]['code_detail_name'];
-        //     policyCharacter = codeDetailName;
-        //     // print(policyInstitution);
-        //   }
-        // }
       });
     });
-
     super.initState();
   }
 
-  // print(institution);
-  // @override
-  // void dispose() {
-  //   institution;
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    policyInstitution;
+    policyField;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -558,15 +527,6 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
     final String endDateDay = policies.application_end_date.substring(8, 10);
     final String startDate = '$startDateYear.$startDateMonth.$startDateDay';
     final String endDate = '$endDateYear.$endDateMonth.$endDateDay';
-
-    // var test;
-
-    // final data = codeService.getCodeData().then((value) {
-    //   test = value['codes']['policy_institution_code'][0]['code_detail_name'];
-    //   print(test);
-    //   return test;
-    // });
-    // print(test);
 
     return Padding(
         padding: const EdgeInsets.fromLTRB(3, 3, 3, 0), // 카드 바깥쪽
