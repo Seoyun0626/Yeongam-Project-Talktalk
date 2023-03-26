@@ -10,6 +10,10 @@ const { json } = require("body-parser");
 // const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 router.get('/show', async function (req, res) {
     try{
+        if(req.session.user == undefined){
+            res.redirect('/admin/auth/login');
+            return;
+          }
         var crtpage = 1;
         var totalPage = 1;
         var pageSize = 8; //한 페이지에 보여줄 정책 수
@@ -44,6 +48,10 @@ router.get('/show', async function (req, res) {
 
 router.get('/upload', async function (req, res) {
     try{
+        if(req.session.user == undefined){
+            res.redirect('/admin/auth/login');
+            return;
+          }
         // var result = policy_controller.fetchCodeData(req,res);
         // console.log(result[0]);
         // var result = await code_controller.fetchPolicyData(req, res);
@@ -77,6 +85,10 @@ router.post('/upload', async function (req, res) {
 
 router.get('/update/:id', async function(req, res){
     try{
+        if(req.session.user == undefined){
+            res.redirect('/admin/auth/login');
+            return;
+          }
         var result = await policy_controller.fetchpolicyByidx(req, res);
         // 접수 기간
         var start_month = result[0].application_start_date.getMonth()+1;
@@ -122,6 +134,10 @@ router.post('/update/:id', async function(req, res){
 
 router.get('/delete/:id', async function(req, res){
     try{
+        if(req.session.user == undefined){
+            res.redirect('/admin/auth/login');
+            return;
+          }
         var result = await policy_controller.deletePolicy(req, res);
         if(result == 0) { //성공
             res.redirect('/admin/policy/show');
@@ -136,6 +152,10 @@ router.get('/delete/:id', async function(req, res){
 
 router.get('/banner', async function (req, res) {
     try{
+        if(req.session.user == undefined){
+            res.redirect('/admin/auth/login');
+            return;
+          }
         var result = await policy_controller.fetchBannerData(req,res);
         res.render('policy/banner', {banner:result});
         }
@@ -163,6 +183,10 @@ router.post('/banner', async function (req, res) {
 
 router.get('/banner/delete/:id', async function(req, res){
     try{
+        if(req.session.user == undefined){
+            res.redirect('/admin/auth/login');
+            return;
+          }
         var result = await policy_controller.deleteBanner(req, res);
         res.redirect('/admin/policy/banner');
         }

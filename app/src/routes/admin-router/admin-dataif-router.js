@@ -66,6 +66,12 @@ router.post("/dataif", checkAuth, async function(req, res) {
 //로그인 시 출력하는 화면
 router.get('/', async function(req, res){
   try{
+    // console.log(req.session);
+    // req.session.user에 데이터가 없으면 로그인 화면으로 이동
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
     var urltype = req.url.split('/')[1].split('=')[0];
     var crtpage = 1;
     var totalPage = 1;
@@ -91,6 +97,7 @@ router.get('/', async function(req, res){
       result = result.slice(0, pageSize);
     }
     var code_data = await code_controller.getUserCodeName();
+    // console.log(req.session);
     res.render('dataif/mem', 
     {
       posts:result,
@@ -134,6 +141,10 @@ router.put('/', async function(req, res){
 // terms
 router.get('/terms', async function(req, res){
   try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
     var result = await dataif_controller.fetchTermData(req, res);
     res.render('dataif/terms', {posts:result});
   }
@@ -153,6 +164,10 @@ router.post('/terms', async function(req, res){
 // update : 회원 정보 수정
 router.get('/update/:id', async function(req, res){
   try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
     // res.redirect("/dataif/update/"+req.user.id);
     // console.log("update:"+req.params.id);
     //데이터 받아오기
@@ -184,6 +199,10 @@ router.post('/update/:id', async function(req, res){
 // 회원 정보 삭제
 router.get('/delete/:id', async function(req, res){
   try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
     // alert창 띄우기
     var result = await dataif_controller.deleteUser(req, res);
     res.redirect("/admin/dataif");
@@ -207,6 +226,10 @@ router.put('/:id', async function(req, res){
 
 router.get('/excel', async function(req, res){
   try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
     var result = await dataif_controller.fetchData(req, res);
     // 엑셀로 다운로드
     var xls = json2xls(result);
@@ -220,6 +243,10 @@ router.get('/excel', async function(req, res){
 
 router.get('/excelup', async function(req, res){
   try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
     // 엑셀 파일 읽기
     var workbook = XLSX.readFile('user_data.xlsx');
     var sheet_name_list = workbook.SheetNames;

@@ -122,9 +122,9 @@ exports.login_check = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
-    var userid = req.body.userid;
-    var password = req.body.password;
-    var name = req.body.name;
+    var userid = req.session.user.userid;
+    var password = req.session.user.password;
+    // console.log(userid, password);
     var query = 'SELECT password, salt FROM webdb.tb_user where userid="'+userid+'"';
     var rows = await conn.query(query); // 쿼리 실행
     if(rows.length){

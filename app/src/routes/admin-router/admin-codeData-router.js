@@ -5,6 +5,10 @@ var code_controller = require("../../controllers/common-controller/codeData-cont
 
 router.get('/show', async function (req, res) {
     try{
+        if(req.session.user == undefined){
+            res.redirect('/admin/auth/login');
+            return;
+          }
         var code_data = await code_controller.getCodeData(req, res);
         res.render('codeData/show', {
             code_data:code_data,
@@ -17,6 +21,10 @@ router.get('/show', async function (req, res) {
 
 router.get('/update/:id', async function (req, res) {
     try{
+        if(req.session.user == undefined){
+            res.redirect('/admin/auth/login');
+            return;
+          }
         // console.log(req.params.id);
         var code_data = await code_controller.getCodeData_update(req, res);
         // var result = await code_controller.fetchData(req,res);
@@ -36,6 +44,10 @@ router.get('/update/:id', async function (req, res) {
 
 router.get('/detail/update/:id', async function (req, res) {
     try{
+        if(req.session.user == undefined){
+            res.redirect('/admin/auth/login');
+            return;
+          }
         // console.log(req.params.id);
         var code_data = await code_controller.getCodedetail_update(req, res);
         // var result = await code_controller.fetchData(req,res);
@@ -85,6 +97,10 @@ router.post('/detail/update/:id', async function (req, res) {
 
 router.get('/detail/:id', async function (req, res) {
     try{
+        if(req.session.user == undefined){
+            res.redirect('/admin/auth/login');
+            return;
+          }
         // console.log(req.params.id);
         var code_data = await code_controller.getCodedetail(req, res);
         // var result = await code_controller.fetchData(req,res);

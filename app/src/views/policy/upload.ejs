@@ -65,13 +65,21 @@
       <br>
       <div class="ui form">
         <div class="inline fields">
+          <!-- 접수시작일 기본값을 현재 날짜로 설정 -->
+          <% var today = new Date(); %>
+          <% var year = today.getFullYear(); %>
+          <% var month = today.getMonth()+1; %>
+          <% var date = today.getDate(); %>
+          <% if(month<10){ month = "0"+month; } %>
+          <% if(date<10){ date = "0"+date; } %>
+          <% var today = year+"-"+month+"-"+date; %>
           <label>접수 시작</label>
           <div class="four wide field">
-            <input type="date" name="application_start_date" id="application_start_date">
+            <input type="date" name="application_start_date" id="application_start_date" value="<%=today%>">
           </div>
           <label>접수 마감</label>
           <div class="four wide field">
-            <input type="date" name="application_end_date" id="application_end_date">
+            <input type="date" name="application_end_date" id="application_end_date" value="<%=today%>">
           </div>
         </div>
       </div>
