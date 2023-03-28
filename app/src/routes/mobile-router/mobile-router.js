@@ -206,6 +206,31 @@ router.get("/logout", function(req, res) {
 });
 
 
+router.get("/user/get-User-By-Id", async function(req, res){
+  try{
+  var result = await mobile_login_controller.getUserById(req, res);
+  console.log(result[0][1]);
+  res.json({
+    resp:true,
+    message : 'get user by id',
+    user :  result
+  })
+} catch(error) {
+  console.log('mobile-router get-user-by-id:'+error);
+  res.json({
+    resp:false,
+    message : 'Failure get user by id',
+  
+  
+  })
+}
+  
+})
+
+
+
+
+
 // 사용자등록
 router.get("/signup", function(req, res) {
   res.render('dataif/signup');
@@ -293,7 +318,7 @@ router.get('/policy/get-search-policy/:searchValue', async function(req, res) {
 
 // 검색 조건 선택 결과
 router.get('/policy/get-select-policy/:code', async function(req, res){
-  console.log('mobile-router get-select-policy', req.params.code);
+  // console.log('mobile-router get-select-policy', req.params.code);
   try{
     var result = await mobile_policy_controller.getPolicyBySelect(req,res);
     // console.log('mobile-router get-all-policy result : ', result);
@@ -376,6 +401,34 @@ router.get('/banner', async function (req, res) {
         message : 'Failure get-policy-banner policies'
       })
   }
+});
+
+router.post('/policy/scrap-or-unscrap-policy', verifyToken, async function (req, res){
+  console.log('0315 test');
+  try{
+    
+    var result = await mobile_policy_controller.scrapOrUnscrapPolicy(req,res);
+    console.log('mobile-router scrap-or-unscrap-policy resultcode', result);
+    if(result == 0) {
+      res.json({
+        resp:true,
+        message : 'scrap',
+      })
+    } else if (result == 1) {
+      res.json({
+        resp:true,
+        message : 'unscrap',
+      })
+    }
+    
+    }
+catch(error) {
+    console.log('mobile-router scrap-or-unscrap-policy error:'+error);
+    res.json({
+      resp:false,
+      message : 'Failure scrap-or-unscrap-policy policies'
+    })
+}
 });
 
 module.exports = router;

@@ -29,3 +29,11 @@ class PolicyState {
 }
 
 class LoadingPolicy extends PolicyState {}
+
+class FailurePolicy extends PolicyState {
+  final String error;
+
+  const FailurePolicy(this.error);
+}
+
+class SuccessPolicy extends PolicyState {}

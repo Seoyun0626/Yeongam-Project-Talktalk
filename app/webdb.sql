@@ -42,8 +42,9 @@ CREATE TABLE webdb.`tb_policy` (
   `policy_link` varchar(100) NULL,
   `application_start_date` timestamp NULL,
   `application_end_date` timestamp NULL,
-  `scrap` int(4) NOT NULL DEFAULT '0',
-  `views` int(4) NOT NULL DEFAULT '0',
+  `count_scraps` int(4) NOT NULL DEFAULT 0,
+  `is_scrap` BOOL NOT NULL DEFAULT 0,
+  `count_views` int(4) NOT NULL DEFAULT 0,
   `min_fund` int(10) NOT NULL,
   `max_fund` int(10) NOT NULL,
   `content` varchar(1000) NULL,
@@ -125,3 +126,16 @@ CREATE TABLE webdb.`tb_policy_scrap` (
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 스크랩 테스트
+CREATE TABLE webdb.`tb_policy_scrap`
+(
+	`uid_scraps` int(11) PRIMARY KEY,
+	`user_uid` int(11) NOT NULL,
+	`policy_uid` int(11) NOT NULL,
+	`ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	
+	FOREIGN KEY(user_uid) REFERENCES webdb.`tb_user`(`board_idx`),
+	FOREIGN KEY(policy_uid) REFERENCES webdb.`tb_policy`(`board_idx`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

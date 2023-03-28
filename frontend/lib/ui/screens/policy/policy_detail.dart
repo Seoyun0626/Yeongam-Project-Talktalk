@@ -2,101 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:login/data/env/env.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/code_service.dart';
+import 'package:login/ui/helpers/get_mobile_code_data.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailPolicyPage extends StatefulWidget {
-  const DetailPolicyPage(this.policies, {Key? key}) : super(key: key);
+  const DetailPolicyPage(
+    this.policies, {
+    Key? key,
+    // required this.codeData
+  }) : super(key: key);
   final Policy policies;
+  // final Map<String, dynamic> codeData;
+  // final Future< dynamic> codeData;
 
   @override
   State<DetailPolicyPage> createState() => _DetailPolicyState();
 }
 
 class _DetailPolicyState extends State<DetailPolicyPage> {
-  late String policyInstitution = '';
-  late String policyTarget = '';
-  late String policyField = '';
-  late String policyCharacter = '';
-
-  @override
-  void initState() {
-    final Policy policies = widget.policies;
-    final String institutionCode = policies.policy_institution_code; // 기관 코드
-    final String targetCode = policies.policy_target_code; // 적용 대상 코드
-    final String fieldCode = policies.policy_field_code; // 분야 코드
-    final String characterCode = policies.policy_character_code;
-
-    // 수정 필요
-    codeService.getCodeData().then((value) {
-      setState(() {
-        var institutionLen = value['codes']['policy_institution_code'].length;
-        var targetLen = value['codes']['policy_target_code'].length;
-        var fieldLen = value['codes']['policy_field_code'].length;
-        var charLen = value['codes']['policy_character_code'].length;
-
-        // 기관
-        for (int i = 0; i < institutionLen; i++) {
-          var codeDetail =
-              value['codes']['policy_institution_code'][i]['code_detail'];
-          if (codeDetail == institutionCode) {
-            var codeDetailName = value['codes']['policy_institution_code'][i]
-                ['code_detail_name'];
-            policyInstitution = codeDetailName;
-            // print(policyInstitution);
-          }
-        }
-
-        // 대상
-        for (int i = 0; i < targetLen; i++) {
-          var codeDetail =
-              value['codes']['policy_target_code'][i]['code_detail'];
-          if (codeDetail == targetCode) {
-            var codeDetailName =
-                value['codes']['policy_target_code'][i]['code_detail_name'];
-            policyTarget = codeDetailName;
-            // print(policyInstitution);
-          }
-        }
-
-        // 분야
-        for (int i = 0; i < fieldLen; i++) {
-          var codeDetail =
-              value['codes']['policy_field_code'][i]['code_detail'];
-          if (codeDetail == fieldCode) {
-            var codeDetailName =
-                value['codes']['policy_field_code'][i]['code_detail_name'];
-            policyField = codeDetailName;
-            // print(policyInstitution);
-          }
-        }
-
-        // 정책 성격
-        for (int i = 0; i < charLen; i++) {
-          var codeDetail =
-              value['codes']['policy_character_code'][i]['code_detail'];
-          if (codeDetail == characterCode) {
-            var codeDetailName =
-                value['codes']['policy_character_code'][i]['code_detail_name'];
-            policyCharacter = codeDetailName;
-            // print(policyInstitution);
-          }
-        }
-      });
-    });
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final Policy policies = widget.policies;
+    // final Map<String, dynamic> codeData = widget.codeData;
+
+    // 기관
+    final String policyInstitution = getMobileCodeService.getCodeDetailName(
+        'policy_institution_code', policies.policy_institution_code);
+
+    // 모집대상
+    final String policyTarget = getMobileCodeService.getCodeDetailName(
+        'policy_target_code', policies.policy_target_code);
+    // 정책 분야
+    final String policyField = getMobileCodeService.getCodeDetailName(
+        'policy_field_code', policies.policy_field_code);
+    // 정책 성격
+    final String policyCharacter = getMobileCodeService.getCodeDetailName(
+        'policy_character_code', policies.policy_character_code);
+    // 이미지
     final String imgName = policies.img;
-
     final String imgUrl = '${Environment.urlApiServer}/upload/policy/$imgName';
-
+    //모집기간
     final String policySupervison = policies.policy_institution_code;
     final String policyName = policies.policy_name;
     final String policyContent = policies.content;

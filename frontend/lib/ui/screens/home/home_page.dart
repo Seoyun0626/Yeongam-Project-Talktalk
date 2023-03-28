@@ -5,9 +5,11 @@ import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
 import 'package:login/domain/blocs/user/user_bloc.dart';
 import 'package:login/domain/models/response/response_policy.dart';
+import 'package:login/domain/services/code_service.dart';
 import 'package:login/domain/services/policy_services.dart';
 import 'package:login/ui/screens/policy/policy_detail.dart';
 import 'package:login/ui/screens/policy/policy_list.dart';
+import 'package:login/ui/screens/policy/search_filter.dart';
 import 'package:login/ui/screens/user/my_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:login/domain/models/response/response_banner.dart';
@@ -73,19 +75,11 @@ class _HomePageState extends State<HomePage> {
                         color: ThemeColors.basic,
                       ),
                       onPressed: () {
-                        if (isLogin == true) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MyPage(),
-                              ));
-                        } else {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LoginPage(),
-                              ));
-                        }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                            ));
                       }),
                 ],
                 backgroundColor: ThemeColors.primary,
@@ -197,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
 
-                      // livePopularPost(),
+                      // 실시간 인기글
                       FutureBuilder<List<Policy>>(
                           future: policyService.getAllPolicy(),
                           builder: ((_, snapshot) {
@@ -205,16 +199,18 @@ class _HomePageState extends State<HomePage> {
                                 snapshot.data!.isEmpty) {
                               return _ListWithoutPopularPolicy();
                             }
-                            return !snapshot.hasData
-                                ? const _ShimerLoadingPopularPolicy()
-                                : ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: 5,
-                                    itemBuilder: (_, i) => livePopularPost(
-                                        ranking: i,
-                                        policies: snapshot.data![i]));
+                            if (!snapshot.hasData) {
+                              return const _ShimerLoadingPopularPolicy();
+                            } else {
+                              return ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: 5,
+                                  itemBuilder: (_, i) => livePopularPost(
+                                      // codeData: codeData,
+                                      ranking: i,
+                                      policies: snapshot.data![i]));
+                            }
                           })),
 
                       // // 로그아웃 버튼
@@ -379,8 +375,14 @@ class CategoryButton extends StatelessWidget {
 class livePopularPost extends StatelessWidget {
   final Policy policies;
   final int ranking;
-  const livePopularPost(
-      {super.key, required this.policies, required this.ranking});
+  // final Map<String, dynamic> codeData;
+
+  const livePopularPost({
+    super.key,
+    required this.policies,
+    required this.ranking,
+    // required this.codeData
+  });
 
   @override
   Widget build(BuildContext context) {

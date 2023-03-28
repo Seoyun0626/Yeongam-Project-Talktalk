@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:login/data/env/env.dart';
 import 'package:login/data/storage/secure_storage.dart';
+import 'package:login/domain/models/response/default_response.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/ui/helpers/debouncer.dart';
@@ -83,6 +84,21 @@ class PolicyServices {
     // print('policy_services');
     // print(resp.body);
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+  }
+
+  // 정책 스크랩
+  Future<DefaultResponse> scrapOrUnscrapPolicy(
+      String uidPolicy, String uidUser) async {
+    final token = await secureStorage.readToken();
+    print('policy_service : scrapOrUnscrapPolicy');
+
+    final resp = await http.post(
+        Uri.parse('${Environment.urlApi}/policy/scrap-or-unscrap-policy'),
+        headers: {'Accept': 'application/json', 'xxx-token': token!},
+        body: {'uidPolicy': uidPolicy, 'uidUser': uidUser});
+    print(resp.body);
+
+    return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 
   void selectPolicy(String code) async {

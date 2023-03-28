@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/domain/blocs/blocs.dart';
+import 'package:login/ui/helpers/get_mobile_code_data.dart';
 import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
@@ -22,6 +23,7 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
   @override
   void initState() {
     super.initState();
+    getMobileCodeService.getCodeData();
 
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
@@ -51,16 +53,19 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is LogOut) {
-          print(state);
-          Navigator.pushAndRemoveUntil(
-              context, routeFade(page: const HomePage()), (_) => false);
-        } else if (state is SuccessAuthentication) {
-          print(state);
-          userBloc.add(OnGetUserAuthenticationEvent());
-          Navigator.pushAndRemoveUntil(
-              context, routeFade(page: const HomePage()), (_) => false);
-        }
+        print(state);
+        Navigator.pushAndRemoveUntil(
+            context, routeFade(page: const HomePage()), (_) => false);
+        // if (state is LogOut) {
+        //   print(state);
+        //   Navigator.pushAndRemoveUntil(
+        //       context, routeFade(page: const HomePage()), (_) => false);
+        // } else if (state is SuccessAuthentication) {
+        //   print(state);
+        //   userBloc.add(OnGetUserAuthenticationEvent());
+        //   Navigator.pushAndRemoveUntil(
+        //       context, routeFade(page: const HomePage()), (_) => false);
+        // }
       },
       child: Scaffold(
         body: SizedBox(
