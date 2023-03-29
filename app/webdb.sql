@@ -98,8 +98,8 @@ insert into tb_common_code_detail (code,code_detail,code_detail_name) values('09
 
 CREATE TABLE webdb.`tb_terms` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `terms` varchar(1000) NOT NULL,
-  `privacy` varchar(1000) NOT NULL,
+  `terms` text NOT NULL,
+  `privacy` text NOT NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
