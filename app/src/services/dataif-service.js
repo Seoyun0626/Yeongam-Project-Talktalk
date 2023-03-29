@@ -65,14 +65,57 @@ exports.fetchTermData = async function(req, res) {
     if (conn) conn.end();
   }
 };
+if(!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+  };
+}
+function addslashes(string) {
+    return string.replace(/\\/g, '\\\\').
+        replace(/\u0008/g, '\\b').
+        replace(/\t/g, '\\t').
+        replace(/\n/g, '\\n').
+        replace(/\f/g, '\\f').
+        replace(/\r/g, '\\r').
+        replace(/'/g, '\\\'').
+        replace(/"/g, '\\"');
+}
+function mysql_real_escape_string (str) {
+  if (typeof str != 'string')
+      return str;
 
+  return str.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
+      switch (char) {
+          case "\0":
+              return "\\0";
+          case "\x08":
+              return "\\b";
+          case "\x09":
+              return "\\t";
+          case "\x1a":
+              return "\\z";
+          case "\n":
+              return "\\n";
+          case "\r":
+              return "\\r";
+          case "\"":
+          case "'":
+          case "\\":
+          case "%":
+              return "\\"+char; // prepends a backslash to backslash, percent,
+                                // and double/single quotes
+      }
+  });
+}
 //다 저장? 업데이트?
 exports.updateTermData = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
     var idx = 1;
-    var query = 'update webdb.tb_terms set terms="'+req.body.terms+'", privacy="'+req.body.privacy+'" where board_idx="'+idx+'"';
+    var terms = mysql_real_escape_string(req.body.terms);
+    var privacy = mysql_real_escape_string(req.body.privacy);
+    var query = 'update webdb.tb_terms set terms="'+terms+'", privacy="'+privacy+'" where board_idx="'+idx+'"';
     var rows = await conn.query(query); // 쿼리 실행
     return rows;
   } catch(error) {
