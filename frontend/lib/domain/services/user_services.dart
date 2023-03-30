@@ -9,7 +9,6 @@ import 'package:login/domain/models/response/default_response.dart';
 // import 'package:login/domain/models/response/response_followings.dart';
 import 'package:login/domain/models/response/response_search.dart';
 import 'package:login/domain/models/response/response_user.dart';
-import 'package:login/domain/models/response/response_user_search.dart';
 
 class UserServices {
   final debouncer = DeBouncer(duration: const Duration(milliseconds: 800));

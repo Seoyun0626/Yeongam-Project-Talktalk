@@ -14,3 +14,4 @@ export 'package:login/ui/helpers/modal_success.dart';
 export 'package:login/ui/helpers/modal_warning.dart';
 // export 'package:login/ui/helpers/modal_menu_other_profile.dart';
 export 'package:login/ui/helpers/validate_form.dart';
+export 'package:login/ui/helpers/get_mobile_code_data.dart';

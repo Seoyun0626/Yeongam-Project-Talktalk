@@ -40,7 +40,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       OnGetUserAuthenticationEvent event, Emitter<UserState> emit) async {
     try {
       final data = await userService.getUserById();
-
+      print('---');
+      print(data.user);
       emit(state.copyWith(user: data.user));
     } catch (e) {
       emit(FailureUserState(e.toString()));

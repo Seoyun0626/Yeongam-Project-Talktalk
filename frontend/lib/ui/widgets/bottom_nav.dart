@@ -80,7 +80,7 @@ class BottomNavigation extends StatelessWidget {
               iconText: '더보기',
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  MaterialPageRoute(builder: (context) => const MyPage()),
                   (_) => false)),
 
           // _ItemProfile()

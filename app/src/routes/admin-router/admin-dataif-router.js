@@ -1,5 +1,8 @@
 const path = require("path");
 var express = require("express");
+var json2xls = require('json2xls'); 
+var fs = require('fs');
+var XLSX = require('xlsx');
 var router = express.Router();
 //var checkAuth = require('../utils/checkauth');
 var dataif_controller = require("../../controllers/common-controller/dataif-controller");
@@ -63,6 +66,12 @@ router.post("/dataif", checkAuth, async function(req, res) {
 //로그인 시 출력하는 화면
 router.get('/', async function(req, res){
   try{
+    // console.log(req.session);
+    // req.session.user에 데이터가 없으면 로그인 화면으로 이동
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
     var urltype = req.url.split('/')[1].split('=')[0];
     var crtpage = 1;
     var totalPage = 1;
@@ -88,6 +97,7 @@ router.get('/', async function(req, res){
       result = result.slice(0, pageSize);
     }
     var code_data = await code_controller.getUserCodeName();
+    // console.log(req.session);
     res.render('dataif/mem', 
     {
       posts:result,
@@ -131,6 +141,10 @@ router.put('/', async function(req, res){
 // terms
 router.get('/terms', async function(req, res){
   try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
     var result = await dataif_controller.fetchTermData(req, res);
     res.render('dataif/terms', {posts:result});
   }
@@ -150,6 +164,10 @@ router.post('/terms', async function(req, res){
 // update : 회원 정보 수정
 router.get('/update/:id', async function(req, res){
   try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
     // res.redirect("/dataif/update/"+req.user.id);
     // console.log("update:"+req.params.id);
     //데이터 받아오기
@@ -181,6 +199,10 @@ router.post('/update/:id', async function(req, res){
 // 회원 정보 삭제
 router.get('/delete/:id', async function(req, res){
   try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
     // alert창 띄우기
     var result = await dataif_controller.deleteUser(req, res);
     res.redirect("/admin/dataif");
@@ -199,6 +221,41 @@ router.put('/:id', async function(req, res){
     res.redirect("/dataif");
   } catch(error) {
     console.log('dataif-router update error:'+error);
+  }
+});
+
+router.get('/excel', async function(req, res){
+  try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
+    var result = await dataif_controller.fetchData(req, res);
+    // 엑셀로 다운로드
+    var xls = json2xls(result);
+    fs.writeFileSync('user_data.xlsx', xls, 'binary');
+    res.download('user_data.xlsx');
+    // res.redirect('/admin/dataif');
+  } catch(error) {
+    console.log('dataif-router / error:'+error);
+  }
+});
+
+router.get('/excelup', async function(req, res){
+  try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
+    // 엑셀 파일 읽기
+    var workbook = XLSX.readFile('user_data.xlsx');
+    var sheet_name_list = workbook.SheetNames;
+    var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+    // 엑셀 파일 데이터 DB에 저장
+    var result = await dataif_controller.excelData(req, res, xlData);
+    res.redirect('/admin/dataif');
+  } catch(error) {
+    console.log('dataif-router / error:'+error);
   }
 });
 

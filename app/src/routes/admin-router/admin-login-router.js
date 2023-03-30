@@ -22,6 +22,7 @@ router.post("/login", async function(req, res) {
     // 로그인 확인을 위해 컨트롤러 호출
     // console.log(req.body);
     var result = await login_controller.SignIn(req, res);
+    // console.log(req.session);
     // console.log(result);
     // res.send(result);
     if(result.code == 0){
@@ -105,9 +106,9 @@ passport.deserializeUser((userid,done)=>{
 router.post("/login-check", async function(req, res) {
   try{
     // 로그인 확인을 위해 컨트롤러 호출
-    console.log('login-router login-check');
+    // console.log('login-router login-check');
     var result = await login_controller.login_check(req, res);
-    //console.log('login-router login-check result:'+result);
+    console.log('login-router login-check result:'+result);
     switch(result){
       case 1 : res.json({success: false, msg: '해당 유저가 존재하지 않습니다.'}); break;
       //case 2 : res.json({success: false, msg: '해당 유저가 존재하지 않거나 비밀번호가 일치하지 않습니다.'}); break;
@@ -152,6 +153,10 @@ router.get("/logout", function(req, res) {
 
 // 사용자등록
 router.get("/signup", async function(req, res) {
+  if(req.session.user == undefined){
+    res.redirect('/admin/auth/login');
+    return;
+  }
   // var sess = req.session;
   //console.log('login-router signup sess:'+sess);
   //res.sendFile(path.join(__dirname, "../public/signup.html"));

@@ -23,8 +23,10 @@ class OnIsSearchPolicyEvent extends PolicyEvent {
 //   OnIsSelectPolicyEvent(this.isSelectPolicy);
 // }
 
-// // 정책 스크랩
-// class OnScrapEvent extends PolicyEvent {
-//   final int scrapNumber;
-//   OnScrapEvent(this.scrapNumber);
-// }
+// 정책 스크랩
+class OnScrapOrUnscrapPolicy extends PolicyEvent {
+  final String uidPolicy;
+  final String uidUser;
+
+  OnScrapOrUnscrapPolicy(this.uidPolicy, this.uidUser);
+}

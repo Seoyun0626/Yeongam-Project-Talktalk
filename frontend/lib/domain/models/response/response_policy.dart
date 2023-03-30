@@ -31,6 +31,7 @@ class ResponsePolicy {
 }
 
 class Policy {
+  int board_idx;
   String policy_institution_code; // 주최측
   String policy_name; // 정책 이름
   String application_start_date; // 모집 시작 날짜
@@ -38,14 +39,15 @@ class Policy {
   String policy_target_code; // 모집 대상
   String policy_field_code; // 정책 분야
   String policy_character_code; // 정책 성격
-  int scrap; // 스크랩 수
-  int views; // 조회수
-  int fund; // 지원금
+  int count_scraps; // 스크랩 수
+  int is_scrap;
+  int count_views; // 조회수
   String content; // 상세내용
   String img; // 정책 대표 이미지
   String policy_link; // 정책 신청 링크
 
   Policy({
+    required this.board_idx,
     required this.policy_institution_code,
     required this.policy_name,
     required this.application_start_date,
@@ -53,15 +55,16 @@ class Policy {
     required this.policy_target_code,
     required this.policy_character_code,
     required this.policy_field_code,
-    required this.fund,
-    required this.scrap,
-    required this.views,
+    required this.count_scraps,
+    required this.is_scrap,
+    required this.count_views,
     required this.content,
     required this.img,
     required this.policy_link,
   });
 
   factory Policy.fromJson(Map<String, dynamic> json) => Policy(
+      board_idx: json["board_idx"],
       application_start_date: json["application_start_date"],
       application_end_date: json["application_end_date"],
       img: json["img"],
@@ -71,12 +74,13 @@ class Policy {
       policy_institution_code: json["policy_institution_code"],
       policy_character_code: json["policy_character_code"],
       policy_field_code: json["policy_field_code"],
-      scrap: json["scrap"],
-      views: json["views"],
-      fund: json["fund"],
+      count_scraps: json["count_scraps"],
+      is_scrap: json["is_scrap"],
+      count_views: json["count_views"],
       policy_link: json["policy_link"]);
 
   Map<String, dynamic> toJson() => {
+        "board_idx": board_idx,
         "policy_supervision": policy_institution_code,
         "policy_name": policy_name,
         "application_start_date": application_start_date,
@@ -84,9 +88,9 @@ class Policy {
         "policy_target_code": policy_target_code,
         "policy_character_code": policy_character_code,
         "policy_field_code": policy_field_code,
-        "scrap": scrap,
-        "views": views,
-        "fund": fund,
+        "count_scraps": count_scraps,
+        "is_scrap": is_scrap,
+        "count_views": count_views,
         "content": content,
         "img:": img,
         "policy_link": policy_link

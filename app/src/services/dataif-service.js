@@ -65,14 +65,57 @@ exports.fetchTermData = async function(req, res) {
     if (conn) conn.end();
   }
 };
+if(!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+  };
+}
+function addslashes(string) {
+    return string.replace(/\\/g, '\\\\').
+        replace(/\u0008/g, '\\b').
+        replace(/\t/g, '\\t').
+        replace(/\n/g, '\\n').
+        replace(/\f/g, '\\f').
+        replace(/\r/g, '\\r').
+        replace(/'/g, '\\\'').
+        replace(/"/g, '\\"');
+}
+function mysql_real_escape_string (str) {
+  if (typeof str != 'string')
+      return str;
 
+  return str.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
+      switch (char) {
+          case "\0":
+              return "\\0";
+          case "\x08":
+              return "\\b";
+          case "\x09":
+              return "\\t";
+          case "\x1a":
+              return "\\z";
+          case "\n":
+              return "\\n";
+          case "\r":
+              return "\\r";
+          case "\"":
+          case "'":
+          case "\\":
+          case "%":
+              return "\\"+char; // prepends a backslash to backslash, percent,
+                                // and double/single quotes
+      }
+  });
+}
 //다 저장? 업데이트?
 exports.updateTermData = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
     var idx = 1;
-    var query = 'update webdb.tb_terms set terms="'+req.body.terms+'", privacy="'+req.body.privacy+'" where board_idx="'+idx+'"';
+    var terms = mysql_real_escape_string(req.body.terms);
+    var privacy = mysql_real_escape_string(req.body.privacy);
+    var query = 'update webdb.tb_terms set terms="'+terms+'", privacy="'+privacy+'" where board_idx="'+idx+'"';
     var rows = await conn.query(query); // 쿼리 실행
     return rows;
   } catch(error) {
@@ -118,6 +161,47 @@ exports.fetchDataByUserid = async function(req, res) {
     if (conn) conn.end();
   }
 };
+
+exports.excelData = async function(req, res,xlData) {
+  var conn;
+  var query;
+  var rows;
+  try{
+    conn = await db.getConnection();
+    //엑셀에 저장된 사용자 수
+    var total_length = xlData.length;
+    // 엑셀 파일 데이터 DB에 저장
+    for(var i=0; i<total_length; i++){
+      hasher({
+        password: xlData[i].password
+      }, async function(err, pass, salt, hash) {
+        if (err) throw err;
+        // Store the password, salt, and hash in the "db"
+        var userid = xlData[i].userid;
+        var password = hash;
+        var name = xlData[i].name;
+        var salt = salt;
+        var user_role = xlData[i].user_role;
+        var user_email = xlData[i].user_email;
+        var user_type = xlData[i].user_type;
+        var youthAge_code = xlData[i].youthAge_code;
+        var parentsAge_code = xlData[i].parentsAge_code;
+        var emd_class_code = xlData[i].emd_class_code;
+        var sex_class_code = xlData[i].sex_class_code;
+        var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code) values ('"+userid+"', '"+password+"', '"+name+"', '"+salt+"', '"+user_role+"', '"+user_email+"', '"+user_type+"', '"+youthAge_code+"', '"+parentsAge_code+"', '"+emd_class_code+"', '"+sex_class_code+"')";
+        rows = await conn.query(query); // 쿼리 실행
+      });
+    }
+    return rows;
+  } catch(error) {
+    console.log('dataif-service excelData:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+};
+      
+    
+
 
 exports.fetchDataSensor = async function(req, res) {
   var conn;

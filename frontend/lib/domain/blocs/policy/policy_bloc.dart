@@ -12,7 +12,7 @@ class PolicyBloc extends Bloc<PolicyEvent, PolicyState> {
     // on<OnSelectedImageEvent>(_onSelectedImage);
     on<OnIsSearchPolicyEvent>(_isSearchPolicy);
     // on<OnIsSearchPolicyEvent>(_isSelectPolicy);
-    // on<OnScrapEvent>(_onScrapEvent);
+    on<OnScrapOrUnscrapPolicy>(_scrapOrUnscrapPolicy);
   }
 
   // Future<void> _onSelectedImage(
@@ -31,4 +31,25 @@ class PolicyBloc extends Bloc<PolicyEvent, PolicyState> {
   //   emit(state.copyWith(
   //       isSearchPolicy: false, isSelectPolicy: event.isSelectPolicy));
   // }
+
+  Future<void> _scrapOrUnscrapPolicy(
+      OnScrapOrUnscrapPolicy event, Emitter<PolicyState> emit) async {
+    print('_scrapOrUnscrapPolic');
+    try {
+      emit(LoadingPolicy());
+      print('after Loading Policy');
+
+      final data = await policyService.scrapOrUnscrapPolicy(
+          event.uidPolicy, event.uidUser);
+      // print(data);
+
+      if (data.resp) {
+        emit(SuccessPolicy());
+      } else {
+        emit(FailurePolicy(data.message));
+      }
+    } catch (e) {
+      emit(FailurePolicy(e.toString()));
+    }
+  }
 }

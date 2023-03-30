@@ -44,10 +44,10 @@ app.use(session({
     resave: false, 
     saveUninitialized: true,
     rolling: true,
-    cookie: {
-      secure: true,
-      expires: 600 * 1000
-   }
+  //   cookie: {
+  //     secure: true,
+  //     expires: 600 * 1000
+  //  } //??
   }));
 
 /*

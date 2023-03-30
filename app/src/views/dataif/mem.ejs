@@ -113,17 +113,22 @@
           <% } %>
           </tbody>
         </table>
-        
         <!-- 페이징 아이콘 -->
         <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/auth/signup'">등록</button>
+        <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/dataif/excel'">다운로드</button>
+        <!-- <form action="/admin/dataif/excelup" method="post" enctype="multipart/form-data">
+          <input type="file" name="file" id="file">
+          <button class="ui button" id="mem_reg_btn" type="submit">업로드</button>
+        </form> -->
+        <!-- <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/dataif/excelup'">업로드</button> -->
         <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->
         <div id="mem_paging">
           <div class="ui pagination menu">
             <!-- <a class="icon item" href="/admin/dataif/?page=1">처음</a> -->
             <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">이전</a>
             <!-- 현재 페이지 기준 5페이지만 보여주기 -->
-            <% var startPage = page-3; %>
-            <% var endPage = page+3; %>
+            <% var startPage = page-2; %>
+            <% var endPage = page+2; %>
             <% if(startPage < 1){ startPage = 1; } %>
             <% if(endPage > totalPage){ endPage = totalPage; } %>
             <% for(var i=startPage; i<=endPage; i++){ %>

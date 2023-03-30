@@ -29,9 +29,9 @@ class _InfoInputPageState extends State<InfoInputPage> {
   late int userTypeCode; // 사용자 유형
   late int userRole = 1;
   late int emd = 0; // 영암군 읍면동 주소
-  late int youthAge = 0; // 청소년/청소년부모 나이
-  late int parentsAge = 0; // 부모 나이
-  late int sex = 0; // 성별
+  late int youthAge = 5; // 청소년/청소년부모 나이
+  late int parentsAge = 6; // 부모 나이
+  late int sex = 2; // 성별
 
   final _keyForm = GlobalKey<FormState>();
 
@@ -216,7 +216,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       keyboardType: TextInputType.emailAddress,
                       validator: validatedEmail,
                     ),
-                    const SizedBox(height: 60.0),
+                    const SizedBox(height: 40.0),
                     const TextCustom(
                         text: '추가정보',
                         letterSpacing: 2.0,
@@ -230,7 +230,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
                         color: Colors.black),
-                    const SizedBox(height: 30.0),
+                    const SizedBox(height: 40.0),
                     // // 전화번호
                     // const TextCustom(
                     //   text: '전화번호를 입력해주세요.',
@@ -321,20 +321,20 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         letterSpacing: 1.0,
                         maxLines: 2,
                       ),
-                      const SizedBox(height: 5.0),
-                      const TextCustom(
-                        text: '청소년, 청소년부모만 해당',
-                        fontSize: 13,
-                        letterSpacing: 1.0,
-                        maxLines: 2,
-                      ),
+                      // const SizedBox(height: 5.0),
+                      // const TextCustom(
+                      //   text: '청소년, 청소년부모만 해당',
+                      //   fontSize: 13,
+                      //   letterSpacing: 1.0,
+                      //   maxLines: 2,
+                      // ),
                       const SizedBox(height: 10.0),
                       ToggleSwitch(
                           minWidth:
                               (MediaQuery.of(context).size.width - 87) / 6,
                           minHeight: 50.0,
                           fontSize: 12,
-                          initialLabelIndex: 0,
+                          initialLabelIndex: 5,
                           activeBgColor: const [
                             Color.fromARGB(40, 204, 221, 90)
                           ],
@@ -374,7 +374,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         minWidth: (MediaQuery.of(context).size.width - 87) / 7,
                         minHeight: 50.0,
                         fontSize: 11,
-                        initialLabelIndex: 0,
+                        initialLabelIndex: 6,
                         activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
                         activeFgColor: ThemeColors.darkGreen,
                         inactiveBgColor: Colors.white,
@@ -415,7 +415,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       minWidth: (MediaQuery.of(context).size.width - 87) / 3,
                       minHeight: 50.0,
                       fontSize: 15,
-                      initialLabelIndex: 0,
+                      initialLabelIndex: 2,
                       activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
                       activeFgColor: ThemeColors.darkGreen,
                       inactiveBgColor: Colors.white,

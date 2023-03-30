@@ -17,9 +17,11 @@ import 'package:login/ui/widgets/widgets.dart';
 import 'package:login/domain/blocs/policy/policy_bloc.dart';
 
 class PolicyListPage extends StatefulWidget {
-  const PolicyListPage(
-      {Key? key, required this.categoryValue, required this.categoryName})
-      : super(key: key);
+  const PolicyListPage({
+    Key? key,
+    required this.categoryValue,
+    required this.categoryName,
+  }) : super(key: key);
   final String categoryName;
   final String categoryValue;
 
@@ -88,6 +90,7 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                                       snapshot.data!.length,
                                                   itemBuilder: (_, i) =>
                                                       ListViewPolicy(
+                                                        // codeData: codeData,
                                                         policies:
                                                             snapshot.data![i],
                                                       ));
@@ -124,7 +127,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                     : FutureBuilder<List<Policy>>(
                                         future: policyService.getAllPolicy(),
                                         builder: ((_, snapshot) {
-                                          // print(isDefaultSelectingCategory);
                                           if (snapshot.data != null &&
                                               snapshot.data!.isEmpty) {
                                             return _ListWithoutPolicySearch();
@@ -181,6 +183,7 @@ class _PolicyListPageState extends State<PolicyListPage> {
             shrinkWrap: true,
             itemCount: snapshot.data!.length,
             itemBuilder: (_, i) => ListViewPolicy(
+                  // codeData: codeData,
                   policies: snapshot.data![i],
                 ));
       },
@@ -447,102 +450,38 @@ class _selectedSearchFilter extends State<selectedSearchFilter> {
 // 정책 리스트
 class ListViewPolicy extends StatefulWidget {
   final Policy policies;
+  // final Map<String, dynamic> codeData;
+  // final Future<dynamic> codeData;
+
   // final String categoryCode;
-  const ListViewPolicy({Key? key, required this.policies}) : super(key: key);
+  const ListViewPolicy({
+    Key? key,
+    required this.policies,
+    // required this.codeData
+  }) : super(key: key);
 
   @override
   State<ListViewPolicy> createState() => _ListViewPolicyState();
 }
 
 class _ListViewPolicyState extends State<ListViewPolicy> {
-  late String policyInstitution = '';
-  // late String policyTarget = '';
-  late String policyField = '';
-  // late String policyCharacter = '';
-
-  @override
-  void initState() {
-    final Policy policies = widget.policies;
-    final String institutionCode = policies.policy_institution_code; // 기관 코드
-    // final String targetCode = policies.policy_target_code; // 적용 대상 코드
-    final String fieldCode = policies.policy_field_code; // 분야 코드
-    // final String characterCode = policies.policy_character_code;
-
-    codeService.getCodeData().then((value) {
-      setState(() {
-        var institutionLen = value['codes']['policy_institution_code'].length;
-        // var targetLen = value['codes']['policy_target_code'].length;
-        var fieldLen = value['codes']['policy_field_code'].length;
-        // var charLen = value['codes']['policy_character_code'].length;
-
-        // 기관
-        for (int i = 0; i < institutionLen; i++) {
-          var codeDetail =
-              value['codes']['policy_institution_code'][i]['code_detail'];
-          if (codeDetail == institutionCode) {
-            var codeDetailName = value['codes']['policy_institution_code'][i]
-                ['code_detail_name'];
-            policyInstitution = codeDetailName;
-            // print(policyInstitution);
-          }
-        }
-
-        // 대상
-        // for (int i = 0; i < targetLen; i++) {
-        //   var codeDetail =
-        //       value['codes']['policy_target_code'][i]['code_detail'];
-        //   if (codeDetail == targetCode) {
-        //     var codeDetailName =
-        //         value['codes']['policy_target_code'][i]['code_detail_name'];
-        //     policyTarget = codeDetailName;
-        //     // print(policyInstitution);
-        //   }
-        // }
-
-        // 분야
-        for (int i = 0; i < fieldLen; i++) {
-          var codeDetail =
-              value['codes']['policy_field_code'][i]['code_detail'];
-          if (codeDetail == fieldCode) {
-            var codeDetailName =
-                value['codes']['policy_field_code'][i]['code_detail_name'];
-            policyField = codeDetailName;
-            // print(policyInstitution);
-          }
-        }
-
-        // 정책 성격
-        // for (int i = 0; i < charLen; i++) {
-        //   var codeDetail =
-        //       value['codes']['policy_character_code'][i]['code_detail'];
-        //   if (codeDetail == characterCode) {
-        //     var codeDetailName =
-        //         value['codes']['policy_character_code'][i]['code_detail_name'];
-        //     policyCharacter = codeDetailName;
-        //     // print(policyInstitution);
-        //   }
-        // }
-      });
-    });
-
-    super.initState();
-  }
-
-  // print(institution);
-  // @override
-  // void dispose() {
-  //   institution;
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     // String categoryCode = widget.categoryCode; // 카테고리(분야) 코드
-
+    final policyBloc = BlocProvider.of<PolicyBloc>(context);
     final Policy policies = widget.policies;
-    // final size = MediaQuery.of(context).size;
-    // final policyBloc = BlocProvider.of<PolicyBloc>(context);
+    // final Map<String, dynamic> codeData = widget.codeData;
+    // final Future<dynamic> codeData = widget.codeData;
 
+    // 기관
+    final String policyInstitution = getMobileCodeService.getCodeDetailName(
+        "policy_institution_code", policies.policy_institution_code);
+    // 분야
+    final String policyField = getMobileCodeService
+        .getCodeDetailName("policy_field_code", policies.policy_field_code)
+        .toString();
+
+    // 이미지
     final String imgName = policies.img;
     final String imgUrl = '${Environment.urlApiServer}/upload/policy/$imgName';
 
@@ -558,15 +497,6 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
     final String endDateDay = policies.application_end_date.substring(8, 10);
     final String startDate = '$startDateYear.$startDateMonth.$startDateDay';
     final String endDate = '$endDateYear.$endDateMonth.$endDateDay';
-
-    // var test;
-
-    // final data = codeService.getCodeData().then((value) {
-    //   test = value['codes']['policy_institution_code'][0]['code_detail_name'];
-    //   print(test);
-    //   return test;
-    // });
-    // print(test);
 
     return Padding(
         padding: const EdgeInsets.fromLTRB(3, 3, 3, 0), // 카드 바깥쪽
@@ -668,15 +598,35 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               // 스크랩
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.bookmark_border,
-                                  size: 30,
-                                  color: ThemeColors.basic,
-                                ),
-                                onPressed: () {},
-                              ),
-                              Text(policies.scrap.toString(),
+                              InkWell(
+                                  onTap: () => policyBloc.add(
+                                      OnScrapOrUnscrapPolicy(
+                                          policies.board_idx.toString(),
+                                          policies.board_idx.toString())),
+                                  child: policies.is_scrap == 1
+                                      ? const Icon(
+                                          Icons.bookmark,
+                                          color: ThemeColors.basic,
+                                          size: 30,
+                                        )
+                                      : const Icon(
+                                          Icons.bookmark_border_outlined,
+                                          color: ThemeColors.basic,
+                                          size: 30,
+                                        )),
+
+                              // IconButton(
+                              //   icon: const Icon(
+                              //     Icons.bookmark_border,
+                              //     size: 30,
+                              //     color: ThemeColors.basic,
+                              //   ),
+                              //   onPressed: () {
+                              //     // 스크랩 수 1 증가
+
+                              //   },
+                              // ),
+                              Text(policies.count_scraps.toString(),
                                   style: const TextStyle(
                                       color: ThemeColors.basic, fontSize: 10))
                             ],

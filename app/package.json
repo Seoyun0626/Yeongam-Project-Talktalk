@@ -10,6 +10,7 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
     "fs-extra": "^11.1.0",
+    "json2xls": "^0.1.2",
     "jsonwebtoken": "^8.5.1",
     "mariadb": "^2.5.3",
     "mongoose": "^6.8.1",
@@ -21,7 +22,8 @@
     "pbkdf2-password": "^1.2.1",
     "promisfy": "^1.2.0",
     "uuidv4": "^6.2.13",
-    "winston": "^3.8.2"
+    "winston": "^3.8.2",
+    "xlsx": "^0.18.5"
   },
   "name": "node",
   "version": "1.0.0",

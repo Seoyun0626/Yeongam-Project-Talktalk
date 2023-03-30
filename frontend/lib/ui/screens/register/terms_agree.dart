@@ -31,8 +31,7 @@ class _termsAgreePageState extends State<termsAgreePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         // title: const Text("약관 동의"),
@@ -124,7 +123,7 @@ class _termsAgreePageState extends State<termsAgreePage> {
           ),
         ],
       ),
-    ));
+    );
   }
 
   onAllClicked(CheckBoxModal checkBoxItem) {

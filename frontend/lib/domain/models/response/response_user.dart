@@ -9,6 +9,7 @@ class ResponseUser {
   bool resp;
   String message;
   User user;
+  // List<User> user;
   // PostsUser postsUser;
 
   ResponseUser({
@@ -22,6 +23,8 @@ class ResponseUser {
         resp: json["resp"],
         message: json["message"],
         user: User.fromJson(json["user"]),
+        // user: List<User>.from(json["user"].map((x) => User.fromJson(x))),
+
         // postsUser: PostsUser.fromJson(json["posts"]),
       );
 
@@ -29,6 +32,7 @@ class ResponseUser {
         "resp": resp,
         "message": message,
         "user": user.toJson(),
+        // "user": List<dynamic>.from(user.map((x) => x.toJson())),
         // "posts": postsUser.toJson(),
       };
 }
@@ -59,35 +63,35 @@ class ResponseUser {
 // }
 
 class User {
-  String user_id;
-  String user_name;
+  String userid;
+  String name;
   String user_email;
-  String user_pw;
+  String user_type;
   // String phone_no;
 
   User({
-    required this.user_id,
-    required this.user_name,
+    required this.userid,
+    required this.name,
     required this.user_email,
-    required this.user_pw,
+    required this.user_type,
     // required this.phone_no,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         // user_no: json["user_no"] ?? -0,
-        user_id: json["user_id"] ?? '',
-        user_name: json["user_name"] ?? '',
+        userid: json["user_id"] ?? '',
+        name: json["user_name"] ?? '',
         user_email: json["user_email"] ?? '',
-        user_pw: json["user_pw"] ?? '',
+        user_type: json["user_pw"] ?? '',
         // phone_no: json["phone_no"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
         // "user_no": user_no,
-        "user_id": user_id,
-        "user_name": user_name,
+        "user_id": userid,
+        "user_name": name,
         "user_email": user_email,
-        "user_pw": user_pw,
+        "user_type": user_type,
         // "phone_no" : phone_no,
       };
 }

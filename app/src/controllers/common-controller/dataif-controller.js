@@ -138,6 +138,15 @@ exports.fetchDataSensor = async function(req, res) {
   }
 };
 
+exports.excelData = async function(req, res, xlData) {
+  try{
+    var result = await dataif_service.excelData(req, res, xlData);
+    return result;
+  } catch(error) {
+    console.log('dataif-controller excelData:'+error);
+  }
+};
+
 exports.permit = async function(req, res) {
   try{
     var result = await dataif_service.permit(req);

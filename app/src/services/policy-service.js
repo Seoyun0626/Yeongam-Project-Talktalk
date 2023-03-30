@@ -1,6 +1,7 @@
 var db = require('../utils/db');
 var multer = require('multer');
 const path = require("path");
+const { uuid } = require('uuidv4');
 
 exports.fetchData = async function(req, res) {
     var conn;
@@ -77,7 +78,7 @@ exports.updatePolicy = async function(req, res) {
         // DB에 저장
         conn = await db.getConnection();
         console.log('policy-service updatePolicy db getConnection');
-        var query = "UPDATE webdb.tb_policy SET img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', fund='"+req.body.fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
+        var query = "UPDATE webdb.tb_policy SET img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
         var rows = await conn.query(query); // 쿼리 실행
         return resultcode;
     } catch(error) {
@@ -135,7 +136,8 @@ exports.upload = async function(req, res) {
         var name = req.body.name;
         var target = req.body.target;
         var policy_institution_code = req.body.policy_institution_code;
-        var fund = req.body.fund;
+        var min_fund = req.body.min_fund;
+        var max_fund = req.body.max_fund;
         var content = req.body.content;
         var application_start_date = req.body.application_start_date;
         var application_end_date = req.body.application_end_date;
@@ -147,8 +149,12 @@ exports.upload = async function(req, res) {
             resultcode = 1;
             return resultcode;
         }
-        if(fund == null || fund == undefined || fund == '') {
+        if(min_fund == null || min_fund == undefined || min_fund == '') {
             resultcode = 3;
+            return resultcode;
+        }
+        if(max_fund == null || max_fund == undefined || max_fund == '') {
+            resultcode = 4;
             return resultcode;
         }
         // if(content == null || content == undefined || content == '') {
@@ -167,8 +173,8 @@ exports.upload = async function(req, res) {
         //     resultcode = 7;
         //     return resultcode;
         // }
-        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link) VALUES "
-          + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "', '" + policy_link + "');";
+        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, min_fund, max_fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link) VALUES "
+          + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + min_fund + "', '" + max_fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "', '" + policy_link + "');";
         var rows = await conn.query(query); // 쿼리 실행
         console.log('policy-service upload success');
         return resultcode; //0이면 성공
@@ -263,8 +269,7 @@ exports.getAllPolicy = async function(req, res) {
         var query = "SELECT * FROM webdb.tb_policy;";
         var rows = await conn.query(query); // 쿼리 실행
         // console.log(rows[0]);
-        // console.log(rows[1]);
-        // console.log(rows[2]); 
+
         // console.log(rows);
         return rows;
     } catch(error) {
@@ -276,17 +281,19 @@ exports.getAllPolicy = async function(req, res) {
 
 
 
+
+
 exports.getSearchPolicy = async function(req, res) {
-    console.log('policy-service getSearchPolicy : ',req.params.searchValue);
+    // console.log('policy-service getSearchPolicy : ',req.params.searchValue);
     var conn;
     var searchValue = '%' + req.params.searchValue + '%';
-    console.log('policy-service getSearchPolicy : ',searchValue);
+    // console.log('policy-service getSearchPolicy : ',searchValue);
     try {
         conn = await db.getConnection();
-        console.log('policy-service getSearchPolicy db getConnecton');
+        console.log('policy-service getSearchPolicy db getConnection');
         var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE" + "'"+searchValue+"'" + ";"; 
         var rows =  await conn.query(query); // 쿼리 실행
-        console.log('policy-service getSerachPolicy success');
+        // console.log('policy-service getSerachPolicy success');
         return rows;
     } catch(error){
         console.log('policy-service getSearchPolicy:'+error);
@@ -297,13 +304,13 @@ exports.getSearchPolicy = async function(req, res) {
 exports.getPolicyBySelect = async function(req, res){
     var conn;
     var code = req.params.code;
-    console.log('policy-service getPolicyBySelect : ',code);
+    // console.log('policy-service getPolicyBySelect : ',code);
     try {
         conn = await db.getConnection();
         console.log('policy-service getSearchPolicy db getConnecton');
         var query = "SELECT * FROM webdb.tb_policy WHERE policy_field_code = " + "'"+code+"'" + ";"; 
         var rows =  await conn.query(query); // 쿼리 실행
-        console.log('policy-service getSelectPolicy success');
+        // console.log('policy-service getSelectPolicy success');
         return rows;
     } catch(error){
         console.log('policy-service getSelectPolicy:'+error);
@@ -345,3 +352,37 @@ exports.getBannerData = async function(req, res) {
         conn.release();
     }
 };
+
+exports.scrapOrUnscrapPolicy = async function(req, res) {
+    console.log('policy_service scrapOrUnscrapPolicy', req.body);
+    var resultcode = 0;
+    try{
+        const {uidPolicy, uidUser} = req.body;
+        const conn = await db.getConnection();
+        console.log('policy-service scrapOrUnscrapPolicy db getConnection');
+
+        const isScrapdb = await conn.query('SELECT COUNT(uid_scraps) AS uid_scraps FROM webdb.tb_policy_scrap WHERE user_uid = ? AND policy_uid = ? LIMIT 1', [req.idPerson, uidPolicy]);
+        
+        if(isScrapdb[0][0].uid_scraps > 0) {
+            await conn.query('DELETE FROM webdb.tb_policy_scrap WHERE user_uid = ? AND policy_uid = ?', [req.idPerson, uidPolicy]);
+            conn.end();
+            resultcode = 1; // unscrap
+            return resultcode;
+        }
+        await conn.query('INSERT INTO webdb.tb_policy_scrap (uid_scraps, user_uid, policy_uid) VALUE (?,?,?)', [uuidv4(), req.idPerson, uidPolicy]);
+        conn.end();
+        return resultcode;
+
+
+
+        // var query = "update  webdb.tb_policy set count_scrps = count_scraps+1 where board_idx = 1;";
+        // var rows = await conn.query(query); // 쿼리 실행
+        // // console.log(rows);
+        // return rows;
+    } catch(error) {
+        console.log('policy-service scrapOrUnscrapPolicy:'+error);
+    } finally {
+        conn.release();
+    }
+};
+

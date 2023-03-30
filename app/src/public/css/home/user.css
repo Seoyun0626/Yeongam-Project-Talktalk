@@ -1,7 +1,8 @@
 #mem_paging {
     padding-left: 380px;
     margin-top: 15px;
-  }
+    /* text-align: center; */
+}
 #mem_table{
     text-align: center;
     width: 945px;
