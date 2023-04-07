@@ -104,6 +104,21 @@ exports.deletePolicy = async function(req, res) {
     }
 };
 
+exports.fetchpolicyImgByidx = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service fetchpolicyImgByidx db getConnection');
+        var query = "SELECT img FROM webdb.tb_policy where board_idx='"+req.params.id+"';";
+        var rows = await conn.query(query); // 쿼리 실행
+        return rows;
+    } catch(error) {
+        console.log('policy-service fetchpolicyImgByidx:'+error);
+    } finally {
+        conn.release();
+    }
+};
+
 exports.upload = async function(req, res) {
     var conn;
     var resultcode = 0;
@@ -260,6 +275,20 @@ exports.deleteBanner = async function(req, res) {
     }
 };
 
+exports.fetchBannerImg = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service fetchBannerImg db getConnection');
+        var query = "SELECT banner_img FROM webdb.tb_banner where board_idx = '" + req.params.id + "';";
+        var rows = await conn.query(query); // 쿼리 실행
+        return rows;
+    } catch(error) {
+        console.log('policy-service fetchBannerImg:'+error);
+    } finally {
+        conn.release();
+    }
+};
 
 exports.getAllPolicy = async function(req, res) {
     var conn;

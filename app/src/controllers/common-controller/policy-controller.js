@@ -48,6 +48,15 @@ exports.deletePolicy = async function(req, res) {
     console.log('policy-controller deletePolicy:'+error);
   }
 };
+exports.fetchpolicyImgByidx = async function(req, res) {
+  try{
+    var result = await policy_service.fetchpolicyImgByidx(req);
+    // console.log(result);
+    return result;
+  } catch(error) {
+    console.log('policy-controller fetchpolicyByidx:'+error);
+  }
+};
 
 
 exports.banner = async function(req, res) {
@@ -75,6 +84,15 @@ exports.deleteBanner = async function(req, res) {
       console.log('policy-controller login_check:'+error);
     }
   };
+exports.fetchBannerImg = async function(req, res) {
+    try{
+      var result = await policy_service.fetchBannerImg(req);
+      return result;
+    } catch(error) {
+      console.log('policy-controller login_check:'+error);
+    }
+  };
+  
 
 exports.fetchData = async function(req, res) {
     try{

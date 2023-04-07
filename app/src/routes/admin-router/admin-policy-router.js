@@ -1,5 +1,6 @@
 const path = require("path");
 var express = require("express");
+var fs = require("fs");
 var router = express.Router();
 var policy_controller = require("../../controllers/common-controller/policy-controller");
 var code_controller = require("../../controllers/common-controller/codeData-controller");
@@ -138,7 +139,13 @@ router.get('/delete/:id', async function(req, res){
             res.redirect('/admin/auth/login');
             return;
           }
+        var policy_img = await policy_controller.fetchpolicyImgByidx(req, res);
         var result = await policy_controller.deletePolicy(req, res);
+        // 정책 이미지 삭제
+        fs.unlink('./src/public/upload/policy/'+policy_img[0].img, function(err){
+            if(err) throw err;
+            console.log('file deleted');
+        });
         if(result == 0) { //성공
             res.redirect('/admin/policy/show');
         } else { //실패
@@ -187,7 +194,14 @@ router.get('/banner/delete/:id', async function(req, res){
             res.redirect('/admin/auth/login');
             return;
           }
+        //배너 이미지명 받아오기
+        var banner_img = await policy_controller.fetchBannerImg(req, res);
         var result = await policy_controller.deleteBanner(req, res);
+        //배너 이미지 삭제
+        fs.unlink('./src/public/upload/banner/'+banner_img[0].banner_img, function(err){
+            if(err) throw err;
+            console.log('file deleted');
+        });
         res.redirect('/admin/policy/banner');
         }
     catch(error) {
