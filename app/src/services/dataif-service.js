@@ -2,6 +2,7 @@ var db = require('../utils/db');
 // var s_db = require('../utils/s_db');
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
+const url = require('url');
 var utils = require('../utils/utils');
 var fs = require('fs');
 
@@ -382,6 +383,28 @@ exports.deleteUser = async function(req, res) {
     console.log('dataif-service delete:'+error);
   } finally {
     if (conn) conn.end();
+  }
+};
+
+exports.giveFig = async function(req, res) {
+  var conn;
+  try{
+    conn = await db.getConnection();
+    // tb_user에서 fig값을 받아오기
+    var query = 'select fig from webdb.tb_user where userid="'+req.params.id+'"';
+    var originFig = await conn.query(query);
+    var giveFig = url.parse(req.url, true);
+    // console.log(url_parts.query.fig);
+    // console.log(originFig[0].fig);
+    // 두 값을 더해서 tb_user에 업데이트
+    var newFig = parseInt(originFig[0].fig) + parseInt(giveFig.query.fig);
+    query = 'update webdb.tb_user set fig='+newFig+' where userid="'+req.params.id+'"';
+    var rows = await conn.query(query);
+    return rows;
+  } catch(error) {
+    console.log('dataif-service giveFig:'+error);
+  } finally {
+    if(conn) conn.end();
   }
 };
 

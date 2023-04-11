@@ -211,6 +211,20 @@ router.get('/delete/:id', async function(req, res){
   }
 });
 
+router.get('/giveFig/:id', async function(req, res){
+  try{
+    if(req.session.user == undefined){
+      res.redirect('/admin/auth/login');
+      return;
+    }
+    // alert창 띄우기
+    var result = await dataif_controller.giveFig(req, res);
+    res.redirect("/admin/dataif");
+  } catch(error) {
+    console.log('dataif-router delete error:'+error);
+  }
+});
+
 router.put('/:id', async function(req, res){
   try{
     var result = await dataif_controller.update(req, res);

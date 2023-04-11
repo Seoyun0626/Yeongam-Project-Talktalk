@@ -23,12 +23,14 @@ CREATE TABLE webdb.`tb_user` (
   `emd_class_code` varchar(2) NULL,
   `user_email` varchar(50) NULL,
   `salt` varchar(255) NOT NULL,
+  `fig` varchar(4) NOT NULL DEFAULT 0, 
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+-- 최고 관리자 id 설정
+insert into tb_user (userid, password, name, user_role, salt) values ('admin', '', 'admin', '0', '');
 
 CREATE TABLE webdb.`tb_policy` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,

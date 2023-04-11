@@ -74,6 +74,7 @@
             <th>사용자 구분</th>
             <th>등록 일시</th>
             <th>수정 일시</th>
+            <th>무화과</th>
             <!-- <th>푸시</th>
             <th>이메일</th>
             <th>sms</th> -->
@@ -95,6 +96,20 @@
               <!-- <td><%= posts[i].push_yn %></td>
               <td><%= posts[i].email_yn %></td>
               <td><%= posts[i].sms_yn %></td> -->
+              <td><a href="/admin/dataif/giveFig/<%=posts[i].userid%>?fig=" onclick="return giveFig()"><%=posts[i].fig%></a></td>
+              <script>
+                function giveFig(){
+                  // -입력 시 무화과 감소
+                  var fig = prompt("추가할 무화과 개수를 입력하세요");
+                  if(fig == null){
+                    return false;
+                  }else{
+                    var url = "/admin/dataif/giveFig/<%=posts[i].userid%>?fig=" + fig;
+                    window.location.href = url;
+                    return false;
+                  }
+                }
+              </script>
               <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
               <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
               <script>
