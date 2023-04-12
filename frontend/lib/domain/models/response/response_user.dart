@@ -82,7 +82,7 @@ class User {
         userid: json["user_id"] ?? '',
         name: json["user_name"] ?? '',
         user_email: json["user_email"] ?? '',
-        user_type: json["user_pw"] ?? '',
+        user_type: json["user_type"] ?? '',
         // phone_no: json["phone_no"] ?? '',
       );
 

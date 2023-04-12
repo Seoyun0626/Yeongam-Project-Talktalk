@@ -19,7 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     try {
-      // print("_onLogin");
+      print("_onLogin");
       emit(LoadingAuthentication());
       // print("auth_bloc loadingAuthentication");
       // print(event.user_id);

@@ -32,7 +32,16 @@ const routerAdminMain = require("./src/routes/admin-router/admin-main-router");
 const routerAdminpolicy = require("./src/routes/admin-router/admin-policy-router");
 const routerAdminCode = require("./src/routes/admin-router/admin-codeData-router");
 
-const routerMobile = require("./src/routes/mobile-router/mobile-router");
+const routerMobileLogin = require("./src/routes/mobile-router/mobile-login-router");
+const routerMobileMain = require("./src/routes/mobile-router/mobile-main-router");
+const routerMobilePolicy = require("./src/routes/mobile-router/mobile-policy-router");
+const routerMobileCode = require("./src/routes/mobile-router/mobile-codeData-router");
+const routerMobileUser = require("./src/routes/mobile-router/mobile-user-router");
+
+
+
+
+
 
 //앱 세팅
 app.set("views", "./src/views"); //템플릿 파일 경로(views)
@@ -77,6 +86,11 @@ app.use("/admin/main",routerAdminMain); //관리자 메인
 app.use("/admin/policy",routerAdminpolicy); //관리자 정책
 app.use("/admin/codeData",routerAdminCode); //관리자 코드데이터(공통코드)
 
-app.use("/mobile",routerMobile); // 모바일
+app.use("/mobile/login",routerMobileLogin); // 모바일
+app.use("/mobile/main",routerMobileMain); // 모바일
+app.use("/mobile/policy",routerMobilePolicy); // 모바일
+app.use("/mobile/codeData",routerMobileCode); // 모바일
+app.use("/mobile/user",routerMobileUser); // 모바일
+
 
 module .exports = app;

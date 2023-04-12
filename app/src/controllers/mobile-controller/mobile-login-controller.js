@@ -104,11 +104,3 @@ exports.date_check = async function(req, res) {
 */
 
 
-exports.getUserById = async function(req, res) {
-  try{
-    var result = await mobile_login_service.getUserById(req);
-    return result;
-  } catch(error) {
-    console.log('login-controller get user by id:'+error);
-  }
-}

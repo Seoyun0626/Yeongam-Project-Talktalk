@@ -13,7 +13,7 @@ class codeServices {
   //Future<List<commonCode>>
   getCodeData() async {
     final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/policy/get-code-data'),
+        Uri.parse('${Environment.urlApi}/codeData/get-code-data'),
         headers:
             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
     // print('code_services getCodeData');

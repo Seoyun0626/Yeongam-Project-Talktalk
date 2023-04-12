@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login/ui/screens/calendar/calendar.dart';
-import 'package:login/ui/screens/keep/keep.dart';
+import 'package:login/ui/screens/event/event.dart';
+import 'package:login/ui/screens/scrap/scrap.dart';
 import 'package:login/ui/screens/policy/policy_list.dart';
 import 'package:login/ui/screens/user/my_page.dart';
 import 'package:shimmer/shimmer.dart';

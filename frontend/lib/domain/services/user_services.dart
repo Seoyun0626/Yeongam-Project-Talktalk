@@ -33,8 +33,8 @@ class UserServices {
     String emd_class_code,
     String sex_class_code,
   ) async {
-    final resp =
-        await http.post(Uri.parse('${Environment.urlApi}/signup'), headers: {
+    final resp = await http
+        .post(Uri.parse('${Environment.urlApi}/login/signup'), headers: {
       'Accept': 'application/json'
     }, body: {
       'userid': userid,

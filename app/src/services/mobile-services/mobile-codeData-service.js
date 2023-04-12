@@ -1,7 +1,6 @@
 var db = require('../../utils/db');
-var bkfd2Password = require('pbkdf2-password');
-var hasher = bkfd2Password();
-var utils = require('../../utils/utils');
+// var bkfd2Password = require('pbkdf2-password');
+// var utils = require('../../utils/utils');
 
 
 exports.fetchData = async function(req, res) {

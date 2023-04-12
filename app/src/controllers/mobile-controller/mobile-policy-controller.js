@@ -1,12 +1,11 @@
 var db = require('../../utils/db');
-var policy_service = require("../../services/policy-service");
-var code_service = require("../../services/codeData-service");
+var mobile_policy_service = require("../../services/mobile-services/mobile-policy-service");
 
 
 
 exports.getAllPolicy = async function(req, res) {
     try{
-        var result = await policy_service.getAllPolicy(req,res);
+        var result = await mobile_policy_service.getAllPolicy(req,res);
         // console.log(result);
         return result;
       } catch(error) {
@@ -20,7 +19,7 @@ exports.getAllPolicy = async function(req, res) {
 
 exports.getSearchPolicy = async function(req, res) {
   try{
-    var result = await policy_service.getSearchPolicy(req, res);
+    var result = await mobile_policy_service.getSearchPolicy(req, res);
     // console.log('mobile-policy-controller getSearchPolicy:');
     return result;
   } catch (error){
@@ -30,7 +29,7 @@ exports.getSearchPolicy = async function(req, res) {
 
 exports.getPolicyBySelect = async function(req, res) {
   try{
-    var result = await policy_service.getPolicyBySelect(req, res);
+    var result = await mobile_policy_service.getPolicyBySelect(req, res);
     // console.log('mobile-policy-controller getPolicyBySelect');
     return result;
   } catch (error){
@@ -40,7 +39,7 @@ exports.getPolicyBySelect = async function(req, res) {
 
 exports.getAllPolicyForSearch = async function(req, res) {
   try{
-      var result = await policy_service.getAllPolicyForSearch(req,res);
+      var result = await mobile_policy_service.getAllPolicyForSearch(req,res);
       // console.log(result);
       return result;
     } catch(error) {
@@ -48,18 +47,11 @@ exports.getAllPolicyForSearch = async function(req, res) {
     }
   };
 
-exports.getBannerData = async function(req, res) {
-  try{
-    var result = await policy_service.getBannerData(req, res);
-    return result;
-  } catch(error) {
-    console.log('mobile-policy-controller fetchBannerData:'+error);
-  }
-};
+
 
 exports.scrapOrUnscrapPolicy = async function(req, res) {
   try{
-    var result = await policy_service.scrapOrUnscrapPolicy(req, res);
+    var result = await mobile_policy_service.scrapOrUnscrapPolicy(req, res);
     return result;
   } catch(error) {
     console.log('mobile-policy-controller scrapOrUnscrapPolicy:'+error);

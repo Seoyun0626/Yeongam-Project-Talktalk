@@ -22,9 +22,9 @@ class BottomNavigation extends StatelessWidget {
           _ItemButtom(
               i: 1,
               index: index,
-              icon: Icons.home,
+              // icon: Icons.home,
               isIcon: false,
-              iconString: 'images/bottom_bar/icon_menu_home.png',
+              iconString: 'images/bottom_bar/icon_menu_home.svg',
               isReel: isReel,
               iconText: '홈',
               onPressed: () => Navigator.pushAndRemoveUntil(
@@ -36,7 +36,7 @@ class BottomNavigation extends StatelessWidget {
               index: index,
               isIcon: false,
               isReel: isReel,
-              iconString: 'images/bottom_bar/icon_menu_policy.png',
+              iconString: 'images/bottom_bar/icon_menu_thumb.svg',
               iconText: '복지검색',
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context,
@@ -52,32 +52,32 @@ class BottomNavigation extends StatelessWidget {
               // icon: Icons.date_range,
               isIcon: false,
               isReel: isReel,
-              iconString: 'images/bottom_bar/icon_menu_keep.png',
-              iconText: 'keep',
+              iconString: 'images/bottom_bar/icon_menu_scrap.svg',
+              iconText: '스크랩',
               onPressed: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const KeepPage()),
+                    MaterialPageRoute(builder: (context) => const ScrapPage()),
                   )),
           _ItemButtom(
               i: 4,
               index: index,
-              icon: Icons.bookmark,
+              // icon: Icons.card_giftcard_rounded,
               isIcon: false,
               isReel: isReel,
-              iconString: 'images/bottom_bar/icon_menu_calendar.png',
-              iconText: '캘린더',
+              iconString: 'images/bottom_bar/icon_menu_event.svg',
+              iconText: '이벤트',
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const CalendarPage()),
+                  MaterialPageRoute(builder: (context) => const EventPage()),
                   (_) => false)),
           _ItemButtom(
               i: 5,
               index: index,
-              icon: Icons.more_horiz,
-              // isIcon: false,
+              // icon: Icons.person,
+              isIcon: false,
               isReel: isReel,
-              // iconString: 'images/bottom_bar/icon_menu_more.png',
-              iconText: '더보기',
+              iconString: 'images/bottom_bar/icon_menu_mypage.svg',
+              iconText: '마이 톡톡',
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const MyPage()),
@@ -153,10 +153,10 @@ class _ItemButtom extends StatelessWidget {
                             : isReel
                                 ? Colors.white
                                 : ThemeColors.basic,
-                        size: MediaQuery.of(context).size.width / 13)
-                    : Image.asset(
+                        size: MediaQuery.of(context).size.width / 15)
+                    : SvgPicture.asset(
                         iconString!,
-                        height: MediaQuery.of(context).size.width / 13,
+                        height: MediaQuery.of(context).size.width / 15,
                         color: (i == index)
                             ? ThemeColors.darkGreen
                             : isReel
@@ -166,7 +166,10 @@ class _ItemButtom extends StatelessWidget {
                 const SizedBox(
                   height: 6,
                 ),
-                Text(iconText),
+                Text(
+                  iconText,
+                  style: const TextStyle(fontFamily: 'NanumSquareB'),
+                ),
               ],
             )));
   }

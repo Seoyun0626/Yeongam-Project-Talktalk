@@ -43,7 +43,7 @@ dependencies:
   permission_handler: ^9.2.0
   pin_code_fields: ^7.3.0
   url_launcher: ^6.1.9
-  # flutter_svg: ^1.1.6
+  flutter_svg: ^1.1.6
   
   
 #  photo_manager: ^2.3.0
@@ -112,6 +112,17 @@ flutter:
       fonts:
         - asset: fonts/KOTRA-HOPE.otf
           weight: 600
+    - family : NanumSquare_ac
+      fonts :
+        - asset: fonts/NanumSquareL.otf
+          weight : 300
+        - asset: fonts/NanumSquareR.otf
+          weight : 400
+        - asset: fonts/NanumSquareB.otf
+          weight : 500
+        - asset: fonts/NanumSquareEB.otf
+          weight : 600
+        
        
   #   - family: Trajan Pro
   #     fonts:

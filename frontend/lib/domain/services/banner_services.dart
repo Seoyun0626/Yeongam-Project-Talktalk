@@ -10,7 +10,7 @@ class BannerServices {
 
   Future<List<Banners>> getBannerData() async {
     // print('get banner data');
-    final resp = await http.get(Uri.parse('${Environment.urlApi}/banner'),
+    final resp = await http.get(Uri.parse('${Environment.urlApi}/main/banner'),
         headers: _setHeaders());
     // print(resp.body);
 
