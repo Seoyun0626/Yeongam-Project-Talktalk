@@ -8,6 +8,113 @@ const { v4: uuidv4 } = require('uuid');
 
 // const jwt = require('jsonwebtoken');
 
+
+// 모바일 로그인
+exports.SignIn = async function(req) {
+  var conn;
+try{
+  var json = {};
+  json.code = 0;
+  console.log('mobile-login-service : ', req.body);
+  const id = req.body['userid'];
+  const password = req.body['userpw'];
+  // console.log(id, password);
+
+  conn = await db.getConnection();
+  console.log('login-service SignIn db getConnection');
+
+  // // 사용자 고유 식별 번호
+  // const uiddb = await conn.query('SELECT uid FROM webdb.tb_user WHERE userid = ?', [id]);
+  // // console.log(uiddb);
+  // const {uid} = uiddb[0];
+  // // console.log('uid', uid);
+  
+  // 사용자 정보(아이디, 비밀번호, salt)
+  const userdb = await conn.query("SELECT uid, userid, userpw, salt FROM webdb.tb_user where userid='" + id + "' ;");
+  // console.log(userdb.userpw);
+  // console.log(userdb[0]);
+
+  if (userdb){
+    var userPass = userdb[0].userpw;
+    const passwordMatch = await bcrypt.compareSync(password, userPass);
+
+    if (!passwordMatch){
+      json.code = 100;
+      json.msg = "비밀번호 일치하지 않습니다.";
+      json.data = {};
+      return json;
+    } else {
+      
+      json.data = userdb[0];
+      return json;
+    }
+  }else {
+    // 아이디 일치 X
+    json.code = 100;
+    json.msg = "ID 일치하지 않습니다.";
+    json.data = {};
+    return json;
+  }
+ 
+} catch(error) {
+  console.log('mobile-login-service SignIn:'+error);
+} finally {
+  if (conn) conn.end();
+}
+
+};
+
+// 모바일 회원가입
+exports.signUp = async function(req, res) {
+  var resultcode = 0;
+  var conn;
+  try{
+    conn = await db.getConnection();
+    console.log('mobile-login-service signUp');
+    
+    console.log(req.body);
+    const {userid,user_name, user_email, userpw, userpw2, user_role, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code} = req.body;
+    // var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
+    // var rows = await conn.query(query); // 쿼리 실행
+    
+    if(user_name=='' || user_email=='' || userpw=='' || userpw2=='') {
+      resultcode=100;
+      console.log('dataif-service update: empty data');
+      return resultcode;
+    }
+    if(userpw != userpw2) {
+        // 비밀번호가 일치하지 않음
+        console.log('비밀번호가 일치하지 않습니다.');
+        resultcode = 100;
+        return resultcode;
+    }
+
+    let salt = bcrypt.genSaltSync();
+    // console.log(salt);
+    const pass = bcrypt.hashSync(userpw, salt);
+    var randomNumber = Math.floor(10000 + Math.random() * 90000); // token_temp
+    var uid = uuidv4(); // 고유 식별 번호
+    // console.log(uid);
+    await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
+    
+  } catch(error) {
+    console.log('login-service SignUp:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+  
+  return resultcode;
+};
+
+
+
+
+
+
+
+
+
+
 // // 로그인
 // exports.SignIn = async function(req) {
 //   var conn;
@@ -112,133 +219,6 @@ const { v4: uuidv4 } = require('uuid');
   
 //   return resultcode;
 // };
-
-// 모바일 로그인
-exports.SignIn = async function(req) {
-  var conn;
-try{
-  var json = {};
-  json.code = 0;
-  console.log('mobile-login-service : ', req.body);
-  const id = req.body['userid'];
-  const password = req.body['userpw'];
-  // console.log(id, password);
-
-  conn = await db.getConnection();
-  console.log('login-service SignIn db getConnection');
-
-  // // 사용자 고유 식별 번호
-  // const uiddb = await conn.query('SELECT uid FROM webdb.tb_user WHERE userid = ?', [id]);
-  // // console.log(uiddb);
-  // const {uid} = uiddb[0];
-  // // console.log('uid', uid);
-  
-  // 사용자 정보(아이디, 비밀번호, salt)
-  const userdb = await conn.query("SELECT uid, userid, userpw, salt FROM webdb.tb_user where userid='" + id + "' ;");
-  // console.log(userdb.userpw);
-  // console.log(userdb[0]);
-
-  if (userdb){
-    var userPass = userdb[0].userpw;
-    const passwordMatch = await bcrypt.compareSync(password, userPass);
-
-    if (!passwordMatch){
-      json.code = 100;
-      json.msg = "비밀번호 일치하지 않습니다.";
-      json.data = {};
-      return json;
-    } else {
-      
-      json.data = userdb[0];
-      return json;
-    }
-  }else {
-    // 아이디 일치 X
-    json.code = 100;
-    json.msg = "ID 일치하지 않습니다.";
-    json.data = {};
-    return json;
-  }
- 
-} catch(error) {
-  console.log('mobile-login-service SignIn:'+error);
-} finally {
-  if (conn) conn.end();
-}
-
-};
-
-// 모바일 회원가입
-exports.signUp = async function(req, res) {
-  var resultcode = 0;
-  var conn;
-  try{
-    conn = await db.getConnection();
-    console.log('mobile-login-service signUp');
-    
-    console.log(req.body);
-    const {userid,user_name, user_email, userpw, userpw2, user_role, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code} = req.body;
-    // var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
-    // var rows = await conn.query(query); // 쿼리 실행
-    
-    if(user_name=='' || user_email=='' || userpw=='' || userpw2=='') {
-      resultcode=100;
-      console.log('dataif-service update: empty data');
-      return resultcode;
-    }
-    if(userpw != userpw2) {
-        // 비밀번호가 일치하지 않음
-        console.log('비밀번호가 일치하지 않습니다.');
-        resultcode = 100;
-        return resultcode;
-    }
-
-    let salt = bcrypt.genSaltSync();
-    // console.log(salt);
-    const pass = bcrypt.hashSync(userpw, salt);
-    var randomNumber = Math.floor(10000 + Math.random() * 90000); // token_temp
-    var uid = uuidv4(); // 고유 식별 번호
-    // console.log(uid);
-    await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
-
-
-
-
-  //   if (rows[0] == undefined) {
-  //     hasher({
-  //         password: userpw
-  //     }, async (err, pass, salt, hash) => {
-  //       // var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
-  //       // var rows = await conn.query(query); // 쿼리 실행
-  //      await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?);`, [userid, hash, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
-
-  //       console.log('회원가입 성공');
-  //     });
-  // } else {
-  //     // 이미 있음
-  //     console.log('이미 존재하는 아이디입니다.');
-  //     resultcode = 100;
-  // }
-
-
-    // console.log('login-service SignUp db getConnection')
-    // var userid = req.body.userid;
-    // var password = req.body.password;
-    // var password2 = req.body.password2;
-    // var name = req.body.name;
-    // var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
-    // var rows = await conn.query(query); // 쿼리 실행
-    
-    // console.log(req.body);
-    
-  } catch(error) {
-    console.log('login-service SignUp:'+error);
-  } finally {
-    if (conn) conn.end();
-  }
-  
-  return resultcode;
-};
 
 
 

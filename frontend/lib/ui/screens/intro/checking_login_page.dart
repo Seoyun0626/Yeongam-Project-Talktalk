@@ -53,7 +53,6 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        print(state);
         Navigator.pushAndRemoveUntil(
             context, routeFade(page: const HomePage()), (_) => false);
         // if (state is LogOut) {

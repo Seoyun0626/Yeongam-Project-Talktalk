@@ -74,29 +74,6 @@ class _PrivacySettingPageState extends State<PrivacySettingPage> {
                         physics: const BouncingScrollPhysics(),
                         children: [
                       const _UserName(),
-                      // BlocBuilder<UserBloc, UserState>(
-                      //   builder: (((context, state) {
-                      //     FutureBuilder<User>(
-                      //       future: userService.getUserById(),
-                      //       builder: ((_, snapshot) {
-                      //         return !snapshot.hasData
-
-                      //       }),
-                      //     );
-                      //   })),
-                      // ),
-                      BtnNaru(
-                        text: '로그아웃',
-                        colorText: Colors.black,
-                        width: size.width,
-                        onPressed: () {
-                          authBloc.add(OnLogOutEvent());
-                          userBloc.add(OnLogOutUser());
-                          // Navigator.pop(context);
-                          Navigator.pushAndRemoveUntil(context,
-                              routeFade(page: const HomePage()), (_) => false);
-                        },
-                      )
                     ]))
               ],
             ),

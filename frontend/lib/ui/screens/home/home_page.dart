@@ -36,199 +36,196 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final userBloc = BlocProvider.of<UserBloc>(context);
+    // final size = MediaQuery.of(context).size;
+    // final userBloc = BlocProvider.of<UserBloc>(context);
     final authBloc = BlocProvider.of<AuthBloc>(context);
 
-    return BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is SuccessAuthentication) {
-          } else if (state is LogOut) {}
-        },
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: Scaffold(
-              appBar: AppBar(
-                titleSpacing: 0,
-                title: const Text('청소년 톡Talk',
-                    style: TextStyle(
-                      color: ThemeColors.basic,
-                      fontFamily: 'CookieRun',
-                      fontSize: 24,
-                    )),
-                leading: InkWell(
-                  // onTap: () => Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const LoginPage(),
-                  //     )),
-                  child: Image.asset('images/aco.png', height: 70),
-                ),
-                actions: [
-                  IconButton(
-                      icon: const Icon(
-                        Icons.perm_identity,
-                        size: 30,
-                        color: ThemeColors.basic,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginPage(),
-                            ));
-                      }),
-                ],
-                backgroundColor: ThemeColors.primary,
-                centerTitle: false,
-                elevation: 0.0,
-              ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 0.0, vertical: 0.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // 배너 슬라이드
-                      FutureBuilder<List<Banners>>(
-                        future: bannerService.getBannerData(),
-                        builder: (_, snapshot) {
-                          if (!snapshot.hasData) {
-                            return Column(
-                              children: const [
-                                ShimmerNaru(),
-                              ],
-                            );
-                          } else {
-                            return CarouselSlider.builder(
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: ((context, index, realIndex) =>
-                                  BannerSlide(
-                                      policyBanners: snapshot.data![index])),
-                              options: CarouselOptions(
-                                scrollDirection: Axis.horizontal,
-                                height: MediaQuery.of(context).size.height / 4,
-                                enlargeCenterPage: true,
-                                viewportFraction: 1.0,
-                                autoPlay: true,
-                              ),
-                            );
-                          }
-                        },
-                      ),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                          padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
-                          margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-                          child: Column(children: [
-                            Row(children: const [
-                              Icon(
-                                Icons.category,
-                                color: ThemeColors.darkGreen,
-                                size: 25,
-                              ),
-                              // ImageIcon(
-                              //   AssetImage("images/icon_check.png"),
-                              //   color: ThemeColors.darkGreen,
-                              //   size: 20,
-                              // ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text('카테고리별 정책을 확인하세요!',
-                                  style: TextStyle(
-                                    color: ThemeColors.basic,
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                            ])
-                          ])),
-
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      // 카테고리 아이콘
-                      CategoryButton(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      // 실시간 인기글
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
-                        margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-                        child: InkWell(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const PolicyListPage(
-                                  categoryName: '',
-                                  categoryValue: '',
-                                ), // 복지검색 탭
-                              )),
-                          child: Row(children: const [
-                            Icon(
-                              Icons.auto_awesome,
-                              color: ThemeColors.darkGreen,
-                            ),
-                            // Image.asset('images/icon_sparkel.png'),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Text('지금 인기있는 정책은?',
-                                style: TextStyle(
-                                  color: ThemeColors.basic,
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.w600,
-                                )),
-                          ]),
-                        ),
-                      ),
-
-                      // 실시간 인기글
-                      FutureBuilder<List<Policy>>(
-                          future: policyService.getAllPolicy(),
-                          builder: ((_, snapshot) {
-                            if (snapshot.data != null &&
-                                snapshot.data!.isEmpty) {
-                              return _ListWithoutPopularPolicy();
-                            }
-                            if (!snapshot.hasData) {
-                              return const _ShimerLoadingPopularPolicy();
-                            } else {
-                              return ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: 5,
-                                  itemBuilder: (_, i) => livePopularPost(
-                                      // codeData: codeData,
-                                      ranking: i,
-                                      policies: snapshot.data![i]));
-                            }
-                          })),
-
-                      // // 로그아웃 버튼
-                      // BtnNaru(
-                      //   text: '로그아웃',
-                      //   colorText: Colors.black,
-                      //   width: size.width,
-                      //   onPressed: () {
-                      //     authBloc.add(OnLogOutEvent());
-                      //     userBloc.add(OnLogOutUser());
-                      //     Navigator.pushAndRemoveUntil(context,
-                      //         routeSlide(page: const HomePage()), (_) => false);
-                      //   },
-                      // ),
-                      const SizedBox(height: 30.0),
-                    ],
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+          appBar: AppBar(
+            titleSpacing: 0,
+            title: const Text('청소년 톡Talk',
+                style: TextStyle(
+                  color: ThemeColors.basic,
+                  fontFamily: 'CookieRun',
+                  fontSize: 24,
+                )),
+            leading: InkWell(
+              // onTap: () => Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const LoginPage(),
+              //     )),
+              child: Image.asset('images/aco.png', height: 70),
+            ),
+            actions: [
+              IconButton(
+                  icon: const Icon(
+                    Icons.perm_identity,
+                    size: 30,
+                    color: ThemeColors.basic,
                   ),
-                ),
+                  onPressed: () {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const LoginPage(),
+                    //     ));
+
+                    if (authBloc.state is LogOut) {
+                      // 로그인 상태일 경우 ProfilePage로 이동
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
+                      );
+                    } else {
+                      // 로그인 상태가 아닐 경우 LoginPage로 이동
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const MyPage()),
+                      );
+                    }
+                  }),
+            ],
+            backgroundColor: ThemeColors.primary,
+            centerTitle: false,
+            elevation: 0.0,
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 배너 슬라이드
+                  FutureBuilder<List<Banners>>(
+                    future: bannerService.getBannerData(),
+                    builder: (_, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Column(
+                          children: const [
+                            ShimmerNaru(),
+                          ],
+                        );
+                      } else {
+                        return CarouselSlider.builder(
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: ((context, index, realIndex) =>
+                              BannerSlide(
+                                  policyBanners: snapshot.data![index])),
+                          options: CarouselOptions(
+                            scrollDirection: Axis.horizontal,
+                            height: MediaQuery.of(context).size.height / 4,
+                            enlargeCenterPage: true,
+                            viewportFraction: 1.0,
+                            autoPlay: true,
+                          ),
+                        );
+                      }
+                    },
+                  ),
+
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                      margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+                      child: Column(children: [
+                        Row(children: const [
+                          Icon(
+                            Icons.category,
+                            color: ThemeColors.darkGreen,
+                            size: 25,
+                          ),
+                          // ImageIcon(
+                          //   AssetImage("images/icon_check.png"),
+                          //   color: ThemeColors.darkGreen,
+                          //   size: 20,
+                          // ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('카테고리별 정책을 확인하세요!',
+                              style: TextStyle(
+                                color: ThemeColors.basic,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w600,
+                              )),
+                        ])
+                      ])),
+
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  // 카테고리 아이콘
+                  CategoryButton(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // 실시간 인기글
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                    margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+                    child: InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PolicyListPage(
+                              categoryName: '',
+                              categoryValue: '',
+                            ), // 복지검색 탭
+                          )),
+                      child: Row(children: const [
+                        Icon(
+                          Icons.auto_awesome,
+                          color: ThemeColors.darkGreen,
+                        ),
+                        // Image.asset('images/icon_sparkel.png'),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text('지금 인기있는 정책은?',
+                            style: TextStyle(
+                              color: ThemeColors.basic,
+                              fontSize: 19,
+                              fontWeight: FontWeight.w600,
+                            )),
+                      ]),
+                    ),
+                  ),
+
+                  // 실시간 인기글
+                  FutureBuilder<List<Policy>>(
+                      future: policyService.getAllPolicy(),
+                      builder: ((_, snapshot) {
+                        if (snapshot.data != null && snapshot.data!.isEmpty) {
+                          return _ListWithoutPopularPolicy();
+                        }
+                        if (!snapshot.hasData) {
+                          return const _ShimerLoadingPopularPolicy();
+                        } else {
+                          return ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: 5,
+                              itemBuilder: (_, i) => livePopularPost(
+                                  // codeData: codeData,
+                                  ranking: i,
+                                  policies: snapshot.data![i]));
+                        }
+                      })),
+
+                  const SizedBox(height: 30.0),
+                ],
               ),
-              bottomNavigationBar: const BottomNavigation(index: 1)),
-        ));
+            ),
+          ),
+          bottomNavigationBar: const BottomNavigation(index: 1)),
+    );
   }
 }
 

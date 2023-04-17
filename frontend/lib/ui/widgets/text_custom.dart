@@ -10,19 +10,21 @@ class TextCustom extends StatelessWidget {
   final TextOverflow overflow;
   final TextAlign textAlign;
   final double? letterSpacing;
+  final double? height;
 
-  const TextCustom({
-    Key? key,
-    required this.text,
-    this.fontSize = 18,
-    this.fontWeight = FontWeight.normal,
-    this.color = Colors.black,
-    this.maxLines = 1,
-    this.overflow = TextOverflow.visible,
-    this.textAlign = TextAlign.left,
-    this.letterSpacing,
-    this.isTitle = false,
-  }) : super(key: key);
+  const TextCustom(
+      {Key? key,
+      required this.text,
+      this.fontSize = 18,
+      this.fontWeight = FontWeight.normal,
+      this.color = Colors.black,
+      this.maxLines = 1,
+      this.overflow = TextOverflow.visible,
+      this.textAlign = TextAlign.left,
+      this.letterSpacing,
+      this.isTitle = false,
+      this.height})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,8 @@ class TextCustom extends StatelessWidget {
           fontSize: fontSize,
           fontWeight: fontWeight,
           color: color,
-          letterSpacing: letterSpacing),
+          letterSpacing: letterSpacing,
+          height: height),
       // style: GoogleFonts.getFont( isTitle ? 'Poppins' :'Roboto', fontSize: fontSize, fontWeight: fontWeight, color: color, letterSpacing: letterSpacing),
       maxLines: maxLines,
       overflow: overflow,
