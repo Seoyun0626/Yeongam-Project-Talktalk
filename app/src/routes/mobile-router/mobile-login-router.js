@@ -6,17 +6,50 @@ const generateJsonWebToken = require("../../lib/generate_jwt");
 
 
 
-// 로그인 라우터
-router.get('/login', function (req, res) {
-    try{
-      console.log('mobile-router login');
-      // res.render('dataif/login');
-    } catch(error) {
-      console.log('mobile-router login error:'+error);
+// 로그인
+router.post("/login", async function(req, res) {
+  try{
+    // 로그인 확인을 위해 컨트롤러 호출
+    // console.log('mobile-router', req.body);
+    var result = await mobile_login_controller.SignIn(req, res);
+
+    // console.log('login mobile-router result : ', result);
+
+    var uid = result.data.uid;
+    // console.log(uid);
+    let token = generateJsonWebToken(uid);
+    
+    // console.log(token);
+    if (result.code == 0){
+      res.json({
+        resp : true,
+        message : '로그인 성공',
+        token : token
+      }) 
+    } else {
+      res.json({
+        resp : false,
+        message : '로그인 실패',
+        token : token
+      })
     }
-  });
+    
+  } catch(error) {
+    console.log('mobile-router login:'+error);
+    if (result== 100){
+      res.json({
+        resp : false,
+        message : '로그인 실패',
+        token : token
+      })
+    }
+
+  }
+});
+
+
   
-  // kth - mobile - verfiy email
+  // verfiy email
   router.get('/verify-email/:code/:email', async function(req, res) {
     let code = req.params.code;
     let email = req.params.email;
@@ -44,91 +77,9 @@ router.get('/login', function (req, res) {
     }
   });
   
-  router.post("/login", async function(req, res) {
-    try{
-      // 로그인 확인을 위해 컨트롤러 호출
-      console.log('mobile-router', req.body);
-      var result = await mobile_login_controller.SignIn(req, res);
-      // console.log("router.post-/login", result);
-      // res.send(result);
-      console.log('login mobile-router result : ', result);
-      let token = generateJsonWebToken(result);
-      if (result.code == 0){
-        res.json({
-          resp : true,
-          message : '로그인 성공',
-          token : token
-        })
-      } else {
-        res.json({
-          resp : false,
-          message : '로그인 실패',
-          token : token
-        })
-      }
-      
-    } catch(error) {
-      console.log('mobile-router login:'+error);
-      if (result.code == 100){
-        res.json({
-          resp : false,
-          message : '로그인 실패',
-          token : token
-        })
-      }
+
   
-    }
-  });
-  
-  // kth - mobile - renew login
-  // router.get('renew-login', verifyToken, login_controller.renewLogin);
-  
-  
-  
-  /*
-  const LocalStrategy = require('passport-local').Strategy;
-  passport.use('local-login', new LocalStrategy({
-    usernameField: 'userid',
-    passwordfield: 'password',
-    passReqToCallback: true,
-  }, async function(req, username, password, done) {
-    //console.log(username);
-    try{
-      var conn = await db.getConnection();
-      const query = 'SELECT userid, password, salt, name FROM webdb.member where userid='+username;
-      var rows = await conn.query(query);
-      if (rows.length) {
-        return done(null, {'userid': rows[0].userid})
-      } else {
-          return done(null, false, {'message': 'your userid is not found'})
-      }
-    } catch(error) {
-      console.log('mobile-router login:'+error);
-      return done(error);
-    } finally {
-      if (conn) conn.end();
-    }
-  }));
-  
-  //serialize 부분을 작성해야 server.js의 post에서 call한
-  //passport.authenticate 함수가 정상 작동한다.
-  passport.serializeUser((user,done)=>{ 
-    //console.log('serializeUser:'+user.userid);
-    done(null,user.userid);
-  });
-  
-  passport.deserializeUser((userid,done)=>{
-    //console.log('deserializeUser:'+user);
-    done(null,userid);
-  });
-  */
-  //이게 동작하면 authenticate() 메서드 실행되고 이 값처리는 위의 passport부분에서 실행한다. 
-  
-  // router.post('/login', passport.authenticate('local-login', {
-  //   successRedirect: '/mobile/loginSuccess', //인증성공시 이동하는화면주소
-  //   failureRedirect: '/mobile/loginFailure', //인증실패시 이동하는화면주소
-  //   failureFlash: true //passport 인증하는 과정에서 오류발생시 플래시 메시지가 오류로 전달됨.
-  // }));
+
   
   //이름 변경
   router.get("/loginSuccess", function(req, res) {
@@ -146,8 +97,6 @@ router.get('/login', function (req, res) {
     //res.json({errMsg:msg});
     
   });
-  
-  //로그인끝
   
   
   router.post("/login-check", async function(req, res) {
@@ -202,6 +151,8 @@ router.get("/signup", function(req, res) {
     res.render('dataif/signup');
   });
   
+
+  // 회원가입 !!
   router.post("/signup", async function(req, res) {
     try{
       // 사용자등록 컨트롤러 호출

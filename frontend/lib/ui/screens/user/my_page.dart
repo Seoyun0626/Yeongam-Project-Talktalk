@@ -20,6 +20,7 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
@@ -42,51 +43,63 @@ class _MyPageState extends State<MyPage> {
       }),
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('마이 페이지',
+            titleSpacing: 0,
+            title: const Text('마이 톡톡',
                 style: TextStyle(
                   color: ThemeColors.basic,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
+                  fontFamily: 'CookieRun',
+                  fontSize: 24,
+                  fontWeight: FontWeight.w300,
                 )),
-            // leading: IconButton(
-            //     icon: const Icon(Icons
-            //         .arrow_back_ios), //Image.asset("images\aco.png", width: 50, height: 50),
-            //     onPressed: () => Navigator.pop(context)
-            //     // Navigator.push(context, routeSlide(page: const LoginPage())),
-            //     ),
-            // actions: [
-            //   IconButton(
-            //     icon: const Icon(Icons.perm_identity),
-            //     // onPressed: () => Navigator.push(
-            //     //     context, routeSlide(page: const LoginPage())),
-            //     onPressed: () {
-
-            //     },
-            //   )
-            // ],
+            leading: InkWell(
+              // onTap: () => Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const LoginPage(),
+              //     )),
+              child: Image.asset('images/aco.png', height: 70),
+            ),
             backgroundColor: ThemeColors.primary,
             centerTitle: false,
             elevation: 0.0,
           ),
-          body: ListView(
-            children: [
-              const SizedBox(
-                height: 30.0,
-              ),
-              const _UserName(),
-              BtnNaru(
-                text: '로그아웃',
-                colorText: Colors.black,
-                width: size.width,
-                onPressed: () {
-                  authBloc.add(OnLogOutEvent());
-                  userBloc.add(OnLogOutUser());
-                  // Navigator.pop(context);
-                  Navigator.pushAndRemoveUntil(
-                      context, routeFade(page: const HomePage()), (_) => false);
-                },
-              ),
-            ],
+          body: SafeArea(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30.0,
+                ),
+                Expanded(
+                    child: ListView(
+                        physics: const BouncingScrollPhysics(),
+                        children: [
+                      const _UserName(),
+                      // BlocBuilder<UserBloc, UserState>(
+                      //   builder: (((context, state) {
+                      //     FutureBuilder<User>(
+                      //       future: userService.getUserById(),
+                      //       builder: ((_, snapshot) {
+                      //         return !snapshot.hasData
+
+                      //       }),
+                      //     );
+                      //   })),
+                      // ),
+                      BtnNaru(
+                        text: '로그아웃',
+                        colorText: Colors.black,
+                        width: size.width,
+                        onPressed: () {
+                          authBloc.add(OnLogOutEvent());
+                          userBloc.add(OnLogOutUser());
+                          // Navigator.pop(context);
+                          Navigator.pushAndRemoveUntil(context,
+                              routeFade(page: const HomePage()), (_) => false);
+                        },
+                      )
+                    ]))
+              ],
+            ),
           ),
           bottomNavigationBar: const BottomNavigation(index: 5)),
     );
@@ -110,9 +123,13 @@ class _UserName extends StatelessWidget {
 
           //     },)),
 
-          builder: (_, state) => (state.user?.name != null)
+          builder: (_, state) => (state.user?.user_name != null)
               ? TextCustom(
-                  text: state.user?.name != '' ? state.user!.name : '사용자')
+                  text: state.user!.user_name != ''
+                      ? state.user!.user_name
+                      : '로그인해주세요',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500)
               : const CircularProgressIndicator(
                   color: ThemeColors.primary,
                 )),

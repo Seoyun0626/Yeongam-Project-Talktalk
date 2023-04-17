@@ -6,9 +6,9 @@ import 'package:login/data/env/env.dart';
 
 class AuthServices {
   Future<ResponseLogin> login(String userid, String password) async {
-    final resp = await http.post(Uri.parse('${Environment.urlApi}/login'),
+    final resp = await http.post(Uri.parse('${Environment.urlApi}/login/login'),
         headers: {'Accept': 'application/json'},
-        body: {'userid': userid, 'password': password});
+        body: {'userid': userid, 'userpw': password});
     // print('auth_services login');
     // print(resp.body);
 

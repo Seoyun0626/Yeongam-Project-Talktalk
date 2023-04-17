@@ -11,6 +11,7 @@ import 'package:login/ui/screens/policy/policy_detail.dart';
 import 'package:login/ui/screens/policy/policy_list.dart';
 import 'package:login/ui/screens/policy/search_filter.dart';
 import 'package:login/ui/screens/user/my_page.dart';
+import 'package:login/ui/screens/user/privacy_setting_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/services/banner_services.dart';
@@ -35,7 +36,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    late bool isLogin = false;
     final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
     final authBloc = BlocProvider.of<AuthBloc>(context);
@@ -43,24 +43,18 @@ class _HomePageState extends State<HomePage> {
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is SuccessAuthentication) {
-            isLogin = true;
-            // print(isLogin);
-          } else if (state is LogOut) {
-            isLogin = false;
-            // print(isLogin);
-          }
+          } else if (state is LogOut) {}
         },
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           home: Scaffold(
               appBar: AppBar(
                 titleSpacing: 0,
-                title: const Text('청소년톡 Talk',
+                title: const Text('청소년 톡Talk',
                     style: TextStyle(
                       color: ThemeColors.basic,
-                      fontFamily: 'KOTRAHOPE',
-                      fontSize: 30,
-                      fontWeight: FontWeight.w300,
+                      fontFamily: 'CookieRun',
+                      fontSize: 24,
                     )),
                 leading: InkWell(
                   // onTap: () => Navigator.push(

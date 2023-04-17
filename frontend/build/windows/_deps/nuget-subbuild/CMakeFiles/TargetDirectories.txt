@@ -1,3 +1,0 @@
-C:/Yeongam-project/frontend/build/windows/_deps/nuget-subbuild/CMakeFiles/nuget-populate.dir
-C:/Yeongam-project/frontend/build/windows/_deps/nuget-subbuild/CMakeFiles/ALL_BUILD.dir
-C:/Yeongam-project/frontend/build/windows/_deps/nuget-subbuild/CMakeFiles/ZERO_CHECK.dir

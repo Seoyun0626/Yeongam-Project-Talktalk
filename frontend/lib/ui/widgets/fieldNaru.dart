@@ -20,7 +20,8 @@ class TextFieldNaru extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: GoogleFonts.getFont('Roboto', fontSize: 18),
+      style: const TextStyle(fontFamily: 'NanumSquare'),
+      // style: GoogleFonts.getFont('Roboto', fontSize: 18),
       cursorColor: ThemeColors.secondary,
       obscureText: isPassword,
       keyboardType: keyboardType,

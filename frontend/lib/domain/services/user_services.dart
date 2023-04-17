@@ -22,10 +22,10 @@ class UserServices {
 
   Future<DefaultResponse> createdUser(
     String userid,
-    String name,
+    String user_name,
     String user_email,
-    String password,
-    String password2,
+    String userpw,
+    String userpw2,
     String user_role,
     String user_type,
     String youthAge_code,
@@ -38,10 +38,10 @@ class UserServices {
       'Accept': 'application/json'
     }, body: {
       'userid': userid,
-      'name': name,
+      'user_name': user_name,
       'user_email': user_email,
-      'password': password,
-      'password2': password2,
+      'userpw': userpw,
+      'userpw2': userpw2,
       'user_role': user_role,
       'user_type': user_type,
       'youthAge_code': youthAge_code,
@@ -55,9 +55,23 @@ class UserServices {
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 
+  Future<ResponseUser> getTestData() async {
+    http.Response resp = await http.get(
+        Uri.parse('${Environment.urlApi}/user/get-Test-Data'),
+        headers: {'Accept': 'application/json'});
+
+    // final resp = await http.get(
+    //     Uri.parse('${Environment.urlApi}/user/get-Test-Data'),
+    // headers: {'Accept': 'application/json'});
+    // final data = DefaultResponse.fromJson(jsonDecode(resp.body));
+
+    return ResponseUser.fromJson(jsonDecode(resp.body));
+  }
+
   Future<ResponseUser> getUserById() async {
     final token = await secureStorage.readToken();
-
+    // print(token);
+    print('ResponseUser - getUserById');
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/user/get-User-By-Id'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});

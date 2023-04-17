@@ -18,11 +18,11 @@ class ScrapPage extends StatelessWidget {
       home: Scaffold(
           appBar: AppBar(
             titleSpacing: 0,
-            title: const Text('Keep 목록',
+            title: const Text('스크랩',
                 style: TextStyle(
                   color: ThemeColors.basic,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+                  fontFamily: 'CookieRun',
+                  fontSize: 24,
                 )),
             leading: InkWell(
               onTap: () =>

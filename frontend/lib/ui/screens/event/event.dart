@@ -21,8 +21,9 @@ class EventPage extends StatelessWidget {
             title: const Text('이벤트',
                 style: TextStyle(
                   color: ThemeColors.basic,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+                  fontFamily: 'CookieRun',
+                  fontSize: 24,
+                  fontWeight: FontWeight.w300,
                 )),
             leading: InkWell(
               onTap: () =>

@@ -1,7 +1,6 @@
 part of 'widgets.dart';
 
 class TextCustom extends StatelessWidget {
-
   final String text;
   final double fontSize;
   final bool isTitle;
@@ -29,13 +28,16 @@ class TextCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: GoogleFonts.getFont( isTitle ? 'Poppins' :'Roboto', fontSize: fontSize, fontWeight: fontWeight, color: color, letterSpacing: letterSpacing),
+      style: TextStyle(
+          fontFamily: 'NanumSquare',
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+          color: color,
+          letterSpacing: letterSpacing),
+      // style: GoogleFonts.getFont( isTitle ? 'Poppins' :'Roboto', fontSize: fontSize, fontWeight: fontWeight, color: color, letterSpacing: letterSpacing),
       maxLines: maxLines,
       overflow: overflow,
       textAlign: textAlign,
     );
   }
-
-
-
 }

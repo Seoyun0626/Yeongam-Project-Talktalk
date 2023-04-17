@@ -49,15 +49,10 @@ class _LoginPageState extends State<LoginPage> {
       listener: (context, state) {
         if (state is LoadingAuthentication) {
           modalLoading(context, '확인 중...');
-        } else if (state is FailureAuthentication) {
-          // print('login-page');
-          // print(context);
-          // print(state);
-          // print('login-page');
-          modalWarning(context, '로그인 실패');
-
           Navigator.pop(context);
+        } else if (state is FailureAuthentication) {
           modalWarning(context, '다시 로그인해주세요');
+          Navigator.pop(context);
 
           // if (state.error == '메일을 확인해주세요') {
           //   Navigator.push(
@@ -67,13 +62,13 @@ class _LoginPageState extends State<LoginPage> {
           //               VerifyEmailPage(user_email: idController.text.trim())));
           // }
 
-          errorMessageSnack(context, state.error);
+          // errorMessageSnack(context, state.error);
         } else if (state is SuccessAuthentication) {
           print(state);
           userBloc.add(OnGetUserAuthenticationEvent());
           Navigator.pop(context);
           Navigator.pushAndRemoveUntil(
-              context, routeSlide(page: const HomePage()), (_) => false);
+              context, routeFade(page: const HomePage()), (_) => false);
         }
       },
       child: Scaffold(

@@ -112,6 +112,7 @@ flutter:
       fonts:
         - asset: fonts/KOTRA-HOPE.otf
           weight: 600
+
     - family : NanumSquare_ac
       fonts :
         - asset: fonts/NanumSquareL.otf
@@ -122,6 +123,12 @@ flutter:
           weight : 500
         - asset: fonts/NanumSquareEB.otf
           weight : 600
+    - family : CookieRun
+      fonts :
+        - asset : fonts/CookieRunRegular.otf
+          weight : 300
+        - asset : fonts/CookieRunBold.otf
+          weight : 400
         
        
   #   - family: Trajan Pro

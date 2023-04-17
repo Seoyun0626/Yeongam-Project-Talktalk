@@ -52,7 +52,7 @@ void modalWarning(BuildContext context, String text) {
                     color: Colors.amber,
                     borderRadius: BorderRadius.circular(5.0)),
                 child: const TextCustom(
-                    text: 'Ok', fontSize: 17, color: Colors.black87),
+                    text: '확인', fontSize: 17, color: Colors.black87),
               ),
             )
           ],

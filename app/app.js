@@ -4,10 +4,10 @@ const bodyParser = require('body-parser'); //body-parser
 const dotenv = require("dotenv"); //환경변수
 
 //모바일 모듈
-const cors = require('cors'); //cors
-const path = require('path'); //경로
-const createServer = require('http'); //http 서버
-const {promisfy} = require('promisfy'); //비동기 처리
+// const cors = require('cors'); //cors
+// const path = require('path'); //경로
+// const createServer = require('http'); //http 서버
+// const {promisfy} = require('promisfy'); //비동기 처리
 
 dotenv.config();
 

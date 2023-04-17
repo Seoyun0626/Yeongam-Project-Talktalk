@@ -40,7 +40,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       OnGetUserAuthenticationEvent event, Emitter<UserState> emit) async {
     try {
       final data = await userService.getUserById();
-      print('---');
+      print('---_onGetUserAuthentication---');
       print(data.user);
       emit(state.copyWith(user: data.user));
     } catch (e) {
@@ -59,8 +59,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           event.user_id,
           event.user_name,
           event.user_email,
-          event.user_pw,
-          event.user_pw2,
+          event.userpw,
+          event.userpw2,
           event.user_role,
           event.user_type,
           event.youthAge_code,
@@ -113,7 +113,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   //
   //     if( data.resp ){
   //
-  //       final dataUser = await userService.getUserById();
+  //       final dataUser = await userService.();
   //
   //       emit(SuccessUserState());
   //

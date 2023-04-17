@@ -15,7 +15,7 @@ const verifyToken = function (req, res, next) {
     try {
         const payload = jwt.verify(token, process.env.TOKEN_SECRET || '청소년 톡Talk');
         req.idPerson = payload.idPerson;
-        console.log('verify-token req.idPerson', req.idPerson);
+        // console.log('verify-token req.idPerson', req.idPerson);
         next();
     }
     catch (err) {

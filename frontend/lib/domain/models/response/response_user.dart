@@ -64,34 +64,55 @@ class ResponseUser {
 
 class User {
   String userid;
-  String name;
+  String userpw;
+  String user_name;
   String user_email;
   String user_type;
+  String youthAge_code;
+  String parentsAge_code;
+  String sex_class_code;
+  String emd_class_code;
+
   // String phone_no;
 
-  User({
-    required this.userid,
-    required this.name,
-    required this.user_email,
-    required this.user_type,
-    // required this.phone_no,
-  });
+  User(
+      {required this.userid,
+      required this.userpw,
+      required this.user_name,
+      required this.user_email,
+      required this.user_type,
+      required this.youthAge_code,
+      required this.parentsAge_code,
+      required this.sex_class_code,
+      required this.emd_class_code
+      // required this.phone_no,
+      });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        // user_no: json["user_no"] ?? -0,
-        userid: json["user_id"] ?? '',
-        name: json["user_name"] ?? '',
-        user_email: json["user_email"] ?? '',
-        user_type: json["user_type"] ?? '',
-        // phone_no: json["phone_no"] ?? '',
+      // user_no: json["user_no"] ?? -0,
+      userid: json["user_id"] ?? '',
+      userpw: json["password"] ?? '',
+      user_name: json["user_name"] ?? '',
+      user_email: json["user_email"] ?? '',
+      user_type: json["user_type"] ?? '',
+      youthAge_code: json["youthAge_code"] ?? '',
+      parentsAge_code: json["parentsAge_code"] ?? '',
+      sex_class_code: json["sex_class_code"] ?? '',
+      emd_class_code: json["emd_class_code"] ?? ''
+      // phone_no: json["phone_no"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
         // "user_no": user_no,
         "user_id": userid,
-        "user_name": name,
+        "password": userpw,
+        "user_name": user_name,
         "user_email": user_email,
         "user_type": user_type,
+        "youthAge_code": youthAge_code,
+        "parentsAge_code": parentsAge_code,
+        "sex_class_code": sex_class_code,
+        "emd_class_code": emd_class_code
         // "phone_no" : phone_no,
       };
 }
