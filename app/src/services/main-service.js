@@ -22,12 +22,12 @@ exports.dashboard = async function(req, res) {
     var userid = req.body.userid;
     var password = req.body.password;
     var name = req.body.name;
-    var query = "SELECT userid, password, name, salt FROM webdb.member where userid='" + userid + "';";
+    var query = "SELECT userid, userpw, user_name, salt FROM webdb.member where userid='" + userid + "';";
     var rows = await conn.query(query); // 쿼리 실행
     if (rows[0] == undefined) {
       resultcode = 1;
     } else {
-      if (rows[0].password == undefined) resultcode = 2;
+      if (rows[0].userpw == undefined) resultcode = 2;
       else resultcode = 3;
     }
   } catch(error) {

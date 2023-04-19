@@ -3,6 +3,7 @@ var db = require('../utils/db');
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
 const url = require('url');
+const { uuid } = require('uuidv4');
 var utils = require('../utils/utils');
 var fs = require('fs');
 
@@ -189,7 +190,7 @@ exports.excelData = async function(req, res,xlData) {
         var parentsAge_code = xlData[i].parentsAge_code;
         var emd_class_code = xlData[i].emd_class_code;
         var sex_class_code = xlData[i].sex_class_code;
-        var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code) values ('"+userid+"', '"+password+"', '"+name+"', '"+salt+"', '"+user_role+"', '"+user_email+"', '"+user_type+"', '"+youthAge_code+"', '"+parentsAge_code+"', '"+emd_class_code+"', '"+sex_class_code+"')";
+        var query = "INSERT INTO webdb.tb_user (userid, userpw, name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code) values ('"+userid+"', '"+password+"', '"+name+"', '"+salt+"', '"+user_role+"', '"+user_email+"', '"+user_type+"', '"+youthAge_code+"', '"+parentsAge_code+"', '"+emd_class_code+"', '"+sex_class_code+"')";
         rows = await conn.query(query); // 쿼리 실행
       });
     }
@@ -360,7 +361,8 @@ exports.update = async function(req, res) {
     hasher(
       {password:req.body.password}, async function(err, pass, salt, hash) {
         // query += 'password="'+hash+'", salt="'+salt+'" where userid="'+userid+'"';
-        var query = 'update webdb.tb_user set password="'+hash+'", salt="'+salt+'", name="'+req.body.name+'", user_email="'+req.body.user_email+'", user_role="'+req.body.user_role+'", user_type="'+req.body.user_type+'", emd_class_code="'+req.body.emd_class_code+'", youthAge_code = "'+req.body.youthAge_code+'", parentsAge_code = "'+req.body.parentsAge_code+'" where userid="'+userid+'"';
+        const uidUser = uuid();
+        var query = 'update webdb.tb_user set uid = "'+uidUser+'", userpw="'+hash+'", salt="'+salt+'", user_name="'+req.body.name+'", user_email="'+req.body.user_email+'", user_role="'+req.body.user_role+'", user_type="'+req.body.user_type+'", emd_class_code="'+req.body.emd_class_code+'", youthAge_code = "'+req.body.youthAge_code+'", parentsAge_code = "'+req.body.parentsAge_code+'" where userid="'+userid+'"';
         var rows = await conn.query(query);
       }
     );

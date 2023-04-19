@@ -78,9 +78,9 @@ exports.updatePolicy = async function(req, res) {
         // DB에 저장
         conn = await db.getConnection();
         console.log('policy-service updatePolicy db getConnection');
-        // const uidPolicy = uuidv4(); // 정책 고유 번호
-        // var query = "UPDATE webdb.tb_policy SET uid = '"+uidPolicy+"', img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
-        var query = "UPDATE webdb.tb_policy SET img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
+        const uidPolicy = uuid(); // 정책 고유 번호
+        var query = "UPDATE webdb.tb_policy SET uid = '"+uidPolicy+"', img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
+        // var query = "UPDATE webdb.tb_policy SET img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
         var rows = await conn.query(query); // 쿼리 실행
         return resultcode;
     } catch(error) {
@@ -190,8 +190,9 @@ exports.upload = async function(req, res) {
         //     resultcode = 7;
         //     return resultcode;
         // }
-        var query = "INSERT INTO webdb.tb_policy (policy_name, policy_target_code, policy_institution_code, min_fund, max_fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link) VALUES "
-          + "('" + name + "', '" + target + "', '" + policy_institution_code + "', '" + min_fund + "', '" + max_fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "', '" + policy_link + "');";
+        const uidPolicy = uuid(); // 정책 고유 번호
+        var query = "INSERT INTO webdb.tb_policy (uid, policy_name, policy_target_code, policy_institution_code, min_fund, max_fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link) VALUES "
+          + "('"+uidPolicy+"', '" + name + "', '" + target + "', '" + policy_institution_code + "', '" + min_fund + "', '" + max_fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "', '" + policy_link + "');";
         var rows = await conn.query(query); // 쿼리 실행
         console.log('policy-service upload success');
         return resultcode; //0이면 성공

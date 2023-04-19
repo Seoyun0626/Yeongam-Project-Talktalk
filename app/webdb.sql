@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS webdb.`tb_user`;
 
 CREATE TABLE webdb.`tb_user` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` varchar(100) NOT NULL
+  `uid` varchar(100) NOT NULL,
   `userid` varchar(255) NOT NULL, -- **사용자 고유 식별 번호 컬럼 추가 쿼리 : alter table `tb_user` add `uid` varchar(100) NOT NULL after `board_idx` ;
   `reg_no` varchar(30) NULL,
   `userpw` varchar(255) NOT NULL, -- **password -> userpw 이름 변경 쿼리 : alter table `tb_user` change `password` `userpw` varchar(255) NOT NULL;
@@ -32,7 +32,7 @@ CREATE TABLE webdb.`tb_user` (
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 최고 관리자 id 설정
-insert into tb_user (userid, password, name, user_role, salt) values ('admin', '', 'admin', '0', '');
+insert into tb_user (userid, password, name, user_role, salt) values ('admin', 'NNNq1ZZBr3kfAIhMCxsxAn7LWe73aPjZEblZHtFPn0DNysXK8qGUXBewTNhkFzeaaBmS0qi2sWws89Ra/iTNjaQrZjIzkRswFLOy5qhOGWa6CKujexk8L/Yv07wMTGRF2ZTK8301Z5QLqawDWjTgt5hyUtabSK0kmS06+s1VAHg=', 'admin', '0', 'yFfmKDozNt6TLMf+9tOni7zbrnqTOZqZWmF1i57q2rNMS5pMlxqAVdiJwPyVWBDKYT5G6wa4V389/tsSS/Ydeg==');
 -- **PK 추가 :  uid
 alter table `webdb`.`tb_user` add primary key `uid`;
 

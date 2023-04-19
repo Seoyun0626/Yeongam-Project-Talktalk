@@ -1,6 +1,7 @@
 var db = require('../utils/db');
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
+const { uuid } = require('uuidv4');
 // const jwt = require('jsonwebtoken');
 
 // 로그인 확인
@@ -15,7 +16,7 @@ try{
   var password = req.body.password;
   // console.log('login-serive SignIn - userid', userid); // kth log
   // console.log('login-serive SignIn - password', password); // kth log
-  var query = "SELECT userid, password, salt, name, user_role FROM webdb.tb_user where userid='" + userid + "' ;";
+  var query = "SELECT userid, userpw, salt, user_name, user_role FROM webdb.tb_user where userid='" + userid + "' ;";
   var rows = await conn.query(query); // 쿼리 실행 
   if (rows[0]) {
       // 관리자만 접속 가능하도록 처리
@@ -28,7 +29,7 @@ try{
       }
       //저장된 password 와 hash password 가 같은지를 체크하여 로그인 성공, 실패 처리 
       var userSalt = rows[0].salt;
-      var userPass = rows[0].password;
+      var userPass = rows[0].userpw;
       
       return new Promise((resolve, reject) => {
           hasher({
@@ -94,7 +95,8 @@ exports.signUp = async function(req, res) {
         hasher({
             password: password
         }, async (err, pass, salt, hash) => {
-          var query = "INSERT INTO webdb.tb_user (userid, password, name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code) values ('"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
+          const uidUser = uuid();
+          var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
           var rows = await conn.query(query); // 쿼리 실행
           console.log('회원가입 성공');
         });
@@ -125,7 +127,7 @@ exports.login_check = async function(req, res) {
     var userid = req.session.user.userid;
     var password = req.session.user.password;
     // console.log(userid, password);
-    var query = 'SELECT password, salt FROM webdb.tb_user where userid="'+userid+'"';
+    var query = 'SELECT userpw, salt FROM webdb.tb_user where userid="'+userid+'"';
     var rows = await conn.query(query); // 쿼리 실행
     if(rows.length){
       var user = rows[0];
@@ -133,7 +135,7 @@ exports.login_check = async function(req, res) {
           hasher( 
             { password: password, salt: user.salt },
             function (err, pass, salt, hash) {
-              if (hash === user.password) resultcode = 3;
+              if (hash === user.userpw) resultcode = 3;
               else resultcode = 2;
               resolve(resultcode);
           });
