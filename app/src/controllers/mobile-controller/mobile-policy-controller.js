@@ -57,3 +57,25 @@ exports.scrapOrUnscrapPolicy = async function(req, res) {
     console.log('mobile-policy-controller scrapOrUnscrapPolicy:'+error);
   }
 };
+
+exports.getScrappedPolicy = async function(req, res) {
+  try{
+      var result = await mobile_policy_service.getScrappedPolicy(req,res);
+      // console.log(result);
+      return result;
+    } catch(error) {
+      console.log('policy-controller getAllPolicy:'+error);
+    }
+  };
+
+  exports.checkPolicyScrapped = async function(req, res) {
+    try{
+        var result = await mobile_policy_service.checkPolicyScrapped(req,res);
+        // console.log(result);
+        return result;
+      } catch(error) {
+        console.log('policy-controller checkPolicyScrapped:'+error);
+      }
+    };
+
+  

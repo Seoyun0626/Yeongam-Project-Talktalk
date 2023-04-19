@@ -55,19 +55,6 @@ class UserServices {
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 
-  Future<ResponseUser> getTestData() async {
-    http.Response resp = await http.get(
-        Uri.parse('${Environment.urlApi}/user/get-Test-Data'),
-        headers: {'Accept': 'application/json'});
-
-    // final resp = await http.get(
-    //     Uri.parse('${Environment.urlApi}/user/get-Test-Data'),
-    // headers: {'Accept': 'application/json'});
-    // final data = DefaultResponse.fromJson(jsonDecode(resp.body));
-
-    return ResponseUser.fromJson(jsonDecode(resp.body));
-  }
-
   Future<ResponseUser> getUserById() async {
     final token = await secureStorage.readToken();
     // print(token);

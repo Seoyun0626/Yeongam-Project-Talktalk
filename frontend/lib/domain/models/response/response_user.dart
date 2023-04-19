@@ -63,6 +63,7 @@ class ResponseUser {
 // }
 
 class User {
+  String uid;
   String userid;
   String userpw;
   String user_name;
@@ -76,7 +77,8 @@ class User {
   // String phone_no;
 
   User(
-      {required this.userid,
+      {required this.uid,
+      required this.userid,
       required this.userpw,
       required this.user_name,
       required this.user_email,
@@ -89,7 +91,7 @@ class User {
       });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-      // user_no: json["user_no"] ?? -0,
+      uid: json["uid"] ?? '',
       userid: json["user_id"] ?? '',
       userpw: json["password"] ?? '',
       user_name: json["user_name"] ?? '',
@@ -103,7 +105,7 @@ class User {
       );
 
   Map<String, dynamic> toJson() => {
-        // "user_no": user_no,
+        "uid": uid,
         "user_id": userid,
         "password": userpw,
         "user_name": user_name,

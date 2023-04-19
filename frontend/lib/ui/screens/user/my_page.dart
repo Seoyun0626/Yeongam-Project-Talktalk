@@ -97,7 +97,7 @@ class _UserName extends StatelessWidget {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (_, state) {
         if (state is LogOut) {
-          modalCheckLogin().showBottomDialog(context);
+          // modalCheckLogin().showBottomDialog(context);
           return InkWell(
               child: Row(
                 children: const [
@@ -110,7 +110,10 @@ class _UserName extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Navigator.push(context, routeSlide(page: const LoginPage()));
+                Navigator.push(
+                  context,
+                  routeSlide(page: const LoginPage()),
+                ); //(_) => false);
               });
         } else {
           return BlocBuilder<UserBloc, UserState>(builder: (_, state) {

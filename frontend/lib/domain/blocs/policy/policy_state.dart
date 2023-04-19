@@ -36,4 +36,4 @@ class FailurePolicy extends PolicyState {
   const FailurePolicy(this.error);
 }
 
-class SuccessPolicy extends PolicyState {}
+class SuccessPolicyScrap extends PolicyState {}

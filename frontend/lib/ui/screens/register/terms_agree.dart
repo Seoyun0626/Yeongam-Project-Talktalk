@@ -19,12 +19,10 @@ class termsAgreePage extends StatefulWidget {
 }
 
 class _termsAgreePageState extends State<termsAgreePage> {
-  final allChecked = CheckBoxModal(
-    title: '약관 전체 동의',
-  );
+  final allChecked = CheckBoxModal(title: '약관 전체 동의', required: '');
   final checkboxList = [
-    CheckBoxModal(title: '회원 가입 약관 동의 (필수)'),
-    CheckBoxModal(title: '개인 정보 처리 방침 동의 (필수)'),
+    CheckBoxModal(title: '회원 가입 약관 동의', required: '(필수)'),
+    CheckBoxModal(title: '개인 정보 처리 방침 동의', required: '(필수)'),
     // CheckBoxModal(title: '마케팅 정보 수신 동의'),
   ];
   bool completeAgree = false;
@@ -56,7 +54,7 @@ class _termsAgreePageState extends State<termsAgreePage> {
                   text: '약관동의',
                   letterSpacing: 2.0,
                   color: Colors.black,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w700,
                   fontSize: 30,
                 ),
                 const SizedBox(
@@ -88,8 +86,33 @@ class _termsAgreePageState extends State<termsAgreePage> {
                               onItemClicked(item);
                             },
                           ),
-                          title: Text(item.title,
-                              style: const TextStyle(fontSize: 18)),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: TextCustom(
+                                  text: item.title,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: TextCustom(
+                                  text: item.required,
+                                  fontSize: 18,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              IconButton(
+                                  icon: const Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 18,
+                                    color: ThemeColors.basic,
+                                  ),
+                                  onPressed: () {}),
+                            ],
+                          ),
                         ))
                     .toList(),
                 const SizedBox(
@@ -161,9 +184,11 @@ class _termsAgreePageState extends State<termsAgreePage> {
 
 class CheckBoxModal {
   String title;
+  String required;
   bool value;
 
-  CheckBoxModal({required this.title, this.value = false});
+  CheckBoxModal(
+      {required this.title, required this.required, this.value = false});
 }
 
 

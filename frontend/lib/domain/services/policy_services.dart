@@ -7,6 +7,7 @@ import 'package:login/data/storage/secure_storage.dart';
 import 'package:login/domain/models/response/default_response.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/models/response/response_policy.dart';
+import 'package:login/domain/models/response/response_policy_by_user.dart';
 import 'package:login/ui/helpers/debouncer.dart';
 // import 'package:login/ui/helpers/response_code.dart';
 
@@ -90,7 +91,10 @@ class PolicyServices {
   Future<DefaultResponse> scrapOrUnscrapPolicy(
       String uidPolicy, String uidUser) async {
     final token = await secureStorage.readToken();
-    print('policy_service : scrapOrUnscrapPolicy');
+    // print('policy_service : scrapOrUnscrapPolicy');
+    // print(token);
+    // print(uidPolicy);
+    // print(uidUser);
 
     final resp = await http.post(
         Uri.parse('${Environment.urlApi}/policy/scrap-or-unscrap-policy'),
@@ -138,6 +142,32 @@ class PolicyServices {
 
   //   return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   // }
+  Future<List<Policy>> getScrappedPolicy() async {
+    final token = await secureStorage.readToken();
+    print('getScrappedPolicy');
+
+    final resp = await http.get(
+        Uri.parse('${Environment.urlApi}/policy/get-scrapped-policy'),
+        headers: {'Accept': 'application/json', 'xxx-token': token!});
+    // print(resp.body);
+
+    return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+  }
+
+  Future<int> checkPolicyScrapped(String uidPolicy) async {
+    final token = await secureStorage.readToken();
+    print('checkPolicyScrapped');
+
+    final resp = await http.get(
+        Uri.parse(
+            '${Environment.urlApi}/policy/check-policy-scrapped/' + uidPolicy),
+        headers: {'Accept': 'application/json', 'xxx-token': token!});
+    // print(resp.body);
+
+    final data = jsonDecode(resp.body);
+    final result = data['isScrapped']['isScrapped'];
+    return result;
+  }
 }
 
 final policyService = PolicyServices();
