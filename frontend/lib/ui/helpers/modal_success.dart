@@ -5,6 +5,7 @@ import 'package:login/ui/widgets/widgets.dart';
 void modalSuccess(BuildContext context, String text,
     {required VoidCallback onPressed}) {
   showDialog(
+    useRootNavigator: true,
     context: context,
     barrierDismissible: true,
     barrierColor: Colors.black12,

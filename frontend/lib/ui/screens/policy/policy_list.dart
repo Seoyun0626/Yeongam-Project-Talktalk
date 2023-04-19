@@ -1,15 +1,20 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter_html/style.dart';
 import 'package:login/data/env/env.dart';
+import 'package:login/domain/blocs/auth/auth_bloc.dart';
+import 'package:login/domain/blocs/user/user_bloc.dart';
 import 'package:login/domain/models/response/response_code.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/code_service.dart';
 import 'package:login/domain/services/policy_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
+import 'package:login/ui/helpers/modal_checkLogin.dart';
+import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/screens/policy/policy_detail.dart';
 import 'package:login/ui/screens/policy/search_filter.dart';
 import 'package:login/ui/themes/theme_colors.dart';
@@ -43,9 +48,13 @@ class _PolicyListPageState extends State<PolicyListPage> {
 
     return BlocListener<PolicyBloc, PolicyState>(
         listener: (context, state) {
-          if (state is LoadingPolicy) {
-            modalLoadingShort(context);
-          }
+          // if (state is LoadingPolicy) {
+          //   modalLoadingShort(context);
+          // } else if (state is SuccessPolicyScrap) {
+          //   modalSuccess(context, '스크랩 완료', onPressed: () {
+          //     // Navigator.of(context).pop();
+          //   });
+          // }
         },
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -467,15 +476,13 @@ class ListViewPolicy extends StatefulWidget {
 class _ListViewPolicyState extends State<ListViewPolicy> {
   @override
   Widget build(BuildContext context) {
-    // String categoryCode = widget.categoryCode; // 카테고리(분야) 코드
-    final policyBloc = BlocProvider.of<PolicyBloc>(context);
     final Policy policies = widget.policies;
-    // final Map<String, dynamic> codeData = widget.codeData;
-    // final Future<dynamic> codeData = widget.codeData;
 
     // 기관
     final String policyInstitution = getMobileCodeService.getCodeDetailName(
         "policy_institution_code", policies.policy_institution_code);
+    // 제목
+    final String policyName = policies.policy_name;
     // 분야
     final String policyField = getMobileCodeService
         .getCodeDetailName("policy_field_code", policies.policy_field_code)
@@ -513,6 +520,7 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                       ),
                   child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(0),
@@ -537,103 +545,213 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text(
-                                      policyInstitution,
-                                      // policies.policy_institution_code,
+                                    // 주최 기관
+                                    TextCustom(
+                                      text: policyInstitution,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                          fontSize: 12.0,
-                                          color: ThemeColors.basic),
-                                    ), // 주최측
+                                      fontSize: 12.0,
+                                      color: ThemeColors.basic,
+                                    ),
                                     const SizedBox(
                                       height: 3,
                                     ),
-                                    Text(
-                                      policies.policy_name,
+                                    // 정책 제목
+                                    TextCustom(
+                                      text: policyName,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ), // 정책 제목
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    // 모집 기간
                                     Container(
-                                      margin: const EdgeInsets.only(top: 5),
+                                      margin: const EdgeInsets.only(
+                                          top: 2, bottom: 2),
                                       padding: const EdgeInsets.all(3),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         color: ThemeColors.secondary,
                                       ),
-                                      child: Text(
-                                        '$startDate ~ $endDate',
+                                      child: TextCustom(
+                                        text: '$startDate ~ $endDate',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                            fontSize: 10.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600),
+                                        fontSize: 10.0,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
                                       ),
-                                    ), // 모집 기간
+                                    ),
                                     const SizedBox(
                                       height: 3,
                                     ),
-
-                                    Text(
-                                      policyField,
-                                      // policies.policy_field_code,
+                                    // 카테고리
+                                    TextCustom(
+                                      text: policyField,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ), // 카테고리
+                                      fontSize: 12,
+                                    ),
                                   ],
                                 ))),
                         SizedBox(
-                          // decoration: BoxDecoration(color: Colors.grey[350]),
-                          width: 80.0,
-                          height: 80.0,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // 스크랩
-                              InkWell(
-                                  onTap: () => policyBloc.add(
-                                      OnScrapOrUnscrapPolicy(
-                                          policies.board_idx.toString(),
-                                          policies.board_idx.toString())),
-                                  child: policies.is_scrap == 1
-                                      ? const Icon(
-                                          Icons.bookmark,
-                                          color: ThemeColors.basic,
-                                          size: 30,
-                                        )
-                                      : const Icon(
-                                          Icons.bookmark_border_outlined,
-                                          color: ThemeColors.basic,
-                                          size: 30,
-                                        )),
-
-                              // IconButton(
-                              //   icon: const Icon(
-                              //     Icons.bookmark_border,
-                              //     size: 30,
-                              //     color: ThemeColors.basic,
-                              //   ),
-                              //   onPressed: () {
-                              //     // 스크랩 수 1 증가
-
-                              //   },
-                              // ),
-                              Text(policies.count_scraps.toString(),
-                                  style: const TextStyle(
-                                      color: ThemeColors.basic, fontSize: 10))
-                            ],
+                          width: 50,
+                          height: 80,
+                          child: _ScrapUnscrap(
+                            uidPolicy: policies.uid,
+                            countScraps: policies.count_scraps,
                           ),
-                        ),
+                        )
+
+                        // Expanded(
+                        //   flex: 1,
+                        //   child: _ScrapUnscrap(
+                        //     uidPolicy: policies.board_idx.toString(),
+                        //     isScrapped: policies.is_scrap,
+                        //     countScraps: policies.count_scraps,
+                        //   ),
+                        // ),
                       ]))),
         ));
+  }
+}
+
+// 정책 스크랩
+class _ScrapUnscrap extends StatefulWidget {
+  final String uidPolicy; // 정책 고유번호
+
+  final int countScraps; // 스크랩 수
+
+  const _ScrapUnscrap(
+      {Key? key, required this.uidPolicy, required this.countScraps})
+      : super(key: key);
+  @override
+  State<_ScrapUnscrap> createState() => _ScrapUnscrapState();
+}
+
+// class _ScrapUnscrapState extends State<_ScrapUnscrap> {
+//   bool _isScrapped = false;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final policyBloc = BlocProvider.of<PolicyBloc>(context);
+//     final authState = BlocProvider.of<AuthBloc>(context).state;
+//     final userState = BlocProvider.of<UserBloc>(context).state;
+//     final uidUser = userState.user?.uid;
+//     final uidPolicy = widget.uidPolicy;
+
+//     return FutureBuilder<int>(
+//       future: policyService.checkPolicyScrapped(uidPolicy),
+//       builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+//         if (snapshot.hasData) {
+//           _isScrapped = snapshot.data == 1;
+//         }
+
+//         return Column(
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             IconButton(
+//               onPressed: () {
+//                 if (authState is LogOut) {
+//                   modalCheckLogin().showBottomDialog(context);
+//                 } else {
+//                   if (uidUser != null) {
+//                     policyBloc.add(
+//                       OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
+//                     );
+//                     setState(() {
+//                       _isScrapped = !_isScrapped;
+//                     });
+//                   }
+//                 }
+//               },
+//               icon: Icon(
+//                 _isScrapped ? Icons.bookmark : Icons.bookmark_border_outlined,
+//                 color: authState is LogOut
+//                     ? ThemeColors.basic
+//                     : (_isScrapped ? ThemeColors.primary : ThemeColors.basic),
+//                 size: 30,
+//               ),
+//             ),
+//             TextCustom(
+//               text: widget.countScraps.toString(),
+//               color: ThemeColors.basic,
+//               fontSize: 10,
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//   }
+// }
+
+class _ScrapUnscrapState extends State<_ScrapUnscrap> {
+  bool _isScrapped = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadScrappedStatus();
+  }
+
+  Future<void> _loadScrappedStatus() async {
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+    if (authState is SuccessAuthentication) {
+      final uidPolicy = widget.uidPolicy;
+      final isScrapped = await policyService.checkPolicyScrapped(uidPolicy);
+      setState(() {
+        _isScrapped = isScrapped == 1;
+      });
+    } else {
+      setState(() {
+        _isScrapped = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final policyBloc = BlocProvider.of<PolicyBloc>(context);
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+    final userState = BlocProvider.of<UserBloc>(context).state;
+    final uidUser = userState.user?.uid;
+    final uidPolicy = widget.uidPolicy;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          onPressed: () {
+            if (authState is LogOut) {
+              modalCheckLogin().showBottomDialog(context);
+            } else {
+              if (uidUser != null) {
+                policyBloc.add(
+                  OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
+                );
+                setState(() {
+                  _isScrapped = !_isScrapped;
+                });
+              }
+            }
+          },
+          icon: Icon(
+            _isScrapped ? Icons.bookmark : Icons.bookmark_border_outlined,
+            color: authState is LogOut
+                ? ThemeColors.basic
+                : (_isScrapped ? ThemeColors.primary : ThemeColors.basic),
+            size: 30,
+          ),
+        ),
+        TextCustom(
+          text: widget.countScraps.toString(),
+          color: ThemeColors.basic,
+          fontSize: 10,
+        ),
+      ],
+    );
   }
 }
 

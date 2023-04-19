@@ -11,6 +11,7 @@ class TextCustom extends StatelessWidget {
   final TextAlign textAlign;
   final double? letterSpacing;
   final double? height;
+  final TextDecoration decoration;
 
   const TextCustom(
       {Key? key,
@@ -23,21 +24,28 @@ class TextCustom extends StatelessWidget {
       this.textAlign = TextAlign.left,
       this.letterSpacing,
       this.isTitle = false,
-      this.height})
+      this.height,
+      this.decoration = TextDecoration.none})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = TextStyle(
+      fontFamily: 'NanumSquare',
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      color: color,
+      letterSpacing: letterSpacing,
+      height: height,
+      decoration: decoration,
+    ).copyWith(
+      decorationThickness: 2.0,
+      decorationColor: Colors.red,
+    );
+
     return Text(
       text,
-      style: TextStyle(
-          fontFamily: 'NanumSquare',
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-          color: color,
-          letterSpacing: letterSpacing,
-          height: height),
-      // style: GoogleFonts.getFont( isTitle ? 'Poppins' :'Roboto', fontSize: fontSize, fontWeight: fontWeight, color: color, letterSpacing: letterSpacing),
+      style: textStyle,
       maxLines: maxLines,
       overflow: overflow,
       textAlign: textAlign,

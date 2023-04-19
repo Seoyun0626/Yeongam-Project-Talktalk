@@ -34,17 +34,18 @@ class PolicyBloc extends Bloc<PolicyEvent, PolicyState> {
 
   Future<void> _scrapOrUnscrapPolicy(
       OnScrapOrUnscrapPolicy event, Emitter<PolicyState> emit) async {
-    print('_scrapOrUnscrapPolic');
+    // print('_scrapOrUnscrapPolicy');
     try {
       emit(LoadingPolicy());
-      print('after Loading Policy');
+      // print('after Loading Policy');
 
       final data = await policyService.scrapOrUnscrapPolicy(
           event.uidPolicy, event.uidUser);
+      // print('scrap :');
       // print(data);
 
       if (data.resp) {
-        emit(SuccessPolicy());
+        emit(SuccessPolicyScrap());
       } else {
         emit(FailurePolicy(data.message));
       }

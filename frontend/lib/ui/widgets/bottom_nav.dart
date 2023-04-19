@@ -54,10 +54,10 @@ class BottomNavigation extends StatelessWidget {
               isReel: isReel,
               iconString: 'images/bottom_bar/icon_menu_scrap.svg',
               iconText: '스크랩',
-              onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ScrapPage()),
-                  )),
+              onPressed: () => Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ScrapPage()),
+                  (_) => false)),
           _ItemButtom(
               i: 4,
               index: index,

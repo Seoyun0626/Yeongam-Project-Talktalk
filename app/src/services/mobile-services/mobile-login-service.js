@@ -15,27 +15,21 @@ exports.SignIn = async function(req) {
 try{
   var json = {};
   json.code = 0;
-  console.log('mobile-login-service : ', req.body);
+  // console.log('mobile-login-service : ', req.body);
   const id = req.body['userid'];
   const password = req.body['userpw'];
   // console.log(id, password);
 
   conn = await db.getConnection();
   console.log('login-service SignIn db getConnection');
-
-  // // 사용자 고유 식별 번호
-  // const uiddb = await conn.query('SELECT uid FROM webdb.tb_user WHERE userid = ?', [id]);
-  // // console.log(uiddb);
-  // const {uid} = uiddb[0];
-  // // console.log('uid', uid);
   
   // 사용자 정보(아이디, 비밀번호, salt)
-  const userdb = await conn.query("SELECT uid, userid, userpw, salt FROM webdb.tb_user where userid='" + id + "' ;");
-  // console.log(userdb.userpw);
-  // console.log(userdb[0]);
+  const userdb = await conn.query("SELECT uid, userid, userpw, salt FROM webdb.tb_user where userid= ?;", [id]);
+  console.log(userdb[0]);
 
   if (userdb){
     var userPass = userdb[0].userpw;
+    console.log(userPass);
     const passwordMatch = await bcrypt.compareSync(password, userPass);
 
     if (!passwordMatch){

@@ -18,6 +18,4 @@ const sendEmailVerify = async (subject, to, html) => {
 };
 
 
-
-
 module.exports = sendEmailVerify
