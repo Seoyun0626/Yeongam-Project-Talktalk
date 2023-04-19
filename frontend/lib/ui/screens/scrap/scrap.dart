@@ -325,15 +325,18 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
                 );
                 setState(() {
                   _isScrapped = !_isScrapped;
+                  print(_isScrapped);
                 });
               }
             }
           },
           icon: Icon(
-            _isScrapped ? Icons.bookmark : Icons.bookmark_border_outlined,
+            Icons
+                .bookmark, //_isScrapped ? Icons.bookmark : Icons.bookmark_border_outlined,
             color: authState is LogOut
                 ? ThemeColors.basic
-                : (_isScrapped ? ThemeColors.primary : ThemeColors.basic),
+                : ThemeColors
+                    .primary, //(_isScrapped ? ThemeColors.primary : ThemeColors.basic),
             size: 30,
           ),
         ),
