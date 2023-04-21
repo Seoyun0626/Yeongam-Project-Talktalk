@@ -42,8 +42,8 @@ class BottomNavigation extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => const PolicyListPage(
-                            categoryName: '',
-                            categoryValue: '',
+                            codeName: '',
+                            codeDetail: '',
                           )),
                   (_) => false)),
           _ItemButtom(
@@ -166,9 +166,9 @@ class _ItemButtom extends StatelessWidget {
                 const SizedBox(
                   height: 6,
                 ),
-                Text(
-                  iconText,
-                  style: const TextStyle(fontFamily: 'NanumSquareB'),
+                TextCustom(
+                  text: iconText,
+                  fontSize: 13,
                 ),
               ],
             )));

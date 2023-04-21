@@ -361,7 +361,7 @@ class _ListWithoutPolicy extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         // mainAxisAlignment: MainAxisAlignment.center,
         children: const [
-          TextCustom(text: "스크랩한 정책이 없습니다."),
+          TextCustom(text: "스크랩한 정책이 없어요."),
         ],
       ),
     );

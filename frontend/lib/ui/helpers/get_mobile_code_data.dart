@@ -1,6 +1,19 @@
 import 'package:flutter/animation.dart';
 import 'package:login/domain/services/code_service.dart';
 
+class CodeDetailData {
+  final String? name;
+  final String? code;
+  bool selected;
+  CodeDetailData({this.name, this.code, this.selected = false});
+}
+
+class CodeData {
+  final String? codeName;
+  final List<CodeDetailData>? detailList;
+  CodeData({this.codeName, this.detailList});
+}
+
 class getMobileCodeFunctions {
   late Map<String, dynamic> codeData = {};
 
@@ -9,79 +22,35 @@ class getMobileCodeFunctions {
     codeData = data;
   }
 
-  String getCodeDetailName(String my_code_name, String my_code_detail) {
-    // print(codeData);
-    // late String code_detail_name = '';
-    // int len = data["codes"][my_code_name].length;
+/*
+호출 예시
+1. getCodeDetailName(예 : '적용 대상' 코드 '00' 값 이름 -> 'policy_tareget_code', 코드 값 전달 -> '부부/임산부' 반환)
+getMobileCodeService.getCodeDetailName('policy_target_code', policies.policy_target_code);
 
+2. getCodeDetailList(예 : '운영 기관' -> 'policy_institution_code' 전달 -> 리스트 반환 [['00', '영암군'], ['01', '청소년 수련관']...])
+getMobileCodeService.getCodeDetailList('policy_institution_code');
+*/
+
+  String getCodeDetailName(String my_code_name, String my_code_detail) {
     int index_code = int.parse(my_code_detail);
     String code_detail_name =
         codeData["codes"][my_code_name][index_code]["code_detail_name"];
-
-    // for (int i = 0; i < len; i++) {
-    //   var code_detail = data["codes"][my_code_name][i]["code_detail"];
-    //   if (code_detail == my_code_detail) {
-    //     var result = data["codes"][my_code_name][i]["code_detail_name"];
-    //     // var result2 = data["codes"](my_code_name);
-    //     // print(result2);
-
-    //     code_detail_name = result;
-    //   }
-    // }
-
     return code_detail_name;
+  }
+
+  List<CodeDetailData> getCodeDetailList(String my_code_name) {
+    List<dynamic> code_detail_list = codeData["codes"][my_code_name];
+    List<CodeDetailData> result = [];
+
+    for (var detail in code_detail_list) {
+      CodeDetailData codeDetail = CodeDetailData(
+        name: detail["code_detail_name"],
+        code: detail["code_detail"],
+      );
+      result.add(codeDetail);
+    }
+    return result;
   }
 }
 
 final getMobileCodeService = getMobileCodeFunctions();
-
-
-// late String policyInstitution = '';
-  // late String policyField = '';
-
-  // @override
-  // void initState() {
-  //   final Policy policies = widget.policies;
-  //   final String institutionCode = policies.policy_institution_code; // 기관 코드
-  //   final String fieldCode = policies.policy_field_code; // 분야 코드
-
-  //   codeService.getCodeData().then((value) {
-  //     setState(() {
-  //       // test = value['codes'];
-  //       var institutionLen = value['codes']['policy_institution_code'].length;
-  //       var fieldLen = value['codes']['policy_field_code'].length;
-
-  //       // 기관
-  //       for (int i = 0; i < institutionLen; i++) {
-  //         var codeDetail =
-  //             value['codes']['policy_institution_code'][i]['code_detail'];
-  //         if (codeDetail == institutionCode) {
-  //           var codeDetailName = value['codes']['policy_institution_code'][i]
-  //               ['code_detail_name'];
-  //           policyInstitution = codeDetailName;
-  //           // print(policyInstitution);
-  //         }
-  //       }
-
-  //       // 분야
-  //       for (int i = 0; i < fieldLen; i++) {
-  //         var codeDetail =
-  //             value['codes']['policy_field_code'][i]['code_detail'];
-  //         if (codeDetail == fieldCode) {
-  //           var codeDetailName =
-  //               value['codes']['policy_field_code'][i]['code_detail_name'];
-  //           policyField = codeDetailName;
-  //           // print(policyInstitution);
-  //         }
-  //       }
-  //     });
-  //   });
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   policyInstitution;
-  //   policyField;
-  //   super.dispose();
-  // }

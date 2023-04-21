@@ -5,137 +5,215 @@ import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/policy_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/login/login_page.dart';
+import 'package:login/ui/screens/policy/policy_list.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:login/domain/blocs/policy/policy_bloc.dart';
 
-class CodeDetailData {
-  final String? name;
-  final String? code;
-  CodeDetailData({this.name, this.code});
+class PolicySearchFilterPage extends StatefulWidget {
+  const PolicySearchFilterPage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<PolicySearchFilterPage> createState() => _PolicySearchFilterState();
 }
 
-class CodeData {
-  final String? detailName;
-  final List<CodeDetailData>? detailList;
-  CodeData({this.detailName, this.detailList});
+class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: const TextCustom(
+            text: '상세 검색 조건',
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+          leading: IconButton(
+            icon: const Icon(
+              Icons.close,
+              color: Colors.black,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        body: SafeArea(
+            child: SingleChildScrollView(
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SearchConditionList(
+                title: '운영 기관',
+                codeName: 'policy_institution_code',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const SearchConditionList(
+                title: '적용 대상',
+                codeName: 'policy_target_code',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const SearchConditionList(
+                title: '정책 분야',
+                codeName: 'policy_field_code',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const SearchConditionList(
+                title: '정책 성격',
+                codeName: 'policy_character_code',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const SearchConditionList(
+                title: '지역',
+                codeName: 'emd_class_code',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                  child: BtnNaru(
+                text: '검색하기',
+                onPressed: () {
+                  Navigator.pop(context);
+                  // Navigator.pushAndRemoveUntil(
+                  //     context,
+                  //     routeSlide(
+                  //         page: const PolicyListPage(
+                  //       codeName: '',
+                  //       codeDetail: '',
+                  //     )),
+                  //     (_) => false);
+                  // Navigator.pop(
+                  //   context,
+                  //   {
+                  //     'codeName': '',
+                  //     'codeDetail': ' ',
+                  //   },
+                  // );
+                },
+                width: size.width - 30,
+                colorText: Colors.black,
+                backgroundColor: ThemeColors.secondary,
+                border: 10,
+              ))
+            ],
+          ),
+        )),
+      ),
+    );
+  }
 }
 
-class PolicySearchFilterPage extends StatelessWidget {
-  PolicySearchFilterPage({Key? key}) : super(key: key);
+class SearchConditionList extends StatefulWidget {
+  final String title;
+  final String codeName;
+  // final Function(List<CodeDetailData>) onSelectionChanged;
 
-  List<CodeDetailData> institutionList = [
-    CodeDetailData(name: '영암군', code: '00'),
-    CodeDetailData(name: '청소년 수련관', code: '01'),
-    CodeDetailData(name: '방과후 아카데미', code: '02'),
-    CodeDetailData(name: '청소년상담복지센터', code: '03'),
-    CodeDetailData(name: '학교밖지원센터', code: '03'),
-    CodeDetailData(name: '삼호읍청소년문화의집', code: '05'),
-  ];
+  const SearchConditionList({
+    Key? key,
+    required this.title,
+    required this.codeName,
+    // required this.onSelectionChanged,
+  }) : super(key: key);
 
-  List<CodeDetailData> targetList = [
-    CodeDetailData(name: '부부/임산부', code: '00'),
-    CodeDetailData(name: '영유아', code: '01'),
-    CodeDetailData(name: '청소년/대학생', code: '02'),
-    CodeDetailData(name: '청년/대학생', code: '03'),
-    CodeDetailData(name: '직장인', code: '03'),
-    CodeDetailData(name: '노인', code: '05'),
-  ];
+  @override
+  State<SearchConditionList> createState() => _SearchConditionListState();
+}
 
-  // List<CodeData> totalList = [
-  //   CodeData(detailName: '기관', detailList: institutionList),
-  // ];
+class _SearchConditionListState extends State<SearchConditionList> {
+  List<CodeDetailData> codeDetailDataList = [];
+  int selectedIndex = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    codeDetailDataList =
+        getMobileCodeService.getCodeDetailList(widget.codeName);
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<CodeDetailData>? selectedInstitutionList = [];
+    final size = MediaQuery.of(context).size;
+    final String title = widget.title;
 
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-              titleSpacing: 0,
-              title: const Text('검색조건',
-                  style: TextStyle(
-                    color: ThemeColors.basic,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w600,
-                  )),
-              leading: IconButton(
-                icon: const Icon(Icons.close, color: ThemeColors.basic),
-                onPressed: () => Navigator.pop(context),
-              ),
-              backgroundColor: Colors.white,
-              centerTitle: false,
-              elevation: 0.0),
-          body: FilterListWidget<CodeDetailData>(
-            hideSelectedTextCount: true,
-            hideSearchField: true,
-            applyButtonText: '검색하기',
-            resetButtonText: '초기화',
-            listData: institutionList,
-            selectedListData: selectedInstitutionList,
-
-            enableOnlySingleSelection: true, // 단수 선택
-            onApplyButtonClick: ((list) {
-              selectedInstitutionList = List.from(list!);
-              Navigator.pop(context);
-              if (list != null) {
-                print("Selected items count: ${list.length}");
-              }
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const PolicyListPage(), // 복지검색 탭
-              //     ));
-            }),
-            choiceChipLabel: (item) {
-              return item!.name;
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Container(
+          padding: const EdgeInsets.fromLTRB(30, 20, 20, 10),
+          child: Text(
+            title,
+            style: const TextStyle(
+                color: ThemeColors.basic,
+                fontFamily: 'NanumSquareRound',
+                fontWeight: FontWeight.w600,
+                fontSize: 20),
+          )),
+      Center(
+          child: Wrap(
+        alignment: WrapAlignment.center,
+        children: [
+          ...List.generate(
+            codeDetailDataList.length,
+            (index) {
+              final codeDetailData = codeDetailDataList[index];
+              return InkWell(
+                onTap: () {
+                  setState(() {
+                    // codeDetailData.selected = !codeDetailData.selected;
+                    if (selectedIndex != index) {
+                      if (selectedIndex != -1) {
+                        codeDetailDataList[selectedIndex].selected = false;
+                      }
+                      codeDetailData.selected = true;
+                      selectedIndex = index;
+                    } else {
+                      codeDetailData.selected = false;
+                      selectedIndex = -1;
+                    }
+                  });
+                },
+                child: Container(
+                  width: (size.width / 2) - 30,
+                  height: 50,
+                  margin: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: codeDetailData.selected == true
+                        ? ThemeColors.secondary
+                        : Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: TextCustom(
+                      text: codeDetailData.name!,
+                      color: codeDetailData.selected == true
+                          ? Colors.black
+                          : ThemeColors.basic,
+                    ),
+                  ),
+                ),
+              );
             },
-            validateSelectedItem: (list, value) {
-              return list!.contains(value);
-            },
-            onItemSearch: ((item, query) {
-              return item.name!.toLowerCase().contains(query.toLowerCase());
-            }),
           ),
+        ],
+      ))
+    ]);
+  }
 
-          // 팝업창
-          // void openFilterDialog() async {
-          //   await FilterListDialog.display(
-          //     context,
-          //     listData: institutionList,
-          //     selectedListData: selectedInstitutionList,
-          //     choiceChipLabel: (institution) => institution!.name,
-          //     height: 480,
-          //     headlineText: "카테고리 선택",
-          //     validateSelectedItem: (list, value) => list!.contains(value),
-          //     onItemSearch: (institution, query) {
-          //       return institution.name!.toLowerCase().contains(query);
-          //     },
-          //     onApplyButtonClick: (list) {
-          //       selectedInstitutionList = List.from(list!);
-          //     },
-          //   );
-          // }
-          // 팝업창
-          // return Scaffold(
-          //   floatingActionButton: FloatingActionButton(
-          //     onPressed: openFilterDialog,
-          //     child: const Icon(Icons.add),
-          //   ),
-          //   body: selectedInstitutionList == null || selectedInstitutionList!.isEmpty
-          //       ? const Center(child: Text('No user selected'))
-          //       : ListView.builder(
-          //           itemBuilder: (context, index) {
-          //             return ListTile(
-          //               title: Text(selectedInstitutionList![index].name!),
-          //             );
-          //           },
-          //           itemCount: selectedInstitutionList!.length,
-          //         ),
-          // );
-        ));
+  List<CodeDetailData> getSelectedItems() {
+    return codeDetailDataList.where((item) => item.selected).toList();
   }
 }

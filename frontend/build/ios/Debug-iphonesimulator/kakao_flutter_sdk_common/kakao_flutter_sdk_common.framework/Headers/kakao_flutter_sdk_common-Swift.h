@@ -260,13 +260,17 @@ using UInt = size_t;
 @class UIApplication;
 @class NSURL;
 @class ASWebAuthenticationSession;
+@class FlutterError;
 
 SWIFT_CLASS("_TtC24kakao_flutter_sdk_common26SwiftKakaoFlutterSdkPlugin")
-@interface SwiftKakaoFlutterSdkPlugin : NSObject <ASWebAuthenticationPresentationContextProviding, FlutterPlugin>
+@interface SwiftKakaoFlutterSdkPlugin : NSObject <ASWebAuthenticationPresentationContextProviding, FlutterPlugin, FlutterStreamHandler>
 + (void)registerWithRegistrar:(id <FlutterPluginRegistrar> _Nonnull)registrar;
 - (void)handleMethodCall:(FlutterMethodCall * _Nonnull)call result:(FlutterResult _Nonnull)result;
 - (BOOL)application:(UIApplication * _Nonnull)application openURL:(NSURL * _Nonnull)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> * _Nonnull)options SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)application:(UIApplication * _Nonnull)application didFinishLaunchingWithOptions:(NSDictionary * _Nonnull)launchOptions SWIFT_WARN_UNUSED_RESULT;
 - (ASPresentationAnchor _Nonnull)presentationAnchorForWebAuthenticationSession:(ASWebAuthenticationSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,introduced=12.0);
+- (FlutterError * _Nullable)onListenWithArguments:(id _Nullable)arguments eventSink:(FlutterEventSink _Nonnull)events SWIFT_WARN_UNUSED_RESULT;
+- (FlutterError * _Nullable)onCancelWithArguments:(id _Nullable)arguments SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -540,13 +544,17 @@ using UInt = size_t;
 @class UIApplication;
 @class NSURL;
 @class ASWebAuthenticationSession;
+@class FlutterError;
 
 SWIFT_CLASS("_TtC24kakao_flutter_sdk_common26SwiftKakaoFlutterSdkPlugin")
-@interface SwiftKakaoFlutterSdkPlugin : NSObject <ASWebAuthenticationPresentationContextProviding, FlutterPlugin>
+@interface SwiftKakaoFlutterSdkPlugin : NSObject <ASWebAuthenticationPresentationContextProviding, FlutterPlugin, FlutterStreamHandler>
 + (void)registerWithRegistrar:(id <FlutterPluginRegistrar> _Nonnull)registrar;
 - (void)handleMethodCall:(FlutterMethodCall * _Nonnull)call result:(FlutterResult _Nonnull)result;
 - (BOOL)application:(UIApplication * _Nonnull)application openURL:(NSURL * _Nonnull)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> * _Nonnull)options SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)application:(UIApplication * _Nonnull)application didFinishLaunchingWithOptions:(NSDictionary * _Nonnull)launchOptions SWIFT_WARN_UNUSED_RESULT;
 - (ASPresentationAnchor _Nonnull)presentationAnchorForWebAuthenticationSession:(ASWebAuthenticationSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT SWIFT_AVAILABILITY(ios,introduced=12.0);
+- (FlutterError * _Nullable)onListenWithArguments:(id _Nullable)arguments eventSink:(FlutterEventSink _Nonnull)events SWIFT_WARN_UNUSED_RESULT;
+- (FlutterError * _Nullable)onCancelWithArguments:(id _Nullable)arguments SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

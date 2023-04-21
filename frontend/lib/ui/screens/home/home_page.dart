@@ -149,12 +149,12 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             width: 5,
                           ),
-                          Text('카테고리별 정책을 확인하세요!',
-                              style: TextStyle(
-                                color: ThemeColors.basic,
-                                fontSize: 19,
-                                fontWeight: FontWeight.w600,
-                              )),
+                          TextCustom(
+                            text: '카테고리별 정책을 확인하세요!',
+                            color: Colors.black, //ThemeColors.basic,
+                            fontSize: 19,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ])
                       ])),
 
@@ -175,8 +175,8 @@ class _HomePageState extends State<HomePage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => const PolicyListPage(
-                              categoryName: '',
-                              categoryValue: '',
+                              codeName: '',
+                              codeDetail: '',
                             ), // 복지검색 탭
                           )),
                       child: Row(children: const [
@@ -188,12 +188,12 @@ class _HomePageState extends State<HomePage> {
                         SizedBox(
                           width: 5,
                         ),
-                        Text('지금 인기있는 정책은?',
-                            style: TextStyle(
-                              color: ThemeColors.basic,
-                              fontSize: 19,
-                              fontWeight: FontWeight.w600,
-                            )),
+                        TextCustom(
+                          text: '지금 인기있는 정책은?',
+                          color: Colors.black, //ThemeColors.basic,
+                          fontSize: 19,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ]),
                     ),
                   ),
@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: 5,
-                              itemBuilder: (_, i) => livePopularPost(
+                              itemBuilder: (_, i) => livePopularPolicy(
                                   // codeData: codeData,
                                   ranking: i,
                                   policies: snapshot.data![i]));
@@ -254,37 +254,66 @@ class BannerSlide extends StatelessWidget {
   }
 }
 
-class Category {
+class HomeCategory {
   final String name;
   final String code;
+  final String codeName;
   final String icon;
-  Category({required this.name, required this.code, required this.icon});
+  HomeCategory(
+      {required this.name,
+      required this.code,
+      required this.codeName,
+      required this.icon});
 }
 
 // 카테고리 아이콘 버튼
 class CategoryButton extends StatelessWidget {
-  final List<Category> categoryIcons01 = [
-    Category(
-        name: '학업', code: '00', icon: 'images/category_icon/icon_study.png'),
-    Category(
+  static String codeName = 'policy_field_code';
+
+  final List<HomeCategory> categoryIcons01 = [
+    HomeCategory(
+        name: '학업',
+        code: '00',
+        codeName: codeName,
+        icon: 'images/category_icon/icon_study.png'),
+    HomeCategory(
         name: '상담',
         code: '01',
+        codeName: codeName,
         icon: 'images/category_icon/icon_counseling.png'),
-    Category(
-        name: '취업/이직', code: '02', icon: 'images/category_icon/icon_job.png'),
-    Category(
-        name: '생활비', code: '03', icon: 'images/category_icon/icon_living.png'),
+    HomeCategory(
+        name: '취업/이직',
+        code: '02',
+        codeName: codeName,
+        icon: 'images/category_icon/icon_job.png'),
+    HomeCategory(
+        name: '생활비',
+        code: '03',
+        codeName: codeName,
+        icon: 'images/category_icon/icon_living.png'),
   ];
 
-  final List<Category> categoryIcons02 = [
-    Category(
-        name: '건강', code: '04', icon: 'images/category_icon/icon_health.png'),
-    Category(
-        name: '주거', code: '05', icon: 'images/category_icon/icon_house.png'),
-    Category(
-        name: '결혼/양육', code: '06', icon: 'images/category_icon/icon_baby.png'),
-    Category(
-        name: '전체보기', code: '', icon: 'images/category_icon/icon_allsee.png'),
+  final List<HomeCategory> categoryIcons02 = [
+    HomeCategory(
+        name: '건강',
+        code: '04',
+        codeName: codeName,
+        icon: 'images/category_icon/icon_health.png'),
+    HomeCategory(
+        name: '주거',
+        code: '05',
+        codeName: codeName,
+        icon: 'images/category_icon/icon_house.png'),
+    HomeCategory(
+        name: '결혼/양육',
+        code: '06',
+        codeName: codeName,
+        icon: 'images/category_icon/icon_baby.png'),
+    HomeCategory(
+        name: '전체보기',
+        code: '',
+        codeName: codeName,
+        icon: 'images/category_icon/icon_allsee.png'),
   ];
   CategoryButton({super.key});
 
@@ -306,20 +335,23 @@ class CategoryButton extends StatelessWidget {
                       icon: Image.asset(
                           categoryIcons01[index].icon), //pngIcons01[index]
                       onPressed: () {
-                        var codeName = categoryIcons01[index].name;
+                        var codeName = categoryIcons01[index].codeName;
                         var codeValue = categoryIcons01[index].code;
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => PolicyListPage(
-                                categoryName: codeName,
-                                categoryValue: codeValue,
+                                codeName: codeName,
+                                codeDetail: codeValue,
                               ), // 복지검색 탭
                             ));
                       },
                       iconSize: MediaQuery.of(context).size.width / 8),
-                  Text(
-                    categoryIcons01[index].name,
+                  TextCustom(
+                    text: categoryIcons01[index].name,
+                    fontSize: 15,
+                    color: ThemeColors.basic,
+                    fontWeight: FontWeight.w600,
                   ),
                 ]),
               ),
@@ -336,22 +368,25 @@ class CategoryButton extends StatelessWidget {
                   IconButton(
                     icon: Image.asset(categoryIcons02[index].icon),
                     onPressed: () {
-                      var codeName = categoryIcons02[index].name;
+                      var codeName = categoryIcons02[index].codeName;
                       var codeValue = categoryIcons02[index].code;
 
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => PolicyListPage(
-                              categoryName: codeName,
-                              categoryValue: codeValue,
+                              codeName: codeName,
+                              codeDetail: codeValue,
                             ), // 복지검색 탭
                           ));
                     },
                     iconSize: MediaQuery.of(context).size.width / 8,
                   ),
-                  Text(
-                    categoryIcons02[index].name,
+                  TextCustom(
+                    text: categoryIcons02[index].name,
+                    fontSize: 15,
+                    color: ThemeColors.basic,
+                    fontWeight: FontWeight.w600,
                   ),
                 ]),
                 // height: 40,
@@ -366,12 +401,12 @@ class CategoryButton extends StatelessWidget {
 }
 
 // 실시간 인기 글
-class livePopularPost extends StatelessWidget {
+class livePopularPolicy extends StatelessWidget {
   final Policy policies;
   final int ranking;
   // final Map<String, dynamic> codeData;
 
-  const livePopularPost({
+  const livePopularPolicy({
     super.key,
     required this.policies,
     required this.ranking,
@@ -406,12 +441,12 @@ class livePopularPost extends StatelessWidget {
               //Icons.looks_one,
               color: ThemeColors.primary,
             ),
-            title: Text(policies.policy_name,
-                style: const TextStyle(
-                  color: ThemeColors.basic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w300,
-                ))));
+            title: TextCustom(
+              text: policies.policy_name,
+              color: ThemeColors.basic,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            )));
   }
 }
 
@@ -423,7 +458,7 @@ class _ListWithoutPopularPolicy extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: const [
-        TextCustom(text: "등록된 정책이 없습니다."),
+        TextCustom(text: "등록된 정책이 없어요."),
       ],
     );
   }

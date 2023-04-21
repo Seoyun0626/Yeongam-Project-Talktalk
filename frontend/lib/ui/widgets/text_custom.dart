@@ -31,7 +31,7 @@ class TextCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = TextStyle(
-      fontFamily: 'NanumSquare',
+      fontFamily: 'NanumSquareRound',
       fontSize: fontSize,
       fontWeight: fontWeight,
       color: color,

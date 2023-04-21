@@ -34,19 +34,19 @@ class PolicyServices {
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
 
-  // 코드 데이터
-  Future getCodeData() async {
-    final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/policy/get-code-data'),
-        headers:
-            _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
-    print('policy_services getCodeData');
-    // print(resp.body);
-    Map<String, dynamic> data = json.decode(resp.body);
-    // List result = data['policies'] as List;
+  // // 코드 데이터
+  // Future getCodeData() async {
+  //   final resp = await http.get(
+  //       Uri.parse('${Environment.urlApi}/policy/get-code-data'),
+  //       headers:
+  //           _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
+  //   print('policy_services getCodeData');
+  //   // print(resp.body);
+  //   Map<String, dynamic> data = json.decode(resp.body);
+  //   // List result = data['policies'] as List;
 
-    return data; //ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
-  }
+  //   return data; //ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+  // }
 
   void searchPolicy(String searchValue) async {
     debouncer.value = "";
@@ -71,14 +71,18 @@ class PolicyServices {
         .then((_) => timer.cancel());
   }
 
-  Future<List<Policy>> getPolicyBySelect(String code) async {
+  Future<List<Policy>> getPolicyBySelect(
+      String codeName, String codeDetail) async {
     //
     // final token = await secureStorage.readToken();
     // print(token);
     print('getPolicyBySelect');
 
     final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/policy/get-select-policy/' + code),
+        Uri.parse('${Environment.urlApi}/policy/get-select-policy/' +
+            codeName +
+            '/' +
+            codeDetail),
         headers:
             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
 
@@ -105,31 +109,31 @@ class PolicyServices {
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 
-  void selectPolicy(String code) async {
-    //Future<List<Policy>>
-    // final token = await secureStorage.readToken();
-    // print(token);
-    print('getPolicyBySelect');
-    debouncer.value = "";
-    debouncer.onValue = (value) async {
-      final resp = await http.get(
-          Uri.parse('${Environment.urlApi}/policy/get-select-policy/' + code),
-          headers:
-              _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
-      final listPolicies =
-          ResponsePolicy.fromJson(json.decode(resp.body)).policies;
+  // void selectPolicy(String code) async {
+  //   //Future<List<Policy>>
+  //   // final token = await secureStorage.readToken();
+  //   // print(token);
+  //   print('getPolicyBySelect');
+  //   debouncer.value = "";
+  //   debouncer.onValue = (value) async {
+  //     final resp = await http.get(
+  //         Uri.parse('${Environment.urlApi}/policy/get-select-policy/' + code),
+  //         headers:
+  //             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
+  //     final listPolicies =
+  //         ResponsePolicy.fromJson(json.decode(resp.body)).policies;
 
-      _streamController.add(listPolicies);
-    };
+  //     _streamController.add(listPolicies);
+  //   };
 
-    final timer =
-        Timer(const Duration(milliseconds: 200), () => debouncer.value = code);
-    Future.delayed(const Duration(milliseconds: 400))
-        .then((_) => timer.cancel());
-    // print('policy_services');
-    // print(resp.body);
-    // return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
-  }
+  //   final timer =
+  //       Timer(const Duration(milliseconds: 200), () => debouncer.value = code);
+  //   Future.delayed(const Duration(milliseconds: 400))
+  //       .then((_) => timer.cancel());
+  //   // print('policy_services');
+  //   // print(resp.body);
+  //   // return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+  // }
 
   // Future<List<Policy>> getAllPolicyForSearch() async {
   //   // final token = await secureStorage.readToken();
@@ -156,7 +160,7 @@ class PolicyServices {
 
   Future<int> checkPolicyScrapped(String uidPolicy) async {
     final token = await secureStorage.readToken();
-    print('checkPolicyScrapped');
+    // print('checkPolicyScrapped');
 
     final resp = await http.get(
         Uri.parse(

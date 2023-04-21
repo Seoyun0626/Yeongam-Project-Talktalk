@@ -44,11 +44,9 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
     // 이미지
     final String imgName = policies.img;
     final String imgUrl = '${Environment.urlApiServer}/upload/policy/$imgName';
-    //모집기간
-    final String policySupervison = policies.policy_institution_code;
+
     final String policyName = policies.policy_name;
     final String policyContent = policies.content;
-    final String policyCategory = policies.policy_field_code;
     final String policyLink = policies.policy_link;
 
     //모집기간
@@ -108,19 +106,21 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                   padding: const EdgeInsets.fromLTRB(30, 0, 30, 5),
                   width: size,
                   color: Colors.white,
-                  child: Text(policyInstitution)),
-              Container(
-                  // 정책 이름
-                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
-                  width: size,
-                  color: Colors.white,
-                  child: Text(
-                    policyName,
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                  child: TextCustom(
+                    text: policyInstitution,
+                    fontSize: 15,
                   )),
+              Container(
+                // 정책 이름
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
+                width: size,
+                color: Colors.white,
+                child: TextCustom(
+                    text: policyName,
+                    color: Colors.black,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w800),
+              ),
               Container(
                 // 카테고리
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
@@ -134,15 +134,31 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                         borderRadius: BorderRadius.circular(10),
                         color: ThemeColors.secondary,
                       ),
-                      child: Text(
-                        policyField,
+                      child: TextCustom(
+                        text: policyField,
                         // policyCategory,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 15.0,
-                          color: Colors.white,
-                        ),
+                        fontSize: 15.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: ThemeColors.secondary,
+                      ),
+                      child: TextCustom(
+                        text: policyCharacter,
+                        // policyCategory,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        fontSize: 15.0,
+                        color: Colors.black,
                       ),
                     ),
                   ],
@@ -155,24 +171,20 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                   color: Colors.white,
                   child: Row(
                     children: [
-                      const Text(
-                        '모집대상',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                      const TextCustom(
+                        text: '모집대상',
+                        color: ThemeColors.basic,
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
                       SizedBox(
                         width: size / 20,
                       ),
-                      Text(
-                        policyTarget,
-                        // policies.policy_target_code,
-                        style: const TextStyle(
-                          color: ThemeColors.basic,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      TextCustom(
+                        text: policyTarget,
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
                       )
                     ],
                   )),
@@ -183,29 +195,31 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                   color: Colors.white,
                   child: Row(
                     children: [
-                      const Text(
-                        '모집기간',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                      const TextCustom(
+                        text: '모집기간',
+                        color: ThemeColors.basic,
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 18,
                       ),
                       SizedBox(
                         width: size / 20,
                       ),
-                      Text(
-                        '$startDate ~ $endDate', //'관내 초등학생',
-                        style: const TextStyle(
-                          color: ThemeColors.basic,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      TextCustom(
+                        text: '$startDate ~ $endDate', //'관내 초등학생',
+
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
                       )
                     ],
                   )),
+              const Divider(
+                height: 20,
+                thickness: 2,
+              ),
               Container(
                 // 상세내용
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 width: size,
                 color: Colors.white,
                 child: Html(
@@ -213,6 +227,7 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                   style: {
                     'p': Style(
                         color: Colors.black,
+                        fontFamily: 'NanumSquareRound',
                         fontSize: FontSize.large,
                         lineHeight: LineHeight.percent(120)),
                   },

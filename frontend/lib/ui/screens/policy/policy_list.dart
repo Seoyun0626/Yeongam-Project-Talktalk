@@ -24,11 +24,11 @@ import 'package:login/domain/blocs/policy/policy_bloc.dart';
 class PolicyListPage extends StatefulWidget {
   const PolicyListPage({
     Key? key,
-    required this.categoryValue,
-    required this.categoryName,
+    required this.codeDetail,
+    required this.codeName,
   }) : super(key: key);
-  final String categoryName;
-  final String categoryValue;
+  final String codeName;
+  final String codeDetail;
 
   @override
   State<PolicyListPage> createState() => _PolicyListPageState();
@@ -39,10 +39,11 @@ class _PolicyListPageState extends State<PolicyListPage> {
   Widget build(BuildContext context) {
     late bool isSelectingCategory = false; // 홈페이지 카테고리 아이콘 선택 여부
 
-    String categoryName = widget.categoryName;
-    String categoryCode = widget.categoryValue; // 홈페이지 카테고리 아이콘 코드
+    String codeDetail = widget.codeDetail; // 홈페이지 카테고리 아이콘 코드
+    String codeName = widget.codeName;
+    print(codeDetail + codeName);
 
-    if (categoryCode != '') {
+    if (codeDetail != '') {
       isSelectingCategory = true;
     }
 
@@ -50,7 +51,9 @@ class _PolicyListPageState extends State<PolicyListPage> {
         listener: (context, state) {
           // if (state is LoadingPolicy) {
           //   modalLoadingShort(context);
-          // } else if (state is SuccessPolicyScrap) {
+          // }
+
+          // else if (state is SuccessPolicyScrap) {
           //   modalSuccess(context, '스크랩 완료', onPressed: () {
           //     // Navigator.of(context).pop();
           //   });
@@ -68,9 +71,9 @@ class _PolicyListPageState extends State<PolicyListPage> {
                   child: Column(
                 children: <Widget>[
                   const SearchBar(), // 검색창
-                  // const selectedSearchFilter(), // 기본 카테고리 선택
 
                   Expanded(
+                      child: Center(
                     child: ListView(
                       physics: const BouncingScrollPhysics(),
                       children: [
@@ -81,8 +84,8 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                 ? streamSearchPolicy()
                                 : isSelectingCategory
                                     ? FutureBuilder<List<Policy>>(
-                                        future: policyService
-                                            .getPolicyBySelect(categoryCode),
+                                        future: policyService.getPolicyBySelect(
+                                            codeName, codeDetail), //청소년 수련관 선택
                                         builder: ((_, snapshot) {
                                           if (snapshot.data != null &&
                                               snapshot.data!.isEmpty) {
@@ -93,7 +96,7 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                               ? const _ShimerLoading()
                                               : ListView.builder(
                                                   physics:
-                                                      const NeverScrollableScrollPhysics(),
+                                                      const BouncingScrollPhysics(),
                                                   shrinkWrap: true,
                                                   itemCount:
                                                       snapshot.data!.length,
@@ -104,48 +107,19 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                                             snapshot.data![i],
                                                       ));
                                         }))
-                                    // : isDefaultSelectingCategory
-                                    //     ? FutureBuilder<List<Policy>>(
-                                    //         future:
-                                    //             policyService.getPolicyBySelect(
-                                    //                 deafultCategoryCode),
-                                    //         builder: ((_, snapshot) {
-                                    //           // print('future default');
-                                    //           // print(deafultCategoryCode);
-                                    //           if (snapshot.data != null &&
-                                    //               snapshot.data!.isEmpty) {
-                                    //             return _ListWithoutPolicySearch();
-                                    //           }
-
-                                    //           return !snapshot.hasData
-                                    //               ? const _ShimerLoading()
-                                    //               : ListView.builder(
-                                    //                   physics:
-                                    //                       const NeverScrollableScrollPhysics(),
-                                    //                   shrinkWrap: true,
-                                    //                   itemCount:
-                                    //                       snapshot.data!.length,
-                                    //                   itemBuilder: (_, i) =>
-                                    //                       ListViewPolicy(
-                                    //                         policies: snapshot
-                                    //                             .data![i],
-                                    //                         categoryCode:
-                                    //                             categoryCode,
-                                    //                       ));
-                                    //         }))
                                     : FutureBuilder<List<Policy>>(
                                         future: policyService.getAllPolicy(),
                                         builder: ((_, snapshot) {
                                           if (snapshot.data != null &&
                                               snapshot.data!.isEmpty) {
-                                            return _ListWithoutPolicySearch();
+                                            return _ListWithoutPolicy();
                                           }
 
                                           return !snapshot.hasData
                                               ? const _ShimerLoading()
                                               : ListView.builder(
                                                   physics:
-                                                      const NeverScrollableScrollPhysics(),
+                                                      const BouncingScrollPhysics(),
                                                   shrinkWrap: true,
                                                   itemCount:
                                                       snapshot.data!.length,
@@ -157,7 +131,7 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                         }))))
                       ],
                     ),
-                  )
+                  ))
                 ],
               )),
               bottomNavigationBar: const BottomNavigation(index: 2),
@@ -178,13 +152,17 @@ class _PolicyListPageState extends State<PolicyListPage> {
 
         if (snapshot.data!.isEmpty) {
           // ignore: prefer_const_constructors
-          return ListTile(
-            title: const Text(
-              '검색 결과 없음',
-              // '${_searchController.text}에 대한 검색 결과 없음',
-              style: TextStyle(color: ThemeColors.basic),
-            ),
-          );
+          return Expanded(
+              child: Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                TextCustom(
+                  text: '검색 결과가 없어요',
+                  // '${_searchController.text}에 대한 검색 결과 없음',
+                  color: ThemeColors.basic,
+                ),
+              ])));
         }
 
         return ListView.builder(
@@ -265,7 +243,7 @@ class _SearchBar extends State<SearchBar> {
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: '복지 검색',
-                  // hintStyle: GoogleFonts.roboto(fontSize: 17),
+                  hintStyle: const TextStyle(fontFamily: 'NanumSqureRound'),
                   prefixIcon: IconButton(
                     icon: const Icon(
                       Icons.tune,
@@ -273,13 +251,12 @@ class _SearchBar extends State<SearchBar> {
                       color: ThemeColors.darkGreen,
                     ),
                     onPressed: () {
-                      // searchFilterDialog();
-                      // Navigator.push(
-                      //   context,
-                      //   routeSlide(
-                      //     page: PolicySearchFilterPage(),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        routeSlide(
+                          page: const PolicySearchFilterPage(),
+                        ),
+                      );
                     },
                   ),
                   suffixIcon: myFocusNode.hasFocus
@@ -311,162 +288,12 @@ class _SearchBar extends State<SearchBar> {
   }
 }
 
-// 카테고리 버튼 선택
-class SelectableButton extends StatefulWidget {
-  const SelectableButton({
-    super.key,
-    required this.selected,
-    this.style,
-    required this.onPressed,
-    required this.child,
-  });
-
-  final bool selected;
-  final ButtonStyle? style;
-  final VoidCallback? onPressed;
-  final Widget child;
-
-  @override
-  State<SelectableButton> createState() => _SelectableButtonState();
-}
-
-class _SelectableButtonState extends State<SelectableButton> {
-  late final MaterialStatesController statesController;
-
-  @override
-  void initState() {
-    super.initState();
-    statesController = MaterialStatesController(
-        <MaterialState>{if (widget.selected) MaterialState.selected});
-  }
-
-  @override
-  void didUpdateWidget(SelectableButton oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.selected != oldWidget.selected) {
-      statesController.update(MaterialState.selected, widget.selected);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      statesController: statesController,
-      style: widget.style,
-      onPressed: widget.onPressed,
-      child: widget.child,
-    );
-  }
-}
-
-// 기본 검색 조건
-class selectedSearchFilter extends StatefulWidget {
-  const selectedSearchFilter({
-    Key? key,
-    // required this.categoryCode,
-  }) : super(key: key);
-  // final String categoryCode;
-
-  @override
-  State<selectedSearchFilter> createState() => _selectedSearchFilter();
-}
-
-class Category {
-  final String name;
-  final String code;
-  late bool selected = false;
-  Category({required this.name, required this.code});
-}
-
-class _selectedSearchFilter extends State<selectedSearchFilter> {
-  // bool selected = false;
-
-  List<Category> defaultCategoryList = [
-    Category(name: '전체보기', code: ''),
-    Category(name: '청소년활동', code: '07'),
-    Category(name: '학교밖청소년', code: '08'),
-    Category(name: '돌봄', code: '09')
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    // final String categoryCode = widget.categoryCode;
-    bool isDuplicated; // 기본카테고리 중복 확인
-    late String deafultCategoryCode = '';
-
-    return Container(
-        // height: 50,
-        padding: const EdgeInsets.all(10),
-        // decoration: const BoxDecoration(
-        //     color: Colors.white,
-        //     border: const Border(bottom: BorderSide(color: ThemeColors.basic))
-        //     ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(
-            defaultCategoryList.length,
-            (index) => SelectableButton(
-              selected: defaultCategoryList[index].selected,
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.selected)) {
-                      return ThemeColors.basic;
-                    }
-                    return null; // defer to the defaults
-                  },
-                ),
-                backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.selected)) {
-                      return ThemeColors.primary;
-                    }
-                    return null; // defer to the defaults
-                  },
-                ),
-              ),
-              onPressed: () {
-                setState(() {
-                  defaultCategoryList[index].selected =
-                      !defaultCategoryList[index].selected;
-
-                  // 중복 선택 불가
-                  var select = defaultCategoryList[index].selected;
-                  var length = defaultCategoryList.length;
-
-                  if (select) {
-                    isDuplicated = true;
-                    for (int i = 0; i < length; i++) {
-                      defaultCategoryList[(i + length) % length].selected =
-                          false;
-                    }
-                    defaultCategoryList[index].selected = true;
-                  }
-
-                  // print(defaultCategoryList[index].name);
-                  // print(defaultCategoryList[index].selected);
-                });
-
-                deafultCategoryCode = defaultCategoryList[index].code;
-              },
-              child: Text(defaultCategoryList[index].name),
-            ),
-          ),
-        ));
-  }
-}
-
 // 정책 리스트
 class ListViewPolicy extends StatefulWidget {
   final Policy policies;
-  // final Map<String, dynamic> codeData;
-  // final Future<dynamic> codeData;
-
-  // final String categoryCode;
   const ListViewPolicy({
     Key? key,
     required this.policies,
-    // required this.codeData
   }) : super(key: key);
 
   @override
@@ -484,9 +311,10 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
     // 제목
     final String policyName = policies.policy_name;
     // 분야
-    final String policyField = getMobileCodeService
-        .getCodeDetailName("policy_field_code", policies.policy_field_code)
-        .toString();
+    final String policyField = getMobileCodeService.getCodeDetailName(
+        "policy_field_code", policies.policy_field_code);
+    final String policyCharacter = getMobileCodeService.getCodeDetailName(
+        "policy_character_code", policies.policy_character_code);
 
     // 이미지
     final String imgName = policies.img;
@@ -586,12 +414,25 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                                       height: 3,
                                     ),
                                     // 카테고리
-                                    TextCustom(
-                                      text: policyField,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      fontSize: 12,
-                                    ),
+                                    Row(
+                                      children: [
+                                        TextCustom(
+                                          text: policyField,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontSize: 12,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        TextCustom(
+                                          text: policyCharacter,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontSize: 12,
+                                        ),
+                                      ],
+                                    )
                                   ],
                                 ))),
                         SizedBox(
@@ -602,15 +443,6 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                             countScraps: policies.count_scraps,
                           ),
                         )
-
-                        // Expanded(
-                        //   flex: 1,
-                        //   child: _ScrapUnscrap(
-                        //     uidPolicy: policies.board_idx.toString(),
-                        //     isScrapped: policies.is_scrap,
-                        //     countScraps: policies.count_scraps,
-                        //   ),
-                        // ),
                       ]))),
         ));
   }
@@ -628,63 +460,6 @@ class _ScrapUnscrap extends StatefulWidget {
   @override
   State<_ScrapUnscrap> createState() => _ScrapUnscrapState();
 }
-
-// class _ScrapUnscrapState extends State<_ScrapUnscrap> {
-//   bool _isScrapped = false;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final policyBloc = BlocProvider.of<PolicyBloc>(context);
-//     final authState = BlocProvider.of<AuthBloc>(context).state;
-//     final userState = BlocProvider.of<UserBloc>(context).state;
-//     final uidUser = userState.user?.uid;
-//     final uidPolicy = widget.uidPolicy;
-
-//     return FutureBuilder<int>(
-//       future: policyService.checkPolicyScrapped(uidPolicy),
-//       builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-//         if (snapshot.hasData) {
-//           _isScrapped = snapshot.data == 1;
-//         }
-
-//         return Column(
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             IconButton(
-//               onPressed: () {
-//                 if (authState is LogOut) {
-//                   modalCheckLogin().showBottomDialog(context);
-//                 } else {
-//                   if (uidUser != null) {
-//                     policyBloc.add(
-//                       OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
-//                     );
-//                     setState(() {
-//                       _isScrapped = !_isScrapped;
-//                     });
-//                   }
-//                 }
-//               },
-//               icon: Icon(
-//                 _isScrapped ? Icons.bookmark : Icons.bookmark_border_outlined,
-//                 color: authState is LogOut
-//                     ? ThemeColors.basic
-//                     : (_isScrapped ? ThemeColors.primary : ThemeColors.basic),
-//                 size: 30,
-//               ),
-//             ),
-//             TextCustom(
-//               text: widget.countScraps.toString(),
-//               color: ThemeColors.basic,
-//               fontSize: 10,
-//             ),
-//           ],
-//         );
-//       },
-//     );
-//   }
-// }
 
 class _ScrapUnscrapState extends State<_ScrapUnscrap> {
   bool _isScrapped = false;
@@ -761,12 +536,14 @@ class _ListWithoutPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
 
-    return Column(
+    return Expanded(
+        child: Center(
+            child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: const [
-        TextCustom(text: "등록된 정책이 없습니다."),
+        TextCustom(text: "등록된 정책이 없어요."),
       ],
-    );
+    )));
   }
 }
 
@@ -776,12 +553,14 @@ class _ListWithoutPolicySearch extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
 
-    return Column(
+    return Expanded(
+        child: Center(
+            child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: const [
-        TextCustom(text: "등록된 정책이 없습니다."),
+        TextCustom(text: "등록된 정책이 없어요."),
       ],
-    );
+    )));
   }
 }
 

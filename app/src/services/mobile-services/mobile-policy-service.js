@@ -45,14 +45,15 @@ exports.getSearchPolicy = async function(req, res) {
 }
 exports.getPolicyBySelect = async function(req, res){
     var conn;
-    var code = req.params.code;
-    // console.log('policy-service getPolicyBySelect : ',code);
+    var code_name = req.params.codeName;
+    var code_detail = req.params.codeDetail;
+    // console.log('policy-service getPolicyBySelect : ',code_name, code_detail);
     try {
         conn = await db.getConnection();
         console.log('policy-service getSearchPolicy db getConnecton');
-        var query = "SELECT * FROM webdb.tb_policy WHERE policy_field_code = " + "'"+code+"'" + ";"; 
-        var rows =  await conn.query(query); // 쿼리 실행
-        // console.log('policy-service getSelectPolicy success');
+        var query = "SELECT * FROM webdb.tb_policy WHERE " + code_name + " = ?;"; 
+        var rows =  await conn.query(query, [code_detail]); // 쿼리 실행
+        // console.log(rows);
         return rows;
     } catch(error){
         console.log('policy-service getSelectPolicy:'+error);

@@ -10,15 +10,15 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		p+LBdoJgpZkE1Bwjuwj5w9NHRCo=
+		+tVDihN0fpk9utp5g1hEmZPwgLU=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
-		41H8EaVPH4fX6oAM6V1F3SeKw5I=
+		cp+6LVW307zI2m1D8DD9VaU2SAg=
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		2Dt9FYFVL6SBoD5Agd+P/kmig7E=
+		gmpmUIpN8TEvq87CnprJDyCQ7KE=
 		</data>
 		<key>flutter_assets/fonts/CookieRunBold.otf</key>
 		<data>
@@ -51,6 +51,22 @@
 		<key>flutter_assets/fonts/NanumSquareR.otf</key>
 		<data>
 		KbB1UxaTygbhWmWh4viTv7fU9NA=
+		</data>
+		<key>flutter_assets/fonts/NanumSquareRoundB.ttf</key>
+		<data>
+		6SMx30wm5nN0y0HBjUvfMm245T0=
+		</data>
+		<key>flutter_assets/fonts/NanumSquareRoundEB.ttf</key>
+		<data>
+		RIARI3e67qPeF6HYOdppHZeJJ7c=
+		</data>
+		<key>flutter_assets/fonts/NanumSquareRoundL.ttf</key>
+		<data>
+		1QFauJWr39APiiMQVVLxU82VOvo=
+		</data>
+		<key>flutter_assets/fonts/NanumSquareRoundR.ttf</key>
+		<data>
+		8McHZL6j+rVR4d7argWdRJWv2Ns=
 		</data>
 		<key>flutter_assets/images/.DS_Store</key>
 		<data>
@@ -174,7 +190,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		3Us8VmRFY+COg3od2DFIjFqMDRU=
+		DyEA+S6AJSUnD46hDuf7rQB5Ado=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -195,21 +211,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			jVIE3ciOfMJFZA81qy9L84UfBQ4rl5c4dDVsIx3rLgs=
+			72y2BFO22ld9fWdQSV6xXzBWKYWFezUs4wKkF8BS/is=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			qg93vgh+k7FMm6xdyYnZ62KYpl5Wh0JD6nPrwRnZZVM=
+			0smKoYduIkMppVfd8bvbajV3hw2SdTk43LXApyzlBUQ=
 			</data>
 		</dict>
 		<key>flutter_assets/NOTICES.Z</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			K1eLfNrKjw9GbldBhXsSde7VheDV6RNEVXAw970hF7g=
+			D70cPjMKEbyKPzOKqlqnqh095EdvxLS+1ugDWQg6JE4=
 			</data>
 		</dict>
 		<key>flutter_assets/fonts/CookieRunBold.otf</key>
@@ -266,6 +282,34 @@
 			<key>hash2</key>
 			<data>
 			8n/2Cl60crsBB92+nlZKEO/qSE7N44FL6s0vwKDi+Zk=
+			</data>
+		</dict>
+		<key>flutter_assets/fonts/NanumSquareRoundB.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Yf03gWoe4akzaHZ0I5LYC9r9NA5RJKCIrtogRG4uFd4=
+			</data>
+		</dict>
+		<key>flutter_assets/fonts/NanumSquareRoundEB.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			noRfw1xbxKW37VnYWhdgBZ3lzlW15aTXU19++odpXjk=
+			</data>
+		</dict>
+		<key>flutter_assets/fonts/NanumSquareRoundL.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sL2efgZ4QNVVIM5+RaPlcycUTaE2tKtVj7mLIAcB0HE=
+			</data>
+		</dict>
+		<key>flutter_assets/fonts/NanumSquareRoundR.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			UoYv3wW1W6iGyiGZgiLZWY74TJdeaARrmo2PGvCSKKA=
 			</data>
 		</dict>
 		<key>flutter_assets/images/aco.png</key>
@@ -461,7 +505,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/FZGTrRYysYAKGaPflN26YaPGWPB38rm5ZdVpCTW6Yk=
+			TrEu+KK6SJlWVizhvXWRC2Etv055aJyzKVJf0AER2S8=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

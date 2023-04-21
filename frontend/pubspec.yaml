@@ -121,6 +121,18 @@ flutter:
           weight : 500
         - asset: fonts/NanumSquareEB.otf
           weight : 600
+
+    - family : NanumSquareRound
+      fonts :
+        - asset: fonts/NanumSquareRoundL.ttf
+          weight : 300
+        - asset: fonts/NanumSquareRoundR.ttf
+          weight : 400
+        - asset: fonts/NanumSquareRoundB.ttf
+          weight : 500
+        - asset: fonts/NanumSquareRoundEB.ttf
+          weight : 600
+            
     - family : CookieRun
       fonts :
         - asset : fonts/CookieRunRegular.otf

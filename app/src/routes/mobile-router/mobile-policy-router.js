@@ -55,26 +55,23 @@ router.get('/get-all-policy', async function(req, res){
   })
   
   // 검색 조건 선택 결과
-  router.get('/get-select-policy/:code', async function(req, res){
-    // console.log('mobile-router get-select-policy', req.params.code);
+  router.get('/get-select-policy/:codeName/:codeDetail', async function(req, res){
+    console.log('mobile-router get-select-policy', req.params.codeName);
+    console.log('mobile-router get-select-policy', req.params.codeDetail);
+
     try{
       var result = await mobile_policy_controller.getPolicyBySelect(req,res);
-      // console.log('mobile-router get-all-policy result : ', result);
-      // res.render('policy/get-all-policy', {
-      //     posts:result,
-      //     user:req.user
-      // }
-      // );
+
       res.json({
         resp:true,
-        message : 'get all policies',
+        message : 'get policies by select',
         policies : result,
       })
   } catch(error) {
-      console.log('policy-router get-all-policy error:'+error);
+      console.log('policy-router get-select-policy error:'+error);
       res.json({
         resp:false,
-        message : 'Failure get all policies'
+        message : 'Failure get policies by select'
       })
   }
     

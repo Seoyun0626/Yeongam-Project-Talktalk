@@ -10,6 +10,7 @@ import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/domain/blocs/blocs.dart';
+import 'package:login/ui/screens/user/privacy_setting_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
@@ -133,7 +134,10 @@ class _UserName extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.push(
-                        context, routeSlide(page: const LoginPage()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PrivacySettingPage(),
+                        ));
                   });
             } else {
               return Container();
