@@ -37,6 +37,7 @@ const routerMobileMain = require("./src/routes/mobile-router/mobile-main-router"
 const routerMobilePolicy = require("./src/routes/mobile-router/mobile-policy-router");
 const routerMobileCode = require("./src/routes/mobile-router/mobile-codeData-router");
 const routerMobileUser = require("./src/routes/mobile-router/mobile-user-router");
+const routerMobileDataif = require("./src/routes/mobile-router/mobile-dataif-router");
 
 
 
@@ -91,6 +92,7 @@ app.use("/mobile/main",routerMobileMain); // 모바일
 app.use("/mobile/policy",routerMobilePolicy); // 모바일
 app.use("/mobile/codeData",routerMobileCode); // 모바일
 app.use("/mobile/user",routerMobileUser); // 모바일
+app.use("/mobile/dataif", routerMobileDataif); //모바일
 
 
 module .exports = app;

@@ -1,10 +1,35 @@
 // const path = require("path");
-// var express = require("express");
-// var router = express.Router();
-// //var checkAuth = require('../utils/checkauth');
-// var dataif_controller = require("../../controllers/common-controller/dataif-controller");
+var express = require('express');
+var router = express.Router();
+//var checkAuth = require('../utils/checkauth');
+var dataif_controller = require("../../controllers/common-controller/dataif-controller");
 // var login_controller = require("../../controllers/common-controller/login-controller");
 // const passport = require('passport');
+
+
+
+router.get('/terms', async function(req, res){
+    try{
+    //   if(req.session.user == undefined){
+    //     res.redirect('/admin/auth/login');
+    //     return;
+    //   }
+      var result = await dataif_controller.fetchTermData(req, res);
+      res.json({
+        resp:true,
+        message : 'get search policies',
+        termsData : result
+      })
+    //   console.log(result);
+    //   res.render('dataif/terms', {posts:result});
+    }
+    catch(error) {
+      console.log('dataif-router /terms error:'+error);
+    }
+  });
+  module.exports = router;
+
+
 // /*
 // var Post = require('../../models/Post');
 

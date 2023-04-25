@@ -76,7 +76,7 @@ class PolicyServices {
     //
     // final token = await secureStorage.readToken();
     // print(token);
-    print('getPolicyBySelect');
+    // print('getPolicyBySelect');
 
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/policy/get-select-policy/' +

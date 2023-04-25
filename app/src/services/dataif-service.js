@@ -60,6 +60,7 @@ exports.fetchTermData = async function(req, res) {
     conn = await db.getConnection();
     var query = 'SELECT * FROM webdb.tb_terms';
     var rows = await conn.query(query); // 쿼리 실행
+    console.log(rows);
     return rows;
   } catch(error) {
     console.log('dataif-service fetchTermData:'+error);

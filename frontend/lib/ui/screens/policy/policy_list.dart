@@ -1,20 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:filter_list/filter_list.dart';
-import 'package:flutter_html/style.dart';
 import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
 import 'package:login/domain/blocs/user/user_bloc.dart';
-import 'package:login/domain/models/response/response_code.dart';
 import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/domain/services/code_service.dart';
 import 'package:login/domain/services/policy_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/helpers/modal_checkLogin.dart';
-import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/screens/policy/policy_detail.dart';
 import 'package:login/ui/screens/policy/search_filter.dart';
 import 'package:login/ui/themes/theme_colors.dart';
@@ -35,17 +28,32 @@ class PolicyListPage extends StatefulWidget {
 }
 
 class _PolicyListPageState extends State<PolicyListPage> {
+  bool isSelectingCategory = false;
+  // late String selectedCodeDetail;
+  // late String selectedCodeName;
+
   @override
-  Widget build(BuildContext context) {
-    late bool isSelectingCategory = false; // 홈페이지 카테고리 아이콘 선택 여부
-
-    String codeDetail = widget.codeDetail; // 홈페이지 카테고리 아이콘 코드
-    String codeName = widget.codeName;
-    print(codeDetail + codeName);
-
-    if (codeDetail != '') {
+  void initState() {
+    super.initState();
+    if (widget.codeDetail != '') {
       isSelectingCategory = true;
     }
+    if (widget.codeDetail.isNotEmpty) {
+      isSelectingCategory = true;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // selectedCodeDetail = widget.codeDetail;
+    // selectedCodeName = widget.codeName;
+    // print(selectedCodeDetail + selectedCodeDetail);
+
+    final String selectedCodeDetail = widget.codeDetail;
+    final String selectedCodeName = widget.codeName;
+
+    print('codeDetail: $selectedCodeDetail, codeName: $selectedCodeName');
+    print(isSelectingCategory);
 
     return BlocListener<PolicyBloc, PolicyState>(
         listener: (context, state) {
@@ -71,6 +79,13 @@ class _PolicyListPageState extends State<PolicyListPage> {
                   child: Column(
                 children: <Widget>[
                   const SearchBar(), // 검색창
+                  Visibility(
+                    visible: isSelectingCategory,
+                    child: SelectedSearchConditions(
+                      codeDetail: selectedCodeDetail,
+                      codeName: selectedCodeName,
+                    ),
+                  ),
 
                   Expanded(
                       child: Center(
@@ -85,7 +100,8 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                 : isSelectingCategory
                                     ? FutureBuilder<List<Policy>>(
                                         future: policyService.getPolicyBySelect(
-                                            codeName, codeDetail), //청소년 수련관 선택
+                                            selectedCodeName,
+                                            selectedCodeDetail), //청소년 수련관 선택
                                         builder: ((_, snapshot) {
                                           if (snapshot.data != null &&
                                               snapshot.data!.isEmpty) {
@@ -284,6 +300,77 @@ class _SearchBar extends State<SearchBar> {
                         )),
             ),
           ),
+        ));
+  }
+}
+
+// class SelectedSearchConditions extends StatefulWidget {
+//   const SelectedSearchConditions({
+//     Key? key,
+//     required this.codeDetail,
+//     required this.codeName,
+//     // required this.searchConditions,
+//   }) : super(key: key);
+//   final String codeName;
+//   final String codeDetail;
+//   // final List<SearchCondition> searchConditions;
+
+//   @override
+//   _SelectedSearchConditionsState createState() =>
+//       _SelectedSearchConditionsState();
+// }
+
+// class _SelectedSearchConditionsState extends State<PolicyListPage> {
+
+class SelectedSearchConditions extends StatelessWidget {
+  final String codeDetail;
+  final String codeName;
+  const SelectedSearchConditions(
+      {super.key, required this.codeDetail, required this.codeName});
+
+  @override
+  Widget build(BuildContext context) {
+    final codeDetailName =
+        getMobileCodeService.getCodeDetailName(codeName, codeDetail);
+    return Container(
+        padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+                // height: 50,
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: ThemeColors.secondary,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children: [
+                    TextCustom(
+                      text: codeDetailName,
+                      color: Colors.black,
+                      fontSize: 12,
+                    ),
+                    InkWell(
+                      child: const Icon(
+                        Icons.close,
+                        size: 15,
+                      ),
+                      onTap: () {
+                        // 부모 위젯의 isSelectingCategory 값을 변경
+                        final policyListPageState = context
+                            .findAncestorStateOfType<_PolicyListPageState>();
+                        policyListPageState?.setState(() {
+                          policyListPageState.isSelectingCategory = false;
+                        });
+                      },
+                    )
+                  ],
+                )),
+          ],
         ));
   }
 }
@@ -536,14 +623,9 @@ class _ListWithoutPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
 
-    return Expanded(
-        child: Center(
-            child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
-        TextCustom(text: "등록된 정책이 없어요."),
-      ],
-    )));
+    return const Center(
+      child: TextCustom(text: "등록된 정책이 없어요."),
+    );
   }
 }
 
@@ -553,14 +635,9 @@ class _ListWithoutPolicySearch extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
 
-    return Expanded(
-        child: Center(
-            child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
-        TextCustom(text: "등록된 정책이 없어요."),
-      ],
-    )));
+    return const Center(
+      child: TextCustom(text: "등록된 정책이 없어요."),
+    );
   }
 }
 

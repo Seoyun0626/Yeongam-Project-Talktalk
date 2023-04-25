@@ -2,17 +2,22 @@ import 'package:flutter/animation.dart';
 import 'package:login/domain/services/code_service.dart';
 
 class CodeDetailData {
-  final String? name;
-  final String? code;
+  final String detailName;
+  final String code;
+  final String codeName;
   bool selected;
-  CodeDetailData({this.name, this.code, this.selected = false});
+  CodeDetailData(
+      {required this.detailName,
+      required this.code,
+      required this.codeName,
+      this.selected = false});
 }
 
-class CodeData {
-  final String? codeName;
-  final List<CodeDetailData>? detailList;
-  CodeData({this.codeName, this.detailList});
-}
+// class CodeData {
+//   final String? codeName;
+//   final List<CodeDetailData>? detailList;
+//   CodeData({this.codeName, this.detailList});
+// }
 
 class getMobileCodeFunctions {
   late Map<String, dynamic> codeData = {};
@@ -44,8 +49,9 @@ getMobileCodeService.getCodeDetailList('policy_institution_code');
 
     for (var detail in code_detail_list) {
       CodeDetailData codeDetail = CodeDetailData(
-        name: detail["code_detail_name"],
+        detailName: detail["code_detail_name"],
         code: detail["code_detail"],
+        codeName: my_code_name,
       );
       result.add(codeDetail);
     }

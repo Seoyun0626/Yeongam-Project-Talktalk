@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/screens/login/verify_email_page.dart';
 import 'package:login/ui/screens/login/login_page.dart';
-import 'package:login/ui/screens/register/user_type.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -331,7 +329,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       const SizedBox(height: 10.0),
                       ToggleSwitch(
                           minWidth:
-                              (MediaQuery.of(context).size.width - 87) / 6,
+                              (MediaQuery.of(context).size.width - 100) / 6,
                           minHeight: 50.0,
                           fontSize: 12,
                           initialLabelIndex: 5,
@@ -371,7 +369,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       ),
                       const SizedBox(height: 10.0),
                       ToggleSwitch(
-                        minWidth: (MediaQuery.of(context).size.width - 87) / 7,
+                        minWidth: (MediaQuery.of(context).size.width - 100) / 7,
                         minHeight: 50.0,
                         fontSize: 11,
                         initialLabelIndex: 6,
@@ -412,7 +410,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                     ),
                     const SizedBox(height: 10.0),
                     ToggleSwitch(
-                      minWidth: (MediaQuery.of(context).size.width - 87) / 3,
+                      minWidth: (MediaQuery.of(context).size.width - 100) / 3,
                       minHeight: 50.0,
                       fontSize: 15,
                       initialLabelIndex: 2,
