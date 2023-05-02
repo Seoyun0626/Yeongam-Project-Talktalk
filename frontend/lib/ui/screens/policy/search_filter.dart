@@ -57,15 +57,15 @@ class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
           child: Column(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // SearchConditionList(
-              //     title: '운영 기관',
-              //     codeName: 'policy_institution_code',
-              //     setSelectedCodeData: (data) {
-              //       setSelectedCodeData(data);
-              //     }),
-              // const SizedBox(
-              //   height: 20,
-              // ),
+              SearchConditionList(
+                  title: '운영 기관',
+                  codeName: 'policy_institution_code',
+                  setSelectedCodeData: (data) {
+                    setSelectedCodeData(data);
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
               // SearchConditionList(
               //     title: '적용 대상',
               //     codeName: 'policy_target_code',
@@ -75,15 +75,15 @@ class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
               // const SizedBox(
               //   height: 20,
               // ),
-              SearchConditionList(
-                  title: '정책 분야',
-                  codeName: 'policy_field_code',
-                  setSelectedCodeData: (data) {
-                    setSelectedCodeData(data);
-                  }),
-              const SizedBox(
-                height: 20,
-              ),
+              // SearchConditionList(
+              //     title: '정책 분야',
+              //     codeName: 'policy_field_code',
+              //     setSelectedCodeData: (data) {
+              //       setSelectedCodeData(data);
+              //     }),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               // SearchConditionList(
               //     title: '정책 성격',
               //     codeName: 'policy_character_code',

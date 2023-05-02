@@ -79,8 +79,21 @@ class ScrapPage extends StatelessWidget {
                                       })))));
                         } else {
                           modalCheckLogin().showBottomDialog(context);
-                          return const Text('준비중입니다',
-                              style: TextStyle(fontSize: 30));
+                          return Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'images/aco3.png',
+                                  width: 300,
+                                  height: 300,
+                                ),
+                                const TextCustom(
+                                    text: '스크랩한 정책이 없어요', fontSize: 20),
+                              ],
+                            ),
+                          );
                         }
                       },
                     ),
@@ -350,7 +363,7 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
   }
 }
 
-// 등록된 정책 없을 때
+// 스크랩한 정책 없을 때
 class _ListWithoutPolicy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -358,10 +371,15 @@ class _ListWithoutPolicy extends StatelessWidget {
 
     return Center(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         // mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          TextCustom(text: "스크랩한 정책이 없어요."),
+        children: [
+          Image.asset(
+            'images/aco3.png',
+            width: 300,
+            height: 300,
+          ),
+          const TextCustom(text: '스크랩한 정책이 없어요', fontSize: 20),
         ],
       ),
     );
