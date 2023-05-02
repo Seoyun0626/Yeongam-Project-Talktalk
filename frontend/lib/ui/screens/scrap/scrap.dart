@@ -21,12 +21,13 @@ class ScrapPage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: ThemeColors.third,
         appBar: AppBar(
           titleSpacing: 0,
           title: const Text(
             '스크랩',
             style: TextStyle(
-              color: ThemeColors.basic,
+              color: ThemeColors.primary,
               fontFamily: 'CookieRun',
               fontSize: 24,
             ),
@@ -39,7 +40,7 @@ class ScrapPage extends StatelessWidget {
               height: 70,
             ),
           ),
-          backgroundColor: ThemeColors.primary,
+          backgroundColor: Colors.white, //ThemeColors.primary,
           centerTitle: false,
           elevation: 0.0,
         ),

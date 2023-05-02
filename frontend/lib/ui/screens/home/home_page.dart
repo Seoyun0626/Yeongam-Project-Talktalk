@@ -43,11 +43,12 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+          backgroundColor: ThemeColors.third,
           appBar: AppBar(
             titleSpacing: 0,
             title: const Text('청소년 톡Talk',
                 style: TextStyle(
-                  color: ThemeColors.basic,
+                  color: ThemeColors.primary,
                   fontFamily: 'CookieRun',
                   fontSize: 24,
                 )),
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                   icon: const Icon(
                     Icons.perm_identity,
                     size: 30,
-                    color: ThemeColors.basic,
+                    color: ThemeColors.primary,
                   ),
                   onPressed: () {
                     // Navigator.push(
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                     }
                   }),
             ],
-            backgroundColor: ThemeColors.primary,
+            backgroundColor: Colors.white, //ThemeColors.primary,
             centerTitle: false,
             elevation: 0.0,
           ),
@@ -138,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                         Row(children: const [
                           Icon(
                             Icons.category,
-                            color: ThemeColors.darkGreen,
+                            color: ThemeColors.primary,
                             size: 25,
                           ),
                           // ImageIcon(
@@ -182,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                       child: Row(children: const [
                         Icon(
                           Icons.auto_awesome,
-                          color: ThemeColors.darkGreen,
+                          color: ThemeColors.primary,
                         ),
                         // Image.asset('images/icon_sparkel.png'),
                         SizedBox(

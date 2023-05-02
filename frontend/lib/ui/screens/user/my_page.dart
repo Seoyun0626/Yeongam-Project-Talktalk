@@ -35,7 +35,7 @@ class _MyPageState extends State<MyPage> {
               titleSpacing: 0,
               title: const Text('마이 톡톡',
                   style: TextStyle(
-                    color: ThemeColors.basic,
+                    color: ThemeColors.primary,
                     fontFamily: 'CookieRun',
                     fontSize: 24,
                     fontWeight: FontWeight.w300,
@@ -48,9 +48,21 @@ class _MyPageState extends State<MyPage> {
                 //     )),
                 child: Image.asset('images/aco.png', height: 70),
               ),
-              backgroundColor: ThemeColors.primary,
+              backgroundColor: Colors.white, //ThemeColors.primary,
               centerTitle: false,
               elevation: 0.0,
+              actions: <Widget>[
+                IconButton(
+                  icon: const Icon(
+                    Icons.settings_outlined,
+                    color: ThemeColors.primary,
+                    size: 30,
+                  ), // 장바구니 아이콘 생성
+                  onPressed: () {
+                    // 아이콘 버튼 실행
+                  },
+                ),
+              ],
             ),
             body: SafeArea(
               child: Column(
@@ -62,7 +74,8 @@ class _MyPageState extends State<MyPage> {
                       children: <Widget>[
                         Container(
                             padding: const EdgeInsets.fromLTRB(25, 40, 25, 25),
-                            color: const Color.fromARGB(255, 226, 241, 200),
+                            color: ThemeColors
+                                .third, //Color.fromARGB(255, 226, 241, 200),
                             child: Column(
                               children: [
                                 Row(
@@ -175,7 +188,7 @@ class _LogInOut extends StatelessWidget {
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: ThemeColors.darkGreen,
+                color: ThemeColors.primary,
                 width: 2,
               ),
             ),
@@ -201,7 +214,7 @@ class _LogInOut extends StatelessWidget {
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: ThemeColors.darkGreen,
+                color: ThemeColors.primary,
                 width: 2,
               ),
             ),

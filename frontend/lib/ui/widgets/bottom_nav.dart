@@ -149,7 +149,7 @@ class _ItemButtom extends StatelessWidget {
                 (isIcon)
                     ? Icon(icon,
                         color: (i == index)
-                            ? ThemeColors.darkGreen
+                            ? ThemeColors.primary
                             : isReel
                                 ? Colors.white
                                 : ThemeColors.basic,
@@ -158,7 +158,7 @@ class _ItemButtom extends StatelessWidget {
                         iconString!,
                         height: MediaQuery.of(context).size.width / 15,
                         color: (i == index)
-                            ? ThemeColors.darkGreen
+                            ? ThemeColors.primary
                             : isReel
                                 ? Colors.white
                                 : ThemeColors.basic,

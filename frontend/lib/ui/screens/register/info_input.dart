@@ -336,7 +336,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           activeBgColor: const [
                             Color.fromARGB(40, 204, 221, 90)
                           ],
-                          activeFgColor: ThemeColors.darkGreen,
+                          activeFgColor: ThemeColors.third,
                           inactiveBgColor: Colors.white,
                           borderColor: const [
                             Color.fromARGB(255, 184, 183, 183)
@@ -374,7 +374,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         fontSize: 11,
                         initialLabelIndex: 6,
                         activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
-                        activeFgColor: ThemeColors.darkGreen,
+                        activeFgColor: ThemeColors.third,
                         inactiveBgColor: Colors.white,
                         borderColor: const [Color.fromARGB(255, 184, 183, 183)],
                         borderWidth: 0.45,
@@ -415,7 +415,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       fontSize: 15,
                       initialLabelIndex: 2,
                       activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
-                      activeFgColor: ThemeColors.darkGreen,
+                      activeFgColor: ThemeColors.third,
                       inactiveBgColor: Colors.white,
                       borderColor: const [Color.fromARGB(255, 184, 183, 183)],
                       borderWidth: 0.45,

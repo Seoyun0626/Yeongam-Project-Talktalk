@@ -70,6 +70,7 @@ class _PolicyListPageState extends State<PolicyListPage> {
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
+              backgroundColor: ThemeColors.third,
               appBar: AppBar(
                 backgroundColor: ThemeColors.primary,
                 toolbarHeight: 10,
@@ -255,7 +256,7 @@ class _SearchBar extends State<SearchBar> {
                   policyBloc.add(OnIsSearchPolicyEvent(false));
                 }
               },
-              cursorColor: ThemeColors.darkGreen,
+              cursorColor: ThemeColors.primary,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: '복지 검색',
@@ -264,7 +265,7 @@ class _SearchBar extends State<SearchBar> {
                     icon: const Icon(
                       Icons.tune,
                       size: 20,
-                      color: ThemeColors.darkGreen,
+                      color: ThemeColors.primary,
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -280,7 +281,7 @@ class _SearchBar extends State<SearchBar> {
                           icon: const Icon(
                             Icons.cancel,
                             size: 20,
-                            color: ThemeColors.darkGreen,
+                            color: ThemeColors.primary,
                           ),
                           onPressed: () {
                             setState(() {
@@ -294,7 +295,7 @@ class _SearchBar extends State<SearchBar> {
                       : IconButton(
                           icon: const Icon(
                             Icons.search_rounded,
-                            color: ThemeColors.darkGreen,
+                            color: ThemeColors.primary,
                           ),
                           onPressed: () {},
                         )),
