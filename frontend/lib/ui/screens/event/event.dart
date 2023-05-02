@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/domain/blocs/blocs.dart';
-import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/domain/services/policy_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/helpers/modal_checkLogin.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
-import 'package:login/domain/blocs/policy/policy_bloc.dart';
 
 class EventPage extends StatelessWidget {
   const EventPage({Key? key}) : super(key: key);
@@ -56,12 +53,32 @@ class EventPage extends StatelessWidget {
                         BlocBuilder<AuthBloc, AuthState>(
                           builder: (context, state) {
                             if (state is SuccessAuthentication) {
-                              return const Text('어서오세요!',
-                                  style: TextStyle(fontSize: 30));
+                              return Center(
+                                  child: Column(
+                                children: [
+                                  Image.asset(
+                                    'images/aco2.png',
+                                    width: 300,
+                                    height: 300,
+                                  ),
+                                  const TextCustom(
+                                      text: '준비중입니다!', fontSize: 20),
+                                ],
+                              ));
                             } else {
                               modalCheckLogin().showBottomDialog(context);
-                              return const Text('준비중입니다',
-                                  style: TextStyle(fontSize: 30));
+                              return Center(
+                                  child: Column(
+                                children: [
+                                  Image.asset(
+                                    'images/aco2.png',
+                                    width: 300,
+                                    height: 300,
+                                  ),
+                                  const TextCustom(
+                                      text: '준비중입니다!', fontSize: 20),
+                                ],
+                              ));
                             }
                           },
                         ),

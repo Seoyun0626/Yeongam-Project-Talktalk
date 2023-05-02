@@ -867,6 +867,9 @@ id uniform
 id up
 id useLogo
 id view_tree_lifecycle_owner
+id view_tree_on_back_pressed_dispatcher_owner
+id view_tree_saved_state_registry_owner
+id view_tree_view_model_store_owner
 id withText
 id wrap
 id wrap_content

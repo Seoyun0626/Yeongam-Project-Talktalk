@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/domain/blocs/policy/policy_bloc.dart';
-import 'package:login/ui/screens/home/home_page.dart';
+// import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/screens/intro/checking_login_page.dart';
-import 'package:login/ui/screens/home/home_page.dart';
-import 'package:login/ui/screens/policy/policy_list.dart';
+// import 'package:login/ui/screens/home/home_page.dart';
+// import 'package:login/ui/screens/policy/policy_list.dart';
 
 void main() => runApp(const MyApp());
 

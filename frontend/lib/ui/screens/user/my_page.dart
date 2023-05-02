@@ -55,26 +55,30 @@ class _MyPageState extends State<MyPage> {
             body: SafeArea(
               child: Column(
                 children: [
-                  const SizedBox(height: 30.0),
+                  // const SizedBox(height: 30.0),
                   Expanded(
                     child: ListView(
                       physics: const BouncingScrollPhysics(),
                       children: <Widget>[
-                        const _UserName(),
-                        BtnNaru(
-                          text: '로그아웃',
-                          colorText: Colors.black,
-                          width: size.width,
-                          onPressed: () {
-                            authBloc.add(OnLogOutEvent());
-                            userBloc.add(OnLogOutUser());
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              routeFade(page: const HomePage()),
-                              (_) => false,
-                            );
-                          },
-                        )
+                        Container(
+                            padding: const EdgeInsets.fromLTRB(25, 40, 25, 25),
+                            color: const Color.fromARGB(255, 226, 241, 200),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    _UserName(),
+                                    _LogInOut(),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                const _MyFig(),
+                              ],
+                            )),
                       ],
                     ),
                   )
@@ -126,8 +130,8 @@ class _UserName extends StatelessWidget {
                         text: state.user!.user_name != ''
                             ? state.user!.user_name
                             : '사용자',
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
                       ),
                       const Icon(Icons.arrow_forward_ios_rounded)
                     ],
@@ -146,5 +150,133 @@ class _UserName extends StatelessWidget {
         }
       },
     );
+  }
+}
+
+// 로그인/로그아웃 버튼
+class _LogInOut extends StatelessWidget {
+  const _LogInOut({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final userBloc = BlocProvider.of<UserBloc>(context);
+    final authBloc = BlocProvider.of<AuthBloc>(context);
+
+    return BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
+      if (state is LogOut) {
+        return InkWell(
+          child: Container(
+            // height: 50,
+            padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: ThemeColors.darkGreen,
+                width: 2,
+              ),
+            ),
+            child: const TextCustom(
+              text: '로그인',
+              color: Colors.black,
+              fontSize: 13,
+            ),
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              routeSlide(page: const LoginPage()),
+            );
+          },
+        );
+      } else {
+        return InkWell(
+          child: Container(
+            // height: 50,
+            padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: ThemeColors.darkGreen,
+                width: 2,
+              ),
+            ),
+            child: const TextCustom(
+              text: '로그아웃',
+              color: Colors.black,
+              fontSize: 13,
+            ),
+          ),
+          onTap: () {
+            authBloc.add(OnLogOutEvent());
+            userBloc.add(OnLogOutUser());
+            Navigator.pushAndRemoveUntil(
+              context,
+              routeFade(page: const HomePage()),
+              (_) => false,
+            );
+          },
+        );
+      }
+    });
+  }
+}
+
+// 무화과 개수
+class _MyFig extends StatelessWidget {
+  const _MyFig({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: InkWell(
+      onTap: () {},
+      child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 5,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const TextCustom(
+                text: '나의 무화과',
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  TextCustom(
+                    text: '100000개',
+                    fontSize: 40,
+                    color: ThemeColors.basic,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  Icon(
+                    Icons.apple,
+                    size: 50,
+                  )
+                ],
+              )
+            ],
+          )),
+    ));
   }
 }

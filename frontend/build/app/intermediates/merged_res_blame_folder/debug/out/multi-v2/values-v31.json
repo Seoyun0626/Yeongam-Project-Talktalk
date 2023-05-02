@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Yeongam-project\\frontend\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v31\\values-v31.xml",
+            "outputFile": "C:\\Yeongam\\frontend\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v31\\values-v31.xml",
             "map": [
                 {
-                    "source": "C:\\Yeongam-project\\frontend\\android\\app\\src\\main\\res\\values-v31\\styles.xml",
+                    "source": "C:\\Yeongam\\frontend\\android\\app\\src\\main\\res\\values-v31\\styles.xml",
                     "from": {
                         "startLines": "3,15",
                         "startColumns": "4,4",

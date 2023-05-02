@@ -5,8 +5,8 @@
     android:versionName="1.0.0" >
 
     <uses-sdk
-        android:minSdkVersion="19"
-        android:targetSdkVersion="31" />
+        android:minSdkVersion="21"
+        android:targetSdkVersion="33" />
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Provide required visibility configuration for API level 30 and above -->
     <queries>
@@ -25,6 +25,8 @@
         </intent>
 
         <package android:name="com.kakao.talk" />
+        <package android:name="com.kakao.talk.alpha" />
+        <package android:name="com.kakao.talk.sandbox" />
         <package android:name="com.kakao.onetalk" />
         <package android:name="com.locnall.KimGiSa" />
         <package android:name="com.lguplus.navi" />
@@ -37,6 +39,12 @@
             <data android:scheme="https" />
         </intent>
     </queries>
+
+    <permission
+        android:name="com.example.adolescent_talk.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.adolescent_talk.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:name="android.app.Application"
