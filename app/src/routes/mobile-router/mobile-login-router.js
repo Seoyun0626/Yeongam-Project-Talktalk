@@ -170,17 +170,44 @@ router.get("/signup", function(req, res) {
           message: '성공적으로 등록된 사용자'
         }); // kth
       }
-      else{
+      else if (result == 100){
         console.log('mobile-router signup fail');
         // res.redirect('/mobile/auth/signup');
         res.json({
           resp: false,
           message: '등록 실패'
       }); // kth
-      }
+      } 
+
     } catch(error) {
       console.log('mobile-router signup error:'+error);
     }
   });
+
+
+  router.post("/checkDuplicateID", async function(req,res){
+    try{
+      var result = await mobile_login_controller.checkDuplicateID(req, res);
+      if(result==0){
+        console.log('mobile-login-router checkDuplicateID success');
+        res.json({
+          resp: false,
+          message: '사용가능한 아이디입니다'
+        }); // kth
+      }
+      else if (result == 100){
+        console.log('mobile-login-router checkDuplicateID fail');
+        res.json({
+          resp: true,
+          message: '이미 존재하는 아이디입니다'
+      }); // kth
+      } 
+    } catch(error) {
+      console.log('mobile-router-checkDuplicateID:' + error);
+    }
+
+  });
+
+
   
   module.exports = router;

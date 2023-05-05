@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:login/domain/blocs/blocs.dart';
+import 'package:login/domain/services/auth_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
@@ -30,8 +31,8 @@ class _InfoInputPageState extends State<InfoInputPage> {
   late int youthAge = 5; // 청소년/청소년부모 나이
   late int parentsAge = 6; // 부모 나이
   late int sex = 2; // 성별
-
   final _keyForm = GlobalKey<FormState>();
+  late bool isDuplicate = true;
 
   @override
   void initState() {
@@ -86,21 +87,14 @@ class _InfoInputPageState extends State<InfoInputPage> {
         } else if (state is SuccessUserState) {
           Navigator.pop(context);
           modalSuccess(
-            context, '회원가입이 완료되었습니다',
+            context,
+            '회원가입이 완료되었습니다',
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const LoginPage(),
                 ),
                 (_) => false),
-
-            // Navigator.pushAndRemoveUntil(
-            //     context, routeSlide(page: const LoginPage()), (_) => false)
-            // Navigator.push(
-            //     context,
-            //     routeSlide(
-            //         page: VerifyEmailPage(
-            //             user_email: userEmailController.text.trim())))
           );
         } else if (state is FailureUserState) {
           Navigator.pop(context);
@@ -114,7 +108,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
           elevation: 0,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                color: Colors.black),
+                color: ThemeColors.primary),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -130,8 +124,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                   children: [
                     const TextCustom(
                         text: '회원가입',
-                        letterSpacing: 2.0,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w700,
                         fontSize: 30,
                         color: Colors.black),
                     const SizedBox(height: 50.0),
@@ -143,10 +136,11 @@ class _InfoInputPageState extends State<InfoInputPage> {
                     ),
                     const SizedBox(height: 1.0),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width: size.width / 2,
+                          width: size.width / 1.7,
                           child: TextFieldNaru(
                             controller: userIDController,
                             hintText: '아이디',
@@ -155,13 +149,54 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                          margin: const EdgeInsets.symmetric(horizontal: 0.0),
                           child: BtnNaru(
                             text: '중복확인',
                             fontSize: 15,
                             width: size.width / 5,
-                            colorText: Colors.black,
-                            onPressed: () => Navigator.pop(context), //수정필요
+                            height: 40,
+                            colorText: Colors.white,
+                            onPressed: () async {
+                              if (userIDController.text.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: TextCustom(
+                                      text: '아이디를 입력해주세요',
+                                      color: Colors.white,
+                                    ),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              } else {
+                                isDuplicate = await authServices
+                                    .checkDuplicateID(userIDController.text);
+                                // print(isDuplicate);
+
+                                if (isDuplicate) {
+                                  // 중복 아이디가 존재하는 경우
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: TextCustom(
+                                        text: '이미 존재하는 아이디입니다.',
+                                        color: Colors.white,
+                                      ),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                } else {
+                                  // 중복 아이디가 존재하지 않는 경우
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: TextCustom(
+                                        text: '사용 가능한 아이디입니다.',
+                                        color: Colors.white,
+                                      ),
+                                      backgroundColor: Colors.green,
+                                    ),
+                                  );
+                                }
+                              }
+                            },
                           ),
                         ),
                       ],
@@ -170,7 +205,6 @@ class _InfoInputPageState extends State<InfoInputPage> {
                     const TextCustom(
                       text: '비밀번호를 입력해주세요.',
                       fontSize: 17,
-                      letterSpacing: 1.0,
                       maxLines: 2,
                     ),
                     const SizedBox(height: 1.0),
@@ -185,13 +219,22 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       controller: userAgainPWController,
                       hintText: '비밀번호 확인',
                       isPassword: true,
-                      validator: againpasswordValidator,
+                      validator:
+                          //againpasswordValidator,
+                          (value) {
+                        if (value!.isEmpty) {
+                          return '비밀번호 확인을 입력해주세요.';
+                        }
+                        return ConfirmPasswordValidator.validate(
+                          userPWController.text,
+                          value,
+                        );
+                      },
                     ),
                     const SizedBox(height: 40.0),
                     const TextCustom(
                       text: '이름을 입력해주세요.',
                       fontSize: 17,
-                      letterSpacing: 1.0,
                       maxLines: 2,
                     ),
                     const SizedBox(height: 1.0),
@@ -204,7 +247,6 @@ class _InfoInputPageState extends State<InfoInputPage> {
                     const TextCustom(
                       text: '이메일을 입력해주세요.',
                       fontSize: 17,
-                      letterSpacing: 1.0,
                       maxLines: 2,
                     ),
                     const SizedBox(height: 1.0),
@@ -216,15 +258,13 @@ class _InfoInputPageState extends State<InfoInputPage> {
                     ),
                     const SizedBox(height: 40.0),
                     const TextCustom(
-                        text: '추가정보',
-                        letterSpacing: 2.0,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 30,
+                        text: '추가 정보 입력',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 24,
                         color: Colors.black),
-                    const SizedBox(height: 5.0),
+                    const SizedBox(height: 10.0),
                     const TextCustom(
                         text: '필수가 아닌 항목입니다.',
-                        letterSpacing: 2.0,
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
                         color: Colors.black),
@@ -266,7 +306,6 @@ class _InfoInputPageState extends State<InfoInputPage> {
                     const TextCustom(
                       text: '거주지를 선택해주세요.',
                       fontSize: 17,
-                      letterSpacing: 1.0,
                       maxLines: 2,
                     ),
                     const SizedBox(height: 10.0),
@@ -277,7 +316,6 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           text: '영암군    ',
                           fontSize: 17,
                           color: ThemeColors.basic,
-                          letterSpacing: 1.0,
                           maxLines: 2,
                         ),
                         DropdownButton(
@@ -285,6 +323,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           borderRadius: BorderRadius.circular(4.0),
                           style: const TextStyle(
                             fontSize: 17,
+                            fontFamily: 'NanumSquareRound',
                             color: Colors.black,
                           ),
                           // ignore: unnecessary_null_comparison
@@ -316,14 +355,13 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       const TextCustom(
                         text: '재학 여부를 선택해주세요.',
                         fontSize: 17,
-                        letterSpacing: 1.0,
                         maxLines: 2,
                       ),
                       // const SizedBox(height: 5.0),
                       // const TextCustom(
                       //   text: '청소년, 청소년부모만 해당',
                       //   fontSize: 13,
-                      //   letterSpacing: 1.0,
+
                       //   maxLines: 2,
                       // ),
                       const SizedBox(height: 10.0),
@@ -334,9 +372,10 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           fontSize: 12,
                           initialLabelIndex: 5,
                           activeBgColor: const [
-                            Color.fromARGB(40, 204, 221, 90)
+                            ThemeColors
+                                .third, //Color.fromARGB(40, 204, 221, 90)
                           ],
-                          activeFgColor: ThemeColors.third,
+                          activeFgColor: Colors.black,
                           inactiveBgColor: Colors.white,
                           borderColor: const [
                             Color.fromARGB(255, 184, 183, 183)
@@ -364,7 +403,6 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       const TextCustom(
                         text: '나이를 선택해주세요.',
                         fontSize: 17,
-                        letterSpacing: 1.0,
                         maxLines: 2,
                       ),
                       const SizedBox(height: 10.0),
@@ -373,8 +411,8 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         minHeight: 50.0,
                         fontSize: 11,
                         initialLabelIndex: 6,
-                        activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
-                        activeFgColor: ThemeColors.third,
+                        activeBgColor: const [ThemeColors.third],
+                        activeFgColor: Colors.black,
                         inactiveBgColor: Colors.white,
                         borderColor: const [Color.fromARGB(255, 184, 183, 183)],
                         borderWidth: 0.45,
@@ -405,7 +443,6 @@ class _InfoInputPageState extends State<InfoInputPage> {
                     const TextCustom(
                       text: '성별을 선택해주세요.',
                       fontSize: 17,
-                      letterSpacing: 1.0,
                       maxLines: 2,
                     ),
                     const SizedBox(height: 10.0),
@@ -414,8 +451,8 @@ class _InfoInputPageState extends State<InfoInputPage> {
                       minHeight: 50.0,
                       fontSize: 15,
                       initialLabelIndex: 2,
-                      activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
-                      activeFgColor: ThemeColors.third,
+                      activeBgColor: const [ThemeColors.third],
+                      activeFgColor: Colors.black,
                       inactiveBgColor: Colors.white,
                       borderColor: const [Color.fromARGB(255, 184, 183, 183)],
                       borderWidth: 0.45,
@@ -439,16 +476,29 @@ class _InfoInputPageState extends State<InfoInputPage> {
 
                     const SizedBox(height: 60.0),
                     BtnNaru(
-                        text: '완료',
+                        text: '회원가입하기',
                         width: size.width,
-                        colorText: Colors.black,
-                        // onPressed: () => Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => const RegisterPage1(),
-                        //     )),
+                        colorText: Colors.white,
+                        fontWeight: FontWeight.bold,
                         onPressed: () {
-                          if (_keyForm.currentState!.validate()) {
+                          // print(userRole);
+                          // print(userTypeCode);
+                          // print(youthAge);
+                          // print(parentsAge);
+                          // print(emd);
+                          // print(sex);
+
+                          if (isDuplicate) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: TextCustom(
+                                  text: '아이디 중복 체크를 해주세요',
+                                  color: Colors.white,
+                                ),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          } else if (_keyForm.currentState!.validate()) {
                             userBloc.add(OnRegisterUserEvent(
                                 userIDController.text.trim(),
                                 userNameController.text.trim(),
@@ -473,6 +523,15 @@ class _InfoInputPageState extends State<InfoInputPage> {
         ),
       ),
     );
+  }
+}
+
+class ConfirmPasswordValidator {
+  static String? validate(String? password, String? confirmPassword) {
+    if (password != confirmPassword) {
+      return "비밀번호가 일치하지 않습니다.";
+    }
+    return null;
   }
 }
 
@@ -510,202 +569,3 @@ class NumberFormatter extends TextInputFormatter {
         selection: TextSelection.collapsed(offset: string.length));
   }
 }
-
-// 나이 선택 토글 버튼
-// const List<Widget> youthAgeList = <Widget>[
-//   Text('초'),
-//   Text('중'),
-//   Text('고'),
-//   Text('대'),
-//   Text('기타'),
-// ];
-// const List<Widget> parentsAgeList = <Widget>[
-//   Text('10대'),
-//   Text('20대'),
-//   Text('30대'),
-//   Text('40대'),
-//   Text('50대'),
-//   Text('60대'),
-// ];
-
-// class AgeToggleButton extends StatefulWidget {
-//   final int typeCode;
-//   const AgeToggleButton(this.typeCode, {Key? key}) : super(key: key);
-
-//   @override
-//   State<AgeToggleButton> createState() => _AgeToggleButtonState();
-// }
-
-// class _AgeToggleButtonState extends State<AgeToggleButton> {
-//   final List<bool> _selectedYouthAge = <bool>[true, false, false, false, false];
-//   final List<bool> _selectedParentsAge = <bool>[
-//     true,
-//     false,
-//     false,
-//     false,
-//     false,
-//     false
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final int code = widget.typeCode;
-//     print(code);
-//     final size = MediaQuery.of(context).size;
-//     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-//       if (code == 0 || code == 1) ...[
-//         const TextCustom(
-//           text: '재학 여부를 선택해주세요.',
-//           fontSize: 17,
-//           letterSpacing: 1.0,
-//           maxLines: 2,
-//         ),
-//         const SizedBox(height: 5.0),
-//         const TextCustom(
-//           text: '청소년, 청소년부모만 해당',
-//           fontSize: 13,
-//           letterSpacing: 1.0,
-//           maxLines: 2,
-//         ),
-//         const SizedBox(height: 10.0),
-//         ToggleButtons(
-//           onPressed: (int index) {
-//             setState(() {
-//               // The button that is tapped is set to true, and the others to false.
-//               for (int i = 0; i < _selectedYouthAge.length; i++) {
-//                 _selectedYouthAge[i] = i == index;
-//               }
-//               print('Age $_selectedYouthAge');
-//             });
-//           },
-//           borderRadius: const BorderRadius.all(Radius.circular(8)),
-//           selectedColor: ThemeColors.darkGreen,
-//           selectedBorderColor: ThemeColors.primary,
-//           fillColor: ThemeColors.primary.withOpacity(0.08),
-//           splashColor: ThemeColors.primary.withOpacity(0.12),
-//           hoverColor: ThemeColors.primary.withOpacity(0.04),
-//           color: ThemeColors.basic,
-//           constraints: const BoxConstraints(
-//             minHeight: 40.0,
-//             minWidth: (330 - 108) / 5,
-//           ),
-//           isSelected: _selectedYouthAge,
-//           children: youthAgeList,
-//         )
-//       ] else if (code == 2) ...[
-//         const TextCustom(
-//           text: '나이를 선택해주세요.',
-//           fontSize: 17,
-//           letterSpacing: 1.0,
-//           maxLines: 2,
-//         ),
-//         const SizedBox(height: 10.0),
-//         ToggleButtons(
-//             onPressed: (int index) {
-//               setState(() {
-//                 // The button that is tapped is set to true, and the others to false.
-//                 for (int i = 0; i < _selectedParentsAge.length; i++) {
-//                   _selectedParentsAge[i] = i == index;
-//                 }
-//                 print('Age $_selectedParentsAge');
-//               });
-//             },
-//             borderRadius: const BorderRadius.all(Radius.circular(8)),
-//             selectedColor: ThemeColors.darkGreen,
-//             selectedBorderColor: ThemeColors.primary,
-//             fillColor: ThemeColors.primary.withOpacity(0.08),
-//             splashColor: ThemeColors.primary.withOpacity(0.12),
-//             hoverColor: ThemeColors.primary.withOpacity(0.04),
-//             color: ThemeColors.basic,
-//             constraints: const BoxConstraints(
-//               minHeight: 40.0,
-//               minWidth: 40.0,
-//             ),
-//             isSelected: _selectedParentsAge,
-//             children: parentsAgeList)
-//       ],
-//     ]);
-//   }
-// }
-
-// // 성별 선택 토글 버튼
-// // const List<Widget> sexList = <Widget>[
-// //   Text('남'),
-// //   Text('여'),
-// // ];
-
-// // class SexToggleButton extends StatefulWidget {
-// //   const SexToggleButton({Key? key}) : super(key: key);
-
-// //   @override
-// //   State<SexToggleButton> createState() => _SexToggleButtonState();
-// // }
-
-// // class _SexToggleButtonState extends State<SexToggleButton> {
-//   final List<bool> _selectedSex = <bool>[true, false];
-//   late int sex;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final size = MediaQuery.of(context).size;
-//     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-//       const TextCustom(
-//         text: '성별을 선택해주세요.',
-//         fontSize: 17,
-//         letterSpacing: 1.0,
-//         maxLines: 2,
-//       ),
-//       const SizedBox(height: 10.0),
-//       ToggleSwitch(
-//         minWidth: (MediaQuery.of(context).size.width - 87) / 2,
-//         minHeight: 50.0,
-//         fontSize: 15,
-//         initialLabelIndex: 0,
-//         activeBgColor: const [Color.fromARGB(40, 204, 221, 90)],
-//         activeFgColor: ThemeColors.darkGreen,
-//         inactiveBgColor: Colors.white,
-//         borderColor: const [Color.fromARGB(255, 184, 183, 183)],
-//         borderWidth: 0.45,
-//         activeBorders: [
-//           Border.all(
-//             color: ThemeColors.primary,
-//             width: 1,
-//           )
-//         ],
-//         dividerColor: const Color.fromARGB(255, 184, 183, 183),
-//         totalSwitches: 2,
-//         labels: const ['남자', '여자'],
-//         animate: true,
-//         animationDuration: 200,
-//         cornerRadius: 7,
-//         onToggle: (index) {
-//           print('sex - switched to : $index');
-//           sex = index!;
-//         },
-//       ),
-//       // ToggleButtons(
-//       //     onPressed: (int index) {
-//       //       setState(() {
-//       //         // The button that is tapped is set to true, and the others to false.
-//       //         for (int i = 0; i < _selectedSex.length; i++) {
-//       //           _selectedSex[i] = i == index;
-//       //         }
-//       //         print('Age $_selectedSex');
-//       //       });
-//       //     },
-//       //     borderRadius: const BorderRadius.all(Radius.circular(8)),
-//       //     selectedColor: ThemeColors.darkGreen,
-//       //     selectedBorderColor: ThemeColors.primary,
-//       //     fillColor: ThemeColors.primary.withOpacity(0.08),
-//       //     splashColor: ThemeColors.primary.withOpacity(0.12),
-//       //     hoverColor: ThemeColors.primary.withOpacity(0.04),
-//       //     color: ThemeColors.basic,
-//       //     constraints: const BoxConstraints(
-//       //       minHeight: 40.0,
-//       //       minWidth: 80,
-//       //     ),
-//       //     isSelected: _selectedSex,
-//       //     children: sexList)
-//     ]);
-//   }
-// }

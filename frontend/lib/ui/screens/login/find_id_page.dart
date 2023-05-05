@@ -90,7 +90,8 @@ class _FindIDPageState extends State<FindIDPage> {
                 const SizedBox(height: 70.0),
                 BtnNaru(
                   text: '아이디 찾기',
-                  colorText: Colors.black,
+                  colorText: Colors.white,
+                  fontWeight: FontWeight.bold,
                   width: size.width,
                   onPressed: () {},
                 ),

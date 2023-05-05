@@ -18,6 +18,8 @@ class ScrapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -87,8 +89,8 @@ class ScrapPage extends StatelessWidget {
                               children: [
                                 Image.asset(
                                   'images/aco3.png',
-                                  width: 300,
-                                  height: 300,
+                                  // width: 300,
+                                  height: size.height / 3, //300,
                                 ),
                                 const TextCustom(
                                     text: '스크랩한 정책이 없어요', fontSize: 20),

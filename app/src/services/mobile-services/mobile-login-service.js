@@ -73,7 +73,7 @@ exports.signUp = async function(req, res) {
     
     if(user_name=='' || user_email=='' || userpw=='' || userpw2=='') {
       resultcode=100;
-      console.log('dataif-service update: empty data');
+      console.log('필수 정보를 입력해주세요.');
       return resultcode;
     }
     if(userpw != userpw2) {
@@ -92,7 +92,7 @@ exports.signUp = async function(req, res) {
     await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
     
   } catch(error) {
-    console.log('login-service SignUp:'+error);
+    console.log('mobile-login-service SignUp:'+error);
   } finally {
     if (conn) conn.end();
   }
@@ -100,6 +100,34 @@ exports.signUp = async function(req, res) {
   return resultcode;
 };
 
+
+exports.checkDuplicateID = async function(req, res) {
+  var conn;
+  var resultcode = 0;
+
+  try {
+    conn = await db.getConnection();
+    console.log('mobile-login-service checkDuplicateID');
+    var id = req.body.userid;
+    console.log(id);
+    var query = "SELECT userid FROM webdb.tb_user WHERE userid=?;"
+    var checkdb = await conn.query(query, [id]);
+    console.log(checkdb.length);
+
+    if (checkdb.length > 0){
+      resultcode = 100;
+      return resultcode;
+    } else {
+      return resultcode;
+    }
+
+
+  } catch(err){
+    console.log('mobile-login-service checkDuplicateId:' + err);
+  } finally{
+    if(conn) conn.end();
+  }
+};
 
 
 

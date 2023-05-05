@@ -105,7 +105,8 @@ class _FindPasswordPageState extends State<FindPasswordPage> {
                 const SizedBox(height: 70.0),
                 BtnNaru(
                   text: '비밀번호 찾기',
-                  colorText: Colors.black,
+                  colorText: Colors.white,
+                  fontWeight: FontWeight.bold,
                   width: size.width,
                   onPressed: () {},
                 ),

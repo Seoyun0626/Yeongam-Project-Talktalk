@@ -8,6 +8,7 @@ import 'package:login/ui/screens/login/find_id_page.dart';
 import 'package:login/ui/screens/login/find_pw_page.dart';
 import 'package:login/ui/screens/register/start_register.dart';
 import 'package:login/ui/screens/login/verify_email_page.dart';
+import 'package:login/ui/screens/register/terms_agree.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
@@ -79,7 +80,16 @@ class _LoginPageState extends State<LoginPage> {
           leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_rounded,
                   color: Colors.black),
-              onPressed: () => Navigator.pop(context)),
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                } else {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomePage()));
+                }
+              }),
         ),
         body: SafeArea(
           child: Padding(
@@ -92,18 +102,19 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 30.0),
-                    const TextCustom(
-                        text: '청소년톡talk',
-                        letterSpacing: 2.0,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 30,
-                        color: Colors.black),
+                    const Text('청소년 톡talk',
+                        style: TextStyle(
+                          color: ThemeColors.primary,
+                          fontFamily: 'CookieRun',
+                          fontSize: 20,
+                        )),
                     const SizedBox(height: 10.0),
                     const TextCustom(
-                      text: '로그인',
-                      letterSpacing: 2.0,
+                      text: '나를 위한 맞춤 정책을\n관리해보세요',
+                      maxLines: 2,
+                      height: 1.5,
                       fontWeight: FontWeight.w400,
-                      fontSize: 30,
+                      fontSize: 24,
                       color: Colors.black,
                     ),
                     const SizedBox(height: 50.0), // 아이디
@@ -123,8 +134,11 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 40.0),
                     BtnNaru(
                       text: '로그인',
+                      fontSize: 20,
+                      height: 48,
                       width: size.width,
-                      colorText: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      colorText: Colors.white,
                       onPressed: () {
                         if (_keyForm.currentState!.validate()) {
                           authBloc.add(OnLoginEvent(idController.text.trim(),
@@ -132,24 +146,17 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       },
                     ),
-                    const SizedBox(height: 40.0),
-
-                    SizedBox(
-                      height: 50,
+                    const SizedBox(height: 20.0),
+                    BtnNaru(
+                      text: '카카오톡으로 계속하기',
+                      height: 48,
+                      fontSize: 20,
                       width: size.width,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor:
-                                const Color.fromRGBO(247, 225, 17, 1),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0))),
-                        child: const TextCustom(
-                            text: '카카오톡으로 로그인하기',
-                            color: Colors.black,
-                            fontSize: 20),
-                        onPressed: () => Navigator.push(
-                            context, routeSlide(page: const LoginPage())),
-                      ),
+                      fontWeight: FontWeight.bold,
+                      colorText: Colors.black,
+                      // border: Border.all()
+                      backgroundColor: Colors.yellow,
+                      onPressed: () {},
                     ),
 
                     const SizedBox(height: 60.0), // 비밀번호 찾기
@@ -158,16 +165,27 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
-                              onTap: () => Navigator.push(context,
-                                  routeSlide(page: const FindIDPage())),
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const FindIDPage(),
+                                  )),
                               child: const TextCustom(text: '아이디 찾기')),
                           InkWell(
-                              onTap: () => Navigator.push(context,
-                                  routeSlide(page: const FindPasswordPage())),
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FindPasswordPage(),
+                                  )),
                               child: const TextCustom(text: '비밀번호 찾기')),
                           InkWell(
-                              onTap: () => Navigator.push(context,
-                                  routeSlide(page: const StartRegisterPage())),
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const termsAgreePage(),
+                                  )),
                               child: const TextCustom(text: '회원가입'))
                         ]),
                   ],

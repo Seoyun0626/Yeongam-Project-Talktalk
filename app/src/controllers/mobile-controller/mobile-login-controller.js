@@ -50,9 +50,18 @@ exports.signUp = async function(req, res) {
     var result = await mobile_login_service.signUp(req);
     return result;
   } catch(error) {
-    console.log('login-controller login_check:'+error);
+    console.log('mobile-login-controller login_check:'+error);
   }
 };
+
+exports.checkDuplicateID = async function(req, res){
+  try{
+    var result = await mobile_login_service.checkDuplicateID(req);
+    return result;
+  } catch(error) {
+    console.log('mobile-login-controller checkDuplicateID:'+error);
+  }
+}
 
 
 /*

@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values-v31/values-v31.xml",
+            "map": [
+                {
+                    "source": "/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/res/values-v31/styles.xml",
+                    "from": {
+                        "startLines": "3,15",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,899",
+                        "endLines": "8,17",
+                        "endColumns": "12,12",
+                        "endOffsets": "548,1063"
+                    },
+                    "to": {
+                        "startLines": "2,8",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,435",
+                        "endLines": "7,10",
+                        "endColumns": "12,12",
+                        "endOffsets": "430,599"
+                    }
+                }
+            ]
+        }
+    ]
+}

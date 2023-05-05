@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/helpers/get_mobile_code_data.dart';
 import 'package:login/ui/screens/home/home_page.dart';
@@ -71,9 +72,13 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Image.asset(
-            'images/splash.png',
+            'images/Splash.jpg',
             fit: BoxFit.fill,
           ),
+          // child: SvgPicture.asset(
+          //   'images/Splash.svg',
+          //   fit: BoxFit.fill,
+          // )
 
           // decoration: const BoxDecoration(
           //   color: Colors.red,

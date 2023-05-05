@@ -1,16 +1,8 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 import 'package:login/domain/models/response/response_terms.dart';
-import 'package:login/domain/services/auth_services.dart';
 import 'package:login/domain/services/dataif_services.dart';
-import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/screens/login/login_page.dart';
-import 'package:login/ui/screens/register/user_type.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
-
-import 'package:login/ui/helpers/animation_route.dart';
 
 class termsDetailPage extends StatefulWidget {
   final int termsCode;
@@ -22,6 +14,7 @@ class termsDetailPage extends StatefulWidget {
 
 class _termsDetailPageState extends State<termsDetailPage> {
   late Future<ResponseTerms> _termsDataFuture;
+  late String title = '';
 
   @override
   void initState() {
@@ -34,6 +27,7 @@ class _termsDetailPageState extends State<termsDetailPage> {
     final int termsCode = widget.termsCode;
     // print(termsCode);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -49,8 +43,10 @@ class _termsDetailPageState extends State<termsDetailPage> {
             String content = '';
             if (termsCode == 0) {
               content = snapshot.data!.termsData.first.terms;
+              title = '회원가입 이용 약관';
             } else if (termsCode == 1) {
               content = snapshot.data!.termsData.first.privacy;
+              title = '개인 정보 처리 방침';
             }
             return ListView(
               children: [
@@ -59,18 +55,20 @@ class _termsDetailPageState extends State<termsDetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const TextCustom(
-                        text: '서비스 이용약관',
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
+                      TextCustom(
+                        text: title,
+                        color: ThemeColors.primary,
+                        fontWeight: FontWeight.w600,
                         fontSize: 20,
                       ),
                       const SizedBox(
-                        height: 50.0,
+                        height: 30.0,
                       ),
                       TextCustom(
                         text: content,
+                        maxLines: content.length,
                         fontSize: 12,
+                        height: 2,
                       )
                     ],
                   ),

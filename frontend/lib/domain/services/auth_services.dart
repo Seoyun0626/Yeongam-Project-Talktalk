@@ -16,6 +16,15 @@ class AuthServices {
     return ResponseLogin.fromJson(jsonDecode(resp.body));
   }
 
+  Future<bool> checkDuplicateID(String userid) async {
+    final resp = await http.post(
+      Uri.parse('${Environment.urlApi}/login/checkDuplicateID'),
+      headers: {'Accept': 'application/json'},
+      body: {'userid': userid},
+    );
+    return ResponseLogin.fromJson(jsonDecode(resp.body)).resp;
+  }
+
   Future<ResponseLogin> renewLogin() async {
     final token = await secureStorage.readToken();
 

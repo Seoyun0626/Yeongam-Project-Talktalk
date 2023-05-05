@@ -8,6 +8,7 @@ class BtnNaru extends StatelessWidget {
   final Color colorText;
   final Color backgroundColor;
   final double fontSize;
+  final FontWeight fontWeight;
   final VoidCallback? onPressed;
 
   const BtnNaru(
@@ -15,10 +16,11 @@ class BtnNaru extends StatelessWidget {
       required this.text,
       required this.width,
       this.onPressed,
-      this.height = 50,
-      this.border = 8.0,
+      this.height = 60,
+      this.border = 30.0,
       this.colorText = Colors.white,
       this.fontSize = 21,
+      this.fontWeight = FontWeight.w400,
       this.backgroundColor = ThemeColors.primary})
       : super(key: key);
 
@@ -31,9 +33,15 @@ class BtnNaru extends StatelessWidget {
         style: TextButton.styleFrom(
             backgroundColor: backgroundColor,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(border))),
+              borderRadius: BorderRadius.circular(border),
+            )),
         onPressed: onPressed,
-        child: TextCustom(text: text, color: colorText, fontSize: fontSize),
+        child: TextCustom(
+          text: text,
+          color: colorText,
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+        ),
       ),
     );
   }

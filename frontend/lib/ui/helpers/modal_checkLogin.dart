@@ -39,7 +39,7 @@ class modalCheckLogin {
       height: MediaQuery.of(context).size.height / 4,
       width: double.maxFinite,
       clipBehavior: Clip.none,
-      padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -54,7 +54,7 @@ class modalCheckLogin {
             _buildCancelIcon(context),
             const SizedBox(height: 10),
             _buildContinueText(),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             _buildExtraText(),
             const SizedBox(height: 16),
             _buildContinueButton(context),
@@ -99,7 +99,7 @@ class modalCheckLogin {
 
   Widget _buildContinueButton(BuildContext context) {
     return Container(
-      height: 45,
+      height: MediaQuery.of(context).size.height / 20,
       width: double.maxFinite,
       decoration: const BoxDecoration(
         color: ThemeColors.primary,

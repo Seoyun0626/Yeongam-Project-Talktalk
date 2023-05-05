@@ -6,21 +6,23 @@ class TextFieldNaru extends StatelessWidget {
   final bool isPassword;
   final TextInputType keyboardType;
   final FormFieldValidator<String>? validator;
+  final String? errorText;
 
-  const TextFieldNaru(
-      {Key? key,
-      required this.controller,
-      this.hintText,
-      this.isPassword = false,
-      this.keyboardType = TextInputType.text,
-      this.validator})
-      : super(key: key);
+  const TextFieldNaru({
+    Key? key,
+    required this.controller,
+    this.hintText,
+    this.isPassword = false,
+    this.keyboardType = TextInputType.text,
+    this.validator,
+    this.errorText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: const TextStyle(fontFamily: 'NanumSquare'),
+      style: const TextStyle(fontFamily: 'NanumSquareRound'),
       // style: GoogleFonts.getFont('Roboto', fontSize: 18),
       cursorColor: ThemeColors.secondary,
       obscureText: isPassword,
@@ -33,6 +35,7 @@ class TextFieldNaru extends StatelessWidget {
           borderSide: BorderSide(color: ThemeColors.primary),
         ),
         hintText: hintText,
+        errorText: errorText,
       ),
       validator: validator,
     );

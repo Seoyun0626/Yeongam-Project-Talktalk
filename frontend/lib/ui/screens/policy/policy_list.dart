@@ -622,11 +622,26 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
 class _ListWithoutPolicy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
-    return const Center(
-      child: TextCustom(text: "등록된 정책이 없어요."),
-    );
+    return Container(
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'images/aco4.png',
+                height: size.height / 4,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const TextCustom(text: '등록된 정책이 없어요', fontSize: 20),
+            ],
+          ),
+        ));
   }
 }
 

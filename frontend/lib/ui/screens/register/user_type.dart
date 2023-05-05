@@ -7,33 +7,8 @@ import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:login/ui/helpers/animation_route.dart';
 
-// class typeCodes {
-//   // final String title;
-//   // final String description;
-//   final List<int> codes = [0, 1, 2];
-
-//   // Todo(this.title, this.description);
-//   typeCodes(List<int> codes);
-// }
-
-// void main() {
-//   runApp(MaterialApp(
-//     title: 'Passing Data',
-//     home: userTypePage(),
-//   ));
-// }
-
 class userTypePage extends StatelessWidget {
-  // final List<typeCodes> code;
-
   const userTypePage({Key? key}) : super(key: key);
-  // static final todos = List<Todo>.generate(
-  //   3,
-  //   (i) => Todo(
-  //     'Todo $i',
-  //     'A description of what needs to be done for Todo $i',
-  //   ),
-  // );
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +21,7 @@ class userTypePage extends StatelessWidget {
           elevation: 0,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                color: Colors.black),
+                color: ThemeColors.primary),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -63,14 +38,6 @@ class userTypePage extends StatelessWidget {
                 ),
           ),
 
-          // const TextCustom(
-          //   text: '앱 이름',
-          //   letterSpacing: 2.0,
-          //   color: ThemeColors.primary,
-          //   fontWeight: FontWeight.w100,
-          //   fontSize: 30,
-          //   textAlign: TextAlign.left,
-          // ),
           const TextCustom(
             text: '회원가입',
             letterSpacing: 2.0,
@@ -85,50 +52,47 @@ class userTypePage extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: TextCustom(
-              text: ('회원 유형에 따라 가입 절차가 다르니'),
-              // textAlign : TextAlign.center,
+              text: ('회원 유형에 따라 가입 절차가 다르니\n본인에 해당하는 회원 유형을 선택해주세요.'),
+              textAlign: TextAlign.center,
               maxLines: 2,
               fontSize: 17,
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextCustom(
-              text: ('본인에 해당하는 회원 유형을 선택해주세요.'),
-              // textAlign : TextAlign.center,
-              maxLines: 2,
-              fontSize: 17,
+              height: 1.5,
             ),
           ),
           const SizedBox(height: 50.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50.0),
             child: SizedBox(
-              height: 60,
+              height: 80,
               width: size.width,
               child: TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: ThemeColors.primary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const TextCustom(
-                        text: '청소년',
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700),
-                    const TextCustom(
-                        text: '24세 이하', color: Colors.black, fontSize: 15),
-                  ],
+                  backgroundColor: Colors.transparent, //ThemeColors.primary,
+                  shape: RoundedRectangleBorder(
+                      side: const BorderSide(
+                        color: ThemeColors.primary, // your color here
+                        width: 3,
+                      ),
+                      borderRadius: BorderRadius.circular(30.0)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      TextCustom(
+                          text: '청소년',
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700),
+                      TextCustom(
+                          text: '24세 이하', color: Colors.black, fontSize: 15),
+                    ],
+                  ),
                 ),
                 onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      // builder: (context) => termsAgreePage(todo: todos[0]),
-                      // builder: (context) => const RegisterPage2(),
-
                       builder: (context) => const InfoInputPage(0),
                     )),
               ),
@@ -139,24 +103,37 @@ class userTypePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50.0),
             child: SizedBox(
-              height: 60,
+              height: 80,
               width: size.width,
               child: TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: ThemeColors.primary,
+                    backgroundColor: Colors.transparent, //ThemeColors.primary,
+                    // surfaceTintColor: Colors.yellow,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const TextCustom(
-                        text: '청소년부모',
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700),
-                    const TextCustom(
-                        text: '24세 이하의 부모', color: Colors.black, fontSize: 15),
-                  ],
+                        side: const BorderSide(
+                          color: ThemeColors.primary, // your color here
+                          width: 3,
+                        ),
+                        borderRadius: BorderRadius.circular(30.0))),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      TextCustom(
+                          text: '청소년부모',
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700),
+                      TextCustom(
+                          text: '24세 이하의\n청소년 부모',
+                          maxLines: 2,
+                          color: Colors.black,
+                          height: 1.5,
+                          textAlign: TextAlign.right,
+                          fontSize: 15),
+                    ],
+                  ),
                 ),
                 onPressed: () => Navigator.push(
                     context,
@@ -172,26 +149,37 @@ class userTypePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50.0),
             child: SizedBox(
-                height: 60,
+                height: 80,
                 width: size.width,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                      backgroundColor: ThemeColors.primary,
+                      backgroundColor:
+                          Colors.transparent, //ThemeColors.primary,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0))),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const TextCustom(
-                          text: '학부모',
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),
-                      const TextCustom(
-                          text: '재학 중인 자녀를 둔 학부모',
-                          color: Colors.black,
-                          fontSize: 15),
-                    ],
+                          side: const BorderSide(
+                            color: ThemeColors.primary, // your color here
+                            width: 3,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        TextCustom(
+                            text: '학부모',
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
+                        TextCustom(
+                            text: '자녀를 둔\n25세 이상의 학부모',
+                            maxLines: 2,
+                            textAlign: TextAlign.right,
+                            height: 1.5,
+                            color: Colors.black,
+                            fontSize: 15),
+                      ],
+                    ),
                   ),
                   onPressed: () => Navigator.push(
                       context,

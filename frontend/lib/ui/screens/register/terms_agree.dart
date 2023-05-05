@@ -22,7 +22,7 @@ class termsAgreePage extends StatefulWidget {
 class _termsAgreePageState extends State<termsAgreePage> {
   final allChecked = CheckBoxModal(title: '약관 전체 동의', required: '');
   final checkboxList = [
-    CheckBoxModal(title: '회원 가입 약관 동의', required: '(필수)', code: 0),
+    CheckBoxModal(title: '회원가입 약관 동의', required: '(필수)', code: 0),
     CheckBoxModal(title: '개인 정보 처리 방침 동의', required: '(필수)', code: 1),
     // CheckBoxModal(title: '마케팅 정보 수신 동의'),
   ];
@@ -31,131 +31,125 @@ class _termsAgreePageState extends State<termsAgreePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         // title: const Text("약관 동의"),
         elevation: 0,
         leading: IconButton(
-          icon:
-              const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+              color: ThemeColors.primary),
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding:
-                // const EdgeInsets.symmetric(horizontal: 50.0, vertical: 40.0),
-                const EdgeInsets.all(40),
-            child: SingleChildScrollView(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const TextCustom(
-                  text: '약관동의',
-                  letterSpacing: 2.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 30,
-                ),
-                const SizedBox(
-                  height: 50.0,
-                ),
-                ListTile(
-                  onTap: () => onAllClicked(allChecked),
-                  leading: Checkbox(
-                    value: allChecked.value,
-                    // checkColor: ThemeColors.basic,
-                    activeColor: ThemeColors.primary,
-                    onChanged: (value) {
-                      onAllClicked(allChecked);
-                    },
-                  ),
-                  title: TextCustom(
-                      text: allChecked.title,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-                const Divider(),
-                ...checkboxList
-                    .map((item) => ListTile(
-                          onTap: () => onItemClicked(item),
-                          leading: Checkbox(
-                            checkColor: Colors.white,
-                            activeColor: ThemeColors.primary,
-                            value: item.value,
-                            onChanged: (value) {
-                              onItemClicked(item);
-                            },
-                          ),
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: TextCustom(
-                                  text: item.title,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: TextCustom(
-                                  text: item.required,
-                                  fontSize: 18,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              IconButton(
-                                  icon: const Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    size: 18,
-                                    color: ThemeColors.basic,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => termsDetailPage(
-                                            termsCode: item.code,
-                                          ),
-                                        ));
-                                  }),
-                            ],
-                          ),
-                        ))
-                    .toList(),
-                const SizedBox(
-                  height: 20,
-                ),
-                BtnNaru(
-                  text: '완료',
-                  width: 350,
-                  height: 40,
+      body: Padding(
+          padding:
+              // const EdgeInsets.symmetric(horizontal: 50.0, vertical: 40.0),
+              const EdgeInsets.all(40),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const TextCustom(
+              text: '약관동의',
+              letterSpacing: 2.0,
+              color: Colors.black,
+              fontWeight: FontWeight.w700,
+              fontSize: 30,
+            ),
+            const SizedBox(
+              height: 50.0,
+            ),
+            ListTile(
+              onTap: () => onAllClicked(allChecked),
+              leading: Checkbox(
+                value: allChecked.value,
+                // checkColor: ThemeColors.basic,
+                activeColor: ThemeColors.primary,
+                onChanged: (value) {
+                  onAllClicked(allChecked);
+                },
+              ),
+              title: TextCustom(
+                  text: allChecked.title,
                   fontSize: 18,
-                  colorText: Colors.black,
-                  onPressed: () {
-                    print('약관 전체 동의');
-                    print(completeAgree);
-                    if (completeAgree == true) {
-                      // DB 저장 : tb_terms
-
-                      // 다음 페이지
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const userTypePage(),
-                          ));
-                    } else {
-                      modalWarning(context, '약관에 동의해주세요');
-                    }
-                  },
-                ),
-              ],
-            )),
-          ),
-        ],
-      ),
+                  fontWeight: FontWeight.bold),
+            ),
+            const Divider(),
+            ...checkboxList
+                .map((item) => ListTile(
+                      onTap: () => onItemClicked(item),
+                      leading: Checkbox(
+                        checkColor: Colors.white,
+                        activeColor: ThemeColors.primary,
+                        value: item.value,
+                        onChanged: (value) {
+                          onItemClicked(item);
+                        },
+                      ),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: TextCustom(
+                              text: item.title,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextCustom(
+                              text: item.required,
+                              fontSize: 18,
+                              color: Colors.red,
+                            ),
+                          ),
+                          IconButton(
+                              icon: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 18,
+                                color: ThemeColors.basic,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => termsDetailPage(
+                                        termsCode: item.code,
+                                      ),
+                                    ));
+                              }),
+                        ],
+                      ),
+                    ))
+                .toList(),
+            const SizedBox(
+              height: 20,
+            ),
+            BtnNaru(
+              text: '다음',
+              width: 350,
+              height: 50,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              colorText: Colors.white,
+              // backgroundColor:
+              //     completeAgree ? ThemeColors.primary : Colors.grey,
+              onPressed: () {
+                print('약관 전체 동의');
+                // print(completeAgree);
+                if (completeAgree == true) {
+                  // 다음 페이지
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const userTypePage(),
+                      ));
+                } else {
+                  modalWarning(context, '약관에 동의해주세요');
+                }
+              },
+            ),
+          ])),
     );
   }
 

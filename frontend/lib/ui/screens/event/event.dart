@@ -12,6 +12,8 @@ class EventPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -73,8 +75,8 @@ class EventPage extends StatelessWidget {
                                 children: [
                                   Image.asset(
                                     'images/aco2.png',
-                                    width: 300,
-                                    height: 300,
+                                    // width: 300,
+                                    height: size.height / 3,
                                   ),
                                   const TextCustom(
                                       text: '준비중입니다!', fontSize: 20),

@@ -40,7 +40,7 @@ class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
           elevation: 0,
           title: const TextCustom(
             text: '상세 검색 조건',
-            color: Colors.black,
+            color: ThemeColors.basic,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),

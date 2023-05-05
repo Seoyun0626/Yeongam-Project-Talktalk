@@ -1,28 +1,20 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
-import 'package:login/domain/blocs/user/user_bloc.dart';
 import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/domain/services/code_service.dart';
 import 'package:login/domain/services/policy_services.dart';
 import 'package:login/ui/screens/policy/policy_detail.dart';
 import 'package:login/ui/screens/policy/policy_list.dart';
-import 'package:login/ui/screens/policy/search_filter.dart';
 import 'package:login/ui/screens/user/my_page.dart';
-import 'package:login/ui/screens/user/privacy_setting_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/services/banner_services.dart';
 import 'package:login/ui/screens/login/login_page.dart';
-import 'package:login/ui/screens/policy/policy_search.dart';
-import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
-import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/ui/screens/policy/policy_detail.dart';
-import 'package:login/domain/services/policy_services.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -75,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                     //     ));
 
                     if (authBloc.state is LogOut) {
-                      // 로그인 상태일 경우 ProfilePage로 이동
+                      // 로그인 상태일 경우 LoginPage로 이동
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -212,7 +204,9 @@ class _HomePageState extends State<HomePage> {
                           return ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: 5,
+                              itemCount: snapshot.data!.length > 5
+                                  ? 5
+                                  : snapshot.data!.length,
                               itemBuilder: (_, i) => livePopularPolicy(
                                   // codeData: codeData,
                                   ranking: i,
@@ -456,12 +450,25 @@ class _ListWithoutPopularPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
-        TextCustom(text: "등록된 정책이 없어요."),
-      ],
-    );
+    return Container(
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'images/aco4.png',
+                width: 100,
+                height: 100,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const TextCustom(text: '등록된 정책이 없어요', fontSize: 20),
+            ],
+          ),
+        ));
   }
 }
 
@@ -473,9 +480,9 @@ class _ShimerLoadingPopularPolicy extends StatelessWidget {
     return Column(
       children: const [
         ShimmerNaru(),
-        SizedBox(height: 10.0),
+        SizedBox(height: 5.0),
         ShimmerNaru(),
-        SizedBox(height: 10.0),
+        SizedBox(height: 5.0),
         ShimmerNaru(),
       ],
     );

@@ -239,7 +239,8 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                 color: Colors.white,
                 child: BtnNaru(
                   text: '신청하기',
-                  colorText: Colors.black,
+                  colorText: Colors.white,
+                  fontWeight: FontWeight.bold,
                   width: size,
                   onPressed: () {
                     launchUrl(Uri.parse(policyLink));
