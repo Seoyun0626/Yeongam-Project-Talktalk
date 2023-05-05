@@ -9,7 +9,7 @@ class ShimmerNaru extends StatelessWidget {
       baseColor: Colors.white,
       highlightColor: const Color(0xFFF3F3F3),
       child: Container(
-        height: 100,
+        height: 200,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(color: Colors.grey[200]),
       ),

@@ -92,8 +92,8 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => User(
       uid: json["uid"] ?? '',
-      userid: json["user_id"] ?? '',
-      userpw: json["password"] ?? '',
+      userid: json["userid"] ?? '',
+      userpw: json["userpw"] ?? '',
       user_name: json["user_name"] ?? '',
       user_email: json["user_email"] ?? '',
       user_type: json["user_type"] ?? '',
@@ -106,8 +106,8 @@ class User {
 
   Map<String, dynamic> toJson() => {
         "uid": uid,
-        "user_id": userid,
-        "password": userpw,
+        "userid": userid,
+        "userpw": userpw,
         "user_name": user_name,
         "user_email": user_email,
         "user_type": user_type,

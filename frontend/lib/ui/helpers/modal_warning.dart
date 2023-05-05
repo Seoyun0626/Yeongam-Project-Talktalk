@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
 void modalWarning(BuildContext context, String text) {
@@ -14,10 +15,13 @@ void modalWarning(BuildContext context, String text) {
           children: [
             Row(
               children: const [
-                TextCustom(
-                    text: '청소년 톡Talk',
-                    color: Colors.amber,
-                    fontWeight: FontWeight.w500),
+                Text(
+                  '청소년 톡Talk',
+                  style: TextStyle(
+                      color: ThemeColors.primary,
+                      fontFamily: 'CookieRun',
+                      fontWeight: FontWeight.w500),
+                ),
                 // TextCustom(text: ' 오류 발생', fontWeight: FontWeight.w500),
               ],
             ),
@@ -30,11 +34,11 @@ void modalWarning(BuildContext context, String text) {
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
                       begin: Alignment.centerLeft,
-                      colors: [Colors.white, Colors.amber])),
+                      colors: [Colors.white, ThemeColors.primary])),
               child: Container(
                 margin: const EdgeInsets.all(10.0),
                 decoration: const BoxDecoration(
-                    shape: BoxShape.circle, color: Colors.amber),
+                    shape: BoxShape.circle, color: ThemeColors.primary),
                 child: const Icon(Icons.priority_high_rounded,
                     color: Colors.white, size: 38),
               ),
@@ -49,10 +53,10 @@ void modalWarning(BuildContext context, String text) {
                 height: 35,
                 width: 150,
                 decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(5.0)),
+                    color: ThemeColors.primary,
+                    borderRadius: BorderRadius.circular(10.0)),
                 child: const TextCustom(
-                    text: '확인', fontSize: 17, color: Colors.black87),
+                    text: '확인', fontSize: 17, color: Colors.white),
               ),
             )
           ],

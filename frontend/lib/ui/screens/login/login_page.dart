@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/home/home_page.dart';
@@ -123,6 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: '아이디 입력',
                       // keyboardType: TextInputType.emailAddress,
                       // validator: validatedEmail,
+                      validator: RequiredValidator(errorText: '아이디를 입력해주세요'),
                     ),
                     const SizedBox(height: 10.0), // 비밀번호
                     TextFieldNaru(

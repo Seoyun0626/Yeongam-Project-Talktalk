@@ -110,7 +110,7 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                           }
 
                                           return !snapshot.hasData
-                                              ? const _ShimerLoading()
+                                              ? _ListWithoutPolicySearch() //const _ShimerLoading()
                                               : ListView.builder(
                                                   physics:
                                                       const BouncingScrollPhysics(),
@@ -649,10 +649,23 @@ class _ListWithoutPolicy extends StatelessWidget {
 class _ListWithoutPolicySearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
-    return const Center(
-      child: TextCustom(text: "등록된 정책이 없어요."),
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'images/aco4.png',
+            height: size.height / 4,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const TextCustom(text: '등록된 정책이 없어요', fontSize: 20),
+        ],
+      ),
     );
   }
 }

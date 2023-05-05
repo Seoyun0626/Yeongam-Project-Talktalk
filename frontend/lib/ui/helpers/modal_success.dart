@@ -17,11 +17,13 @@ void modalSuccess(BuildContext context, String text,
           children: [
             Row(
               children: const [
-                TextCustom(
-                    text: '청소년 톡Talk',
-                    color: ThemeColors.primary,
-                    fontWeight: FontWeight.w500),
-                TextCustom(text: 'Mobile App', fontWeight: FontWeight.w500),
+                Text(
+                  '청소년 톡Talk',
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontFamily: 'CookieRun',
+                      fontWeight: FontWeight.w500),
+                ),
               ],
             ),
             const Divider(),
@@ -33,11 +35,11 @@ void modalSuccess(BuildContext context, String text,
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
                       begin: Alignment.centerLeft,
-                      colors: [Colors.white, ThemeColors.primary])),
+                      colors: [Colors.white, Colors.green])),
               child: Container(
                 margin: const EdgeInsets.all(10.0),
                 decoration: const BoxDecoration(
-                    shape: BoxShape.circle, color: ThemeColors.primary),
+                    shape: BoxShape.circle, color: Colors.green),
                 child: const Icon(Icons.check, color: Colors.white, size: 38),
               ),
             ),
@@ -51,7 +53,7 @@ void modalSuccess(BuildContext context, String text,
                 height: 35,
                 width: 150,
                 decoration: BoxDecoration(
-                    color: ThemeColors.primary,
+                    color: Colors.green,
                     borderRadius: BorderRadius.circular(5.0)),
                 child: const TextCustom(
                     text: '확인', color: Colors.white, fontSize: 17),

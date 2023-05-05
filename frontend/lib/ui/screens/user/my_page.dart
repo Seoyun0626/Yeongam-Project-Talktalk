@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_template.dart';
 import 'package:login/domain/models/response/response_user.dart';
 import 'package:login/domain/services/policy_services.dart';
@@ -13,6 +14,7 @@ import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/screens/user/privacy_setting_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -92,6 +94,10 @@ class _MyPageState extends State<MyPage> {
                                 const _MyFig(),
                               ],
                             )),
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: const _YeongamWebsite(),
+                        )
                       ],
                     ),
                   )
@@ -277,7 +283,7 @@ class _MyFig extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: const [
                   TextCustom(
-                    text: '100000개',
+                    text: '-',
                     fontSize: 40,
                     color: ThemeColors.basic,
                     fontWeight: FontWeight.bold,
@@ -291,5 +297,47 @@ class _MyFig extends StatelessWidget {
             ],
           )),
     ));
+  }
+}
+
+class _YeongamWebsite extends StatelessWidget {
+  const _YeongamWebsite({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        onTap: () {
+          launchUrl(Uri.parse('https://www.yeongam.go.kr/'));
+        },
+        child: Container(
+            padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(20),
+
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.grey.withOpacity(0.5),
+              //     spreadRadius: 1,
+              //     blurRadius: 5,
+              //     offset: const Offset(0, 3),
+              //   ),
+              // ],
+            ),
+            child: Row(
+              children: [
+                Image.asset('images/namsaengs.png'),
+                const SizedBox(
+                  width: 10,
+                ),
+                const TextCustom(
+                  text: '영암군 소식이 궁금하다면?',
+                  fontSize: 16,
+                )
+              ],
+            )));
   }
 }
