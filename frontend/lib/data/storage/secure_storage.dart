@@ -15,6 +15,7 @@ class SecureStorageYeongam {
   }
 
   Future<void> deleteSecureStorage() async {
+    // print('deleteSecureStorage');
     await secureStorage.delete(key: 'token');
     await secureStorage.deleteAll();
   }

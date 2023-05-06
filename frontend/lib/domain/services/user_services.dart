@@ -58,7 +58,7 @@ class UserServices {
   Future<ResponseUser> getUserById() async {
     final token = await secureStorage.readToken();
     // print(token);
-    print('ResponseUser - getUserById');
+    // print('ResponseUser - getUserById');
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/user/get-User-By-Id'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});

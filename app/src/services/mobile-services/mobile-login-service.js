@@ -25,11 +25,11 @@ try{
   
   // 사용자 정보(아이디, 비밀번호, salt)
   const userdb = await conn.query("SELECT uid, userid, userpw, salt FROM webdb.tb_user where userid= ?;", [id]);
-  console.log(userdb[0]);
+  // console.log(userdb[0]);
 
   if (userdb){
     var userPass = userdb[0].userpw;
-    console.log(userPass);
+    // console.log(userPass);
     const passwordMatch = await bcrypt.compareSync(password, userPass);
 
     if (!passwordMatch){

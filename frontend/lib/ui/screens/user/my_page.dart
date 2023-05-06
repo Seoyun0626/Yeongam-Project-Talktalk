@@ -1,12 +1,5 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk_template.dart';
-import 'package:login/domain/models/response/response_user.dart';
-import 'package:login/domain/services/policy_services.dart';
-import 'package:login/domain/services/user_services.dart';
-import 'package:login/ui/helpers/modal_checkLogin.dart';
 import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/helpers/helpers.dart';
@@ -24,11 +17,12 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
+// class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final userBloc = BlocProvider.of<UserBloc>(context);
-    final authBloc = BlocProvider.of<AuthBloc>(context);
+    // final size = MediaQuery.of(context).size;
+    // final userBloc = BlocProvider.of<UserBloc>(context);
+    // final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -69,7 +63,6 @@ class _MyPageState extends State<MyPage> {
             body: SafeArea(
               child: Column(
                 children: [
-                  // const SizedBox(height: 30.0),
                   Expanded(
                     child: ListView(
                       physics: const BouncingScrollPhysics(),
@@ -79,24 +72,25 @@ class _MyPageState extends State<MyPage> {
                             color: ThemeColors
                                 .third, //Color.fromARGB(255, 226, 241, 200),
                             child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: const [
-                                    _UserName(),
-                                    _LogInOut(),
-                                  ],
-                                ),
-                                const SizedBox(
+                              children: const [
+                                _LogInOutUserName(),
+                                // Row(
+                                //   mainAxisAlignment:
+                                //       MainAxisAlignment.spaceBetween,
+                                //   children: const [
+                                //     _UserName(),
+                                //     _LogInOut(),
+                                //   ],
+                                // ),
+                                SizedBox(
                                   height: 30,
                                 ),
-                                const _MyFig(),
+                                _MyFig(),
                               ],
                             )),
-                        Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: const _YeongamWebsite(),
+                        const Padding(
+                          padding: EdgeInsets.all(20),
+                          child: _YeongamWebsite(),
                         )
                       ],
                     ),
@@ -105,6 +99,99 @@ class _MyPageState extends State<MyPage> {
               ),
             ),
             bottomNavigationBar: const BottomNavigation(index: 5)));
+  }
+}
+
+class _LogInOutUserName extends StatefulWidget {
+  const _LogInOutUserName({
+    Key? key,
+  }) : super(key: key);
+  @override
+  State<_LogInOutUserName> createState() => _LogInOutUserNameState();
+}
+
+class _LogInOutUserNameState extends State<_LogInOutUserName> {
+  @override
+  Widget build(BuildContext context) {
+    // final size = MediaQuery.of(context).size;
+    final userBloc = BlocProvider.of<UserBloc>(context);
+    final authBloc = BlocProvider.of<AuthBloc>(context);
+
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (_, state) {
+        if (state is LogOut) {
+          return InkWell(
+            child: Row(
+              children: const [
+                TextCustom(
+                  text: '로그인해주세요',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                ),
+                Icon(Icons.arrow_forward_ios_rounded)
+              ],
+            ),
+            onTap: () {
+              Navigator.push(context, routeSlide(page: const LoginPage()));
+            },
+          );
+        } else {
+          String username = userBloc.state.user?.user_name ?? '사용자 이름';
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                child: Row(
+                  children: [
+                    TextCustom(
+                      text: username,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    const Icon(Icons.arrow_forward_ios_rounded)
+                  ],
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PrivacySettingPage(),
+                      ));
+                },
+              ),
+              const SizedBox(width: 10),
+              InkWell(
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: ThemeColors.primary,
+                      width: 2,
+                    ),
+                  ),
+                  child: const TextCustom(
+                    text: '로그아웃',
+                    color: Colors.black,
+                    fontSize: 13,
+                  ),
+                ),
+                onTap: () {
+                  authBloc.add(OnLogOutEvent());
+                  userBloc.add(OnLogOutUser());
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    routeFade(page: const HomePage()),
+                    (_) => false,
+                  );
+                },
+              ),
+            ],
+          );
+        }
+      },
+    );
   }
 }
 
@@ -134,10 +221,13 @@ class _UserName extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  routeSlide(page: const LoginPage()),
-                ); //(_) => false);
+                // Navigator.pushAndRemoveUntil(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const LoginPage(),
+                //     ),
+                //     (_) => false);
+                Navigator.push(context, routeSlide(page: const LoginPage()));
               });
         } else {
           return BlocBuilder<UserBloc, UserState>(builder: (_, state) {
@@ -205,10 +295,13 @@ class _LogInOut extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.push(
-              context,
-              routeSlide(page: const LoginPage()),
-            );
+            // Navigator.pushAndRemoveUntil(
+            //     context,
+            //     MaterialPageRoute(
+            //       builder: (context) => const LoginPage(),
+            //     ),
+            //     (_) => false);
+            Navigator.push(context, routeSlide(page: const LoginPage()));
           },
         );
       } else {

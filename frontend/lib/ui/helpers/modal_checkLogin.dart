@@ -107,7 +107,11 @@ class modalCheckLogin {
       ),
       child: RawMaterialButton(
         onPressed: () {
-          // Navigator.of(context, rootNavigator: true).pop();
+          Navigator.of(context, rootNavigator: true).pop();
+          // Navigator.pushAndRemoveUntil(
+          //     context,
+          //     MaterialPageRoute(builder: (context) => const LoginPage()),
+          //     (_) => false);
           Navigator.push(context, routeSlide(page: const LoginPage()));
         },
         child: const Center(

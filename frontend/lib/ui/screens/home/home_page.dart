@@ -67,14 +67,14 @@ class _HomePageState extends State<HomePage> {
                     //     ));
 
                     if (authBloc.state is LogOut) {
-                      // 로그인 상태일 경우 LoginPage로 이동
+                      // 로그인 상태가 아닐 경우 LoginPage로 이동
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const LoginPage()),
                       );
                     } else {
-                      // 로그인 상태가 아닐 경우 LoginPage로 이동
+                      // 로그인 상태일 경우 MyPage로 이동
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => const MyPage()),

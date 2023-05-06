@@ -42,7 +42,7 @@ class _PrivacySettingPageState extends State<PrivacySettingPage> {
             title: const TextCustom(
               text: '개인 정보 설정',
               color: Colors.black,
-              fontSize: 24,
+              fontSize: 20,
               fontWeight: FontWeight.w600,
             ),
             leading: IconButton(

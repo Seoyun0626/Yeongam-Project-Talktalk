@@ -4,10 +4,10 @@ part of 'auth_bloc.dart';
 abstract class AuthEvent {}
 
 class OnLoginEvent extends AuthEvent {
-  final String user_id;
-  final String user_pw;
+  final String userid;
+  final String userpw;
 
-  OnLoginEvent(this.user_id, this.user_pw);
+  OnLoginEvent(this.userid, this.userpw);
 }
 
 class OnCheckingLoginEvent extends AuthEvent {}

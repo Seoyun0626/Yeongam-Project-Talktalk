@@ -49,29 +49,21 @@ class _LoginPageState extends State<LoginPage> {
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is LoadingAuthentication) {
-          modalLoading(context, '확인 중...');
-          Navigator.pop(context);
-        } else if (state is FailureAuthentication) {
+        if (state is FailureAuthentication) {
           modalWarning(context, '다시 로그인해주세요');
-          Navigator.pop(context);
-
-          // if (state.error == '메일을 확인해주세요') {
-          //   Navigator.push(
-          //       context,
-          //       routeSlide(
-          //           page:
-          //               VerifyEmailPage(user_email: idController.text.trim())));
-          // }
-
-          // errorMessageSnack(context, state.error);
         } else if (state is SuccessAuthentication) {
-          print(state);
           userBloc.add(OnGetUserAuthenticationEvent());
-          Navigator.pop(context);
+          Navigator.of(context).pop();
           Navigator.pushAndRemoveUntil(
-              context, routeFade(page: const HomePage()), (_) => false);
+            context,
+            routeFade(page: const HomePage()),
+            (_) => false,
+          );
         }
+        // else if (state is LoadingAuthentication) {
+        //   modalLoading(context, '확인 중...');
+        //   Navigator.of(context).pop();
+        // }
       },
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -82,14 +74,16 @@ class _LoginPageState extends State<LoginPage> {
               icon: const Icon(Icons.arrow_back_ios_new_rounded,
                   color: Colors.black),
               onPressed: () {
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                } else {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomePage()));
-                }
+                Navigator.pop(context);
+
+                // if (Navigator.canPop(context)) {
+                //   Navigator.pop(context);
+                // } else {
+                //   Navigator.pushReplacement(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => const HomePage()));
+                // }
               }),
         ),
         body: SafeArea(

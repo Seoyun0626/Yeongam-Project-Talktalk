@@ -117,12 +117,21 @@ class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
 
                   Navigator.pushAndRemoveUntil(
                       context,
-                      routeFade(
-                          page: PolicyListPage(
-                        codeDetail: selectedCode.code,
-                        codeName: selectedCode.codeName,
-                      )),
+                      MaterialPageRoute(
+                          builder: (context) => PolicyListPage(
+                                codeDetail: selectedCode.code,
+                                codeName: selectedCode.codeName,
+                              )),
                       (_) => false);
+
+                  // Navigator.pushAndRemoveUntil(
+                  //     context,
+                  //     routeFade(
+                  //         page: PolicyListPage(
+                  //       codeDetail: selectedCode.code,
+                  //       codeName: selectedCode.codeName,
+                  //     )),
+                  //     (_) => false);
                 },
                 width: size.width - 30,
                 colorText: Colors.black,
