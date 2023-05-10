@@ -101,9 +101,7 @@ class _HomePageState extends State<HomePage> {
                     builder: (_, snapshot) {
                       if (!snapshot.hasData) {
                         return Column(
-                          children: const [
-                            ShimmerNaru(),
-                          ],
+                          children: const [ShimmerNaru(), ShimmerNaru()],
                         );
                       } else {
                         return CarouselSlider.builder(
@@ -277,7 +275,7 @@ class BannerSlide extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           child: Image.network(
             bannerImgUrl,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           )),
     );
   }

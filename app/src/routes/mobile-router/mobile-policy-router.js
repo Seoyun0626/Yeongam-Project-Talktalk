@@ -147,7 +147,7 @@ router.get('/get-all-policy-for-search', async function(req, res) {
     try{
       // console.log(req.params.uidPolicy)
       const result = await mobile_policy_controller.checkPolicyScrapped(req,res);
-      console.log('mobile-router check-policy-scrapped result : ', result);
+      // console.log('mobile-router check-policy-scrapped result : ', result);
 
       res.json({
         resp:true,
