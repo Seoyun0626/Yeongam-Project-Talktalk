@@ -27,6 +27,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     // on<OnUpdatePictureProfile>( _onUpdatePictureProfile );
     // on<OnUpdateProfileEvent>( _onUpdateProfile );
     on<OnChangePasswordEvent>(_changePassword);
+    on<OnChangeEmailEvent>(_changeEmail);
+    on<OnChangeExtraInfoEvent>(_changeExtraInfo);
     // on<OnToggleButtonProfile>( _toggleButtonProfile );
     // on<OnChangeAccountToPrivacy>( _changeAccountPrivacy );
     on<OnLogOutUser>(_logOutAuth);
@@ -204,6 +206,58 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
         // emit( state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
 
+      }
+    } catch (e) {
+      emit(FailureUserState(e.toString()));
+    }
+  }
+
+  Future<void> _changeEmail(
+      OnChangeEmailEvent event, Emitter<UserState> emit) async {
+    try {
+      emit(LoadingUserState());
+
+      final data =
+          await userService.changeEmail(event.currentEmail, event.newEmail);
+
+      await Future.delayed(const Duration(milliseconds: 450));
+
+      final dataUser = await userService.getUserById();
+
+      if (data.resp) {
+        emit(SuccessUserState());
+
+        emit(state.copyWith(user: dataUser.user));
+      } else {
+        emit(FailureUserState(data.message));
+
+        emit(state.copyWith(user: dataUser.user));
+      }
+    } catch (e) {
+      emit(FailureUserState(e.toString()));
+    }
+  }
+
+  Future<void> _changeExtraInfo(
+      OnChangeExtraInfoEvent event, Emitter<UserState> emit) async {
+    try {
+      emit(LoadingUserState());
+
+      final data = await userService.changeExtraInfo(event.emd_class_code,
+          event.youthAge_code, event.parentsAge_code, event.sex_class_code);
+
+      await Future.delayed(const Duration(milliseconds: 450));
+
+      final dataUser = await userService.getUserById();
+
+      if (data.resp) {
+        emit(SuccessUserState());
+
+        emit(state.copyWith(user: dataUser.user));
+      } else {
+        emit(FailureUserState(data.message));
+
+        emit(state.copyWith(user: dataUser.user));
       }
     } catch (e) {
       emit(FailureUserState(e.toString()));

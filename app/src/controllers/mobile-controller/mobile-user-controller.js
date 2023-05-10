@@ -9,3 +9,21 @@ exports.getUserById = async function(req, res) {
       console.log('mobile-user-controller get user by id:'+error);
     }
   }
+
+exports.changeEmail = async function(req, res){
+  try{
+    var result = await mobile_user_service.changeEmail(req, res);
+    return result;
+  } catch(error) {
+    console.log('mobile-user-controller change extra info:'+error);
+  }
+}
+
+exports.changeExtraInfo = async function(req, res){
+  try{
+    var result = await mobile_user_service.changeExtraInfo(req, res);
+    return result;
+  } catch(error) {
+    console.log('mobile-user-controller change extra info:'+error);
+  }
+}

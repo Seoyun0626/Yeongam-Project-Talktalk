@@ -3,15 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/domain/models/response/response_policy_by_user.dart';
 import 'package:login/domain/services/policy_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/helpers/modal_checkLogin.dart';
 import 'package:login/ui/screens/login/login_page.dart';
-import 'package:login/ui/screens/policy/policy_detail.dart';
+import 'package:login/ui/screens/policy/policy_detail_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
-import 'package:login/domain/blocs/policy/policy_bloc.dart';
 
 class ScrapPage extends StatelessWidget {
   const ScrapPage({Key? key}) : super(key: key);

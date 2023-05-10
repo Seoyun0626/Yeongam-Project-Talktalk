@@ -136,6 +136,38 @@ class UserServices {
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 
+  Future<DefaultResponse> changeEmail(
+      String currentPass, String newPass) async {
+    final token = await secureStorage.readToken();
+
+    final resp = await http.put(
+        Uri.parse('${Environment.urlApi}/user/change-email'),
+        headers: {'Accept': 'application/json', 'xxx-token': token!},
+        body: {'currentEmail': currentPass, 'newEmail': newPass});
+
+    return DefaultResponse.fromJson(jsonDecode(resp.body));
+  }
+
+  Future<DefaultResponse> changeExtraInfo(
+      String emd, String youthAge, String parentsAge, String sex) async {
+    final token = await secureStorage.readToken();
+
+    final resp = await http.put(
+        Uri.parse('${Environment.urlApi}/user/change-extra-info'),
+        headers: {
+          'Accept': 'application/json',
+          'xxx-token': token!
+        },
+        body: {
+          'emd_class_code': emd,
+          'youthAge_code': youthAge,
+          'parentsAge_code': parentsAge,
+          'sex_class_code': sex
+        });
+
+    return DefaultResponse.fromJson(jsonDecode(resp.body));
+  }
+
   // Future<DefaultResponse> changeAccountPrivacy() async {
   //
   //   final token = await secureStorage.readToken();

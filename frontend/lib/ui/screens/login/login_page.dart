@@ -6,10 +6,7 @@ import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/screens/login/find_pw_page.dart';
 import 'package:login/ui/screens/login/find_id_page.dart';
-import 'package:login/ui/screens/login/find_pw_page.dart';
-import 'package:login/ui/screens/register/start_register.dart';
-import 'package:login/ui/screens/login/verify_email_page.dart';
-import 'package:login/ui/screens/register/terms_agree.dart';
+import 'package:login/ui/screens/register/terms_agree_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 

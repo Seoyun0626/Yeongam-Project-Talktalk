@@ -15,7 +15,7 @@ void modalLoading(BuildContext context, String text) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              '청소년 톡Talk',
+              '청소년 톡talk',
               style: TextStyle(
                   color: ThemeColors.primary,
                   fontFamily: 'CookieRun',

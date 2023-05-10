@@ -18,7 +18,7 @@ void modalSuccess(BuildContext context, String text,
             Row(
               children: const [
                 Text(
-                  '청소년 톡Talk',
+                  '청소년 톡talk',
                   style: TextStyle(
                       color: Colors.green,
                       fontFamily: 'CookieRun',
@@ -46,15 +46,32 @@ void modalSuccess(BuildContext context, String text,
             const SizedBox(height: 35.0),
             TextCustom(text: text, fontSize: 17, fontWeight: FontWeight.w400),
             const SizedBox(height: 20.0),
+            // GestureDetector(
+            //   onTap: onPressed,
+            //   child: Container(
+            //     alignment: Alignment.center,
+            //     height: 35,
+            //     width: 150,
+            //     decoration: BoxDecoration(
+            //         color: Colors.green,
+            //         borderRadius: BorderRadius.circular(10.0)),
+            //     child: const TextCustom(
+            //         text: '확인', color: Colors.white, fontSize: 17),
+            //   ),
+            // ),
+
             InkWell(
-              onTap: onPressed,
+              onTap: () {
+                Navigator.pop(context);
+                onPressed();
+              },
               child: Container(
                 alignment: Alignment.center,
                 height: 35,
                 width: 150,
                 decoration: BoxDecoration(
                     color: Colors.green,
-                    borderRadius: BorderRadius.circular(5.0)),
+                    borderRadius: BorderRadius.circular(10.0)),
                 child: const TextCustom(
                     text: '확인', color: Colors.white, fontSize: 17),
               ),
