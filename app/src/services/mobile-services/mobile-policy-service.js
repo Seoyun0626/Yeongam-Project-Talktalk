@@ -151,7 +151,7 @@ exports.scrapOrUnscrapPolicy = async function(req, res) {
             const result = await conn.query(query, [uidUser, uidPolicy]);
     
             const isScrapped = result[0]?.isScrapped || 0;
-            console.log(isScrapped);
+            // console.log(isScrapped);
             return {
                 isScrapped: isScrapped == 1 ? 1 : 0
             };

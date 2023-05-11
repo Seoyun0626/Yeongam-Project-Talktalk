@@ -29,8 +29,8 @@ class PolicyListPage extends StatefulWidget {
 
 class _PolicyListPageState extends State<PolicyListPage> {
   bool isSelectingCategory = false;
-  // late String selectedCodeDetail;
-  // late String selectedCodeName;
+
+  late int policyCount = 0;
 
   @override
   void initState() {
@@ -45,15 +45,11 @@ class _PolicyListPageState extends State<PolicyListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // selectedCodeDetail = widget.codeDetail;
-    // selectedCodeName = widget.codeName;
-    // print(selectedCodeDetail + selectedCodeDetail);
-
     final String selectedCodeDetail = widget.codeDetail;
     final String selectedCodeName = widget.codeName;
 
-    print('codeDetail: $selectedCodeDetail, codeName: $selectedCodeName');
-    print(isSelectingCategory);
+    // print('codeDetail: $selectedCodeDetail, codeName: $selectedCodeName');
+    // print(isSelectingCategory);
 
     return BlocListener<PolicyBloc, PolicyState>(
         listener: (context, state) {
@@ -87,68 +83,79 @@ class _PolicyListPageState extends State<PolicyListPage> {
                       codeName: selectedCodeName,
                     ),
                   ),
-
+                  // PolicyBar(policyCount: policyCount),
                   Expanded(
-                      child: Center(
-                    child: ListView(
-                      physics: const BouncingScrollPhysics(),
-                      children: [
-                        BlocBuilder<PolicyBloc, PolicyState>(
-                            buildWhen: (previous, current) =>
-                                previous != current,
-                            builder: ((context, state) => state.isSearchPolicy
-                                ? streamSearchPolicy()
-                                : isSelectingCategory
-                                    ? FutureBuilder<List<Policy>>(
-                                        future: policyService.getPolicyBySelect(
-                                            selectedCodeName,
-                                            selectedCodeDetail), //청소년 수련관 선택
-                                        builder: ((_, snapshot) {
-                                          if (snapshot.data != null &&
-                                              snapshot.data!.isEmpty) {
-                                            return _ListWithoutPolicySearch();
-                                          }
-
-                                          return !snapshot.hasData
-                                              ? _ListWithoutPolicySearch() //const _ShimerLoading()
-                                              : ListView.builder(
-                                                  physics:
-                                                      const BouncingScrollPhysics(),
-                                                  shrinkWrap: true,
-                                                  itemCount:
-                                                      snapshot.data!.length,
-                                                  itemBuilder: (_, i) =>
-                                                      ListViewPolicy(
-                                                        // codeData: codeData,
-                                                        policies:
-                                                            snapshot.data![i],
-                                                      ));
-                                        }))
-                                    : FutureBuilder<List<Policy>>(
-                                        future: policyService.getAllPolicy(),
-                                        builder: ((_, snapshot) {
-                                          if (snapshot.data != null &&
-                                              snapshot.data!.isEmpty) {
-                                            return _ListWithoutPolicy();
-                                          }
-
-                                          return !snapshot.hasData
-                                              ? const _ShimerLoading()
-                                              : ListView.builder(
-                                                  physics:
-                                                      const BouncingScrollPhysics(),
-                                                  shrinkWrap: true,
-                                                  itemCount:
-                                                      snapshot.data!.length,
-                                                  itemBuilder: (_, i) =>
-                                                      ListViewPolicy(
-                                                        policies:
-                                                            snapshot.data![i],
-                                                      ));
-                                        }))))
-                      ],
-                    ),
-                  ))
+                    child: Center(
+                        child: BlocBuilder<PolicyBloc, PolicyState>(
+                      buildWhen: (previous, current) => previous != current,
+                      builder: (context, state) {
+                        if (state.isSearchPolicy) {
+                          return streamSearchPolicy();
+                        } else if (isSelectingCategory) {
+                          return FutureBuilder<List<Policy>>(
+                            future: policyService.getPolicyBySelect(
+                                selectedCodeName, selectedCodeDetail),
+                            builder: (_, snapshot) {
+                              if (snapshot.data != null &&
+                                  snapshot.data!.isEmpty) {
+                                return _ListWithoutPolicySearch();
+                              }
+                              policyCount = snapshot.data?.length ?? 0;
+                              return !snapshot.hasData
+                                  ? const _ShimerLoading()
+                                  : Column(
+                                      children: [
+                                        PolicyBar(policyCount: policyCount),
+                                        Expanded(
+                                          child: ListView.builder(
+                                            physics:
+                                                const BouncingScrollPhysics(),
+                                            shrinkWrap: false,
+                                            itemCount: snapshot.data!.length,
+                                            itemBuilder: (_, i) =>
+                                                ListViewPolicy(
+                                              policies: snapshot.data![i],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    );
+                            },
+                          );
+                        } else {
+                          return FutureBuilder<List<Policy>>(
+                            future: policyService.getAllPolicy(),
+                            builder: (_, snapshot) {
+                              if (snapshot.data != null &&
+                                  snapshot.data!.isEmpty) {
+                                return _ListWithoutPolicy();
+                              }
+                              policyCount = snapshot.data?.length ?? 0;
+                              return !snapshot.hasData
+                                  ? const _ShimerLoading()
+                                  : Column(
+                                      children: [
+                                        PolicyBar(policyCount: policyCount),
+                                        Expanded(
+                                          child: ListView.builder(
+                                            physics:
+                                                const BouncingScrollPhysics(),
+                                            shrinkWrap: false,
+                                            itemCount: snapshot.data!.length,
+                                            itemBuilder: (_, i) =>
+                                                ListViewPolicy(
+                                              policies: snapshot.data![i],
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    );
+                            },
+                          );
+                        }
+                      },
+                    )),
+                  )
                 ],
               )),
               bottomNavigationBar: const BottomNavigation(index: 2),
@@ -168,7 +175,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
         }
 
         if (snapshot.data!.isEmpty) {
-          // ignore: prefer_const_constructors
           return Expanded(
               child: Center(
                   child: Column(
@@ -181,15 +187,23 @@ class _PolicyListPageState extends State<PolicyListPage> {
                 ),
               ])));
         }
+        policyCount = snapshot.data!.length;
 
-        return ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: snapshot.data!.length,
-            itemBuilder: (_, i) => ListViewPolicy(
-                  // codeData: codeData,
-                  policies: snapshot.data![i],
-                ));
+        return Column(
+          children: [
+            PolicyBar(policyCount: policyCount),
+            Expanded(
+              child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: false,
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (_, i) => ListViewPolicy(
+                        // codeData: codeData,
+                        policies: snapshot.data![i],
+                      )),
+            )
+          ],
+        );
       },
     );
   }
@@ -336,8 +350,9 @@ class SelectedSearchConditions extends StatelessWidget {
     return Container(
         padding: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
-          color: Colors.white,
-        ),
+            color: Colors.white,
+            border: Border(
+                bottom: BorderSide(color: ThemeColors.basic, width: 0.3))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -373,6 +388,86 @@ class SelectedSearchConditions extends StatelessWidget {
                 )),
           ],
         ));
+  }
+}
+
+class PolicyBar extends StatefulWidget {
+  final int policyCount;
+  const PolicyBar({Key? key, required this.policyCount}) : super(key: key);
+
+  @override
+  State<PolicyBar> createState() => _PolicyBarState();
+}
+
+class _PolicyBarState extends State<PolicyBar> {
+  String _selectedSortBy = '최신순';
+  final List<String> _sortByOptions = ['최신순', '스크랩순'];
+
+  @override
+  Widget build(BuildContext context) {
+    final int policyCount = widget.policyCount;
+
+    return Container(
+        padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+        // height: 25,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+        ),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          TextCustom(
+            text: '검색결과 $policyCount건',
+            fontSize: 15,
+            color: ThemeColors.basic,
+          ),
+          PopupMenuButton(
+            onSelected: (value) {
+              setState(() {
+                _selectedSortBy = value;
+              });
+            },
+            itemBuilder: (BuildContext context) {
+              return _sortByOptions.map((String option) {
+                return PopupMenuItem(
+                    value: option, child: TextCustom(text: option));
+              }).toList();
+            },
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TextCustom(
+                  text: _selectedSortBy,
+                  fontSize: 15,
+                  color: ThemeColors.basic,
+                ),
+                const Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  size: 20,
+                  color: ThemeColors.primary,
+                )
+              ],
+            ),
+          ),
+
+          // InkWell(
+          //   onTap: () {},
+          //   child: Row(
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: [
+          //       TextCustom(
+          //         text: '최신순',
+          //         fontSize: 15,
+          //         color: ThemeColors.basic,
+          //       ),
+          //       Icon(
+          //         Icons.keyboard_arrow_down_rounded,
+          //         size: 20,
+          //         color: ThemeColors.primary,
+          //       )
+          //     ],
+          //   ),
+          // )
+        ]));
   }
 }
 

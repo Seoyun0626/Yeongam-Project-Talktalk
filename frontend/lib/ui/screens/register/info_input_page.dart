@@ -86,7 +86,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
         if (state is LoadingUserState) {
           modalLoading(context, '로드 중');
         } else if (state is SuccessUserState) {
-          Navigator.pop(context);
+          // Navigator.pop(context);
           modalSuccess(
             context,
             '회원가입이 완료되었습니다',

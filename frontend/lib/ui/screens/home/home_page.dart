@@ -6,6 +6,7 @@ import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/policy_services.dart';
+import 'package:login/ui/screens/notification/notification_page.dart';
 import 'package:login/ui/screens/policy/policy_detail_page.dart';
 import 'package:login/ui/screens/policy/policy_list_page.dart';
 import 'package:login/ui/screens/user/myTalkTalk_page.dart';
@@ -53,34 +54,50 @@ class _HomePageState extends State<HomePage> {
               child: Image.asset('images/aco.png', height: 70),
             ),
             actions: [
-              IconButton(
-                  icon: const Icon(
-                    Icons.perm_identity,
-                    size: 30,
-                    color: ThemeColors.primary,
-                  ),
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const LoginPage(),
-                    //     ));
-
-                    if (authBloc.state is LogOut) {
-                      // 로그인 상태가 아닐 경우 LoginPage로 이동
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.notifications_none_outlined,
+                      size: 30,
+                      color: ThemeColors.primary,
+                    ),
+                    onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
+                            builder: (context) => const NotificationPage()),
                       );
-                    } else {
-                      // 로그인 상태일 경우 MyPage로 이동
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const MyPage()),
-                      );
-                    }
-                  }),
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: IconButton(
+                        icon: const Icon(
+                          Icons.perm_identity,
+                          size: 30,
+                          color: ThemeColors.primary,
+                        ),
+                        onPressed: () {
+                          if (authBloc.state is LogOut) {
+                            // 로그인 상태가 아닐 경우 LoginPage로 이동
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginPage()),
+                            );
+                          } else {
+                            // 로그인 상태일 경우 MyPage로 이동
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MyPage()),
+                            );
+                          }
+                        }),
+                  )
+                ],
+              )
             ],
             backgroundColor: Colors.white, //ThemeColors.primary,
             centerTitle: false,
