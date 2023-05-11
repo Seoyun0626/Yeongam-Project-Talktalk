@@ -96,7 +96,7 @@
               <!-- <td><%= posts[i].push_yn %></td>
               <td><%= posts[i].email_yn %></td>
               <td><%= posts[i].sms_yn %></td> -->
-              <td><a href="/admin/dataif/giveFig/<%=posts[i].userid%>?fig=" onclick="return giveFig()"><%=posts[i].fig%></a></td>
+              <!-- <td><a href="/admin/dataif/giveFig/<%=posts[i].userid%>?fig=" onclick="return giveFig()"><%=posts[i].fig%></a></td>
               <script>
                 function giveFig(){
                   // -입력 시 무화과 감소
@@ -109,7 +109,9 @@
                     return false;
                   }
                 }
-              </script>
+              </script> -->
+              <!-- <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>"><%=posts[i].fig%></a></td>/ -->
+              <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>"><%=posts[i].fig%></a></td>
               <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
               <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
               <script>

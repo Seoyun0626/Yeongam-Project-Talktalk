@@ -7,6 +7,41 @@ const { uuid } = require('uuidv4');
 var utils = require('../utils/utils');
 var fs = require('fs');
 
+
+exports.fetchFigUsageByUid = async function(req, res) {
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var userid = req.params.id;
+    var query = 'SELECT uid FROM webdb.tb_user where userid="'+userid+'"';
+    var uid = await conn.query(query); // 쿼리 실행
+    // query = 'SELECT * FROM webdb.tb_fig_usage where uid="'+uid[0].uid+'"';
+    query = 'select fig_usage_no,fig_used_date,product_name,product_cost,product_desc,product_stock from webdb.tb_fig_usage as a inner join webdb.tb_product as b on a.pid = b.pid where a.uid = "'+uid[0].uid+'";'
+    rows = await conn.query(query); // 쿼리 실행
+    return rows;
+  } catch(error) {
+    console.log('dataif-service fetchFigDataByUid:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+};
+exports.fetchEventPartByUid = async function(req, res) {
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var userid = req.params.id;
+    var query = 'SELECT uid FROM webdb.tb_user where userid="'+userid+'"';
+    var uid = await conn.query(query); // 쿼리 실행
+    query = 'select event_part_no,aquired_time,event_name,event_desc,fig_payment from webdb.tb_event_part as a inner join webdb.tb_event as b on a.eid = b.eid where a.uid = "3d06c817-d8ee-43be-be7b-226c0a4d6695";'
+    rows = await conn.query(query); // 쿼리 실행
+    return rows;
+  } catch(error) {
+    console.log('dataif-service fetchEventPartByUid:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+};
+
 exports.fetchData = async function(req, res) {
   var conn;
   try{

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/css/home/user.css">
+  <link rel="stylesheet" href="/semantic/layout.css">
+  <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/mem.css">
+  <link rel="stylesheet" href="/css/home/admin.css">
+  <script src="/ckeditor/build/ckeditor.js"></script>
+  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
+  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
+  <script src="/js/home/mem.js" defer></script>
+</head>
+<body>
+  <div id='rectanglel1' class='rectanglel1'></div>
+  <div id='rectangleb1' class='rectangleb1'></div>
+  <%- include('../layout.ejs') %>
+<section>
+    <div>
+      <!-- <div class="pagename"><%=userid %></div> -->
+      <div class="pagename">무화과 사용 내역</div>
+      <table>
+        <tr>
+          <th>번호</th>
+          <th>상품명</th>
+          <th>비용</th>
+          <th>상품 설명</th>
+          <th>사용 일시</th>
+        </tr>
+        <% for(var i=0; i<figUsage.length; i++){ %>
+        <tr>
+          <td><%= figUsage[i].fig_usage_no %></td>
+          <td><%= figUsage[i].product_name %></td>
+          <td><%= figUsage[i].product_cost %></td>
+          <td><%= figUsage[i].product_desc %></td>
+          <td><%= `${figUsage[i].fig_used_date.getFullYear()}` + `-`+ `${figUsage[i].fig_used_date.getMonth()+1}` + `-`+ `${figUsage[i].fig_used_date.getDate()}`%></td>
+        </tr>
+        <% } %>
+      </table>
+      <br><br>
+      <div class="pagename">이벤트 참여 내역</div>
+      <table>
+        <tr>
+          <th>번호</th>
+          <th>이벤트명</th>
+          <th>비용</th>
+          <th>이벤트 내용</th>
+          <th>획들 일시</th>
+        </tr>
+        <% for(var i=0; i<eventPart.length; i++){ %>
+        <tr>
+          <td><%= eventPart[i].event_part_no %></td>
+          <td><%= eventPart[i].event_name %></td>
+          <td><%= eventPart[i].fig_payment %></td>
+          <td><%= eventPart[i].event_desc %></td>
+          <td><%= `${eventPart[i].aquired_time.getFullYear()}` + `-`+ `${eventPart[i].aquired_time.getMonth()+1}` + `-`+ `${eventPart[i].aquired_time.getDate()}`%></td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
+</section>
+</div>
+</body>
+</html>

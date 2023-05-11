@@ -12,6 +12,22 @@ exports.fetchData = async function(req, res) {
 };
 
 
+exports.fetchFigUsageByUid = async function(req, res) {
+  try{
+    var result = await dataif_service.fetchFigUsageByUid(req);
+    return result;
+  } catch(error) {
+    console.log('dataif-controller fetchFigDataByUid:'+error);
+  }
+};
+exports.fetchEventPartByUid = async function(req, res) {
+  try{
+    var result = await dataif_service.fetchEventPartByUid(req);
+    return result;
+  } catch(error) {
+    console.log('dataif-controller fetchEventPartByUid:'+error);
+  }
+};
 
 // userid로 사용자 정보 가져오기
 exports.fetchDataByUserid = async function(req, res) {
