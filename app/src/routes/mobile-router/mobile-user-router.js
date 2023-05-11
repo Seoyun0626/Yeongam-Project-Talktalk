@@ -29,4 +29,54 @@ router.get("/get-User-By-Id", verifyToken, async function(req, res){
     
   });
 
+  router.put("/change-email", verifyToken, async function(req, res){
+    try{
+      console.log('mobile-router change email');
+      var result = await mobile_user_controller.changeEmail(req, res);
+      // console.log(result);
+  
+      if(result == 0){
+        res.json({
+          resp:true,
+          message : 'change email',
+        })
+      }
+      
+    } catch(error) {
+      console.log('mobile-router change-email:'+error);
+      res.json({
+        resp:false,
+        message : 'Failure change emal',
+      
+      })
+    }
+
+  });
+
+
+  router.put("/change-extra-info", verifyToken, async function(req, res){
+    try{
+      console.log('mobile-router  change-extra-info');
+      var result = await mobile_user_controller.changeExtraInfo(req, res);
+      // console.log(result);
+  
+      if(result == 0){
+        res.json({
+          resp:true,
+          message : 'change-extra-info',
+        })
+      }
+      
+    } catch(error) {
+      console.log('mobile-router change-extra-info:'+error);
+      res.json({
+        resp:false,
+        message : 'Failure change-extra-info',
+      
+      })
+    }
+
+  });
+ 
+
   module.exports = router;

@@ -7,6 +7,7 @@ class TextFieldNaru extends StatelessWidget {
   final TextInputType keyboardType;
   final FormFieldValidator<String>? validator;
   final String? errorText;
+  final double fontSzie;
 
   const TextFieldNaru({
     Key? key,
@@ -16,13 +17,17 @@ class TextFieldNaru extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.validator,
     this.errorText,
+    this.fontSzie = 18,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      style: const TextStyle(fontFamily: 'NanumSquareRound'),
+      style: TextStyle(
+        fontFamily: 'NanumSquareRound',
+        fontSize: fontSzie,
+      ),
       // style: GoogleFonts.getFont('Roboto', fontSize: 18),
       cursorColor: ThemeColors.secondary,
       obscureText: isPassword,

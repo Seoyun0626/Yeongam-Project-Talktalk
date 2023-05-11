@@ -16,7 +16,7 @@ void modalWarning(BuildContext context, String text) {
             Row(
               children: const [
                 Text(
-                  '청소년 톡Talk',
+                  '청소년 tTalk',
                   style: TextStyle(
                       color: ThemeColors.primary,
                       fontFamily: 'CookieRun',
@@ -44,7 +44,11 @@ void modalWarning(BuildContext context, String text) {
               ),
             ),
             const SizedBox(height: 35.0),
-            TextCustom(text: text, fontSize: 17, fontWeight: FontWeight.w400),
+            TextCustom(
+              text: text,
+              fontSize: 17,
+              fontWeight: FontWeight.w400,
+            ),
             const SizedBox(height: 20.0),
             InkWell(
               onTap: () => Navigator.pop(context),

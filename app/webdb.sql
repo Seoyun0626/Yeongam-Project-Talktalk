@@ -131,6 +131,50 @@ CREATE TABLE webdb.`tb_banner` (
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE webdb.`tb_fig_usage`(
+  `fig_usage_no` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` varchar(100) NOT NULL,
+  `uid` varchar(100) NOT NULL,
+  `fig_used_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`fig_usage_no`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE webdb.`tb_event_part`(
+  `event_part_no` int(11) NOT NULL AUTO_INCREMENT,
+  `eid` varchar(100) NOT NULL,
+  `uid` varchar(100) NOT NULL,
+  `aquired_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_part_no`) USING BTREE 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE webdb.`tb_product`(
+  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` varchar(100) NOT NULL,
+  `product_name` varchar(100) NOT NULL,
+  `product_cost` varchar(4) NOT NULL,
+  `product_img` varchar(100) NOT NULL,
+  `product_desc` varchar(255) NOT NULL,
+  -- `product_category` varchar(100) NOT NULL,
+  `product_stock` varchar(4) NOT NULL,
+  -- `product_sales` int(11) NOT NULL, -- 판매량 
+  -- `product_like` int(11) NOT NULL, 
+  `product_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `product_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`board_idx`) USING BTREE 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE webdb.`tb_event`(
+  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `eid` varchar(100) NOT NULL,
+  `event_name` varchar(100) NOT NULL,
+  -- `event_img` varchar(100) NOT NULL,
+  `event_desc` varchar(255) NOT NULL,
+  `fig_payment` varchar(4) NOT NULL,
+  `event_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `event_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`board_idx`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- **기존 tb_policy_scrap drop
 -- 쿼리 : drop table tb_policy_scrap;
 /* 

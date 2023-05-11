@@ -24,10 +24,10 @@ try{
   console.log('login-service SignIn db getConnection');
   
   // 사용자 정보(아이디, 비밀번호, salt)
-  const userdb = await conn.query("SELECT uid, userid, userpw, salt FROM webdb.tb_user where userid= ?;", [id]);
+  const userdb = await conn.query("SELECT uid, userid, userpw, salt FROM webdb.tb_user WHERE userid= ?;", [id]);
   // console.log(userdb[0]);
 
-  if (userdb){
+  if (userdb && userdb[0]){
     var userPass = userdb[0].userpw;
     // console.log(userPass);
     const passwordMatch = await bcrypt.compareSync(password, userPass);
@@ -44,7 +44,7 @@ try{
     }
   }else {
     // 아이디 일치 X
-    json.code = 100;
+    json.code = 200;
     json.msg = "ID 일치하지 않습니다.";
     json.data = {};
     return json;
@@ -109,10 +109,10 @@ exports.checkDuplicateID = async function(req, res) {
     conn = await db.getConnection();
     console.log('mobile-login-service checkDuplicateID');
     var id = req.body.userid;
-    console.log(id);
+    // console.log(id);
     var query = "SELECT userid FROM webdb.tb_user WHERE userid=?;"
     var checkdb = await conn.query(query, [id]);
-    console.log(checkdb.length);
+    // console.log(checkdb.length);
 
     if (checkdb.length > 0){
       resultcode = 100;

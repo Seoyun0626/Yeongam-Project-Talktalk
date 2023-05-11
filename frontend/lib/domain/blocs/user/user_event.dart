@@ -71,6 +71,21 @@ class OnChangePasswordEvent extends UserEvent {
   OnChangePasswordEvent(this.currentPassword, this.newPassword);
 }
 
+class OnChangeEmailEvent extends UserEvent {
+  final String currentEmail;
+  final String newEmail;
+  OnChangeEmailEvent(this.currentEmail, this.newEmail);
+}
+
+class OnChangeExtraInfoEvent extends UserEvent {
+  final String emd_class_code;
+  final String youthAge_code;
+  final String parentsAge_code;
+  final String sex_class_code;
+  OnChangeExtraInfoEvent(this.emd_class_code, this.youthAge_code,
+      this.parentsAge_code, this.sex_class_code);
+}
+
 // class OnToggleButtonProfile extends UserEvent {
 //   final bool isPhotos;
 //

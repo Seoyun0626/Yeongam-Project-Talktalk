@@ -26,23 +26,25 @@ router.post("/login", async function(req, res) {
         message : '로그인 성공',
         token : token
       }) 
-    } else {
+    } else if (result.code == 100) {
       res.json({
         resp : false,
-        message : '로그인 실패',
+        message : '비밀번호가 일치하지 않습니다',
         token : token
       })
+    } else if (result.code == 200) {
+      
+        res.json({
+          resp : false,
+          message : '아이디가 일치하지 않습니다',
+          token : token
+        })
+      
     }
     
   } catch(error) {
     console.log('mobile-router login:'+error);
-    if (result== 100){
-      res.json({
-        resp : false,
-        message : '로그인 실패',
-        token : token
-      })
-    }
+    
 
   }
 });

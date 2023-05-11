@@ -63,8 +63,8 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
         // } else if (state is SuccessAuthentication) {
         //   print(state);
         //   userBloc.add(OnGetUserAuthenticationEvent());
-        //   Navigator.pushAndRemoveUntil(
-        //       context, routeFade(page: const HomePage()), (_) => false);
+        // Navigator.pushAndRemoveUntil(
+        //     context, routeFade(page: const HomePage()), (_) => false);
         // }
       },
       child: Scaffold(

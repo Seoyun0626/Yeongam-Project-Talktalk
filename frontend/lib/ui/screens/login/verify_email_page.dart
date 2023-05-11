@@ -27,7 +27,7 @@ class VerifyEmailPage extends StatelessWidget {
           modalLoading(context, '코드 확인 중...');
         } else if (state is SuccessUserState) {
           print('verify_eamil_page SuccessUserState');
-          Navigator.pop(context);
+          // Navigator.pop(context);
           modalSuccess(context, '환영합니다!',
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context, routeSlide(page: const LoginPage()), (_) => false));

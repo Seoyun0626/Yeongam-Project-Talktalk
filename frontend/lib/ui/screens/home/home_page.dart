@@ -7,9 +7,10 @@ import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/policy_services.dart';
-import 'package:login/ui/screens/policy/policy_detail.dart';
-import 'package:login/ui/screens/policy/policy_list.dart';
-import 'package:login/ui/screens/user/my_page.dart';
+import 'package:login/ui/screens/notification/notification_page.dart';
+import 'package:login/ui/screens/policy/policy_detail_page.dart';
+import 'package:login/ui/screens/policy/policy_list_page.dart';
+import 'package:login/ui/screens/user/myTalkTalk_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/services/banner_services.dart';
@@ -103,9 +104,7 @@ class _HomePageState extends State<HomePage> {
                     builder: (_, snapshot) {
                       if (!snapshot.hasData) {
                         return Column(
-                          children: const [
-                            ShimmerNaru(),
-                          ],
+                          children: const [ShimmerNaru(), ShimmerNaru()],
                         );
                       } else {
                         return CarouselSlider.builder(
@@ -280,7 +279,7 @@ class BannerSlide extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           child: Image.network(
             bannerImgUrl,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           )),
     );
   }
