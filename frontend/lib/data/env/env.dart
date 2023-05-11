@@ -6,9 +6,9 @@ class Environment {
   // static const String urlApi =
   //     'http://10.0.2.2:4000/mobile'; // android emulator
   // static const String urlApiServer = 'http://210.94.199.139:8000'; // server
-  static const String urlApi = 'http://localhost:4000/mobile'; // local
-  static const String urlApiServer = 'http://localhost:4000'; // local
+  //static const String urlApi = 'http://localhost:4000/mobile'; // local
+  static const String urlApiServer = 'http://192.168.219.163:4000'; // local 윤주
 
-  // static const String urlApi =
-  //     'http://10.0.2.2:4000/mobile'; // android emulator
+  static const String urlApi =
+      'http://10.0.2.2:4000/mobile'; // android emulator
 }

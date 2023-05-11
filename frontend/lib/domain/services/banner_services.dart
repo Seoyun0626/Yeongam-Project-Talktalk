@@ -9,10 +9,10 @@ class BannerServices {
       {'Content-Type': 'application/json;charset=UTF-8', 'Charset': 'utf-8'};
 
   Future<List<Banners>> getBannerData() async {
-    // print('get banner data');
+    print('get banner data');
     final resp = await http.get(Uri.parse('${Environment.urlApi}/main/banner'),
         headers: _setHeaders());
-    // print(resp.body);
+    print(resp.body);
 
     return ResponseBanner.fromJson(jsonDecode(resp.body)).banners;
   }

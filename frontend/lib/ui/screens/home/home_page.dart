@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
@@ -15,6 +16,7 @@ import 'package:login/domain/services/banner_services.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -38,11 +40,11 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: ThemeColors.third,
           appBar: AppBar(
             titleSpacing: 0,
-            title: const Text('청소년 톡Talk',
+            title: Text('청소년 톡Talk',
                 style: TextStyle(
                   color: ThemeColors.primary,
                   fontFamily: 'CookieRun',
-                  fontSize: 24,
+                  fontSize: 28.sp,
                 )),
             leading: InkWell(
               // onTap: () => Navigator.push(
@@ -50,13 +52,13 @@ class _HomePageState extends State<HomePage> {
               //     MaterialPageRoute(
               //       builder: (context) => const LoginPage(),
               //     )),
-              child: Image.asset('images/aco.png', height: 70),
+              child: Image.asset('images/aco.png', height: 55.h),
             ),
             actions: [
               IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.perm_identity,
-                    size: 30,
+                    size: 25.w,
                     color: ThemeColors.primary,
                   ),
                   onPressed: () {
@@ -91,7 +93,7 @@ class _HomePageState extends State<HomePage> {
               padding:
                   // const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
                   // const EdgeInsets.all(15),
-                  const EdgeInsets.fromLTRB(15, 20, 15, 20),
+                  const EdgeInsets.fromLTRB(15, 20, 15, 20).w,
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -123,8 +125,8 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
 
-                  const SizedBox(
-                    height: 15,
+                  SizedBox(
+                    height: 15.h,
                   ),
                   Container(
                       decoration: BoxDecoration(
@@ -133,20 +135,20 @@ class _HomePageState extends State<HomePage> {
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 5,
+                            spreadRadius: 1.r,
+                            blurRadius: 5.r,
                             offset: const Offset(0, 3),
                           ),
                         ],
                       ),
-                      padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15).w,
                       // margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
                       child: Column(children: [
-                        Row(children: const [
+                        Row(children: [
                           Icon(
                             Icons.category,
                             color: ThemeColors.primary,
-                            size: 25,
+                            size: 22.w,
                           ),
                           // ImageIcon(
                           //   AssetImage("images/icon_check.png"),
@@ -154,23 +156,23 @@ class _HomePageState extends State<HomePage> {
                           //   size: 20,
                           // ),
                           SizedBox(
-                            width: 5,
+                            width: 5.w,
                           ),
                           TextCustom(
                             text: '카테고리별 정책을 확인하세요!',
                             color: Colors.black, //ThemeColors.basic,
-                            fontSize: 19,
+                            fontSize: 19.sp,
                             fontWeight: FontWeight.w700,
                           ),
                         ]),
-                        const SizedBox(
-                          width: 5,
+                        SizedBox(
+                          width: 5.w,
                         ),
                         // 카테고리 아이콘
                         CategoryButton(),
                       ])),
-                  const SizedBox(
-                    height: 15,
+                  SizedBox(
+                    height: 20.h,
                   ),
 
                   // 실시간 인기글
@@ -182,13 +184,13 @@ class _HomePageState extends State<HomePage> {
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 5,
+                          spreadRadius: 1.r,
+                          blurRadius: 5.r,
                           offset: const Offset(0, 3),
                         ),
                       ],
                     ),
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15).w,
                     // margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
                     child: InkWell(
                         onTap: () => Navigator.push(
@@ -200,24 +202,25 @@ class _HomePageState extends State<HomePage> {
                               ), // 복지검색 탭
                             )),
                         child: Column(children: [
-                          Row(children: const [
+                          Row(children: [
                             Icon(
                               Icons.auto_awesome,
                               color: ThemeColors.primary,
+                              size: 22.w,
                             ),
                             // Image.asset('images/icon_sparkel.png'),
                             SizedBox(
-                              width: 5,
+                              width: 5.w,
                             ),
                             TextCustom(
                               text: '지금 인기있는 정책은?',
                               color: Colors.black, //ThemeColors.basic,
-                              fontSize: 19,
+                              fontSize: 19.sp,
                               fontWeight: FontWeight.w700,
                             ),
                           ]),
-                          const SizedBox(
-                            height: 15,
+                          SizedBox(
+                            height: 15.h,
                           ),
                           // 실시간 인기글
                           FutureBuilder<List<Policy>>(
@@ -311,7 +314,7 @@ class CategoryButton extends StatelessWidget {
         codeName: codeName,
         icon: 'images/category_icon/icon_counseling.svg'),
     HomeCategory(
-        name: '취업/이직',
+        name: '건강',
         code: '02',
         codeName: codeName,
         icon: 'images/category_icon/icon_health.svg'),
@@ -324,17 +327,17 @@ class CategoryButton extends StatelessWidget {
 
   final List<HomeCategory> categoryIcons02 = [
     HomeCategory(
-        name: '건강',
+        name: '청소년활동',
         code: '04',
         codeName: codeName,
         icon: 'images/category_icon/icon_teenagers.svg'),
     HomeCategory(
-        name: '주거',
+        name: '학교밖',
         code: '05',
         codeName: codeName,
         icon: 'images/category_icon/icon_schoolOut.svg'),
     HomeCategory(
-        name: '결혼/양육',
+        name: '돌봄',
         code: '06',
         codeName: codeName,
         icon: 'images/category_icon/icon_caring.svg'),
@@ -357,8 +360,8 @@ class CategoryButton extends StatelessWidget {
             children: List.generate(
               4,
               (index) => Container(
-                margin: const EdgeInsets.only(bottom: 5.0),
-                padding: const EdgeInsets.all(10.0),
+                margin: const EdgeInsets.only(bottom: 5.0).w,
+                padding: const EdgeInsets.all(10.0).w,
                 child: Column(children: [
                   IconButton(
                       icon: SvgPicture.asset(
@@ -375,10 +378,10 @@ class CategoryButton extends StatelessWidget {
                               ), // 복지검색 탭
                             ));
                       },
-                      iconSize: 35), //MediaQuery.of(context).size.width / 8),
+                      iconSize: 32.w), //MediaQuery.of(context).size.width / 8),
                   TextCustom(
                     text: categoryIcons01[index].name,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     color: ThemeColors.basic,
                     // fontWeight: FontWeight.w600,
                   ),
@@ -391,8 +394,8 @@ class CategoryButton extends StatelessWidget {
             children: List.generate(
               4,
               (index) => Container(
-                margin: const EdgeInsets.only(bottom: 5.0),
-                padding: const EdgeInsets.all(10.0),
+                margin: const EdgeInsets.only(bottom: 5.0).w,
+                padding: const EdgeInsets.all(10.0).w,
                 child: Column(children: [
                   IconButton(
                     icon: SvgPicture.asset(categoryIcons02[index].icon),
@@ -409,11 +412,11 @@ class CategoryButton extends StatelessWidget {
                             ), // 복지검색 탭
                           ));
                     },
-                    iconSize: 35, //MediaQuery.of(context).size.width / 8,
+                    iconSize: 32.w, //MediaQuery.of(context).size.width / 8,
                   ),
                   TextCustom(
                     text: categoryIcons02[index].name,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     color: ThemeColors.basic,
                     // fontWeight: FontWeight.w600,
                   ),
@@ -453,11 +456,11 @@ class livePopularPolicy extends StatelessWidget {
     ];
 
     return Container(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-        margin: const EdgeInsets.fromLTRB(0, 3, 0, 3),
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0).w,
+        margin: const EdgeInsets.fromLTRB(0, 1, 0, 1).w,
         child: ListTile(
             minLeadingWidth: 0,
-            contentPadding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
+            contentPadding: const EdgeInsets.fromLTRB(0, 0, 20, 0).w,
             visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
             onTap: () {
               Navigator.push(
@@ -474,7 +477,7 @@ class livePopularPolicy extends StatelessWidget {
             title: TextCustom(
               text: policies.policy_name,
               color: ThemeColors.basic,
-              fontSize: 16,
+              fontSize: 18.sp,
               fontWeight: FontWeight.w500,
             )));
   }
@@ -486,7 +489,7 @@ class _ListWithoutPopularPolicy extends StatelessWidget {
     // final size = MediaQuery.of(context).size;
 
     return Container(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20).w,
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -494,13 +497,13 @@ class _ListWithoutPopularPolicy extends StatelessWidget {
             children: [
               Image.asset(
                 'images/aco4.png',
-                width: 100,
-                height: 100,
+                width: 100.w,
+                height: 90.w,
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 20.h,
               ),
-              const TextCustom(text: '등록된 정책이 없어요', fontSize: 20),
+              TextCustom(text: '등록된 정책이 없어요', fontSize: 20.sp),
             ],
           ),
         ));
@@ -513,11 +516,11 @@ class _ShimerLoadingPopularPolicy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         ShimmerNaru(),
-        SizedBox(height: 5.0),
+        SizedBox(height: 5.0.h),
         ShimmerNaru(),
-        SizedBox(height: 5.0),
+        SizedBox(height: 5.0.h),
         ShimmerNaru(),
       ],
     );

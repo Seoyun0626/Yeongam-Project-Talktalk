@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' show Color;
 
 class ThemeColors {
+  static const Color darkGreen = Color.fromRGBO(86, 138, 53, 1);
   static const Color primary = Color.fromRGBO(245, 117, 33, 1);
   // Color(0xffcbdd5a); // F57521 주황색 rgb(245, 117, 33)
   static const Color secondary =

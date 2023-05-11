@@ -1,4 +1,0 @@
-#Fri May 05 15:02:46 KST 2023
-base.0=/Users/taeheekim/Documents/yeongam_dev/frontend/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
