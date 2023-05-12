@@ -77,6 +77,7 @@ exports.signUp = async function(req, res) {
     var password = req.body.password;
     var password2 = req.body.password2;
     var name = req.body.name;
+    var inviteCode = req.body.invite_code;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
     if(name=='' || req.body.email=='' || req.body.password=='' || req.body.password2=='') {
@@ -105,6 +106,21 @@ exports.signUp = async function(req, res) {
         console.log('이미 존재하는 아이디입니다.');
         resultcode = 100;
     }
+    // invite코드의 유저에 무화과 추가
+    if(inviteCode != '') {
+      query = "SELECT fig,uid FROM webdb.tb_user where userid='" + inviteCode + "' ;";
+      var rows = await conn.query(query); // 쿼리 실행
+      // int형식으로 무화과 추가후 varchar로 변환
+      rows[0].fig = parseInt(rows[0].fig) + 1;
+      rows[0].fig = rows[0].fig.toString();
+      query = "UPDATE webdb.tb_user SET fig='"+rows[0].fig+"' WHERE userid='"+inviteCode+"';";
+      var figUpdate = await conn.query(query); // 쿼리 실행
+      var eid = 1; // 무화과 이벤트 번호, 바꿔야함
+      query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+rows[0].uid+"');";
+      console.log(query);
+      var eventPart = await conn.query(query); // 쿼리 실행
+    }
+
   } catch(error) {
     console.log('login-service SignUp:'+error);
   } finally {
@@ -115,7 +131,52 @@ exports.signUp = async function(req, res) {
 };
 
 
-    
+
+exports.getAttendance = async function(req, res) {
+  var resultcode = 0;
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var userid = req.session.user.data.userid;
+    var query = 'SELECT uid FROM webdb.tb_user where userid="'+userid+'"';
+    var uid = await conn.query(query); // 쿼리 실행
+    var today = new Date().toISOString().slice(0, 10); // 오늘 날짜
+    var query = 'SELECT * FROM webdb.tb_attendance_logs where user_uid="'+uid[0].uid+'" and attendance_date="'+today+'"';
+    var attendanceLog = await conn.query(query); // 쿼리 실행
+
+    if(attendanceLog.length){
+      resultcode = 1;
+    } else resultcode = 0;
+  } catch(error) {
+    console.log('login-service getAttendance:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+  return resultcode;
+};
+
+exports.checkAttendance = async function(req, res) {
+  var resultcode = 0;
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var userid = req.session.user.data.userid;
+    var today = new Date(); // 오늘 날짜
+    // userid를 통해 uid받아오기
+    var query = 'SELECT uid FROM webdb.tb_user where userid="'+userid+'"';
+    var uid = await conn.query(query); // 쿼리 실행
+    query = 'insert into webdb.tb_attendance_logs (user_uid, attendance_date, attendance_time) values ("'+uid[0].uid+'", "'+today.toISOString().slice(0, 10)+'", "'+today.toISOString().slice(11, 19)+'")';
+    var rows = await conn.query(query); // 쿼리 실행
+    console.log('출석 체크 완료');
+    resultcode = 1;
+  } catch(error) {
+    console.log('login-service checkAttendance:'+error);
+  } finally {
+    if (conn) conn.end();
+  }
+  return resultcode;
+};
+
 
 
 //로그인 체크

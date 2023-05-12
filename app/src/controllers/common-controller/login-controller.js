@@ -55,6 +55,24 @@ exports.signUp = async function(req, res) {
   }
 };
 
+exports.getAttendance = async function(req, res) {
+  try{
+    var result = await login_service.getAttendance(req);
+    return result;
+  } catch(error) {
+    console.log('login-controller getAttendance:'+error);
+  }
+};
+
+exports.checkAttendance = async function(req, res) {
+  try{
+    var result = await login_service.checkAttendance(req);
+    return result;
+  } catch(error) {
+    console.log('login-controller checkAttendance:'+error);
+  }
+};
+
 
 /*
 // 회원가입 컨트롤러

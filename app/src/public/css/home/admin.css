@@ -1,7 +1,6 @@
-
 @font-face {
-    font-family: 'KOTRAHOPE';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+    font-family: 'CookieRun-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -104,9 +103,9 @@ width:81px;
 color:#000000;
 text-align:left;
 vertical-align:text-top;
-font-size:45px;
+font-size:35px;
 /* font-weight: bold; */
-font-family: 'KOTRAHOPE';
+font-family: 'CookieRun-Regular';
 left:25px;
 top:56px;
 padding-top: 8px;
@@ -250,6 +249,24 @@ line-height:auto;
 border-style:hidden;
 outline:none;
 }
+.출석체크
+{
+color:#000000;
+text-align:left;
+vertical-align:text-top;
+font-size:20px;
+font-family:Inter;
+left:43px;
+/* top:421px; */
+top: 600px;
+/* width:95px; */
+width: 110px;
+height:29px;
+position:absolute;
+line-height:auto;
+border-style:hidden;
+outline:none;
+}
 /* .admin1
 {
 color:#000000;
@@ -281,7 +298,7 @@ border-radius:50%;
 /* 선택 분류 */
 .rectanglel1
 {
-background-color:rgba(206, 220, 109, 0.5);
+background-color:#FBEEE7;
 height:37px;
 width:253px;
 top:188px;
@@ -290,7 +307,7 @@ position:absolute;
 }
 .rectangleb1
 {
-background-color:#cedc6d;
+background-color:#f0ccb4;
 height:37px;
 width:5px;
 top:188px;
@@ -299,7 +316,7 @@ position:absolute;
 }
 .rectanglel2
 {
-background-color:rgba(206, 220, 109, 0.5);
+background-color:#FBEEE7;
 height:37px;
 width:253px;
 top:225px;
@@ -308,7 +325,7 @@ position:absolute;
 }
 .rectangleb2
 {
-background-color:#cedc6d;
+background-color:#f0ccb4;
 height:37px;
 width:5px;
 top:225px;
@@ -317,7 +334,7 @@ position:absolute;
 }
 .rectanglel3
 {
-background-color:rgba(206, 220, 109, 0.5);
+background-color:#FBEEE7;
 height:37px;
 width:253px;
 top:342px;
@@ -326,7 +343,7 @@ position:absolute;
 }
 .rectangleb3
 {
-background-color:#cedc6d;
+background-color:#f0ccb4;
 height:37px;
 width:5px;
 top:342px;
@@ -335,7 +352,7 @@ position:absolute;
 }
 .rectanglel4
 {
-background-color:rgba(206, 220, 109, 0.5);
+background-color:#FBEEE7;
 height:37px;
 width:253px;
 top:379px;
@@ -344,7 +361,7 @@ position:absolute;
 }
 .rectangleb4
 {
-background-color:#cedc6d;
+background-color:#f0ccb4;
 height:37px;
 width:5px;
 top:379px;
@@ -353,7 +370,7 @@ position:absolute;
 }
 .rectanglel5
 {
-background-color:rgba(206, 220, 109, 0.5);
+background-color:#FBEEE7;
 height:37px;
 width:253px;
 top:527px;
@@ -362,7 +379,7 @@ position:absolute;
 }
 .rectangleb5
 {
-background-color:#cedc6d;
+background-color:#f0ccb4;
 height:37px;
 width:5px;
 top:527px;
