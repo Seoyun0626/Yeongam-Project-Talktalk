@@ -68,8 +68,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           event.parentsAge_code,
           event.emd_class_code,
           event.sex_class_code);
-      print(event);
-      print(resp.resp);
+      // print(event);
+      // print(resp.resp);
       print(resp.message);
 
       if (resp.resp) {

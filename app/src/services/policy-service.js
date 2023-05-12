@@ -246,6 +246,7 @@ exports.banner = async function(req, res) {
         resultcode = 100;
     }
 };
+
 exports.fetchBannerData = async function(req, res) {
     var conn;
     try{

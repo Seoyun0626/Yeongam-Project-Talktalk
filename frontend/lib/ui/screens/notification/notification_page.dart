@@ -44,7 +44,10 @@ class _NotificationPageState extends State<NotificationPage> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start, children: [])),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Container(child: TextCustom(text: ),)
+                  ])),
         ));
   }
 }

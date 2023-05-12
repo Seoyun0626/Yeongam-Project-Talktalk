@@ -148,6 +148,7 @@ class _UserInfoState extends State<_UserInfo> {
   @override
   Widget build(BuildContext context) {
     final userBloc = BlocProvider.of<UserBloc>(context);
+    // print(userBloc.state.user!.userpw);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

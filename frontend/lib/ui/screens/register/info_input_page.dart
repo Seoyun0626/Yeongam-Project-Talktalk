@@ -85,6 +85,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
       listener: (context, state) {
         if (state is LoadingUserState) {
           modalLoading(context, '로드 중');
+          Navigator.pop(context);
         } else if (state is SuccessUserState) {
           // Navigator.pop(context);
           modalSuccess(

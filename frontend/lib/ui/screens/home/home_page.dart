@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
@@ -31,7 +30,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     // final userBloc = BlocProvider.of<UserBloc>(context);
     final authBloc = BlocProvider.of<AuthBloc>(context);
 
@@ -45,45 +44,55 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(
                   color: ThemeColors.primary,
                   fontFamily: 'CookieRun',
-                  fontSize: 28.sp,
+                  fontSize: 20.sp,
                 )),
             leading: InkWell(
-              // onTap: () => Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const LoginPage(),
-              //     )),
               child: Image.asset('images/aco.png', height: 55.h),
             ),
             actions: [
-              IconButton(
-                  icon: Icon(
-                    Icons.perm_identity,
-                    size: 25.w,
-                    color: ThemeColors.primary,
-                  ),
-                  onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const LoginPage(),
-                    //     ));
+              Row(children: [
+                IconButton(
+                    icon: Icon(
+                      Icons.notifications_none_outlined,
+                      size: 25.w,
+                      color: ThemeColors.primary,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NotificationPage()));
+                    }),
+                IconButton(
+                    icon: Icon(
+                      Icons.perm_identity,
+                      size: 25.w,
+                      color: ThemeColors.primary,
+                    ),
+                    onPressed: () {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => const LoginPage(),
+                      //     ));
 
-                    if (authBloc.state is LogOut) {
-                      // 로그인 상태가 아닐 경우 LoginPage로 이동
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
-                      );
-                    } else {
-                      // 로그인 상태일 경우 MyPage로 이동
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const MyPage()),
-                      );
-                    }
-                  }),
+                      if (authBloc.state is LogOut) {
+                        // 로그인 상태가 아닐 경우 LoginPage로 이동
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()),
+                        );
+                      } else {
+                        // 로그인 상태일 경우 MyPage로 이동
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MyPage()),
+                        );
+                      }
+                    }),
+              ])
             ],
             backgroundColor: Colors.white, //ThemeColors.primary,
             centerTitle: false,
@@ -160,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                           TextCustom(
                             text: '카테고리별 정책을 확인하세요!',
                             color: Colors.black, //ThemeColors.basic,
-                            fontSize: 19.sp,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
                           ),
                         ]),
@@ -214,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                             TextCustom(
                               text: '지금 인기있는 정책은?',
                               color: Colors.black, //ThemeColors.basic,
-                              fontSize: 19.sp,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w700,
                             ),
                           ]),
@@ -380,7 +389,7 @@ class CategoryButton extends StatelessWidget {
                       iconSize: 32.w), //MediaQuery.of(context).size.width / 8),
                   TextCustom(
                     text: categoryIcons01[index].name,
-                    fontSize: 15.sp,
+                    fontSize: 13.sp,
                     color: ThemeColors.basic,
                     // fontWeight: FontWeight.w600,
                   ),
@@ -415,7 +424,7 @@ class CategoryButton extends StatelessWidget {
                   ),
                   TextCustom(
                     text: categoryIcons02[index].name,
-                    fontSize: 15.sp,
+                    fontSize: 13.sp,
                     color: ThemeColors.basic,
                     // fontWeight: FontWeight.w600,
                   ),
@@ -476,7 +485,7 @@ class livePopularPolicy extends StatelessWidget {
             title: TextCustom(
               text: policies.policy_name,
               color: ThemeColors.basic,
-              fontSize: 18.sp,
+              fontSize: 13.sp,
               fontWeight: FontWeight.w500,
             )));
   }

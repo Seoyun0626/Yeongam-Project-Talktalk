@@ -20,6 +20,8 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ));
+    // final width = MediaQuery.of(context).size.width;
+    // final height = MediaQuery.of(context).size.height;
 
     return ScreenUtilInit(
         designSize: const Size(360, 690),

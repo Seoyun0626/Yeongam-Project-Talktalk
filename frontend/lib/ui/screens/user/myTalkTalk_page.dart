@@ -348,6 +348,8 @@ class _MyFig extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userBloc = BlocProvider.of<UserBloc>(context);
+
     return Center(
         child: InkWell(
       onTap: () {},
@@ -377,13 +379,27 @@ class _MyFig extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const TextCustom(
-                    text: '-',
-                    fontSize: 40,
-                    color: ThemeColors.basic,
-                    fontWeight: FontWeight.bold,
+                  BlocBuilder<AuthBloc, AuthState>(
+                    builder: (_, state) {
+                      if (state is LogOut) {
+                        return const TextCustom(
+                          text: '-',
+                          fontSize: 40,
+                          color: ThemeColors.basic,
+                          fontWeight: FontWeight.bold,
+                        );
+                      } else {
+                        return TextCustom(
+                          text: userBloc.state.user!.fig,
+                          fontSize: 40,
+                          color: ThemeColors.basic,
+                          fontWeight: FontWeight.bold,
+                        );
+                      }
+                    },
                   ),
-                  Icon(
+
+                  const Icon(
                     Icons.apple,
                     size: 50,
                     // color: Colors.purple[400],

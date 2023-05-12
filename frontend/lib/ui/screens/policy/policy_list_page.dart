@@ -401,7 +401,7 @@ class PolicyBar extends StatefulWidget {
 
 class _PolicyBarState extends State<PolicyBar> {
   String _selectedSortBy = '최신순';
-  final List<String> _sortByOptions = ['최신순', '스크랩순'];
+  final List<String> _sortByOptions = ['최신순', '스크랩순', '마감일순', '조회수순'];
 
   @override
   Widget build(BuildContext context) {

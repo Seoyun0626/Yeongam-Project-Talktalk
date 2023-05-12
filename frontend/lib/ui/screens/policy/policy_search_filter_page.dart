@@ -66,42 +66,42 @@ class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
               const SizedBox(
                 height: 20,
               ),
-              // SearchConditionList(
-              //     title: '적용 대상',
-              //     codeName: 'policy_target_code',
-              //     setSelectedCodeData: (data) {
-              //       setSelectedCodeData(data);
-              //     }),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // SearchConditionList(
-              //     title: '정책 분야',
-              //     codeName: 'policy_field_code',
-              //     setSelectedCodeData: (data) {
-              //       setSelectedCodeData(data);
-              //     }),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // SearchConditionList(
-              //     title: '정책 성격',
-              //     codeName: 'policy_character_code',
-              //     setSelectedCodeData: (data) {
-              //       setSelectedCodeData(data);
-              //     }),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // SearchConditionList(
-              //     title: '지역',
-              //     codeName: 'emd_class_code',
-              //     setSelectedCodeData: (data) {
-              //       setSelectedCodeData(data);
-              //     }),
-              // const SizedBox(
-              //   height: 20,
-              // ),
+              SearchConditionList(
+                  title: '적용 대상',
+                  codeName: 'policy_target_code',
+                  setSelectedCodeData: (data) {
+                    setSelectedCodeData(data);
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
+              SearchConditionList(
+                  title: '정책 분야',
+                  codeName: 'policy_field_code',
+                  setSelectedCodeData: (data) {
+                    setSelectedCodeData(data);
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
+              SearchConditionList(
+                  title: '정책 성격',
+                  codeName: 'policy_character_code',
+                  setSelectedCodeData: (data) {
+                    setSelectedCodeData(data);
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
+              SearchConditionList(
+                  title: '지역',
+                  codeName: 'emd_class_code',
+                  setSelectedCodeData: (data) {
+                    setSelectedCodeData(data);
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
               Center(
                   child: BtnNaru(
                 text: '검색하기',
