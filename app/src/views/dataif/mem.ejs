@@ -87,7 +87,7 @@
           <% for(var i=0; i<posts.length; i++){ %>
             <tr>
               <td><%= posts[i].userid %></td>
-              <td><%= posts[i].name %></td>
+              <td><%= posts[i].user_name %></td>
               <td><%= role_code_to_class(posts[i].user_role) %></td>
               <td><%= emd_code_to_name(posts[i].emd_class_code,code_data) %></td>
               <td><%= user_type_to_name(posts[i].user_type,code_data) %></td>

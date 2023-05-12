@@ -207,3 +207,14 @@ CREATE TABLE webdb.`tb_policy_scrap`
 	FOREIGN KEY(user_uid) REFERENCES webdb.`tb_user`(`uid`),
 	FOREIGN KEY(policy_uid) REFERENCES webdb.`tb_policy`(`uid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 출석 체크
+CREATE TABLE tb_attendance_logs (
+  -- `uid_attendance` VARCHAR(100) PRIMARY KEY,
+  `user_uid` VARCHAR(100) NOT NULL,
+  `attendance_date` DATE,
+  `attendance_time` TIME,
+  -- PRIMARY KEY (user_uid, attendance_date),
+  FOREIGN KEY(user_uid) REFERENCES webdb.`tb_user`(`uid`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -35,6 +35,21 @@ router.post("/login", async function(req, res) {
   }
 });
 
+router.get('/attendance', async function (req, res) {
+  try{
+    var attendance = await login_controller.getAttendance(req, res);
+    if(attendance == 0){ // 출석 진행
+      var result = await login_controller.checkAttendance(req, res);
+      res.redirect('/admin/dataif');
+    } else {
+      console.log("이미 출석하셨습니다.");
+      res.redirect('/admin/dataif');
+    }
+  } catch(error) {
+    console.log('login-router login error:'+error);
+  }
+});
+
 // router.post('/login', passport.authenticate('local-login', {
 //   // successRedirect: '/admin/auth/loginSuccess', //인증성공시 이동하는화면주소
 //   successRedirect: '/admin/dataif', //인증성공시 이동하는화면주소
