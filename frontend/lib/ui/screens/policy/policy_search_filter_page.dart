@@ -15,11 +15,57 @@ class PolicySearchFilterPage extends StatefulWidget {
 
 class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
   late CodeDetailData selectedCode;
+  final SelectedCodes selectedCodeList = SelectedCodes();
 
   void setSelectedCodeData(CodeDetailData data) {
     setState(() {
       selectedCode = data;
     });
+
+    switch (data.codeName) {
+      case 'policy_institution_code':
+        if (selectedCodeList.policyInstitution != null &&
+            selectedCodeList.policyInstitution!.contains(data)) {
+          selectedCodeList.policyInstitution!.remove(data);
+        } else {
+          selectedCodeList.policyInstitution = [data];
+        }
+        break;
+      case 'policy_target_code':
+        if (selectedCodeList.policyTarget != null &&
+            selectedCodeList.policyTarget!.contains(data)) {
+          selectedCodeList.policyTarget!.remove(data);
+        } else {
+          selectedCodeList.policyTarget = [data];
+        }
+        break;
+      case 'policy_field_code':
+        if (selectedCodeList.policyField != null &&
+            selectedCodeList.policyField!.contains(data)) {
+          selectedCodeList.policyField!.remove(data);
+        } else {
+          selectedCodeList.policyField = [data];
+        }
+        break;
+      case 'policy_character_code':
+        if (selectedCodeList.policyCharacter != null &&
+            selectedCodeList.policyCharacter!.contains(data)) {
+          selectedCodeList.policyCharacter!.remove(data);
+        } else {
+          selectedCodeList.policyCharacter = [data];
+        }
+        break;
+      // case 'emd_class_code':
+      //   if (selectedCodeList.policyArea != null &&
+      //       selectedCodeList.policyArea!.contains(data)) {
+      //     selectedCodeList.policyArea!.remove(data);
+      //   } else {
+      //     selectedCodeList.policyArea = [data];
+      //   }
+      //   break;
+      default:
+        break;
+    }
   }
 
   @override
@@ -30,6 +76,47 @@ class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    // -----
+    print('SelectedCodes=======');
+
+    if (selectedCodeList.policyInstitution != null) {
+      selectedCodeList.policyInstitution!.forEach((element) {
+        print('policyInstitution : ${element.detailName}');
+      });
+    } else {
+      print('policyInstitution : null');
+    }
+    if (selectedCodeList.policyTarget != null) {
+      selectedCodeList.policyTarget!.forEach((element) {
+        print('policyTarget : ${element.detailName}');
+      });
+    } else {
+      print('policyTarget : null');
+    }
+    if (selectedCodeList.policyField != null) {
+      selectedCodeList.policyField!.forEach((element) {
+        print('policyField : ${element.detailName}');
+      });
+    } else {
+      print('policyField : null');
+    }
+    if (selectedCodeList.policyCharacter != null) {
+      selectedCodeList.policyCharacter!.forEach((element) {
+        print('policyCharacter : ${element.detailName}');
+      });
+    } else {
+      print('policyCharacter : null');
+    }
+    // if (selectedCodeList.policyArea != null) {
+    //   selectedCodeList.policyArea!.forEach((element) {
+    //     print('policyArea : ${element.detailName}');
+    //   });
+    // } else {
+    //   print('policyArea : null');
+    // }
+
+    //-----
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -93,45 +180,30 @@ class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
               const SizedBox(
                 height: 20,
               ),
-              SearchConditionList(
-                  title: '지역',
-                  codeName: 'emd_class_code',
-                  setSelectedCodeData: (data) {
-                    setSelectedCodeData(data);
-                  }),
-              const SizedBox(
-                height: 20,
-              ),
+              // SearchConditionList(
+              //     title: '지역',
+              //     codeName: 'emd_class_code',
+              //     setSelectedCodeData: (data) {
+              //       setSelectedCodeData(data);
+              //     }),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               Center(
                   child: BtnNaru(
                 text: '검색하기',
                 onPressed: () {
-                  // print(selectedCode.code);
-                  // print(selectedCode.detailName);
-                  // print(selectedCode.codeName);
-
-                  Navigator.pop(context, {
-                    'codeDetail': selectedCode.code,
-                    'codeName': selectedCode.codeName,
-                  });
+                  Navigator.pop(context, {});
 
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                           builder: (context) => PolicyListPage(
-                                codeDetail: selectedCode.code,
-                                codeName: selectedCode.codeName,
-                              )),
+                              // codeDetail: selectedCode.code,
+                              // codeName: selectedCode.codeName,
+                              //selectedCodes : selectedCodes,
+                              selectedCodes: selectedCodeList)),
                       (_) => false);
-
-                  // Navigator.pushAndRemoveUntil(
-                  //     context,
-                  //     routeFade(
-                  //         page: PolicyListPage(
-                  //       codeDetail: selectedCode.code,
-                  //       codeName: selectedCode.codeName,
-                  //     )),
-                  //     (_) => false);
                 },
                 width: size.width - 30,
                 colorText: Colors.black,
@@ -164,21 +236,28 @@ class SearchConditionList extends StatefulWidget {
 
 class _SearchConditionListState extends State<SearchConditionList> {
   List<CodeDetailData> codeDetailDataList = [];
+  CodeDetailData? selectedCodeData;
   int selectedIndex = -1;
   CodeDetailData? _selectedCode;
-
-  void _onSelected(CodeDetailData data) {
-    setState(() {
-      _selectedCode = data;
-    });
-    widget.setSelectedCodeData(data);
-  }
 
   @override
   void initState() {
     super.initState();
     codeDetailDataList =
         getMobileCodeService.getCodeDetailList(widget.codeName);
+  }
+
+  void _onSelected(CodeDetailData data) {
+    setState(() {
+      _selectedCode = data;
+      //   if (_selectedCode != null && _selectedCode != data) {
+      //     _selectedCode!.selected = false;
+      //   }
+      //   data.selected = !data.selected;
+      //   _selectedCode = data;
+    });
+
+    widget.setSelectedCodeData(data);
   }
 
   @override
@@ -207,28 +286,21 @@ class _SearchConditionListState extends State<SearchConditionList> {
               final codeDetailData = codeDetailDataList[index];
               return InkWell(
                 onTap: () {
-                  final codeDetailData = codeDetailDataList[index];
+                  final selectedValue = codeDetailDataList[index];
                   setState(() {
-                    // codeDetailData.selected = !codeDetailData.selected;
-                    _onSelected(codeDetailData);
+                    _onSelected(selectedValue);
                     if (selectedIndex != index) {
                       if (selectedIndex != -1) {
                         codeDetailDataList[selectedIndex].selected = false;
                       }
-                      codeDetailData.selected = true;
+                      selectedValue.selected = true;
                       selectedIndex = index;
-                      _selectedCode = codeDetailData;
+                      _selectedCode = selectedValue;
                     } else {
-                      codeDetailData.selected = false;
+                      selectedValue.selected = false;
                       selectedIndex = -1;
                       _selectedCode = null;
                     }
-                    // if (selectedCodeData == codeDetailData) {
-                    //   selectedCodeData = null; // 선택 취소
-                    // } else {
-                    //   selectedCodeData = codeDetailData; // 선택
-                    // }
-                    // print(_selectedCode?.code);
                   });
                 },
                 child: Container(

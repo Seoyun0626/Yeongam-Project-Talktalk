@@ -55,28 +55,83 @@ router.get('/get-all-policy', async function(req, res){
   })
   
   // 검색 조건 선택 결과
-  router.get('/get-select-policy/:codeName/:codeDetail', async function(req, res){
-    console.log('mobile-router get-select-policy', req.params.codeName);
-    console.log('mobile-router get-select-policy', req.params.codeDetail);
-
-    try{
-      var result = await mobile_policy_controller.getPolicyBySelect(req,res);
-
-      res.json({
-        resp:true,
-        message : 'get policies by select',
-        policies : result,
-      })
-  } catch(error) {
-      console.log('policy-router get-select-policy error:'+error);
-      res.json({
-        resp:false,
-        message : 'Failure get policies by select'
-      })
-  }
-    
+  // router.get('/get-select-policy/:institutionCodeName/:institutionCodeDetail/:targetCodeName/:targetCodeDetail/:fieldCodeName/:fieldCodeDetail/:characterCodeName/:characterCodeDetail', async function(req, res) {
+  //   console.log('mobile-router get-select-policy', req.params.institutionCodeName);
+  //   console.log('mobile-router get-select-policy', req.params.institutionCodeDetail);
+  //   console.log('mobile-router get-select-policy', req.params.targetCodeName);
+  //   console.log('mobile-router get-select-policy', req.params.targetCodeDetail);
+  //   console.log('mobile-router get-select-policy', req.params.fieldCodeName);
+  //   console.log('mobile-router get-select-policy', req.params.fieldCodeDetail);
+  //   console.log('mobile-router get-select-policy', req.params.characterCodeName);
+  //   console.log('mobile-router get-select-policy', req.params.characterCodeDetail);
   
+  //   try {
+  //     var result = await mobile_policy_controller.getPolicyBySelect(req, res);
+  
+  //     res.json({
+  //       resp: true,
+  //       message: 'get policies by select',
+  //       policies: result,
+  //     })
+  //   } catch(error) {
+  //     console.log('policy-router get-select-policy error:' + error);
+  //     res.json({
+  //       resp: false,
+  //       message: 'Failure get policies by select'
+  //     })
+  //   }
+  // })
+
+  router.get('/get-select-policy?:values', async function(req, res) {
+    // console.log(req.query);
+
+
+    try {
+      var result = await mobile_policy_controller.getPolicyBySelect(req, res);
+  
+      res.json({
+        resp: true,
+        message: 'get policies by select',
+        policies: result,
+      })
+    } catch(error) {
+      console.log('policy-router get-select-policy error:' + error);
+      res.json({
+        resp: false,
+        message: 'Failure get policies by select'
+      })
+    }
   })
+  
+  function createUri(values) {
+    const paths = [
+      'institutionCodeName',
+      'institutionCodeDetail',
+      'targetCodeName',
+      'targetCodeDetail',
+      'fieldCodeName',
+      'fieldCodeDetail',
+      'characterCodeName',
+      'characterCodeDetail'
+    ];
+  
+    let uri = '/get-select-policy/';
+  
+    // 선택된 값에 따라 경로 생성
+    if (values.length === 1) {
+      uri += values[0];
+    } else if (values.length === 2) {
+      uri += `${paths[values[0]]}/${values[1]}`;
+    } else if (values.length === 3) {
+      uri += `${paths[values[0]]}/${values[1]}/${paths[values[2]]}/${values[3]}`;
+    } else if (values.length === 4) {
+      uri += `${paths[values[0]]}/${values[1]}/${paths[values[2]]}/${values[3]}/${paths[values[4]]}/${values[5]}`;
+    }
+  
+    return uri;
+  }
+  
+  
 
   // 필요없음
 router.get('/get-all-policy-for-search', async function(req, res) {

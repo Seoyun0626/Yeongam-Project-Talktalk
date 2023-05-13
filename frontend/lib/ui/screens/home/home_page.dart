@@ -6,6 +6,7 @@ import 'package:login/data/env/env.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/policy_services.dart';
+import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/notification/notification_page.dart';
 import 'package:login/ui/screens/policy/policy_detail_page.dart';
 import 'package:login/ui/screens/policy/policy_list_page.dart';
@@ -180,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                         CategoryButton(),
                       ])),
                   SizedBox(
-                    height: 20.h,
+                    height: 15.h,
                   ),
 
                   // 실시간 인기글
@@ -201,60 +202,59 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(15).w,
                     // margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
                     child: InkWell(
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const PolicyListPage(
-                                codeName: '',
-                                codeDetail: '',
-                              ), // 복지검색 탭
-                            )),
+                        // onTap: () => Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => const PolicyListPage(
+                        //         codeName: '',
+                        //         codeDetail: '',
+                        //       ), // 복지검색 탭
+                        //     )),
                         child: Column(children: [
-                          Row(children: [
-                            Icon(
-                              Icons.auto_awesome,
-                              color: ThemeColors.primary,
-                              size: 22.w,
-                            ),
-                            // Image.asset('images/icon_sparkel.png'),
-                            SizedBox(
-                              width: 5.w,
-                            ),
-                            TextCustom(
-                              text: '지금 인기있는 정책은?',
-                              color: Colors.black, //ThemeColors.basic,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ]),
-                          SizedBox(
-                            height: 15.h,
-                          ),
-                          // 실시간 인기글
-                          FutureBuilder<List<Policy>>(
-                              future: policyService.getAllPolicy(),
-                              builder: ((_, snapshot) {
-                                if (snapshot.data != null &&
-                                    snapshot.data!.isEmpty) {
-                                  return _ListWithoutPopularPolicy();
-                                }
-                                if (!snapshot.hasData) {
-                                  return _ListWithoutPopularPolicy(); //const _ShimerLoadingPopularPolicy();
-                                } else {
-                                  return ListView.builder(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      itemCount: snapshot.data!.length > 5
-                                          ? 5
-                                          : snapshot.data!.length,
-                                      itemBuilder: (_, i) => livePopularPolicy(
-                                          // codeData: codeData,
-                                          ranking: i,
-                                          policies: snapshot.data![i]));
-                                }
-                              })),
-                        ])),
+                      Row(children: [
+                        Icon(
+                          Icons.auto_awesome,
+                          color: ThemeColors.primary,
+                          size: 22.w,
+                        ),
+                        // Image.asset('images/icon_sparkel.png'),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        TextCustom(
+                          text: '지금 인기있는 정책은?',
+                          color: Colors.black, //ThemeColors.basic,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ]),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      // 실시간 인기글
+                      FutureBuilder<List<Policy>>(
+                          future: policyService.getAllPolicy(),
+                          builder: ((_, snapshot) {
+                            if (snapshot.data != null &&
+                                snapshot.data!.isEmpty) {
+                              return _ListWithoutPopularPolicy();
+                            }
+                            if (!snapshot.hasData) {
+                              return _ListWithoutPopularPolicy(); //const _ShimerLoadingPopularPolicy();
+                            } else {
+                              return ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data!.length > 5
+                                      ? 5
+                                      : snapshot.data!.length,
+                                  itemBuilder: (_, i) => livePopularPolicy(
+                                      // codeData: codeData,
+                                      ranking: i,
+                                      policies: snapshot.data![i]));
+                            }
+                          })),
+                    ])),
                   ),
 
                   const SizedBox(height: 30.0),
@@ -295,70 +295,78 @@ class BannerSlide extends StatelessWidget {
 }
 
 class HomeCategory {
-  final String name;
+  final String title;
   final String code;
   final String codeName;
+  final String codeDetailName;
   final String icon;
   HomeCategory(
-      {required this.name,
+      {required this.title,
       required this.code,
       required this.codeName,
+      required this.codeDetailName,
       required this.icon});
 }
 
 // 카테고리 아이콘 버튼
-class CategoryButton extends StatelessWidget {
+class CategoryButton extends StatefulWidget {
+  const CategoryButton({super.key});
+
+  @override
+  State<CategoryButton> createState() => _CategoryButtonState();
+}
+
+class _CategoryButtonState extends State<CategoryButton> {
+  List<CodeDetailData> codeDetailDataList = [];
   static String codeName = 'policy_field_code';
-
-  final List<HomeCategory> categoryIcons01 = [
-    HomeCategory(
-        name: '학업',
-        code: '00',
-        codeName: codeName,
-        icon: 'images/category_icon/icon_study.svg'),
-    HomeCategory(
-        name: '상담',
-        code: '01',
-        codeName: codeName,
-        icon: 'images/category_icon/icon_counseling.svg'),
-    HomeCategory(
-        name: '건강',
-        code: '02',
-        codeName: codeName,
-        icon: 'images/category_icon/icon_health.svg'),
-    HomeCategory(
-        name: '생활비',
-        code: '03',
-        codeName: codeName,
-        icon: 'images/category_icon/icon_money.svg'),
-  ];
-
-  final List<HomeCategory> categoryIcons02 = [
-    HomeCategory(
-        name: '청소년활동',
-        code: '04',
-        codeName: codeName,
-        icon: 'images/category_icon/icon_teenagers.svg'),
-    HomeCategory(
-        name: '학교밖',
-        code: '05',
-        codeName: codeName,
-        icon: 'images/category_icon/icon_schoolOut.svg'),
-    HomeCategory(
-        name: '돌봄',
-        code: '06',
-        codeName: codeName,
-        icon: 'images/category_icon/icon_caring.svg'),
-    HomeCategory(
-        name: '전체보기',
-        code: '',
-        codeName: codeName,
-        icon: 'images/category_icon/icon_total.svg'),
-  ];
-  CategoryButton({super.key});
+  @override
+  void initState() {
+    super.initState();
+    codeDetailDataList = getMobileCodeService.getCodeDetailList(codeName);
+  }
 
   @override
   Widget build(BuildContext context) {
+    // codeDetailDataList.forEach((element) {
+    //   print(element.detailName);
+    // });
+    final List<HomeCategory> categoryIcons01 = codeDetailDataList
+        .where((detail) => ['00', '01', '03', '04'].contains(detail.code))
+        .map((detail) => HomeCategory(
+            title: [
+              '학업',
+              '상담',
+              '생활비',
+              '건강'
+            ][['00', '01', '03', '04'].indexOf(detail.code)],
+            code: detail.code,
+            codeName: codeName,
+            codeDetailName: detail.detailName,
+            icon: 'images/category_icon/icon_${detail.code}.svg'))
+        .toList();
+
+    final List<HomeCategory> categoryIcons02 = codeDetailDataList
+        .where((detail) => ['07', '08', '09'].contains(detail.code))
+        .map((detail) => HomeCategory(
+            title: ['청소년활동', '학교밖', '돌봄'][[
+              '07',
+              '08',
+              '09',
+            ].indexOf(detail.code)],
+            code: detail.code,
+            codeName: codeName,
+            codeDetailName: detail.detailName,
+            icon: 'images/category_icon/icon_${detail.code}.svg'))
+        .toList();
+
+    // 전체보기 HomeCategory 추가
+    categoryIcons02.add(HomeCategory(
+        title: '전체보기',
+        code: '',
+        codeName: codeName,
+        codeDetailName: '', // 비어 있는 문자열로 초기화
+        icon: 'images/category_icon/icon_total.svg'));
+
     return Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -377,18 +385,31 @@ class CategoryButton extends StatelessWidget {
                       onPressed: () {
                         var codeName = categoryIcons01[index].codeName;
                         var codeValue = categoryIcons01[index].code;
+                        var codeDetailName =
+                            categoryIcons01[index].codeDetailName;
+                        // print(codeDetailName + codeValue + codeName);
+
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
+                          context,
+                          MaterialPageRoute(
                               builder: (context) => PolicyListPage(
-                                codeName: codeName,
-                                codeDetail: codeValue,
-                              ), // 복지검색 탭
-                            ));
+                                      selectedCodes: SelectedCodes(
+                                    policyInstitution: [],
+                                    policyTarget: [],
+                                    policyField: [
+                                      CodeDetailData(
+                                          code: codeValue,
+                                          codeName: codeName,
+                                          detailName: codeDetailName)
+                                    ],
+                                    policyCharacter: [],
+                                    // policyArea: []
+                                  ))),
+                        );
                       },
                       iconSize: 32.w), //MediaQuery.of(context).size.width / 8),
                   TextCustom(
-                    text: categoryIcons01[index].name,
+                    text: categoryIcons01[index].title,
                     fontSize: 13.sp,
                     color: ThemeColors.basic,
                     // fontWeight: FontWeight.w600,
@@ -410,20 +431,32 @@ class CategoryButton extends StatelessWidget {
                     onPressed: () {
                       var codeName = categoryIcons02[index].codeName;
                       var codeValue = categoryIcons02[index].code;
+                      var codeDetailName =
+                          categoryIcons02[index].codeDetailName;
+                      // print(codeDetailName + codeValue + codeName);
 
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
+                        context,
+                        MaterialPageRoute(
                             builder: (context) => PolicyListPage(
-                              codeName: codeName,
-                              codeDetail: codeValue,
-                            ), // 복지검색 탭
-                          ));
+                                    selectedCodes: SelectedCodes(
+                                  policyInstitution: [],
+                                  policyTarget: [],
+                                  policyField: [
+                                    CodeDetailData(
+                                        code: codeValue,
+                                        codeName: codeName,
+                                        detailName: codeDetailName)
+                                  ],
+                                  policyCharacter: [],
+                                  // policyArea: []
+                                ))),
+                      );
                     },
                     iconSize: 32.w, //MediaQuery.of(context).size.width / 8,
                   ),
                   TextCustom(
-                    text: categoryIcons02[index].name,
+                    text: categoryIcons02[index].title,
                     fontSize: 13.sp,
                     color: ThemeColors.basic,
                     // fontWeight: FontWeight.w600,

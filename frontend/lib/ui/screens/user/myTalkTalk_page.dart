@@ -390,7 +390,7 @@ class _MyFig extends StatelessWidget {
                         );
                       } else {
                         return TextCustom(
-                          text: userBloc.state.user!.fig,
+                          text: userBloc.state.user?.fig ?? '',
                           fontSize: 40,
                           color: ThemeColors.basic,
                           fontWeight: FontWeight.bold,

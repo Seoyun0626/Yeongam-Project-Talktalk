@@ -38,14 +38,20 @@ class BottomNavigation extends StatelessWidget {
               isReel: isReel,
               iconString: 'images/bottom_bar/icon_menu_thumb.svg',
               iconText: '복지검색',
-              onPressed: () => Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PolicyListPage(
-                            codeName: '',
-                            codeDetail: '',
-                          )),
-                  (_) => false)),
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PolicyListPage(
+                                selectedCodes: SelectedCodes(
+                              policyInstitution: [],
+                              policyTarget: [],
+                              policyField: [],
+                              policyCharacter: [],
+                              // policyArea: []
+                            ))),
+                    (_) => false);
+              }),
           _ItemButtom(
               i: 3,
               index: index,

@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		dh+NEJpp51OGLhdfHIoSJgLCzBg=
+		M2crbKaRH2uQA9HrKGKXdnApvjY=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -124,37 +124,45 @@
 		<data>
 		3y++sUAKzaCQmjLBz2v0kvESHgc=
 		</data>
-		<key>flutter_assets/images/category_icon/icon_allsee.png</key>
+		<key>flutter_assets/images/category_icon/icon_00.svg</key>
 		<data>
-		hrT1LggBvKByeZtt/grNGIObvCs=
+		Lx3e63r/LwJrRJzakOeHoJh3GQw=
+		</data>
+		<key>flutter_assets/images/category_icon/icon_01.svg</key>
+		<data>
+		RwUWNNEDhGpROD0yNxv3SELVHrI=
+		</data>
+		<key>flutter_assets/images/category_icon/icon_02.svg</key>
+		<data>
+		kWqsLc6BHGGzRWJZx9pj3TKggYQ=
+		</data>
+		<key>flutter_assets/images/category_icon/icon_03.svg</key>
+		<data>
+		kWqsLc6BHGGzRWJZx9pj3TKggYQ=
+		</data>
+		<key>flutter_assets/images/category_icon/icon_04.svg</key>
+		<data>
+		VyAM6eV0v2Q6aHWbwBExkGl08Qg=
+		</data>
+		<key>flutter_assets/images/category_icon/icon_07.svg</key>
+		<data>
+		XGJDk/dSGvvYKFplBZ4uUMReXvM=
+		</data>
+		<key>flutter_assets/images/category_icon/icon_08.svg</key>
+		<data>
+		mbuFwjqRjHKr6tHZYppEyGT+oFE=
+		</data>
+		<key>flutter_assets/images/category_icon/icon_09.svg</key>
+		<data>
+		NO06OPQ5ThhmRfXEyV1iqye/PjE=
 		</data>
 		<key>flutter_assets/images/category_icon/icon_baby.png</key>
 		<data>
 		A4wv8tUe4jQZIkKcZapGhwbOjJ4=
 		</data>
-		<key>flutter_assets/images/category_icon/icon_care.png</key>
-		<data>
-		xagBNFGdCW5r7c7rUkgjFUp5Mpc=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_caring.svg</key>
-		<data>
-		NO06OPQ5ThhmRfXEyV1iqye/PjE=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_counseling.png</key>
-		<data>
-		nH/cTU3mv9MopcBnChZDsKT064k=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_counseling.svg</key>
-		<data>
-		RwUWNNEDhGpROD0yNxv3SELVHrI=
-		</data>
 		<key>flutter_assets/images/category_icon/icon_health.png</key>
 		<data>
 		RXN0mWPupqTfB5oSOS1MljlA+K8=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_health.svg</key>
-		<data>
-		kWqsLc6BHGGzRWJZx9pj3TKggYQ=
 		</data>
 		<key>flutter_assets/images/category_icon/icon_house.png</key>
 		<data>
@@ -163,38 +171,6 @@
 		<key>flutter_assets/images/category_icon/icon_job.png</key>
 		<data>
 		NeCnRR2e0XZFkdPin663iFJAykg=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_living.png</key>
-		<data>
-		ukBsa3CPGjkNM7flZZGjRnWiH1I=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_money.svg</key>
-		<data>
-		VyAM6eV0v2Q6aHWbwBExkGl08Qg=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_outofschool.png</key>
-		<data>
-		b5T+ItJtcMgUZ2OpPmhf59K8e4A=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_schoolOut.svg</key>
-		<data>
-		mbuFwjqRjHKr6tHZYppEyGT+oFE=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_studentactivity.png</key>
-		<data>
-		K/iVMrd0NF0OhpI9PXezF8lR2PQ=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_study.png</key>
-		<data>
-		y2mRKtUtbF6R9cEWR3Dnd9qgNO4=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_study.svg</key>
-		<data>
-		Lx3e63r/LwJrRJzakOeHoJh3GQw=
-		</data>
-		<key>flutter_assets/images/category_icon/icon_teenagers.svg</key>
-		<data>
-		XGJDk/dSGvvYKFplBZ4uUMReXvM=
 		</data>
 		<key>flutter_assets/images/category_icon/icon_total.svg</key>
 		<data>
@@ -254,7 +230,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		lmCJZhOEiGTxozxuPssTul40OXw=
+		Go6udUXiT/vF3Vs9i9i/h8Y/gDI=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -275,7 +251,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1IkZz7vx9rYdxpYdNn16yw4krvCxwb88AKd7WhFCui8=
+			xBqRkU5RZ71A+1OPQ5S1CbhRvmfalkS8u4FGj7mk2NU=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -453,11 +429,60 @@
 			qwbF783VUcAlgwH3CiurHwKne720poPzyqRIH/PcsdU=
 			</data>
 		</dict>
-		<key>flutter_assets/images/category_icon/icon_allsee.png</key>
+		<key>flutter_assets/images/category_icon/icon_00.svg</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			coALHPr4OERWiuhSCRBxRhq8CSvc2Q+4jSj5GUys+Uk=
+			Pd5DJMIBbiUrBJXrxp2Uzk9Uj+88jeHTAKRUjsGcpoo=
+			</data>
+		</dict>
+		<key>flutter_assets/images/category_icon/icon_01.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			51+fmF9bjr1cAx4y8m/rMjxqlkYUkZqZijIF8jMupCc=
+			</data>
+		</dict>
+		<key>flutter_assets/images/category_icon/icon_02.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+lToVNO/jvHzgqk8aANZp8NWFwjtuiVwSdHJ6edWO70=
+			</data>
+		</dict>
+		<key>flutter_assets/images/category_icon/icon_03.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+lToVNO/jvHzgqk8aANZp8NWFwjtuiVwSdHJ6edWO70=
+			</data>
+		</dict>
+		<key>flutter_assets/images/category_icon/icon_04.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iaERNJDz53p0Sob7/OS4mwPdYDWxOmAUhUDDrNjlD64=
+			</data>
+		</dict>
+		<key>flutter_assets/images/category_icon/icon_07.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HKLPFltpWWvb5gauZX8evRWdspis6Z2gb9VXqOzNxNY=
+			</data>
+		</dict>
+		<key>flutter_assets/images/category_icon/icon_08.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4YI3UgsWsOgL0MVZLNBJJ4kR1XzTdgqw40OOGL66Pxk=
+			</data>
+		</dict>
+		<key>flutter_assets/images/category_icon/icon_09.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			mB/c6I6MWkywIqjRQJEUvyUOW/ZrCbHop6f+97QmzuE=
 			</data>
 		</dict>
 		<key>flutter_assets/images/category_icon/icon_baby.png</key>
@@ -467,46 +492,11 @@
 			fWR+6pzNt7ndJaUd9U9cJTokt81nozH5CuuZXYNTkVY=
 			</data>
 		</dict>
-		<key>flutter_assets/images/category_icon/icon_care.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			cI3p5lVWzDX12TUx++DOwjHJBZgg+jt7QP0+hvGXiGc=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_caring.svg</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			mB/c6I6MWkywIqjRQJEUvyUOW/ZrCbHop6f+97QmzuE=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_counseling.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			KliHA91w6YUbfkY6aDsdQ91sPKg+V6EO5AZGKU9je4Q=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_counseling.svg</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			51+fmF9bjr1cAx4y8m/rMjxqlkYUkZqZijIF8jMupCc=
-			</data>
-		</dict>
 		<key>flutter_assets/images/category_icon/icon_health.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
 			EMfu9RsFbCmKKvRyL3y2HRKmlmWO9LUJ2kcShDLeh7E=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_health.svg</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			+lToVNO/jvHzgqk8aANZp8NWFwjtuiVwSdHJ6edWO70=
 			</data>
 		</dict>
 		<key>flutter_assets/images/category_icon/icon_house.png</key>
@@ -521,62 +511,6 @@
 			<key>hash2</key>
 			<data>
 			ehml4gwup5DX+NpQNf+aZjvfnrZ+nCiMAwZBwH5RcPs=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_living.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			oFlFNYJyJ6+d1uCGGHGczzgR8WhS6Bv4Kc9WlWfh5JY=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_money.svg</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			iaERNJDz53p0Sob7/OS4mwPdYDWxOmAUhUDDrNjlD64=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_outofschool.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Sf2bDGtH4HepHUF5FnLMX0irRyrCppVJz2EvGtvh594=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_schoolOut.svg</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			4YI3UgsWsOgL0MVZLNBJJ4kR1XzTdgqw40OOGL66Pxk=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_studentactivity.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Bq2N2l7tYr/5uYwg5UXyL3iS6zy/2dGBUTb9myuosQ0=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_study.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			COVilGVib5P/ojZgW5dTUXaL2zvV50kInoEjrWxders=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_study.svg</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Pd5DJMIBbiUrBJXrxp2Uzk9Uj+88jeHTAKRUjsGcpoo=
-			</data>
-		</dict>
-		<key>flutter_assets/images/category_icon/icon_teenagers.svg</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HKLPFltpWWvb5gauZX8evRWdspis6Z2gb9VXqOzNxNY=
 			</data>
 		</dict>
 		<key>flutter_assets/images/category_icon/icon_total.svg</key>
@@ -681,7 +615,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			r3wIufW2FCRP8T8m/d25n/IPiBwShfhF9ZIfbXM5OkY=
+			KyvWfxiQomBZY+4jFPHrNxviqIWu8DZ4OlWf5jqwC3Q=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

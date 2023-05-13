@@ -72,22 +72,40 @@ class PolicyServices {
   }
 
   Future<List<Policy>> getPolicyBySelect(
-      String codeName, String codeDetail) async {
-    //
-    // final token = await secureStorage.readToken();
-    // print(token);
-    // print('getPolicyBySelect');
+    String? institutionCodeName,
+    String? institutionCodeDetail,
+    String? targetCodeName,
+    String? targetCodeDetail,
+    String? fieldCodeName,
+    String? fieldCodeDetail,
+    String? characterCodeName,
+    String? characterCodeDetail,
+  ) async {
+    final queryParams = <String, String>{};
 
-    final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/policy/get-select-policy/' +
-            codeName +
-            '/' +
-            codeDetail),
-        headers:
-            _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
+    final selectedValues = {
+      'institutionCodeName': institutionCodeName,
+      'institutionCodeDetail': institutionCodeDetail,
+      'targetCodeName': targetCodeName,
+      'targetCodeDetail': targetCodeDetail,
+      'fieldCodeName': fieldCodeName,
+      'fieldCodeDetail': fieldCodeDetail,
+      'characterCodeName': characterCodeName,
+      'characterCodeDetail': characterCodeDetail,
+    };
 
-    // print('policy_services');
-    // print(resp.body);
+    // 선택된 값들만 필터링하여 query parameter 추가
+    selectedValues.forEach((key, value) {
+      if (value != null) {
+        queryParams[key] = value;
+      }
+    });
+
+    final uri = Uri.parse('${Environment.urlApi}/policy/get-select-policy')
+        .replace(queryParameters: queryParams);
+    // print(uri);
+
+    final resp = await http.get(uri, headers: _setHeaders());
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
 

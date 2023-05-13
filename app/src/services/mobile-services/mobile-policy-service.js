@@ -43,24 +43,155 @@ exports.getSearchPolicy = async function(req, res) {
         conn.release();
     }
 }
+// exports.getPolicyBySelect = async function(req, res){
+//     var conn;
+//     var institution_code_name = req.params.institutionCodeName;
+//     var institution_code_detail = req.params.institutionCodeDetail;
+//     var target_code_name = req.params.targetCodeName;
+//     var target_code_detail = req.params.targetCodeDetail;
+//     var field_code_name = req.params.fieldCodeName;
+//     var field_code_detail = req.params.fieldCodeDetail;
+//     var character_code_name = req.params.characterCodeName;
+//     var character_code_detail = req.params.characterCodeDetail;
+//     // console.log('policy-service getPolicyBySelect : ',code_name, code_detail);
+//     try {
+//         conn = await db.getConnection();
+//         console.log('policy-service getSearchPolicy db getConnecton');
+//         var query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ? AND " + field_code_name + " = ? AND " + character_code_name + " = ?;";
+//         var rows = await conn.query(query, [institution_code_detail, target_code_detail, field_code_detail, character_code_detail]);
+
+//         // console.log(rows);
+//         return rows;
+//     } catch(error){
+//         console.log('policy-service getSelectPolicy:'+error);
+//     } finally {
+//         conn.release();
+//     }
+// }
+
 exports.getPolicyBySelect = async function(req, res){
     var conn;
-    var code_name = req.params.codeName;
-    var code_detail = req.params.codeDetail;
-    // console.log('policy-service getPolicyBySelect : ',code_name, code_detail);
+    var institution_code_name = req.query.institutionCodeName;
+    var institution_code_detail = req.query.institutionCodeDetail;
+    var target_code_name = req.query.targetCodeName;
+    var target_code_detail = req.query.targetCodeDetail;
+    var field_code_name = req.query.fieldCodeName;
+    var field_code_detail = req.query.fieldCodeDetail;
+    var character_code_name = req.query.characterCodeName;
+    var character_code_detail = req.query.characterCodeDetail;
+
+
+    // console.log(institution_code_name);
+    // console.log(institution_code_detail);
+    // console.log(target_code_name);
+    // console.log(target_code_detail);
+    // console.log(field_code_name);
+    // console.log(field_code_detail);
+    // console.log(character_code_name);
+    // console.log(character_code_detail);
+
     try {
         conn = await db.getConnection();
         console.log('policy-service getSearchPolicy db getConnecton');
-        var query = "SELECT * FROM webdb.tb_policy WHERE " + code_name + " = ?;"; 
-        var rows =  await conn.query(query, [code_detail]); // 쿼리 실행
-        // console.log(rows);
+
+        var query = "";
+        var values = [];
+
+        // 4개 선택
+        if (institution_code_name && target_code_name && field_code_name && character_code_name) {
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ? AND " + field_code_name + " = ? AND " + character_code_name + " = ?;";
+            values = [institution_code_detail, target_code_detail, field_code_detail, character_code_detail];
+        } 
+        // 3개 선택 - 운영 기관, 정책 대상, 정책 분야
+        else if (institution_code_name && target_code_name && field_code_name) { // 3개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ? AND " + field_code_name + " = ?;";
+            values = [institution_code_detail, target_code_detail, field_code_detail];
+        }
+        // 3개 선택 - 운영 기관, 정책 대상, 정책 성격
+        else if (institution_code_name && target_code_name && character_code_name) { // 3개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ? AND " + character_code_name + " = ?;";
+            values = [institution_code_detail, target_code_detail, character_code_detail];
+        }
+        // 3개 선택 - 운영 기관, 정책 분야, 정책 성격 
+        else if (institution_code_name && field_code_name && character_code_name) { // 3개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + field_code_name + " = ? AND " + character_code_name + " = ?;";
+            values = [institution_code_detail, field_code_detail, character_code_detail];
+        }
+        // 3개 선택 - 정책 대상, 정책 분야, 정책 성격
+        else if (target_code_name && field_code_name && character_code_name) { // 3개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ? AND " + field_code_name + " = ? AND " + character_code_name + " = ?;";
+            values = [target_code_detail, field_code_detail, character_code_detail];
+        }
+        // 2개 선택 - 운영 기관, 정책 대상
+        else if (institution_code_name && target_code_name) { // 2개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ?;";
+            values = [institution_code_detail, target_code_detail];
+        }
+        // 2개 선택 - 운영 기관, 정책 분야
+        else if (institution_code_name && field_code_name) { // 2개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + field_code_name + " = ?;";
+            values = [institution_code_detail, field_code_detail];
+        }
+        // 2개 선택 - 운영 기관, 정책 성격
+        else if (institution_code_name && character_code_name) { // 2개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + character_code_name + " = ?;";
+            values = [institution_code_detail, character_code_detail];
+        }
+        // 2개 선택 - 정책 대상, 정책 분야
+        else if (target_code_name && field_code_name) { // 2개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ? AND " + field_code_name + " = ?;";
+            values = [target_code_detail, field_code_detail];
+        }
+        // 2개 선택 - 정책 대상, 정책 성격
+        else if (target_code_name && character_code_name) { // 2개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ? AND " + character_code_name + " = ?;";
+            values = [target_code_detail, character_code_detail];
+        }
+        // 2개 선택 - 정책 분야, 정책 성격
+        else if (field_code_name && character_code_name) { // 2개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + field_code_name + " = ? AND " + character_code_name + " = ?;";
+            values = [field_code_detail, character_code_detail];
+        } 
+        // 1개 선택 - 운영 기관
+        else if (institution_code_name) { // 1개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ?;";
+            values = [institution_code_detail];
+        }
+        // 1개 선택 - 정책 대상
+        else if (target_code_name) { // 1개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ?;";
+            values = [target_code_detail];
+        }
+        // 1개 선택 - 정책 분야
+        else if (field_code_name) { // 1개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + field_code_name + " = ?;";
+            values = [field_code_detail];
+        }
+        // 1개 선택 - 정책 성격
+        else if (character_code_name) { // 1개 선택
+            query = "SELECT * FROM webdb.tb_policy WHERE " + character_code_name + " = ?;";
+            values = [character_code_detail];
+        } 
+
+        // else { // 선택된 조건이 없을 경우
+        //     return { success: false, message: "At least one search condition must be selected." };
+        // }
+
+        // console.log('policy-service getSelectPolicy query:', query, ' values:', values);
+
+        const rows = await conn.query(query, values);
+        // console.log('policy-service getSearchPolicy rows:', rows);
         return rows;
-    } catch(error){
+        
+    }
+
+    catch(error){
         console.log('policy-service getSelectPolicy:'+error);
     } finally {
         conn.release();
-    }
+     }
 }
+
 
 exports.getAllPolicyForSearch = async function(req, res) {
     var conn;

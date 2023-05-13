@@ -14,42 +14,162 @@ import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:login/domain/blocs/policy/policy_bloc.dart';
 
+class SelectedCodes {
+  late List<CodeDetailData>? policyInstitution;
+  late List<CodeDetailData>? policyTarget;
+  late List<CodeDetailData>? policyField;
+  late List<CodeDetailData>? policyCharacter;
+  // late List<CodeDetailData>? policyArea;
+
+  SelectedCodes({
+    this.policyInstitution,
+    this.policyTarget,
+    this.policyField,
+    this.policyCharacter,
+    // this.policyArea
+  });
+
+  void remove(String codeDetail) {
+    if (policyInstitution != null) {
+      policyInstitution!
+          .removeWhere((detail) => detail.detailName == codeDetail);
+    }
+    if (policyTarget != null) {
+      policyTarget!.removeWhere((detail) => detail.detailName == codeDetail);
+    }
+    if (policyField != null) {
+      policyField!.removeWhere((detail) => detail.detailName == codeDetail);
+    }
+    if (policyCharacter != null) {
+      policyCharacter!.removeWhere((detail) => detail.detailName == codeDetail);
+    }
+  }
+
+  bool get isEmpty {
+    return (policyInstitution == null || policyInstitution!.isEmpty) &&
+        (policyTarget == null || policyTarget!.isEmpty) &&
+        (policyField == null || policyField!.isEmpty) &&
+        (policyCharacter == null || policyCharacter!.isEmpty);
+  }
+
+  Map<String, List<CodeDetailData>?> toMap() => {
+        'policyInstitution': policyInstitution,
+        'policyTarget': policyTarget,
+        'policyField': policyField,
+        'policyCharacter': policyCharacter,
+        // 'policyArea': policyArea,
+      };
+  @override
+  String toString() {
+    return 'SelectedCodes: {policyInstitution: ${policyInstitution}, policyTarget: $policyTarget, policyField: $policyField, policyCharacter: $policyCharacter}';
+  }
+}
+
 class PolicyListPage extends StatefulWidget {
   const PolicyListPage({
     Key? key,
-    required this.codeDetail,
-    required this.codeName,
+    // required this.codeDetail,
+    // required this.codeName,
+    required this.selectedCodes,
   }) : super(key: key);
-  final String codeName;
-  final String codeDetail;
+  // final String codeName;
+  // final String codeDetail;
+  final SelectedCodes selectedCodes;
 
   @override
   State<PolicyListPage> createState() => _PolicyListPageState();
 }
 
 class _PolicyListPageState extends State<PolicyListPage> {
-  bool isSelectingCategory = false;
+  bool _isSelectingCategory = false;
 
   late int policyCount = 0;
+
+  void _removeCodeDetail(String codeDetail) {
+    setState(() {
+      // 검색 조건 제거
+      widget.selectedCodes.remove(codeDetail);
+
+      if (widget.selectedCodes.isEmpty) {
+        _isSelectingCategory = false;
+      }
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    if (widget.codeDetail != '') {
-      isSelectingCategory = true;
-    }
-    if (widget.codeDetail.isNotEmpty) {
-      isSelectingCategory = true;
+
+    // 홈페이지 카테고리 선택 또는 검색 상세 조건 선택
+    if ((widget.selectedCodes.policyField != null &&
+            widget.selectedCodes.policyField!.isNotEmpty &&
+            widget.selectedCodes.policyField![0].code != '' &&
+            widget.selectedCodes.policyField![0].detailName != '') ||
+        (widget.selectedCodes.policyInstitution != null &&
+            widget.selectedCodes.policyInstitution!.isNotEmpty &&
+            widget.selectedCodes.policyInstitution![0].code != '' &&
+            widget.selectedCodes.policyInstitution![0].detailName != '') ||
+        (widget.selectedCodes.policyTarget != null &&
+            widget.selectedCodes.policyTarget!.isNotEmpty &&
+            widget.selectedCodes.policyTarget![0].code != '' &&
+            widget.selectedCodes.policyTarget![0].detailName != '') ||
+        (widget.selectedCodes.policyCharacter != null &&
+            widget.selectedCodes.policyCharacter!.isNotEmpty &&
+            widget.selectedCodes.policyCharacter![0].code != '' &&
+            widget.selectedCodes.policyCharacter![0].detailName != '')) {
+      _isSelectingCategory = true;
+    } else {
+      // 홈페이지>전체보기 또는 하단메뉴[복지검색] 탭
+      _isSelectingCategory = false;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final String selectedCodeDetail = widget.codeDetail;
-    final String selectedCodeName = widget.codeName;
+    print(_isSelectingCategory);
 
-    // print('codeDetail: $selectedCodeDetail, codeName: $selectedCodeName');
-    // print(isSelectingCategory);
+    final policyInstitution = widget.selectedCodes.policyInstitution;
+    final policyTarget = widget.selectedCodes.policyTarget;
+    final policyField = widget.selectedCodes.policyField;
+    final policyCharacter = widget.selectedCodes.policyCharacter;
+
+    // 운영 기관
+    final String selectedInstitutionCodeName =
+        policyInstitution?.isNotEmpty == true
+            ? policyInstitution![0].codeName
+            : '';
+    final String selectedInstitutionCodeDetail =
+        policyInstitution?.isNotEmpty == true ? policyInstitution![0].code : '';
+    // 정책 대상
+    final String selectedTargetCodeName =
+        policyTarget?.isNotEmpty == true ? policyTarget![0].codeName : '';
+    final String selectedTargetCodeDetail =
+        policyTarget?.isNotEmpty == true ? policyTarget![0].code : '';
+    // 정책 분야
+    final String selectedFieldCodeName =
+        policyField?.isNotEmpty == true ? policyField![0].codeName : '';
+    final String selectedFieldCodeDetail =
+        policyField?.isNotEmpty == true ? policyField![0].code : '';
+    //정책 성격
+    final String selectedCharacterCodeName =
+        policyCharacter?.isNotEmpty == true ? policyCharacter![0].codeName : '';
+    final String selectedCharacterCodeDetail =
+        policyCharacter?.isNotEmpty == true ? policyCharacter![0].code : '';
+
+    // print(selectedInstitutionCodeName + selectedInstitutionCodeDetail);
+    // print(selectedTargetCodeName + selectedTargetCodeDetail);
+    // print(selectedFieldCodeName + selectedFieldCodeDetail);
+    // print(selectedCharacterCodeName + selectedCharacterCodeDetail);
+
+    // // 지역
+    // final String selectedAreaCodeName =
+    //     widget.selectedCodes.policyInstitution?.isNotEmpty == true
+    //         ? widget.selectedCodes.policyArea![0].codeName
+    //         : '';
+    // final String selectedAreaCodeDetail =
+    //     widget.selectedCodes.policyInstitution?.isNotEmpty == true
+    //         ? widget.selectedCodes.policyArea![0].code
+    //         : '';
 
     return BlocListener<PolicyBloc, PolicyState>(
         listener: (context, state) {
@@ -77,12 +197,13 @@ class _PolicyListPageState extends State<PolicyListPage> {
                 children: <Widget>[
                   const SearchBar(), // 검색창
                   Visibility(
-                    visible: isSelectingCategory,
+                    visible: _isSelectingCategory,
                     child: SelectedSearchConditions(
-                      codeDetail: selectedCodeDetail,
-                      codeName: selectedCodeName,
+                      selectedCodes: widget.selectedCodes,
+                      onRemove: _removeCodeDetail,
                     ),
                   ),
+
                   // PolicyBar(policyCount: policyCount),
                   Expanded(
                     child: Center(
@@ -91,10 +212,19 @@ class _PolicyListPageState extends State<PolicyListPage> {
                       builder: (context, state) {
                         if (state.isSearchPolicy) {
                           return streamSearchPolicy();
-                        } else if (isSelectingCategory) {
+                        } else if (_isSelectingCategory) {
                           return FutureBuilder<List<Policy>>(
                             future: policyService.getPolicyBySelect(
-                                selectedCodeName, selectedCodeDetail),
+                              // selectedCodeName, selectedCodeDetail
+                              selectedInstitutionCodeName,
+                              selectedInstitutionCodeDetail,
+                              selectedTargetCodeName,
+                              selectedTargetCodeDetail,
+                              selectedFieldCodeName,
+                              selectedFieldCodeDetail,
+                              selectedCharacterCodeName,
+                              selectedCharacterCodeDetail,
+                            ),
                             builder: (_, snapshot) {
                               if (snapshot.data != null &&
                                   snapshot.data!.isEmpty) {
@@ -338,56 +468,75 @@ class _SearchBar extends State<SearchBar> {
 // class _SelectedSearchConditionsState extends State<PolicyListPage> {
 
 class SelectedSearchConditions extends StatelessWidget {
-  final String codeDetail;
-  final String codeName;
-  const SelectedSearchConditions(
-      {super.key, required this.codeDetail, required this.codeName});
+  final SelectedCodes selectedCodes;
+  final Function(String detailName) onRemove;
+
+  const SelectedSearchConditions({
+    Key? key,
+    required this.selectedCodes,
+    required this.onRemove,
+    // required this.isSelectingCategory,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final codeDetailName =
-        getMobileCodeService.getCodeDetailName(codeName, codeDetail);
+    List<String> selectedDetails = [];
+    final size = MediaQuery.of(context).size;
+
+    final List<CodeDetailData>? policyInstitution =
+        selectedCodes.policyInstitution ?? [];
+    final List<CodeDetailData>? policyTarget = selectedCodes.policyTarget ?? [];
+    final List<CodeDetailData>? policyField = selectedCodes.policyField ?? [];
+    final List<CodeDetailData>? policyCharacter =
+        selectedCodes.policyCharacter ?? [];
+
+    selectedDetails.addAll(policyInstitution!.map((e) => e.detailName));
+    selectedDetails.addAll(policyTarget!.map((e) => e.detailName));
+    selectedDetails.addAll(policyField!.map((e) => e.detailName));
+    selectedDetails.addAll(policyCharacter!.map((e) => e.detailName));
+
     return Container(
-        padding: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            border: Border(
-                bottom: BorderSide(color: ThemeColors.basic, width: 0.3))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-                // height: 50,
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: ThemeColors.secondary,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  children: [
-                    TextCustom(
-                      text: codeDetailName,
-                      color: Colors.black,
-                      fontSize: 12,
+      padding: const EdgeInsets.all(10),
+      width: size.width,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          bottom: BorderSide(color: ThemeColors.basic, width: 0.3),
+        ),
+      ),
+      child: Wrap(
+        spacing: 5, // 좌우 간격
+        runSpacing: 5, // 상하 간격
+        children: selectedDetails
+            .map((codeDetailName) => Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: ThemeColors.secondary,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      onRemove(codeDetailName);
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextCustom(
+                          text: codeDetailName,
+                          color: Colors.black,
+                          fontSize: 12,
+                        ),
+                        const Icon(
+                          Icons.clear,
+                          size: 15,
+                        ),
+                      ],
                     ),
-                    InkWell(
-                      child: const Icon(
-                        Icons.close,
-                        size: 15,
-                      ),
-                      onTap: () {
-                        // 부모 위젯의 isSelectingCategory 값을 변경
-                        final policyListPageState = context
-                            .findAncestorStateOfType<_PolicyListPageState>();
-                        policyListPageState?.setState(() {
-                          policyListPageState.isSelectingCategory = false;
-                        });
-                      },
-                    )
-                  ],
-                )),
-          ],
-        ));
+                  ),
+                ))
+            .toList(),
+      ),
+    );
   }
 }
 

@@ -10,7 +10,7 @@ router.get("/get-User-By-Id", verifyToken, async function(req, res){
     try{
     console.log('mobile-router get user by id');
     var result = await mobile_user_controller.getUserById(req, res);
-    console.log(result);
+    // console.log(result);
 
     res.json({
       resp:true,
