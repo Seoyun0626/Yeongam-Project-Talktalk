@@ -131,6 +131,17 @@
                 <div class="four wide field">
                   <input type="text" name="user_email" id="update_email" value="<%= post.user_email %>">
                 </div>
+                <a href="/admin/dataif/resetPW/<%= post.userid %>" onclick="reset_password()">비밀번호 초기화</a>
+                <script>
+                  function reset_password() {
+                    if (!confirm("비밀번호를 초기화 하시겠습니까??")) {
+                      alert("취소 하였습니다.");
+                      return false;
+                    } else {
+                      document.getElementById("update_password").value = "1234";
+                    }
+                  }
+                </script>
               </div>
             </div>
                   <br>

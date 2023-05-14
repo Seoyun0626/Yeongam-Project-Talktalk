@@ -1,11 +1,13 @@
 var db = require('../utils/db');
 // var s_db = require('../utils/s_db');
 var bkfd2Password = require('pbkdf2-password');
+const nodemailer = require("nodemailer");
 var hasher = bkfd2Password();
 const url = require('url');
 const { uuid } = require('uuidv4');
 var utils = require('../utils/utils');
 var fs = require('fs');
+const { response } = require('express');
 
 
 exports.fetchFigUsageByUid = async function(req, res) {
@@ -33,7 +35,8 @@ exports.fetchEventPartByUid = async function(req, res) {
     var query = 'SELECT uid FROM webdb.tb_user where userid="'+userid+'"';
     var uid = await conn.query(query); // 쿼리 실행
     query = 'select event_part_no,aquired_time,event_name,event_desc,fig_payment from webdb.tb_event_part as a inner join webdb.tb_event as b on a.eid = b.eid where a.uid = "3d06c817-d8ee-43be-be7b-226c0a4d6695";'
-    rows = await conn.query(query); // 쿼리 실행
+    console.log(query);
+    var rows = await conn.query(query); // 쿼리 실행
     return rows;
   } catch(error) {
     console.log('dataif-service fetchEventPartByUid:'+error);
@@ -41,6 +44,81 @@ exports.fetchEventPartByUid = async function(req, res) {
     if (conn) conn.end();
   }
 };
+
+// transpoter 생성
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: 'youremail@gmail.com',
+      pass: 'yourpassword'
+  }
+});
+// 비밀번호 초기화
+exports.resetPW = async function(req, res) {
+  var resultcode = 0;
+  var conn;
+  try{
+    conn = await db.getConnection();
+    // url에서 userid 받아오기 params.id
+    var userid = req.params.id;
+    // // 확인 이메일을 보내기 위해 이메일 주소 받아오기
+    // var query = 'SELECT user_email,uid FROM webdb.tb_user where userid="'+userid+'"';
+    // var rows = await conn.query(query); // 쿼리 실행
+    // var email = rows[0].user_email;
+    // var uid = rows[0].uid;
+    // 임시 비밀번호 생성
+    var tempPW = Math.random().toString(36).slice(2);
+    // 비밀번호 암호화
+    hasher({password:tempPW}, async function(err, pass, salt, hash) {
+      if (err) {
+        console.log('dataif-service resetPW:'+err);
+        response.send({resultcode: resultcode});
+      }
+      try{
+        // 임시 비밀번호로 비밀번호 변경,salt값도 변경
+        query = 'UPDATE webdb.tb_user SET userpw="'+hash+'", salt="'+salt+'" WHERE userid="'+userid+'"';
+        rows = await conn.query(query); // 쿼리 실행
+        resultcode = 1;
+        console.log('dataif-service resetPW:'+resultcode);
+      } catch(error) {
+        console.log('dataif-service resetPW:'+error);
+        resultcode = 0;
+      } finally {
+        if (conn) conn.end();
+      }
+    });
+    return tempPW;
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.mailserver.com',
+      port: 587,
+      secure: false,
+      auth: {
+          user: 'email@mailserver.com',
+          pass: 'password'
+      }
+        });
+        let mailOptions = {
+          from: 'email@gmail.com',
+          to: 'email',
+          subject: '비밀번호 초기화',
+          text: '임시 비밀번호는 '+tempPW+'입니다.'
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+  } catch(error) {
+    console.log('dataif-service resetPW:'+error);
+    response.send({resultcode: resultcode});
+  } finally {
+    if (conn) conn.end();
+  }
+};
+
+
 
 exports.fetchData = async function(req, res) {
   var conn;

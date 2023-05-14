@@ -1,6 +1,8 @@
 var db = require('../utils/db');
 var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
+const nodemailer = require("nodemailer");
+
 const { uuid } = require('uuidv4');
 // const jwt = require('jsonwebtoken');
 
@@ -117,7 +119,7 @@ exports.signUp = async function(req, res) {
       var figUpdate = await conn.query(query); // 쿼리 실행
       var eid = 1; // 무화과 이벤트 번호, 바꿔야함
       query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+rows[0].uid+"');";
-      console.log(query);
+      // console.log(query);
       var eventPart = await conn.query(query); // 쿼리 실행
     }
 
@@ -176,7 +178,6 @@ exports.checkAttendance = async function(req, res) {
   }
   return resultcode;
 };
-
 
 
 //로그인 체크

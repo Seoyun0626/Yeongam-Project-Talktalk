@@ -126,7 +126,6 @@ router.get('/figManage/:id', async function (req, res) {
     var figUsage = await dataif_controller.fetchFigUsageByUid(req, res);
     var eventPart = await dataif_controller.fetchEventPartByUid(req, res);
     // console.log(figUsage)
-    // console.log(eventPart)
     res.render('dataif/figManage',
       {
         figUsage: figUsage,
@@ -138,6 +137,17 @@ router.get('/figManage/:id', async function (req, res) {
   }
 });
 
+// 비밀번호 초기화
+router.get('/resetPW/:id', async function (req, res) {
+  try{
+    // console.log(req.params.id);
+    var result = await dataif_controller.resetPW(req, res);
+    console.log(result);
+    res.redirect('/admin/dataif');
+  } catch(error) {
+    console.log('dataif-router resetPW error:'+error);
+  }
+});
 
 router.post('/', async function (req, res) {
   try {

@@ -74,6 +74,8 @@ exports.checkAttendance = async function(req, res) {
 };
 
 
+
+
 /*
 // 회원가입 컨트롤러
 exports.SignUp = async function(req, res) {

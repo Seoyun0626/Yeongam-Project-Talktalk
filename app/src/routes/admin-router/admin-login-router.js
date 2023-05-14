@@ -35,6 +35,7 @@ router.post("/login", async function(req, res) {
   }
 });
 
+//출석체크 로직
 router.get('/attendance', async function (req, res) {
   try{
     var attendance = await login_controller.getAttendance(req, res);
@@ -49,6 +50,8 @@ router.get('/attendance', async function (req, res) {
     console.log('login-router login error:'+error);
   }
 });
+
+
 
 // router.post('/login', passport.authenticate('local-login', {
 //   // successRedirect: '/admin/auth/loginSuccess', //인증성공시 이동하는화면주소

@@ -29,6 +29,15 @@ exports.fetchEventPartByUid = async function(req, res) {
   }
 };
 
+exports.resetPW = async function(req, res) {
+  try{
+    var result = await dataif_service.resetPW(req);
+    return result;
+  } catch(error) {
+    console.log('dataif-controller resetPW:'+error);
+  }
+};
+
 // userid로 사용자 정보 가져오기
 exports.fetchDataByUserid = async function(req, res) {
   try{
