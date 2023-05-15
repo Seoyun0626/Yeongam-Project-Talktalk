@@ -45,14 +45,6 @@ exports.fetchEventPartByUid = async function(req, res) {
   }
 };
 
-// transpoter 생성
-let transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-      user: 'youremail@gmail.com',
-      pass: 'yourpassword'
-  }
-});
 // 비밀번호 초기화
 exports.resetPW = async function(req, res) {
   var resultcode = 0;
@@ -62,9 +54,9 @@ exports.resetPW = async function(req, res) {
     // url에서 userid 받아오기 params.id
     var userid = req.params.id;
     // // 확인 이메일을 보내기 위해 이메일 주소 받아오기
-    // var query = 'SELECT user_email,uid FROM webdb.tb_user where userid="'+userid+'"';
-    // var rows = await conn.query(query); // 쿼리 실행
-    // var email = rows[0].user_email;
+    var query = 'SELECT user_email,uid FROM webdb.tb_user where userid="'+userid+'"';
+    var rows = await conn.query(query); // 쿼리 실행
+    var email = rows[0].user_email;
     // var uid = rows[0].uid;
     // 임시 비밀번호 생성
     var tempPW = Math.random().toString(36).slice(2);
@@ -87,19 +79,19 @@ exports.resetPW = async function(req, res) {
         if (conn) conn.end();
       }
     });
-    return tempPW;
+    // return tempPW;
     let transporter = nodemailer.createTransport({
-      host: 'smtp.mailserver.com',
+      service: 'naver',
+      host: 'smtp.naver.com',
       port: 587,
-      secure: false,
       auth: {
-          user: 'email@mailserver.com',
-          pass: 'password'
+          user: process.env.NODEMAILER_USER,
+          pass: process.env.NODEMAILER_PASS
       }
         });
         let mailOptions = {
-          from: 'email@gmail.com',
-          to: 'email',
+          from: process.env.NODEMAILER_USER,
+          to: email,
           subject: '비밀번호 초기화',
           text: '임시 비밀번호는 '+tempPW+'입니다.'
       };
@@ -110,6 +102,7 @@ exports.resetPW = async function(req, res) {
             console.log('Email sent: ' + info.response);
         }
     });
+    return tempPW;
   } catch(error) {
     console.log('dataif-service resetPW:'+error);
     response.send({resultcode: resultcode});
