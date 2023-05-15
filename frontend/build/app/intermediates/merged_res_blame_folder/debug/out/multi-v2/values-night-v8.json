@@ -1,17 +1,17 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Yeongam-project\\frontend\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Yeongam-project\\frontend\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,17",
                         "startColumns": "4,4",
-                        "startOffsets": "172,1020",
+                        "startOffsets": "172,1014",
                         "endLines": "10,19",
                         "endColumns": "12,12",
-                        "endOffsets": "673,1184"
+                        "endOffsets": "672,1178"
                     },
                     "to": {
                         "startLines": "2,10",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-3\\721af5cb1377ecd00b0f2eaaa8841448\\transformed\\appcompat-1.0.2\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "/Users/taeheekim/.gradle/caches/transforms-3/721af5cb1377ecd00b0f2eaaa8841448/transformed/appcompat-1.0.2/res/values-night-v8/values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",

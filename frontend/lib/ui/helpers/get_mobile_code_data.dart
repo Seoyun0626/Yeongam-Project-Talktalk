@@ -44,6 +44,7 @@ getMobileCodeService.getCodeDetailList('policy_institution_code');
   }
 
   List<CodeDetailData> getCodeDetailList(String my_code_name) {
+    // print(codeData);
     List<dynamic> code_detail_list = codeData["codes"][my_code_name];
     List<CodeDetailData> result = [];
 

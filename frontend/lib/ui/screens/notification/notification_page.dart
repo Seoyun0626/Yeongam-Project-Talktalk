@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
+import 'package:login/ui/screens/notification/notification.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({
@@ -14,6 +15,44 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
+  @override
+  void initState() {
+    // 알림 설정 초기화
+    FlutterLocalNotification.init();
+    // 3초 뒤에 알림 권한 요청
+    Future.delayed(const Duration(seconds: 3),
+        FlutterLocalNotification.requestNotificationPermission());
+    super.initState();
+  }
+
+  Widget _buildNotificationListTile() {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.grey.withOpacity(0.5),
+            width: 1,
+          ),
+        ),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(5),
+        title: const TextCustom(
+          text: '알림 제목',
+          fontWeight: FontWeight.bold,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: TextCustom(
+          text: '2023.05.12', // 현재 날짜를 표시
+          fontSize: 12,
+          color: ThemeColors.basic,
+        ),
+        onTap: () {},
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -46,7 +85,12 @@ class _NotificationPageState extends State<NotificationPage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Container(child: TextCustom(text: ),)
+                    TextButton(
+                      onPressed: () =>
+                          FlutterLocalNotification.showNotification(),
+                      child: const Text("알림 보내기"),
+                    ),
+                    _buildNotificationListTile()
                   ])),
         ));
   }

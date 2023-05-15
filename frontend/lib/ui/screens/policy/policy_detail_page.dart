@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login/data/env/env.dart';
 import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/domain/services/code_service.dart';
 import 'package:login/ui/helpers/get_mobile_code_data.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -69,16 +68,25 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
         home: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            leading: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: ThemeColors.basic,
+              backgroundColor: Colors.white,
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  color: ThemeColors.primary,
+                ),
+                onPressed: () => Navigator.pop(context),
               ),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
+              actions: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.share,
+                    color: ThemeColors.primary,
+                  ),
+                  padding: const EdgeInsets.only(right: 20),
+                  onPressed: () {},
+                ),
+              ]),
           body: SafeArea(
               child: SingleChildScrollView(
                   child: Center(

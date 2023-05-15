@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:login/ui/screens/event/event.dart';
 import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/screens/intro/checking_login_page.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/domain/blocs/blocs.dart';
+import 'package:login/ui/screens/settings/settings_page.dart';
+import 'package:login/ui/screens/user/fig_market_page.dart';
+import 'package:login/ui/screens/user/my_fig_history_page.dart';
 import 'package:login/ui/screens/user/privacy_setting_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
@@ -29,6 +34,7 @@ class _MyPageState extends State<MyPage> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
               titleSpacing: 0,
               title: const Text('마이 톡톡',
@@ -55,9 +61,13 @@ class _MyPageState extends State<MyPage> {
                     Icons.settings_outlined,
                     color: ThemeColors.primary,
                     size: 30,
-                  ), // 장바구니 아이콘 생성
+                  ),
                   onPressed: () {
-                    // 아이콘 버튼 실행
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SettingsPage(),
+                        ));
                   },
                 ),
               ],
@@ -76,24 +86,68 @@ class _MyPageState extends State<MyPage> {
                             child: Column(
                               children: const [
                                 _LogInOutUserName(),
-                                // Row(
-                                //   mainAxisAlignment:
-                                //       MainAxisAlignment.spaceBetween,
-                                //   children: const [
-                                //     _UserName(),
-                                //     _LogInOut(),
-                                //   ],
-                                // ),
                                 SizedBox(
                                   height: 30,
                                 ),
                                 _MyFig(),
                               ],
                             )),
-                        const Padding(
-                          padding: EdgeInsets.all(20),
-                          child: _YeongamWebsite(),
-                        )
+                        Padding(
+                          padding: EdgeInsets.all(15.h),
+                          child: Column(children: [
+                            const _YeongamWebsite(),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            const _FigMarket(),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            ListTile(
+                              contentPadding: const EdgeInsets.all(5),
+                              leading: SvgPicture.asset(
+                                'images/Fig.svg',
+                                width: 35.w,
+                                height: 35.h,
+                              ),
+                              title: TextCustom(
+                                text: "미션 성공하고",
+                                fontSize: 10.sp,
+                              ),
+                              subtitle: TextCustom(
+                                text: "무화과 따러가기",
+                                fontSize: 20.sp,
+                              ),
+                              trailing: const Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: ThemeColors.basic),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const EventPage(),
+                                    ));
+                              },
+                            ),
+                            ListTile(
+                              contentPadding: const EdgeInsets.all(5),
+                              leading: Image.asset(
+                                'images/aco5.png',
+                                width: 40.w,
+                                height: 40.h,
+                              ),
+                              title: TextCustom(
+                                text: "개발자 괴롭히기",
+                                fontSize: 20.sp,
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: ThemeColors.basic,
+                              ),
+                              onTap: () {},
+                            ),
+                          ]),
+                        ),
                       ],
                     ),
                   )
@@ -349,15 +403,32 @@ class _MyFig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userBloc = BlocProvider.of<UserBloc>(context);
+    final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return Center(
         child: InkWell(
-      onTap: () {},
+      onTap: () {
+        if (authBloc.state is LogOut) {
+          // 로그인 상태 아닐 경우
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => MyFigHistoryPage(),
+          //     ));
+        } else {
+          // 로그인 상태일 경우 MyFigListPage 이동
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MyFigHistoryPage(),
+              ));
+        }
+      },
       child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(30.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -399,14 +470,14 @@ class _MyFig extends StatelessWidget {
                     },
                   ),
 
-                  const Icon(
-                    Icons.apple,
-                    size: 50,
-                    // color: Colors.purple[400],
-                  )
-                  // SvgPicture.asset(
-                  //   'images/Fig.svg',
+                  // const Icon(
+                  //   Icons.apple,
+                  //   size: 50,
+                  //   // color: Colors.purple[400],
                   // )
+                  SvgPicture.asset(
+                    'images/Fig.svg',
+                  )
                 ],
               )
             ],
@@ -454,5 +525,101 @@ class _YeongamWebsite extends StatelessWidget {
                 )
               ],
             )));
+  }
+}
+
+class _FigMarket extends StatelessWidget {
+  const _FigMarket({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // margin: EdgeInsets.only(top: 10.h),
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 5.h, left: 10.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      'images/my_page_market.svg',
+                      height: 25.h,
+                      width: 25.w,
+                    ),
+                    SizedBox(
+                      width: 4.w,
+                    ),
+                    const TextCustom(
+                      text: "무화과 잡화점",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.all(5.h),
+                  child: const TextCustom(
+                    text: "내가 모은 무화과로 쇼핑해요!",
+                    fontSize: 15,
+                    color: ThemeColors.basic,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Center(
+            child: Padding(
+                padding: EdgeInsets.all(10.h),
+                child: SvgPicture.asset(
+                  'images/my_page_shopping_cart.svg',
+                  width: 60.w,
+                  height: 60.h,
+                )),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 8.h),
+            child: Align(
+              alignment: Alignment.center,
+              child: BtnNaru(
+                text: "쇼핑하러 가기",
+                colorText: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                width: 120.w,
+                height: 30.h,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FigMarketPage(),
+                      ));
+                },
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

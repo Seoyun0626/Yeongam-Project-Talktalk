@@ -70,6 +70,7 @@ class _HomePageState extends State<HomePage> {
                       size: 25.w,
                       color: ThemeColors.primary,
                     ),
+                    padding: const EdgeInsets.only(right: 20),
                     onPressed: () {
                       // Navigator.push(
                       //     context,
@@ -178,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                           width: 5.w,
                         ),
                         // 카테고리 아이콘
-                        CategoryButton(),
+                        const CategoryButton(),
                       ])),
                   SizedBox(
                     height: 15.h,
@@ -318,7 +319,7 @@ class CategoryButton extends StatefulWidget {
 
 class _CategoryButtonState extends State<CategoryButton> {
   List<CodeDetailData> codeDetailDataList = [];
-  static String codeName = 'policy_field_code';
+  static String codeName = "policy_field_code";
   @override
   void initState() {
     super.initState();
