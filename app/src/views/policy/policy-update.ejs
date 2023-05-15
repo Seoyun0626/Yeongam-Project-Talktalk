@@ -10,6 +10,7 @@
   <script src="/ckeditor/build/ckeditor.js"></script>
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="/js/home/policy-upload.js" defer></script>
 </head>
 <body>
@@ -126,10 +127,24 @@
         <div class="inline fields">
           <label>정책 사진</label>
           <div class="nine wide field">
-            <input type="file" name="imgFile" id="policy_imgFile" accept="image/*" src="<%= post.img%>">
+            <input type="file" name="imgFile" id="policy_imgFile" accept="image/*">
           </div>
+          <div class="four wide field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="imgCheck" id="policy_imgCheck" checked>
+              <label>기존 이미지 사용</label>
+            </div>
+            <script>
+              $(function() {
+                // 파일 선택시 실행되는 이벤트 핸들러 등록
+                $("#policy_imgFile").change(function() {
+                  console.log("파일 선택됨");
+                  // 기존 이미지 사용 체크박스 해제
+                  $("#policy_imgCheck").prop("checked", false);
+                });
+              });
+            </script>
         </div>
-
       </div>
       <div class="ui form">
           <textarea name="content" id="editor"></textarea>
@@ -197,11 +212,11 @@
                     document.getElementById("max_fund").focus();
                     return false;
                   }
-                  if(document.getElementById("policy_imgFile").value == ""){
-                    alert("정책 사진을 등록해주세요.");
-                    document.getElementById("policy_imgFile").focus();
-                    return false;
-                  }
+                  // if(document.getElementById("policy_imgFile").value == ""){
+                  //   // 이미지를 등록하지 않으면 기존 이미지를 사용
+                  //   alert("이미지를 등록하지 않으면 기존 이미지를 사용합니다.");
+                  //   return true;
+                  // }
                   if(document.getElementById("policy_application_start_date").value == ""){
                     alert("접수 시작일을 입력해주세요.");
                     document.getElementById("policy_application_start_date").focus();

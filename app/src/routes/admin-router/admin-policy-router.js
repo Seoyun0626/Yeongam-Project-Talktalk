@@ -104,7 +104,7 @@ router.get('/update/:id', async function(req, res){
         if(end_date < 10) end_date = '0'+end_date;
         var end_day = result[0].application_end_date.getFullYear()+'-'+end_month+'-'+end_date;
         var code_data = await code_controller.getCodeData(req, res);
-        
+        console.log(result[0].img)
         var content = result[0].content;
         // content를 string으로 변환
         res.render('policy/policy-update', {

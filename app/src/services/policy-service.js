@@ -1,6 +1,7 @@
 var db = require('../utils/db');
 var multer = require('multer');
 const path = require("path");
+var fs = require("fs");
 const { uuid } = require('uuidv4');
 
 exports.fetchData = async function(req, res) {
@@ -54,6 +55,7 @@ exports.updatePolicy = async function(req, res) {
     var conn;
     var resultcode = 0;
     try{
+        //form data 받아오기
         var temp = Date.now();
         // 이미지 업로드
         var upload = multer({ 
@@ -78,9 +80,21 @@ exports.updatePolicy = async function(req, res) {
         // DB에 저장
         conn = await db.getConnection();
         console.log('policy-service updatePolicy db getConnection');
+        var query;
+        // imgCheck가 on상태라면 기존 이미지를 그대로 사용하고, off라면 새로운 이미지를 사용한다.
         const uidPolicy = uuid(); // 정책 고유 번호
-        var query = "UPDATE webdb.tb_policy SET uid = '"+uidPolicy+"', img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
-        // var query = "UPDATE webdb.tb_policy SET img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
+        if(req.body.imgCheck == 'on') {
+            query = "update webdb.tb_policy set uid = '"+uidPolicy+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
+        }
+        else {
+            var policy_img = await conn.query("select img from webdb.tb_policy where board_idx='"+req.params.id+"';");
+            console.log(policy_img[0].img);
+            query = "UPDATE webdb.tb_policy SET uid = '"+uidPolicy+"', img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
+            fs.unlink('./src/public/upload/policy/'+policy_img[0].img, function(err){
+                if(err) throw err;
+                console.log('file deleted');
+            });
+        }
         var rows = await conn.query(query); // 쿼리 실행
         return resultcode;
     } catch(error) {

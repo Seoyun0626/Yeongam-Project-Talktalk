@@ -6,3 +6,4 @@ function manage(){
 function regiAll(){
     location.href = "/admin/auth/regiAll";
 }
+
