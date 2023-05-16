@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/taeheekim/Documents/yeongam_dev/frontend/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v26/values-v26.xml",
+            "outputFile": "C:\\Yeongam\\frontend\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
             "map": [
                 {
-                    "source": "/Users/taeheekim/.gradle/caches/transforms-3/721af5cb1377ecd00b0f2eaaa8841448/transformed/appcompat-1.0.2/res/values-v26/values-v26.xml",
+                    "source": "C:\\Users\\PJW\\.gradle\\caches\\transforms-3\\721af5cb1377ecd00b0f2eaaa8841448\\transformed\\appcompat-1.0.2\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",

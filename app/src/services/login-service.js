@@ -112,6 +112,11 @@ exports.signUp = async function(req, res) {
     if(inviteCode != '') {
       query = "SELECT fig,uid FROM webdb.tb_user where userid='" + inviteCode + "' ;";
       var rows = await conn.query(query); // 쿼리 실행
+      if(rows[0] == undefined) {
+        console.log('존재하지 않는 코드입니다.');
+        resultcode = 100;
+        return resultcode;
+      }
       // int형식으로 무화과 추가후 varchar로 변환
       rows[0].fig = parseInt(rows[0].fig) + 1;
       rows[0].fig = rows[0].fig.toString();

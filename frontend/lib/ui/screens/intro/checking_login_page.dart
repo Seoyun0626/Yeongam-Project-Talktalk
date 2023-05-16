@@ -25,7 +25,6 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
   void initState() {
     super.initState();
     getMobileCodeService.getCodeData();
-
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
 

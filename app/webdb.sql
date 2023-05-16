@@ -153,7 +153,7 @@ CREATE TABLE webdb.`tb_product`(
   `product_name` varchar(100) NOT NULL,
   `product_cost` varchar(4) NOT NULL,
   `product_img` varchar(100) NOT NULL,
-  `product_desc` varchar(255) NOT NULL,
+  -- `product_desc` varchar(255) NOT NULL,
   -- `product_category` varchar(100) NOT NULL,
   `product_stock` varchar(4) NOT NULL,
   -- `product_sales` int(11) NOT NULL, -- 판매량 
@@ -168,7 +168,7 @@ CREATE TABLE webdb.`tb_event`(
   `eid` varchar(100) NOT NULL,
   `event_name` varchar(100) NOT NULL,
   -- `event_img` varchar(100) NOT NULL,
-  `event_desc` varchar(255) NOT NULL,
+  -- `event_desc` varchar(255) NOT NULL,
   `fig_payment` varchar(4) NOT NULL,
   `event_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `event_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

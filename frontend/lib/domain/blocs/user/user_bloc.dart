@@ -55,7 +55,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(LoadingUserState());
 
       await Future.delayed(const Duration(milliseconds: 550));
-      print("_onRegisterUser");
+      print("event.user_id: ${event.user_id}");
       final resp = await userService.createdUser(
           event.user_id,
           event.user_name,
@@ -200,12 +200,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(SuccessUserState());
 
         // emit( state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
-
       } else {
         emit(FailureUserState(data.message));
 
         // emit( state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
-
       }
     } catch (e) {
       emit(FailureUserState(e.toString()));
@@ -406,5 +404,4 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   //   }
   //
   // }
-
 }

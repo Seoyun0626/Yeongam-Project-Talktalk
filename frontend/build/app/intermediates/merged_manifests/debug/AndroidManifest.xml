@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="21"
-        android:targetSdkVersion="31" />
+        android:targetSdkVersion="33" />
 
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Provide required visibility configuration for API level 30 and above -->
     <queries>
@@ -92,6 +92,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="io.flutter.embedding.android.DrawableForeground"
+            android:resource="@mipmap/ic_launcher" />
 
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
