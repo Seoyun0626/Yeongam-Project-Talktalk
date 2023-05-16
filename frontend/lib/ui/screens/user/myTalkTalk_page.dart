@@ -37,7 +37,7 @@ class _MyPageState extends State<MyPage> {
             backgroundColor: Colors.white,
             appBar: AppBar(
               titleSpacing: 0,
-              title: const Text('마이 톡톡',
+              title: const Text('마이 톡talk',
                   style: TextStyle(
                     color: ThemeColors.primary,
                     fontFamily: 'CookieRun',

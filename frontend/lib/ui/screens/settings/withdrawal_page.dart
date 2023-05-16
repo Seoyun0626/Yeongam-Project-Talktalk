@@ -29,7 +29,22 @@ class WithdrawalPage extends StatelessWidget {
               ),
             ),
             body: SafeArea(
-              child: Column(children: []),
+              child: Column(children: [
+                Expanded(
+                  child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: BtnNaru(
+                          text: '탈퇴하기',
+                          width: 350,
+                          height: 50,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          colorText: Colors.white,
+                          // backgroundColor:
+                          //     completeAgree ? ThemeColors.primary : Colors.grey,
+                          onPressed: () {})),
+                )
+              ]),
             )));
   }
 }

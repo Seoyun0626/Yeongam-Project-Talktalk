@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: ThemeColors.third,
           appBar: AppBar(
             titleSpacing: 0,
-            title: Text('청소년 톡Talk',
+            title: Text('청소년 톡talk',
                 style: TextStyle(
                   color: ThemeColors.primary,
                   fontFamily: 'CookieRun',
@@ -113,25 +113,47 @@ class _HomePageState extends State<HomePage> {
                   FutureBuilder<List<Banners>>(
                     future: bannerService.getBannerData(),
                     builder: (_, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Column(
-                          children: const [ShimmerNaru(), ShimmerNaru()],
-                        );
-                      } else {
-                        return CarouselSlider.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: ((context, index, realIndex) =>
-                              BannerSlide(
-                                  policyBanners: snapshot.data![index])),
-                          options: CarouselOptions(
-                            scrollDirection: Axis.horizontal,
-                            height: MediaQuery.of(context).size.height / 4,
-                            enlargeCenterPage: true,
-                            viewportFraction: 1.0,
-                            autoPlay: true,
-                          ),
-                        );
+                      if (snapshot.data != null && snapshot.data!.isEmpty) {
+                        return _ListWithoutBanner();
                       }
+
+                      return !snapshot.hasData
+                          ? Column(
+                              children: const [ShimmerNaru(), ShimmerNaru()],
+                            )
+                          : CarouselSlider.builder(
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: ((context, index, realIndex) =>
+                                  BannerSlide(
+                                      policyBanners: snapshot.data![index])),
+                              options: CarouselOptions(
+                                scrollDirection: Axis.horizontal,
+                                height: MediaQuery.of(context).size.height / 4,
+                                enlargeCenterPage: true,
+                                viewportFraction: 1.0,
+                                autoPlay: true,
+                              ),
+                            );
+
+                      // if (!snapshot.hasData) {
+                      //   return Column(
+                      //     children: const [ShimmerNaru(), ShimmerNaru()],
+                      //   );
+                      // } else {
+                      //   return CarouselSlider.builder(
+                      //     itemCount: snapshot.data!.length,
+                      //     itemBuilder: ((context, index, realIndex) =>
+                      //         BannerSlide(
+                      //             policyBanners: snapshot.data![index])),
+                      //     options: CarouselOptions(
+                      //       scrollDirection: Axis.horizontal,
+                      //       height: MediaQuery.of(context).size.height / 4,
+                      //       enlargeCenterPage: true,
+                      //       viewportFraction: 1.0,
+                      //       autoPlay: true,
+                      //     ),
+                      //   );
+                      // }
                     },
                   ),
 
@@ -292,6 +314,32 @@ class BannerSlide extends StatelessWidget {
             fit: BoxFit.cover,
           )),
     );
+  }
+}
+
+// 등록된 배너 없을 때
+class _ListWithoutBanner extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // final size = MediaQuery.of(context).size;
+
+    return Container(
+        height: 150.h,
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(20),
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.grey.withOpacity(0.5),
+          //     spreadRadius: 1.r,
+          //     blurRadius: 5.r,
+          //     offset: const Offset(0, 3),
+          //   ),
+          // ],
+        ),
+        padding: const EdgeInsets.all(15).w,
+        // margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+        child: Container());
   }
 }
 

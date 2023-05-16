@@ -62,7 +62,7 @@ exports.updatePolicy = async function(req, res) {
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
                     // cb(null, '../frontend/images/policy');
-                    cb(null, '../app/src/public/upload/policy');
+                    cb(null, './src/public/upload/policy'); //../app/src/public/upload/policy
                 },
                 filename: function (req, file, cb) {
                     temp = temp + path.extname(file.originalname);
@@ -145,7 +145,7 @@ exports.upload = async function(req, res) {
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
                     // cb(null, '../frontend/images/policy');
-                    cb(null, '../app/src/public/upload/policy');
+                    cb(null, './src/public/upload/policy'); //../app/src/public/upload/policy
                     
                 },
                 filename: function (req, file, cb) {
@@ -230,7 +230,7 @@ exports.banner = async function(req, res) {
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
                     // cb(null, '../frontend/images/banner');
-                    cb(null, '../app/src/public/upload/banner');
+                    cb(null, './src/public/upload/banner');
                 },
                 filename: function (req, file, cb) {
                     temp = temp + path.extname(file.originalname);

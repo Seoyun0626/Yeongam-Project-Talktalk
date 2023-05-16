@@ -532,7 +532,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                                 // userPhoneNumberController.text.trim(),
                                 _youthAge, // youthAge_code
                                 _parentsAge, // parentsAge_code
-                                _emd, //emd_class_code // 자료형 해결해야 함
+                                _emd, //emd_class_code
                                 _sex // sex_class_code
                                 ));
                           }
