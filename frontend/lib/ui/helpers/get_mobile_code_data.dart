@@ -25,6 +25,7 @@ class getMobileCodeFunctions {
   void getCodeData() async {
     var data = await codeService.getCodeData();
     codeData = data;
+    // print(codeData);
   }
 
 /*
@@ -37,6 +38,7 @@ getMobileCodeService.getCodeDetailList('policy_institution_code');
 */
 
   String getCodeDetailName(String my_code_name, String my_code_detail) {
+    // print(codeData);
     int index_code = int.parse(my_code_detail);
     String code_detail_name =
         codeData["codes"][my_code_name][index_code]["code_detail_name"];
