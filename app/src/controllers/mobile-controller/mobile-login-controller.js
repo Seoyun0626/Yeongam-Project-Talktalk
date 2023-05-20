@@ -5,7 +5,7 @@ exports.SignIn = async function(req, res) {
   try{
     // console.log('login-controller', req.body);
     const result = await mobile_login_service.SignIn(req);
-    // console.log('mobile-login-controller SignIn:', result);    
+    // console.log('mobile-login-controller SignIn:', result.code);    
     // if (result.code == 0) {
       // console.log("mobile-login-controller SiginIn 로그인 성공");
       // // 로그인 성공시 쿠키 생성

@@ -832,7 +832,8 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
         IconButton(
           onPressed: () {
             if (authState is LogOut) {
-              modalCheckLogin().showBottomDialog(context);
+              modalCheckLogin(context);
+              // modalCheckLogin().showBottomDialog(context);
             } else {
               if (uidUser != null) {
                 policyBloc.add(

@@ -1,14 +1,9 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/screens/register/terms_detail_page.dart';
 import 'package:login/ui/screens/register/user_type_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
-
-import 'package:login/ui/helpers/animation_route.dart';
 
 // kth 수정 : 밑에 수정 전 코드 주석처리 해놓음
 
@@ -23,7 +18,7 @@ class _termsAgreePageState extends State<termsAgreePage> {
   final allChecked = CheckBoxModal(title: '약관 전체 동의', required: '');
   final checkboxList = [
     CheckBoxModal(title: '회원가입 약관 동의', required: '(필수)', code: 0),
-    CheckBoxModal(title: '개인 정보 처리 방침 동의', required: '(필수)', code: 1),
+    CheckBoxModal(title: '개인정보 처리 방침 동의', required: '(필수)', code: 1),
     // CheckBoxModal(title: '마케팅 정보 수신 동의'),
   ];
   bool completeAgree = false;
@@ -45,7 +40,7 @@ class _termsAgreePageState extends State<termsAgreePage> {
       body: Padding(
           padding:
               // const EdgeInsets.symmetric(horizontal: 50.0, vertical: 40.0),
-              const EdgeInsets.all(40),
+              const EdgeInsets.all(30),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const TextCustom(

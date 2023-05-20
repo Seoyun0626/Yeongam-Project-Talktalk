@@ -13,7 +13,7 @@ router.post("/login", async function(req, res) {
     // console.log('mobile-router', req.body);
     var result = await mobile_login_controller.SignIn(req, res);
 
-    // console.log('login mobile-router result : ', result);
+    // console.log('login mobile-router result : ', result.data);
 
     var uid = result.data.uid;
     // console.log(uid);
@@ -160,7 +160,7 @@ router.get("/signup", function(req, res) {
       // 사용자등록 컨트롤러 호출
       
       var result = await mobile_login_controller.signUp(req, res);
-      // console.log(3);
+      // console.log(result);
       //res.send({errMsg:result});
       //if(result==0) res.json({success: true, msg:'등록하였습니다.'});
       //else res.json({success: false, msg:'등록실패하였습니다.'});

@@ -92,7 +92,7 @@ exports.getPolicyBySelect = async function(req, res){
 
     try {
         conn = await db.getConnection();
-        console.log('policy-service getSearchPolicy db getConnecton');
+        console.log('policy-service getPolicyBySelect db getConnecton');
 
         var query = "";
         var values = [];
@@ -275,7 +275,7 @@ exports.scrapOrUnscrapPolicy = async function(req, res) {
         var conn;
         try {
             conn = await db.getConnection();
-            console.log('policy-service checkPolicyScrapped db getConnection');
+            // console.log('policy-service checkPolicyScrapped db getConnection');
             const uidPolicy = req.params.uidPolicy;
             const uidUser = req.idPerson;
             const query = `SELECT IFNULL(is_scrapped, 0) AS isScrapped FROM webdb.tb_policy_scrap WHERE user_uid = (?) AND policy_uid = (?);`;

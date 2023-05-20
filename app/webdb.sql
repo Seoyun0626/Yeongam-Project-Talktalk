@@ -175,7 +175,7 @@ CREATE TABLE webdb.`tb_event`(
   PRIMARY KEY (`board_idx`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- **기존 tb_policy_scrap drop
+-- 기존 tb_policy_scrap drop
 -- 쿼리 : drop table tb_policy_scrap;
 /* 
 CREATE TABLE webdb.`tb_policy_scrap` (
@@ -189,12 +189,12 @@ CREATE TABLE webdb.`tb_policy_scrap` (
 */
 
 
--- ** 스크랩 (new)
--- ** add index (tb_policy와 tb_user의 uid 컬럼을 Foregin key로 가져오기 위해)
+-- 스크랩 (new)
+-- add index (tb_policy와 tb_user의 uid 컬럼을 Foregin key로 가져오기 위해)
 ALTER TABLE `webdb.tb_user` ADD INDEX (`uid`);
 ALTER TABLE `webdb.tb_policy` ADD INDEX (`uid`);
 
--- ** 그 다음 새로 create하기
+-- 그 다음 새로 create하기
 CREATE TABLE webdb.`tb_policy_scrap`
 (
 	`uid_scraps` VARCHAR(100) PRIMARY KEY,

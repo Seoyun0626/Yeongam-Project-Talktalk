@@ -65,9 +65,6 @@ try{
 
 
 
-
-
-
 // 회원가입
 exports.signUp = async function(req, res) {
   var resultcode = 0;

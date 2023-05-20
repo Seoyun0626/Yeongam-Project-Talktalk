@@ -20,6 +20,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late TextEditingController idController;
   late TextEditingController passwordController;
+  late FocusNode idFocusNode;
+  late FocusNode pwFocusNode;
   final _keyForm = GlobalKey<FormState>();
 
   @override
@@ -27,6 +29,8 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     idController = TextEditingController();
     passwordController = TextEditingController();
+    idFocusNode = FocusNode();
+    pwFocusNode = FocusNode();
   }
 
   @override
@@ -35,6 +39,8 @@ class _LoginPageState extends State<LoginPage> {
     idController.dispose();
     passwordController.clear();
     passwordController.dispose();
+    idFocusNode.dispose();
+    pwFocusNode.dispose();
     super.dispose();
   }
 
@@ -112,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 50.0), // 아이디
                     TextFieldNaru(
                       controller: idController,
+                      focusNode: idFocusNode,
                       hintText: '아이디 입력',
                       // keyboardType: TextInputType.emailAddress,
                       // validator: validatedEmail,
@@ -120,6 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 10.0), // 비밀번호
                     TextFieldNaru(
                       controller: passwordController,
+                      focusNode: pwFocusNode,
                       hintText: '비밀번호 입력',
                       isPassword: true,
                       validator: passwordValidator,

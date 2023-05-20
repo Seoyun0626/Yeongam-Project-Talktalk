@@ -8,6 +8,7 @@ class TextFieldNaru extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final String? errorText;
   final double fontSzie;
+  final FocusNode? focusNode;
 
   const TextFieldNaru({
     Key? key,
@@ -18,12 +19,14 @@ class TextFieldNaru extends StatelessWidget {
     this.validator,
     this.errorText,
     this.fontSzie = 18,
+    this.focusNode,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      focusNode: focusNode,
       style: TextStyle(
         fontFamily: 'NanumSquareRound',
         fontSize: fontSzie,

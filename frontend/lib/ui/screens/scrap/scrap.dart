@@ -10,6 +10,7 @@ import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/screens/policy/policy_detail_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class ScrapPage extends StatelessWidget {
   const ScrapPage({Key? key}) : super(key: key);
@@ -20,6 +21,10 @@ class ScrapPage extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        // primarySwatch: Colors.transparent,
+        canvasColor: Colors.transparent,
+      ),
       home: Scaffold(
         backgroundColor: ThemeColors.third,
         appBar: AppBar(
@@ -33,8 +38,8 @@ class ScrapPage extends StatelessWidget {
             ),
           ),
           leading: InkWell(
-            onTap: () =>
-                Navigator.push(context, routeSlide(page: const LoginPage())),
+            // onTap: () =>
+            //     Navigator.push(context, routeSlide(page: const LoginPage())),
             child: Image.asset(
               'images/aco.png',
               height: 70,
@@ -79,32 +84,52 @@ class ScrapPage extends StatelessWidget {
                                                             snapshot.data![i]));
                                       })))));
                         } else {
-                          modalCheckLogin().showBottomDialog(context);
+                          // modalCheckLogin(context);
+
                           return Center(
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              // mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'images/aco3.png',
-                                  // width: 300,
-                                  height: size.height / 3, //300,
-                                ),
-                                const TextCustom(
-                                    text: '스크랩한 정책이 없어요', fontSize: 20),
-                              ],
-                            ),
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                // mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'images/aco3.png',
+                                    // width: 300,
+                                    height: size.height / 3, //300,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      NeumorphicButton(
+                                        style: NeumorphicStyle(
+                                            shape: NeumorphicShape.flat,
+                                            boxShape:
+                                                NeumorphicBoxShape.roundRect(
+                                                    BorderRadius.circular(20)),
+                                            depth: 2,
+                                            lightSource: LightSource.topLeft,
+                                            color: ThemeColors.primary),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              routeSlide(
+                                                  page: const LoginPage()));
+                                        },
+                                        child: const TextCustom(
+                                          text: '로그인',
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const TextCustom(
+                                          text: ' 해주세요', fontSize: 20),
+                                    ],
+                                  )
+                                ]),
                           );
                         }
                       },
                     ),
-                    // BtnNaru(
-                    //   text: '팝업',
-                    //   width: 100,
-                    //   onPressed: () {
-                    //     modalCheckLogin().showBottomDialog(context);
-                    //   },
-                    // ),
                   ],
                 ),
               ),
@@ -331,7 +356,8 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
         IconButton(
           onPressed: () {
             if (authState is LogOut) {
-              modalCheckLogin().showBottomDialog(context);
+              modalCheckLogin(context);
+              // modalCheckLogin().showBottomDialog(context);
             } else {
               if (uidUser != null) {
                 policyBloc.add(

@@ -29,22 +29,42 @@ try{
 
   if (userdb && userdb[0]){
     var userPass = userdb[0].userpw;
+    var userSalt = userdb[0].salt;
     // const passwordMatch = await bcrypt.compareSync(password, userPass);
-    console.log(1);
-    hasher({
-      password: password,
-      salt: userdb[0].salt
-    }, (err, pass, salt, hash) => {
-      if (hash != userPass) {
-        json.code = 100;
-        json.msg = "패스워드 일치하지 않습니다.";
-        json.data = {};
-      } else {
-        // console.log('login-service json.code', json.code);
-        json.data = userdb[0];
-      }
+    const result = await new Promise((resolve, reject) => {
+      hasher({
+        password: password,
+        salt: userSalt
+      }, (err, pass, salt, hash) => {
+        if (hash !== userPass) {
+          json.code = 100;
+          json.msg = "패스워드 일치하지 않습니다.";
+          json.data = {};
+          resolve(json);
+        } else {
+          json.data = userdb[0];
+          console.log('login-service json.data', json.data);
+          resolve(json);
+        }
+      });
     });
-    console.log(2);
+  
+    return result;
+
+  } else {
+    json.code = 200;
+    json.msg = "ID 일치하지 않습니다.";
+    json.data = {};
+    return json;
+}
+ 
+} catch(error) {
+  console.log('mobile-login-service SignIn:'+error);
+} finally {
+  if (conn) conn.end();
+}
+
+};
 
   //   if (!passwordMatch){
   //     json.code = 100;
@@ -62,15 +82,8 @@ try{
   //   json.msg = "ID 일치하지 않습니다.";
   //   json.data = {};
   //   return json;
-  }
- 
-} catch(error) {
-  console.log('mobile-login-service SignIn:'+error);
-} finally {
-  if (conn) conn.end();
-}
 
-};
+
 
 // 모바일 회원가입
 exports.signUp = async function(req, res) {
@@ -96,18 +109,21 @@ exports.signUp = async function(req, res) {
         resultcode = 100;
         return resultcode;
     }
-<<<<<<< HEAD
     // 아이디 중복 체크 후 비밀번호 암호화
     if(rows[0] == undefined){
-      hasher({
-        password: userpw
-      }, async function(err, pass, salt, hash) {
-        pass = hash;
-        var randomNumber = Math.floor(10000 + Math.random() * 90000); // token_temp
-        var uid = uuidv4(); // 고유 식별 번호
-        // console.log(uid);
-        await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
+     
+      new Promise((resolve, reject) => {
+        hasher({
+          password: userpw
+        }, async function(err, pass, salt, hash) {
+          pass = hash;
+          var randomNumber = Math.floor(10000 + Math.random() * 90000); // token_temp
+          var uid = uuidv4(); // 고유 식별 번호
+          // console.log(uid);
+          await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
+        });
       });
+     
     } else{
       // 아이디 중복
       console.log('이미 존재하는 아이디입니다.');
@@ -121,19 +137,6 @@ exports.signUp = async function(req, res) {
     // var uid = uuidv4(); // 고유 식별 번호
     // // console.log(uid);
     // await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
-=======
-
-    let salt = bcrypt.genSaltSync();
-    // console.log(salt);
-    const pass = bcrypt.hashSync(userpw, salt);
-    var randomNumber = Math.floor(10000 + Math.random() * 90000); // token_temp
-    var uid = uuidv4(); // 고유 식별 번호
-    // console.log(uid);
-    await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
-
-
-    
->>>>>>> 084e2f7ec2816742d5deca29f5f9ffdce229e288
     
   } catch(error) {
     console.log('mobile-login-service SignUp:'+error);

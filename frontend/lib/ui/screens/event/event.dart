@@ -29,8 +29,7 @@ class EventPage extends StatelessWidget {
             ),
           ),
           leading: InkWell(
-            onTap: () =>
-                Navigator.push(context, routeSlide(page: const LoginPage())),
+            // onTap: () => Navigator.push(context, routeSlide(page: const LoginPage())),
             child: Image.asset(
               'images/aco.png',
               height: 70,
@@ -53,38 +52,17 @@ class EventPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(height: 10),
-                        BlocBuilder<AuthBloc, AuthState>(
-                          builder: (context, state) {
-                            if (state is SuccessAuthentication) {
-                              return Center(
-                                  child: Column(
-                                children: [
-                                  Image.asset(
-                                    'images/aco2.png',
-                                    width: 300,
-                                    height: 300,
-                                  ),
-                                  const TextCustom(
-                                      text: '준비중입니다!', fontSize: 20),
-                                ],
-                              ));
-                            } else {
-                              modalCheckLogin().showBottomDialog(context);
-                              return Center(
-                                  child: Column(
-                                children: [
-                                  Image.asset(
-                                    'images/aco2.png',
-                                    // width: 300,
-                                    height: size.height / 3,
-                                  ),
-                                  const TextCustom(
-                                      text: '준비중입니다!', fontSize: 20),
-                                ],
-                              ));
-                            }
-                          },
-                        ),
+                        Center(
+                            child: Column(
+                          children: [
+                            Image.asset(
+                              'images/aco2.png',
+                              width: 300,
+                              height: 300,
+                            ),
+                            const TextCustom(text: '준비중입니다!', fontSize: 20),
+                          ],
+                        ))
                       ],
                     ),
                   ),

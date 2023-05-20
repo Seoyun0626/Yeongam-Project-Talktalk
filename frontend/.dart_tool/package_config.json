@@ -170,6 +170,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_neumorphic",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_neumorphic-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_plugin_android_lifecycle",
       "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.14",
       "packageUri": "lib/",
@@ -387,11 +393,7 @@
     },
     {
       "name": "material_color_utilities",
-<<<<<<< HEAD
-      "rootUri": "file:///C:/Users/PJW/AppData/Local/Pub/Cache/hosted/pub.dev/material_color_utilities-0.2.0",
-=======
       "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/material_color_utilities-0.1.5",
->>>>>>> 084e2f7ec2816742d5deca29f5f9ffdce229e288
       "packageUri": "lib/",
       "languageVersion": "2.13"
     },
@@ -595,11 +597,7 @@
     },
     {
       "name": "source_span",
-<<<<<<< HEAD
-      "rootUri": "file:///C:/Users/PJW/AppData/Local/Pub/Cache/hosted/pub.dev/source_span-1.9.1",
-=======
       "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.9.0",
->>>>>>> 084e2f7ec2816742d5deca29f5f9ffdce229e288
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -629,11 +627,7 @@
     },
     {
       "name": "test_api",
-<<<<<<< HEAD
-      "rootUri": "file:///C:/Users/PJW/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.5.1",
-=======
       "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.12",
->>>>>>> 084e2f7ec2816742d5deca29f5f9ffdce229e288
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -758,13 +752,7 @@
       "languageVersion": "2.18"
     }
   ],
-<<<<<<< HEAD
-  "generated": "2023-05-16T04:41:49.662509Z",
-  "generator": "pub",
-  "generatorVersion": "3.0.0"
-=======
-  "generated": "2023-05-16T03:32:56.458875Z",
+  "generated": "2023-05-20T07:15:15.714210Z",
   "generator": "pub",
   "generatorVersion": "2.18.5"
->>>>>>> 084e2f7ec2816742d5deca29f5f9ffdce229e288
 }
