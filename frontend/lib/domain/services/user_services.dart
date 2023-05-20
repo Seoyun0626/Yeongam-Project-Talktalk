@@ -60,7 +60,7 @@ class UserServices {
     // print(token);
     // print('ResponseUser - getUserById');
     final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/user/get-User-By-Id'),
+        Uri.parse('${Environment.urlApi}/user/get-user-by-id'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
 
     return ResponseUser.fromJson(jsonDecode(resp.body));

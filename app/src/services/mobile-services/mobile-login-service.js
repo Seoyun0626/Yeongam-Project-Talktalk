@@ -43,7 +43,7 @@ try{
           resolve(json);
         } else {
           json.data = userdb[0];
-          console.log('login-service json.data', json.data);
+          // console.log('login-service json.data', json.data);
           resolve(json);
         }
       });

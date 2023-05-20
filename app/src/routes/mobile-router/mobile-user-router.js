@@ -6,7 +6,7 @@ const verifyToken = require("../../middleware/verify_token");
 
 
 
-router.get("/get-User-By-Id", verifyToken, async function(req, res){
+router.get("/get-user-by-id", verifyToken, async function(req, res){
     try{
     console.log('mobile-router get user by id');
     var result = await mobile_user_controller.getUserById(req, res);

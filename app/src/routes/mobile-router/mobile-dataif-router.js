@@ -5,6 +5,8 @@ var router = express.Router();
 var dataif_controller = require("../../controllers/common-controller/dataif-controller");
 // var login_controller = require("../../controllers/common-controller/login-controller");
 // const passport = require('passport');
+const verifyToken = require("../../middleware/verify_token");
+
 
 
 
@@ -27,6 +29,8 @@ router.get('/terms', async function(req, res){
       console.log('dataif-router /terms error:'+error);
     }
   });
+
+
   module.exports = router;
 
 

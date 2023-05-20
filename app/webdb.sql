@@ -143,7 +143,7 @@ CREATE TABLE webdb.`tb_event_part`(
   `event_part_no` int(11) NOT NULL AUTO_INCREMENT,
   `eid` varchar(100) NOT NULL,
   `uid` varchar(100) NOT NULL,
-  `aquired_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `acquired_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 오타 aquired -> acquired
   PRIMARY KEY (`event_part_no`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

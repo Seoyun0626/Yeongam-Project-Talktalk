@@ -19,7 +19,7 @@ class _termsDetailPageState extends State<termsDetailPage> {
   @override
   void initState() {
     super.initState();
-    _termsDataFuture = dataIfServices.getTermsData();
+    _termsDataFuture = dataIfService.getTermsData();
   }
 
   @override

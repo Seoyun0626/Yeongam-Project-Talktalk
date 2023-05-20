@@ -3,14 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login/domain/blocs/user/user_bloc.dart';
+import 'package:login/domain/models/response/response_event.dart';
+import 'package:login/domain/services/event_services.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
 class MyFigHistoryPage extends StatelessWidget {
+  const MyFigHistoryPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final userBloc = BlocProvider.of<UserBloc>(context);
     final myFigCount = userBloc.state.user?.fig ?? '';
+    // eventService.getFigHistoryByUser();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -83,12 +88,16 @@ class _FigHistory extends StatefulWidget {
 class _FigHistoryState extends State<_FigHistory>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  // final List<String> _tabs = ['지급 내역', '사용 내역'];
+  // late Future<ResponseEvent> _figHistoryData;
+  List<FigReward> figRewardList = [];
+  List<FigUsage> figUsagedList = [];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this); // _tabs.length
+    _tabController = TabController(length: 2, vsync: this);
+    _getFigHistory();
+    //  _figHistoryData = eventService.getFigHistoryByUser();
   }
 
   @override
@@ -97,46 +106,63 @@ class _FigHistoryState extends State<_FigHistory>
     super.dispose();
   }
 
+  Future<void> _getFigHistory() async {
+    ResponseEvent figHistoryData = await eventService.getFigHistoryByUser();
+    setState(() {
+      figRewardList = figHistoryData.rewardData;
+      figUsagedList = figHistoryData.usageData;
+      print(figRewardList);
+      print(figUsagedList);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(children: [
+    return ListView(
+      shrinkWrap: true,
+      children: [
         TabBar(
-            controller: _tabController,
-            labelColor: ThemeColors.basic,
-            unselectedLabelColor: Colors.grey,
-            indicatorColor: ThemeColors.primary,
-            tabs: // _tabs.map((tab) => Tab(text: tab)).toList(),
-                const <Widget>[
-              Tab(
-                child: TextCustom(
-                  text: '지급 내역',
-                  fontSize: 20,
-                ),
+          controller: _tabController,
+          labelColor: ThemeColors.basic,
+          unselectedLabelColor: Colors.grey,
+          indicatorColor: ThemeColors.primary,
+          tabs: const <Widget>[
+            Tab(
+              child: TextCustom(
+                text: '지급 내역',
+                fontSize: 20,
               ),
-              Tab(
-                child: TextCustom(
-                  text: '사용 내역',
-                  fontSize: 20,
-                ),
+            ),
+            Tab(
+              child: TextCustom(
+                text: '사용 내역',
+                fontSize: 20,
               ),
-            ]),
+            ),
+          ],
+        ),
         SizedBox(
-            height: MediaQuery.of(context).size.height - 200, // 높이 임시 지정
-            child: TabBarView(controller: _tabController, children: [
-              _buildPaymentList(),
-              _buildUsageList(),
-            ]))
-      ]),
+          height:
+              MediaQuery.of(context).size.height, // Adjust the remaining height
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              _buildFigRewardList(),
+              _buildFigUsageList(),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildPaymentList() {
+  Widget _buildFigRewardList() {
     return SizedBox(
         height: 410.h,
         child: ListView.builder(
-            itemCount: 10,
+            itemCount: figRewardList.length,
             itemBuilder: (context, index) {
+              FigReward reward = figRewardList[index];
               return Container(
                   decoration: const BoxDecoration(
                     border: Border(
@@ -154,14 +180,15 @@ class _FigHistoryState extends State<_FigHistory>
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const TextCustom(
-                                text: "출석 체크",
+                            TextCustom(
+                                text: reward.event_name, //"출석 체크",
                                 fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                             SizedBox(height: 8.h),
-                            const TextCustom(
-                              text: "2023.03.24 13:44",
+                            TextCustom(
+                              text: reward.acquired_time
+                                  .substring(0, 10), //"2023.03.24 13:44",
                               fontSize: 15,
                             )
                           ],
@@ -173,7 +200,7 @@ class _FigHistoryState extends State<_FigHistory>
                         Container(
                             margin: EdgeInsets.only(right: 16.w),
                             child: TextCustom(
-                                text: "500",
+                                text: reward.fig_payment, //"500",
                                 fontSize: 15.sp,
                                 color: Colors.black))
                       ],
@@ -182,12 +209,13 @@ class _FigHistoryState extends State<_FigHistory>
             }));
   }
 
-  Widget _buildUsageList() {
+  Widget _buildFigUsageList() {
     return SizedBox(
         height: 410.h,
         child: ListView.builder(
-            itemCount: 10,
+            itemCount: figUsagedList.length,
             itemBuilder: (context, index) {
+              FigUsage usage = figUsagedList[index];
               return Container(
                   decoration: const BoxDecoration(
                     border: Border(
@@ -205,14 +233,15 @@ class _FigHistoryState extends State<_FigHistory>
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const TextCustom(
-                                text: "출석 체크",
+                            TextCustom(
+                                text: usage.product_name, //"출석 체크",
                                 fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                             SizedBox(height: 8.h),
-                            const TextCustom(
-                              text: "2023.03.24 13:44",
+                            TextCustom(
+                              text: usage.fig_used_date
+                                  .substring(0, 10), //"2023.03.24 13:44",
                               fontSize: 15,
                             )
                           ],
@@ -224,13 +253,12 @@ class _FigHistoryState extends State<_FigHistory>
                         Container(
                             margin: EdgeInsets.only(right: 16.w),
                             child: TextCustom(
-                                text: "500",
+                                text: usage.product_cost, //"500",
                                 fontSize: 15.sp,
                                 color: Colors.black))
                       ],
                     ),
                   ));
             }));
-    ;
   }
 }
