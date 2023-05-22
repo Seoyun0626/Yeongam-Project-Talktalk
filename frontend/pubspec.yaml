@@ -54,6 +54,7 @@ dependencies:
   toggle_switch : ^2.0.1
   shimmer: ^2.0.0
   filter_list: ^1.0.2
+  get: ^4.6.5
 #  timeago: ^3.2.2
 #  cached_network_image: ^3.2.0
 #  socket_io_client: ^1.0.2
@@ -94,6 +95,8 @@ flutter:
     - images/category_icon/
     - images/main_icon/
     - images/bottom_bar/
+    - images/event_icon/
+    - images/event_icon/weekly_event/
 
 
 

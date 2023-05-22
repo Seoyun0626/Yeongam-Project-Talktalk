@@ -6,8 +6,9 @@ var verifyToken = require("../../middleware/verify_token");
 
 
 
-router.get('/get-all-policy', async function(req, res){
+router.get('/get-all-policy/:sortOrderCode', async function(req, res){
     try{
+      // console.log(req.params.sortOrderCode);
       var result = await mobile_policy_controller.getAllPolicy(req,res);
       // console.log('mobile-router get-all-policy result : ', result);
       // res.render('policy/get-all-policy', {
@@ -36,6 +37,7 @@ router.get('/get-all-policy', async function(req, res){
   // 정책 텍스트-제목 검색
   router.get('/get-search-policy/:searchValue', async function(req, res) {
     // console.log('mobile-router', req.params.searchValue );
+    // console.log('mobile-router', req.params.sortOrderCode );
     try{
       var result = await mobile_policy_controller.getSearchPolicy(req,res);
       // console.log('mobile-router get-search-policy result : ', result);
@@ -55,35 +57,9 @@ router.get('/get-all-policy', async function(req, res){
   })
   
   // 검색 조건 선택 결과
-  // router.get('/get-select-policy/:institutionCodeName/:institutionCodeDetail/:targetCodeName/:targetCodeDetail/:fieldCodeName/:fieldCodeDetail/:characterCodeName/:characterCodeDetail', async function(req, res) {
-  //   console.log('mobile-router get-select-policy', req.params.institutionCodeName);
-  //   console.log('mobile-router get-select-policy', req.params.institutionCodeDetail);
-  //   console.log('mobile-router get-select-policy', req.params.targetCodeName);
-  //   console.log('mobile-router get-select-policy', req.params.targetCodeDetail);
-  //   console.log('mobile-router get-select-policy', req.params.fieldCodeName);
-  //   console.log('mobile-router get-select-policy', req.params.fieldCodeDetail);
-  //   console.log('mobile-router get-select-policy', req.params.characterCodeName);
-  //   console.log('mobile-router get-select-policy', req.params.characterCodeDetail);
-  
-  //   try {
-  //     var result = await mobile_policy_controller.getPolicyBySelect(req, res);
-  
-  //     res.json({
-  //       resp: true,
-  //       message: 'get policies by select',
-  //       policies: result,
-  //     })
-  //   } catch(error) {
-  //     console.log('policy-router get-select-policy error:' + error);
-  //     res.json({
-  //       resp: false,
-  //       message: 'Failure get policies by select'
-  //     })
-  //   }
-  // })
 
   router.get('/get-select-policy?:values', async function(req, res) {
-    // console.log(req.query);
+    console.log(req.query);
 
 
     try {

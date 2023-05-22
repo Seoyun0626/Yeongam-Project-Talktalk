@@ -3,12 +3,62 @@ const { v4: uuidv4 } = require('uuid');
 const path = require("path");
 // const { uuid } = require('uuidv4');
 
+// exports.getAllPolicy = async function(req, res) {
+//     var conn;
+//     try{
+//         conn = await db.getConnection();
+//         console.log('policy-service getAllPolicy db getConnection');
+//         var query = "SELECT * FROM webdb.tb_policy;";
+//         var rows = await conn.query(query); // 쿼리 실행
+//         // console.log(rows[0]);
+
+//         // console.log(rows);
+//         return rows;
+//     } catch(error) {
+//         console.log('policy-service getAllPolicy:'+error);
+//     } finally {
+//         conn.release();
+//     }
+// }
+
 exports.getAllPolicy = async function(req, res) {
     var conn;
-    try{
+    try {
         conn = await db.getConnection();
         console.log('policy-service getAllPolicy db getConnection');
-        var query = "SELECT * FROM webdb.tb_policy;";
+
+        var query;
+        var sortOrderCode = req.params.sortOrderCode;
+
+        if (sortOrderCode === '0') {
+            // 최신순으로 정렬
+            query = "SELECT * FROM webdb.tb_policy ORDER BY board_idx DESC;";
+        } else if (sortOrderCode === '1') {
+            // 조회수 높은 순으로 정렬
+            query = "SELECT * FROM webdb.tb_policy ORDER BY count_views DESC;";
+        } else if (sortOrderCode === '2') {
+           // 조회수 낮은 순으로 정렬
+           query = "SELECT * FROM webdb.tb_policy ORDER BY count_views ASC;";
+        } else if (sortOrderCode === '3') {
+            // 스크랩 수 많은 순으로 정렬
+            query = "SELECT * FROM webdb.tb_policy ORDER BY count_scraps DESC;";
+        } else if (sortOrderCode === '4') {
+            // 스크랩 수 적은 순으로 정렬
+            query = "SELECT * FROM webdb.tb_policy ORDER BY count_scraps ASC;";
+        } else if (sortOrderCode === '5') {
+            // 마감일 순으로 정렬
+            query = "SELECT * FROM webdb.tb_policy ORDER BY application_end_date ASC;";
+        }  
+        else if (sortOrderCode === '6') {
+            // 등록 순으로 정렬
+            query = "SELECT * FROM webdb.tb_policy ORDER BY board_idx ASC;";
+        }  
+        else {
+            // 기본적으로 등록 순으로 정렬
+            query = "SELECT * FROM webdb.tb_policy ORDER BY board_idx ASC;";
+        }
+        
+
         var rows = await conn.query(query); // 쿼리 실행
         // console.log(rows[0]);
 
@@ -25,17 +75,47 @@ exports.getAllPolicy = async function(req, res) {
 
 
 
+
 exports.getSearchPolicy = async function(req, res) {
     // console.log('policy-service getSearchPolicy : ',req.params.searchValue);
     var conn;
     var searchValue = '%' + req.params.searchValue + '%';
+    // var sortOrderCode = req.params.sortOrderCode;
+    // console.log(sortOrderCode);
     // console.log('policy-service getSearchPolicy : ',searchValue);
     try {
         conn = await db.getConnection();
         console.log('policy-service getSearchPolicy db getConnection');
-        var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE" + "'"+searchValue+"'" + ";"; 
+        var query = "SELECT * FROM webdb.tb_policy WHERE policy_name LIKE" + "'"+searchValue+"'"; //+ ";"; 
+
+        // // // 정렬
+        // if (sortOrderCode === '0') {
+        //     // 최신순으로 정렬
+        //     query += " ORDER BY board_idx DESC;";
+        // } else if (sortOrderCode === '1') {
+        //     // 조회수 높은 순으로 정렬
+        //     query += " ORDER BY count_views DESC;";
+        // } else if (sortOrderCode === '2') {
+        //    // 조회수 낮은 순으로 정렬
+        //    query += " ORDER BY count_views ASC;";
+        // } else if (sortOrderCode === '3') {
+        //     // 스크랩 수 많은 순으로 정렬
+        //     query += " ORDER BY count_scraps DESC;";
+        // } else if (sortOrderCode === '4') {
+        //     // 스크랩 수 적은 순으로 정렬
+        //     query += " ORDER BY count_scraps ASC;";
+        // } else if (sortOrderCode === '5') {
+        //     // 마감일 순으로 정렬
+        //     query += " ORDER BY application_end_date ASC;";
+        // } else if (sortOrderCode === '6') {
+        //     // 등록 순으로 정렬
+        //     query += " ORDER BY board_idx ASC;";
+        // } else {
+        //     // 기본적으로 등록 순으로 정렬
+        //     query += " ORDER BY board_idx ASC;";
+        // }
         var rows =  await conn.query(query); // 쿼리 실행
-        // console.log('policy-service getSerachPolicy success');
+        // console.log('policy-service getSerachPolicy');
         return rows;
     } catch(error){
         console.log('policy-service getSearchPolicy:'+error);
@@ -43,6 +123,7 @@ exports.getSearchPolicy = async function(req, res) {
         conn.release();
     }
 }
+
 // exports.getPolicyBySelect = async function(req, res){
 //     var conn;
 //     var institution_code_name = req.params.institutionCodeName;
@@ -79,6 +160,7 @@ exports.getPolicyBySelect = async function(req, res){
     var field_code_detail = req.query.fieldCodeDetail;
     var character_code_name = req.query.characterCodeName;
     var character_code_detail = req.query.characterCodeDetail;
+    var sortOrderCode = req.query.sortOrderCode;
 
 
     // console.log(institution_code_name);
@@ -99,83 +181,110 @@ exports.getPolicyBySelect = async function(req, res){
 
         // 4개 선택
         if (institution_code_name && target_code_name && field_code_name && character_code_name) {
-            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ? AND " + field_code_name + " = ? AND " + character_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ? AND " + field_code_name + " = ? AND " + character_code_name + " = ?";
             values = [institution_code_detail, target_code_detail, field_code_detail, character_code_detail];
         } 
         // 3개 선택 - 운영 기관, 정책 대상, 정책 분야
         else if (institution_code_name && target_code_name && field_code_name) { // 3개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ? AND " + field_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ? AND " + field_code_name + " = ?";
             values = [institution_code_detail, target_code_detail, field_code_detail];
         }
         // 3개 선택 - 운영 기관, 정책 대상, 정책 성격
         else if (institution_code_name && target_code_name && character_code_name) { // 3개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ? AND " + character_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ? AND " + character_code_name + " = ?";
             values = [institution_code_detail, target_code_detail, character_code_detail];
         }
         // 3개 선택 - 운영 기관, 정책 분야, 정책 성격 
         else if (institution_code_name && field_code_name && character_code_name) { // 3개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + field_code_name + " = ? AND " + character_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + field_code_name + " = ? AND " + character_code_name + " = ?";
             values = [institution_code_detail, field_code_detail, character_code_detail];
         }
         // 3개 선택 - 정책 대상, 정책 분야, 정책 성격
         else if (target_code_name && field_code_name && character_code_name) { // 3개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ? AND " + field_code_name + " = ? AND " + character_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ? AND " + field_code_name + " = ? AND " + character_code_name + " = ?";
             values = [target_code_detail, field_code_detail, character_code_detail];
         }
         // 2개 선택 - 운영 기관, 정책 대상
         else if (institution_code_name && target_code_name) { // 2개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + target_code_name + " = ?";
             values = [institution_code_detail, target_code_detail];
         }
         // 2개 선택 - 운영 기관, 정책 분야
         else if (institution_code_name && field_code_name) { // 2개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + field_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + field_code_name + " = ?";
             values = [institution_code_detail, field_code_detail];
         }
         // 2개 선택 - 운영 기관, 정책 성격
         else if (institution_code_name && character_code_name) { // 2개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + character_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ? AND " + character_code_name + " = ?";
             values = [institution_code_detail, character_code_detail];
         }
         // 2개 선택 - 정책 대상, 정책 분야
         else if (target_code_name && field_code_name) { // 2개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ? AND " + field_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ? AND " + field_code_name + " = ?";
             values = [target_code_detail, field_code_detail];
         }
         // 2개 선택 - 정책 대상, 정책 성격
         else if (target_code_name && character_code_name) { // 2개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ? AND " + character_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ? AND " + character_code_name + " = ?";
             values = [target_code_detail, character_code_detail];
         }
         // 2개 선택 - 정책 분야, 정책 성격
         else if (field_code_name && character_code_name) { // 2개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + field_code_name + " = ? AND " + character_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + field_code_name + " = ? AND " + character_code_name + " = ?";
             values = [field_code_detail, character_code_detail];
         } 
         // 1개 선택 - 운영 기관
         else if (institution_code_name) { // 1개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + institution_code_name + " = ?";
             values = [institution_code_detail];
         }
         // 1개 선택 - 정책 대상
         else if (target_code_name) { // 1개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + target_code_name + " = ?";
             values = [target_code_detail];
         }
         // 1개 선택 - 정책 분야
         else if (field_code_name) { // 1개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + field_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + field_code_name + " = ?";
             values = [field_code_detail];
         }
         // 1개 선택 - 정책 성격
         else if (character_code_name) { // 1개 선택
-            query = "SELECT * FROM webdb.tb_policy WHERE " + character_code_name + " = ?;";
+            query = "SELECT * FROM webdb.tb_policy WHERE " + character_code_name + " = ?";
             values = [character_code_detail];
         } 
 
         // else { // 선택된 조건이 없을 경우
         //     return { success: false, message: "At least one search condition must be selected." };
         // }
+
+        // 정렬
+        if (sortOrderCode === '0') {
+            // 최신순으로 정렬
+            query += " ORDER BY board_idx DESC;";
+        } else if (sortOrderCode === '1') {
+            // 조회수 높은 순으로 정렬
+            query += " ORDER BY count_views DESC;";
+        } else if (sortOrderCode === '2') {
+           // 조회수 낮은 순으로 정렬
+           query += " ORDER BY count_views ASC;";
+        } else if (sortOrderCode === '3') {
+            // 스크랩 수 많은 순으로 정렬
+            query += " ORDER BY count_scraps DESC;";
+        } else if (sortOrderCode === '4') {
+            // 스크랩 수 적은 순으로 정렬
+            query += " ORDER BY count_scraps ASC;";
+        } else if (sortOrderCode === '5') {
+            // 마감일 순으로 정렬
+            query += " ORDER BY application_end_date ASC;";
+        } else if (sortOrderCode === '6') {
+            // 등록 순으로 정렬
+            query += " ORDER BY board_idx ASC;";
+        } else {
+            // 기본적으로 등록 순으로 정렬
+            query += " ORDER BY board_idx ASC;";
+        }
 
         // console.log('policy-service getSelectPolicy query:', query, ' values:', values);
 

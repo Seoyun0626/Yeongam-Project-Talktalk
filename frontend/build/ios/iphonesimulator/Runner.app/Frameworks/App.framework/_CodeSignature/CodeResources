@@ -10,15 +10,15 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		IY8mZKhsLbA768uYkkSi2al3ypQ=
+		R0/MO1kHPskoGNu1XmrKHUJpf28=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
-		cp+6LVW307zI2m1D8DD9VaU2SAg=
+		2vxJtp9fu8akNPXObYbKFP5J7D4=
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		lxKvd6NQR8AFEWMsHS4YdM4uVHI=
+		qmzqveKSuWQZzGsCXjoYtYdlZcg=
 		</data>
 		<key>flutter_assets/fonts/CookieRunBold.otf</key>
 		<data>
@@ -238,11 +238,15 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		Ko/J61WFKbZ8vtzvw5Y8PQUocbA=
+		gjCNwQgMqbfcnm2/rqfZWV5dxRI=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
 		P7bb/oR3EhwqCIH1M6LyTuBIWYU=
+		</data>
+		<key>flutter_assets/packages/flutter_neumorphic/fonts/NeumorphicIcons.ttf</key>
+		<data>
+		j/gyItxv7nJwy6iDn+JK3Ow2kW0=
 		</data>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -259,21 +263,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			colrCkThW6Zwj0QVxWsGfz9fPBRQ+rjjuPuVNv5xTjA=
+			f+wOGbREcqzPei5B4i9EDvLKQddZ9fXZO5TBksd5BbA=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0smKoYduIkMppVfd8bvbajV3hw2SdTk43LXApyzlBUQ=
+			eMXSu5u56sPPuhjS3AUSdouffckscqojHJwuJCk5fm4=
 			</data>
 		</dict>
 		<key>flutter_assets/NOTICES.Z</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			W67XSriZzcx+UFdYd3nW3zrNR4E2WCwnE/TpJ9LkFmU=
+			RfBc5LI68hzFZg1MmQc3b8tL4Y9ye/zn4lH8CZG3cSk=
 			</data>
 		</dict>
 		<key>flutter_assets/fonts/CookieRunBold.otf</key>
@@ -637,7 +641,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RsaXYN01Vr839v13ILQdWSIZANP7AkN4flaVleK92Uw=
+			lI7HDM/vMUTjtRyTG7vaoAJAnqQYBzxnmVjbx7AyN0g=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -645,6 +649,13 @@
 			<key>hash2</key>
 			<data>
 			x6NX+tjyECiQtyzbbjyY8U2zoZ7GDbJtE+T+k/dzgI0=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_neumorphic/fonts/NeumorphicIcons.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dG5Zlm9qgmPN4N+NEhqJ6dvsSd44jCKx5vyp8oOPgwg=
 			</data>
 		</dict>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>

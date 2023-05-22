@@ -18,9 +18,11 @@ class _FigMarketPageState extends State<FigMarketPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
+          centerTitle: true,
           title: const TextCustom(
             text: '무화과 잡화점',
             color: Colors.black,

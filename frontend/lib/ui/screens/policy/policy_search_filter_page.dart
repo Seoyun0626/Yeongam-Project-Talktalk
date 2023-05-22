@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/screens/policy/policy_list_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
@@ -78,36 +79,36 @@ class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
     final size = MediaQuery.of(context).size;
 
     // -----
-    print('SelectedCodes=======');
+    // print('SelectedCodes=======');
 
-    if (selectedCodeList.policyInstitution != null) {
-      selectedCodeList.policyInstitution!.forEach((element) {
-        print('policyInstitution : ${element.detailName}');
-      });
-    } else {
-      print('policyInstitution : null');
-    }
-    if (selectedCodeList.policyTarget != null) {
-      selectedCodeList.policyTarget!.forEach((element) {
-        print('policyTarget : ${element.detailName}');
-      });
-    } else {
-      print('policyTarget : null');
-    }
-    if (selectedCodeList.policyField != null) {
-      selectedCodeList.policyField!.forEach((element) {
-        print('policyField : ${element.detailName}');
-      });
-    } else {
-      print('policyField : null');
-    }
-    if (selectedCodeList.policyCharacter != null) {
-      selectedCodeList.policyCharacter!.forEach((element) {
-        print('policyCharacter : ${element.detailName}');
-      });
-    } else {
-      print('policyCharacter : null');
-    }
+    // if (selectedCodeList.policyInstitution != null) {
+    //   selectedCodeList.policyInstitution!.forEach((element) {
+    //     print('policyInstitution : ${element.detailName}');
+    //   });
+    // } else {
+    //   print('policyInstitution : null');
+    // }
+    // if (selectedCodeList.policyTarget != null) {
+    //   selectedCodeList.policyTarget!.forEach((element) {
+    //     print('policyTarget : ${element.detailName}');
+    //   });
+    // } else {
+    //   print('policyTarget : null');
+    // }
+    // if (selectedCodeList.policyField != null) {
+    //   selectedCodeList.policyField!.forEach((element) {
+    //     print('policyField : ${element.detailName}');
+    //   });
+    // } else {
+    //   print('policyField : null');
+    // }
+    // if (selectedCodeList.policyCharacter != null) {
+    //   selectedCodeList.policyCharacter!.forEach((element) {
+    //     print('policyCharacter : ${element.detailName}');
+    //   });
+    // } else {
+    //   print('policyCharacter : null');
+    // }
     // if (selectedCodeList.policyArea != null) {
     //   selectedCodeList.policyArea!.forEach((element) {
     //     print('policyArea : ${element.detailName}');
@@ -141,76 +142,79 @@ class _PolicySearchFilterState extends State<PolicySearchFilterPage> {
         ),
         body: SafeArea(
             child: SingleChildScrollView(
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SearchConditionList(
-                  title: '운영 기관',
-                  codeName: 'policy_institution_code',
-                  setSelectedCodeData: (data) {
-                    setSelectedCodeData(data);
-                  }),
-              const SizedBox(
-                height: 20,
-              ),
-              SearchConditionList(
-                  title: '적용 대상',
-                  codeName: 'policy_target_code',
-                  setSelectedCodeData: (data) {
-                    setSelectedCodeData(data);
-                  }),
-              const SizedBox(
-                height: 20,
-              ),
-              SearchConditionList(
-                  title: '정책 분야',
-                  codeName: 'policy_field_code',
-                  setSelectedCodeData: (data) {
-                    setSelectedCodeData(data);
-                  }),
-              const SizedBox(
-                height: 20,
-              ),
-              SearchConditionList(
-                  title: '정책 성격',
-                  codeName: 'policy_character_code',
-                  setSelectedCodeData: (data) {
-                    setSelectedCodeData(data);
-                  }),
-              const SizedBox(
-                height: 20,
-              ),
-              // SearchConditionList(
-              //     title: '지역',
-              //     codeName: 'emd_class_code',
-              //     setSelectedCodeData: (data) {
-              //       setSelectedCodeData(data);
-              //     }),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              Center(
-                  child: BtnNaru(
-                text: '검색하기',
-                onPressed: () {
-                  Navigator.pop(context, {});
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 15.h),
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SearchConditionList(
+                    title: '운영 기관',
+                    codeName: 'policy_institution_code',
+                    setSelectedCodeData: (data) {
+                      setSelectedCodeData(data);
+                    }),
+                const SizedBox(
+                  height: 20,
+                ),
+                SearchConditionList(
+                    title: '적용 대상',
+                    codeName: 'policy_target_code',
+                    setSelectedCodeData: (data) {
+                      setSelectedCodeData(data);
+                    }),
+                const SizedBox(
+                  height: 20,
+                ),
+                SearchConditionList(
+                    title: '정책 분야',
+                    codeName: 'policy_field_code',
+                    setSelectedCodeData: (data) {
+                      setSelectedCodeData(data);
+                    }),
+                const SizedBox(
+                  height: 20,
+                ),
+                SearchConditionList(
+                    title: '정책 성격',
+                    codeName: 'policy_character_code',
+                    setSelectedCodeData: (data) {
+                      setSelectedCodeData(data);
+                    }),
+                const SizedBox(
+                  height: 20,
+                ),
+                // SearchConditionList(
+                //     title: '지역',
+                //     codeName: 'emd_class_code',
+                //     setSelectedCodeData: (data) {
+                //       setSelectedCodeData(data);
+                //     }),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                Center(
+                    child: BtnNaru(
+                  text: '검색하기',
+                  onPressed: () {
+                    Navigator.pop(context, {});
 
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PolicyListPage(
-                              // codeDetail: selectedCode.code,
-                              // codeName: selectedCode.codeName,
-                              //selectedCodes : selectedCodes,
-                              selectedCodes: selectedCodeList)),
-                      (_) => false);
-                },
-                width: size.width - 30,
-                colorText: Colors.black,
-                backgroundColor: ThemeColors.secondary,
-                border: 10,
-              ))
-            ],
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PolicyListPage(
+                                // codeDetail: selectedCode.code,
+                                // codeName: selectedCode.codeName,
+                                //selectedCodes : selectedCodes,
+                                selectedCodes: selectedCodeList)),
+                        (_) => false);
+                  },
+                  width: size.width - 30,
+                  colorText: Colors.black,
+                  backgroundColor: ThemeColors.secondary,
+                  border: 10,
+                ))
+              ],
+            ),
           ),
         )),
       ),

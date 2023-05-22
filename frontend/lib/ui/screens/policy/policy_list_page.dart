@@ -66,15 +66,14 @@ class SelectedCodes {
 }
 
 class PolicyListPage extends StatefulWidget {
-  const PolicyListPage({
+  PolicyListPage({
     Key? key,
-    // required this.codeDetail,
-    // required this.codeName,
     required this.selectedCodes,
+    this.selectedSortOrder,
   }) : super(key: key);
-  // final String codeName;
-  // final String codeDetail;
+
   final SelectedCodes selectedCodes;
+  late policySortOrder? selectedSortOrder;
 
   @override
   State<PolicyListPage> createState() => _PolicyListPageState();
@@ -82,8 +81,7 @@ class PolicyListPage extends StatefulWidget {
 
 class _PolicyListPageState extends State<PolicyListPage> {
   bool _isSelectingCategory = false;
-
-  late int policyCount = 0;
+  late int policyCount = 0; // 검색 결과 수
 
   void _removeCodeDetail(String codeDetail) {
     setState(() {
@@ -124,9 +122,16 @@ class _PolicyListPageState extends State<PolicyListPage> {
     }
   }
 
+  void updateSelectedSortOrder(policySortOrder? newSortOrder) {
+    setState(() {
+      widget.selectedSortOrder = newSortOrder;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(_isSelectingCategory);
+    String selectedSortOrderCode = widget.selectedSortOrder?.code ?? '0';
+    // print(_isSelectingCategory);
 
     final policyInstitution = widget.selectedCodes.policyInstitution;
     final policyTarget = widget.selectedCodes.policyTarget;
@@ -203,8 +208,6 @@ class _PolicyListPageState extends State<PolicyListPage> {
                       onRemove: _removeCodeDetail,
                     ),
                   ),
-
-                  // PolicyBar(policyCount: policyCount),
                   Expanded(
                     child: Center(
                         child: BlocBuilder<PolicyBloc, PolicyState>(
@@ -215,16 +218,16 @@ class _PolicyListPageState extends State<PolicyListPage> {
                         } else if (_isSelectingCategory) {
                           return FutureBuilder<List<Policy>>(
                             future: policyService.getPolicyBySelect(
-                              // selectedCodeName, selectedCodeDetail
-                              selectedInstitutionCodeName,
-                              selectedInstitutionCodeDetail,
-                              selectedTargetCodeName,
-                              selectedTargetCodeDetail,
-                              selectedFieldCodeName,
-                              selectedFieldCodeDetail,
-                              selectedCharacterCodeName,
-                              selectedCharacterCodeDetail,
-                            ),
+                                // selectedCodeName, selectedCodeDetail
+                                selectedInstitutionCodeName,
+                                selectedInstitutionCodeDetail,
+                                selectedTargetCodeName,
+                                selectedTargetCodeDetail,
+                                selectedFieldCodeName,
+                                selectedFieldCodeDetail,
+                                selectedCharacterCodeName,
+                                selectedCharacterCodeDetail,
+                                selectedSortOrderCode),
                             builder: (_, snapshot) {
                               if (snapshot.data != null &&
                                   snapshot.data!.isEmpty) {
@@ -235,7 +238,13 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                   ? const _ShimerLoading()
                                   : Column(
                                       children: [
-                                        PolicyBar(policyCount: policyCount),
+                                        PolicyBar(
+                                          policyCount: policyCount,
+                                          selectedSortOrder:
+                                              widget.selectedSortOrder,
+                                          onUpdateSortOrder:
+                                              updateSelectedSortOrder,
+                                        ),
                                         Expanded(
                                           child: ListView.builder(
                                             physics:
@@ -254,7 +263,8 @@ class _PolicyListPageState extends State<PolicyListPage> {
                           );
                         } else {
                           return FutureBuilder<List<Policy>>(
-                            future: policyService.getAllPolicy(),
+                            future: policyService
+                                .getAllPolicy(selectedSortOrderCode),
                             builder: (_, snapshot) {
                               if (snapshot.data != null &&
                                   snapshot.data!.isEmpty) {
@@ -265,7 +275,13 @@ class _PolicyListPageState extends State<PolicyListPage> {
                                   ? const _ShimerLoading()
                                   : Column(
                                       children: [
-                                        PolicyBar(policyCount: policyCount),
+                                        PolicyBar(
+                                          policyCount: policyCount,
+                                          selectedSortOrder:
+                                              widget.selectedSortOrder,
+                                          onUpdateSortOrder:
+                                              updateSelectedSortOrder,
+                                        ),
                                         Expanded(
                                           child: ListView.builder(
                                             physics:
@@ -293,6 +309,7 @@ class _PolicyListPageState extends State<PolicyListPage> {
   }
 
   Widget streamSearchPolicy() {
+    print(widget.selectedSortOrder?.name ?? '');
     return StreamBuilder<List<Policy>>(
       stream: policyService.searchProducts,
       builder: (context, snapshot) {
@@ -317,11 +334,16 @@ class _PolicyListPageState extends State<PolicyListPage> {
                 ),
               ])));
         }
+        // 검색 결과 수
         policyCount = snapshot.data!.length;
 
         return Column(
           children: [
-            PolicyBar(policyCount: policyCount),
+            PolicyBar(
+              policyCount: policyCount,
+              selectedSortOrder: widget.selectedSortOrder,
+              onUpdateSortOrder: updateSelectedSortOrder,
+            ),
             Expanded(
               child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
@@ -344,128 +366,113 @@ class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
 
   @override
-  State<SearchBar> createState() => _SearchBar();
+  _SearchBarState createState() => _SearchBarState();
 }
 
-class _SearchBar extends State<SearchBar> {
+class _SearchBarState extends State<SearchBar> {
   late TextEditingController _searchController;
-  late FocusNode myFocusNode;
+  late FocusNode _myFocusNode;
 
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
-    myFocusNode = FocusNode();
+    _myFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
-    _searchController.clear();
     _searchController.dispose();
-    myFocusNode.dispose();
+    _myFocusNode.dispose();
     super.dispose();
+  }
+
+  void _performSearch() {
+    final value = _searchController.text.trim();
+    if (value.isNotEmpty) {
+      final policyBloc = BlocProvider.of<PolicyBloc>(context);
+      policyBloc.add(OnIsSearchPolicyEvent(true));
+      policyService.searchPolicy(value);
+      _myFocusNode.unfocus();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // final String inputText = widget.inputText;
-    final size = MediaQuery.of(context).size;
     final policyBloc = BlocProvider.of<PolicyBloc>(context);
 
     return Container(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-        color: ThemeColors.primary,
-        child: Container(
-          padding: const EdgeInsets.only(right: 5.0),
-          height: 45,
-          width: size.width,
-          decoration: BoxDecoration(
-              color: Colors.grey[100],
-              borderRadius: BorderRadius.circular(10.0)),
-          child: BlocBuilder<PolicyBloc, PolicyState>(
-            builder: (context, state) => TextField(
-              textInputAction: TextInputAction.go,
-              onSubmitted: (value) {
-                setState(() {});
-              }, // 엔터
-              focusNode: myFocusNode,
-              autofocus: false,
-              controller: _searchController,
-              onChanged: (value) {
-                // print(value);
-                if (value.isNotEmpty) {
-                  policyBloc.add(OnIsSearchPolicyEvent(true));
-                  policyService.searchPolicy(value);
-                } else {
-                  policyBloc.add(OnIsSearchPolicyEvent(false));
-                }
-              },
-              cursorColor: ThemeColors.primary,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: '복지 검색',
-                  hintStyle: const TextStyle(fontFamily: 'NanumSqureRound'),
-                  prefixIcon: IconButton(
-                    icon: const Icon(
-                      Icons.tune,
-                      size: 20,
-                      color: ThemeColors.primary,
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+      color: ThemeColors.primary,
+      child: Container(
+        padding: const EdgeInsets.only(right: 5.0),
+        height: 45,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: BlocBuilder<PolicyBloc, PolicyState>(
+          builder: (context, state) => TextField(
+            textInputAction: TextInputAction.search,
+            onSubmitted: (value) {
+              _performSearch();
+            },
+            focusNode: _myFocusNode,
+            controller: _searchController,
+            cursorColor: ThemeColors.primary,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: '복지 검색',
+              hintStyle: const TextStyle(fontFamily: 'NanumSqureRound'),
+              prefixIcon: IconButton(
+                icon: const Icon(
+                  Icons.tune,
+                  size: 20,
+                  color: ThemeColors.primary,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    routeSlide(
+                      page: const PolicySearchFilterPage(),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        routeSlide(
-                          page: const PolicySearchFilterPage(),
-                        ),
-                      );
-                    },
-                  ),
-                  suffixIcon: myFocusNode.hasFocus
-                      ? IconButton(
-                          icon: const Icon(
-                            Icons.cancel,
-                            size: 20,
-                            color: ThemeColors.primary,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _searchController.clear();
-                              // _searchText = "";
-                              policyBloc.add(OnIsSearchPolicyEvent(false));
-                              myFocusNode.unfocus();
-                            });
-                          },
-                        )
-                      : IconButton(
-                          icon: const Icon(
-                            Icons.search_rounded,
-                            color: ThemeColors.primary,
-                          ),
-                          onPressed: () {},
-                        )),
+                  );
+                },
+              ),
+              suffixIcon: _searchController.text.isNotEmpty
+                  ? IconButton(
+                      icon: const Icon(
+                        Icons.cancel,
+                        size: 20,
+                        color: ThemeColors.primary,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _searchController.clear();
+                          policyBloc.add(OnIsSearchPolicyEvent(false));
+                          _myFocusNode.unfocus();
+                        });
+                      },
+                    )
+                  : IconButton(
+                      icon: const Icon(
+                        Icons.search_rounded,
+                        color: ThemeColors.primary,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _performSearch();
+                        });
+                      },
+                    ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
-
-// class SelectedSearchConditions extends StatefulWidget {
-//   const SelectedSearchConditions({
-//     Key? key,
-//     required this.codeDetail,
-//     required this.codeName,
-//     // required this.searchConditions,
-//   }) : super(key: key);
-//   final String codeName;
-//   final String codeDetail;
-//   // final List<SearchCondition> searchConditions;
-
-//   @override
-//   _SelectedSearchConditionsState createState() =>
-//       _SelectedSearchConditionsState();
-// }
-
-// class _SelectedSearchConditionsState extends State<PolicyListPage> {
 
 class SelectedSearchConditions extends StatelessWidget {
   final SelectedCodes selectedCodes;
@@ -540,17 +547,47 @@ class SelectedSearchConditions extends StatelessWidget {
   }
 }
 
+class policySortOrder {
+  final String name;
+  final String code;
+
+  policySortOrder({required this.name, required this.code});
+}
+
 class PolicyBar extends StatefulWidget {
   final int policyCount;
-  const PolicyBar({Key? key, required this.policyCount}) : super(key: key);
+  final policySortOrder? selectedSortOrder;
+  final Function(policySortOrder?) onUpdateSortOrder;
+  const PolicyBar(
+      {Key? key,
+      required this.policyCount,
+      this.selectedSortOrder,
+      required this.onUpdateSortOrder})
+      : super(key: key);
 
   @override
   State<PolicyBar> createState() => _PolicyBarState();
 }
 
 class _PolicyBarState extends State<PolicyBar> {
-  String _selectedSortBy = '최신순';
-  final List<String> _sortByOptions = ['최신순', '스크랩순', '마감일순', '조회수순'];
+  late policySortOrder _selectedSortOrder;
+
+  final List<policySortOrder> _sortByOptions = [
+    policySortOrder(name: '최신순', code: '0'),
+    policySortOrder(name: '조회수높은순', code: '1'),
+    policySortOrder(name: '조회수낮은순', code: '2'),
+    policySortOrder(name: '스크랩많은순', code: '3'),
+    policySortOrder(name: '스크랩적은순', code: '4'),
+    policySortOrder(name: '마감일순', code: '5'),
+    policySortOrder(name: '등록순', code: '6'),
+  ];
+  // late String _sortOrderCode = '0';
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedSortOrder = widget.selectedSortOrder ?? _sortByOptions[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -569,23 +606,26 @@ class _PolicyBarState extends State<PolicyBar> {
             fontSize: 15,
             color: ThemeColors.basic,
           ),
+
+          // 정렬
           PopupMenuButton(
-            onSelected: (value) {
+            onSelected: (policySortOrder value) {
               setState(() {
-                _selectedSortBy = value;
+                _selectedSortOrder = value;
+                widget.onUpdateSortOrder(value);
               });
             },
             itemBuilder: (BuildContext context) {
-              return _sortByOptions.map((String option) {
-                return PopupMenuItem(
-                    value: option, child: TextCustom(text: option));
+              return _sortByOptions.map((policySortOrder option) {
+                return PopupMenuItem<policySortOrder>(
+                    value: option, child: TextCustom(text: option.name));
               }).toList();
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextCustom(
-                  text: _selectedSortBy,
+                  text: _selectedSortOrder.name,
                   fontSize: 15,
                   color: ThemeColors.basic,
                 ),
@@ -597,25 +637,6 @@ class _PolicyBarState extends State<PolicyBar> {
               ],
             ),
           ),
-
-          // InkWell(
-          //   onTap: () {},
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: [
-          //       TextCustom(
-          //         text: '최신순',
-          //         fontSize: 15,
-          //         color: ThemeColors.basic,
-          //       ),
-          //       Icon(
-          //         Icons.keyboard_arrow_down_rounded,
-          //         size: 20,
-          //         color: ThemeColors.primary,
-          //       )
-          //     ],
-          //   ),
-          // )
         ]));
   }
 }

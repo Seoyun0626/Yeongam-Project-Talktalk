@@ -13,6 +13,9 @@ import 'package:login/ui/helpers/debouncer.dart';
 
 class PolicyServices {
   final debouncer = DeBouncer(duration: const Duration(milliseconds: 800));
+  Timer? _timer;
+
+  // late DeBouncer debouncer = DeBouncer(duration: const Duration(milliseconds: 800));
   final StreamController<List<Policy>> _streamController =
       StreamController<List<Policy>>.broadcast();
   Stream<List<Policy>> get searchProducts => _streamController.stream;
@@ -21,12 +24,13 @@ class PolicyServices {
   Map<String, String> _setHeaders() =>
       {'Content-Type': 'application/json;charset=UTF-8', 'Charset': 'utf-8'};
 
-  Future<List<Policy>> getAllPolicy() async {
+  Future<List<Policy>> getAllPolicy(String sortOrderCode) async {
     // final token = await secureStorage.readToken();
     // print(token);
-
+    // print(sortOrderCode);
     final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/policy/get-all-policy'),
+        Uri.parse(
+            '${Environment.urlApi}/policy/get-all-policy/' + sortOrderCode),
         headers:
             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
     // print('policy_services');
@@ -48,39 +52,64 @@ class PolicyServices {
   //   return data; //ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   // }
 
+  // void searchPolicy(String searchValue, String sortOrderCode) async {
+  //   debouncer.value = "";
+  //   debouncer.onValue = (value) async {
+  //     // final token = await secureStorage.readToken();
+  //     final resp = await http.get(
+  //         Uri.parse('${Environment.urlApi}/policy/get-search-policy/' +
+  //             searchValue +
+  //             '/' +
+  //             sortOrderCode),
+  //         headers:
+  //             _setHeaders()); //{'Accept': 'application/json'}); //, 'xxx-token': token! });
+
+  //     // print(resp.body);
+  //     final listPolicies =
+  //         ResponsePolicy.fromJson(json.decode(resp.body)).policies;
+
+  //     _streamController.add(listPolicies);
+  //   };
+
+  //   final timer = Timer(
+  //       const Duration(milliseconds: 200), () => debouncer.value = searchValue);
+  //   Future.delayed(const Duration(milliseconds: 400))
+  //       .then((_) => timer.cancel());
+  // }
+
   void searchPolicy(String searchValue) async {
     debouncer.value = "";
     debouncer.onValue = (value) async {
-      // final token = await secureStorage.readToken();
       final resp = await http.get(
-          Uri.parse(
-              '${Environment.urlApi}/policy/get-search-policy/' + searchValue),
-          headers:
-              _setHeaders()); //{'Accept': 'application/json'}); //, 'xxx-token': token! });
+        Uri.parse('${Environment.urlApi}/policy/get-search-policy/' + value),
+        headers: _setHeaders(),
+      );
 
-      // print(resp.body);
       final listPolicies =
           ResponsePolicy.fromJson(json.decode(resp.body)).policies;
 
       _streamController.add(listPolicies);
     };
 
-    final timer = Timer(
-        const Duration(milliseconds: 200), () => debouncer.value = searchValue);
-    Future.delayed(const Duration(milliseconds: 400))
-        .then((_) => timer.cancel());
+    debouncer.value = searchValue; // Update the debouncer value
+
+    // Cancel the existing timer and start a new one
+    _timer?.cancel();
+    _timer = Timer(const Duration(milliseconds: 00), () {
+      debouncer.value = searchValue; // Update the debouncer value
+    });
   }
 
   Future<List<Policy>> getPolicyBySelect(
-    String? institutionCodeName,
-    String? institutionCodeDetail,
-    String? targetCodeName,
-    String? targetCodeDetail,
-    String? fieldCodeName,
-    String? fieldCodeDetail,
-    String? characterCodeName,
-    String? characterCodeDetail,
-  ) async {
+      String? institutionCodeName,
+      String? institutionCodeDetail,
+      String? targetCodeName,
+      String? targetCodeDetail,
+      String? fieldCodeName,
+      String? fieldCodeDetail,
+      String? characterCodeName,
+      String? characterCodeDetail,
+      String sortOrderCode) async {
     final queryParams = <String, String>{};
 
     final selectedValues = {
@@ -92,6 +121,7 @@ class PolicyServices {
       'fieldCodeDetail': fieldCodeDetail,
       'characterCodeName': characterCodeName,
       'characterCodeDetail': characterCodeDetail,
+      'sortOrderCode': sortOrderCode
     };
 
     // 선택된 값들만 필터링하여 query parameter 추가

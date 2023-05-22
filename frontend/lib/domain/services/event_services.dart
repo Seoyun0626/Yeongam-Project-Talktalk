@@ -14,7 +14,7 @@ class EventServices {
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/event/get-fig-history-by-user'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
-    print(resp.body);
+    // print(resp.body);
 
     return ResponseEvent.fromJson(jsonDecode(resp.body));
   }

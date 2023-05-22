@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		fyjlOnWEX8zxzl8bfCLmOhgDiKM=
+		A09gq+OK8at0gGSUgeioBJRxgMQ=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,19 +54,19 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		3t7EK1xZp5s7iQWdFLpdr41sqBY=
+		DywkoXgaFpkxE4ilRump6uj9Zs4=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		IY8mZKhsLbA768uYkkSi2al3ypQ=
+		R0/MO1kHPskoGNu1XmrKHUJpf28=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
-		cp+6LVW307zI2m1D8DD9VaU2SAg=
+		2vxJtp9fu8akNPXObYbKFP5J7D4=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		lxKvd6NQR8AFEWMsHS4YdM4uVHI=
+		qmzqveKSuWQZzGsCXjoYtYdlZcg=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/fonts/CookieRunBold.otf</key>
 		<data>
@@ -274,11 +274,15 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		Ko/J61WFKbZ8vtzvw5Y8PQUocbA=
+		gjCNwQgMqbfcnm2/rqfZWV5dxRI=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
 		P7bb/oR3EhwqCIH1M6LyTuBIWYU=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_neumorphic/fonts/NeumorphicIcons.ttf</key>
+		<data>
+		j/gyItxv7nJwy6iDn+JK3Ow2kW0=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -553,7 +557,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			iudXivmeeF8e9hlr48FcVuQglUxGAxkJiBWiIBMeuXs=
+			e+RLdQRC1YXw+ouCbjcYrk/ULNiFIwKyaJoA65suwtg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -567,28 +571,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			wTuVJJUZAitUQ/+S0yPv6NdAyyKe2w2ilfMOg5b0MlU=
+			m+W3AM0lGa4wmzKk6VsX6hyBSTTfkbC+nvsy5JmfVLc=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			colrCkThW6Zwj0QVxWsGfz9fPBRQ+rjjuPuVNv5xTjA=
+			f+wOGbREcqzPei5B4i9EDvLKQddZ9fXZO5TBksd5BbA=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0smKoYduIkMppVfd8bvbajV3hw2SdTk43LXApyzlBUQ=
+			eMXSu5u56sPPuhjS3AUSdouffckscqojHJwuJCk5fm4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			W67XSriZzcx+UFdYd3nW3zrNR4E2WCwnE/TpJ9LkFmU=
+			RfBc5LI68hzFZg1MmQc3b8tL4Y9ye/zn4lH8CZG3cSk=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/fonts/CookieRunBold.otf</key>
@@ -952,7 +956,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RsaXYN01Vr839v13ILQdWSIZANP7AkN4flaVleK92Uw=
+			lI7HDM/vMUTjtRyTG7vaoAJAnqQYBzxnmVjbx7AyN0g=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -960,6 +964,13 @@
 			<key>hash2</key>
 			<data>
 			x6NX+tjyECiQtyzbbjyY8U2zoZ7GDbJtE+T+k/dzgI0=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/packages/flutter_neumorphic/fonts/NeumorphicIcons.ttf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dG5Zlm9qgmPN4N+NEhqJ6dvsSd44jCKx5vyp8oOPgwg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/shaders/ink_sparkle.frag</key>

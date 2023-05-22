@@ -9,13 +9,12 @@ import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
 class MyFigHistoryPage extends StatelessWidget {
-  const MyFigHistoryPage({super.key});
+  const MyFigHistoryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final userBloc = BlocProvider.of<UserBloc>(context);
     final myFigCount = userBloc.state.user?.fig ?? '';
-    // eventService.getFigHistoryByUser();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -25,53 +24,56 @@ class MyFigHistoryPage extends StatelessWidget {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                  color: ThemeColors.primary),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                color: ThemeColors.primary),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
-        body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                  margin: EdgeInsets.only(
-                    left: 20.h,
-                    top: 20.h,
-                  ),
-                  child: const TextCustom(
-                      text: "무화과 지급내역",
-                      fontSize: 30,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                left: 20.h,
+                top: 20.h,
+              ),
+              child: const TextCustom(
+                text: "무화과 지급내역",
+                fontSize: 30,
+                color: ThemeColors.basic,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(15.h),
+              child: Container(
+                padding: const EdgeInsets.all(30),
+                height: 82.h,
+                decoration: BoxDecoration(
+                  color: ThemeColors.third,
+                  borderRadius: BorderRadius.circular(30.r),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SvgPicture.asset('images/Fig.svg'),
+                    TextCustom(
+                      text: '$myFigCount개',
+                      fontSize: 32.sp,
+                      fontWeight: FontWeight.w900,
                       color: ThemeColors.basic,
-                      fontWeight: FontWeight.w700)),
-              Container(
-                margin: EdgeInsets.all(15.h),
-                child: Container(
-                  padding: const EdgeInsets.all(30),
-                  height: 82.h,
-                  decoration: BoxDecoration(
-                    color: ThemeColors.third,
-                    borderRadius: BorderRadius.circular(30.r),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SvgPicture.asset('images/Fig.svg'),
-                      TextCustom(
-                          text: '$myFigCount개',
-                          fontSize: 32.sp,
-                          fontWeight: FontWeight.w900,
-                          color: ThemeColors.basic),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 10.r),
-              const _FigHistory(),
-            ],
-          ),
+            ),
+            SizedBox(height: 10.r),
+            const Expanded(
+              child: _FigHistory(),
+            ),
+          ],
         ),
       ),
     );
@@ -111,15 +113,14 @@ class _FigHistoryState extends State<_FigHistory>
     setState(() {
       figRewardList = figHistoryData.rewardData;
       figUsagedList = figHistoryData.usageData;
-      print(figRewardList);
-      print(figUsagedList);
+      // print(figRewardList);
+      // print(figUsagedList);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
+    return Column(
       children: [
         TabBar(
           controller: _tabController,
@@ -141,24 +142,24 @@ class _FigHistoryState extends State<_FigHistory>
             ),
           ],
         ),
-        SizedBox(
-          height:
-              MediaQuery.of(context).size.height, // Adjust the remaining height
-          child: TabBarView(
-            controller: _tabController,
-            children: [
-              _buildFigRewardList(),
-              _buildFigUsageList(),
-            ],
+        Expanded(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                _buildFigRewardList(),
+                _buildFigUsageList(),
+              ],
+            ),
           ),
-        ),
+        )
       ],
     );
   }
 
   Widget _buildFigRewardList() {
-    return SizedBox(
-        height: 410.h,
+    return Scrollbar(
         child: ListView.builder(
             itemCount: figRewardList.length,
             itemBuilder: (context, index) {
@@ -210,8 +211,7 @@ class _FigHistoryState extends State<_FigHistory>
   }
 
   Widget _buildFigUsageList() {
-    return SizedBox(
-        height: 410.h,
+    return Scrollbar(
         child: ListView.builder(
             itemCount: figUsagedList.length,
             itemBuilder: (context, index) {

@@ -256,7 +256,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       // 실시간 인기글
                       FutureBuilder<List<Policy>>(
-                          future: policyService.getAllPolicy(),
+                          future: policyService.getAllPolicy('2'), // 스크랩 수 많은 순
                           builder: ((_, snapshot) {
                             if (snapshot.data != null &&
                                 snapshot.data!.isEmpty) {

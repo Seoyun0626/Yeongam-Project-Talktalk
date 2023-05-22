@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:login/ui/screens/settings/notice_page.dart';
 import 'package:login/ui/screens/settings/withdrawal_page.dart';
@@ -33,22 +34,24 @@ class SettingsPage extends StatelessWidget {
             child: Column(children: [
               Container(
                 padding: const EdgeInsets.all(30),
-                child: Row(children: [
-                  Icon(
-                    Icons.notifications_none_rounded,
-                    size: 30.sp,
-                  ),
-                  SizedBox(
-                    width: 5.w,
-                  ),
-                  TextCustom(
-                    text: "알림 허용",
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  const Spacer(),
-                  const _NotifySwitchButton()
-                ]),
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.notifications_none_rounded,
+                        size: 30.sp,
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      TextCustom(
+                        text: "알림 허용",
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      const Spacer(),
+                      const _NotifySwitchButton()
+                    ]),
               ),
               Container(
                 height: 2.h,
@@ -108,16 +111,30 @@ class _NotifySwitchButtonState extends State<_NotifySwitchButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Switch(
-      // This bool value toggles the switch.
+    return NeumorphicSwitch(
       value: light,
-      activeColor: ThemeColors.primary,
+      height: 35.h,
+      style: NeumorphicSwitchStyle(
+        activeTrackColor: ThemeColors.primary,
+        inactiveTrackColor: Colors.grey[300],
+      ),
       onChanged: (bool value) {
-        // This is called when the user toggles the switch.
         setState(() {
           light = value;
         });
       },
     );
+
+    // Switch(
+    //   // This bool value toggles the switch.
+    //   value: light,
+    //   activeColor: ThemeColors.primary,
+    //   onChanged: (bool value) {
+    //     // This is called when the user toggles the switch.
+    //     setState(() {
+    //       light = value;
+    //     });
+    //   },
+    // );
   }
 }

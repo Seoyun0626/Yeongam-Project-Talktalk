@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/style.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:login/ui/screens/event/event.dart';
+import 'package:login/ui/screens/event/event_page.dart';
 import 'package:login/ui/screens/scrap/scrap.dart';
 import 'package:login/ui/screens/policy/policy_list_page.dart';
 import 'package:login/ui/screens/user/myTalkTalk_page.dart';
