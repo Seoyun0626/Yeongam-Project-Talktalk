@@ -93,9 +93,9 @@
     },
     {
       "name": "dio",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/dio-4.0.6",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/dio-5.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.15"
     },
     {
       "name": "encrypt",
@@ -144,6 +144,12 @@
       "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_html-3.0.0-alpha.6",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_inappwebview",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_inappwebview-5.7.2+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
     },
     {
       "name": "flutter_lints",
@@ -327,63 +333,63 @@
     },
     {
       "name": "kakao_flutter_sdk",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk-1.4.2",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk-1.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "kakao_flutter_sdk_auth",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_auth-1.4.2",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_auth-1.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "kakao_flutter_sdk_common",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_common-1.4.2",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_common-1.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "kakao_flutter_sdk_friend",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_friend-1.4.2",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_friend-1.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "kakao_flutter_sdk_navi",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_navi-1.4.2",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_navi-1.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "kakao_flutter_sdk_share",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_share-1.4.2",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_share-1.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "kakao_flutter_sdk_story",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_story-1.4.2",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_story-1.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "kakao_flutter_sdk_talk",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_talk-1.4.2",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_talk-1.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "kakao_flutter_sdk_template",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_template-1.4.2",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_template-1.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "kakao_flutter_sdk_user",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_user-1.4.2",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/kakao_flutter_sdk_user-1.4.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "lints",
@@ -711,27 +717,27 @@
     },
     {
       "name": "webview_flutter",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter-3.0.4",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter-4.2.1",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "webview_flutter_android",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_android-2.10.4",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_android-3.7.1",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "webview_flutter_platform_interface",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_platform_interface-1.9.5",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_platform_interface-2.3.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "webview_flutter_wkwebview",
-      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_wkwebview-2.9.5",
+      "rootUri": "file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/webview_flutter_wkwebview-3.4.4",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "win32",
@@ -758,7 +764,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-05-21T14:44:47.259374Z",
+  "generated": "2023-05-25T06:09:02.754443Z",
   "generator": "pub",
   "generatorVersion": "2.18.5"
 }

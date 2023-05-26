@@ -10,6 +10,8 @@ class BtnNaru extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final VoidCallback? onPressed;
+  final EdgeInsets padding;
+  final EdgeInsets margin;
 
   const BtnNaru(
       {Key? key,
@@ -21,12 +23,16 @@ class BtnNaru extends StatelessWidget {
       this.colorText = Colors.white,
       this.fontSize = 21,
       this.fontWeight = FontWeight.w400,
-      this.backgroundColor = ThemeColors.primary})
+      this.backgroundColor = ThemeColors.primary,
+      this.padding = const EdgeInsets.all(0),
+      this.margin = const EdgeInsets.all(0)})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: padding,
+      margin: margin,
       height: height,
       width: width,
       child: TextButton(

@@ -12,6 +12,8 @@ class EventCtroller extends GetxController {
   RxInt month = 0.obs;
   RxList days = [].obs;
 
+  // tb_attendance_logs에서 받아오기
+  //
   RxList temp_days = [4, 6, 7].obs;
 
   @override

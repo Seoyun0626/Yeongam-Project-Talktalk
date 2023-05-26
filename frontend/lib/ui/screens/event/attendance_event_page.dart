@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -36,7 +37,8 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
               }),
         ),
         body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+          physics:
+              const ClampingScrollPhysics(), //const BouncingScrollPhysics(),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,7 +109,7 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                                 margin: EdgeInsets.symmetric(horizontal: 10),
                                 child: TextCustom(
                                   text: controller.week[i],
-                                  fontSize: 12.sp,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w600,
                                   color: i == 0
                                       ? ThemeColors.primary
@@ -162,13 +164,13 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                                           : Colors.transparent,
                                     ),
                                     child: Center(
-                                      child: Text(
-                                        controller.days[i]["day"].toString(),
-                                        style: TextStyle(
-                                          color: controller.days[i]["inMonth"]
-                                              ? Colors.black
-                                              : Colors.grey,
-                                        ),
+                                      child: TextCustom(
+                                        text: controller.days[i]["day"]
+                                            .toString(),
+                                        fontSize: 15.sp,
+                                        color: controller.days[i]["inMonth"]
+                                            ? Colors.black
+                                            : Colors.grey,
                                       ),
                                     ),
                                   ),
@@ -177,24 +179,28 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                           ),
                         ),
                       ),
-                      InkWell(
-                        onTap: () {
-                          if (controller.temp_days
-                              .contains(controller.now2.value.day)) {
-                            print("이미 출석하였습니다.");
-                          } else {
-                            controller.temp_days.add(controller.now2.value.day);
-                          }
-                        },
-                        child: Container(
-                          height: 40.h,
-                          width: 190.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.r),
-                            color: Color.fromRGBO(247, 248, 250, 1),
-                          ),
+                      Container(
+                        width: 190.w,
+                        child: NeumorphicButton(
+                          margin: EdgeInsets.only(top: 10.h),
+                          style: NeumorphicStyle(
+                              shape: NeumorphicShape.flat,
+                              boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.circular(50.r)),
+                              depth: 2,
+                              lightSource: LightSource.topLeft,
+                              color: Color.fromRGBO(247, 248, 250, 1)),
+                          onPressed: () {
+                            if (controller.temp_days
+                                .contains(controller.now2.value.day)) {
+                              print("이미 출석하였습니다.");
+                            } else {
+                              controller.temp_days
+                                  .add(controller.now2.value.day);
+                            }
+                          },
                           child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset('images/Fig.svg',
@@ -203,6 +209,7 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                               TextCustom(
                                 text: "오늘의 무화과 받기",
                                 fontSize: 15.sp,
+                                color: Colors.black,
                               )
                             ],
                           ),

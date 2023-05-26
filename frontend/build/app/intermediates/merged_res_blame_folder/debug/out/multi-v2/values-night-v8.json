@@ -23,20 +23,20 @@
                     }
                 },
                 {
-                    "source": "/Users/taeheekim/.gradle/caches/transforms-3/721af5cb1377ecd00b0f2eaaa8841448/transformed/appcompat-1.0.2/res/values-night-v8/values-night-v8.xml",
+                    "source": "/Users/taeheekim/.gradle/caches/transforms-3/9f293e4f2b52118cf4fe36db13746d0c/transformed/appcompat-1.5.1/res/values-night-v8/values-night-v8.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,125,209,293,389,491,593",
-                        "endColumns": "69,83,83,95,101,101,93",
-                        "endOffsets": "120,204,288,384,486,588,682"
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593,687",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "120,204,288,384,486,588,682,771"
                     },
                     "to": {
-                        "startLines": "13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "729,799,883,967,1063,1165,1267",
-                        "endColumns": "69,83,83,95,101,101,93",
-                        "endOffsets": "794,878,962,1058,1160,1262,1356"
+                        "startLines": "13,14,15,16,17,18,19,20",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "729,799,883,967,1063,1165,1267,1361",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "794,878,962,1058,1160,1262,1356,1445"
                     }
                 }
             ]

@@ -83,10 +83,10 @@ class EventPage extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const TextCustom(
+                                TextCustom(
                                     text: "무화과 이벤트 모두 보기",
                                     color: ThemeColors.basic,
-                                    fontSize: 12),
+                                    fontSize: 12.sp),
                                 SizedBox(width: 4.w),
                                 const Icon(
                                   Icons.arrow_forward_ios_rounded,
@@ -167,11 +167,13 @@ class _attendanceEvent extends StatelessWidget {
             child: Row(
               children: [
                 TextCustom(
-                    text: "하루 한 번, 출석 체크하고 \n무화과 받기",
-                    maxLines: 2,
-                    height: 1.3.h,
-                    color: Colors.black,
-                    fontSize: 15.sp),
+                  text: "하루 한 번, 출석 체크하고 \n무화과 받기",
+                  maxLines: 2,
+                  height: 1.3.h,
+                  color: Colors.black,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w600,
+                ),
                 const Spacer(),
                 SvgPicture.asset('images/event_icon/attendance_icon.svg')
               ],
@@ -220,11 +222,13 @@ class _weeklyFigEvent extends StatelessWidget {
             child: Row(
               children: [
                 TextCustom(
-                    text: "주간 무화과 챌린지\n이번주 미션은?",
-                    color: Colors.black,
-                    height: 1.3.h,
-                    maxLines: 2,
-                    fontSize: 15.sp),
+                  text: "주간 무화과 챌린지\n이번주 미션은?",
+                  color: Colors.black,
+                  height: 1.3.h,
+                  maxLines: 2,
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w600,
+                ),
                 const Spacer(),
                 SvgPicture.asset('images/event_icon/flagIcon.svg')
               ],

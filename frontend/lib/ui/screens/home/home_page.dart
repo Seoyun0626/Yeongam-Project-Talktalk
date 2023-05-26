@@ -11,6 +11,7 @@ import 'package:login/ui/screens/notification/notification_page.dart';
 import 'package:login/ui/screens/policy/policy_detail_page.dart';
 import 'package:login/ui/screens/policy/policy_list_page.dart';
 import 'package:login/ui/screens/user/myTalkTalk_page.dart';
+import 'package:login/webview_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/services/banner_services.dart';
@@ -18,6 +19,7 @@ import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -314,6 +316,44 @@ class BannerSlide extends StatelessWidget {
             fit: BoxFit.cover,
           )),
     );
+
+    // webview
+    //   return InkWell(
+    //     onTap: () {
+    //       _launchWebView(context, bannerLink);
+    //     },
+    //     child: ClipRRect(
+    //       borderRadius: BorderRadius.circular(20),
+    //       child: Image.network(
+    //         bannerImgUrl,
+    //         fit: BoxFit.cover,
+    //       ),
+    //     ),
+    //   );
+    // }
+
+    // void _launchWebView(BuildContext context, String bannerLink) async {
+    //   final uri = Uri.parse(bannerLink);
+    //   if (await canLaunchUrl(uri)) {
+    //     Navigator.push(
+    //         context,
+    //         MaterialPageRoute(
+    //             builder: (context) => WebViewPage(url: bannerLink)));
+    //   } else {
+    //     showDialog(
+    //         context: context,
+    //         builder: (context) {
+    //           return AlertDialog(
+    //             title: const TextCustom(text: 'Error'),
+    //             content: const TextCustom(text: 'Could no launch the web page'),
+    //             actions: [
+    //               TextButton(
+    //                   onPressed: () => Navigator.pop(context),
+    //                   child: const TextCustom(text: 'OK')),
+    //             ],
+    //           );
+    //         });
+    //   }
   }
 }
 

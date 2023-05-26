@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class InviteEventPage extends StatefulWidget {
 class _InviteEventPageState extends State<InviteEventPage> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -32,7 +34,8 @@ class _InviteEventPageState extends State<InviteEventPage> {
               }),
         ),
         body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+          physics:
+              const ClampingScrollPhysics(), //const BouncingScrollPhysics(),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,6 +80,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
                 ),
                 SizedBox(height: 16.h),
                 Container(
+                  padding: EdgeInsets.only(),
                   // height: MediaQuery.of(context).size.height.h / 1.90.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -96,36 +100,29 @@ class _InviteEventPageState extends State<InviteEventPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Container(
-                        height: 60.h,
-                        margin:
-                            EdgeInsets.only(left: 23.w, top: 12.h, right: 23.w),
-                        child: Container(
-                          // height: 60.h,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey,
-                            ),
-                            color: Color.fromRGBO(247, 248, 250, 1),
-                          ),
-                          child: Center(child: Text("ddd")),
-                        ),
+                      Neumorphic(
+                          margin: EdgeInsets.only(
+                              left: 20.w, top: 10.h, right: 20.w, bottom: 40.h),
+                          style: const NeumorphicStyle(
+                              shape: NeumorphicShape.flat,
+                              depth: -2,
+                              color: Color.fromRGBO(247, 248, 250, 1)),
+                          child: Container(
+                              padding: EdgeInsets.only(top: 5.h, bottom: 5.h),
+                              height: 60.h,
+                              child: Center(child: TextCustom(text: "ddd")))),
+
+                      BtnNaru(
+                        margin: EdgeInsets.only(left: 20.w, right: 20.w),
+                        backgroundColor: ThemeColors.secondary,
+                        height: 50.h,
+                        text: "카카오톡으로 초대하기",
+                        width: size.width,
+                        colorText: Colors.black,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Container(
-                        height: 58.h,
-                        margin:
-                            EdgeInsets.only(left: 23.w, top: 12.h, right: 23.w),
-                        decoration: BoxDecoration(
-                          color: Color.fromRGBO(255, 227, 91, 1),
-                          borderRadius: BorderRadius.circular(30.r),
-                        ),
-                        child: Center(
-                          child: TextCustom(
-                              text: "카카오톡으로 초대하기",
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20.sp),
-                        ),
-                      ),
+
+                      // ),
                       SizedBox(
                         height: 28.h,
                       ),
@@ -139,7 +136,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
                       ),
                       Container(
                         margin:
-                            EdgeInsets.only(left: 23.w, top: 12.h, right: 23.w),
+                            EdgeInsets.only(left: 20.w, top: 15.h, right: 20.w),
                         child: TextCustom(
                             text: "유의사항",
                             fontSize: 20.sp,
