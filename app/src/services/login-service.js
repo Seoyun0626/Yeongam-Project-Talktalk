@@ -135,7 +135,7 @@ exports.signUp = async function(req, res) {
 };
 
 
-
+// 세션의 유저아이디를 통해 출석기록 받아오기
 exports.getAttendance = async function(req, res) {
   var resultcode = 0;
   var conn;
@@ -144,13 +144,16 @@ exports.getAttendance = async function(req, res) {
     var userid = req.session.user.data.userid;
     var query = 'SELECT uid FROM webdb.tb_user where userid="'+userid+'"';
     var uid = await conn.query(query); // 쿼리 실행
-    var today = new Date().toISOString().slice(0, 10); // 오늘 날짜
-    var query = 'SELECT * FROM webdb.tb_attendance_logs where user_uid="'+uid[0].uid+'" and attendance_date="'+today+'"';
+    
+    // uid를 통해 출석기록 받아오기
+    var query = 'SELECT * FROM webdb.tb_attendance_logs where user_uid="'+uid[0].uid+'"';
     var attendanceLog = await conn.query(query); // 쿼리 실행
+    // console.log(attendanceLog);
 
     if(attendanceLog.length){
       resultcode = 1;
     } else resultcode = 0;
+    return attendanceLog;
   } catch(error) {
     console.log('login-service getAttendance:'+error);
   } finally {
@@ -165,13 +168,11 @@ exports.checkAttendance = async function(req, res) {
   try{
     conn = await db.getConnection();
     var userid = req.session.user.data.userid;
-    var today = new Date(); // 오늘 날짜
     // userid를 통해 uid받아오기
     var query = 'SELECT uid FROM webdb.tb_user where userid="'+userid+'"';
-    var uid = await conn.query(query); // 쿼리 실행
-    query = 'insert into webdb.tb_attendance_logs (user_uid, attendance_date, attendance_time) values ("'+uid[0].uid+'", "'+today.toISOString().slice(0, 10)+'", "'+today.toISOString().slice(11, 19)+'")';
+    var uid = await conn.query(query); // 쿼리 실행'
+    query = 'insert into webdb.tb_attendance_logs (user_uid) values ("'+uid[0].uid+'")';
     var rows = await conn.query(query); // 쿼리 실행
-    console.log('출석 체크 완료');
     resultcode = 1;
   } catch(error) {
     console.log('login-service checkAttendance:'+error);

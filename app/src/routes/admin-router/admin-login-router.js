@@ -39,11 +39,30 @@ router.post("/login", async function(req, res) {
 router.get('/attendance', async function (req, res) {
   try{
     var attendance = await login_controller.getAttendance(req, res);
-    if(attendance == 0){ // 출석 진행
-      var result = await login_controller.checkAttendance(req, res);
+    // var today = new Date().toISOString().slice(0, 10); // 오늘 날짜
+    var today = new Date();
+    today = new Date(today).toLocaleDateString('ko-KR', {
+      timeZone: 'Asia/Seoul',
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    });
+    // at_date는 마지막 출석 날짜
+    var at_date = attendance[attendance.length - 1].attendance_date;
+    at_date = new Date(at_date).toLocaleDateString('ko-KR', {
+      timeZone: 'Asia/Seoul',
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    });
+
+    // 출석 내역이 있고, 마지막 출석 날짜가 오늘 날짜와 같으면 이미 출석한 것
+    if(attendance.length && at_date == today){
+      console.log("이미 출석하셨습니다.");
       res.redirect('/admin/dataif');
     } else {
-      console.log("이미 출석하셨습니다.");
+      var result = await login_controller.checkAttendance(req, res);
+      console.log("출석 체크 완료");
       res.redirect('/admin/dataif');
     }
   } catch(error) {
@@ -51,6 +70,40 @@ router.get('/attendance', async function (req, res) {
   }
 });
 
+// 테스트 페이지, 캘린더 정보
+router.get('/calendar', async function (req, res) {
+  try{
+    // console.log(req.session.user.data.userid);
+    var result = await login_controller.getAttendance(req, res);
+    //현재 month 구하기
+    var date;
+    var today = new Date();
+    var month = new Date(today).toLocaleDateString('ko-KR', {
+      timeZone: 'Asia/Seoul',
+      month: 'numeric',
+    }).split('월')[0];
+    // result에서 현재 개월의 출석 날짜만 뽑아서 배열로 만들기
+    var attendance = [];
+    for(var i = 0; i < result.length; i++){
+      date = new Date(result[i].attendance_date).toLocaleDateString('ko-KR', {
+        timeZone: 'Asia/Seoul',
+        month: 'numeric',
+      }).split('월')[0];
+      if(date == month){
+        at_date = new Date(result[i].attendance_date).toLocaleDateString('ko-KR', {
+          timeZone: 'Asia/Seoul',
+          day: 'numeric'
+        }).split('일')[0];
+        at_date = Number(at_date);
+        // attendance에 중복된 날짜가 없으면 추가
+        if(!attendance.includes(at_date)) attendance.push(at_date);
+      }
+    }
+    return attendance;
+  } catch(error) {
+    console.log('login-router login error:'+error);
+  }
+});
 
 
 // router.post('/login', passport.authenticate('local-login', {
