@@ -90,10 +90,6 @@ flutter_html
 2.17
 file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_html-3.0.0-alpha.6/
 file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_html-3.0.0-alpha.6/lib/
-flutter_inappwebview
-2.14
-file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_inappwebview-5.7.2+3/
-file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_inappwebview-5.7.2+3/lib/
 flutter_lints
 2.17
 file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1/
@@ -146,6 +142,10 @@ flutter_secure_storage_windows
 2.12
 file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_secure_storage_windows-1.1.3/
 file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_secure_storage_windows-1.1.3/lib/
+flutter_share
+2.12
+file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_share-2.0.0/
+file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_share-2.0.0/lib/
 flutter_svg
 2.17
 file:///Users/taeheekim/Documents/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-1.1.6/

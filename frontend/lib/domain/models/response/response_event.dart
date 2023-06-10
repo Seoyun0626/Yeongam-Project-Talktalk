@@ -37,12 +37,14 @@ class ResponseEvent {
 // 지급 내역
 class FigReward {
   int event_part_no;
+  // String eid;
   String acquired_time; // 지급 일시
   String event_name; // 이벤트 이름
   String fig_payment; // 무화과 개수
 
   FigReward({
     required this.event_part_no,
+    // required this.eid,
     required this.acquired_time,
     required this.event_name,
     required this.fig_payment,
@@ -50,6 +52,7 @@ class FigReward {
 
   factory FigReward.fromJson(Map<String, dynamic> json) => FigReward(
         event_part_no: json["event_part_no"],
+        // eid: json["eid"],
         acquired_time: json["acquired_time"],
         event_name: json["event_name"],
         fig_payment: json["fig_payment"],
@@ -57,6 +60,7 @@ class FigReward {
 
   Map<String, dynamic> toJson() => {
         "event_part_no": event_part_no,
+        // "eid": eid,
         "acquired_time": acquired_time,
         "event_name": event_name,
         "fig_payment": fig_payment,

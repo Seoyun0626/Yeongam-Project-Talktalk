@@ -5,7 +5,7 @@ import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/domain/services/policy_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/helpers/modal_checkLogin.dart';
+import 'package:login/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/screens/policy/policy_detail_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';

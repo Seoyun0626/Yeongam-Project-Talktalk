@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:login/domain/services/event_services.dart';
 import 'package:login/ui/helpers/attendance_event_controller.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
@@ -17,8 +17,9 @@ class AttendanceEventPage extends StatefulWidget {
 class _AttendanceEventPageState extends State<AttendanceEventPage> {
   @override
   Widget build(BuildContext context) {
+    EventController controller = EventController();
+
     final size = MediaQuery.of(context).size;
-    EventCtroller controller = EventCtroller();
     controller.onInit();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -179,26 +180,41 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                           ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         width: 190.w,
                         child: NeumorphicButton(
                           margin: EdgeInsets.only(top: 10.h),
                           style: NeumorphicStyle(
+                              disableDepth: controller.isCheckedAttendance.value
+                                  ? true
+                                  : false,
                               shape: NeumorphicShape.flat,
                               boxShape: NeumorphicBoxShape.roundRect(
                                   BorderRadius.circular(50.r)),
                               depth: 2,
                               lightSource: LightSource.topLeft,
-                              color: Color.fromRGBO(247, 248, 250, 1)),
-                          onPressed: () {
-                            if (controller.temp_days
-                                .contains(controller.now2.value.day)) {
-                              print("이미 출석하였습니다.");
-                            } else {
-                              controller.temp_days
-                                  .add(controller.now2.value.day);
-                            }
-                          },
+                              color: controller.isCheckedAttendance.value
+                                  ? Colors.grey
+                                  : const Color.fromRGBO(247, 248, 250, 1)),
+                          onPressed: controller.isCheckedAttendance.value
+                              ? null
+                              : controller.handleAttendanceCheck,
+                          // onPressed: () {
+                          // bool isCheckedAttendance = controller.temp_days
+                          //     .contains(controller.now2.value.day);
+                          // print(controller.temp_days);
+                          // print(isCheckedAttendance);
+                          // if (isCheckedAttendance) {
+                          //   return null;
+                          // } else {
+                          //   controller.temp_days
+                          //       .add(controller.now2.value.day);
+                          //   isCheckedAttendance = true;
+                          //   eventService.giveFig(
+                          //     '71965135-8e01-422a-92b9-4bb5a65a81f5',
+                          //   ); // 출석체크 eid 수정
+                          // }
+                          // },
                           child: Row(
                             // crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -207,9 +223,13 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                                   width: 18.w, height: 18.h),
                               SizedBox(width: 8.w),
                               TextCustom(
-                                text: "오늘의 무화과 받기",
+                                text: controller.isCheckedAttendance.value
+                                    ? "이미 출석하였습니다"
+                                    : "오늘의 무화과 받기",
                                 fontSize: 15.sp,
-                                color: Colors.black,
+                                color: controller.isCheckedAttendance.value
+                                    ? Colors.white
+                                    : Colors.black,
                               )
                             ],
                           ),

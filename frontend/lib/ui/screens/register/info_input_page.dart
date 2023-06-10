@@ -11,7 +11,7 @@ import 'package:login/ui/widgets/widgets.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class InfoInputPage extends StatefulWidget {
-  const InfoInputPage(this.userTypeCode, {Key? key}) : super(key: key);
+  const InfoInputPage({required this.userTypeCode, Key? key}) : super(key: key);
   final int userTypeCode;
 
   @override
@@ -19,11 +19,14 @@ class InfoInputPage extends StatefulWidget {
 }
 
 class _InfoInputPageState extends State<InfoInputPage> {
+  late ScrollController _scrollController;
+
   late TextEditingController userIDController;
   late TextEditingController userPWController;
   late TextEditingController userAgainPWController;
   late TextEditingController userEmailController;
   late TextEditingController userNameController;
+  late TextEditingController inviteCodeController;
   // late TextEditingController userPhoneNumberController;
   late int userTypeCode; // 사용자 유형
   final String userRole = '1';
@@ -42,11 +45,13 @@ class _InfoInputPageState extends State<InfoInputPage> {
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
     userIDController = TextEditingController();
     userPWController = TextEditingController();
     userAgainPWController = TextEditingController();
     userEmailController = TextEditingController();
     userNameController = TextEditingController();
+    inviteCodeController = TextEditingController();
     // userPhoneNumberController = TextEditingController();
     // emd = '0';
     // youthAge = '5';
@@ -60,11 +65,13 @@ class _InfoInputPageState extends State<InfoInputPage> {
 
   @override
   void dispose() {
+    _scrollController.dispose();
     userIDController.dispose();
     userPWController.dispose();
     userAgainPWController.dispose();
     userEmailController.dispose();
     userNameController.dispose();
+    inviteCodeController.dispose();
     // userPhoneNumberController.dispose();
     super.dispose();
   }
@@ -83,10 +90,13 @@ class _InfoInputPageState extends State<InfoInputPage> {
 
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
-        if (state is LoadingUserState) {
-          modalLoading(context, '로드 중');
-          Navigator.pop(context);
-        } else if (state is SuccessUserState) {
+        print(state);
+        // if (state is LoadingUserState) {
+        //   modalLoading(context, '로드 중');
+        //   Navigator.pop(context);
+        // } else
+
+        if (state is SuccessUserState) {
           // Navigator.pop(context);
           modalSuccess(
             context,
@@ -118,6 +128,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 40, 20, 40),
             child: SingleChildScrollView(
+              controller: _scrollController,
               child: Form(
                 key: _keyForm,
                 child: Column(
@@ -270,6 +281,20 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         fontSize: 15,
                         color: Colors.black),
                     const SizedBox(height: 40.0),
+                    // 친구 초대
+                    const TextCustom(
+                      text: '친구 초대 코드를 입력해주세요.',
+                      fontSize: 17,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(height: 1.0),
+                    TextFieldNaru(
+                      controller: inviteCodeController,
+                      hintText: '친구 초대 코드',
+                      // validator: RequiredValidator(errorText: '이름을 입력해주세요.'),
+                    ),
+                    const SizedBox(height: 40.0),
+
                     // // 전화번호
                     // const TextCustom(
                     //   text: '전화번호를 입력해주세요.',
@@ -510,16 +535,19 @@ class _InfoInputPageState extends State<InfoInputPage> {
                             );
                           } else if (_keyForm.currentState != null &&
                               _keyForm.currentState!.validate()) {
+                            String _inviteCode = '';
+                            _inviteCode = inviteCodeController.text.trim();
+
                             String _youthAge = youthAge ?? '5';
                             String _parentsAge = parentsAge ?? '6';
                             String _emd = emd ?? '0';
                             String _sex = sex ?? '2';
 
-                            print(_youthAge);
-                            print(_parentsAge);
-                            print(_youthAge);
-                            print(_emd);
-                            print(_sex);
+                            // print(_youthAge);
+                            // print(_parentsAge);
+                            // print(_youthAge);
+                            // print(_emd);
+                            // print(_sex);
 
                             userBloc.add(OnRegisterUserEvent(
                                 userIDController.text.trim(),
@@ -529,6 +557,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                                 userAgainPWController.text.trim(),
                                 userRole, // user_role - 사용자
                                 userTypeCode.toString(), // user_type
+                                _inviteCode,
                                 // userPhoneNumberController.text.trim(),
                                 _youthAge, // youthAge_code
                                 _parentsAge, // parentsAge_code

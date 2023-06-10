@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/helpers/modal_checkLogin.dart';
+import 'package:login/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:login/ui/screens/event/attendance_event_page.dart';
 import 'package:login/ui/screens/event/event_list_page.dart';
 import 'package:login/ui/screens/event/weeklyFig_event_page.dart';
@@ -136,6 +136,7 @@ class _attendanceEvent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final authState = BlocProvider.of<AuthBloc>(context).state;
 
     return Container(
       height: 80.h,
@@ -143,11 +144,15 @@ class _attendanceEvent extends StatelessWidget {
       // margin: EdgeInsets.only(left: 12.w, right: 12.w),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AttendanceEventPage(),
-              ));
+          if (authState is LogOut) {
+            modalCheckLogin(context);
+          } else {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AttendanceEventPage(),
+                ));
+          }
         },
         child: Container(
           decoration: BoxDecoration(

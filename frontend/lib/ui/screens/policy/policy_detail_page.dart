@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:login/data/env/env.dart';
 import 'package:login/domain/models/response/response_policy.dart';
 import 'package:login/ui/helpers/get_mobile_code_data.dart';
@@ -22,6 +24,15 @@ class DetailPolicyPage extends StatefulWidget {
 }
 
 class _DetailPolicyState extends State<DetailPolicyPage> {
+  Future<void> _shareURL() async {
+    await FlutterShare.share(
+      title: 'Example share',
+      text: 'URL 복사하기',
+      linkUrl: '',
+      // chooserTitle: 'Example Chooser Title',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final Policy policies = widget.policies;
@@ -84,7 +95,10 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                     color: ThemeColors.primary,
                   ),
                   padding: const EdgeInsets.only(right: 20),
-                  onPressed: () {},
+                  onPressed: () async {
+                    _shareURL();
+                    // KakaoShareServices.kakaoSharePolicyToMe();
+                  },
                 ),
               ]),
           body: SafeArea(
@@ -251,7 +265,11 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                   fontWeight: FontWeight.bold,
                   width: size,
                   onPressed: () {
-                    launchUrl(Uri.parse(policyLink));
+                    launchUrl(
+                      Uri.parse(policyLink),
+                      mode: LaunchMode.externalApplication,
+                    );
+                    // launchUrl(Uri.parse(policyLink));
                   },
                 ),
               )

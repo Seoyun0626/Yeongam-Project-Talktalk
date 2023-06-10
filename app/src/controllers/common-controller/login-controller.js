@@ -25,23 +25,6 @@ exports.SignIn = async function(req, res) {
   }
 };
 
-// kth - mobile - renewLogin
-// exports.renewLogin = async function (req, res) {
-//   try {
-//       const token = generateJsonWebToken(req.idPerson);
-//       return res.json({
-//           resp: true,
-//           message: '청소년 톡talk에 오신 것을 환영합니다',
-//           token: token
-//       });
-//   }
-//   catch (err) {
-//       return res.status(500).json({
-//           resp: false,
-//           message: err
-//       });
-//   }
-// };
 
 
 

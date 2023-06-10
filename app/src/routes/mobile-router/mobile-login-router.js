@@ -2,6 +2,7 @@ const path = require("path");
 var express = require("express");
 var router = express.Router();
 var mobile_login_controller = require("../../controllers/mobile-controller/mobile-login-controller");
+const verifyToken = require("../../middleware/verify_token");
 const generateJsonWebToken = require("../../lib/generate_jwt");
 
 
@@ -44,10 +45,56 @@ router.post("/login", async function(req, res) {
     
   } catch(error) {
     console.log('mobile-router login:'+error);
-    
-
   }
 });
+
+// 카카오 가입
+router.post("/kakao-signup", async function(req, res) {
+  try{
+    // 사용자등록 컨트롤러 호출
+    console.log('mobile-router kakao signup');
+    
+    var result = await mobile_login_controller.KakaoLogIn(req, res);
+    // console.log(result);
+    //res.send({errMsg:result});
+    //if(result==0) res.json({success: true, msg:'등록하였습니다.'});
+    //else res.json({success: false, msg:'등록실패하였습니다.'});
+    if(result==0){
+      console.log('mobile-router kakao signup success');
+      // res.redirect('/mobile/auth/login');
+      res.json({
+        resp: true,
+        message: '성공적으로 등록된 사용자'
+      }); // kth
+    }
+    else if (result == 100){
+      console.log('mobile-router kakao signup fail');
+      // res.redirect('/mobile/auth/signup');
+      res.json({
+        resp: false,
+        message: '등록 실패'
+    }); // kth
+    } 
+
+  } catch(error) {
+    console.log('mobile-router signup error:'+error);
+  }
+});
+
+// 로그아웃
+// router.get("/logout", function(req, res) {
+//   res.clearCookie('userid'); // userid 쿠키 삭제
+//   res.clearCookie('username'); // username 쿠키 삭제
+//   req.session.destroy(); // 세션 정보 삭제
+//   req.logout(); // 로그아웃 처리 (세션 또는 토큰 기반 로그인에 따라 필요한 경우 사용)
+
+//   // 토큰 무효화 작업 추가
+//   // 여기에 토큰을 무효화하는 로직을 구현합니다.
+//   // 토큰을 저장하는 방식과 무효화하는 방식은 사용하는 토큰 시스템(예: JWT, Redis 등)에 따라 다를 수 있습니다.
+
+//   res.redirect('/'); // 로그아웃 후 홈페이지로 리다이렉트
+// });
+
 
 
   
@@ -208,6 +255,25 @@ router.get("/signup", function(req, res) {
       console.log('mobile-router-checkDuplicateID:' + error);
     }
 
+  });
+
+  router.get("/renew-login", verifyToken, function(req, res) {
+    try {
+
+      const token = generateJsonWebToken( req.idPerson );
+
+      return res.json({
+          resp: true,
+          message: 'Bienvenido a Social Frave',
+          token: token
+      }); 
+      
+  } catch (err) {
+      return res.status(500).json({
+          resp: false,
+          message: err
+      });
+  }
   });
 
 

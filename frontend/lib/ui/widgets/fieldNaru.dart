@@ -7,8 +7,9 @@ class TextFieldNaru extends StatelessWidget {
   final TextInputType keyboardType;
   final FormFieldValidator<String>? validator;
   final String? errorText;
-  final double fontSzie;
+  final double fontSize;
   final FocusNode? focusNode;
+  // final bool enableInteractiveSelection; // 텍스트 선택 및 편집 활성화 여부
 
   const TextFieldNaru({
     Key? key,
@@ -18,23 +19,26 @@ class TextFieldNaru extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.validator,
     this.errorText,
-    this.fontSzie = 18,
+    this.fontSize = 18,
     this.focusNode,
+    // this.enableInteractiveSelection = true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      // readOnly: true,
       focusNode: focusNode,
       style: TextStyle(
         fontFamily: 'NanumSquareRound',
-        fontSize: fontSzie,
+        fontSize: fontSize,
       ),
       // style: GoogleFonts.getFont('Roboto', fontSize: 18),
       cursorColor: ThemeColors.secondary,
       obscureText: isPassword,
       keyboardType: keyboardType,
+      // enableInteractiveSelection: enableInteractiveSelection,
       decoration: InputDecoration(
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.black),

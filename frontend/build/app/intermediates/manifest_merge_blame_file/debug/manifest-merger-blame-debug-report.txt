@@ -36,319 +36,265 @@
 24-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:13-42
 24-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:19-39
 25        </intent>
-26        <intent>
-26-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-12:18
-27            <action android:name="android.support.customtabs.action.CustomTabsService" />
-27-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-90
-27-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-87
-28        </intent>
-29
-30        <package android:name="com.kakao.talk" />
-30-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-50
-30-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-47
-31        <package android:name="com.kakao.talk.alpha" />
-31-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-56
-31-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:11:18-53
-32        <package android:name="com.kakao.talk.sandbox" />
-32-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:12:9-58
-32-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:12:18-55
-33        <package android:name="com.kakao.onetalk" />
-33-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:13:9-53
-33-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:13:18-50
-34        <package android:name="com.locnall.KimGiSa" />
-34-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-55
-34-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:14:18-52
-35        <package android:name="com.lguplus.navi" />
-35-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:15:9-52
-35-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:15:18-49
+26
+27        <package android:name="com.kakao.talk" />
+27-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-50
+27-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-47
+28        <package android:name="com.kakao.talk.alpha" />
+28-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-56
+28-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:11:18-53
+29        <package android:name="com.kakao.talk.sandbox" />
+29-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:12:9-58
+29-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:12:18-55
+30        <package android:name="com.kakao.onetalk" />
+30-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:13:9-53
+30-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:13:18-50
+31        <package android:name="com.locnall.KimGiSa" />
+31-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-55
+31-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:14:18-52
+32        <package android:name="com.lguplus.navi" />
+32-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:15:9-52
+32-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:15:18-49
+33
+34        <intent>
+34-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:17:9-23:18
+35            <action android:name="android.intent.action.VIEW" />
+35-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:13-65
+35-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:21-62
 36
-37        <intent>
-37-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:17:9-23:18
-38            <action android:name="android.intent.action.VIEW" />
-38-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:13-65
-38-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:21-62
-39
-40            <category android:name="android.intent.category.BROWSABLE" />
-40-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-74
-40-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:20:23-71
-41
-42            <data android:scheme="https" />
-42-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:13-42
-42-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:19-39
-43        </intent>
-44    </queries>
-45
-46    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-46-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-81
-46-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-78
-47    <uses-permission android:name="android.permission.VIBRATE" />
-47-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-66
-47-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:10:22-63
-48    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
-48-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-81
-48-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-78
-49    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-49-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:12:5-79
-49-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:12:22-76
-50    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-50-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:13:5-77
-50-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:13:22-74
-51
-52    <permission
-52-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
-53        android:name="com.example.adolescent_talk.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-53-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
-54        android:protectionLevel="signature" />
-54-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
-55
-56    <uses-permission android:name="com.example.adolescent_talk.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-56-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
-56-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
-57
-58    <application
-59        android:name="android.app.Application"
-60        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-60-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
-61        android:debuggable="true"
-62        android:icon="@mipmap/ic_launcher"
-63        android:label="청소년 톡talk" >
-64        <activity
-65            android:name="com.example.login.MainActivity"
-66            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-67            android:exported="true"
-68            android:hardwareAccelerated="true"
-69            android:launchMode="singleTop"
-70            android:showWhenLocked="true"
-71            android:theme="@style/LaunchTheme"
-72            android:turnScreenOn="true"
-73            android:windowSoftInputMode="adjustResize" >
-74
-75            <!--
-76                 Specifies an Android theme to apply to this Activity as soon as
-77                 the Android process has started. This theme is visible to the user
-78                 while the Flutter UI initializes. After that, this theme continues
-79                 to determine the Window background behind the Flutter UI.
-80            -->
-81            <meta-data
-82                android:name="io.flutter.embedding.android.NormalTheme"
-83                android:resource="@style/NormalTheme" />
-84
-85            <intent-filter>
-86                <action android:name="android.intent.action.MAIN" />
-87
-88                <category android:name="android.intent.category.LAUNCHER" />
-89            </intent-filter>
-90        </activity>
-91        <!--
-92             Don't delete the meta-data below.
-93             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-94        -->
-95        <meta-data
-96            android:name="flutterEmbedding"
-97            android:value="2" />
-98        <meta-data
-99            android:name="io.flutter.embedding.android.DrawableForeground"
-100            android:resource="@mipmap/ic_launcher" />
-101
-102        <activity
-102-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:16:9-20:47
-103            android:name="com.pichillilorenzo.flutter_inappwebview.in_app_browser.InAppBrowserActivity"
-103-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-104
-104            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
-104-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-137
-105            android:exported="false"
-105-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-37
-106            android:theme="@style/AppTheme" />
-106-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-44
-107        <activity
-107-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:21:9-24:55
-108            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ChromeCustomTabsActivity"
-108-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-112
-109            android:exported="false"
-109-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-37
-110            android:theme="@style/ThemeTransparent" />
-110-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-52
-111        <activity
-111-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:25:9-28:55
-112            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.TrustedWebActivity"
-112-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-106
-113            android:exported="false"
-113-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-37
-114            android:theme="@style/ThemeTransparent" />
-114-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-52
-115        <activity
-115-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:29:9-33:55
-116            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ChromeCustomTabsActivitySingleInstance"
-116-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-126
-117            android:exported="false"
-117-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-37
-118            android:launchMode="singleInstance"
-118-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-48
-119            android:theme="@style/ThemeTransparent" />
-119-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:33:13-52
-120        <activity
-120-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:34:9-38:55
-121            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.TrustedWebActivitySingleInstance"
-121-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:35:13-120
-122            android:exported="false"
-122-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:36:13-37
-123            android:launchMode="singleInstance"
-123-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:37:13-48
-124            android:theme="@style/ThemeTransparent" />
-124-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:38:13-52
-125
-126        <receiver
-126-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:40:9-43:40
-127            android:name="com.pichillilorenzo.flutter_inappwebview.chrome_custom_tabs.ActionBroadcastReceiver"
-127-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:41:13-111
-128            android:enabled="true"
-128-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:42:13-35
-129            android:exported="false" />
-129-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:43:13-37
-130
-131        <meta-data
-131-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:45:9-47:36
-132            android:name="io.flutter.embedded_views_preview"
-132-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:46:13-61
-133            android:value="true" />
-133-->[:flutter_inappwebview] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_manifest/debug/AndroidManifest.xml:47:13-33
-134
-135        <provider
-135-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
-136            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-136-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
-137            android:authorities="com.example.adolescent_talk.flutter.image_provider"
-137-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
-138            android:exported="false"
-138-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
-139            android:grantUriPermissions="true" >
-139-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
-140            <meta-data
-140-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
-141                android:name="android.support.FILE_PROVIDER_PATHS"
-141-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
-142                android:resource="@xml/flutter_image_picker_file_paths" />
-142-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
-143        </provider>
-144
+37            <category android:name="android.intent.category.BROWSABLE" />
+37-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-74
+37-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:20:23-71
+38
+39            <data android:scheme="https" />
+39-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:13-42
+39-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:19-39
+40        </intent>
+41    </queries>
+42
+43    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+43-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-81
+43-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-78
+44    <uses-permission android:name="android.permission.VIBRATE" />
+44-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-66
+44-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:10:22-63
+45    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+45-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-81
+45-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-78
+46    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+46-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:12:5-79
+46-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:12:22-76
+47    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+47-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:13:5-77
+47-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:13:22-74
+48
+49    <permission
+49-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
+50        android:name="com.example.adolescent_talk.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+50-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
+51        android:protectionLevel="signature" />
+51-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
+52
+53    <uses-permission android:name="com.example.adolescent_talk.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+53-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
+53-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
+54
+55    <application
+56        android:name="android.app.Application"
+57        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+57-->[androidx.core:core:1.10.1] /Users/taeheekim/.gradle/caches/transforms-3/7716558d8a01a724478474eda67ba33c/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
+58        android:debuggable="true"
+59        android:icon="@mipmap/ic_launcher"
+60        android:label="청소년 톡talk" >
+61
+62        <!-- 카카오 로그인 -->
+63        <activity
+64            android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
+65            android:exported="true"
+66            android:launchMode="singleTask"
+66-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:36:13-44
+67            android:theme="@style/TransparentCompat" >
+67-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:37:13-53
+68            <intent-filter android:label="flutter_web_auth" >
+69                <action android:name="android.intent.action.VIEW" />
+69-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:13-65
+69-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:21-62
+70
+71                <category android:name="android.intent.category.DEFAULT" />
+72                <category android:name="android.intent.category.BROWSABLE" />
+72-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-74
+72-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:20:23-71
+73
+74                <!-- "kakao${YOUR_NATIVE_APP_KEY}://oauth" 형식의 앱 실행 스킴 설정 -->
+75                <!-- 카카오 로그인 Redirect URI -->
+76                <data
+76-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:13-42
+77                    android:host="oauth"
+78                    android:scheme="kakao1a9e760429b6a71b3b46d729ad6927d4" />
+78-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:19-39
+79            </intent-filter>
+80        </activity>
+81        <activity
+82            android:name="com.example.login.MainActivity"
+83            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+84            android:exported="true"
+85            android:hardwareAccelerated="true"
+86            android:launchMode="singleTop"
+87            android:showWhenLocked="true"
+88            android:theme="@style/LaunchTheme"
+89            android:turnScreenOn="true"
+90            android:windowSoftInputMode="adjustResize" >
+91            <intent-filter>
+92                <action android:name="android.intent.action.VIEW" />
+92-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:13-65
+92-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:8:21-62
+93
+94                <category android:name="android.intent.category.DEFAULT" />
+95                <category android:name="android.intent.category.BROWSABLE" />
+95-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-74
+95-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:20:23-71
+96
+97                <!-- "kakao${YOUR_NATIVE_APP_KEY}://${PRODUCT_NAME}" 형식의 앱 실행 스킴 설정 -->
+98                <!-- 카카오톡 공유, 카카오톡 메시지 -->
+99                <data
+99-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:13-42
+100                    android:host="kakaolink"
+101                    android:scheme="kakao1a9e760429b6a71b3b46d729ad6927d4" />
+101-->/Users/taeheekim/Documents/yeongam_dev/frontend/android/app/src/main/AndroidManifest.xml:9:19-39
+102            </intent-filter>
+103
+104            <!--
+105                 Specifies an Android theme to apply to this Activity as soon as
+106                 the Android process has started. This theme is visible to the user
+107                 while the Flutter UI initializes. After that, this theme continues
+108                 to determine the Window background behind the Flutter UI.
+109            -->
+110            <meta-data
+111                android:name="io.flutter.embedding.android.NormalTheme"
+112                android:resource="@style/NormalTheme" />
+113
+114            <intent-filter>
+115                <action android:name="android.intent.action.MAIN" />
+116
+117                <category android:name="android.intent.category.LAUNCHER" />
+118            </intent-filter>
+119        </activity>
+120
+121        <!--
+122             Don't delete the meta-data below.
+123             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+124        -->
+125        <meta-data
+126            android:name="flutterEmbedding"
+127            android:value="2" />
+128        <meta-data
+129            android:name="io.flutter.embedding.android.DrawableForeground"
+130            android:resource="@mipmap/ic_launcher" />
+131
+132        <provider
+132-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
+133            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+133-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
+134            android:authorities="com.example.adolescent_talk.flutter.image_provider"
+134-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
+135            android:exported="false"
+135-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+136            android:grantUriPermissions="true" >
+136-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
+137            <meta-data
+137-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
+138                android:name="android.support.FILE_PROVIDER_PATHS"
+138-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
+139                android:resource="@xml/flutter_image_picker_file_paths" />
+139-->[:image_picker_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
+140        </provider>
+141
+142        <receiver
+142-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:16:9-18:40
+143            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"
+143-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-91
+144            android:exported="false" />
+144-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
 145        <receiver
-145-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:16:9-18:40
-146            android:name="com.dexterous.flutterlocalnotifications.ActionBroadcastReceiver"
-146-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-91
+145-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-21:40
+146            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+146-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-97
 147            android:exported="false" />
-147-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
+147-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-37
 148        <receiver
-148-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-21:40
-149            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
-149-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-97
-150            android:exported="false" />
-150-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-37
-151        <receiver
-151-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:22:9-31:20
-152            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
-152-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-101
-153            android:exported="false" >
-153-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-37
-154            <intent-filter>
-154-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:25:13-30:29
-155                <action android:name="android.intent.action.BOOT_COMPLETED" />
-155-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:26:17-79
-155-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:26:25-76
-156                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-156-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:27:17-84
-156-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:27:25-81
-157                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-157-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:28:17-82
-157-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:28:25-79
-158                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
-158-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:29:17-82
-158-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:29:25-79
-159            </intent-filter>
-160        </receiver>
-161
-162        <activity
-162-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-13:74
-163            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-163-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
-164            android:exported="false"
-164-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
-165            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-165-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
-166        <activity
-166-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:27:9-32:56
-167            android:name="com.kakao.sdk.flutter.TalkAuthCodeActivity"
-167-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-70
-168            android:configChanges="orientation|screenSize|keyboardHidden|uiMode"
-168-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-81
-169            android:exported="false"
-169-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-37
-170            android:launchMode="singleTask"
-170-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-44
-171            android:theme="@style/TransparentCompat" />
-171-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-53
-172        <activity
-172-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:33:9-37:56
-173            android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
-173-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:34:13-76
-174            android:exported="true"
-174-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:35:13-36
-175            android:launchMode="singleTask"
-175-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:36:13-44
-176            android:theme="@style/TransparentCompat" />
-176-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:37:13-53
+148-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:22:9-31:20
+149            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+149-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-101
+150            android:exported="false" >
+150-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-37
+151            <intent-filter>
+151-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:25:13-30:29
+152                <action android:name="android.intent.action.BOOT_COMPLETED" />
+152-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:26:17-79
+152-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:26:25-76
+153                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+153-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:27:17-84
+153-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:27:25-81
+154                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+154-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:28:17-82
+154-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:28:25-79
+155                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+155-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:29:17-82
+155-->[:flutter_local_notifications] /Users/taeheekim/Documents/yeongam_dev/frontend/build/flutter_local_notifications/intermediates/merged_manifest/debug/AndroidManifest.xml:29:25-79
+156            </intent-filter>
+157        </receiver>
+158
+159        <activity
+159-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-13:74
+160            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+160-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-74
+161            android:exported="false"
+161-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-37
+162            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+162-->[:url_launcher_android] /Users/taeheekim/Documents/yeongam_dev/frontend/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-71
+163        <activity
+163-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:27:9-32:56
+164            android:name="com.kakao.sdk.flutter.TalkAuthCodeActivity"
+164-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-70
+165            android:configChanges="orientation|screenSize|keyboardHidden|uiMode"
+165-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-81
+166            android:exported="false"
+166-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-37
+167            android:launchMode="singleTask"
+167-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-44
+168            android:theme="@style/TransparentCompat" />
+168-->[:kakao_flutter_sdk_common] /Users/taeheekim/Documents/yeongam_dev/frontend/build/kakao_flutter_sdk_common/intermediates/merged_manifest/debug/AndroidManifest.xml:32:13-53
+169
+170        <uses-library
+170-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+171            android:name="androidx.window.extensions"
+171-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+172            android:required="false" />
+172-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+173        <uses-library
+173-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+174            android:name="androidx.window.sidecar"
+174-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+175            android:required="false" />
+175-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+176    </application>
 177
-178        <uses-library
-178-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
-179            android:name="androidx.window.extensions"
-179-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
-180            android:required="false" />
-180-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
-181        <uses-library
-181-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
-182            android:name="androidx.window.sidecar"
-182-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
-183            android:required="false" />
-183-->[androidx.window:window:1.0.0-beta04] /Users/taeheekim/.gradle/caches/transforms-3/6e951e46e213cb9f2e945851dbb4819c/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
-184
-185        <provider
-185-->[androidx.emoji2:emoji2:1.2.0] /Users/taeheekim/.gradle/caches/transforms-3/45308b2d129e75b1d1e0f2245c7c2620/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
-186            android:name="androidx.startup.InitializationProvider"
-186-->[androidx.emoji2:emoji2:1.2.0] /Users/taeheekim/.gradle/caches/transforms-3/45308b2d129e75b1d1e0f2245c7c2620/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
-187            android:authorities="com.example.adolescent_talk.androidx-startup"
-187-->[androidx.emoji2:emoji2:1.2.0] /Users/taeheekim/.gradle/caches/transforms-3/45308b2d129e75b1d1e0f2245c7c2620/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
-188            android:exported="false" >
-188-->[androidx.emoji2:emoji2:1.2.0] /Users/taeheekim/.gradle/caches/transforms-3/45308b2d129e75b1d1e0f2245c7c2620/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
-189            <meta-data
-189-->[androidx.emoji2:emoji2:1.2.0] /Users/taeheekim/.gradle/caches/transforms-3/45308b2d129e75b1d1e0f2245c7c2620/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
-190                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-190-->[androidx.emoji2:emoji2:1.2.0] /Users/taeheekim/.gradle/caches/transforms-3/45308b2d129e75b1d1e0f2245c7c2620/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
-191                android:value="androidx.startup" />
-191-->[androidx.emoji2:emoji2:1.2.0] /Users/taeheekim/.gradle/caches/transforms-3/45308b2d129e75b1d1e0f2245c7c2620/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
-192            <meta-data
-192-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/taeheekim/.gradle/caches/transforms-3/f1a5ef914d7aac4b184aea7dde17f105/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
-193                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-193-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/taeheekim/.gradle/caches/transforms-3/f1a5ef914d7aac4b184aea7dde17f105/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
-194                android:value="androidx.startup" />
-194-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/taeheekim/.gradle/caches/transforms-3/f1a5ef914d7aac4b184aea7dde17f105/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
-195        </provider>
-196    </application>
-197
-198</manifest><!--
-199 <activity 
-200    android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
-201    android:exported="true">
-202    <intent-filter android:label="flutter_web_auth">
-203        <action android:name="android.intent.action.VIEW" />
-204        <category android:name="android.intent.category.DEFAULT" />
-205        <category android:name="android.intent.category.BROWSABLE" />
-206
-207         Redirect URI, "kakao${YOUR_NATIVE_APP_KEY}://oauth" 형식
-208        <data android:scheme="kakao${0bbf7ab39e609d6bc349bf5603977a13}" android:host="oauth"/>
-209    </intent-filter>
-210    </activity>
-211    The INTERNET permission is required for development. Specifically,
-212         the Flutter tool needs it to communicate with the running application
-213         to allow setting breakpoints, to provide hot reload, etc.
-214    
-215    <uses-permission android:name="android.permission.INTERNET"/>
-216-->
+178</manifest><!--
+179 <activity 
+180    android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
+181    android:exported="true">
+182    <intent-filter android:label="flutter_web_auth">
+183        <action android:name="android.intent.action.VIEW" />
+184        <category android:name="android.intent.category.DEFAULT" />
+185        <category android:name="android.intent.category.BROWSABLE" />
+186
+187         Redirect URI, "kakao${YOUR_NATIVE_APP_KEY}://oauth" 형식
+188        <data android:scheme="kakao${0bbf7ab39e609d6bc349bf5603977a13}" android:host="oauth"/>
+189    </intent-filter>
+190    </activity>
+191    The INTERNET permission is required for development. Specifically,
+192         the Flutter tool needs it to communicate with the running application
+193         to allow setting breakpoints, to provide hot reload, etc.
+194    
+195    <uses-permission android:name="android.permission.INTERNET"/>
+196-->

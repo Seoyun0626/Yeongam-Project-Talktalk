@@ -24,7 +24,20 @@ exports.SignIn = async function(req, res) {
   }
 };
 
-// kth - mobile - renewLogin
+//카카오 가입
+exports.KakaoLogIn = async function(req, res) {
+  try{
+
+    const result = await mobile_login_service.KakaoLogIn(req);
+   
+    return result;
+  } catch(error) {
+    console.log('mobile-login-controller SignIn:'+error);
+  }
+};
+
+
+
 // exports.renewLogin = async function (req, res) {
 //   try {
 //       const token = generateJsonWebToken(req.idPerson);

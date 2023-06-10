@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:login/ui/screens/event/event_page.dart';
-import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/screens/intro/checking_login_page.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/helpers/helpers.dart';
@@ -25,9 +24,11 @@ class MyPage extends StatefulWidget {
 
 class _MyPageState extends State<MyPage> {
 // class MyPage extends StatelessWidget {
+  // final viewModel = MainViewModel(KakaoLogin()); // 카카오 로그인
+
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     // final userBloc = BlocProvider.of<UserBloc>(context);
     // final authBloc = BlocProvider.of<AuthBloc>(context);
 
@@ -137,7 +138,7 @@ class _MyPageState extends State<MyPage> {
                                 height: 40.h,
                               ),
                               title: TextCustom(
-                                text: "개발자 괴롭히기",
+                                text: "개발자와 소통하기",
                                 fontSize: 20.sp,
                               ),
                               trailing: const Icon(
@@ -238,7 +239,7 @@ class _LogInOutUserNameState extends State<_LogInOutUserName> {
                   userBloc.add(OnLogOutUser());
                   Navigator.pushAndRemoveUntil(
                     context,
-                    routeFade(page: const HomePage()),
+                    routeFade(page: const CheckingLoginPage()),
                     (_) => false,
                   );
                 },
@@ -382,9 +383,20 @@ class _LogInOut extends StatelessWidget {
           onTap: () {
             authBloc.add(OnLogOutEvent());
             userBloc.add(OnLogOutUser());
-            Navigator.pushAndRemoveUntil(
-              context,
-              routeFade(page: const CheckingLoginPage()),
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   routeFade(page: const CheckingLoginPage()),
+            //   (_) => false,
+            // );
+            // Navigator.pushNamedAndRemoveUntil(
+            //   context,
+            //   CheckingLoginPage.routeName,
+            //   (_) => false,
+
+            // );
+
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              CheckingLoginPage.routeName,
               (_) => false,
             );
           },
@@ -420,7 +432,7 @@ class _MyFig extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MyFigHistoryPage(),
+                builder: (context) => const MyFigHistoryPage(),
               ));
         }
       },
@@ -460,14 +472,21 @@ class _MyFig extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         );
                       } else {
+                        final figCount = userBloc.state.user?.fig ?? '';
+
                         return TextCustom(
-                          text: userBloc.state.user?.fig ?? '',
+                          text: figCount,
                           fontSize: 40,
                           color: ThemeColors.basic,
                           fontWeight: FontWeight.bold,
                         );
                       }
                     },
+
+                    // 무화과 개수가 업데이트될 때마다 OnUpdateFigCountEvent 이벤트 호출
+                    // userBloc을 통해 tb_user의 fig 열을 업데이트
+                    // userBloc.add(OnUpdateFigCountEvent(figCount)),
+                    // userBloc: userBloc,
                   ),
 
                   // const Icon(
@@ -493,9 +512,14 @@ class _YeongamWebsite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final yeongamUrl = Uri.parse('https://www.yeongam.go.kr/');
     return InkWell(
         onTap: () {
-          launchUrl(Uri.parse('https://www.yeongam.go.kr/'));
+          launchUrl(
+            yeongamUrl,
+            mode: LaunchMode.externalApplication,
+          );
+          // launchUrl(Uri.parse('https://www.yeongam.go.kr/'));
         },
         child: Container(
             padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),

@@ -83,6 +83,66 @@ try{
   //   json.data = {};
   //   return json;
 
+  // 카카오 가입
+  exports.KakaoLogIn = async function(req) {
+    var resultcode = 0;
+    var conn;
+    try{
+      conn = await db.getConnection();
+      console.log('mobile-login-service kakao login');
+      
+      console.log(req.body);
+      const {userid,user_name, user_email, user_role, user_type, invite_code, youthAge_code, parentsAge_code, emd_class_code, sex_class_code} = req.body;
+    
+      
+
+  
+      // invite코드의 유저에 무화과 추가
+      if(invite_code != '') {
+        query = "SELECT fig,uid FROM webdb.tb_user where userid='" + invite_code + "' ;";
+        var rows = await conn.query(query); // 쿼리 실행
+        if(rows[0] == undefined) {
+          console.log('존재하지 않는 코드입니다.');
+          resultcode = 100;
+          return resultcode;
+        }
+        // int형식으로 무화과 추가후 varchar로 변환
+        rows[0].fig = parseInt(rows[0].fig) + 1;
+        rows[0].fig = rows[0].fig.toString();
+        query = "UPDATE webdb.tb_user SET fig='"+rows[0].fig+"' WHERE userid='"+invite_code+"';";
+        var figUpdate = await conn.query(query); // 쿼리 실행
+        var eid = 1; // 무화과 이벤트 번호, 바꿔야함
+        query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+rows[0].uid+"');";
+        // console.log(query);
+        var eventPart = await conn.query(query); // 쿼리 실행
+      }
+
+      query = "SELECT COUNT(*) AS count FROM webdb.tb_user WHERE userid='" + userid + "' ;";
+      var userExists = await conn.query(query); // 쿼리 실행
+
+      if (userExists[0].count > 0) {
+        console.log('카카오 로그인');
+        // resultcode = 200;
+        // return;
+      } else {
+        var pass = '';
+        var salt = '';
+        var randomNumber = Math.floor(10000 + Math.random() * 90000); // token_temp
+        var uid = uuidv4(); // 고유 식별 번호
+        // console.log(uid);
+        await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
+      }
+  
+      
+    } catch(error) {
+      console.log('mobile-login-service SignUp:'+error);
+    } finally {
+      if (conn) conn.end();
+    }
+    
+    return resultcode;
+  
+  };
 
 
 // 모바일 회원가입
@@ -94,7 +154,7 @@ exports.signUp = async function(req, res) {
     console.log('mobile-login-service signUp');
     
     console.log(req.body);
-    const {userid,user_name, user_email, userpw, userpw2, user_role, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code} = req.body;
+    const {userid,user_name, user_email, userpw, userpw2, user_role, user_type, invite_code, youthAge_code, parentsAge_code, emd_class_code, sex_class_code} = req.body;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
     
@@ -130,6 +190,27 @@ exports.signUp = async function(req, res) {
       resultcode = 100;
       return resultcode;
     }
+
+    // invite코드의 유저에 무화과 추가
+    if(invite_code != '') {
+      query = "SELECT fig,uid FROM webdb.tb_user where userid='" + invite_code + "' ;";
+      var rows = await conn.query(query); // 쿼리 실행
+      if(rows[0] == undefined) {
+        console.log('존재하지 않는 코드입니다.');
+        resultcode = 100;
+        return resultcode;
+      }
+      // int형식으로 무화과 추가후 varchar로 변환
+      rows[0].fig = parseInt(rows[0].fig) + 1;
+      rows[0].fig = rows[0].fig.toString();
+      query = "UPDATE webdb.tb_user SET fig='"+rows[0].fig+"' WHERE userid='"+invite_code+"';";
+      var figUpdate = await conn.query(query); // 쿼리 실행
+      var eid = 1; // 무화과 이벤트 번호, 바꿔야함
+      query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+rows[0].uid+"');";
+      // console.log(query);
+      var eventPart = await conn.query(query); // 쿼리 실행
+    }
+
     // let salt = bcrypt.genSaltSync();
     // // console.log(salt);
     // const pass = bcrypt.hashSync(userpw, salt);

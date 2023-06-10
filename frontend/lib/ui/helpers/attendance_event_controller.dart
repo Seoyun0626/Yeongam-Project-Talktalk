@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:login/domain/models/response/default_response.dart';
+import 'package:login/domain/services/event_services.dart';
 
-class EventCtroller extends GetxController {
+class EventController extends GetxController {
   var week = ["일", "월", "화", "수", "목", "금", "토"];
 
   static DateTime now = DateTime.now();
@@ -11,21 +13,27 @@ class EventCtroller extends GetxController {
   RxInt year = 0.obs;
   RxInt month = 0.obs;
   RxList days = [].obs;
-
-  // tb_attendance_logs에서 받아오기
-  //
-  RxList temp_days = [4, 6, 7].obs;
+  RxList temp_days = [].obs;
+  RxBool isCheckedAttendance = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     setFirst(now.year, now.month);
+    getAttendanceLog();
   }
 
   setFirst(int setYear, int setMonth) {
     year.value = setYear;
     month.value = setMonth;
     insertDays(year.value, month.value);
+  }
+
+  // 출석 기록 받아오기
+  getAttendanceLog() async {
+    var attendanceLog = await eventService.getAttendance();
+    temp_days.value = attendanceLog.map((date) => date.day).toList();
+    // print(temp_days);
   }
 
   // 일자 계산
@@ -83,5 +91,17 @@ class EventCtroller extends GetxController {
     }
 
     days = [...days, ...temp].obs;
+  }
+
+  void handleAttendanceCheck() {
+    isCheckedAttendance.value = temp_days.contains(now2.value.day);
+    // print(temp_days);
+    // print(isCheckedAttendance.value);
+    if (!isCheckedAttendance.value) {
+      temp_days.add(now2.value.day);
+      isCheckedAttendance.value = true;
+      eventService
+          .giveFig('71965135-8e01-422a-92b9-4bb5a65a81f5'); // 출석체크 eid 수정
+    }
   }
 }

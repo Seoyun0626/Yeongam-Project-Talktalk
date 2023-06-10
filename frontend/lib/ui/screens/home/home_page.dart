@@ -11,15 +11,14 @@ import 'package:login/ui/screens/notification/notification_page.dart';
 import 'package:login/ui/screens/policy/policy_detail_page.dart';
 import 'package:login/ui/screens/policy/policy_list_page.dart';
 import 'package:login/ui/screens/user/myTalkTalk_page.dart';
-import 'package:login/webview_page.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/link.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/services/banner_services.dart';
 import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -40,6 +39,7 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: ThemeColors.third,
           appBar: AppBar(
             titleSpacing: 0,
@@ -300,14 +300,18 @@ class BannerSlide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bannerImgName = policyBanners.banner_img;
-
     final bannerImgUrl =
         '${Environment.urlApiServer}/upload/banner/$bannerImgName';
     final bannerLink = policyBanners.banner_link;
+    final url = Uri.parse(bannerLink);
 
     return InkWell(
       onTap: () {
-        launchUrl(Uri.parse(bannerLink));
+        launchUrl(
+          url,
+          mode: LaunchMode.externalApplication,
+        );
+        // launchUrl(Uri.parse(bannerLink));
       },
       child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
@@ -316,44 +320,6 @@ class BannerSlide extends StatelessWidget {
             fit: BoxFit.cover,
           )),
     );
-
-    // webview
-    //   return InkWell(
-    //     onTap: () {
-    //       _launchWebView(context, bannerLink);
-    //     },
-    //     child: ClipRRect(
-    //       borderRadius: BorderRadius.circular(20),
-    //       child: Image.network(
-    //         bannerImgUrl,
-    //         fit: BoxFit.cover,
-    //       ),
-    //     ),
-    //   );
-    // }
-
-    // void _launchWebView(BuildContext context, String bannerLink) async {
-    //   final uri = Uri.parse(bannerLink);
-    //   if (await canLaunchUrl(uri)) {
-    //     Navigator.push(
-    //         context,
-    //         MaterialPageRoute(
-    //             builder: (context) => WebViewPage(url: bannerLink)));
-    //   } else {
-    //     showDialog(
-    //         context: context,
-    //         builder: (context) {
-    //           return AlertDialog(
-    //             title: const TextCustom(text: 'Error'),
-    //             content: const TextCustom(text: 'Could no launch the web page'),
-    //             actions: [
-    //               TextButton(
-    //                   onPressed: () => Navigator.pop(context),
-    //                   child: const TextCustom(text: 'OK')),
-    //             ],
-    //           );
-    //         });
-    //   }
   }
 }
 
@@ -419,15 +385,16 @@ class _CategoryButtonState extends State<CategoryButton> {
     // codeDetailDataList.forEach((element) {
     //   print(element.detailName);
     // });
+
     final List<HomeCategory> categoryIcons01 = codeDetailDataList
-        .where((detail) => ['00', '01', '03', '04'].contains(detail.code))
+        .where((detail) => ['00', '01', '02', '03'].contains(detail.code))
         .map((detail) => HomeCategory(
             title: [
               '학업',
               '상담',
-              '생활비',
-              '건강'
-            ][['00', '01', '03', '04'].indexOf(detail.code)],
+              '취업/이직',
+              '생활비'
+            ][['00', '01', '02', '03'].indexOf(detail.code)],
             code: detail.code,
             codeName: codeName,
             codeDetailName: detail.detailName,
@@ -435,12 +402,12 @@ class _CategoryButtonState extends State<CategoryButton> {
         .toList();
 
     final List<HomeCategory> categoryIcons02 = codeDetailDataList
-        .where((detail) => ['07', '08', '09'].contains(detail.code))
+        .where((detail) => ['04', '05', '06'].contains(detail.code))
         .map((detail) => HomeCategory(
-            title: ['청소년활동', '학교밖', '돌봄'][[
-              '07',
-              '08',
-              '09',
+            title: ['건강', '주거', '결혼/양육'][[
+              '04',
+              '05',
+              '06',
             ].indexOf(detail.code)],
             code: detail.code,
             codeName: codeName,

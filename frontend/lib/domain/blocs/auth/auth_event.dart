@@ -10,6 +10,8 @@ class OnLoginEvent extends AuthEvent {
   OnLoginEvent(this.userid, this.userpw);
 }
 
+class OnKakaoLoginEvent extends AuthEvent {}
+
 class OnCheckingLoginEvent extends AuthEvent {}
 
 class OnLogOutEvent extends AuthEvent {}

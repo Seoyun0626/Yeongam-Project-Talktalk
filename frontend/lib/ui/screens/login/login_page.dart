@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/helpers/helpers.dart';
+import 'package:login/ui/helpers/kakao_sdk_login.dart';
+import 'package:login/ui/helpers/modals/modal_basic.dart';
+import 'package:login/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/screens/login/find_pw_page.dart';
 import 'package:login/ui/screens/login/find_id_page.dart';
 import 'package:login/ui/screens/register/terms_agree_page.dart';
+import 'package:login/ui/screens/register/user_type_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
@@ -39,7 +44,9 @@ class _LoginPageState extends State<LoginPage> {
     idController.dispose();
     passwordController.clear();
     passwordController.dispose();
+    // idFocusNode.unfocus();
     idFocusNode.dispose();
+    // pwFocusNode.unfocus();
     pwFocusNode.dispose();
     super.dispose();
   }
@@ -52,6 +59,12 @@ class _LoginPageState extends State<LoginPage> {
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
+        print(state);
+        // if (state is LoadingAuthentication) {
+        //   modalLoading(context, '확인 중...');
+        //   // Navigator.of(context).pop();
+        // } else
+
         if (state is FailureAuthentication) {
           modalWarning(context, '다시 로그인해주세요');
         } else if (state is SuccessAuthentication) {
@@ -63,19 +76,16 @@ class _LoginPageState extends State<LoginPage> {
             (_) => false,
           );
         }
-        // else if (state is LoadingAuthentication) {
-        //   modalLoading(context, '확인 중...');
-        //   Navigator.of(context).pop();
-        // }
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                  color: Colors.black),
+                  color: ThemeColors.primary),
               onPressed: () {
                 Navigator.pop(context);
 
@@ -117,6 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 50.0), // 아이디
                     TextFieldNaru(
+                      // enableInteractiveSelection: false,
                       controller: idController,
                       focusNode: idFocusNode,
                       hintText: '아이디 입력',
@@ -126,6 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 10.0), // 비밀번호
                     TextFieldNaru(
+                      // enableInteractiveSelection: false,
                       controller: passwordController,
                       focusNode: pwFocusNode,
                       hintText: '비밀번호 입력',
@@ -148,8 +160,38 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     const SizedBox(height: 20.0),
+
+                    // BtnNaru(
+                    //   text: '카카오톡 로그아웃 테스트',
+                    //   height: 48,
+                    //   fontSize: 20,
+                    //   width: size.width,
+                    //   fontWeight: FontWeight.bold,
+                    //   colorText: Colors.black,
+                    //   // border: Border.all()
+                    //   backgroundColor: Colors.yellow,
+                    //   onPressed: () async {
+                    //     KakaoLoginServices.kakaoLogout();
+                    //   },
+                    // ),
+                    // const SizedBox(height: 20.0),
+                    // BtnNaru(
+                    //   text: '카카오톡 정보',
+                    //   height: 48,
+                    //   fontSize: 20,
+                    //   width: size.width,
+                    //   fontWeight: FontWeight.bold,
+                    //   colorText: Colors.black,
+                    //   // border: Border.all()
+                    //   backgroundColor: Colors.yellow,
+                    //   onPressed: () async {
+                    //     KakaoLoginServices.kakaoPrintUserInfo();
+                    //   },
+                    // ),
+                    // const SizedBox(height: 20.0),
+
                     BtnNaru(
-                      text: '카카오톡으로 계속하기',
+                      text: '카카오톡 로그인',
                       height: 48,
                       fontSize: 20,
                       width: size.width,
@@ -157,8 +199,22 @@ class _LoginPageState extends State<LoginPage> {
                       colorText: Colors.black,
                       // border: Border.all()
                       backgroundColor: Colors.yellow,
-                      onPressed: () {},
+                      onPressed: () async {
+                        modalBasic(context, '준비 중입니다');
+                        // bool loginSuccess =
+                        //     await KakaoLoginServices.kakaoLogin();
+
+                        // if (loginSuccess) {
+                        //   Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             userTypePage(isKakaoLogin: true),
+                        //       ));
+                        // }
+                      },
                     ),
+                    const SizedBox(height: 5.0),
 
                     const SizedBox(height: 60.0), // 비밀번호 찾기
 

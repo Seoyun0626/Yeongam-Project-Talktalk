@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_kakao_sdk/flutter_kakao_sdk.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -112,15 +113,39 @@ class _InviteEventPageState extends State<InviteEventPage> {
                               height: 60.h,
                               child: Center(child: TextCustom(text: "ddd")))),
 
-                      BtnNaru(
-                        margin: EdgeInsets.only(left: 20.w, right: 20.w),
-                        backgroundColor: ThemeColors.secondary,
+                      SizedBox(
                         height: 50.h,
-                        text: "카카오톡으로 초대하기",
                         width: size.width,
-                        colorText: Colors.black,
-                        fontWeight: FontWeight.bold,
+                        child: NeumorphicButton(
+                            margin: EdgeInsets.only(left: 20.w, right: 20.w),
+                            style: NeumorphicStyle(
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                    BorderRadius.circular(50.r)),
+                                depth: 2,
+                                lightSource: LightSource.topLeft,
+                                color: ThemeColors.secondary),
+                            onPressed: () {},
+                            child: Center(
+                              child: TextCustom(
+                                text: "카카오톡으로 초대하기",
+                                fontSize: 18.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
                       ),
+
+                      // BtnNaru(
+                      //   margin: EdgeInsets.only(left: 20.w, right: 20.w),
+                      //   backgroundColor: ThemeColors.secondary,
+                      //   height: 50.h,
+                      //   text: "ㅊ",
+                      //   width: size.width,
+                      //   colorText: Colors.black,
+                      //   fontWeight: FontWeight.bold,
+                      //   onPressed: () {},
+                      // ),
 
                       // ),
                       SizedBox(
@@ -129,7 +154,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
                       Center(
                         child: Container(
                           height: 8.h,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color.fromRGBO(247, 248, 250, 1),
                           ),
                         ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:login/domain/blocs/auth/auth_bloc.dart';
 import 'package:login/ui/helpers/attendance_event_controller.dart';
+import 'package:login/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:login/ui/screens/event/attendance_event_page.dart';
 import 'package:login/ui/screens/event/invite_event_page.dart';
 import 'package:login/ui/screens/event/weeklyFig_event_page.dart';
@@ -18,6 +21,8 @@ class EventListPage extends StatefulWidget {
 class _EventListPageState extends State<EventListPage> {
   @override
   Widget build(BuildContext context) {
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+
     List<String> bannerIconList = [
       'images/event_icon/attendance_icon.svg',
       'images/event_icon/flagIcon.svg',
@@ -39,13 +44,13 @@ class _EventListPageState extends State<EventListPage> {
       '친구 초대하고 함께 무화과 받기'
     ];
     List<String> bannerDateList = [
-      '2021.05.01 ~ 2021.05.31',
-      '2021.05.01 ~ 2021.05.31',
-      '2021.05.01 ~ 2021.05.31'
+      '2021.07.01 ~ 2023.07.31',
+      '2021.07.01 ~ 2023.07.31',
+      '2021.07.01 ~ 2023.07.31'
     ];
 
-    EventCtroller controller = EventCtroller();
-    controller.onInit();
+    // EventController controller = EventController();
+    // controller.onInit();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -82,12 +87,16 @@ class _EventListPageState extends State<EventListPage> {
                     child: InkWell(
                       onTap: () {
                         if (index == 0) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const AttendanceEventPage(),
-                              ));
+                          if (authState is LogOut) {
+                            modalCheckLogin(context);
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const AttendanceEventPage(),
+                                ));
+                          }
                         } else if (index == 1) {
                           Navigator.push(
                               context,
@@ -96,11 +105,15 @@ class _EventListPageState extends State<EventListPage> {
                                     const WeeklyFigEventPage(),
                               ));
                         } else if (index == 2) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const InviteEventPage(),
-                              ));
+                          if (authState is LogOut) {
+                            modalCheckLogin(context);
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const InviteEventPage(),
+                                ));
+                          }
                         }
                       },
                       child: Container(

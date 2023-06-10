@@ -148,7 +148,7 @@ exports.getAttendance = async function(req, res) {
     // uid를 통해 출석기록 받아오기
     var query = 'SELECT * FROM webdb.tb_attendance_logs where user_uid="'+uid[0].uid+'"';
     var attendanceLog = await conn.query(query); // 쿼리 실행
-    // console.log(attendanceLog);
+    console.log(attendanceLog);
 
     if(attendanceLog.length){
       resultcode = 1;

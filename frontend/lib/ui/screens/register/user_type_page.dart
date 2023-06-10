@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:login/ui/screens/register/info_input_page.dart';
+import 'package:login/ui/screens/register/kakao_extra_info_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
 class userTypePage extends StatelessWidget {
-  const userTypePage({Key? key}) : super(key: key);
+  const userTypePage({required this.isKakaoLogin, Key? key}) : super(key: key);
+  final bool isKakaoLogin;
 
   @override
   Widget build(BuildContext context) {
+    // print(isKakaoLogin);
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -86,11 +89,21 @@ class userTypePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const InfoInputPage(0),
-                    )),
+                onPressed: () => isKakaoLogin
+                    ? Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const KakaoExtraInfoPage(
+                            userTypeCode: 0,
+                          ),
+                        ))
+                    : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const InfoInputPage(
+                            userTypeCode: 0,
+                          ),
+                        )),
               ),
             ),
           ),
@@ -131,12 +144,21 @@ class userTypePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      // builder: (context) => termsAgreePage(todo: todos[1]),
-                      builder: (context) => const InfoInputPage(1),
-                    )),
+                onPressed: () => isKakaoLogin
+                    ? Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const KakaoExtraInfoPage(
+                            userTypeCode: 1,
+                          ),
+                        ))
+                    : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const InfoInputPage(
+                            userTypeCode: 1,
+                          ),
+                        )),
               ),
             ),
           ),
@@ -177,12 +199,21 @@ class userTypePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        // builder: (context) => termsAgreePage(todo: todos[2]),
-                        builder: (context) => const InfoInputPage(2),
-                      )),
+                  onPressed: () => isKakaoLogin
+                      ? Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const KakaoExtraInfoPage(
+                              userTypeCode: 2,
+                            ),
+                          ))
+                      : Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const InfoInputPage(
+                              userTypeCode: 2,
+                            ),
+                          )),
                 )),
           ),
           // Padding(

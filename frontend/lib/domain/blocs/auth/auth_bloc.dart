@@ -10,6 +10,7 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthState()) {
     on<OnLoginEvent>(_onLogin);
+    on<OnKakaoLoginEvent>(_onKakaoLogin);
     on<OnCheckingLoginEvent>(_onCheckingLogin);
     on<OnLogOutEvent>(_onLogOut);
   }
@@ -27,18 +28,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       final data = await authServices.login(event.userid, event.userpw);
       // print('_onLogin data.resp');
-      // print(data.resp);
+      print(data.resp);
       await Future.delayed(const Duration(milliseconds: 350));
 
       if (data.resp) {
         await secureStorage.deleteSecureStorage();
-
         await secureStorage.persistenToken(data.token!);
-        print('_onLogin SuccessAuthentication');
+        // print('_onLogin SuccessAuthentication');
         emit(SuccessAuthentication());
       } else {
-        print('_onLogin FailureAuthentication');
-        print(data.resp);
+        // print('_onLogin FailureAuthentication');
+        // print(data.resp);
         emit(FailureAuthentication(data.message));
         // emit(FailureAuthentication());
       }
@@ -48,12 +48,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
+  Future<void> _onKakaoLogin(
+      OnKakaoLoginEvent event, Emitter<AuthState> emit) async {
+    emit(SuccessAuthentication());
+  }
+
   Future<void> _onCheckingLogin(
     OnCheckingLoginEvent event,
     Emitter<AuthState> emit,
   ) async {
     try {
-      print("_onCheckingLogin");
+      // print("_onCheckingLogin");
       await Future.delayed(const Duration(milliseconds: 850));
 
       if (await secureStorage.readToken() != null) {
@@ -77,12 +82,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onLogOut(
-    OnLogOutEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    print("_onLogOut");
-
+  Future<void> _onLogOut(OnLogOutEvent event, Emitter<AuthState> emit) async {
+    // print("_onLogOut");
     await secureStorage.deleteSecureStorage();
     emit(LogOut());
   }

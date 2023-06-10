@@ -28,6 +28,7 @@ class UserServices {
     String userpw2,
     String user_role,
     String user_type,
+    String invite_code,
     String youthAge_code,
     String parentsAge_code,
     String emd_class_code,
@@ -44,6 +45,42 @@ class UserServices {
       'userpw2': userpw2,
       'user_role': user_role,
       'user_type': user_type,
+      'invite_code': invite_code,
+      'youthAge_code': youthAge_code,
+      'parentsAge_code': parentsAge_code,
+      'emd_class_code': emd_class_code,
+      'sex_class_code': sex_class_code
+    });
+    // print('${Environment.urlApi}/signup');
+    // print(resp.body);
+
+    return DefaultResponse.fromJson(jsonDecode(resp.body));
+  }
+
+  Future<DefaultResponse> createdKakaoUser(
+    String userid, // 회원번호
+    String user_name,
+    String user_email,
+    String user_role, //기본 - 선택 X
+    String user_type, //기본 - 선택 X
+    String invite_code,
+    String youthAge_code, //기본 - 선택 X
+    String parentsAge_code, //기본 - 선택 X
+    String emd_class_code, //기본 - 선택 X
+    String sex_class_code, //기본 - 선택 X
+  ) async {
+    final resp = await http
+        .post(Uri.parse('${Environment.urlApi}/login/kakao-signup'), headers: {
+      'Accept': 'application/json'
+    }, body: {
+      'userid': userid,
+      'user_name': user_name,
+      'user_email': user_email,
+      // 'userpw': userpw,
+      // 'userpw2': userpw2,
+      'user_role': user_role,
+      'user_type': user_type,
+      'invite_code': invite_code,
       'youthAge_code': youthAge_code,
       'parentsAge_code': parentsAge_code,
       'emd_class_code': emd_class_code,

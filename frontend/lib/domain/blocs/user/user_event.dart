@@ -13,6 +13,7 @@ class OnRegisterUserEvent extends UserEvent {
   final String userpw2;
   final String user_role;
   final String user_type;
+  final String invite_code;
   // final String phone_number;
   final String youthAge_code;
   final String parentsAge_code;
@@ -27,6 +28,7 @@ class OnRegisterUserEvent extends UserEvent {
     this.userpw2,
     this.user_role,
     this.user_type,
+    this.invite_code,
     // this.phone_number,
     this.youthAge_code,
     this.parentsAge_code,
@@ -36,11 +38,42 @@ class OnRegisterUserEvent extends UserEvent {
   );
 }
 
+class OnRegisterKakaoUserEvent extends UserEvent {
+  final String user_id; // 회원번호
+  final String user_name; // 닉네임
+  final String user_email; // 이메일
+  final String user_role; // 사용자
+  final String user_type; // 선택안함
+  final String invite_code;
+  final String youthAge_code; // 선택안함
+  final String parentsAge_code; // 선택안함
+  final String emd_class_code; // 선택안함
+  final String sex_class_code; // 선택안함
+
+  OnRegisterKakaoUserEvent(
+      this.user_id,
+      this.user_name,
+      this.user_email,
+      this.user_role,
+      this.user_type,
+      this.invite_code,
+      this.youthAge_code,
+      this.parentsAge_code,
+      this.emd_class_code,
+      this.sex_class_code);
+}
+
 class OnVerifyEmailEvent extends UserEvent {
   final String user_email;
   final String code;
 
   OnVerifyEmailEvent(this.user_email, this.code);
+}
+
+class OnUpdateFigCountEvent extends UserEvent {
+  final int newFigCount;
+
+  OnUpdateFigCountEvent(this.newFigCount);
 }
 
 // class OnUpdatePictureCover extends UserEvent {

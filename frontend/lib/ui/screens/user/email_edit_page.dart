@@ -119,7 +119,7 @@ class _EditEmailPageState extends State<EditEmailPage> {
                         TextFieldNaru(
                           controller: emailController,
                           validator: validatedEmail,
-                          fontSzie: 20,
+                          fontSize: 20,
                         ),
                         Expanded(
                           child: Align(

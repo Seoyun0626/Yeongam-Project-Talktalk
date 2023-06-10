@@ -29,7 +29,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  kakao_flutter_sdk: ^1.4.2 # 카카오 로그인
   cupertino_icons: ^1.0.4
   flutter:
     sdk: flutter
@@ -47,8 +46,17 @@ dependencies:
   flutter_screenutil: ^5.7.0
   flutter_local_notifications: ^14.0.0+2
   flutter_neumorphic: ^3.2.0
-  # webview_flutter: ^4.2.1
-  flutter_inappwebview: ^5.7.2
+  webview_flutter: ^4.2.1
+  flutter_share: ^2.0.0
+  kakao_flutter_sdk_auth: ^1.4.1
+  kakao_flutter_sdk_common: ^1.4.1
+  kakao_flutter_sdk_user : ^1.4.1 # 카카오 로그인
+  kakao_flutter_sdk_talk : ^1.4.1 # 카카오톡 메시지, 소셜(프로필 가져오기, 친구 목록 가져오기)
+  kakao_flutter_sdk_share : ^1.4.1 # 카카오톡 공유
+  kakao_flutter_sdk_friend : ^1.4.1 # 카카오톡 소셜(피커 : 친구 선택하기)
+  kakao_flutter_sdk_template : ^1.4.1
+  
+
   
   
 #  photo_manager: ^2.3.0
@@ -57,6 +65,7 @@ dependencies:
   shimmer: ^2.0.0
   filter_list: ^1.0.2
   get: ^4.6.5
+  kakao_flutter_sdk: ^1.4.3
 #  timeago: ^3.2.2
 #  cached_network_image: ^3.2.0
 #  socket_io_client: ^1.0.2
@@ -99,6 +108,7 @@ flutter:
     - images/bottom_bar/
     - images/event_icon/
     - images/event_icon/weekly_event/
+    - images/namsaeng/
 
 
 

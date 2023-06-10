@@ -140,7 +140,9 @@ class _termsAgreePageState extends State<termsAgreePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const userTypePage(),
+                            builder: (context) => const userTypePage(
+                              isKakaoLogin: false,
+                            ),
                           ));
                     } else {
                       modalWarning(context, '약관에 동의해주세요');

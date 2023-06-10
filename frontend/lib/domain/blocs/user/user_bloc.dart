@@ -4,6 +4,7 @@
 // import 'dart:js';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:login/domain/blocs/blocs.dart';
 // import 'package:meta/meta.dart';
 import 'package:login/domain/models/response/response_user.dart';
 import 'package:login/domain/services/user_services.dart';
@@ -22,6 +23,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(const UserState()) {
     on<OnGetUserAuthenticationEvent>(_onGetUserAuthentication);
     on<OnRegisterUserEvent>(_onRegisterUser);
+    on<OnRegisterKakaoUserEvent>(_onRegisterKakaoUser);
     on<OnVerifyEmailEvent>(_onVerifyEmail);
     // on<OnUpdatePictureCover>( _onUpdatePictureCover );
     // on<OnUpdatePictureProfile>( _onUpdatePictureProfile );
@@ -55,7 +57,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(LoadingUserState());
 
       await Future.delayed(const Duration(milliseconds: 550));
-      print("event.user_id: ${event.user_id}");
+      // print("event.user_id: ${event.user_id}");
       final resp = await userService.createdUser(
           event.user_id,
           event.user_name,
@@ -64,6 +66,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           event.userpw2,
           event.user_role,
           event.user_type,
+          event.invite_code,
           event.youthAge_code,
           event.parentsAge_code,
           event.emd_class_code,
@@ -71,6 +74,42 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       // print(event);
       // print(resp.resp);
       print(resp.message);
+      print(resp.resp);
+
+      if (resp.resp) {
+        emit(SuccessUserState());
+      } else {
+        emit(FailureUserState(resp.message));
+      }
+    } catch (e) {
+      emit(FailureUserState(e.toString()));
+    }
+  }
+
+  Future<void> _onRegisterKakaoUser(
+      OnRegisterKakaoUserEvent event, Emitter<UserState> emit) async {
+    try {
+      emit(LoadingUserState());
+
+      await Future.delayed(const Duration(milliseconds: 550));
+      print("_onRegisterKakaoUser ${event.user_name}");
+      final resp = await userService.createdKakaoUser(
+          event.user_id,
+          event.user_name,
+          event.user_email,
+          // event.userpw,
+          // event.userpw2,
+          event.user_role,
+          event.user_type,
+          event.invite_code,
+          event.youthAge_code,
+          event.parentsAge_code,
+          event.emd_class_code,
+          event.sex_class_code);
+      // print(event);
+      // print(resp.resp);
+      print(resp.message);
+      print(resp.resp);
 
       if (resp.resp) {
         emit(SuccessUserState());
@@ -297,6 +336,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   // }
 
   Future<void> _logOutAuth(OnLogOutUser event, Emitter<UserState> emit) async {
+    // print('_logOutAuth');
     emit(state.copyWith(user: null));
   }
 

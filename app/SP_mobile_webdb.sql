@@ -26,3 +26,19 @@ BEGIN
 	WHERE webdb.tb_policy_scrap.user_uid = ID;
 END
 
+CREATE DEFINER=`webservice`@`%` PROCEDURE `SP_GIVE_FIG`(IN USER_ID VARCHAR(100), IN EVENT_ID VARCHAR(100))
+BEGIN
+    INSERT INTO tb_event_part (eid, uid)
+    VALUES (EVENT_ID, USER_ID);
+    
+    INSERT INTO tb_attendance_logs (user_uid, attendance_date, attendance_time)
+    VALUES (USER_ID, CURDATE(), CURTIME()); 
+
+    UPDATE tb_user
+    SET fig = fig + (
+        SELECT tb_event.fig_payment
+        FROM tb_event
+        WHERE eid = EVENT_ID
+    )
+    WHERE uid = USER_ID;
+END
