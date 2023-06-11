@@ -3,12 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login/domain/blocs/blocs.dart';
-import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:login/ui/screens/event/attendance_event_page.dart';
 import 'package:login/ui/screens/event/event_list_page.dart';
 import 'package:login/ui/screens/event/weeklyFig_event_page.dart';
-import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
@@ -131,14 +129,14 @@ class EventPage extends StatelessWidget {
 }
 
 class _attendanceEvent extends StatelessWidget {
-  const _attendanceEvent({super.key});
+  const _attendanceEvent();
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final authState = BlocProvider.of<AuthBloc>(context).state;
 
-    return Container(
+    return SizedBox(
       height: 80.h,
       width: size.width,
       // margin: EdgeInsets.only(left: 12.w, right: 12.w),
@@ -191,13 +189,13 @@ class _attendanceEvent extends StatelessWidget {
 }
 
 class _weeklyFigEvent extends StatelessWidget {
-  const _weeklyFigEvent({super.key});
+  const _weeklyFigEvent();
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Container(
+    return SizedBox(
       height: 80.h,
       width: size.width,
       // margin: EdgeInsets.only(left: 12.w, right: 12.w),
@@ -246,7 +244,7 @@ class _weeklyFigEvent extends StatelessWidget {
 }
 
 class _clickBattle extends StatelessWidget {
-  const _clickBattle({super.key});
+  const _clickBattle();
 
   @override
   Widget build(BuildContext context) {

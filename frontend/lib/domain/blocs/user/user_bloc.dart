@@ -4,14 +4,11 @@
 // import 'dart:js';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:login/domain/blocs/blocs.dart';
 // import 'package:meta/meta.dart';
 import 'package:login/domain/models/response/response_user.dart';
 import 'package:login/domain/services/user_services.dart';
 
 // import 'package:login/ui/popup/register/register_success.dart';
-import '../../../ui/helpers/animation_route.dart';
-import '../../../ui/screens/login/login_page.dart';
 // import '../../../ui/themes/theme_colors.dart';
 // import '../../../ui/widgets/widgets.dart';
 // import '../../services/user_services.dart';

@@ -67,7 +67,7 @@ class _MyPageState extends State<MyPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SettingsPage(),
+                          builder: (context) => const SettingsPage(),
                         ));
                   },
                 ),

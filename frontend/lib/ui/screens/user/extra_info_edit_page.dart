@@ -142,8 +142,9 @@ class _EditExtraInfoPageState extends State<EditExtraInfoPage> {
                             }).toList(),
                             onChanged: (String? value) {
                               setState(() {
-                                emdList.forEach(
-                                    (element) => element.selected = false);
+                                for (var element in emdList) {
+                                  element.selected = false;
+                                }
                                 emdList
                                     .firstWhere(
                                         (element) =>

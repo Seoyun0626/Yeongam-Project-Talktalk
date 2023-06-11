@@ -21,7 +21,7 @@ class ItemModal extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-            primary: ThemeColors.secondary
+            foregroundColor: ThemeColors.secondary
         ),
         child: Align(
             alignment: Alignment.centerLeft,

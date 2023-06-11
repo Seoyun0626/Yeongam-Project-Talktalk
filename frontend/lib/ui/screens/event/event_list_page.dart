@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login/domain/blocs/auth/auth_bloc.dart';
-import 'package:login/ui/helpers/attendance_event_controller.dart';
 import 'package:login/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:login/ui/screens/event/attendance_event_page.dart';
 import 'package:login/ui/screens/event/invite_event_page.dart';
@@ -30,13 +29,13 @@ class _EventListPageState extends State<EventListPage> {
     ];
     List<Color> bannerColorsList = [
       ThemeColors.primary,
-      Color.fromRGBO(251, 238, 231, 1),
-      Color.fromRGBO(255, 227, 91, 1)
+      const Color.fromRGBO(251, 238, 231, 1),
+      const Color.fromRGBO(255, 227, 91, 1)
     ];
     List<Color> bannerIconsColorsList = [
       Colors.white,
       ThemeColors.primary,
-      Color.fromRGBO(53, 29, 31, 1)
+      const Color.fromRGBO(53, 29, 31, 1)
     ];
     List<String> bannerTitleList = [
       '하루 한 번, 출석 체크하고 무화과 받기',
@@ -59,7 +58,7 @@ class _EventListPageState extends State<EventListPage> {
           title: TextCustom(
             text: "무화과 이벤트",
             fontSize: 20.sp,
-            color: Color.fromRGBO(88, 88, 86, 1),
+            color: const Color.fromRGBO(88, 88, 86, 1),
             fontWeight: FontWeight.bold,
           ),
           centerTitle: true,

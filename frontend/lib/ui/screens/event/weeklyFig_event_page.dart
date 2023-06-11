@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
 import 'package:login/ui/screens/event/fig_market_page.dart';
 
@@ -30,10 +29,10 @@ class _WeeklyFigEventPageState extends State<WeeklyFigEventPage> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Color.fromRGBO(251, 238, 231, 1),
+          backgroundColor: const Color.fromRGBO(251, 238, 231, 1),
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Color.fromRGBO(251, 238, 231, 1),
+            backgroundColor: const Color.fromRGBO(251, 238, 231, 1),
             leading: IconButton(
                 icon: const Icon(
                   Icons.arrow_back_ios_new_rounded,
@@ -140,7 +139,7 @@ class _WeeklyFigEventPageState extends State<WeeklyFigEventPage> {
                           child: Container(
                             height: 21.h,
                             width: 131.h,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.transparent,
                             ),
                           )),
@@ -195,7 +194,7 @@ class _WeeklyFigEventPageState extends State<WeeklyFigEventPage> {
             height: 50.h,
             decoration: BoxDecoration(
               border: Border.all(color: ThemeColors.primary, width: 2.w),
-              color: Color.fromRGBO(245, 117, 33, 0.5),
+              color: const Color.fromRGBO(245, 117, 33, 0.5),
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Align(

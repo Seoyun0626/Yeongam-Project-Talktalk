@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/helpers/get_mobile_code_data.dart';
 import 'package:login/ui/screens/home/home_page.dart';
-import 'package:login/ui/screens/login/login_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
 import '../../helpers/animation_route.dart';
 
 class CheckingLoginPage extends StatefulWidget {
@@ -69,36 +65,19 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
         }
       },
       child: Scaffold(
-        body: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-                color: Colors.red,
-                gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    colors: [
-                      ThemeColors.secondary,
-                      ThemeColors.primary,
-                      Colors.white
-                    ])),
-            child: Center(
-              child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // AnimatedBuilder(
-                  //     animation: _animationController,
-                  //     builder: (_, child) => Transform.scale(
-                  //         scale: _scaleAnimation.value,
-                  //         child: Image.asset(
-                  //           'images/aco2.png',
-                  //           width: 200.w,
-                  //         ))),
-                  // const TextCustom(text: '확인 중...', color: Colors.white)
-                ],
-              ),
-            )),
-      ),
+          body: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
+                  color: Colors.red,
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      colors: [
+                        ThemeColors.secondary,
+                        ThemeColors.primary,
+                        Colors.white
+                      ])),
+              child: Container())),
 
       // SizedBox(
       //   height: MediaQuery.of(context).size.height,

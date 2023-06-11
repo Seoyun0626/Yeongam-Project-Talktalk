@@ -62,19 +62,19 @@ class _PrivacySettingPageState extends State<PrivacySettingPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 // [기본 정보]
-                                const TextCustom(
+                                TextCustom(
                                   text: '기본 정보',
                                   color: Colors.black,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   height: 30,
                                 ),
-                                const _UserInfo(),
+                                _UserInfo(),
 
                                 // [추가 정보]
-                                const SizedBox(
+                                SizedBox(
                                   height: 40,
                                 ),
                                 Row(
@@ -94,10 +94,10 @@ class _PrivacySettingPageState extends State<PrivacySettingPage> {
                                   ],
                                 ),
 
-                                const SizedBox(
+                                SizedBox(
                                   height: 30,
                                 ),
-                                const _UserExtraInfo(),
+                                _UserExtraInfo(),
                               ]),
                         )
                       ]))

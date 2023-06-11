@@ -1,14 +1,14 @@
-#Sat Jun 10 14:27:32 KST 2023
+#Sun Jun 11 19:05:49 KST 2023
 path.4=15/classes.dex
 path.3=1/classes.dex
 path.2=0/classes.dex
 path.1=0/classes.dex
 path.0=classes.dex
-base.4=/Users/taeheekim/Documents/yeongam_dev/frontend/build/app/intermediates/dex/debug/mergeProjectDexDebug/15/classes.dex
-base.3=/Users/taeheekim/Documents/yeongam_dev/frontend/build/app/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
-base.2=/Users/taeheekim/Documents/yeongam_dev/frontend/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
-base.1=/Users/taeheekim/Documents/yeongam_dev/frontend/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
-base.0=/Users/taeheekim/Documents/yeongam_dev/frontend/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.4=/Users/taeheekim/Documents/Yeongam_dev/frontend/build/app/intermediates/dex/debug/mergeProjectDexDebug/15/classes.dex
+base.3=/Users/taeheekim/Documents/Yeongam_dev/frontend/build/app/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
+base.2=/Users/taeheekim/Documents/Yeongam_dev/frontend/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.1=/Users/taeheekim/Documents/Yeongam_dev/frontend/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
+base.0=/Users/taeheekim/Documents/Yeongam_dev/frontend/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex

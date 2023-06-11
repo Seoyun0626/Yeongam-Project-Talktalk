@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
 // import 'package:flutter_kakao_sdk/flutter_kakao_sdk.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
@@ -21,9 +18,9 @@ class _InviteEventPageState extends State<InviteEventPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromRGBO(255, 227, 91, 1),
+        backgroundColor: const Color.fromRGBO(255, 227, 91, 1),
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(255, 227, 91, 1),
+          backgroundColor: const Color.fromRGBO(255, 227, 91, 1),
           elevation: 0,
           leading: IconButton(
               icon: const Icon(
@@ -81,7 +78,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
                 ),
                 SizedBox(height: 16.h),
                 Container(
-                  padding: EdgeInsets.only(),
+                  padding: const EdgeInsets.only(),
                   // height: MediaQuery.of(context).size.height.h / 1.90.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -111,7 +108,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
                           child: Container(
                               padding: EdgeInsets.only(top: 5.h, bottom: 5.h),
                               height: 60.h,
-                              child: Center(child: TextCustom(text: "ddd")))),
+                              child: const Center(child: TextCustom(text: "ddd")))),
 
                       SizedBox(
                         height: 50.h,

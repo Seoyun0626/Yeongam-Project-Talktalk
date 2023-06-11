@@ -86,7 +86,7 @@ class BottomNavigation extends StatelessWidget {
               iconText: '마이 톡톡',
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => MyPage()),
+                  MaterialPageRoute(builder: (context) => const MyPage()),
                   (_) => false)),
 
           // _ItemProfile()
@@ -134,11 +134,11 @@ class _ItemButtom extends StatelessWidget {
     required this.i,
     required this.index,
     required this.onPressed,
-    this.icon,
     this.iconString,
     this.isIcon = true,
     this.isReel = false,
     required this.iconText,
+    this.icon,
   }) : super(key: key);
 
   @override

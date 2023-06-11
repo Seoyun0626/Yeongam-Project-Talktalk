@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+// import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/helpers/kakao_sdk_login.dart';
 import 'package:login/ui/helpers/modals/modal_basic.dart';
-import 'package:login/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/screens/login/find_pw_page.dart';
 import 'package:login/ui/screens/login/find_id_page.dart';
 import 'package:login/ui/screens/register/terms_agree_page.dart';
-import 'package:login/ui/screens/register/user_type_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 

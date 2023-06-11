@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/domain/blocs/blocs.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:login/ui/screens/notification/notification.dart';
@@ -43,7 +41,7 @@ class _NotificationPageState extends State<NotificationPage> {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        subtitle: TextCustom(
+        subtitle: const TextCustom(
           text: '2023.05.12', // 현재 날짜를 표시
           fontSize: 12,
           color: ThemeColors.basic,
@@ -55,9 +53,9 @@ class _NotificationPageState extends State<NotificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
     // print(userTypeCode);
-    final userBloc = BlocProvider.of<UserBloc>(context);
+    // final userBloc = BlocProvider.of<UserBloc>(context);
 
     return Scaffold(
         backgroundColor: Colors.white,

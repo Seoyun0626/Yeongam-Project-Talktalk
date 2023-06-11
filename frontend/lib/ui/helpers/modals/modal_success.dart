@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
 void modalSuccess(BuildContext context, String text,

@@ -2,7 +2,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:login/domain/services/event_services.dart';
 import 'package:login/ui/helpers/attendance_event_controller.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
@@ -98,7 +97,7 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                       SizedBox(
                         height: 28.h,
                       ),
-                      Container(
+                      SizedBox(
                         width: 350,
                         // margin: EdgeInsets.symmetric(vertical: 10),
                         child: Row(
@@ -107,7 +106,7 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                             for (var i = 0; i < controller.week.length; i++)
                               Container(
                                 width: 30,
-                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                margin: const EdgeInsets.symmetric(horizontal: 10),
                                 child: TextCustom(
                                   text: controller.week[i],
                                   fontSize: 15.sp,

@@ -12,7 +12,6 @@ import 'package:login/ui/screens/policy/policy_detail_page.dart';
 import 'package:login/ui/screens/policy/policy_list_page.dart';
 import 'package:login/ui/screens/user/myTalkTalk_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/link.dart';
 import 'package:login/domain/models/response/response_banner.dart';
 import 'package:login/domain/services/banner_services.dart';
 import 'package:login/ui/screens/login/login_page.dart';
@@ -614,11 +613,11 @@ class _ShimerLoadingPopularPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ShimmerNaru(),
+        const ShimmerNaru(),
         SizedBox(height: 5.0.h),
-        ShimmerNaru(),
+        const ShimmerNaru(),
         SizedBox(height: 5.0.h),
-        ShimmerNaru(),
+        const ShimmerNaru(),
       ],
     );
   }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/domain/services/user_services.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/domain/blocs/blocs.dart';
-import 'package:login/ui/screens/user/privacy_setting_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 

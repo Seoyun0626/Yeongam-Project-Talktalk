@@ -361,8 +361,9 @@ class _InfoInputPageState extends State<InfoInputPage> {
                           }).toList(),
                           onChanged: (String? value) {
                             setState(() {
-                              emdList.forEach(
-                                  (element) => element.selected = false);
+                              for (var element in emdList) {
+                                element.selected = false;
+                              }
                               emdList
                                   .firstWhere(
                                       (element) => element.detailName == value,
@@ -535,8 +536,8 @@ class _InfoInputPageState extends State<InfoInputPage> {
                             );
                           } else if (_keyForm.currentState != null &&
                               _keyForm.currentState!.validate()) {
-                            String _inviteCode = '';
-                            _inviteCode = inviteCodeController.text.trim();
+                            String inviteCode = '';
+                            inviteCode = inviteCodeController.text.trim();
 
                             String _youthAge = youthAge ?? '5';
                             String _parentsAge = parentsAge ?? '6';
@@ -557,7 +558,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                                 userAgainPWController.text.trim(),
                                 userRole, // user_role - 사용자
                                 userTypeCode.toString(), // user_type
-                                _inviteCode,
+                                inviteCode,
                                 // userPhoneNumberController.text.trim(),
                                 _youthAge, // youthAge_code
                                 _parentsAge, // parentsAge_code

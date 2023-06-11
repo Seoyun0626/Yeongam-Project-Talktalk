@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
 class WithdrawalPage extends StatelessWidget {
+  const WithdrawalPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

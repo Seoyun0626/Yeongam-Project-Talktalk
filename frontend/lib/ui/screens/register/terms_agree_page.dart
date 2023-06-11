@@ -159,12 +159,12 @@ class _termsAgreePageState extends State<termsAgreePage> {
     final newValue = !checkBoxItem.value;
     setState(() {
       checkBoxItem.value = newValue;
-      checkboxList.forEach((element) {
+      for (var element in checkboxList) {
         element.value = newValue;
         // print('onAllClicked');
         // print(element.value);
         completeAgree = element.value;
-      });
+      }
     });
   }
 

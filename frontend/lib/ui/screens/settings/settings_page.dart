@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:login/ui/screens/settings/notice_page.dart';
@@ -7,6 +6,8 @@ import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -71,7 +72,7 @@ class SettingsPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NoticePage(),
+                        builder: (context) => const NoticePage(),
                       ));
                 },
               ),
@@ -89,7 +90,7 @@ class SettingsPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => WithdrawalPage(),
+                        builder: (context) => const WithdrawalPage(),
                       ));
                 },
               ),
@@ -100,7 +101,7 @@ class SettingsPage extends StatelessWidget {
 }
 
 class _NotifySwitchButton extends StatefulWidget {
-  const _NotifySwitchButton({super.key});
+  const _NotifySwitchButton();
 
   @override
   State<_NotifySwitchButton> createState() => _NotifySwitchButtonState();

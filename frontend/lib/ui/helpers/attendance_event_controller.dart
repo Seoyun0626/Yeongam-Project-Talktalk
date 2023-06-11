@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:login/domain/models/response/default_response.dart';
 import 'package:login/domain/services/event_services.dart';
 
 class EventController extends GetxController {

@@ -37,22 +37,22 @@ getMobileCodeService.getCodeDetailName('policy_target_code', policies.policy_tar
 getMobileCodeService.getCodeDetailList('policy_institution_code');
 */
 
-  String getCodeDetailName(String my_code_name, String my_code_detail) {
+  String getCodeDetailName(String myCodeName, String myCodeDetail) {
     // print(codeData);
-    int index_code = int.parse(my_code_detail);
-    String code_detail_name =
-        codeData["codes"][my_code_name][index_code]["code_detail_name"];
-    return code_detail_name;
+    int indexCode = int.parse(myCodeDetail);
+    String codeDetailName =
+        codeData["codes"][myCodeName][indexCode]["code_detail_name"];
+    return codeDetailName;
   }
 
-  List<CodeDetailData> getCodeDetailList(String my_code_name) {
-    List<dynamic> code_detail_list = codeData["codes"][my_code_name];
+  List<CodeDetailData> getCodeDetailList(String myCodeName) {
+    List<dynamic> codeDetailList = codeData["codes"][myCodeName];
     List<CodeDetailData> result = [];
-    for (var detail in code_detail_list) {
+    for (var detail in codeDetailList) {
       CodeDetailData codeDetail = CodeDetailData(
         detailName: detail["code_detail_name"],
         code: detail["code_detail"],
-        codeName: my_code_name,
+        codeName: myCodeName,
       );
       result.add(codeDetail);
     }

@@ -61,7 +61,7 @@ class SelectedCodes {
       };
   @override
   String toString() {
-    return 'SelectedCodes: {policyInstitution: ${policyInstitution}, policyTarget: $policyTarget, policyField: $policyField, policyCharacter: $policyCharacter}';
+    return 'SelectedCodes: {policyInstitution: $policyInstitution, policyTarget: $policyTarget, policyField: $policyField, policyCharacter: $policyCharacter}';
   }
 }
 
@@ -490,17 +490,17 @@ class SelectedSearchConditions extends StatelessWidget {
     List<String> selectedDetails = [];
     final size = MediaQuery.of(context).size;
 
-    final List<CodeDetailData>? policyInstitution =
+    final List<CodeDetailData> policyInstitution =
         selectedCodes.policyInstitution ?? [];
-    final List<CodeDetailData>? policyTarget = selectedCodes.policyTarget ?? [];
-    final List<CodeDetailData>? policyField = selectedCodes.policyField ?? [];
-    final List<CodeDetailData>? policyCharacter =
+    final List<CodeDetailData> policyTarget = selectedCodes.policyTarget ?? [];
+    final List<CodeDetailData> policyField = selectedCodes.policyField ?? [];
+    final List<CodeDetailData> policyCharacter =
         selectedCodes.policyCharacter ?? [];
 
-    selectedDetails.addAll(policyInstitution!.map((e) => e.detailName));
-    selectedDetails.addAll(policyTarget!.map((e) => e.detailName));
-    selectedDetails.addAll(policyField!.map((e) => e.detailName));
-    selectedDetails.addAll(policyCharacter!.map((e) => e.detailName));
+    selectedDetails.addAll(policyInstitution.map((e) => e.detailName));
+    selectedDetails.addAll(policyTarget.map((e) => e.detailName));
+    selectedDetails.addAll(policyField.map((e) => e.detailName));
+    selectedDetails.addAll(policyCharacter.map((e) => e.detailName));
 
     return Container(
       padding: const EdgeInsets.all(10),

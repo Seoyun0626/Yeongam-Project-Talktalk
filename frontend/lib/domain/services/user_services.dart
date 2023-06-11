@@ -7,7 +7,6 @@ import 'package:login/data/storage/secure_storage.dart';
 import 'package:login/domain/models/response/default_response.dart';
 // import 'package:login/domain/models/response/response_followers.dart';
 // import 'package:login/domain/models/response/response_followings.dart';
-import 'package:login/domain/models/response/response_search.dart';
 import 'package:login/domain/models/response/response_user.dart';
 
 class UserServices {
@@ -22,34 +21,34 @@ class UserServices {
 
   Future<DefaultResponse> createdUser(
     String userid,
-    String user_name,
-    String user_email,
+    String userName,
+    String userEmail,
     String userpw,
     String userpw2,
-    String user_role,
-    String user_type,
-    String invite_code,
-    String youthAge_code,
-    String parentsAge_code,
-    String emd_class_code,
-    String sex_class_code,
+    String userRole,
+    String userType,
+    String inviteCode,
+    String youthageCode,
+    String parentsageCode,
+    String emdClassCode,
+    String sexClassCode,
   ) async {
     final resp = await http
         .post(Uri.parse('${Environment.urlApi}/login/signup'), headers: {
       'Accept': 'application/json'
     }, body: {
       'userid': userid,
-      'user_name': user_name,
-      'user_email': user_email,
+      'user_name': userName,
+      'user_email': userEmail,
       'userpw': userpw,
       'userpw2': userpw2,
-      'user_role': user_role,
-      'user_type': user_type,
-      'invite_code': invite_code,
-      'youthAge_code': youthAge_code,
-      'parentsAge_code': parentsAge_code,
-      'emd_class_code': emd_class_code,
-      'sex_class_code': sex_class_code
+      'user_role': userRole,
+      'user_type': userType,
+      'invite_code': inviteCode,
+      'youthAge_code': youthageCode,
+      'parentsAge_code': parentsageCode,
+      'emd_class_code': emdClassCode,
+      'sex_class_code': sexClassCode
     });
     // print('${Environment.urlApi}/signup');
     // print(resp.body);
@@ -59,32 +58,32 @@ class UserServices {
 
   Future<DefaultResponse> createdKakaoUser(
     String userid, // 회원번호
-    String user_name,
-    String user_email,
-    String user_role, //기본 - 선택 X
-    String user_type, //기본 - 선택 X
-    String invite_code,
-    String youthAge_code, //기본 - 선택 X
-    String parentsAge_code, //기본 - 선택 X
-    String emd_class_code, //기본 - 선택 X
-    String sex_class_code, //기본 - 선택 X
+    String userName,
+    String userEmail,
+    String userRole, //기본 - 선택 X
+    String userType, //기본 - 선택 X
+    String inviteCode,
+    String youthageCode, //기본 - 선택 X
+    String parentsageCode, //기본 - 선택 X
+    String emdClassCode, //기본 - 선택 X
+    String sexClassCode, //기본 - 선택 X
   ) async {
     final resp = await http
         .post(Uri.parse('${Environment.urlApi}/login/kakao-signup'), headers: {
       'Accept': 'application/json'
     }, body: {
       'userid': userid,
-      'user_name': user_name,
-      'user_email': user_email,
+      'user_name': userName,
+      'user_email': userEmail,
       // 'userpw': userpw,
       // 'userpw2': userpw2,
-      'user_role': user_role,
-      'user_type': user_type,
-      'invite_code': invite_code,
-      'youthAge_code': youthAge_code,
-      'parentsAge_code': parentsAge_code,
-      'emd_class_code': emd_class_code,
-      'sex_class_code': sex_class_code
+      'user_role': userRole,
+      'user_type': userType,
+      'invite_code': inviteCode,
+      'youthAge_code': youthageCode,
+      'parentsAge_code': parentsageCode,
+      'emd_class_code': emdClassCode,
+      'sex_class_code': sexClassCode
     });
     // print('${Environment.urlApi}/signup');
     // print(resp.body);
@@ -107,7 +106,7 @@ class UserServices {
     print(email);
     print(code);
     final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/verify-email/' + code + '/' + email),
+        Uri.parse('${Environment.urlApi}/verify-email/$code/$email'),
         headers: {'Accept': 'application/json'});
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));

@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/ui/helpers/helpers.dart';
 import 'package:login/domain/blocs/blocs.dart';
-import 'package:login/ui/helpers/kakao_sdk_login.dart';
 import 'package:login/ui/screens/home/home_page.dart';
 import 'package:login/ui/themes/theme_colors.dart';
 import 'package:login/ui/widgets/widgets.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+// import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 class KakaoExtraInfoPage extends StatefulWidget {
   const KakaoExtraInfoPage({
@@ -39,27 +38,27 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
   late String user_email = '';
 
   @override
-  void initState() {
-    super.initState();
-    KakaoLoginServices.kakaoGetUserInfo().then((userInfo) {
-      setState(() {
-        user_id = userInfo['user_id'] ?? '';
-        user_name = userInfo['user_name'] ?? '';
-        user_email = userInfo['user_email'] ?? '';
-      });
-    });
-    inviteCodeController = TextEditingController();
-    youthAgeList = getMobileCodeService.getCodeDetailList('youthAge_code');
-    parentsAgeList = getMobileCodeService.getCodeDetailList('parentsAge_code');
-    sexList = getMobileCodeService.getCodeDetailList('sex_class_code');
-    emdList = getMobileCodeService.getCodeDetailList('emd_class_code');
-  }
+  // void initState() {
+  //   super.initState();
+  //   KakaoLoginServices.kakaoGetUserInfo().then((userInfo) {
+  //     setState(() {
+  //       user_id = userInfo['user_id'] ?? '';
+  //       user_name = userInfo['user_name'] ?? '';
+  //       user_email = userInfo['user_email'] ?? '';
+  //     });
+  //   });
+  //   inviteCodeController = TextEditingController();
+  //   youthAgeList = getMobileCodeService.getCodeDetailList('youthAge_code');
+  //   parentsAgeList = getMobileCodeService.getCodeDetailList('parentsAge_code');
+  //   sexList = getMobileCodeService.getCodeDetailList('sex_class_code');
+  //   emdList = getMobileCodeService.getCodeDetailList('emd_class_code');
+  // }
 
-  @override
-  void dispose() {
-    inviteCodeController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   inviteCodeController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -174,8 +173,9 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                             }).toList(),
                             onChanged: (String? value) {
                               setState(() {
-                                emdList.forEach(
-                                    (element) => element.selected = false);
+                                for (var element in emdList) {
+                                  element.selected = false;
+                                }
                                 emdList
                                     .firstWhere(
                                         (element) =>
@@ -345,24 +345,24 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
 
                             // if (_keyForm.currentState != null &&
                             //     _keyForm.currentState!.validate()) {
-                            String _inviteCode = '';
-                            _inviteCode = inviteCodeController.text.trim();
+                            String inviteCode = '';
+                            inviteCode = inviteCodeController.text.trim();
                             String _youthAge = youthAge ?? '5';
                             String _parentsAge = parentsAge ?? '6';
                             String _emd = emd ?? '0';
                             String _sex = sex ?? '2';
 
-                            print(user_id);
-                            print(user_name);
-                            print(user_email);
-                            print(userRole);
-                            print(userTypeCode);
-                            print(_inviteCode);
-                            print(_youthAge);
-                            print(_parentsAge);
-                            print(_youthAge);
-                            print(_emd);
-                            print(_sex);
+                            // print(user_id);
+                            // print(user_name);
+                            // print(user_email);
+                            // print(userRole);
+                            // print(userTypeCode);
+                            // print(inviteCode);
+                            // print(youthAge);
+                            // print(parentsAge);
+                            // print(youthAge);
+                            // print(emd);
+                            // print(sex);
 
                             userBloc.add(OnRegisterKakaoUserEvent(
                                 user_id,
@@ -370,7 +370,7 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                                 user_email,
                                 userRole, // user_role - 사용자
                                 userTypeCode.toString(), // user_type
-                                _inviteCode,
+                                inviteCode,
                                 _youthAge, // youthAge_code
                                 _parentsAge, // parentsAge_code
                                 _emd, //emd_class_code

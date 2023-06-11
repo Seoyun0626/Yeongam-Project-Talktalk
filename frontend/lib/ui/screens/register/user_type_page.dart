@@ -75,7 +75,7 @@ class userTypePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30.0)),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
@@ -125,7 +125,7 @@ class userTypePage extends StatelessWidget {
                         ),
                         borderRadius: BorderRadius.circular(30.0))),
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
@@ -180,7 +180,7 @@ class userTypePage extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(30.0))),
                   child: Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
