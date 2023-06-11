@@ -114,6 +114,7 @@
         </div>
       </div>
       <br>
+      <input type="hidden" name="content" id="content">
       <div class="ui form">
         <div class="inline fields">
           <label>정책 사진</label>
@@ -121,85 +122,16 @@
             <input type="file" name="imgFile" id="imgFile" accept="image/*">
           </div>
         </div>
-
       </div>
-      <div class="ui form">
-          <textarea name="content" id="editor"></textarea>
-          <script>
-            // 3. CKEditor5를 생성할 textarea 지정
-            ClassicEditor
-                .create( document.querySelector( '#editor' ), {
-                  language: "ko",
-                  simpleUpload: {
-                    uploadUrl: '/upload/image',
-                    withCredentials: true,
-                  }
-                } )
-                .catch( error => {
-                    console.error( error );
-                } );
-            </script>
-        </div>
+      <div class="ui form">        
+        <textarea id="editor"></textarea>
+      </div>
         <!-- <div class="field">
           <label>정책 파일</label>
           <input type="file" name="file">
         </div> -->
         <div>
           <button class="ui button" type="submit" onclick="return btn()">등록</button>
-          <script>
-            function btn(){
-                if (!confirm("정책 등록 하시겠습니까??")) {
-                    alert("취소 하였습니다.");
-                    return false;
-                } else {
-                  if(document.getElementById("name").value == ""){
-                    alert("이름을 입력해주세요.");
-                    // 마우스를 name에 놓는다.
-                    document.getElementById("name").focus();
-                    return false;
-                  }
-                  if(document.getElementById("min_fund").value == ""){
-                    alert("지원금을 입력해주세요.");
-                    document.getElementById("min_fund").focus();
-                    return false;
-                  }
-                  // 지원금이 숫자가 아니면
-                  if(isNaN(document.getElementById("min_fund").value)){
-                    alert("지원금은 숫자만 입력해주세요.");
-                    document.getElementById("min_fund").focus();
-                    return false;
-                  }
-                  if(document.getElementById("max_fund").value == ""){
-                    alert("지원금을 입력해주세요.");
-                    document.getElementById("max_fund").focus();
-                    return false;
-                  }
-                  // 지원금이 숫자가 아니면
-                  if(isNaN(document.getElementById("max_fund").value)){
-                    alert("지원금은 숫자만 입력해주세요.");
-                    document.getElementById("max_fund").focus();
-                    return false;
-                  }
-                  if(document.getElementById("imgFile").value == ""){
-                    alert("정책 사진을 등록해주세요.");
-                    document.getElementById("imgFile").focus();
-                    return false;
-                  }
-                  if(document.getElementById("application_start_date").value == ""){
-                    alert("접수 시작일을 입력해주세요.");
-                    document.getElementById("application_start_date").focus();
-                    return false;
-                  }
-                  if(document.getElementById("application_end_date").value == ""){
-                    alert("접수 마감일을 입력해주세요.");
-                    document.getElementById("application_end_date").focus();
-                    return false;
-                  }
-                  alert("등록되었습니다.");
-                  return true;
-              }
-            }
-          </script>
           <button class="ui button" type="button" onclick="return cancel()">취소</button>
           <script>
             function cancel() {
@@ -217,5 +149,83 @@
     </form>
   </div>
 </section>
+<script>
+  ClassicEditor
+    .create( document.querySelector( '#editor' ), {
+      // 에디터 설정
+      dataProcessor: {
+        htmlOutputProcessor: {
+          // 데이터 처리 방식 설정
+          encoding: 'utf-8',
+          entities: false,
+          indent: true,
+          indentOffset: 2
+        }
+      }
+    } )
+    .then( editor => {
+      // 에디터가 준비되면 이벤트 리스너를 등록
+      editor.model.document.on( 'change:data', () => {
+        // 에디터 내용이 변경되었을 때 실행되는 콜백 함수
+        var editorData = editor.getData();
+        document.getElementById("content").value = editorData;
+      } );
+    } )
+    .catch( error => {
+      console.error( error );
+    } );
+
+  function btn(){
+      if (!confirm("정책 등록 하시겠습니까??")) {
+          alert("취소 하였습니다.");
+          return false;
+      } else {
+        if(document.getElementById("name").value == ""){
+          alert("이름을 입력해주세요.");
+          // 마우스를 name에 놓는다.
+          document.getElementById("name").focus();
+          return false;
+        }
+        if(document.getElementById("min_fund").value == ""){
+          alert("지원금을 입력해주세요.");
+          document.getElementById("min_fund").focus();
+          return false;
+        }
+        // 지원금이 숫자가 아니면
+        if(isNaN(document.getElementById("min_fund").value)){
+          alert("지원금은 숫자만 입력해주세요.");
+          document.getElementById("min_fund").focus();
+          return false;
+        }
+        if(document.getElementById("max_fund").value == ""){
+          alert("지원금을 입력해주세요.");
+          document.getElementById("max_fund").focus();
+          return false;
+        }
+        // 지원금이 숫자가 아니면
+        if(isNaN(document.getElementById("max_fund").value)){
+          alert("지원금은 숫자만 입력해주세요.");
+          document.getElementById("max_fund").focus();
+          return false;
+        }
+        if(document.getElementById("imgFile").value == ""){
+          alert("정책 사진을 등록해주세요.");
+          document.getElementById("imgFile").focus();
+          return false;
+        }
+        if(document.getElementById("application_start_date").value == ""){
+          alert("접수 시작일을 입력해주세요.");
+          document.getElementById("application_start_date").focus();
+          return false;
+        }
+        if(document.getElementById("application_end_date").value == ""){
+          alert("접수 마감일을 입력해주세요.");
+          document.getElementById("application_end_date").focus();
+          return false;
+        }
+        return true;
+    }
+  }
+</script>
 </body>
 </html>

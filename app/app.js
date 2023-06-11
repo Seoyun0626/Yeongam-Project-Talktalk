@@ -44,8 +44,6 @@ const routerMobileEvent = require("./src/routes/mobile-router/mobile-event-route
 
 
 
-
-
 //앱 세팅
 app.set("views", "./src/views"); //템플릿 파일 경로(views)
 app.set("view engine", "ejs"); //템플릿 엔진(ejs)

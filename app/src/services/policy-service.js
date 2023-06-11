@@ -144,7 +144,6 @@ exports.upload = async function(req, res) {
         var upload = multer({ 
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
-                    // cb(null, '../frontend/images/policy');
                     cb(null, './src/public/upload/policy'); //../app/src/public/upload/policy
                     
                 },
