@@ -7,6 +7,13 @@
     text-align: center;
     width: 1000px;
 }
+/* 
+#mem_table thead {
+    background-color: #F57521;
+}
+*/
+
+
 #mem_reg_btn{
     float: left;
     margin-top: 15px;

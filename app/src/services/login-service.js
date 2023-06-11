@@ -77,6 +77,7 @@ exports.signUp = async function(req, res) {
     var password2 = req.body.password2;
     var name = req.body.name;
     var inviteCode = req.body.invite_code;
+    var fig = 0;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
     if(name=='' || req.body.email=='' || req.body.password=='' || req.body.password2=='') {
@@ -90,13 +91,33 @@ exports.signUp = async function(req, res) {
         resultcode = 100;
         return resultcode;
     }
-    console.log(req.body);
     if (rows[0] == undefined) {
+      // invite코드의 유저에 무화과 추가
+      if(inviteCode != '') {
+        query = "SELECT fig,uid FROM webdb.tb_user where userid='" + inviteCode + "' ;";
+        var inv = await conn.query(query); // 쿼리 실행
+        if(inv[0] == undefined) {
+          console.log('존재하지 않는 코드입니다.');
+          resultcode = 100;
+          return resultcode;
+        }
+        // int형식으로 무화과 추가후 varchar로 변환
+        inv[0].fig = parseInt(inv[0].fig) + 1;
+        inv[0].fig = inv[0].fig.toString();
+        query = "UPDATE webdb.tb_user SET fig='"+inv[0].fig+"' WHERE userid='"+inviteCode+"';";
+        var figUpdate = await conn.query(query); // 쿼리 실행
+        var eid = 1; // TODO:무화과 이벤트 번호, 바꿔야함
+        query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+inv[0].uid+"');";
+        // console.log(query);
+        var eventPart = await conn.query(query); // 쿼리 실행
+        fig+=1; //TODO: 지급 무화과 수 변경 필요
+        fig = fig.toString();
+      }
         hasher({
             password: password
         }, async (err, pass, salt, hash) => {
           const uidUser = uuid();
-          var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"')";
+          var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code, fig) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"', '"+fig+"')";
           var rows = await conn.query(query); // 쿼리 실행
           console.log('회원가입 성공');
         });
@@ -105,26 +126,6 @@ exports.signUp = async function(req, res) {
         console.log('이미 존재하는 아이디입니다.');
         resultcode = 100;
     }
-    // invite코드의 유저에 무화과 추가
-    if(inviteCode != '') {
-      query = "SELECT fig,uid FROM webdb.tb_user where userid='" + inviteCode + "' ;";
-      var rows = await conn.query(query); // 쿼리 실행
-      if(rows[0] == undefined) {
-        console.log('존재하지 않는 코드입니다.');
-        resultcode = 100;
-        return resultcode;
-      }
-      // int형식으로 무화과 추가후 varchar로 변환
-      rows[0].fig = parseInt(rows[0].fig) + 1;
-      rows[0].fig = rows[0].fig.toString();
-      query = "UPDATE webdb.tb_user SET fig='"+rows[0].fig+"' WHERE userid='"+inviteCode+"';";
-      var figUpdate = await conn.query(query); // 쿼리 실행
-      var eid = 1; // 무화과 이벤트 번호, 바꿔야함
-      query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+rows[0].uid+"');";
-      // console.log(query);
-      var eventPart = await conn.query(query); // 쿼리 실행
-    }
-
   } catch(error) {
     console.log('login-service SignUp:'+error);
   } finally {
