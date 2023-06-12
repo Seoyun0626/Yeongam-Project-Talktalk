@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/data/env/env.dart';
-import 'package:login/domain/blocs/blocs.dart';
-import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/domain/services/policy_services.dart';
-import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/helpers/modals/modal_checkLogin.dart';
-import 'package:login/ui/screens/login/login_page.dart';
-import 'package:login/ui/screens/policy/policy_detail_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/data/env/env.dart';
+import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/domain/models/response/response_policy.dart';
+import 'package:teentalktalk/domain/services/policy_services.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/screens/login/login_page.dart';
+import 'package:teentalktalk/ui/screens/policy/policy_detail_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class ScrapPage extends StatelessWidget {

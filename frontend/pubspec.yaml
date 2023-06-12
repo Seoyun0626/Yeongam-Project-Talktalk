@@ -1,4 +1,4 @@
-name: login
+name: teentalktalk
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -20,7 +20,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.5 <3.0.0'
+  sdk: '>=2.18.0 <4.0.0'
+
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -50,10 +51,8 @@ dependencies:
   flutter_inappwebview: ^5.7.2
   webview_flutter: ^4.2.1
   flutter_share: ^2.0.0
-
-  
-
-  
+  kakao_flutter_sdk: ^1.4.0
+  # firebase_dynamic_links: ^5.1.0
   
 #  photo_manager: ^2.3.0
   carousel_slider: ^4.0.0
@@ -61,10 +60,8 @@ dependencies:
   shimmer: ^2.0.0
   filter_list: ^1.0.2
   get: ^4.6.5
-#  timeago: ^3.2.2
-#  cached_network_image: ^3.2.0
-#  socket_io_client: ^1.0.2
-#  equatable: ^2.0.3
+  firebase_core: ^2.13.1
+
 
 
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:login/data/env/env.dart';
-import 'package:login/domain/models/response/response_terms.dart';
+import 'package:teentalktalk/data/env/env.dart';
+import 'package:teentalktalk/domain/models/response/response_terms.dart';
 
 class DataIfServices {
   Future<ResponseTerms> getTermsData() async {

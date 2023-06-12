@@ -1,8 +1,8 @@
 // import 'package:flutter_kakao_sdk/flutter_kakao_sdk.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class InviteEventPage extends StatefulWidget {
   const InviteEventPage({Key? key}) : super(key: key);
@@ -108,7 +108,8 @@ class _InviteEventPageState extends State<InviteEventPage> {
                           child: Container(
                               padding: EdgeInsets.only(top: 5.h, bottom: 5.h),
                               height: 60.h,
-                              child: const Center(child: TextCustom(text: "ddd")))),
+                              child: const Center(
+                                  child: TextCustom(text: "ddd")))),
 
                       SizedBox(
                         height: 50.h,

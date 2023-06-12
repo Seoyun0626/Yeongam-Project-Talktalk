@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/domain/blocs/blocs.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class EditExtraInfoPage extends StatefulWidget {
@@ -179,7 +179,7 @@ class _EditExtraInfoPageState extends State<EditExtraInfoPage> {
                           minWidth: (size.width - 80) / 6,
                           minHeight: 50.0,
                           fontSize: size.width / 45,
-                          multiLineText: true,
+                          // multiLineText: true,
                           initialLabelIndex: int.parse(initialYouthAge),
                           activeBgColor: const [ThemeColors.third],
                           activeFgColor: Colors.black,

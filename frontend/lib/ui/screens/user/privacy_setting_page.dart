@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/domain/blocs/blocs.dart';
-import 'package:login/ui/screens/user/email_edit_page.dart';
-import 'package:login/ui/screens/user/extra_info_edit_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/ui/screens/user/email_edit_page.dart';
+import 'package:teentalktalk/ui/screens/user/extra_info_edit_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class PrivacySettingPage extends StatefulWidget {
   const PrivacySettingPage({Key? key}) : super(key: key);
@@ -245,15 +245,12 @@ class _UserExtraInfoState extends State<_UserExtraInfo> {
   @override
   Widget build(BuildContext context) {
     final userBloc = BlocProvider.of<UserBloc>(context);
-    late String ageCode = '';
     late String ageCodeName = '';
     final String userTypeCode = userBloc.state.user!.user_type;
 
     if (userTypeCode == '0' || userTypeCode == '1') {
-      ageCode = userBloc.state.user!.youthAge_code;
       ageCodeName = "youthAge_code";
     } else if (userTypeCode == '2') {
-      ageCode = userBloc.state.user!.parentsAge_code;
       ageCodeName = "parentsAge_code";
     }
 

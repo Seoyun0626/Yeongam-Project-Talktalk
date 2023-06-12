@@ -1,9 +1,9 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:login/ui/screens/settings/notice_page.dart';
-import 'package:login/ui/screens/settings/withdrawal_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/screens/settings/notice_page.dart';
+import 'package:teentalktalk/ui/screens/settings/withdrawal_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

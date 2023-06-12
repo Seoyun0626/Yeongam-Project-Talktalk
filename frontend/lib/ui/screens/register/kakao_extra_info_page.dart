@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/domain/blocs/blocs.dart';
-import 'package:login/ui/screens/home/home_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/ui/screens/home/home_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 // import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
@@ -210,7 +210,7 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                           minWidth: (size.width - 80) / 6,
                           minHeight: 50.0,
                           fontSize: size.width / 45,
-                          multiLineText: true,
+                          // multiLineText: true,
                           initialLabelIndex: 5,
                           activeBgColor: const [ThemeColors.third],
                           activeFgColor: Colors.black,

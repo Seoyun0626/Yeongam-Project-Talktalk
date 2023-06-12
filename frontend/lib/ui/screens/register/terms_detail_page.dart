@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:login/domain/models/response/response_terms.dart';
-import 'package:login/domain/services/dataif_services.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/domain/models/response/response_terms.dart';
+import 'package:teentalktalk/domain/services/dataif_services.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class termsDetailPage extends StatefulWidget {
   final int termsCode;

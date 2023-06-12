@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:login/data/env/env.dart';
-import 'package:login/data/storage/secure_storage.dart';
-import 'package:login/domain/models/response/default_response.dart';
-import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/ui/helpers/debouncer.dart';
-// import 'package:login/ui/helpers/response_code.dart';
+import 'package:teentalktalk/data/env/env.dart';
+import 'package:teentalktalk/data/storage/secure_storage.dart';
+import 'package:teentalktalk/domain/models/response/default_response.dart';
+import 'package:teentalktalk/domain/models/response/response_policy.dart';
+import 'package:teentalktalk/ui/helpers/debouncer.dart';
+// import 'package:teentalktalk/ui/helpers/response_code.dart';
 
 class PolicyServices {
   final debouncer = DeBouncer(duration: const Duration(milliseconds: 800));
@@ -26,8 +26,7 @@ class PolicyServices {
     // print(token);
     // print(sortOrderCode);
     final resp = await http.get(
-        Uri.parse(
-            '${Environment.urlApi}/policy/get-all-policy/$sortOrderCode'),
+        Uri.parse('${Environment.urlApi}/policy/get-all-policy/$sortOrderCode'),
         headers:
             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
     // print('policy_services');

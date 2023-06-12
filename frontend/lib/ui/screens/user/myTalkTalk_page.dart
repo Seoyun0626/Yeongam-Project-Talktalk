@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:login/ui/screens/event/event_page.dart';
-import 'package:login/ui/screens/intro/checking_login_page.dart';
-import 'package:login/ui/screens/login/login_page.dart';
-import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/domain/blocs/blocs.dart';
-import 'package:login/ui/screens/settings/settings_page.dart';
-import 'package:login/ui/screens/event/fig_market_page.dart';
-import 'package:login/ui/screens/user/my_fig_history_page.dart';
-import 'package:login/ui/screens/user/privacy_setting_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/screens/event/event_page.dart';
+import 'package:teentalktalk/ui/screens/intro/checking_login_page.dart';
+import 'package:teentalktalk/ui/screens/login/login_page.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/ui/screens/settings/settings_page.dart';
+import 'package:teentalktalk/ui/screens/event/fig_market_page.dart';
+import 'package:teentalktalk/ui/screens/user/my_fig_history_page.dart';
+import 'package:teentalktalk/ui/screens/user/privacy_setting_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyPage extends StatefulWidget {
@@ -28,7 +28,6 @@ class _MyPageState extends State<MyPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     // final userBloc = BlocProvider.of<UserBloc>(context);
     // final authBloc = BlocProvider.of<AuthBloc>(context);
 
@@ -106,11 +105,17 @@ class _MyPageState extends State<MyPage> {
                             ),
                             ListTile(
                               contentPadding: const EdgeInsets.all(5),
-                              leading: SvgPicture.asset(
-                                'images/Fig.svg',
+                              leading: Image.asset(
+                                'images/Fig2.png',
                                 width: 35.w,
                                 height: 35.h,
                               ),
+
+                              // SvgPicture.asset(
+                              //   'images/Fig.svg',
+                              //   width: 35.w,
+                              //   height: 35.h,
+                              // ),
                               title: TextCustom(
                                 text: "미션 성공하고",
                                 fontSize: 10.sp,
@@ -327,7 +332,6 @@ class _LogInOut extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
     final authBloc = BlocProvider.of<AuthBloc>(context);
 
@@ -494,9 +498,13 @@ class _MyFig extends StatelessWidget {
                   //   size: 50,
                   //   // color: Colors.purple[400],
                   // )
-                  SvgPicture.asset(
-                    'images/Fig.svg',
-                  )
+                  // SvgPicture.asset(
+                  //   'images/Fig.svg',
+                  // )
+                  Image.asset(
+                    'images/Fig2.png',
+                    height: 40.h,
+                  ),
                 ],
               )
             ],

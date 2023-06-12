@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/screens/policy/policy_list_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class PolicySearchFilterPage extends StatefulWidget {
   const PolicySearchFilterPage({
@@ -242,7 +242,6 @@ class _SearchConditionListState extends State<SearchConditionList> {
   List<CodeDetailData> codeDetailDataList = [];
   CodeDetailData? selectedCodeData;
   int selectedIndex = -1;
-  CodeDetailData? _selectedCode;
 
   @override
   void initState() {
@@ -253,7 +252,6 @@ class _SearchConditionListState extends State<SearchConditionList> {
 
   void _onSelected(CodeDetailData data) {
     setState(() {
-      _selectedCode = data;
       //   if (_selectedCode != null && _selectedCode != data) {
       //     _selectedCode!.selected = false;
       //   }
@@ -299,11 +297,9 @@ class _SearchConditionListState extends State<SearchConditionList> {
                       }
                       selectedValue.selected = true;
                       selectedIndex = index;
-                      _selectedCode = selectedValue;
                     } else {
                       selectedValue.selected = false;
                       selectedIndex = -1;
-                      _selectedCode = null;
                     }
                   });
                 },

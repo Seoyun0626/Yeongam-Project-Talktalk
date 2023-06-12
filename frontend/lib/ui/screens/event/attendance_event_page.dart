@@ -2,9 +2,9 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:login/ui/helpers/attendance_event_controller.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/helpers/attendance_event_controller.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class AttendanceEventPage extends StatefulWidget {
   const AttendanceEventPage({Key? key}) : super(key: key);
@@ -106,7 +106,8 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                             for (var i = 0; i < controller.week.length; i++)
                               Container(
                                 width: 30,
-                                margin: const EdgeInsets.symmetric(horizontal: 10),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 child: TextCustom(
                                   text: controller.week[i],
                                   fontSize: 15.sp,
@@ -146,10 +147,13 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                                           : Colors.transparent,
                                     ),
                                     child: Center(
-                                        child: SvgPicture.asset(
-                                      'images/Fig.svg',
-                                      width: 18.w,
-                                      height: 18.h,
+                                        child:
+
+                                            // SvgPicture.asset('images/Fig2.svg', width: 18.w,height: 18.h,)
+                                            Image.asset(
+                                      'images/Fig2.png',
+                                      width: 15.w,
+                                      height: 15.h,
                                     )),
                                   ),
                                 ] else ...[
@@ -218,8 +222,13 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                             // crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SvgPicture.asset('images/Fig.svg',
-                                  width: 18.w, height: 18.h),
+                              // SvgPicture.asset('images/Fig.svg',
+                              //     width: 18.w, height: 18.h),
+                              Image.asset(
+                                'images/Fig2.png',
+                                width: 20.w,
+                                height: 20.h,
+                              ),
                               SizedBox(width: 8.w),
                               TextCustom(
                                 text: controller.isCheckedAttendance.value

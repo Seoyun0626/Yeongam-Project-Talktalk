@@ -1,7 +1,7 @@
 // import 'package:flutter/services.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
-// import 'package:login/domain/blocs/auth/auth_bloc.dart';
+// import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
 
 // class KakaoLoginService {
 //   // 로그인

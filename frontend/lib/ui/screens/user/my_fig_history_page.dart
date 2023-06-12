@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:login/domain/blocs/user/user_bloc.dart';
-import 'package:login/domain/models/response/response_event.dart';
-import 'package:login/domain/services/event_services.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/domain/blocs/user/user_bloc.dart';
+import 'package:teentalktalk/domain/models/response/response_event.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class MyFigHistoryPage extends StatelessWidget {
   const MyFigHistoryPage({Key? key}) : super(key: key);
@@ -58,7 +58,8 @@ class MyFigHistoryPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset('images/Fig.svg'),
+                    // SvgPicture.asset('images/Fig.svg'),
+                    Image.asset('images/Fig2.png'),
                     TextCustom(
                       text: '$myFigCount개',
                       fontSize: 32.sp,
@@ -195,8 +196,13 @@ class _FigHistoryState extends State<_FigHistory>
                           ],
                         ),
                         const Spacer(),
-                        SvgPicture.asset('images/Fig.svg',
-                            width: 20.w, height: 20.h),
+                        // SvgPicture.asset('images/Fig.svg',
+                        //     width: 20.w, height: 20.h),
+                        Image.asset(
+                          'images/Fig2.png',
+                          width: 20.w,
+                          height: 20.h,
+                        ),
                         SizedBox(width: 6.w),
                         Container(
                             margin: EdgeInsets.only(right: 16.w),
@@ -247,8 +253,13 @@ class _FigHistoryState extends State<_FigHistory>
                           ],
                         ),
                         const Spacer(),
-                        SvgPicture.asset('images/Fig.svg',
-                            width: 20.w, height: 20.h),
+                        // SvgPicture.asset('images/Fig.svg',
+                        //     width: 20.w, height: 20.h),
+                        Image.asset(
+                          'images/Fig2.png',
+                          width: 20.w,
+                          height: 20.h,
+                        ),
                         SizedBox(width: 6.w),
                         Container(
                             margin: EdgeInsets.only(right: 16.w),

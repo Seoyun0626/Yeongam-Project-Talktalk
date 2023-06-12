@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/screens/register/terms_detail_page.dart';
-import 'package:login/ui/screens/register/user_type_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/ui/screens/register/terms_detail_page.dart';
+import 'package:teentalktalk/ui/screens/register/user_type_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 // kth 수정 : 밑에 수정 전 코드 주석처리 해놓음
 

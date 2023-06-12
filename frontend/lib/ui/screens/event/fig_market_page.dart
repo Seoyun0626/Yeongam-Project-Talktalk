@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class FigMarketPage extends StatefulWidget {
   const FigMarketPage({Key? key}) : super(key: key);

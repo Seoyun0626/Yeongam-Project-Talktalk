@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:login/data/storage/secure_storage.dart';
-import 'package:login/domain/services/auth_services.dart';
+import 'package:teentalktalk/data/storage/secure_storage.dart';
+import 'package:teentalktalk/domain/services/auth_services.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

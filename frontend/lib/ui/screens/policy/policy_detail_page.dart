@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_share/flutter_share.dart';
-import 'package:login/data/env/env.dart';
-import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/ui/helpers/get_mobile_code_data.dart';
-import 'package:login/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/data/env/env.dart';
+import 'package:teentalktalk/domain/models/response/response_policy.dart';
+import 'package:teentalktalk/ui/helpers/get_mobile_code_data.dart';
+import 'package:teentalktalk/ui/helpers/kakao_sdk_share.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailPolicyPage extends StatefulWidget {
@@ -96,8 +97,10 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                   ),
                   padding: const EdgeInsets.only(right: 20),
                   onPressed: () async {
-                    _shareURL();
-                    // KakaoShareServices.kakaoSharePolicyToMe();
+                    // _shareURL();
+                    KakaoShareServices.kakaoSharePolicy(
+                        policyName, imgUrl, policyLink);
+                    // KakaoShareServices.kakaoSharePolicy();
                   },
                 ),
               ]),

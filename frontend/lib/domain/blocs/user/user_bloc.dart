@@ -5,10 +5,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 // import 'package:meta/meta.dart';
-import 'package:login/domain/models/response/response_user.dart';
-import 'package:login/domain/services/user_services.dart';
+import 'package:teentalktalk/domain/models/response/response_user.dart';
+import 'package:teentalktalk/domain/services/user_services.dart';
 
-// import 'package:login/ui/popup/register/register_success.dart';
+// import 'package:teentalktalk/ui/popup/register/register_success.dart';
 // import '../../../ui/themes/theme_colors.dart';
 // import '../../../ui/widgets/widgets.dart';
 // import '../../services/user_services.dart';
@@ -229,8 +229,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           event.currentPassword, event.newPassword);
 
       await Future.delayed(const Duration(milliseconds: 450));
-
-      final dataUser = await userService.getUserById();
 
       if (data.resp) {
         emit(SuccessUserState());

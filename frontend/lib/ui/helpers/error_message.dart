@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 void errorMessageSnack(BuildContext context, String error) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

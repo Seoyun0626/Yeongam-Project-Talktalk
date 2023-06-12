@@ -1,17 +1,16 @@
 part of 'widgets.dart';
 
 class ItemModal extends StatelessWidget {
-
   final IconData icon;
   final String text;
   final Function() onPressed;
 
-  const ItemModal({
-    Key? key,
-    required this.icon,
-    required this.text,
-    required this.onPressed
-  }) : super(key: key);
+  const ItemModal(
+      {Key? key,
+      required this.icon,
+      required this.text,
+      required this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +20,8 @@ class ItemModal extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-            foregroundColor: ThemeColors.secondary
-        ),
+            // foregroundColor: ThemeColors.secondary
+            ),
         child: Align(
             alignment: Alignment.centerLeft,
             child: Row(
@@ -31,8 +30,7 @@ class ItemModal extends StatelessWidget {
                 const SizedBox(width: 10.0),
                 TextCustom(text: text, fontSize: 17)
               ],
-            )
-        ),
+            )),
       ),
     );
   }

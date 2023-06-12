@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:login/ui/screens/register/info_input_page.dart';
-import 'package:login/ui/screens/register/kakao_extra_info_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/screens/register/info_input_page.dart';
+import 'package:teentalktalk/ui/screens/register/kakao_extra_info_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class userTypePage extends StatelessWidget {
   const userTypePage({required this.isKakaoLogin, Key? key}) : super(key: key);

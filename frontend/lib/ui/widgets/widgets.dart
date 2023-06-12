@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:login/ui/screens/event/event_page.dart';
-import 'package:login/ui/screens/scrap/scrap.dart';
-import 'package:login/ui/screens/policy/policy_list_page.dart';
-import 'package:login/ui/screens/user/myTalkTalk_page.dart';
+import 'package:teentalktalk/ui/screens/event/event_page.dart';
+import 'package:teentalktalk/ui/screens/scrap/scrap.dart';
+import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
+import 'package:teentalktalk/ui/screens/user/myTalkTalk_page.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:login/ui/screens/home/home_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/screens/home/home_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
 
 part 'text_custom.dart';
 part 'fieldNaru.dart';

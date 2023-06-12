@@ -1,18 +1,18 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:google_fonts/google_fonts.dart';
-// import 'package:login/data/env/env.dart';
-// import 'package:login/domain/blocs/policy/policy_bloc.dart';
-// import 'package:login/domain/models/response/response_policy.dart';
-// import 'package:login/domain/models/response/response_search.dart';
-// import 'package:login/domain/services/policy_services.dart';
-// import 'package:login/domain/services/user_services.dart';
-// import 'package:login/ui/helpers/helpers.dart';
-// // import 'package:login/domain/models/response/response_search.dart';
-// import 'package:login/ui/screens/policy/policy_detail.dart';
-// import 'package:login/ui/screens/policy/policy_list_X.dart';
-// import 'package:login/ui/themes/theme_colors.dart';
-// import 'package:login/ui/widgets/widgets.dart';
+// import 'package:teentalktalk/data/env/env.dart';
+// import 'package:teentalktalk/domain/blocs/policy/policy_bloc.dart';
+// import 'package:teentalktalk/domain/models/response/response_policy.dart';
+// import 'package:teentalktalk/domain/models/response/response_search.dart';
+// import 'package:teentalktalk/domain/services/policy_services.dart';
+// import 'package:teentalktalk/domain/services/user_services.dart';
+// import 'package:teentalktalk/ui/helpers/helpers.dart';
+// // import 'package:teentalktalk/domain/models/response/response_search.dart';
+// import 'package:teentalktalk/ui/screens/policy/policy_detail.dart';
+// import 'package:teentalktalk/ui/screens/policy/policy_list_X.dart';
+// import 'package:teentalktalk/ui/themes/theme_colors.dart';
+// import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 // class SearchPage extends StatefulWidget {
 //   const SearchPage({Key? key}) : super(key: key);

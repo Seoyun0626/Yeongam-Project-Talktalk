@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:login/data/env/env.dart';
-import 'package:login/ui/helpers/debouncer.dart';
-import 'package:login/data/storage/secure_storage.dart';
-import 'package:login/domain/models/response/default_response.dart';
-// import 'package:login/domain/models/response/response_followers.dart';
-// import 'package:login/domain/models/response/response_followings.dart';
-import 'package:login/domain/models/response/response_user.dart';
+import 'package:teentalktalk/data/env/env.dart';
+import 'package:teentalktalk/ui/helpers/debouncer.dart';
+import 'package:teentalktalk/data/storage/secure_storage.dart';
+import 'package:teentalktalk/domain/models/response/default_response.dart';
+// import 'package:teentalktalk/domain/models/response/response_followers.dart';
+// import 'package:teentalktalk/domain/models/response/response_followings.dart';
+import 'package:teentalktalk/domain/models/response/response_user.dart';
 
 class UserServices {
   final debouncer = DeBouncer(duration: const Duration(milliseconds: 800));

@@ -1,5 +1,5 @@
 // import 'package:flutter/animation.dart';
-import 'package:login/domain/services/code_service.dart';
+import 'package:teentalktalk/domain/services/code_service.dart';
 
 class CodeDetailData {
   final String detailName;

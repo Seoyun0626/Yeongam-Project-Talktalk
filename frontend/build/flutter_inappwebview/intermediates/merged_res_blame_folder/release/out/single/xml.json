@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/taeheekim/Documents/Yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_res/release/xml/image_share_filepaths.xml",
+        "source": "/Users/taeheekim/.gradle/caches/transforms-3/aa5bfdca251979a9f9e55830567ed58e/transformed/browser-1.4.0/res/xml/image_share_filepaths.xml"
+    },
+    {
+        "merged": "/Users/taeheekim/Documents/Yeongam_dev/frontend/build/flutter_inappwebview/intermediates/merged_res/release/xml/provider_paths.xml",
+        "source": "/Users/taeheekim/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.7.2+3/android/src/main/res/xml/provider_paths.xml"
+    }
+]

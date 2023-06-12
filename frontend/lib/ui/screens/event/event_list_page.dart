@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:login/domain/blocs/auth/auth_bloc.dart';
-import 'package:login/ui/helpers/modals/modal_checkLogin.dart';
-import 'package:login/ui/screens/event/attendance_event_page.dart';
-import 'package:login/ui/screens/event/invite_event_page.dart';
-import 'package:login/ui/screens/event/weeklyFig_event_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/screens/event/attendance_event_page.dart';
+import 'package:teentalktalk/ui/screens/event/invite_event_page.dart';
+import 'package:teentalktalk/ui/screens/event/weeklyFig_event_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class EventListPage extends StatefulWidget {
   const EventListPage({Key? key}) : super(key: key);

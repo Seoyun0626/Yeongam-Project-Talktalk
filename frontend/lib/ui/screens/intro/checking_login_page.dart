@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/domain/blocs/blocs.dart';
-import 'package:login/ui/helpers/get_mobile_code_data.dart';
-import 'package:login/ui/screens/home/home_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/ui/helpers/get_mobile_code_data.dart';
+import 'package:teentalktalk/ui/screens/home/home_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import '../../helpers/animation_route.dart';
 
 class CheckingLoginPage extends StatefulWidget {
@@ -17,7 +17,6 @@ class CheckingLoginPage extends StatefulWidget {
 class _CheckingLoginPageState extends State<CheckingLoginPage>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
-  late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
@@ -25,16 +24,6 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
     getMobileCodeService.getCodeData();
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
-
-    _scaleAnimation =
-        Tween<double>(begin: 1.0, end: 0.8).animate(_animationController)
-          ..addStatusListener((status) {
-            if (status == AnimationStatus.completed) {
-              _animationController.reverse();
-            } else if (status == AnimationStatus.dismissed) {
-              _animationController.forward();
-            }
-          });
 
     _animationController.forward();
   }

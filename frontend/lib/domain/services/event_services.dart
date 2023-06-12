@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:login/data/storage/secure_storage.dart';
-import 'package:login/domain/models/response/default_response.dart';
+import 'package:teentalktalk/data/storage/secure_storage.dart';
+import 'package:teentalktalk/domain/models/response/default_response.dart';
 
-import 'package:login/domain/models/response/response_event.dart';
-import 'package:login/data/env/env.dart';
+import 'package:teentalktalk/domain/models/response/response_event.dart';
+import 'package:teentalktalk/data/env/env.dart';
 
 class EventServices {
   // 무화과 지급 - 이벤트 참여

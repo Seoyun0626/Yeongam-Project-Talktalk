@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:login/domain/services/event_services.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
 
 class EventController extends GetxController {
   var week = ["일", "월", "화", "수", "목", "금", "토"];

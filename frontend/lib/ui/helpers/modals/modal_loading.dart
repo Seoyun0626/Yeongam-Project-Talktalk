@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 void modalLoading(BuildContext context, String text) {
   showDialog(

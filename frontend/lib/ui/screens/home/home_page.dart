@@ -2,21 +2,21 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:login/data/env/env.dart';
-import 'package:login/domain/blocs/auth/auth_bloc.dart';
-import 'package:login/domain/models/response/response_policy.dart';
-import 'package:login/domain/services/policy_services.dart';
-import 'package:login/ui/helpers/helpers.dart';
-import 'package:login/ui/screens/notification/notification_page.dart';
-import 'package:login/ui/screens/policy/policy_detail_page.dart';
-import 'package:login/ui/screens/policy/policy_list_page.dart';
-import 'package:login/ui/screens/user/myTalkTalk_page.dart';
+import 'package:teentalktalk/data/env/env.dart';
+import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
+import 'package:teentalktalk/domain/models/response/response_policy.dart';
+import 'package:teentalktalk/domain/services/policy_services.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/ui/screens/notification/notification_page.dart';
+import 'package:teentalktalk/ui/screens/policy/policy_detail_page.dart';
+import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
+import 'package:teentalktalk/ui/screens/user/myTalkTalk_page.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:login/domain/models/response/response_banner.dart';
-import 'package:login/domain/services/banner_services.dart';
-import 'package:login/ui/screens/login/login_page.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
+import 'package:teentalktalk/domain/models/response/response_banner.dart';
+import 'package:teentalktalk/domain/services/banner_services.dart';
+import 'package:teentalktalk/ui/screens/login/login_page.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +31,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     // final userBloc = BlocProvider.of<UserBloc>(context);
     final authBloc = BlocProvider.of<AuthBloc>(context);
 

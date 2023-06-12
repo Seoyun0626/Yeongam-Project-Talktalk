@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:login/ui/themes/theme_colors.dart';
-import 'package:login/ui/widgets/widgets.dart';
-import 'package:login/ui/screens/notification/notification.dart';
+import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:teentalktalk/ui/widgets/widgets.dart';
+import 'package:teentalktalk/ui/screens/notification/notification.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({

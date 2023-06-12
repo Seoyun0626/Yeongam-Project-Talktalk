@@ -5,8 +5,8 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:image_picker/image_picker.dart';
 // import 'package:permission_handler/permission_handler.dart';
-// import 'package:login/domain/blocs/blocs.dart';
-// import 'package:login/domain/blocs/post/post_bloc.dart';
+// import 'package:teentalktalk/domain/blocs/blocs.dart';
+// import 'package:teentalktalk/domain/blocs/post/post_bloc.dart';
 //
 // class AppPermission {
 //

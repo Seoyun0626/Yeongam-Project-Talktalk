@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:login/data/storage/secure_storage.dart';
-import 'package:login/domain/models/response/response_login.dart';
-import 'package:login/data/env/env.dart';
+import 'package:teentalktalk/data/storage/secure_storage.dart';
+import 'package:teentalktalk/domain/models/response/response_login.dart';
+import 'package:teentalktalk/data/env/env.dart';
 
 class AuthServices {
   Future<ResponseLogin> login(String userid, String password) async {
