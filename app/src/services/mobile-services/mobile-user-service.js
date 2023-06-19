@@ -62,6 +62,23 @@ exports.getUserById = async function(req) {
     }
   }
 
+
+
+  exports.getFigCount = async function(req, res) {
+    var conn;
+    try{
+      conn = await db.getConnection();
+      var uid = req.idPerson;
+      query = 'select fig from webdb.tb_user where uid = "'+uid+'";'
+      rows = await conn.query(query); // 쿼리 실행
+      return rows;
+    } catch(error) {
+      console.log('mobile-user-service getFigCount:'+error);
+    } finally {
+      if (conn) conn.end();
+    }
+  };
+
   /*
   export const changePassword = async (req: Request, res: Response): Promise<Response> => {
 

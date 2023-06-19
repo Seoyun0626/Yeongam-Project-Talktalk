@@ -698,6 +698,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "stroke_text",
+      "rootUri": "file:///Users/taeheekim/.pub-cache/hosted/pub.dev/stroke_text-0.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "term_glyph",
       "rootUri": "file:///Users/taeheekim/.pub-cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
@@ -830,7 +836,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-06-11T18:09:54.301768Z",
+  "generated": "2023-06-16T08:55:44.659540Z",
   "generator": "pub",
   "generatorVersion": "2.19.0"
 }

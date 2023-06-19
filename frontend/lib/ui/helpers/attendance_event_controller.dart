@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 
 class EventController extends GetxController {
   var week = ["일", "월", "화", "수", "목", "금", "토"];
@@ -97,8 +98,10 @@ class EventController extends GetxController {
     if (!isCheckedAttendance.value) {
       temp_days.add(now2.value.day);
       isCheckedAttendance.value = true;
-      eventService
-          .giveFig('71965135-8e01-422a-92b9-4bb5a65a81f5'); // 출석체크 eid 수정
+      eventService.giveFig(
+          '71965135-8e01-422a-92b9-4bb5a65a81f5'); // 출석체크 event 아이디 - eid 수정
+    } else {
+      print('이미 출석하였습니다');
     }
   }
 }

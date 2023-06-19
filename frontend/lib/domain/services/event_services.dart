@@ -9,7 +9,7 @@ import 'package:teentalktalk/data/env/env.dart';
 class EventServices {
   // 무화과 지급 - 이벤트 참여
   Future<DefaultResponse> giveFig(String eid) async {
-    print('giveFig');
+    // print('giveFig');
     final token = await secureStorage.readToken();
 
     final resp = await http.post(
@@ -47,7 +47,7 @@ class EventServices {
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/event/get-fig-history-by-user'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
-    print(resp.body);
+    // print(resp.body);
 
     return ResponseEvent.fromJson(jsonDecode(resp.body));
   }

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:teentalktalk/domain/models/response/default_response.dart';
+import 'package:teentalktalk/domain/models/response/response_fig.dart';
+import 'package:teentalktalk/domain/services/user_services.dart';
 import 'package:teentalktalk/ui/screens/event/event_page.dart';
 import 'package:teentalktalk/ui/screens/intro/checking_login_page.dart';
 import 'package:teentalktalk/ui/screens/login/login_page.dart';
@@ -411,27 +414,41 @@ class _LogInOut extends StatelessWidget {
 }
 
 // 무화과 개수
-class _MyFig extends StatelessWidget {
+class _MyFig extends StatefulWidget {
   const _MyFig({
     Key? key,
   }) : super(key: key);
+  @override
+  State<_MyFig> createState() => _MyFigState();
+}
+
+class _MyFigState extends State<_MyFig> {
+  late String figCount = '-';
+
+  @override
+  initState() {
+    super.initState();
+    _updateFigCount();
+  }
+
+  Future<void> _updateFigCount() async {
+    final authBloc = BlocProvider.of<AuthBloc>(context);
+    if (authBloc.state is SuccessAuthentication) {
+      FigResponse figCountData = await userService.updateFigCount();
+      setState(() {
+        figCount = figCountData.figCount;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final userBloc = BlocProvider.of<UserBloc>(context);
     final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return Center(
         child: InkWell(
       onTap: () {
-        if (authBloc.state is LogOut) {
-          // 로그인 상태 아닐 경우
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => MyFigHistoryPage(),
-          //     ));
-        } else {
+        if (authBloc.state is SuccessAuthentication) {
           // 로그인 상태일 경우 MyFigListPage 이동
           Navigator.push(
               context,
@@ -476,8 +493,7 @@ class _MyFig extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         );
                       } else {
-                        final figCount = userBloc.state.user?.fig ?? '';
-
+                        // final figCount = userBloc.state.user?.fig ?? '-';
                         return TextCustom(
                           text: figCount,
                           fontSize: 40,
@@ -486,18 +502,7 @@ class _MyFig extends StatelessWidget {
                         );
                       }
                     },
-
-                    // 무화과 개수가 업데이트될 때마다 OnUpdateFigCountEvent 이벤트 호출
-                    // userBloc을 통해 tb_user의 fig 열을 업데이트
-                    // userBloc.add(OnUpdateFigCountEvent(figCount)),
-                    // userBloc: userBloc,
                   ),
-
-                  // const Icon(
-                  //   Icons.apple,
-                  //   size: 50,
-                  //   // color: Colors.purple[400],
-                  // )
                   // SvgPicture.asset(
                   //   'images/Fig.svg',
                   // )

@@ -77,6 +77,23 @@ router.get("/get-user-by-id", verifyToken, async function(req, res){
     }
 
   });
+
+  router.get("/get-fig-count", verifyToken, async function (req, res) {
+    try {
+      var figCount = await mobile_user_controller.getFigCount(req, res);
+      figCount = figCount[0]["fig"]
+      // console.log(figCount);
+      res.json({
+        resp:true,
+        message : 'get fig count',
+        figCount : figCount, // 무화과 개수
+      })
+    } catch (error) {
+      console.log('mobile-user-router get fig count error:' + error);
+    }
+  });
+
+ 
  
 
   module.exports = router;

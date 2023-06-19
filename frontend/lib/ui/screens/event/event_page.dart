@@ -6,6 +6,7 @@ import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:teentalktalk/ui/screens/event/attendance_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/event_list_page.dart';
+import 'package:teentalktalk/ui/screens/event/new_weeklyFig_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/weeklyFig_event_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
@@ -202,7 +203,7 @@ class _weeklyFigEvent extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const WeeklyFigEventPage(),
+                builder: (context) => const newWeeklyFigEventPage(),
               ));
         },
         child: Container(

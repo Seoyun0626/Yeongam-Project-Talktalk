@@ -57,7 +57,7 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                   height: 5.h,
                 ),
                 TextCustom(
-                    text: "2023.05.01 ~ 2023.05.31",
+                    text: "2023.07.05 ~ 2023.07.31",
                     color: Colors.white,
                     fontSize: 12.sp),
                 SizedBox(
@@ -152,8 +152,8 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                                             // SvgPicture.asset('images/Fig2.svg', width: 18.w,height: 18.h,)
                                             Image.asset(
                                       'images/Fig2.png',
-                                      width: 15.w,
-                                      height: 15.h,
+                                      width: 17.w,
+                                      height: 17.h,
                                     )),
                                   ),
                                 ] else ...[
@@ -188,9 +188,9 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                         child: NeumorphicButton(
                           margin: EdgeInsets.only(top: 10.h),
                           style: NeumorphicStyle(
-                              disableDepth: controller.isCheckedAttendance.value
-                                  ? true
-                                  : false,
+                              // disableDepth: controller.isCheckedAttendance.value
+                              //     ? true
+                              //     : false,
                               shape: NeumorphicShape.flat,
                               boxShape: NeumorphicBoxShape.roundRect(
                                   BorderRadius.circular(50.r)),
@@ -199,25 +199,9 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                               color: controller.isCheckedAttendance.value
                                   ? Colors.grey
                                   : const Color.fromRGBO(247, 248, 250, 1)),
-                          onPressed: controller.isCheckedAttendance.value
-                              ? null
-                              : controller.handleAttendanceCheck,
-                          // onPressed: () {
-                          // bool isCheckedAttendance = controller.temp_days
-                          //     .contains(controller.now2.value.day);
-                          // print(controller.temp_days);
-                          // print(isCheckedAttendance);
-                          // if (isCheckedAttendance) {
-                          //   return null;
-                          // } else {
-                          //   controller.temp_days
-                          //       .add(controller.now2.value.day);
-                          //   isCheckedAttendance = true;
-                          //   eventService.giveFig(
-                          //     '71965135-8e01-422a-92b9-4bb5a65a81f5',
-                          //   ); // 출석체크 eid 수정
-                          // }
-                          // },
+                          onPressed: () {
+                            controller.handleAttendanceCheck();
+                          },
                           child: Row(
                             // crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,

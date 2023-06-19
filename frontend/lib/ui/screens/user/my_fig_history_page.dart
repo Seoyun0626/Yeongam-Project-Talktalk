@@ -2,20 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
 import 'package:teentalktalk/domain/blocs/user/user_bloc.dart';
 import 'package:teentalktalk/domain/models/response/response_event.dart';
+import 'package:teentalktalk/domain/models/response/response_fig.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
+import 'package:teentalktalk/domain/services/user_services.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
-class MyFigHistoryPage extends StatelessWidget {
+class MyFigHistoryPage extends StatefulWidget {
   const MyFigHistoryPage({Key? key}) : super(key: key);
+  @override
+  State<MyFigHistoryPage> createState() => _MyFigHistoryPageState();
+}
+
+class _MyFigHistoryPageState extends State<MyFigHistoryPage> {
+  late String figCount = '-';
+
+  @override
+  initState() {
+    super.initState();
+    _updateFigCount();
+  }
+
+  Future<void> _updateFigCount() async {
+    final authBloc = BlocProvider.of<AuthBloc>(context);
+    if (authBloc.state is SuccessAuthentication) {
+      FigResponse figCountData = await userService.updateFigCount();
+      setState(() {
+        figCount = figCountData.figCount;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final userBloc = BlocProvider.of<UserBloc>(context);
-    final myFigCount = userBloc.state.user?.fig ?? '';
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -61,7 +83,7 @@ class MyFigHistoryPage extends StatelessWidget {
                     // SvgPicture.asset('images/Fig.svg'),
                     Image.asset('images/Fig2.png'),
                     TextCustom(
-                      text: '$myFigCount개',
+                      text: '$figCount개',
                       fontSize: 32.sp,
                       fontWeight: FontWeight.w900,
                       color: ThemeColors.basic,

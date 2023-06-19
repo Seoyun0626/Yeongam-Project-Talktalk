@@ -79,7 +79,7 @@ exports.fetchFigRewardByUser = async function(req, res) {
     var uid = req.idPerson;
     query = 'select event_part_no,acquired_time,event_name,fig_payment from webdb.tb_event_part as a inner join webdb.tb_event as b on a.eid = b.eid where a.uid ="'+uid+'"'; // "3d06c817-d8ee-43be-be7b-226c0a4d6695";'
     var rows = await conn.query(query); // 쿼리 실행
-    console.log(rows);
+    // console.log(rows);
     return rows;
   } catch(error) {
     console.log('mobile-event-service fetchFigRewardByUser:'+error);

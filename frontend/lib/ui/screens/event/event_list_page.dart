@@ -6,6 +6,7 @@ import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:teentalktalk/ui/screens/event/attendance_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/invite_event_page.dart';
+import 'package:teentalktalk/ui/screens/event/new_weeklyFig_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/weeklyFig_event_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
@@ -101,7 +102,7 @@ class _EventListPageState extends State<EventListPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const WeeklyFigEventPage(),
+                                    const newWeeklyFigEventPage(),
                               ));
                         } else if (index == 2) {
                           if (authState is LogOut) {

@@ -109,6 +109,14 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // modal test
+                  // BtnNaru(
+                  //   text: 'test',
+                  //   width: 300,
+                  //   onPressed: () {
+                  //     modalSuccess(context, 'hello', onPressed: () {});
+                  //   },
+                  // ),
                   // 배너 슬라이드
                   FutureBuilder<List<Banners>>(
                     future: bannerService.getBannerData(),
