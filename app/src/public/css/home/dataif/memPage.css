@@ -4,10 +4,6 @@
   margin-top: 15px;
   /* text-align: center; */
 }
-#mem_table{
-  text-align: center;
-  width: 1000px;
-}
 
 
 #mem_reg_btn{
@@ -25,12 +21,6 @@ body {
     padding: 20px;
     /* color: #FFAB94; */
   }
-  #wapper {
-    width: 100vw;
-    height: 100vh;
-    margin: 0px;
-    padding: 0px;
-  }
   a {
     text-decoration: none;
     color: black;
@@ -45,7 +35,6 @@ body {
     padding: 10px;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-    vertical-align: center;
     text-align: center;
   }
   table th {
@@ -66,7 +55,7 @@ body {
     color: #fff;
   }
   .ui.button:hover {
-    background-color: #F57521 ;
+    background-color: #fff ;
     box-shadow: 0 1px 10px rgba(70, 130, 180, 0.4);
   }
   .ui.pagination.menu {

@@ -6,6 +6,9 @@ var code_controller = require("../../controllers/common-controller/codeData-cont
 
 const passport = require('passport');
 
+const ensureAuth = require("../../utils/middleware/ensureAuth");
+const asyncHandler = require("../../utils/middleware/asyncHandler");
+
 
 // 로그인 라우터
 router.get('/login', function (req, res) {
@@ -46,16 +49,12 @@ router.get("/logout", function(req, res) {
 
 
 // 사용자등록
-router.get("/signup", async function(req, res) {
-  if(req.session.user == undefined){
-    res.redirect('/admin/auth/login');
-    return;
-  }
+router.get("/signup", ensureAuth, asyncHandler(async function (req, res) {
   var code_data = await code_controller.getCodeData(req, res);
   res.render('dataif/signup', {title: '회원가입', sess: req.session,
     code_data: code_data
   });
-});
+}, 'dataif-router / error:'));
 
 router.post("/signup", async function(req, res) {
   try{
