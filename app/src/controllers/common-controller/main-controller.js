@@ -1,15 +1,4 @@
 var main_service = require("../../services/main-service");
-/*
-exports.GetJsonList = async function(req, res) {
-  var result = await service_main.GetJsonList();
-  var json = {
-    title: "view",
-    data: result
-  };
-  res.send(json);
-};
-*/
-
 // 게시판
 exports.dashboard = async function(req, res) {
   try{

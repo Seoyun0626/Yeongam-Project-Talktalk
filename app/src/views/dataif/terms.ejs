@@ -5,13 +5,9 @@
   <title>Admin Page</title>
   <link rel="stylesheet" href="/semantic/layout.css">
   <link rel="stylesheet" href="/semantic/semantic.min.css">
-  <link rel="stylesheet" href="/css/home/mem.css">
-  <link rel="stylesheet" href="/css/home/terms.css">
-  <link rel="stylesheet" href="/css/home/admin.css">
+  <link rel="stylesheet" href="/css/home/dataif/terms.css">
+  <link rel="stylesheet" href="/css/home/layout.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
-  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
-  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
-  <script src="/js/home/mem.js" defer></script>
   <script> 
     function btn() {
         if (!confirm("설정을 저장하시겠습니까?")) {
@@ -32,13 +28,10 @@
 <section>
     <div>
       <div class="pagename">회원 가입 설정</div>
-      <!-- 약관 테이블 -->
       <form action="/admin/dataif/terms" method="post">
         <textarea name="terms" id="terms" cols="100" rows="10" ><%= posts[0].terms %></textarea><br>
         <textarea name="privacy" id="privacy" cols="100" rows="10"><%= posts[0].privacy %></textarea><br>
-        <!-- alert 버튼 -->
         <input type="submit" value="저장" onclick="return btn()">
-        <!-- <input type="submit" value="저장""> -->
       </form>
     </div>
 </section>

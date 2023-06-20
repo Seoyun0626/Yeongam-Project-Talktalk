@@ -3,15 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <title>Admin Page</title>
-  <link rel="stylesheet" href="/css/home/user.css">
   <link rel="stylesheet" href="/semantic/semantic.min.css">
-  <link rel="stylesheet" href="/css/home/mem.css">
-  <link rel="stylesheet" href="/css/home/memPage.css">
-  <link rel="stylesheet" href="/css/home/admin.css">
+  <link rel="stylesheet" href="/css/home/dataif/memPage.css">
+  <link rel="stylesheet" href="/css/home/layout.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
-  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script> -->
-  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script> -->
-  <script src="/js/home/mem.js" defer></script>
 </head>
 <body>
   <div id='rectanglel1' class='rectanglel1'></div>
@@ -20,50 +15,6 @@
 <section>
     <div>
         <div class="pagename">회원 정보 관리</div>
-        <!-- <div id="search_userinfo">
-          <form action="/admin/dataif/" method="search">
-            <ul>
-                <li>회원분류
-                    <div class="ui checkbox">
-                        <input type="checkbox">
-                        <label>청소년</label>
-                    </div>
-                    <div class="ui checkbox">
-                        <input type="checkbox">
-                        <label>학부모</label>
-                    </div>
-                    <div class="ui checkbox">
-                        <input type="checkbox"> 
-                        <label>청소년 부모</label>
-                    </div>
-                </li>
-                <li>수신동의
-                    <div class="ui checkbox">
-                        <input type="checkbox">
-                        <label>푸시알림</label>
-                    </div>
-                    <div class="ui checkbox">
-                        <input type="checkbox">
-                        <label>SMS</label>
-                    </div>
-                    <div class="ui checkbox">
-                        <input type="checkbox">
-                        <label>이메일</label>
-                    </div>
-                </li>
-                <li>
-              <div>검색어
-                <select>
-                    <option value="name">이름</option>
-                    <option value="id">아이디</option>
-                </select>
-                <input type="search" name="search" id="search" placeholder="검색어를 입력하세요">
-                <button id="search_btn" type="submit">검색</button>
-            </div>
-            </li>
-            </ul>
-          </form>
-        </div> -->
         <br>
         <form action="/admin/dataif/" method="search" class="ui form">
           <div class="fields">
@@ -108,24 +59,6 @@
               <td><%= user_type_to_name(posts[i].user_type,code_data) %></td>
               <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
               <td><%= `${posts[i].upd_date.getFullYear()}` + `-`+ `${posts[i].upd_date.getMonth()+1}` + `-`+ `${posts[i].upd_date.getDate()}`%></td>
-              <!-- <td><%= posts[i].push_yn %></td>
-              <td><%= posts[i].email_yn %></td>
-              <td><%= posts[i].sms_yn %></td> -->
-              <!-- <td><a href="/admin/dataif/giveFig/<%=posts[i].userid%>?fig=" onclick="return giveFig()"><%=posts[i].fig%></a></td>
-              <script>
-                function giveFig(){
-                  // -입력 시 무화과 감소
-                  var fig = prompt("추가할 무화과 개수를 입력하세요");
-                  if(fig == null){
-                    return false;
-                  }else{
-                    var url = "/admin/dataif/giveFig/<%=posts[i].userid%>?fig=" + fig;
-                    window.location.href = url;
-                    return false;
-                  }
-                }
-              </script> -->
-              <!-- <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>"><%=posts[i].fig%></a></td>/ -->
               <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>"><%=posts[i].fig%></a></td>
               <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
               <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
@@ -138,9 +71,6 @@
                   }
                 }
               </script>
-              <!-- <td>
-                <button class="ui button" type="submit">수정</button>
-              </td> -->
             </tr>
           <% } %>
           </tbody>
@@ -148,14 +78,8 @@
         <!-- 페이징 아이콘 -->
         <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/auth/signup'">등록</button>
         <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/dataif/excel'">다운로드</button>
-        <!-- <form action="/admin/dataif/excelup" method="post" enctype="multipart/form-data">
-          <input type="file" name="file" id="file">
-          <button class="ui button" id="mem_reg_btn" type="submit">업로드</button>
-        </form> -->
         <!-- <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/dataif/excelup'">업로드</button> -->
         <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->
-
-
         <div id="mem_paging">
           <div class="ui pagination menu">
               <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">이전</a>
@@ -171,8 +95,6 @@
               <a class="icon item" href="/admin/dataif/?page=<%=page+1 %>">다음</a>
           </div>
         </div>
-        
-        
     </div>
 </section>
 </div>

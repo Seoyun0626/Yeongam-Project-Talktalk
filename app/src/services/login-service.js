@@ -16,8 +16,6 @@ try{
   console.log('login-service SignIn db getConnection');
   var userid = req.body.userid; //req.body.id -> req.body.userid
   var password = req.body.password;
-  // console.log('login-serive SignIn - userid', userid); // kth log
-  // console.log('login-serive SignIn - password', password); // kth log
   var query = "SELECT userid, userpw, salt, user_name, user_role FROM webdb.tb_user where userid='" + userid + "' ;";
   var rows = await conn.query(query); // 쿼리 실행 
   if (rows[0]) {
@@ -182,74 +180,3 @@ exports.checkAttendance = async function(req, res) {
   }
   return resultcode;
 };
-
-
-//로그인 체크
-exports.login_check = async function(req, res) {
-  var resultcode = 0;
-  var conn;
-  try{
-    conn = await db.getConnection();
-    var userid = req.session.user.userid;
-    var password = req.session.user.password;
-    // console.log(userid, password);
-    var query = 'SELECT userpw, salt FROM webdb.tb_user where userid="'+userid+'"';
-    var rows = await conn.query(query); // 쿼리 실행
-    if(rows.length){
-      var user = rows[0];
-      return new Promise((resolve,reject)=>{
-          hasher( 
-            { password: password, salt: user.salt },
-            function (err, pass, salt, hash) {
-              if (hash === user.userpw) resultcode = 3;
-              else resultcode = 2;
-              resolve(resultcode);
-          });
-      });
-    } else resultcode = 1;
-
-    return resultcode;
-  } catch(error) {
-    console.log('login-service login_check:'+error);
-  } finally {
-    if (conn) conn.end();
-  }
-};
-
-
-
-
-
-/*
-exports.date_check = async function(req, res) {
-  var resultcode = 0;
-  var conn;
-  try{
-    console.log('date_check');
-    conn = await db.getConnection();
-    var userid = req.user.userid;
-    var query = "SELECT case when Timestampdiff(hour, Date_format(Str_to_date(a.strt_date, '%Y%m%d'),'%Y-%m-%d'),now()) >= 0 and Timestampdiff(hour, Date_format(Str_to_date(a.end_date, '%Y%m%d'),'%Y-%m-%d'),now()) <= 0 then "
-      +"Timestampdiff(hour, now(), Date_format(Str_to_date(a.end_date, '%Y%m%d'),'%Y-%m-%d')) else 0 end expr"
-//      +"when Timestampdiff(hour, Date_format(Str_to_date(a.strt_date, '%Y%m%d'),'%Y-%m-%d'),now()) < 0 and Timestampdiff(hour, Date_format(Str_to_date(a.end_date, '%Y%m%d'),'%Y-%m-%d'),now()) <= 0 then "
-//      +"Timestampdiff(hour, now(),Date_format(Str_to_date(a.end_date, '%Y%m%d'),'%Y-%m-%d')) else 0 end expr"
-      +", a.strt_date FROM webdb.tb_dataif a inner join webdb.tb_sensor b on a.sensor_board_idx=b.board_idx inner join webdb.tb_device c on b.dev_board_idx=c.board_idx where a.permit_type in ('Y', 'S') and a.ins_id='"+userid+"' and b.sen_mng_no='"+req.body.sensorid+"'";
-    var rows = await conn.query(query); // 쿼리 실행
-    var expr=0;
-    if(rows.length>0) {
-      expr=rows[0].expr;
-      const token = jwt.sign(
-        { userid: userid },
-        'eyJ1c2VySWQiOiIxIiwiaWF0IjoxNjMyOTg2',
-        { expiresIn: expr });
-      if(expr>0) req.user.token=token;
-      //req.user.strt_date=rows[0].strt_date;
-    }
-
-    return resultcode;
-  } catch(error) {
-    console.log('login-service date_check:'+error);
-  } finally {
-    if (conn) conn.end();
-  }
-};
-*/

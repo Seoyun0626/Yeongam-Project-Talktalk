@@ -15,6 +15,18 @@ body {
   color: #333;
 }
 
+#wapper {
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+text-decoration: none;
+color: black;
+}
+
 .pagename {
   font-weight: bold;
   font-size: 26px;
@@ -52,12 +64,12 @@ table th {
 }
 
 .ui.button.orange {
-  background-color: #FFAB94;
+  background-color: #F57521;
   color: #fff;
 }
 
 .ui.button:hover {
-  background-color: #FFAB94;
+  background-color: #F57521;
   box-shadow: 0 1px 10px rgba(70, 130, 180, 0.4);
 }
 

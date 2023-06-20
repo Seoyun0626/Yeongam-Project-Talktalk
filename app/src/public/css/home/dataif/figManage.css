@@ -27,8 +27,6 @@ body {
   margin-right: 10px;
   }
 
-/*layout 외*/
-
   #search_userinfo{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -103,13 +101,6 @@ body {
     border-bottom: 1px solid rgba(0,0,0,.1);
     background: #fff;
   }
-
-/* 테이블 설정 */
-
-#banner_table{
-  text-align: center;
-  width: 50em;
-}
 
 
 

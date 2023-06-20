@@ -26,8 +26,6 @@ exports.SignIn = async function(req, res) {
 };
 
 
-
-
 // 회원가입 컨트롤러
 exports.signUp = async function(req, res) {
   try{
@@ -57,52 +55,3 @@ exports.checkAttendance = async function(req, res) {
 };
 
 
-
-
-/*
-// 회원가입 컨트롤러
-exports.SignUp = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await service_main.SignUp(req);
-    var msg = "가입완료";
-    if (result == 100) {
-      msg = "이미 존재하는 ID 입니다.";
-    }
-    var json = {
-      code: result,
-      msg: msg
-    };
-  } catch(error) {
-    console.log('login-controller SignUp:'+error);
-  }
-  console.log(json);
-  return json;
-};
-*/
-
-
-
-
-// 로그인 체크 컨트롤러
-exports.login_check = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await login_service.login_check(req);
-    return result;
-  } catch(error) {
-    console.log('login-controller login_check:'+error);
-  }
-};
-
-/*
-exports.date_check = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await login_service.date_check(req);
-    return result;
-  } catch(error) {
-    console.log('login-controller date_check:'+error);
-  }
-};
-*/

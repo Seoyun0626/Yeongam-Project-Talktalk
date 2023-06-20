@@ -1,3 +1,19 @@
+/* 테이블 */
+#mem_paging {
+  padding-left: 380px;
+  margin-top: 15px;
+  /* text-align: center; */
+}
+#mem_table{
+  text-align: center;
+  width: 1000px;
+}
+
+
+#mem_reg_btn{
+  float: left;
+  margin-top: 15px;
+}
 
 body {
     font-family: 'Arial', sans-serif;
@@ -9,6 +25,16 @@ body {
     padding: 20px;
     /* color: #FFAB94; */
   }
+  #wapper {
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+    }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -19,10 +45,11 @@ body {
     padding: 10px;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+    vertical-align: center;
     text-align: center;
   }
   table th {
-    background-color: #FFAB94;
+    background-color: #F57521;
     color: #fff;
     border: none;
   }
@@ -35,11 +62,11 @@ body {
     font-weight: bold;
   }
   .ui.button.orange {
-    background-color: #FFAB94 ;
+    background-color: #F57521 ;
     color: #fff;
   }
   .ui.button:hover {
-    background-color: #FFAB94 ;
+    background-color: #F57521 ;
     box-shadow: 0 1px 10px rgba(70, 130, 180, 0.4);
   }
   .ui.pagination.menu {

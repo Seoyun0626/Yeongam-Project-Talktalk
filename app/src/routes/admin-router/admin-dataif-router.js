@@ -12,56 +12,6 @@ var codeName = require('../../public/js/home/getCodeName');
 
 //js함수
 const passport = require('passport');
-/*
-var Post = require('../../models/Post');
-
-var multer = require('multer');  //multer 모듈 import
-var uploadImg = multer({dest: 'public/upload/img/'}); //업로드 경로 설정
-var uploadFile = multer({dest: 'public/upload/file/'}); //업로드 경로 설정
-//multer({ dest: 'uploads/', limits: { fileSize: 5 * 1024 * 1024 } });
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, new Date().valueOf() + path.extname(file.originalname))
-  }
-})
-
-const fileFilter = function (req, file, cb) {
-  let typeArray = file.mimetype.split('/');
-  let fileType = typeArray[1];
-  if (fileType == 'jpg' || fileType == 'png' || fileType == 'jpeg' || fileType == 'gif') {
-      cb(null, true);
-  } else {
-      req.fileValidationError = "jpg,jpeg,png,gif 파일만 업로드 가능합니다.";
-      cb(null, false)
-  }
-}
-
-const upload = multer({
-  storage: storage,
-  fileFilter: fileFilter,
-  limits: {
-      fileSize: 5 * 1024 * 1024
-  }
-});
-*/
-
-/*
-router.post("/dataif", checkAuth, async function(req, res) {
-    console.log('dataif:'+req.user)
-    try{
-        // 로그인 확인을 위해 컨트롤러 호출
-        var result = await main_controller.dataif(req, res);
-
-        res.render('dataif', {'id':req.user});
-    } catch(error) {
-        console.log('main-router dataif error:'+error);
-    }
-});
-*/
-
 
 //로그인 시 출력하는 화면
 router.get('/', async function (req, res) {
@@ -84,9 +34,6 @@ router.get('/', async function (req, res) {
       if (crtpage == undefined) crtpage = 1; //현재 페이지가 없으면 1페이지로 설정
       if (crtpage < 1) crtpage = 1; //현재 페이지가 1보다 작으면 1페이지로 설정
       if (crtpage > Math.ceil(result.length / pageSize)) crtpage = Math.ceil(result.length / pageSize); //현재 페이지가 마지막 페이지보다 크면 마지막 페이지로 설정
-      // var rtnparams=[];
-      // rtnparams.totalPages=result.length/pageSize;
-      // rtnparams.page=crtpage;
       var start = (crtpage - 1) * pageSize;
       var end = crtpage * pageSize;
       totalPage = Math.ceil(result.length / pageSize);
@@ -200,8 +147,6 @@ router.get('/update/:id', async function (req, res) {
       res.redirect('/admin/auth/login');
       return;
     }
-    // res.redirect("/dataif/update/"+req.user.id);
-    // console.log("update:"+req.params.id);
     //데이터 받아오기
     var result = await dataif_controller.fetchDataUserUpdate(req, res);
     var code_data = await code_controller.getCodeData(req, res);
@@ -260,10 +205,6 @@ router.get('/giveFig/:id', async function (req, res) {
 router.put('/:id', async function (req, res) {
   try {
     var result = await dataif_controller.update(req, res);
-    //console.log(result)
-    //if(result) res.render('dataif/edit', {post:result});
-    //else res.render('dataif/edit', {post:result});
-
     res.redirect("/dataif");
   } catch (error) {
     console.log('dataif-router update error:' + error);
@@ -305,16 +246,6 @@ router.get('/excelup', async function (req, res) {
   }
 });
 
-// New
-router.get('/new', function (req, res) {
-  console.log('dataif-router new');
-  res.render('dataif/new', { parent_board_id: req.params.id });
-});
-
-router.get('/:id/new', function (req, res) {
-  res.render('dataif/new', { parent_board_id: req.params.id });
-});
-
 
 // show
 router.get('/:id', async function (req, res) {
@@ -336,21 +267,6 @@ router.get('/:id/edit', async function (req, res) {
     console.log('dataif-router edit error:' + error);
   }
 });
-
-
-
-// // destroy
-// router.delete('/:id', async function(req, res){
-//   try{
-//     var result = await dataif_controller.delete(req, res);
-
-//     if(result) res.json({success: true, msg:'삭제하였습니다.'});
-//     else res.json({success: false, msg:'삭제실패하였습니다.'});
-
-//   } catch(error) {
-//     console.log('dataif-router destroy error:'+error);
-//   }
-// });
 
 
 router.get('/datapermit', async function (req, res) {

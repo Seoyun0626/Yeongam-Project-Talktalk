@@ -19,13 +19,8 @@ const initPassport = require('./src/utils/passport'); //passport 설정
 
 // const port = process.env.PORT;
 
-// app.listen(port, () => {
-//   console.log(`APP : SERVER RUN ON PORT ${port}`)
-// })
 
 //라우팅
-// const routeUser = require('./src/routes/mobile-router/user_routes');
-// const routeAuth = require('./src/routes/mobile-router/auth_routes');
 const routerAdminDataif = require("./src/routes/admin-router/admin-dataif-router");
 const routerAdminLogin = require("./src/routes/admin-router/admin-login-router");
 const routerAdminMain = require("./src/routes/admin-router/admin-main-router");
@@ -40,10 +35,6 @@ const routerMobileUser = require("./src/routes/mobile-router/mobile-user-router"
 const routerMobileDataif = require("./src/routes/mobile-router/mobile-dataif-router");
 const routerMobileEvent = require("./src/routes/mobile-router/mobile-event-router");
 
-
-
-
-
 //앱 세팅
 app.set("views", "./src/views"); //템플릿 파일 경로(views)
 app.set("view engine", "ejs"); //템플릿 엔진(ejs)
@@ -54,21 +45,8 @@ app.use(session({
     resave: false, 
     saveUninitialized: true,
     rolling: true,
-  //   cookie: {
-  //     secure: true,
-  //     expires: 600 * 1000
-  //  } //??
   }));
 
-/*
-app.use(express.static('src/public'))
-app.use('/js', express.static('public/js'));
-app.use('/public/upload', express.static('src/public/upload'));
-app.use('/js', express.static(path.join(__dirname, 'public/js')));
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
-// app.use(methodoverride('_method'));
-*/
 
 app.use(passport.initialize()); //passport 초기화
 app.use(passport.session()); //passport 세션 사용
@@ -94,6 +72,5 @@ app.use("/mobile/codeData",routerMobileCode); // 모바일
 app.use("/mobile/user",routerMobileUser); // 모바일
 app.use("/mobile/dataif", routerMobileDataif); //모바일
 app.use("/mobile/event", routerMobileEvent); //모바일
-
 
 module .exports = app;

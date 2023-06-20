@@ -9,7 +9,17 @@ body {
     padding: 20px;
     /* background-color: #FFAB94; */
   }
+  #wapper {
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+  }
   
+  a {
+  text-decoration: none;
+  color: black;
+  }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -25,7 +35,7 @@ body {
   }
   
   table th {
-    background-color: #FFAB94;
+    background-color: #F57521;
     color: #fff;
     border: none;
   }
@@ -42,11 +52,13 @@ body {
   }
   
   .ui.button:hover {
-    background-color: #FFAB94;
+    background-color: #F57521;
     box-shadow: 0 1px 10px rgba(70, 130, 180, 0.4);
   }
   
   #banner_table {
+    text-align: center;
+    width: 50em;
     border-collapse: separate;
     border-spacing: 0;
   }
@@ -174,3 +186,4 @@ body {
   .submit-button {
     margin-top: 20px;
   }
+

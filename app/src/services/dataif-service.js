@@ -441,18 +441,6 @@ exports.update = async function(req, res) {
   var resultcode=0;
   try{
     conn = await db.getConnection();
-    // ??
-    // if(req.body.if_type!="DBS") {
-    //   req.body.hostip='';
-    //   req.body.port='';
-    //   req.body.userid='';
-    //   req.body.password='';
-    //   req.body.dbname='';
-    //   req.body.tbname='';
-    // }
-    // req.body.fieldArr=['dbname', 'end_date', 'hostip', 'if_subtype', 'if_type', 'password', 'port', 'req_dtl', 'sensor_board_idx', 'strt_date', 'tbname', 'userid'];
-    // var queryStr=utils.makeBoardUpdateFieldQuery(req.body);
-    // 'update webdb.tb_dataif set data_cnt='+req.body.count+' where board_idx='+req.body.modal_board_idx;
     var userid = req.params.id;
     if(req.body.name=='' || req.body.email=='' || req.body.password=='' || req.body.password2=='') {
       resultcode=100;
