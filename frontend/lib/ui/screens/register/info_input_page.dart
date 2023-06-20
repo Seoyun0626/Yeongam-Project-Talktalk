@@ -5,6 +5,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/domain/services/auth_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_success_register.dart';
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
@@ -97,10 +98,8 @@ class _InfoInputPageState extends State<InfoInputPage> {
         // } else
 
         if (state is SuccessUserState) {
-          // Navigator.pop(context);
-          modalSuccess(
+          modalSuccessRegister(
             context,
-            '회원가입이 완료되었습니다',
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
@@ -108,6 +107,16 @@ class _InfoInputPageState extends State<InfoInputPage> {
                 ),
                 (_) => false),
           );
+          // modalSuccess(
+          //   context,
+          //   '회원가입이 완료되었습니다',
+          //   onPressed: () => Navigator.pushAndRemoveUntil(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => const HomePage(),
+          //       ),
+          //       (_) => false),
+          // );
         } else if (state is FailureUserState) {
           Navigator.pop(context);
           errorMessageSnack(context, state.error);

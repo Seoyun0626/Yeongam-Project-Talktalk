@@ -7,6 +7,12 @@ import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
 import 'package:teentalktalk/domain/models/response/response_policy.dart';
 import 'package:teentalktalk/domain/services/policy_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_logout.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_scrap.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_success_register.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_unscrap.dart';
 import 'package:teentalktalk/ui/screens/notification/notification_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_detail_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
@@ -114,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   //   text: 'test',
                   //   width: 300,
                   //   onPressed: () {
-                  //     modalSuccess(context, 'hello', onPressed: () {});
+                  //     modalPreparing(context);
                   //   },
                   // ),
                   // 배너 슬라이드
