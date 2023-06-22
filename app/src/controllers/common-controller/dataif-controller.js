@@ -95,16 +95,6 @@ exports.deleteUser = async function(req, res) {
   }
 };
 
-exports.giveFig = async function(req, res) {
-  try{
-    var result = await dataif_service.giveFig(req);
-    return result;
-  } catch(error) {
-    console.log('dataif-controller giveFig:'+error);
-  }
-};
-
-
 exports.excelData = async function(req, res, xlData) {
   try{
     var result = await dataif_service.excelData(req, res, xlData);

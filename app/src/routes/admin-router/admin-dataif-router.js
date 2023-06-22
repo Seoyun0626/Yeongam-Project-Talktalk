@@ -53,10 +53,12 @@ router.get('/', ensureAuth, asyncHandler(async function (req, res) {
     });
 }, 'dataif-router / error:'));
 
+
+// 무화과 사용 로그 확인 페이지
 router.get('/figManage/:id', ensureAuth, asyncHandler(async function (req, res) {
-  var id = req.params.id;
-  var figUsage = await dataif_controller.fetchFigUsageByUid(req, res);
-  var eventPart = await dataif_controller.fetchEventPartByUid(req, res);
+  var id = req.params.id; //회원 아이디
+  var figUsage = await dataif_controller.fetchFigUsageByUid(req, res); //무화과 사용 로그
+  var eventPart = await dataif_controller.fetchEventPartByUid(req, res); //행사 참여 로그
   res.render('dataif/figManage',
     {
       figUsage: figUsage,
@@ -65,21 +67,25 @@ router.get('/figManage/:id', ensureAuth, asyncHandler(async function (req, res) 
     });
 }, 'dataif-router / error:'));
 
+
 router.post('/', asyncHandler(async function (req, res) {
   var result = await dataif_controller.fetchData(req, res);
   res.render('dataif/index', { posts: result });
 }, 'dataif-router / error:'));
 
+
+// 약관 설정 페이지
 router.get('/terms', ensureAuth, asyncHandler(async function (req, res) {
     var result = await dataif_controller.fetchTermData(req, res);
     res.render('dataif/terms', { posts: result });
 }, 'dataif-router / error:'));
-
 router.post('/terms', asyncHandler(async function (req, res) {
     var result = await dataif_controller.updateTermData(req, res);
     res.redirect('/admin/dataif/terms');
 }, 'dataif-router / error:'));
 
+
+// 회원 정보 수정 페이지
 router.get('/update/:id', ensureAuth, asyncHandler(async function (req, res) {
     //데이터 받아오기
     var result = await dataif_controller.fetchDataUserUpdate(req, res);
@@ -89,34 +95,27 @@ router.get('/update/:id', ensureAuth, asyncHandler(async function (req, res) {
       code_data: code_data
     });
 }, 'dataif-router / error:'));
-
-
 router.post('/update/:id', asyncHandler(async function (req, res) {
     var result = await dataif_controller.update(req, res);
-    //비밀번호가 맞은 경우
-    if (result == 0) {res.redirect("/admin/dataif");}
-    else {
+    if (result == 0) {res.redirect("/admin/dataif");} //비밀번호가 맞는 경우
+    else { //비밀번호가 틀린 경우
       res.redirect("/admin/dataif/update/" + req.params.id);
     }
 }, 'dataif-router / error:'));
 
+
+// 회원 정보 삭제
 router.get('/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
     var result = await dataif_controller.deleteUser(req, res);
     res.redirect("/admin/dataif");
 }, 'dataif-router / error:'));
 
-router.get('/giveFig/:id', ensureAuth, asyncHandler(async function (req, res) {
-    var result = await dataif_controller.giveFig(req, res);
-    res.redirect("/admin/dataif");
-}, 'dataif-router / error:'));
-
+// 엑셀 다운로드
 router.get('/excel', ensureAuth, asyncHandler(async function (req, res) {
-    var result = await dataif_controller.fetchData(req, res);
-    // 엑셀로 다운로드
-    var xls = json2xls(result);
-    fs.writeFileSync('user_data.xlsx', xls, 'binary');
-    res.download('user_data.xlsx');
-    // res.redirect('/admin/dataif');
+    var result = await dataif_controller.fetchData(req, res); //회원 정보 가져오기
+    var xls = json2xls(result); //json 데이터를 엑셀 파일로 변환
+    fs.writeFileSync('user_data.xlsx', xls, 'binary'); //엑셀 파일 저장
+    res.download('user_data.xlsx'); //엑셀 파일 다운로드
 }, 'dataif-router / error:'));
 
 //테스트, 사용안하는 코드
@@ -132,6 +131,8 @@ router.get('/resetPW/:id', async function (req, res) {
     console.log('dataif-router resetPW error:'+error);
   }
 });
+
+
 // router.get('/excelup', async function (req, res) {
 //   try {
 //     if (req.session.user == undefined) {

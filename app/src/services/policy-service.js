@@ -42,7 +42,6 @@ exports.fetchpolicyByidx = async function(req, res) {
       conn = await db.getConnection();
       var query = 'SELECT * FROM webdb.tb_policy where board_idx="'+req.params.id+'"';
       var rows = await conn.query(query); // 쿼리 실행
-    //   console.log(rows[0]);
       return rows;
     } catch(error) {
       console.log('dataif-service fetchpolicyByidx:'+error);
@@ -112,7 +111,17 @@ exports.deletePolicy = async function(req, res) {
         console.log('policy-service deletePolicy db getConnection');
         var query = "DELETE FROM webdb.tb_policy where board_idx='"+req.params.id+"';";
         var rows = await conn.query(query); // 쿼리 실행
-        return rows;
+        //삭제가 제대로 되었는 지 확인
+        query = "SELECT * FROM webdb.tb_policy where board_idx='"+req.params.id+"';";
+        rows = await conn.query(query); // 쿼리 실행
+        if(rows.length == 0) {
+            console.log('policy-service deletePolicy success');
+            return 0;
+        }
+        else {
+            console.log('policy-service deletePolicy fail');
+            return 1;
+        }
     } catch(error) {
         console.log('policy-service deletePolicy:'+error);
     } finally {

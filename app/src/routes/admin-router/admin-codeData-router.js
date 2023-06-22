@@ -74,20 +74,9 @@ router.post('/detail/update/:id', async function (req, res) {
     try{
         // 공통 코드 수정 쿼리
         var code_data = await code_controller.updateCodeDetail(req, res);
-        // var code_data = await code_controller.getCodedetail_update(req, res);
-        // console.log(code_data);
         var common_code = req.params.id.split(':')[1];
         var detail_code = req.params.id.split(':')[2];
         res.redirect('/admin/codeData/detail/'+common_code+'');
-        // console.log(code_data);
-        // res.render('codeData/detailUpdate', {
-        //     code_data:code_data,
-        //     params:req.params.id,
-        //     common_code:common_code,
-        //     detail_code:detail_code,
-        //     // posts:result,
-        //     // user:req.user
-        // });
     }
     catch(error) {
         console.log('policy-router show error:'+error);
