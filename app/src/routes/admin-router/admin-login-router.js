@@ -55,7 +55,6 @@ router.get("/signup", ensureAuth, asyncHandler(async function (req, res) {
     code_data: code_data
   });
 }, 'dataif-router / error:'));
-
 router.post("/signup", async function(req, res) {
   try{
     // 사용자등록 컨트롤러 호출

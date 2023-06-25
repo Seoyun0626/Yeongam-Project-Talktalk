@@ -108,7 +108,7 @@ router.post('/update/:id', asyncHandler(async function (req, res) {
 router.get('/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
     var result = await dataif_controller.deleteUser(req, res);
     res.redirect("/admin/dataif");
-}, 'dataif-router / error:'));
+}, 'dataif-router delete/ error:'));
 
 // 엑셀 다운로드
 router.get('/excel', ensureAuth, asyncHandler(async function (req, res) {
@@ -116,21 +116,15 @@ router.get('/excel', ensureAuth, asyncHandler(async function (req, res) {
     var xls = json2xls(result); //json 데이터를 엑셀 파일로 변환
     fs.writeFileSync('user_data.xlsx', xls, 'binary'); //엑셀 파일 저장
     res.download('user_data.xlsx'); //엑셀 파일 다운로드
-}, 'dataif-router / error:'));
+}, 'dataif-router excel/ error:'));
 
 //테스트, 사용안하는 코드
 
 // 비밀번호 초기화
-router.get('/resetPW/:id', async function (req, res) {
-  try{
-    // console.log(req.params.id);
-    var result = await dataif_controller.resetPW(req, res);
-    console.log(result);
-    res.redirect('/admin/dataif');
-  } catch(error) {
-    console.log('dataif-router resetPW error:'+error);
-  }
-});
+router.get('/resetPW/:id', asyncHandler(async function (req, res) {
+  var result = await dataif_controller.resetPW(req, res);
+  res.redirect('/admin/dataif');
+}, 'dataif-router resetPW error:'));
 
 
 // router.get('/excelup', async function (req, res) {

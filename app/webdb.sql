@@ -16,7 +16,7 @@ CREATE TABLE webdb.`tb_user` (
   `reg_no` varchar(30) NULL,
   `userpw` varchar(255) NOT NULL, -- **password -> userpw 이름 변경 쿼리 : alter table `tb_user` change `password` `userpw` varchar(255) NOT NULL;
   `user_name` varchar(255) NOT NULL, -- **name -> user_name 이름 변경 쿼리 : alter table `tb_user` change `name` `user_name` varchar(255) NOT NULL;
-  `user_role` varchar(1) NULL,
+  `user_role` varchar(1) NULL,  -- 0 : 사용자, 1 : 최고 관리자(root), 2 : 관리자
   `user_type` varchar(1) NOT NULL,
   `youthAge_code` varchar(1) NULL,
   `parentsAge_code` varchar(1) NULL,
@@ -32,7 +32,6 @@ CREATE TABLE webdb.`tb_user` (
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 최고 관리자 id 설정
---insert into tb_user (userid, password, name, user_role, salt) values ('admin', 'NNNq1ZZBr3kfAIhMCxsxAn7LWe73aPjZEblZHtFPn0DNysXK8qGUXBewTNhkFzeaaBmS0qi2sWws89Ra/iTNjaQrZjIzkRswFLOy5qhOGWa6CKujexk8L/Yv07wMTGRF2ZTK8301Z5QLqawDWjTgt5hyUtabSK0kmS06+s1VAHg=', 'admin', '0', 'yFfmKDozNt6TLMf+9tOni7zbrnqTOZqZWmF1i57q2rNMS5pMlxqAVdiJwPyVWBDKYT5G6wa4V389/tsSS/Ydeg==');
 insert into tb_user (userid, uid, userpw, user_name, user_role, user_type, salt) values ('admin', '7f06c817-d8ee-43be-be7b-226c0a4d3432', 'NNNq1ZZBr3kfAIhMCxsxAn7LWe73aPjZEblZHtFPn0DNysXK8qGUXBewTNhkFzeaaBmS0qi2sWws89Ra/iTNjaQrZjIzkRswFLOy5qhOGWa6CKujexk8L/Yv07wMTGRF2ZTK8301Z5QLqawDWjTgt5hyUtabSK0kmS06+s1VAHg=', 'admin', '0', '0', 'yFfmKDozNt6TLMf+9tOni7zbrnqTOZqZWmF1i57q2rNMS5pMlxqAVdiJwPyVWBDKYT5G6wa4V389/tsSS/Ydeg==');
 -- 아이디 : admin, 비밀번호 : 1234
 
@@ -139,13 +138,6 @@ CREATE TABLE webdb.`tb_fig_usage`(
   PRIMARY KEY (`fig_usage_no`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE webdb.`tb_event_part`(
-  `event_part_no` int(11) NOT NULL AUTO_INCREMENT,
-  `eid` varchar(100) NOT NULL,
-  `uid` varchar(100) NOT NULL,
-  `acquired_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 오타 aquired -> acquired
-  PRIMARY KEY (`event_part_no`) USING BTREE 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE webdb.`tb_product`(
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
@@ -167,12 +159,19 @@ CREATE TABLE webdb.`tb_event`(
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `eid` varchar(100) NOT NULL,
   `event_name` varchar(100) NOT NULL,
-  -- `event_img` varchar(100) NOT NULL,
-  -- `event_desc` varchar(255) NOT NULL,
   `fig_payment` varchar(4) NOT NULL,
   `event_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `event_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert into webdb.tb_event (eid,event_name,fig_payment) values('1','출석체크','1'),('2','웰컴 청소년 톡talk','10'),('3','톡talk 알림 허용','2'),('4','정책 스크랩','3'),('5','정책 공유','3'),('6','친구 초대','3'),('7','추천인 입력','10');
+
+CREATE TABLE webdb.`tb_event_part`(
+  `event_part_no` int(11) NOT NULL AUTO_INCREMENT,
+  `eid` varchar(100) NOT NULL,
+  `uid` varchar(100) NOT NULL,
+  `acquired_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 오타 aquired -> acquired
+  PRIMARY KEY (`event_part_no`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 기존 tb_policy_scrap drop
