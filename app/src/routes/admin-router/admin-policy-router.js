@@ -10,6 +10,7 @@ const { json } = require("body-parser");
 
 const ensureAuth = require("../../utils/middleware/ensureAuth");
 const asyncHandler = require("../../utils/middleware/asyncHandler");
+const e = require("connect-flash");
 
 router.get('/show', ensureAuth, asyncHandler(async function (req, res) {
     var crtpage = 1;
@@ -116,59 +117,27 @@ router.get('/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
 }, 'policy-router delete/ error:'));
 
 
-router.get('/banner', async function (req, res) {
-    try{
-        if(req.session.user == undefined){
-            res.redirect('/admin/auth/login');
-            return;
-          }
-        var result = await policy_controller.fetchBannerData(req,res);
-        res.render('policy/banner', {banner:result});
-        }
-    catch(error) {
-        console.log('policy-router banner error:'+error);
-    }
-});
-
-
-
-router.post('/banner', async function (req, res) {
-    try{
-        // DB에 저장
-        var result = await policy_controller.banner(req,res);
-        if(result == 0) { //성공
-            res.redirect('/admin/policy/banner');
-        } else { //실패
-            res.redirect('/admin/policy/banner');
-        }
-    }
-    catch(error) {
-        console.log('policy-router banner error:'+error);
-    }
-});
-
-
-
-router.get('/banner/delete/:id', async function(req, res){
-    try{
-        if(req.session.user == undefined){
-            res.redirect('/admin/auth/login');
-            return;
-          }
-        //배너 이미지명 받아오기
-        var banner_img = await policy_controller.fetchBannerImg(req, res);
-        var result = await policy_controller.deleteBanner(req, res);
-        //배너 이미지 삭제
-        fs.unlink('./src/public/upload/banner/'+banner_img[0].banner_img, function(err){
-            if(err) throw err;
-            console.log('file deleted');
-        });
+// 베너 관리
+router.get('/banner', ensureAuth, asyncHandler(async function (req, res) {
+    var result = await policy_controller.fetchBannerData(req,res);
+    res.render('policy/banner', {banner:result});
+}, 'policy-router banner/ error:'));
+router.post('/banner', asyncHandler(async function (req, res) {
+    var result = await policy_controller.banner(req,res);
+    if(result == 0) { //성공
         res.redirect('/admin/policy/banner');
-        }
-    catch(error) {
-        console.log('policy-router banner delete error:'+error);
+    } else { //실패
+        res.redirect('/admin/policy/banner');
     }
-});
-
+}, 'policy-router banner/ error:'));
+router.get('/banner/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
+    var banner_img = await policy_controller.fetchBannerImg(req, res);
+    var result = await policy_controller.deleteBanner(req, res);
+    fs.unlink('./src/public/upload/banner/'+banner_img[0].banner_img, function(err){
+        if(err) throw err;
+        console.log('file deleted');
+    });
+    res.redirect('/admin/policy/banner');
+}, 'policy-router banner delete/ error:'));
 
 module.exports = router;
