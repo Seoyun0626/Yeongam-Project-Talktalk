@@ -10,6 +10,7 @@ import 'package:teentalktalk/ui/screens/event/attendance_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/event_list_page.dart';
 import 'package:teentalktalk/ui/screens/event/new_weeklyFig_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/weeklyFig_event_page.dart';
+import 'package:teentalktalk/ui/screens/login/login_page.dart';
 import 'package:teentalktalk/ui/screens/register/user_type_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
@@ -244,9 +245,8 @@ class FirstWeekMissionPage extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const userTypePage(
-                                                      isKakaoLogin: false,
-                                                    )));
+                                                    // const userTypePage(isKakaoLogin: false,)
+                                                    const LoginPage()));
                                       },
                                       child: Center(
                                         child: Container(
@@ -279,7 +279,7 @@ class FirstWeekMissionPage extends StatelessWidget {
                                                 ),
                                               ]),
                                           child: TextCustom(
-                                            text: "회원가입하러 가기",
+                                            text: "무화과 받기",
                                             fontSize: 20.sp,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

@@ -28,8 +28,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
   Widget build(BuildContext context) {
     final authState = BlocProvider.of<AuthBloc>(context).state;
 
-    int week = 2;
-
+    int week = 3;
     // 이벤트 참여 여부
     List<bool> getWeekCheckList = [false, false, false, false];
 
@@ -253,26 +252,26 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                 SizedBox(
                   height: 10.h,
                 ),
-                Container(
-                  child: week == 1
-                      ? SvgPicture.asset(
-                          'images/event_icon/weekly_event/1_week_new.svg',
-                          width: 300.w)
-                      : week == 2
-                          ? SvgPicture.asset(
-                              'images/event_icon/weekly_event/2_week_new.svg',
-                              width: 300.w)
-                          : week == 3
-                              ? SvgPicture.asset(
-                                  'images/event_icon/weekly_event/3_week_new.svg',
-                                  width: 300.w)
-                              : week == 4
-                                  ? SvgPicture.asset(
-                                      'images/event_icon/weekly_event/4_week_new.svg',
-                                      width: 300.w)
-                                  : Container(),
-                ),
-                SizedBox(height: 40.h),
+                // Container(
+                //   child: week == 1
+                //       ? SvgPicture.asset(
+                //           'images/event_icon/weekly_event/1_week_new.svg',
+                //           width: 300.w)
+                //       : week == 2
+                //           ? SvgPicture.asset(
+                //               'images/event_icon/weekly_event/2_week_new.svg',
+                //               width: 300.w)
+                //           : week == 3
+                //               ? SvgPicture.asset(
+                //                   'images/event_icon/weekly_event/3_week_new.svg',
+                //                   width: 300.w)
+                //               : week == 4
+                //                   ? SvgPicture.asset(
+                //                       'images/event_icon/weekly_event/4_week_new.svg',
+                //                       width: 300.w)
+                //                   : Container(),
+                // ),
+                // SizedBox(height: 40.h),
                 // 첫째주  - 웰컴 청소년톡talk
                 challengeWidget(
                     text: week >= 1 ? challengeList[0] : "어떤 미션이 기다리고 있을까요?",

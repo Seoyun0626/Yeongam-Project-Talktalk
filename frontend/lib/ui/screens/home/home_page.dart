@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   //   text: 'test',
                   //   width: 300,
                   //   onPressed: () {
-                  //     modalPreparing(context);
+                  //     modalSuccessRegister(context, onPressed: () {});
                   //   },
                   // ),
                   // 배너 슬라이드

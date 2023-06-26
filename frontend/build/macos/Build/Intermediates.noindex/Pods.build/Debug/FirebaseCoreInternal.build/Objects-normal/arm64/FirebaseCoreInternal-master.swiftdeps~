@@ -1,0 +1,29 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "dea778e009e27d96309c30cce16f5440a928c08e1094a364160076e18f528ee3"
+build_start_time: [1687583021, 39650917]
+build_end_time: [1687583021, 62947034]
+inputs:
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift"
+  : !private [1687583005, 412263870]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatController.swift"
+  : !private [1687583005, 412835121]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatLoggingTestUtils.swift"
+  : !private [1687583005, 413121223]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatStorage.swift"
+  : !private [1687583005, 413249492]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsBundle.swift"
+  : !private [1687583005, 413393259]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/HeartbeatsPayload.swift"
+  : !private [1687583005, 413719415]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/RingBuffer.swift"
+  : !private [1687583005, 412393808]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Storage.swift"
+  : !private [1687583005, 412137746]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/StorageFactory.swift"
+  : !private [1687583005, 413862228]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/WeakContainer.swift"
+  : !private [1687583005, 413547992]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatController.swift"
+  : !private [1687583005, 412630081]
+  ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/_ObjC_HeartbeatsPayload.swift"
+  : !private [1687583005, 412965297]
