@@ -126,6 +126,12 @@ router.get('/resetPW/:id', asyncHandler(async function (req, res) {
   res.redirect('/admin/dataif');
 }, 'dataif-router resetPW error:'));
 
+// 푸시 알림
+router.get('/push', asyncHandler(async function (req, res) {
+  var result = await dataif_controller.fetchData(req, res);
+  res.render('dataif/push', { posts: result });
+}, 'dataif-router / error:'));
+
 
 // router.get('/excelup', async function (req, res) {
 //   try {

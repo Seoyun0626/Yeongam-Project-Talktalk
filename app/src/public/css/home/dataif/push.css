@@ -1,21 +1,33 @@
 body {
-    padding: 20px;
-  }
-  .pagename {
+    font-family: Arial, sans-serif;
+}
+.pagename {
     font-weight: bold;
     font-size: 26px;
     padding: 20px;
     /* color: #FFAB94; */
   }
-  textarea {
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: left; /* Here, we change the text alignment to left */
+}
+
+
+form input[type="text"],
+form textarea {
     width: 100%;
-    padding: 15px;
     box-sizing: border-box;
-    border: 1px solid #999;
+    padding: 10px;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  input[type="submit"] {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+form input[type="submit"] {
     border: none;
     padding: 10px 25px;
     text-align: center;
@@ -25,4 +37,5 @@ body {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;
-  }
+}
+

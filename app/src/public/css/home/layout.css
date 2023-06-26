@@ -39,13 +39,6 @@ a {
     position: absolute;
   }
   
-  .vector4 {
-    width: 1366.2900390625px;
-    left: 720px;
-    top: 0px;
-    position: absolute;
-  }
-  
   .관리자페이지 {
     color: #000000;
     text-align: left;
@@ -168,7 +161,6 @@ a {
 .border-bar-codeManage { top: 525px; }
 
 
-  
   nav {
     /* position:absolute; */
     background-color: #ffffff;
@@ -187,8 +179,13 @@ a {
     left: 340px;
     width: 75vw;
     background-color: white;
+    height: calc(100vh - 50px); /* Subtract the top offset */
     margin: 0;
     position: absolute;
     overflow: hidden;
   }
-  
+
+  /* 확대 시 좌우 스크롤 바 */
+  body {
+    overflow-x: auto;
+  }

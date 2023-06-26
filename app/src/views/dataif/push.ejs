@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/dataif/push.css">
+  <link rel="stylesheet" href="/css/home/layout.css">
+  <script src="/ckeditor/build/ckeditor.js"></script>
+</head>
+<body>
+  <div class='common-background-bar background-bar-push'></div>
+  <div class='common-border-bar border-bar-push'></div>
+  <%- include('../layout.ejs') %>
+  <section>
+    <div>
+      <div class="pagename">푸시 알림</div>
+      <form action="/admin/push_notification" method="post">
+        <label for="title">제목:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="content">내용:</label><br>
+        <textarea id="content" name="content" rows="4" cols="50"></textarea><br>
+        <label for="recipients">받을 사람:</label><br>
+        <input type="text" id="searchUser" onkeyup="searchUser()">
+        <div id="userList"></div>
+        <input type="text" id="recipients" name="recipients" readonly><br>
+        <input type="submit" value="보내기">
+      </form>
+    </div>
+  </section>  
+</div>
+</body>
+</html>

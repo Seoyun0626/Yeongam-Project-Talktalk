@@ -112,7 +112,6 @@ exports.resetPW = async function(req, res) {
 };
 
 
-
 exports.fetchData = async function(req, res) {
   var conn;
   try{
