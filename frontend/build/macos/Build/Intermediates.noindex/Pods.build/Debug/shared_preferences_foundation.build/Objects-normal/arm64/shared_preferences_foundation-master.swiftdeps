@@ -1,7 +1,0 @@
-version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
-options: "d3fb025820b3f162ac329a6ff522e096dd06cc60dcd1d1cf6af18f598c77ee4f"
-build_start_time: [1687739968, 265607833]
-build_end_time: [1687739970, 78497886]
-inputs:
-  "/Users/taeheekim/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.2/macos/Classes/SharedPreferencesPlugin.swift": [1686493009, 583233594]
-  "/Users/taeheekim/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.2/macos/Classes/messages.g.swift": [1686493009, 582979917]
