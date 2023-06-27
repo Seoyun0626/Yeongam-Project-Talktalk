@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 // import 'package:meta/meta.dart';
 import 'package:teentalktalk/domain/models/response/response_user.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/domain/services/user_services.dart';
 
 // import 'package:teentalktalk/ui/popup/register/register_success.dart';
@@ -22,19 +23,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<OnRegisterUserEvent>(_onRegisterUser);
     on<OnRegisterKakaoUserEvent>(_onRegisterKakaoUser);
     on<OnVerifyEmailEvent>(_onVerifyEmail);
-    // on<OnUpdatePictureCover>( _onUpdatePictureCover );
-    // on<OnUpdatePictureProfile>( _onUpdatePictureProfile );
-    // on<OnUpdateProfileEvent>( _onUpdateProfile );
     on<OnChangePasswordEvent>(_changePassword);
     on<OnChangeEmailEvent>(_changeEmail);
     on<OnChangeExtraInfoEvent>(_changeExtraInfo);
-    // on<OnToggleButtonProfile>( _toggleButtonProfile );
-    // on<OnChangeAccountToPrivacy>( _changeAccountPrivacy );
+    on<OnEnterInviteCodeEvent>(_enterInviteCode);
     on<OnLogOutUser>(_logOutAuth);
-    // on<OnAddNewFollowingEvent>( _addNewFollowing );
-    // on<OnAcceptFollowerRequestEvent>( _acceptFollowerRequest );
-    // on<OnDeletefollowingEvent>( _deleteFollowing );
-    // on<OnDeletefollowersEvent>( _deleteFollowers );
   }
 
   Future<void> _onGetUserAuthentication(
@@ -138,88 +131,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  // Future<void> _onUpdatePictureCover( OnUpdatePictureCover event, Emitter<UserState> emit ) async {
-  //
-  //   try {
-  //
-  //     emit( LoadingUserState() );
-  //
-  //     final data = await userService.updatePictureCover(event.pathCover);
-  //
-  //     await Future.delayed(const Duration(milliseconds: 450));
-  //
-  //     if( data.resp ){
-  //
-  //       final dataUser = await userService.();
-  //
-  //       emit(SuccessUserState());
-  //
-  //       // emit( state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
-  //
-  //     }else{
-  //       emit( FailureUserState( data.message ));
-  //     }
-  //
-  //   } catch (e) {
-  //     emit( FailureUserState(e.toString()) );
-  //   }
-  //
-  // }
-
-  // Future<void> _onUpdatePictureProfile( OnUpdatePictureProfile event, Emitter<UserState> emit ) async {
-  //
-  //   try {
-  //
-  //     emit( LoadingUserState() );
-  //
-  //     final data = await userService.updatePictureProfile( event.pathProfile );
-  //
-  //     await Future.delayed(const Duration(milliseconds: 450));
-  //
-  //     if( data.resp ){
-  //
-  //       final dataUser = await userService.getUserById();
-  //
-  //       emit( SuccessUserState() );
-  //
-  //       emit( state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
-  //
-  //     }else{
-  //       emit( FailureUserState(data.message) );
-  //     }
-  //
-  //   } catch (e) {
-  //     emit( FailureUserState(e.toString()) );
-  //   }
-  //
-  // }
-  //
-  //
-  // Future<void> _onUpdateProfile( OnUpdateProfileEvent event, Emitter<UserState> emit ) async {
-  //
-  //   try {
-  //
-  //     emit( LoadingEditUserState() );
-  //
-  //     final data = await userService.updateProfile(event.user, event.description, event.fullname, event.phone);
-  //
-  //     if( data.resp ){
-  //
-  //       final dataUser = await userService.getUserById();
-  //
-  //       emit( SuccessUserState() );
-  //
-  //       emit( state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
-  //
-  //     }else {
-  //       emit( FailureUserState(data.message) );
-  //     }
-  //
-  //   } catch (e) {
-  //     emit( FailureUserState(e.toString()) );
-  //   }
-  // }
-
   Future<void> _changePassword(
       OnChangePasswordEvent event, Emitter<UserState> emit) async {
     try {
@@ -232,12 +143,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
       if (data.resp) {
         emit(SuccessUserState());
-
-        // emit( state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
       } else {
         emit(FailureUserState(data.message));
-
-        // emit( state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
       }
     } catch (e) {
       emit(FailureUserState(e.toString()));
@@ -296,147 +203,30 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  // Future<void> _toggleButtonProfile( OnToggleButtonProfile event, Emitter<UserState> emit ) async {
-  //
-  //   emit( state.copyWith( isPhotos:  event.isPhotos));
-  //
-  // }
+  Future<void> _enterInviteCode(
+      OnEnterInviteCodeEvent event, Emitter<UserState> emit) async {
+    try {
+      emit(LoadingUserState());
+      final data = await eventService.giveFigForInvitation(event.inviteCode);
+      await Future.delayed(const Duration(milliseconds: 450));
+      final dataUser = await userService.getUserById();
 
-  // Future<void> _changeAccountPrivacy( OnChangeAccountToPrivacy event, Emitter<UserState> emit ) async {
-  //
-  //   try {
-  //
-  //     emit( LoadingChangeAccount() );
-  //
-  //     final data = await userService.changeAccountPrivacy();
-  //
-  //     await Future.delayed(const Duration(milliseconds: 350));
-  //
-  //     if( data.resp ){
-  //
-  //       final data = await userService.getUserById();
-  //
-  //       emit( SuccessUserState() );
-  //
-  //       // emit( state.copyWith(user: data.user, postsUser: data.postsUser));
-  //
-  //     }else {
-  //       FailureUserState(data.message);
-  //     }
-  //
-  //   } catch (e) {
-  //     emit(FailureUserState(e.toString()));
-  //   }
-  //
-  // }
+      if (data.resp) {
+        emit(SuccessUserState());
+
+        emit(state.copyWith(user: dataUser.user));
+      } else {
+        emit(FailureUserState(data.message));
+
+        emit(state.copyWith(user: dataUser.user));
+      }
+    } catch (e) {
+      emit(FailureUserState(e.toString()));
+    }
+  }
 
   Future<void> _logOutAuth(OnLogOutUser event, Emitter<UserState> emit) async {
     // print('_logOutAuth');
     emit(state.copyWith(user: null));
   }
-
-  // Future<void> _addNewFollowing(OnAddNewFollowingEvent event, Emitter<UserState> emit) async {
-  //
-  //   try {
-  //
-  //     emit(LoadingFollowingUser());
-  //
-  //     final data = await userService.addNewFollowing(event.uidFriend);
-  //
-  //     if(data.resp){
-  //
-  //       final data = await userService.getUserById();
-  //
-  //       emit( SuccessFollowingUser() );
-  //
-  //       emit( state.copyWith(user: data.user, postsUser: data.postsUser));
-  //
-  //     }else {
-  //       FailureUserState(data.message);
-  //     }
-  //
-  //   } catch (e) {
-  //     emit(FailureUserState(e.toString()));
-  //   }
-  //
-  // }
-
-  // Future<void> _acceptFollowerRequest( OnAcceptFollowerRequestEvent event, Emitter<UserState> emit) async {
-  //
-  //   try {
-  //
-  //     emit(LoadingUserState());
-  //
-  //     final data = await userService.acceptFollowerRequest(event.uidFriend, event.uidNotification);
-  //
-  //     if(data.resp){
-  //
-  //       final data = await userService.getUserById();
-  //
-  //       emit( SuccessUserState() );
-  //
-  //       emit( state.copyWith(user: data.user, postsUser: data.postsUser));
-  //
-  //     }else {
-  //       FailureUserState(data.message);
-  //     }
-  //
-  //   } catch (e) {
-  //     emit(FailureUserState(e.toString()));
-  //   }
-  // }
-  //
-  //
-  // Future<void> _deleteFollowing(OnDeletefollowingEvent event, Emitter<UserState> emit) async {
-  //
-  //   try {
-  //
-  //     emit(LoadingFollowingUser());
-  //
-  //     final data = await userService.deleteFollowing(event.uidUser);
-  //
-  //     if(data.resp){
-  //
-  //       final data = await userService.getUserById();
-  //
-  //       emit( SuccessFollowingUser() );
-  //
-  //       emit( state.copyWith(user: data.user, postsUser: data.postsUser));
-  //
-  //     }else{
-  //       emit(FailureUserState(data.message));
-  //     }
-  //
-  //   } catch (e) {
-  //     emit(FailureUserState(e.toString()));
-  //   }
-  //
-  // }
-  //
-  //
-  // Future<void> _deleteFollowers(OnDeletefollowersEvent event, Emitter<UserState> emit) async {
-  //
-  //   try {
-  //
-  //     emit(LoadingFollowersUser());
-  //
-  //     final data = await userService.deleteFollowers(event.uidUser);
-  //
-  //     if(data.resp){
-  //
-  //       final data = await userService.getUserById();
-  //
-  //       emit( SuccessFollowersUser() );
-  //
-  //       emit( state.copyWith(user: data.user, postsUser: data.postsUser));
-  //
-  //     }else{
-  //       emit(FailureUserState(data.message));
-  //     }
-  //
-  //   } catch (e) {
-  //     emit(FailureUserState(e.toString()));
-  //   }
-  //
-  // }
 }

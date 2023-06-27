@@ -20,14 +20,14 @@ import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MyPage extends StatefulWidget {
-  const MyPage({Key? key}) : super(key: key);
+class MyTalkTalkPage extends StatefulWidget {
+  const MyTalkTalkPage({Key? key}) : super(key: key);
 
   @override
-  State<MyPage> createState() => _MyPageState();
+  State<MyTalkTalkPage> createState() => _MyTalkTalkPageState();
 }
 
-class _MyPageState extends State<MyPage> {
+class _MyTalkTalkPageState extends State<MyTalkTalkPage> {
 // class MyPage extends StatelessWidget {
   // final viewModel = MainViewModel(KakaoLogin()); // 카카오 로그인
 

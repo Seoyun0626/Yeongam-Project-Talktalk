@@ -20,6 +20,17 @@ class _InviteEventPageState extends State<InviteEventPage> {
     return uid.substring(0, 8);
   }
 
+  // void showToast(String message) {
+  //   Fluttertoast.showToast(
+  //       msg: message,
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       gravity: ToastGravity.CENTER,
+  //       timeInSecForIosWeb: 1,
+  //       backgroundColor: Colors.red,
+  //       textColor: Colors.white,
+  //       fontSize: 16.0);
+  // }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -102,7 +113,8 @@ class _InviteEventPageState extends State<InviteEventPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 21.w, top: 27.h),
+                        padding:
+                            EdgeInsets.only(left: 21.w, top: 27.h, right: 21.w),
                         child: TextCustom(
                           text: "나의 초대코드",
                           fontSize: 20.sp,
@@ -111,7 +123,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
                       ),
                       Neumorphic(
                           margin: EdgeInsets.only(
-                              left: 20.w, top: 10.h, right: 20.w, bottom: 40.h),
+                              left: 20.w, top: 10.h, right: 20.w),
                           style: const NeumorphicStyle(
                               shape: NeumorphicShape.flat,
                               depth: -2,
@@ -131,6 +143,37 @@ class _InviteEventPageState extends State<InviteEventPage> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               )))),
+                      Padding(
+                        padding: EdgeInsets.only(right: 21.w, bottom: 20.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Clipboard.setData(
+                                    ClipboardData(text: inviteCode));
+                              },
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  TextCustom(
+                                    text: "코드 복사",
+                                    fontSize: 10.sp,
+                                    color: ThemeColors.basic,
+
+                                    // fontWeight: FontWeight.bold,
+                                  ),
+                                  Icon(
+                                    Icons.copy_rounded,
+                                    size: 10.sp,
+                                    color: ThemeColors.basic,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
 
                       SizedBox(
                         height: 50.h,

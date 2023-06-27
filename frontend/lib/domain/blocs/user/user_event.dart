@@ -72,8 +72,12 @@ class OnVerifyEmailEvent extends UserEvent {
 
 class OnUpdateFigCountEvent extends UserEvent {
   final int newFigCount;
-
   OnUpdateFigCountEvent(this.newFigCount);
+}
+
+class OnEnterInviteCodeEvent extends UserEvent {
+  final String inviteCode;
+  OnEnterInviteCodeEvent(this.inviteCode);
 }
 
 // class OnUpdatePictureCover extends UserEvent {

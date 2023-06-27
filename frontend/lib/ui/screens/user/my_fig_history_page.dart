@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
-import 'package:teentalktalk/domain/blocs/user/user_bloc.dart';
 import 'package:teentalktalk/domain/models/response/response_event.dart';
 import 'package:teentalktalk/domain/models/response/response_fig.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
@@ -50,6 +48,12 @@ class _MyFigHistoryPageState extends State<MyFigHistoryPage> {
                 color: ThemeColors.primary),
             onPressed: () {
               Navigator.pop(context);
+              // Navigator.pushAndRemoveUntil(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const MyTalkTalkPage(),
+              //     ),
+              //     (_) => false);
             },
           ),
         ),

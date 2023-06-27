@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
+import 'package:teentalktalk/ui/screens/user/myTalkTalk_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -50,16 +52,13 @@ class _InviteCodePageState extends State<InviteCodePage> {
             errorMessageSnack(context, state.error);
           }
           if (state is SuccessUserState) {
-            modalSuccess(context, '저장되었습니다!', onPressed: () {
-              // clear();
-              Navigator.pop(context);
-              Navigator.pop(context);
-              // Navigator.pushReplacement(
-              //   context,
-              //   routeFade(page: const PrivacySettingPage()),
-              //   result: emailController.text.trim(),
-              // );
-            });
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MyTalkTalkPage(),
+                ),
+                (_) => false);
+            modalGetFig(context, '7');
           }
         },
         child: Scaffold(
@@ -166,17 +165,10 @@ class _InviteCodePageState extends State<InviteCodePage> {
                               fontWeight: FontWeight.bold,
                               height: 50,
                               onPressed: () {
-                                print(inviteCodeController.text.trim());
-                                eventService.giveFigForInvitation(
-                                    inviteCodeController.text.trim());
-
-                                // userService.changeEmail(
-                                //     initialEmail!, emailController.text.trim());
-                                // if (_keyForm.currentState!.validate()) {
-                                //   userBloc.add(OnChangeEmailEvent(
-                                //       initialEmail!.trim(),
-                                //       emailController.text.trim()));
-                                // }
+                                if (_keyForm.currentState!.validate()) {
+                                  userBloc.add(OnEnterInviteCodeEvent(
+                                      inviteCodeController.text.trim()));
+                                }
                               },
                             ),
                           ),

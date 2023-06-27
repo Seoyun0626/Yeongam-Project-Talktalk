@@ -1,8 +1,0 @@
-version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
-options: "9deb3eb02d9418a9bf02248fe1f489c97162e90efc0e1674d7dde104e8ddaa55"
-build_start_time: [1687739975, 261857032]
-build_end_time: [1687739978, 34676074]
-inputs:
-  "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Flutter/GeneratedPluginRegistrant.swift": [1687739952, 335340499]
-  "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Runner/AppDelegate.swift": [1686470402, 576241254]
-  "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Runner/MainFlutterWindow.swift": [1686470402, 579062700]

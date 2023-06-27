@@ -4,6 +4,7 @@ var router = express.Router();
 var mobile_event_controller = require("../../controllers/mobile-controller/mobile-event-controller");
 const verifyToken = require("../../middleware/verify_token");
 
+
 // 무화과 지급 - 출석체크
 // giveFigForAttendance
 router.post("/give-fig-for-attendance", verifyToken, async function(req, res){

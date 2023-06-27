@@ -71,3 +71,18 @@ exports.getCodedetail = async function(req, res) {
   }
 };
 
+exports.getEvents = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var eid = req.params.eid;
+    var query = "SELECT eid, event_name, fig_payment FROM webdb.tb_event where eid = '" + eid + "'";
+    var rows = await conn.query(query); // 쿼리 실행
+    console.log(rows);
+    return rows;
+  }
+  catch(error){
+    console.log('codeData-controller getCodedetail error:'+error);
+  }
+};
+
+
