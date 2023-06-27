@@ -1,1 +1,44 @@
-node_modules
+# Node.js
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Dart/Flutter ?
+.dart_tool/
+.packages
+pubspec.lock
+**/ios/Podfile.lock
+**/ios/Pods/
+**/macos/Podfile.lock
+**/macos/Pods/
+**/web/packages/
+
+**/*.jks
+# Flutter
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/App.framework
+**/ios/Flutter/FlutterPluginRegistrant/
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.flx
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/ephemeral/
+*.podspec
+**/.last_build_id
+**/.flutter-plugins-dependencies
+**/.flutter-plugins
+**/linux/flutter/generated_plugins.cmake
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/windows/flutter/generated_plugins.cmake
+**/Podfile.lock
+
+
+
+# Build artifacts
+*.d
+*.jar
+*.bin
+*.stamp
+
+frontend/build/

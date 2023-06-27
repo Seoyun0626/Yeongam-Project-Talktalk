@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:teentalktalk/data/storage/secure_storage.dart';
 import 'package:teentalktalk/domain/models/response/default_response.dart';
@@ -8,14 +9,26 @@ import 'package:teentalktalk/data/env/env.dart';
 
 class EventServices {
   // 무화과 지급 - 이벤트 참여
-  Future<DefaultResponse> giveFig(String eid) async {
+  Future<DefaultResponse> giveFigForAttendance() async {
     // print('giveFig');
     final token = await secureStorage.readToken();
 
     final resp = await http.post(
-        Uri.parse('${Environment.urlApi}/event/give-fig/$eid'),
+        Uri.parse('${Environment.urlApi}/event/give-fig-for-attendance'),
         headers: {'Accept': 'application/json', 'xxx-token': token!},
-        body: {'eid': eid});
+        body: {});
+    // print(resp.body);
+    return DefaultResponse.fromJson(jsonDecode(resp.body));
+  }
+
+  Future<DefaultResponse> giveFigForInvitation(String invite_code) async {
+    // print('giveFig');
+    final token = await secureStorage.readToken();
+
+    final resp = await http.post(
+        Uri.parse('${Environment.urlApi}/event/give-fig-for-invitation'),
+        headers: {'Accept': 'application/json', 'xxx-token': token!},
+        body: {'invite_code': invite_code});
     // print(resp.body);
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }

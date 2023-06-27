@@ -5,6 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:teentalktalk/domain/models/response/default_response.dart';
 import 'package:teentalktalk/domain/models/response/response_fig.dart';
 import 'package:teentalktalk/domain/services/user_services.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/screens/event/enter_invite_code_page.dart';
 import 'package:teentalktalk/ui/screens/event/event_page.dart';
 import 'package:teentalktalk/ui/screens/intro/checking_login_page.dart';
 import 'package:teentalktalk/ui/screens/login/login_page.dart';
@@ -33,6 +35,7 @@ class _MyPageState extends State<MyPage> {
   Widget build(BuildContext context) {
     // final userBloc = BlocProvider.of<UserBloc>(context);
     // final authBloc = BlocProvider.of<AuthBloc>(context);
+    final authState = BlocProvider.of<AuthBloc>(context).state;
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -109,9 +112,37 @@ class _MyPageState extends State<MyPage> {
                             ListTile(
                               contentPadding: const EdgeInsets.all(5),
                               leading: Image.asset(
+                                'images/aco6.png',
+                                width: 40.w,
+                                height: 40.h,
+                              ),
+                              title: TextCustom(
+                                text: "초대 코드 입력하기",
+                                fontSize: 18.sp,
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: ThemeColors.basic,
+                              ),
+                              onTap: () {
+                                if (authState is LogOut) {
+                                  modalCheckLogin(context);
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const InviteCodePage(),
+                                      ));
+                                }
+                              },
+                            ),
+                            ListTile(
+                              contentPadding: const EdgeInsets.all(5),
+                              leading: Image.asset(
                                 'images/Fig2.png',
-                                width: 35.w,
-                                height: 35.h,
+                                width: 40.w,
+                                height: 40.h,
                               ),
 
                               // SvgPicture.asset(
@@ -119,13 +150,13 @@ class _MyPageState extends State<MyPage> {
                               //   width: 35.w,
                               //   height: 35.h,
                               // ),
+                              // subtitle: TextCustom(
+                              //   text: "미션 성공하고",
+                              //   fontSize: 10.sp,
+                              // ),
                               title: TextCustom(
-                                text: "미션 성공하고",
-                                fontSize: 10.sp,
-                              ),
-                              subtitle: TextCustom(
                                 text: "무화과 따러가기",
-                                fontSize: 20.sp,
+                                fontSize: 18.sp,
                               ),
                               trailing: const Icon(
                                   Icons.arrow_forward_ios_rounded,
@@ -147,7 +178,7 @@ class _MyPageState extends State<MyPage> {
                               ),
                               title: TextCustom(
                                 text: "개발자와 소통하기",
-                                fontSize: 20.sp,
+                                fontSize: 18.sp,
                               ),
                               trailing: const Icon(
                                 Icons.arrow_forward_ios_rounded,

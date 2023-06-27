@@ -1,8 +1,12 @@
 // import 'package:flutter_kakao_sdk/flutter_kakao_sdk.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:teentalktalk/domain/blocs/user/user_bloc.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class InviteEventPage extends StatefulWidget {
   const InviteEventPage({Key? key}) : super(key: key);
@@ -12,9 +16,16 @@ class InviteEventPage extends StatefulWidget {
 }
 
 class _InviteEventPageState extends State<InviteEventPage> {
+  String generateInviteCode(String uid) {
+    return uid.substring(0, 8);
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final userBloc = BlocProvider.of<UserBloc>(context);
+    late String inviteCode = generateInviteCode(userBloc.state.user!.uid);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -108,8 +119,18 @@ class _InviteEventPageState extends State<InviteEventPage> {
                           child: Container(
                               padding: EdgeInsets.only(top: 5.h, bottom: 5.h),
                               height: 60.h,
-                              child: const Center(
-                                  child: TextCustom(text: "ddd")))),
+                              child: Center(
+                                  child: InkWell(
+                                onTap: () {
+                                  Clipboard.setData(
+                                      ClipboardData(text: inviteCode));
+                                },
+                                child: TextCustom(
+                                  text: inviteCode,
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )))),
 
                       SizedBox(
                         height: 50.h,

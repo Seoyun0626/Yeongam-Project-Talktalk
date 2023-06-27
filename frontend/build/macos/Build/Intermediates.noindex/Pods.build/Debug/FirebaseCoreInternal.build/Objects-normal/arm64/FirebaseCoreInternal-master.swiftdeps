@@ -1,7 +1,7 @@
 version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
 options: "dea778e009e27d96309c30cce16f5440a928c08e1094a364160076e18f528ee3"
-build_start_time: [1687583021, 39650917]
-build_end_time: [1687583027, 207290172]
+build_start_time: [1687739964, 36716938]
+build_end_time: [1687739967, 948130130]
 inputs:
   ? "/Users/taeheekim/Documents/Yeongam_dev/frontend/macos/Pods/FirebaseCoreInternal/FirebaseCore/Internal/Sources/HeartbeatLogging/Heartbeat.swift"
   : [1687583005, 412263870]

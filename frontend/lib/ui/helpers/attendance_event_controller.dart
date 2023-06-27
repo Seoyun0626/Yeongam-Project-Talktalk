@@ -98,8 +98,7 @@ class EventController extends GetxController {
     if (!isCheckedAttendance.value) {
       temp_days.add(now2.value.day);
       isCheckedAttendance.value = true;
-      eventService.giveFig(
-          '71965135-8e01-422a-92b9-4bb5a65a81f5'); // 출석체크 event 아이디 - eid 수정
+      eventService.giveFigForAttendance(); // 출석체크 eid
     } else {
       print('이미 출석하였습니다');
     }

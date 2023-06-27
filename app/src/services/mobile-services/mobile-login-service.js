@@ -145,7 +145,7 @@ try{
   };
 
 
-// 모바일 회원가입
+// 모바일 로컬 회원가입
 exports.signUp = async function(req, res) {
   var resultcode = 0;
   var conn;
@@ -157,6 +157,17 @@ exports.signUp = async function(req, res) {
     const {userid,user_name, user_email, userpw, userpw2, user_role, user_type, invite_code, youthAge_code, parentsAge_code, emd_class_code, sex_class_code} = req.body;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
+
+    // uid 생성 및 중복 체크
+    do {
+      var uid = uuidv4();
+      var uidPrefix = uid.slice(0,8); // 앞 8자리 중복 체크 (초대코드로 사용 예정)
+      var countQuery = "SELECT COUNT(*) AS count FROM webdb.tb_user WHERE uid LIKE '" + uidPrefix + "%';";
+      var countResult = await conn.query(countQuery);
+      var count = countResult[0].count;
+      // console.log(count);
+    } while (count > 0);
+    // console.log(uid);
     
     if(user_name=='' || user_email=='' || userpw=='' || userpw2=='') {
       resultcode=100;
@@ -178,8 +189,6 @@ exports.signUp = async function(req, res) {
         }, async function(err, pass, salt, hash) {
           pass = hash;
           var randomNumber = Math.floor(10000 + Math.random() * 90000); // token_temp
-          var uid = uuidv4(); // 고유 식별 번호
-          // console.log(uid);
           await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
         });
       });
@@ -191,6 +200,9 @@ exports.signUp = async function(req, res) {
       return resultcode;
     }
 
+ 
+
+    // 친구 초대
     // invite코드의 유저에 무화과 추가
     if(invite_code != '') {
       query = "SELECT fig,uid FROM webdb.tb_user where userid='" + invite_code + "' ;";
@@ -205,20 +217,12 @@ exports.signUp = async function(req, res) {
       rows[0].fig = rows[0].fig.toString();
       query = "UPDATE webdb.tb_user SET fig='"+rows[0].fig+"' WHERE userid='"+invite_code+"';";
       var figUpdate = await conn.query(query); // 쿼리 실행
-      var eid = 1; // 무화과 이벤트 번호, 바꿔야함
+      var eid = 6; // 무화과 이벤트 번호, 바꿔야함
       query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+rows[0].uid+"');";
       // console.log(query);
       var eventPart = await conn.query(query); // 쿼리 실행
     }
 
-    // let salt = bcrypt.genSaltSync();
-    // // console.log(salt);
-    // const pass = bcrypt.hashSync(userpw, salt);
-    // var randomNumber = Math.floor(10000 + Math.random() * 90000); // token_temp
-    // var uid = uuidv4(); // 고유 식별 번호
-    // // console.log(uid);
-    // await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
-    
   } catch(error) {
     console.log('mobile-login-service SignUp:'+error);
   } finally {

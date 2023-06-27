@@ -26,19 +26,49 @@ BEGIN
 	WHERE webdb.tb_policy_scrap.user_uid = ID;
 END
 
-CREATE DEFINER=`webservice`@`%` PROCEDURE `SP_GIVE_FIG`(IN USER_ID VARCHAR(100), IN EVENT_ID VARCHAR(100))
+CREATE DEFINER=`webservice`@`%` PROCEDURE `SP_GIVE_FIG_FOR_ATTENDANCE`(IN USER_ID VARCHAR(100))
 BEGIN
     INSERT INTO tb_event_part (eid, uid)
-    VALUES (EVENT_ID, USER_ID);
+    VALUES ('1', USER_ID);
     
     INSERT INTO tb_attendance_logs (user_uid, attendance_date, attendance_time)
-    VALUES (USER_ID, CURDATE(), CURTIME()); 
+    VALUES (USER_ID, CURDATE(), CURTIME());
 
     UPDATE tb_user
     SET fig = fig + (
         SELECT tb_event.fig_payment
         FROM tb_event
-        WHERE eid = EVENT_ID
+        WHERE eid = '1'
     )
     WHERE uid = USER_ID;
+END
+
+CREATE DEFINER=`webservice`@`%` PROCEDURE `SP_GIVE_FIG_FOR_INVITATION`(IN invitee_uid VARCHAR(100), IN invite_code VARCHAR(8))
+BEGIN
+	DECLARE inviter_uid VARCHAR(100);
+    
+    SELECT uid INTO inviter_uid
+    FROM tb_user
+    WHERE substring(uid, 1, 8) = invite_code
+    LIMIT 1;
+    
+    INSERT INTO tb_event_part (eid, uid)
+    VALUES (6, inviter_uid), (7, invitee_uid);
+    
+    UPDATE tb_user
+    SET fig = fig + (
+        SELECT tb_event.fig_payment
+        FROM tb_event
+        WHERE eid = '6'
+    )
+    WHERE uid = inviter_uid;
+    
+    UPDATE tb_user
+    SET fig = fig + (
+        SELECT tb_event.fig_payment
+        FROM tb_event
+        WHERE eid = '7'
+    )
+    WHERE uid = invitee_uid;
+    
 END
