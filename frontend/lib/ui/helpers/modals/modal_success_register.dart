@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/screens/login/login_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
-void modalSuccessRegister(BuildContext context,
-    {required VoidCallback onPressed}) {
+void modalSuccessRegister(
+  BuildContext context,
+) {
   showDialog(
     useRootNavigator: true,
     context: context,
-    barrierDismissible: true,
+    barrierDismissible: false,
     barrierColor: Colors.black12,
     builder: (context) => AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
@@ -67,10 +69,13 @@ void modalSuccessRegister(BuildContext context,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InkWell(
-                  onTap: () {
-                    onPressed();
-                    Navigator.pop(context);
-                  },
+                  onTap: () => Navigator.pop(context),
+                  // onTap: () => Navigator.pushAndRemoveUntil(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const HomePage(),
+                  //     ),
+                  //     (_) => false),
                   child: Container(
                     padding: EdgeInsets.all(10.h),
                     alignment: Alignment.center,
@@ -87,8 +92,8 @@ void modalSuccessRegister(BuildContext context,
                 ),
                 InkWell(
                   onTap: () {
-                    onPressed();
                     Navigator.pop(context);
+                    // pushandremoveuntil -> loginpage 에서 뒤로가기 없애고 홈화면 이동 아이콘 추가
                     Navigator.push(
                         context,
                         MaterialPageRoute(

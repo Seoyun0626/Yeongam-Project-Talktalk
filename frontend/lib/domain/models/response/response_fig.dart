@@ -1,3 +1,10 @@
+import 'dart:convert';
+
+FigResponse responseLoginFromJson(String str) =>
+    FigResponse.fromJson(json.decode(str));
+
+String responseLoginToJson(FigResponse data) => json.encode(data.toJson());
+
 class FigResponse {
   bool resp;
   String message;

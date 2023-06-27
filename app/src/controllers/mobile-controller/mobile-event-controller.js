@@ -1,9 +1,19 @@
 var mobile_event_service = require("../../services/mobile-services/mobile-event-service");
 
 // 무화과 지급하기
-exports.giveFig = async function(req, res) {
+exports.giveFigForAttendance = async function(req, res) {
   try{
-    var result = await mobile_event_service.giveFig(req);
+    var result = await mobile_event_service.giveFigForAttendance(req);
+    return result;
+  } catch(error) {
+    console.log('mobile-event-controller giveFig:'+error);
+  }
+};
+
+
+exports.giveFigForInvitation = async function(req, res) {
+  try{
+    var result = await mobile_event_service.giveFigForInvitation(req);
     return result;
   } catch(error) {
     console.log('mobile-event-controller giveFig:'+error);
@@ -39,3 +49,4 @@ exports.getAttendance = async function(req, res) {
       console.log('mobile-event-controller fetchFigRewardByUser:'+error);
     }
   };
+

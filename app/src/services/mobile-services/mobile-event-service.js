@@ -3,20 +3,40 @@ var db = require('../../utils/db');
 
 // 무화과 지급(이벤트 참여)
 // tb_event_part에 기록 추가, tb_user의 fig열 update
-exports.giveFig = async function(req, res) {
+exports.giveFigForAttendance = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
-    var eid = req.params.eid;
+    // var eid = req.params.eid;
     var uid = req.idPerson;
-    var query = `CALL webdb.SP_GIVE_FIG(?,?)`;
-    var result = await conn.query(query, [uid, eid]);
+    var query = `CALL webdb.SP_GIVE_FIG_FOR_ATTENDANCE(?)`;
+    var result = await conn.query(query, [uid]);
     // console.log(result);
     return result
 
 
   } catch(error) {
     console.log('mobile-event-service giveFig:'+error);
+  } finally {
+    if(conn) conn.end();
+  }
+};
+
+exports.giveFigForInvitation = async function(req, res) {
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var invite_code = req.body.invite_code;
+    // console.log(invite_code);
+    var invitee_uid = req.idPerson;
+    var query = `CALL webdb.SP_GIVE_FIG_FOR_INVITATION(?,?)`;
+    var result = await conn.query(query, [invitee_uid, invite_code]);
+    // console.log(result);
+    return result
+
+
+  } catch(error) {
+    console.log('mobile-event-service giveFigForInvitation:'+error);
   } finally {
     if(conn) conn.end();
   }
@@ -77,7 +97,7 @@ exports.fetchFigRewardByUser = async function(req, res) {
   try{
     conn = await db.getConnection();
     var uid = req.idPerson;
-    query = 'select event_part_no,acquired_time,event_name,fig_payment from webdb.tb_event_part as a inner join webdb.tb_event as b on a.eid = b.eid where a.uid ="'+uid+'"'; // "3d06c817-d8ee-43be-be7b-226c0a4d6695";'
+    query = 'select event_part_no,acquired_time,event_name,fig_payment from webdb.tb_event_part as a inner join webdb.tb_event as b on a.eid = b.eid where a.uid ="'+uid+'"'; 
     var rows = await conn.query(query); // 쿼리 실행
     // console.log(rows);
     return rows;

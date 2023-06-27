@@ -4,15 +4,16 @@ var router = express.Router();
 var mobile_event_controller = require("../../controllers/mobile-controller/mobile-event-controller");
 const verifyToken = require("../../middleware/verify_token");
 
-// 무화과 지급
-router.post("/give-fig/:eid", verifyToken, async function(req, res){
+// 무화과 지급 - 출석체크
+// giveFigForAttendance
+router.post("/give-fig-for-attendance", verifyToken, async function(req, res){
   try {
     // console.log('mobile give fig');
-    var result = await mobile_event_controller.giveFig(req, res);
+    var result = await mobile_event_controller.giveFigForAttendance(req, res);
     // console.log('mobile-event-router give-fig', result);
     res.json({
       resp : true,
-      message : 'give fig'
+      message : 'give fig for attendance'
     })
 
   } catch(error){
@@ -21,8 +22,29 @@ router.post("/give-fig/:eid", verifyToken, async function(req, res){
   }
 });
 
-// router.post("/use-fig/:eid")
+// 무화과 지급 - 친구초대
+// giveFigForInvitation
+router.post("/give-fig-for-invitation", verifyToken, async function(req, res){
+  try {
+    // console.log('mobile give fig');
+    var result = await mobile_event_controller.giveFigForInvitation(req, res);
+    // console.log('mobile-event-router give-fig', result);
+    res.json({
+      resp : true,
+      message : 'give fig for invitation'
+    })
 
+  } catch(error){
+    console.log('mobile-event-router give-fig error:' + error);
+
+  }
+});
+
+
+// 무화과 지급 - 주간 무화과 챌린지
+// giveFigForWeeklyChanllenge
+
+// 출석 체크 내역 가져오기
 router.get("/get-attendance", verifyToken, async function(req, res){
   try {
     console.log('mobile get-attendance');
@@ -57,10 +79,14 @@ router.get("/get-fig-history-by-user", verifyToken, async function (req, res) {
       figReward : figReward, // 무화과 지급 내역
       figUsage : figUsage, // 무화과 사용 내역
 
+
     })
   } catch (error) {
-    console.log('mobile-event-router / error:' + error);
+    console.log('mobile-event-router get-fig-history-by-user error:' + error);
   }
 });
+
+
+
 
 module.exports = router;

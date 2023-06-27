@@ -98,14 +98,14 @@ class _InfoInputPageState extends State<InfoInputPage> {
         // } else
 
         if (state is SuccessUserState) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+              (_) => false);
           modalSuccessRegister(
             context,
-            onPressed: () => Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HomePage(),
-                ),
-                (_) => false),
           );
           // modalSuccess(
           //   context,
