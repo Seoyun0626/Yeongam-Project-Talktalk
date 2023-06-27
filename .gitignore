@@ -32,3 +32,13 @@ pubspec.lock
 **/macos/Flutter/GeneratedPluginRegistrant.swift
 **/windows/flutter/generated_plugins.cmake
 **/Podfile.lock
+
+
+
+# Build artifacts
+*.d
+*.jar
+*.bin
+*.stamp
+
+frontend/build/
