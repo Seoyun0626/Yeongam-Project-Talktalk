@@ -48,7 +48,7 @@ class _InviteCodePageState extends State<InviteCodePage> {
             modalLoading(context, '확인 중...');
           }
           if (state is FailureUserState) {
-            Navigator.pop(context);
+            // Navigator.pop(context);
             errorMessageSnack(context, state.error);
           }
           if (state is SuccessUserState) {

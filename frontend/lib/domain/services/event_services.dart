@@ -8,7 +8,7 @@ import 'package:teentalktalk/domain/models/response/response_event.dart';
 import 'package:teentalktalk/data/env/env.dart';
 
 class EventServices {
-  // 무화과 지급 - 이벤트 참여
+  // 무화과 지급 - 출석 체크
   Future<DefaultResponse> giveFigForAttendance() async {
     // print('giveFig');
     final token = await secureStorage.readToken();
@@ -21,8 +21,8 @@ class EventServices {
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 
+  // 무화과 지급 - 친구 초대
   Future<DefaultResponse> giveFigForInvitation(String invite_code) async {
-    // print('giveFig');
     final token = await secureStorage.readToken();
 
     final resp = await http.post(

@@ -209,6 +209,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(LoadingUserState());
       final data = await eventService.giveFigForInvitation(event.inviteCode);
       await Future.delayed(const Duration(milliseconds: 450));
+      print(data.resp);
       final dataUser = await userService.getUserById();
 
       if (data.resp) {

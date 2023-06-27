@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:teentalktalk/ui/helpers/attendance_event_controller.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -200,7 +201,7 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                                   ? Colors.grey
                                   : const Color.fromRGBO(247, 248, 250, 1)),
                           onPressed: () {
-                            controller.handleAttendanceCheck();
+                            controller.handleAttendanceCheck(context);
                           },
                           child: Row(
                             // crossAxisAlignment: CrossAxisAlignment.center,

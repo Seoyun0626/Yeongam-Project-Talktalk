@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 
 class EventController extends GetxController {
   var week = ["일", "월", "화", "수", "목", "금", "토"];
@@ -91,7 +93,7 @@ class EventController extends GetxController {
     days = [...days, ...temp].obs;
   }
 
-  void handleAttendanceCheck() {
+  void handleAttendanceCheck(context) {
     isCheckedAttendance.value = temp_days.contains(now2.value.day);
     // print(temp_days);
     // print(isCheckedAttendance.value);
@@ -99,8 +101,10 @@ class EventController extends GetxController {
       temp_days.add(now2.value.day);
       isCheckedAttendance.value = true;
       eventService.giveFigForAttendance(); // 출석체크 eid
+      modalGetFig(context, '1');
     } else {
-      print('이미 출석하였습니다');
+      // print('이미 출석하였습니다');
+      modalWarning(context, '이미 출석하였습니다.');
     }
   }
 }

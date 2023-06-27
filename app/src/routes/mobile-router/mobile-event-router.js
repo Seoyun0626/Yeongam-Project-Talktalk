@@ -25,19 +25,32 @@ router.post("/give-fig-for-attendance", verifyToken, async function(req, res){
 
 // 무화과 지급 - 친구초대
 // giveFigForInvitation
-router.post("/give-fig-for-invitation", verifyToken, async function(req, res){
+router.post("/give-fig-for-invitation", verifyToken, async function(req, res) {
   try {
-    // console.log('mobile give fig');
     var result = await mobile_event_controller.giveFigForInvitation(req, res);
-    // console.log('mobile-event-router give-fig', result);
-    res.json({
-      resp : true,
-      message : 'give fig for invitation'
-    })
-
-  } catch(error){
+    console.log(result);
+    if (result === 'success') {
+      res.json({
+        resp: true,
+        message: 'give fig for invitation'
+      });
+    } else if (result === 'invalidCode') {
+      res.json({
+        resp: false,
+        message: '유효하지 않은 코드입니다.'
+      });
+    } else {
+      res.json({
+        resp: false,
+        message: 'Failure give fig for invitation'
+      });
+    }
+  } catch(error) {
     console.log('mobile-event-router give-fig error:' + error);
-
+    res.json({
+      resp: false,
+      message: 'Failure give fig for invitation'
+    });
   }
 });
 

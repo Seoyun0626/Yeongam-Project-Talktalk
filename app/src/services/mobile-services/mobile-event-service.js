@@ -24,19 +24,21 @@ exports.giveFigForAttendance = async function(req, res) {
 
 exports.giveFigForInvitation = async function(req, res) {
   var conn;
-  try{
+  try {
     conn = await db.getConnection();
     var invite_code = req.body.invite_code;
-    // console.log(invite_code);
     var invitee_uid = req.idPerson;
     var query = `CALL webdb.SP_GIVE_FIG_FOR_INVITATION(?,?)`;
     var result = await conn.query(query, [invitee_uid, invite_code]);
     // console.log(result);
-    return result
-
-
+    if (result && result.affectedRows > 0 && result.inviter_uid !== null) {
+      return 'success'; // 유효한 코드
+    } else {
+      return 'invalidCode'; // 유효하지 않은 코드
+    }
   } catch(error) {
     console.log('mobile-event-service giveFigForInvitation:'+error);
+    return 'error';
   } finally {
     if(conn) conn.end();
   }
