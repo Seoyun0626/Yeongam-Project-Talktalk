@@ -8,6 +8,7 @@
 
 import 'package:firebase_core_web/firebase_core_web.dart';
 import 'package:flutter_secure_storage_web/flutter_secure_storage_web.dart';
+import 'package:fluttertoast/fluttertoast_web.dart';
 import 'package:image_picker_for_web/image_picker_for_web.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_plugin.dart';
 import 'package:shared_preferences_web/shared_preferences_web.dart';
@@ -18,6 +19,7 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   final Registrar registrar = pluginRegistrar ?? webPluginRegistrar;
   FirebaseCoreWeb.registerWith(registrar);
   FlutterSecureStorageWeb.registerWith(registrar);
+  FluttertoastWebPlugin.registerWith(registrar);
   ImagePickerPlugin.registerWith(registrar);
   KakaoFlutterSdkPlugin.registerWith(registrar);
   SharedPreferencesPlugin.registerWith(registrar);
