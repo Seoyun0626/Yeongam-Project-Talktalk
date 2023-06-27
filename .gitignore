@@ -42,3 +42,4 @@ pubspec.lock
 *.stamp
 
 frontend/build/
+frontend/.dart_tool/flutter_build/
