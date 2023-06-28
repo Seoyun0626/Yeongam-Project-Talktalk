@@ -172,18 +172,8 @@ exports.upload = async function(req, res) {
         // DB에 저장
         conn = await db.getConnection();
         console.log('policy-service upload db getConnection');
-        var name = req.body.name;
-        var target = req.body.target;
-        var policy_institution_code = req.body.policy_institution_code;
-        var min_fund = req.body.min_fund;
-        var max_fund = req.body.max_fund;
-        var content = req.body.content;
-        var application_start_date = req.body.application_start_date;
-        var application_end_date = req.body.application_end_date;
-        var policy_field_code = req.body.policy_field_code;
-        var policy_character_code = req.body.policy_character_code;
-        var policy_link = req.body.policy_link;
-        console.log(req.body);
+        var { name, target, policy_institution_code, min_fund, max_fund, content, application_start_date, application_end_date, 
+            policy_field_code, policy_character_code, policy_link } = req.body; 
         if(name == null || name == undefined || name == '') {
             resultcode = 1;
             return resultcode;

@@ -186,7 +186,7 @@ a {
     height: calc(100vh - 50px); /* Subtract the top offset */
     margin: 0;
     position: absolute;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
   /* 확대 시 좌우 스크롤 바 */
