@@ -103,7 +103,26 @@ exports.checkUserWithin24Hours = async function(req, res){
   }
 };
 
-// 초대 인원 확인
+
+// 무화과 지급 - 주간 무화과 챌린지
+exports.giveFigForWeeklyFigChallenge = async function(req, res) {
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var eid = req.body.eid;
+    var uid = req.idPerson;
+    var query = `CALL webdb.SP_GIVE_FIG_FOR_WEEKLY_FIG_CHALLENGE(?,?)`;
+    var result = await conn.query(query, [uid, eid]);
+    console.log(result);
+    return result
+
+
+  } catch(error) {
+    console.log('mobile-event-service giveFig:'+error);
+  } finally {
+    if(conn) conn.end();
+  }
+};
 
 // 이벤트 참여 내역 확인
 exports.checkEventParticipation = async function(req, rese) {

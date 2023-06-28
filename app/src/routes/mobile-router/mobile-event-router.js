@@ -54,7 +54,22 @@ router.post("/give-fig-for-invitation", verifyToken, async function(req, res) {
 
 
 // 무화과 지급 - 주간 무화과 챌린지
-// giveFigForWeeklyChanllenge
+// giveFigForWeeklyFigChallenge
+router.post("/give-fig-for-weekly", verifyToken, async function(req, res){
+  try {
+    // console.log('mobile give fig');
+    var result = await mobile_event_controller.giveFigForWeeklyFigChallenge(req, res);
+    // console.log('mobile-event-router give-fig', result);
+    res.json({
+      resp : true,
+      message : 'give fig for weekly fig challenge'
+    })
+
+  } catch(error){
+    console.log('mobile-event-router give-fig-for-weekly-fig-hallenge error:' + error);
+
+  }
+});
 
 
 // 가입 24시간 이내 여부 확인

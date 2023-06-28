@@ -32,6 +32,19 @@ class EventServices {
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 
+  // 무화과 지급 - 주간 무화과 챌린지
+  // give-fig-for-weekly
+  Future<DefaultResponse> giveFigForWeeklyFigChallenge(String eid) async {
+    final token = await secureStorage.readToken();
+
+    final resp = await http.post(
+        Uri.parse('${Environment.urlApi}/event/give-fig-for-weekly'),
+        headers: {'Accept': 'application/json', 'xxx-token': token!},
+        body: {'eid': eid});
+    // print(resp.body);
+    return DefaultResponse.fromJson(jsonDecode(resp.body));
+  }
+
   // 가입 24시간 이내 확인
   Future<DefaultResponse> checkUserWithin24Hours() async {
     final token = await secureStorage.readToken();
@@ -54,7 +67,7 @@ class EventServices {
             '${Environment.urlApi}/event/check-event-participation-available/$eid'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
     // print('checkEventParticipation');
-    print(resp.body);
+    // print(resp.body);
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }

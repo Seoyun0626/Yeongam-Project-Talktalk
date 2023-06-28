@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 // import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_basic.dart';
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
@@ -66,6 +67,7 @@ class _LoginPageState extends State<LoginPage> {
           modalWarning(context, '다시 로그인해주세요');
         } else if (state is SuccessAuthentication) {
           userBloc.add(OnGetUserAuthenticationEvent());
+
           Navigator.of(context).pop();
           Navigator.pushAndRemoveUntil(
             context,

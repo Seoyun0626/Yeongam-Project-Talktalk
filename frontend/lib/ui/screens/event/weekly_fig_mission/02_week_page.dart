@@ -5,21 +5,29 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stroke_text/stroke_text.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_access_denied.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/screens/event/attendance_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/event_list_page.dart';
 import 'package:teentalktalk/ui/screens/event/new_weeklyFig_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/weeklyFig_event_page.dart';
+import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/screens/register/user_type_page.dart';
 import 'package:teentalktalk/ui/screens/settings/settings_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class SecondWeekMissionPage extends StatelessWidget {
-  const SecondWeekMissionPage({Key? key}) : super(key: key);
+  const SecondWeekMissionPage({Key? key, required this.hasParticipated})
+      : super(key: key);
+  final bool hasParticipated;
 
   @override
   Widget build(BuildContext context) {
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+    final bool isLogIn = authState is SuccessAuthentication;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -241,11 +249,29 @@ class SecondWeekMissionPage extends StatelessWidget {
                                   ),
                                   TextButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const SettingsPage()));
+                                        if (isLogIn && hasParticipated) {
+                                          modalAccessDenied(
+                                              context, "이미 참여한 이벤트입니다.",
+                                              onPressed: () {});
+                                        } else {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      // const userTypePage(isKakaoLogin: false,)
+                                                      const SettingsPage()));
+                                          // eventService
+                                          //     .giveFigForWeeklyFigChallenge(
+                                          //         '3'); //eid
+                                          // Navigator.pushAndRemoveUntil(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           const HomePage(),
+                                          //     ),
+                                          //     (_) => false);
+                                          // modalGetFig(context, '3'); //eid
+                                        }
                                       },
                                       child: Center(
                                         child: Container(
@@ -278,7 +304,9 @@ class SecondWeekMissionPage extends StatelessWidget {
                                                 ),
                                               ]),
                                           child: TextCustom(
-                                            text: "알림 허용하러 가기",
+                                            text: hasParticipated
+                                                ? "참여 완료"
+                                                : "알림 허용하러 가기",
                                             fontSize: 20.sp,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

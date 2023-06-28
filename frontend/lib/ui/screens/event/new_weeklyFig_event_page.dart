@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:teentalktalk/ui/screens/event/fig_market_page.dart';
 import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/01_week_page.dart';
@@ -24,13 +25,49 @@ class newWeeklyFigEventPage extends StatefulWidget {
 }
 
 class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
+  // 주차별 이벤트 참여 했는지 안했는지
+  late bool hasWeek01Participated = false;
+  late bool hasWeek02Participated = false;
+  late bool hasWeek03Participated = false;
+  late bool hasWeek04Participated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+    if (authState is SuccessAuthentication) {
+      checkEventParticipation();
+    }
+  }
+
+  Future<void> checkEventParticipation() async {
+    // true -> 참여 기록 없음. 참여 가능
+    // false -> 참여 기록 있음. 참여 불가능
+    var week01 = await eventService.checkEventParticipation('2');
+    var week02 = await eventService.checkEventParticipation('3');
+    var week03 = await eventService.checkEventParticipation('4');
+    var week04 = await eventService.checkEventParticipation('5');
+    setState(() {
+      hasWeek01Participated = !week01.resp;
+      hasWeek02Participated = !week02.resp;
+      hasWeek03Participated = !week03.resp;
+      hasWeek04Participated = !week04.resp;
+    });
+    // print(hasWeek01Participated);
+  }
+
   @override
   Widget build(BuildContext context) {
     final authState = BlocProvider.of<AuthBloc>(context).state;
 
-    int week = 3;
+    int week = 1;
     // 이벤트 참여 여부
-    List<bool> getWeekCheckList = [false, false, false, false];
+    List<bool> getWeekCheckList = [
+      hasWeek01Participated,
+      hasWeek02Participated,
+      hasWeek03Participated,
+      hasWeek04Participated
+    ];
 
     List<String> challengeList = [
       "웰컴 청소년 톡talk",
@@ -252,26 +289,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                 SizedBox(
                   height: 10.h,
                 ),
-                // Container(
-                //   child: week == 1
-                //       ? SvgPicture.asset(
-                //           'images/event_icon/weekly_event/1_week_new.svg',
-                //           width: 300.w)
-                //       : week == 2
-                //           ? SvgPicture.asset(
-                //               'images/event_icon/weekly_event/2_week_new.svg',
-                //               width: 300.w)
-                //           : week == 3
-                //               ? SvgPicture.asset(
-                //                   'images/event_icon/weekly_event/3_week_new.svg',
-                //                   width: 300.w)
-                //               : week == 4
-                //                   ? SvgPicture.asset(
-                //                       'images/event_icon/weekly_event/4_week_new.svg',
-                //                       width: 300.w)
-                //                   : Container(),
-                // ),
-                // SizedBox(height: 40.h),
+
                 // 첫째주  - 웰컴 청소년톡talk
                 challengeWidget(
                     text: week >= 1 ? challengeList[0] : "어떤 미션이 기다리고 있을까요?",
@@ -400,6 +418,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
     bool isCheck = false, // 이벤트 참여 여부
   }) {
     if (isPastEvent && !isEvent) {
+      // 종료된 이벤트 and 이번주 이벤트 아님
       return Stack(
         children: [
           Container(
@@ -452,6 +471,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
         ],
       );
     } else if (!isEvent) {
+      // 이번주 이벤트 아님
       return Container(
         padding: EdgeInsets.only(left: 10.w, right: 10.w),
         width: 300.w,
@@ -478,6 +498,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
         ),
       );
     } else {
+      // 이번주 이벤트
       return InkWell(
         onTap: () {
           // 해당 주차 페이지로 이동
@@ -486,7 +507,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const FirstWeekMissionPage(),
+                  builder: (context) =>
+                      FirstWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
               break;
@@ -494,7 +516,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SecondWeekMissionPage(),
+                  builder: (context) =>
+                      SecondWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
               break;
@@ -502,7 +525,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ThirdWeekMissionPage(),
+                  builder: (context) =>
+                      ThirdWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
               break;
@@ -510,7 +534,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const FourthWeekMissionPage(),
+                  builder: (context) =>
+                      FourthWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
               break;
@@ -519,7 +544,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const FirstWeekMissionPage(),
+                  builder: (context) =>
+                      FirstWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
           }

@@ -20,6 +20,16 @@ exports.giveFigForInvitation = async function(req, res) {
   }
 };
 
+// 무화과 지급 - 주간 무화과 챌린지
+exports.giveFigForWeeklyFigChallenge = async function(req, res) {
+  try{
+    var result = await mobile_event_service.giveFigForWeeklyFigChallenge(req);
+    return result;
+  } catch(error) {
+    console.log('mobile-event-controller giveFigForWeeklyFigChallenge:'+error);
+  }
+};
+
 // 가입 24시간 이내 여부 확인
 exports.checkUserWithin24Hours = async function(req, res) {
   try{

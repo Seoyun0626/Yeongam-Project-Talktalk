@@ -20,7 +20,7 @@ class InviteEventPage extends StatefulWidget {
 class _InviteEventPageState extends State<InviteEventPage> {
   late int inviteCount = 0;
   late String inviteCountString = '';
-  late bool isInvitePossible = false;
+  late bool isInvitePossible = false; //초대 가능 여부
 
   String generateInviteCode(String uid) {
     return uid.substring(0, 8);

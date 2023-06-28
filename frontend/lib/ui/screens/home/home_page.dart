@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:teentalktalk/data/env/env.dart';
 import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
+import 'package:teentalktalk/domain/blocs/user/user_bloc.dart';
 import 'package:teentalktalk/domain/models/response/response_policy.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/domain/services/policy_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
@@ -13,6 +15,7 @@ import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_scrap.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_success_register.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_unscrap.dart';
+import 'package:teentalktalk/ui/screens/event/new_weeklyFig_event_page.dart';
 import 'package:teentalktalk/ui/screens/notification/notification_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_detail_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
@@ -35,10 +38,45 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late bool isEventParticipationAvailable = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+
+    if (authState is SuccessAuthentication) {
+      checkEventParticipation();
+    }
+  }
+
+  Future<void> checkEventParticipation() async {
+    var response = await eventService.checkEventParticipation('2');
+    setState(() {
+      isEventParticipationAvailable = response.resp;
+    });
+    navigateToEventPage();
+  }
+
+  void navigateToEventPage() {
+    // print(isEventParticipationAvailable);
+    if (isEventParticipationAvailable) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const newWeeklyFigEventPage()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // final userBloc = BlocProvider.of<UserBloc>(context);
     final authBloc = BlocProvider.of<AuthBloc>(context);
+    // final authState = BlocProvider.of<AuthBloc>(context).state;
+
+    // if (authState is SuccessAuthentication) {
+    //   checkEventParticipation();
+    // }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
