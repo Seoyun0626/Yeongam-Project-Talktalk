@@ -1,88 +1,29 @@
 var main_service = require("../../services/main-service");
-// 게시판
-exports.dashboard = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await main_service.dashboard(req);
-    return result;
-  } catch(error) {
-    console.log('main_controller dashboard:'+error);
-  }
-};
 
-exports.getFile = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await main_service.getFile(req);
+// 고차 함수
+async function executeService(service, req, res, serviceName) {
+  try {
+    var result = await service(req, res);
     return result;
-  } catch(error) {
-    console.log('main_controller getFile:'+error);
+  } catch (error) {
+    console.log(`main_controller ${serviceName} error: ${error}`);
   }
-};
+}
 
-exports.getProject = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await main_service.getProject(req);
-    return result;
-  } catch(error) {
-    console.log('main_controller getProject:'+error);
-  }
-};
+exports.dashboard = (req, res) => executeService(main_service.dashboard, req, res, 'dashboard');
 
-exports.getSubproject = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await main_service.getSubproject(req);
-    return result;
-  } catch(error) {
-    console.log('main_controller getSubproject:'+error);
-  }
-};
+exports.getFile = (req, res) => executeService(main_service.getFile, req, res, 'getFile');
 
-exports.getPowersave = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await main_service.getPowersave(req);
-    return result;
-  } catch(error) {
-    console.log('main_controller getPowersave:'+error);
-  }
-};
+exports.getProject = (req, res) => executeService(main_service.getProject, req, res, 'getProject');
 
-exports.getSensorName = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await main_service.getSensorName(req);
-    return result;
-  } catch(error) {
-    console.log('main_controller getSensorName:'+error);
-  }
-};
+exports.getSubproject = (req, res) => executeService(main_service.getSubproject, req, res, 'getSubproject');
 
-exports.sensorData = async function(req, res) {
-  try{
-    var result = await main_service.sensorData(req);
-    return result;
-  } catch(error) {
-    console.log('main_controller sensorData:'+error);
-  }
-};
+exports.getPowersave = (req, res) => executeService(main_service.getPowersave, req, res, 'getPowersave');
 
-exports.prjectData = async function(req, res) {
-  try{
-    var result = await main_service.prjectData(req);
-    return result;
-  } catch(error) {
-    console.log('main_controller prjectData:'+error);
-  }
-};
+exports.getSensorName = (req, res) => executeService(main_service.getSensorName, req, res, 'getSensorName');
 
-exports.getControlCommand = async function(req, res) {
-  try{
-    var result = await main_service.getControlCommand(req);
-    return result;
-  } catch(error) {
-    console.log('main_controller getControlCommand:'+error);
-  }
-};
+exports.sensorData = (req, res) => executeService(main_service.sensorData, req, res, 'sensorData');
+
+exports.prjectData = (req, res) => executeService(main_service.prjectData, req, res, 'prjectData');
+
+exports.getControlCommand = (req, res) => executeService(main_service.getControlCommand, req, res, 'getControlCommand');

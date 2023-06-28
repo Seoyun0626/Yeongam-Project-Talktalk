@@ -120,6 +120,10 @@ a {
 .공지사항 { top: 570px; }
 .통계 { top: 605px; }
 .출석체크 { top: 686px; }
+.로그아웃{
+  top: 680px;
+  left: 50px;
+}
 
   
   .ellipse5 {

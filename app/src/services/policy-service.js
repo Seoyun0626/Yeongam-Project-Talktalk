@@ -232,6 +232,15 @@ exports.banner = async function(req, res) {
     var conn;
     var resultcode = 0;
     try{
+        // 베너의 개수가 6개 이상이면 업로드 불가
+        conn = await db.getConnection();
+        console.log('policy-service banner db getConnection');
+        var query = "SELECT count(*) as cnt FROM webdb.tb_banner;";
+        var banner_count = await conn.query(query); // 쿼리 실행
+        if(banner_count[0].cnt >= 6) {
+            resultcode = 1;
+            return resultcode;
+        }
         var temp = Date.now();
         // 이미지 업로드
         var upload = multer({ 

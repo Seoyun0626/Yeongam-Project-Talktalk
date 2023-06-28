@@ -35,16 +35,17 @@ router.post("/login", async function(req, res) {
 
 // 로그아웃
 router.get("/logout", function(req, res) {
-  //console.log("clear cookie");
+  console.log("clear cookie");
   // 로그아웃 쿠키 삭제
   res.clearCookie('userid');
   res.clearCookie('username');
   // 세션정보 삭제
-  //console.log("destroy session");
+  console.log("destroy session");
   req.session.destroy();
   //res.sendFile(path.join(__dirname, "../public/login.html"));
-  req.logout();
-  res.redirect('/');
+  req.logout(() => {
+    res.redirect('/admin/auth/login');
+  });
 });
 
 
