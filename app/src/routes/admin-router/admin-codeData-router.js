@@ -60,4 +60,16 @@ router.get('/eventDetail', ensureAuth, asyncHandler(async function (req, res) {
     });
 }, 'codeData-router eventDetail/ error:'));
 
+router.get('/eventDetail/update/:id', ensureAuth, asyncHandler(async function (req, res) {
+    var code_data = await code_controller.getEventDetail_update(req, res);
+    res.render('codeData/eventDetailUpdate', {
+        code_data:code_data,
+        params:req.params.id,
+    });
+}, 'codeData-router eventDetailUpdate/ error:'));
+router.post('/eventDetail/update/:id', asyncHandler(async function (req, res) {
+    var code_data = await code_controller.updateEventDetail(req, res);
+    res.redirect('/admin/codeData/eventDetail');
+}, 'codeData-router eventDetailUpdate/ error:'));
+
 module.exports = router;

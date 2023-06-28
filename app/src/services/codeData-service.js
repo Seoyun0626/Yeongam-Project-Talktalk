@@ -179,3 +179,42 @@ exports.getCodeData_update = async function(req, res) {
     console.log('codeData-controller getCodeData_update error:'+error);
     }
   };
+
+exports.getEventDetail = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var event_code = req.params.id;
+    var query = "select eid,event_name,fig_payment from webdb.tb_event";
+    var rows = await conn.query(query); // 쿼리 실행
+    // console.log(rows);
+    return rows;
+  } catch(error){
+    console.log('codeData-controller getEventDetail error:'+error);
+  }
+};
+
+exports.getEventDetail_update = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var event_code = req.params.id;
+    var query = "select eid,event_name,fig_payment from webdb.tb_event where eid = '" + event_code + "'";
+    var rows = await conn.query(query); // 쿼리 실행
+    return rows;
+  }catch(error){
+    console.log('codeData-controller getEventDetail_update error:'+error);
+  }
+};
+
+exports.updateEventDetail = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var eid = req.params.id.split(":")[1];
+    var event_name = req.body.event_name;
+    var fig_payment = req.body.fig_payment;
+    var query = "update webdb.tb_event set event_name = '" + event_name + "', fig_payment = '" + fig_payment + "' where eid = '" + eid + "'";
+    var rows = await conn.query(query); // 쿼리 실행
+    return rows;
+  } catch(error){
+    console.log('codeData-controller updateEventDetail error:'+error);
+  }
+};
