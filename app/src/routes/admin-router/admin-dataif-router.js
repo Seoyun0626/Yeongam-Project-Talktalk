@@ -1,5 +1,6 @@
 const path = require("path");
 var express = require("express");
+const axios = require('axios');
 var json2xls = require('json2xls');
 var fs = require('fs');
 var XLSX = require('xlsx');
@@ -127,11 +128,43 @@ router.get('/resetPW/:id', asyncHandler(async function (req, res) {
 }, 'dataif-router resetPW error:'));
 
 // 푸시 알림 페이지
-router.get('/push', asyncHandler(async function (req, res) {
-  var result = await dataif_controller.fetchData(req, res);
+router.get('/push', ensureAuth, asyncHandler(async function (req, res) {
+  var userDatas = await dataif_controller.fetchData(req, res);
   res.render('dataif/push', { posts: userDatas });
 }, 'dataif-router / error:'));
 
+router.post('/push', ensureAuth, asyncHandler(async function (req, res) {
+  const serverKey = process.env.FCM_SERVER_KEY; // 서버키 가져오기
+  const fcmUrl = 'https://fcm.googleapis.com/fcm/send'; // FCM 서버 주소
+  const { title, content } = req.body; // 폼 데이터에서 제목과 내용을 가져오기
+  // var userDatas = await dataif_controller.fetchData(req, res); // db에서 registration_ids 가져오기
+  const message = {
+    notification: {
+      title: title,
+      body: content,
+    },
+    // 추가적인 페이로드 설정
+    // data: {
+    //   key1: 'value1',
+    //   key2: 'value2',
+    // },
+    registration_ids: ['RegistrationToken1', 'RegistrationToken2', 'RegistrationToken3'], // 여러 명에게 보낼 경우 RegistrationToken을 배열로 설정
+  };
+  try {
+    const response = await axios.post(fcmUrl, message, {
+      headers: {
+        'Content-Type': 'application/json', // 요청 헤더
+        Authorization: `key=${serverKey}`, // 서버 키를 헤더에 포함시켜 보낸다
+      },
+    });
+
+    console.log('푸시 알림이 성공적으로 전송되었습니다:', response.data);
+    res.redirect('/admin/push'); // 알림 전송 후 리디렉션할 경로를 설정합니다.
+  } catch (error) {
+    console.error('푸시 알림 전송 중 오류가 발생했습니다:', error);
+    res.redirect('/admin/push'); // 오류 발생 시 리디렉션할 경로를 설정합니다.
+  }
+}));
 
 // router.get('/excelup', async function (req, res) {
 //   try {

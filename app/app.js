@@ -58,6 +58,9 @@ app.use(express.static(`${__dirname}/src/public`)); //정적파일 경로
 app.use(bodyParser.json()); //json형식의 데이터를 받을 수 있게
 app.use(bodyParser.urlencoded({ extended: true })); //urlencoded형식의 데이터를 받을 수 있게
 
+// FCM을 통한 푸시알림
+// app.use("/fcm", require("./src/routes/fcm-router"));
+
 // app.use(cors());
 app.use("/admin/auth",routerAdminLogin); //관리자 로그인
 app.use("/admin/dataif",routerAdminDataif); //관리자 데이터 인터페이스
