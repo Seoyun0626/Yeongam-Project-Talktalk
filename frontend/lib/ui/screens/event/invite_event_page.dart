@@ -232,9 +232,39 @@ class _InviteEventPageState extends State<InviteEventPage> {
                           ],
                         ),
                       ),
+                      SizedBox(
+                        height: 50.h,
+                        width: size.width,
+                        child: NeumorphicButton(
+                            margin: EdgeInsets.only(left: 20.w, right: 20.w),
+                            style: NeumorphicStyle(
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                    BorderRadius.circular(50.r)),
+                                depth: 2,
+                                lightSource: LightSource.topLeft,
+                                color: ThemeColors.secondary),
+                            onPressed: () {
+                              // print(isInvitePossible);
+                              if (!isInvitePossible) {
+                                modalAccessDenied(
+                                    context, '최대 3명까지만 초대할 수 있어요.',
+                                    onPressed: () {});
+                              }
+                            },
+                            child: Center(
+                              child: TextCustom(
+                                text: "카카오톡으로 초대하기",
+                                fontSize: 18.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                      ),
+
                       Neumorphic(
                           margin: EdgeInsets.only(
-                              left: 21.w, right: 21.w, bottom: 20.h),
+                              left: 21.w, right: 21.w, top: 20.h),
                           style: NeumorphicStyle(
                               shape: NeumorphicShape.flat,
                               depth: 1,
@@ -276,36 +306,6 @@ class _InviteEventPageState extends State<InviteEventPage> {
                                   ),
                                 ],
                               )))),
-
-                      SizedBox(
-                        height: 50.h,
-                        width: size.width,
-                        child: NeumorphicButton(
-                            margin: EdgeInsets.only(left: 20.w, right: 20.w),
-                            style: NeumorphicStyle(
-                                shape: NeumorphicShape.flat,
-                                boxShape: NeumorphicBoxShape.roundRect(
-                                    BorderRadius.circular(50.r)),
-                                depth: 2,
-                                lightSource: LightSource.topLeft,
-                                color: ThemeColors.secondary),
-                            onPressed: () {
-                              // print(isInvitePossible);
-                              if (!isInvitePossible) {
-                                modalAccessDenied(
-                                    context, '최대 3명까지만 초대할 수 있어요.',
-                                    onPressed: () {});
-                              }
-                            },
-                            child: Center(
-                              child: TextCustom(
-                                text: "카카오톡으로 초대하기",
-                                fontSize: 18.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )),
-                      ),
 
                       // BtnNaru(
                       //   margin: EdgeInsets.only(left: 20.w, right: 20.w),

@@ -45,30 +45,63 @@ END
 
 CREATE DEFINER=`webservice`@`%` PROCEDURE `SP_GIVE_FIG_FOR_INVITATION`(IN invitee_uid VARCHAR(100), IN invite_code VARCHAR(8))
 BEGIN
-	DECLARE inviter_uid VARCHAR(100);
+    DECLARE inviter_uid VARCHAR(100);
+    DECLARE inviter_count INT;
+    DECLARE code_valid INT DEFAULT 1; -- 유효한 코드 여부
     
+    -- inviter_uid 찾기
     SELECT uid INTO inviter_uid
     FROM tb_user
     WHERE substring(uid, 1, 8) = invite_code
     LIMIT 1;
     
-    INSERT INTO tb_event_part (eid, uid)
-    VALUES (6, inviter_uid), (7, invitee_uid);
+    -- invite_code로 inviter_uid를 찾을 수 없을 때
+    IF inviter_uid IS NULL THEN
+        SET code_valid = 0; -- 유효하지 않은 코드
+    END IF;
     
-    UPDATE tb_user
-    SET fig = fig + (
-        SELECT tb_event.fig_payment
-        FROM tb_event
-        WHERE eid = '6'
-    )
-    WHERE uid = inviter_uid;
+    -- 본인 코드 입력인 경우
+    IF inviter_uid = invitee_uid THEN
+        SET inviter_uid = NULL;
+        SET code_valid = 0; -- 유효하지 않은 코드
+    END IF;
     
-    UPDATE tb_user
-    SET fig = fig + (
-        SELECT tb_event.fig_payment
-        FROM tb_event
-        WHERE eid = '7'
-    )
-    WHERE uid = invitee_uid;
+    -- 초대 인원수 확인
+    SELECT COUNT(*) INTO inviter_count
+    FROM tb_event_part
+    WHERE uid = inviter_uid AND eid = '6';
     
+    -- 초대자 인원수가 3명을 초과하는 경우
+    IF inviter_count > 3 THEN
+        SET inviter_uid = NULL;
+        SET code_valid = 0; -- 유효하지 않은 코드
+    END IF;
+    
+    IF code_valid = 1 THEN
+        -- 이벤트 내역 추가
+		INSERT INTO tb_event_part (eid, uid)
+        VALUES (6, inviter_uid), (7, invitee_uid);
+        
+        -- 초대자 inviter에게 무화과 지급
+        UPDATE tb_user
+        SET fig = fig + (
+            SELECT tb_event.fig_payment
+            FROM tb_event
+            WHERE eid = '6'
+        )
+        WHERE uid = inviter_uid;
+        
+        -- 초대받은 사람 invitee에게 무화과 지급
+        UPDATE tb_user
+        SET fig = fig + (
+            SELECT tb_event.fig_payment
+            FROM tb_event
+            WHERE eid = '7'
+        )
+        WHERE uid = invitee_uid;
+	
+    END IF;
+    
+    -- code_valid 반환
+    SELECT code_valid;
 END

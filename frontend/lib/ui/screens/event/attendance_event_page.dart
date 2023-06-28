@@ -216,13 +216,9 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                               ),
                               SizedBox(width: 8.w),
                               TextCustom(
-                                text: controller.isCheckedAttendance.value
-                                    ? "이미 출석하였습니다"
-                                    : "오늘의 무화과 받기",
+                                text: "오늘의 무화과 받기",
                                 fontSize: 15.sp,
-                                color: controller.isCheckedAttendance.value
-                                    ? Colors.white
-                                    : Colors.black,
+                                color: Colors.black,
                               )
                             ],
                           ),

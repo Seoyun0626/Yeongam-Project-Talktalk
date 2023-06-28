@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_access_denied.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 
@@ -103,8 +104,7 @@ class EventController extends GetxController {
       eventService.giveFigForAttendance(); // 출석체크 eid
       modalGetFig(context, '1');
     } else {
-      // print('이미 출석하였습니다');
-      modalWarning(context, '이미 출석하였습니다.');
+      modalAccessDenied(context, '하루에 한 번만 받을 수 있어요', onPressed: () {});
     }
   }
 }

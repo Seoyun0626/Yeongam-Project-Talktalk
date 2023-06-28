@@ -26,13 +26,13 @@ router.post("/give-fig-for-attendance", verifyToken, async function(req, res){
 router.post("/give-fig-for-invitation", verifyToken, async function(req, res) {
   try {
     var result = await mobile_event_controller.giveFigForInvitation(req, res);
-    console.log(result);
-    if (result === 'success') {
+    // console.log(result);
+    if (result == 1) {
       res.json({
         resp: true,
         message: 'give fig for invitation'
       });
-    } else if (result === 'invalidCode') {
+    } else if (result == 0) {
       res.json({
         resp: false,
         message: '유효하지 않은 코드입니다.'

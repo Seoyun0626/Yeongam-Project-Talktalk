@@ -52,18 +52,23 @@ exports.getAttendance = async function(req, res) {
 // 무화과 지급 - 친구초대
 exports.giveFigForInvitation = async function(req, res) {
   var conn;
+  var resultcode = 0;
   try {
     conn = await db.getConnection();
     var invite_code = req.body.invite_code;
     var invitee_uid = req.idPerson;
     var query = `CALL webdb.SP_GIVE_FIG_FOR_INVITATION(?,?)`;
-    var result = await conn.query(query, [invitee_uid, invite_code]);
-    // console.log(result.inviter_uid);
-    if (result && result.affectedRows > 0 && result.inviter_uid!= null && result.inviter_uid != undefined) {
-      return 'success'; // 유효한 코드
-    } else {
-      return 'invalidCode'; // 유효하지 않은 코드
-    }
+    var rows = await conn.query(query, [invitee_uid, invite_code]);
+    // console.log(rows);
+    // console.log(rows[0][0].code_valid);
+   
+    
+    if (rows[0][0].code_valid == 1) {
+      resultcode = 1;// 유효한 코드
+    } 
+    
+    
+    return resultcode;
   } catch(error) {
     console.log('mobile-event-service giveFigForInvitation:'+error);
     return 'error';
