@@ -1,104 +1,24 @@
 var code_service = require("../../services/codeData-service");
 
-
-exports.fetchData = async function(req, res) {
-    try {
-        var result = await code_service.fetchData(req,res);
-        return result;
-    } catch (error) {
-        console.log('codeData-controller fetchData error:'+error);
-    }
-};
-
-exports.fetchPolicyData = async function(req, res) {
-    try{
-        var result = await code_service.fetchPolicyData(req, res);
-        return result;
-    }
-    catch(error) {
-        console.log('code-controller fetchPolicyData:'+error);
-    }
-};
-
-exports.getPolicyName = async function(req, res) {
-    try{
-        var result = await code_service.getPolicyName(req, res);
-        return result;
-    }
-    catch(error) {
-        console.log('code-controller getPolicyName:'+error);
-    }
-};
-
-exports.getCodeData = async function(req, res) {
-    try{
-      // console.log( req.body);
-      var result = await code_service.getCodeData(req);
-      // console.log(result.code_data_name[0]);
-      return result;
-    } catch(error) {
-      console.log('code-controller getUserData:'+error);
-    }
-  };
-
-exports.getUserCodeName = async function(req, res) {
-    try{
-      // console.log( req.body);
-      var result = await code_service.getUserCodeName(req);
-      // console.log(result.code_data_name[0]);
-      return result;
-    } catch(error) {
-      console.log('code-controller getUserData:'+error);
-    }
-  };
-  
-
-exports.getCodedetail = async function(req, res) {
-    try{
-      //console.log( req.body);
-      var result = await code_service.getCodedetail(req);
-      return result;
-    } catch(error) {
-      console.log('code-controller getUserData:'+error);
-    }
-  };
-
-exports.getCodedetail_update = async function(req, res) {
-    try{
-      //console.log( req.body);
-      var result = await code_service.getCodedetail_update(req);
-      return result;
-    } catch(error) {
-      console.log('code-controller getUserData:'+error);
-    }
-  };
-
-exports.updateCodeDetail = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await code_service.updateCodeDetail(req);
+// 고차 함수
+async function executeService(service, req, res, serviceName) {
+  try {
+    var result = await service(req, res);
     return result;
-  } catch(error) {
-    console.log('code-controller getUserData:'+error);
+  } catch (error) {
+    console.log(`code-controller ${serviceName} error: ${error}`);
   }
-};
-
-exports.insertCodeDetail = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await code_service.insertCodeDetail(req);
-    return result;
-  } catch(error) {
-    console.log('code-controller getUserData:'+error);
-  }
-};
-
-exports.getCodeData_update = async function(req, res) {
-  try{
-    //console.log( req.body);
-    var result = await code_service.getCodeData_update(req);
-    return result;
-  } catch(error) {
-    console.log('code-controller getUserData:'+error);
-  }
-};
+}
+exports.fetchData = (req, res) => executeService(code_service.fetchData, req, res, 'fetchData');
+exports.fetchPolicyData = (req, res) => executeService(code_service.fetchPolicyData, req, res, 'fetchPolicyData');
+exports.getPolicyName = (req, res) => executeService(code_service.getPolicyName, req, res, 'getPolicyName');
+exports.getCodeData = (req, res) => executeService(code_service.getCodeData, req, 'getCodeData');
+exports.getUserCodeName = (req, res) => executeService(code_service.getUserCodeName, req, 'getUserCodeName');
+exports.getCodedetail = (req, res) => executeService(code_service.getCodedetail, req, 'getCodedetail');
+exports.getCodedetail_update = (req, res) => executeService(code_service.getCodedetail_update, req, 'getCodedetail_update');
+exports.updateCodeDetail = (req, res) => executeService(code_service.updateCodeDetail, req, 'updateCodeDetail');
+exports.insertCodeDetail = (req, res) => executeService(code_service.insertCodeDetail, req, 'insertCodeDetail');
+exports.getCodeData_update = (req, res) => executeService(code_service.getCodeData_update, req, 'getCodeData_update');
+exports.getEventDetail = (req, res) => executeService(code_service.getEventDetail, req, 'getEventDetail');
+exports.getEventDetail_update = (req, res) => executeService(code_service.getEventDetail_update, req, 'getEventDetail_update');
+exports.updateEventDetail = (req, res) => executeService(code_service.updateEventDetail, req, 'updateEventDetail');

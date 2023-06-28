@@ -20,7 +20,7 @@ try{
   var rows = await conn.query(query); // 쿼리 실행 
   if (rows[0]) {
       // 관리자만 접속 가능하도록 처리
-      if(rows[0].user_role != 0) {
+      if(rows[0].user_role == 0) {
         json.code = 100;
         json.msg = "관리자만 접속 가능합니다.";
         json.data = {};
@@ -70,11 +70,7 @@ exports.signUp = async function(req, res) {
   try{
     conn = await db.getConnection();
     // console.log('login-service SignUp db getConnection')
-    var userid = req.body.userid;
-    var password = req.body.password;
-    var password2 = req.body.password2;
-    var name = req.body.name;
-    var inviteCode = req.body.invite_code;
+    var { userid, password, password2, name, invite_code: inviteCode } = req.body;
     var fig = 0;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
@@ -89,6 +85,11 @@ exports.signUp = async function(req, res) {
         resultcode = 100;
         return resultcode;
     }
+    query = "SELECT eid, fig_payment FROM webdb.tb_event WHERE eid = 2 OR eid = 6 OR eid = 7;"; // 무화과 지급량 받아오기
+    var figPayment = await conn.query(query); // 쿼리 실행
+    welcomeTalk = figPayment[0].fig_payment;
+    inviteFriend = figPayment[1].fig_payment;
+    recommender = figPayment[2].fig_payment; // 추천인 무화과 지급량 설정
     if (rows[0] == undefined) {
       // invite코드의 유저에 무화과 추가
       if(inviteCode != '') {
@@ -147,8 +148,6 @@ exports.getAttendance = async function(req, res) {
     // uid를 통해 출석기록 받아오기
     var query = 'SELECT * FROM webdb.tb_attendance_logs where user_uid="'+uid[0].uid+'"';
     var attendanceLog = await conn.query(query); // 쿼리 실행
-    console.log(attendanceLog);
-
     if(attendanceLog.length){
       resultcode = 1;
     } else resultcode = 0;
