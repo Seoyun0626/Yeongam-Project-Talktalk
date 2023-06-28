@@ -1,24 +1,45 @@
 var mobile_event_service = require("../../services/mobile-services/mobile-event-service");
 
-// 무화과 지급하기
+// 무화과 지급 - 출석 체크
 exports.giveFigForAttendance = async function(req, res) {
   try{
     var result = await mobile_event_service.giveFigForAttendance(req);
     return result;
   } catch(error) {
-    console.log('mobile-event-controller giveFig:'+error);
+    console.log('mobile-event-controller giveFigForAttendance:'+error);
   }
 };
 
-
+// 무화과 지급 - 친구 초대
 exports.giveFigForInvitation = async function(req, res) {
   try{
     var result = await mobile_event_service.giveFigForInvitation(req);
     return result;
   } catch(error) {
-    console.log('mobile-event-controller giveFig:'+error);
+    console.log('mobile-event-controller giveFigForInvitation:'+error);
   }
 };
+
+// 가입 24시간 이내 여부 확인
+exports.checkUserWithin24Hours = async function(req, res) {
+  try{
+    var result = await mobile_event_service.checkUserWithin24Hours(req);
+    return result;
+  } catch(error) {
+    console.log('mobile-event-controller checkUserWithin24Hours:'+error);
+  }
+};
+
+// 이벤트 참여 내역 확인
+exports.checkEventParticipation = async function(req, res) {
+  try{
+    var result = await mobile_event_service.checkEventParticipation(req);
+    return result;
+  } catch(error) {
+    console.log('mobile-event-controller checkEventParticipation:'+error);
+  }
+};
+
 
 // 출석 체크 기록 불러오기
 exports.getAttendance = async function(req, res) {

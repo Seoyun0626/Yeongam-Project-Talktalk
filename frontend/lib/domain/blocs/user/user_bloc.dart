@@ -56,7 +56,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           event.userpw2,
           event.user_role,
           event.user_type,
-          event.invite_code,
+          // event.invite_code,
           event.youthAge_code,
           event.parentsAge_code,
           event.emd_class_code,
@@ -91,7 +91,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           // event.userpw2,
           event.user_role,
           event.user_type,
-          event.invite_code,
+          // event.invite_code,
           event.youthAge_code,
           event.parentsAge_code,
           event.emd_class_code,
@@ -209,7 +209,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(LoadingUserState());
       final data = await eventService.giveFigForInvitation(event.inviteCode);
       await Future.delayed(const Duration(milliseconds: 450));
-      print(data.resp);
+      // print(data.resp);
       final dataUser = await userService.getUserById();
 
       if (data.resp) {

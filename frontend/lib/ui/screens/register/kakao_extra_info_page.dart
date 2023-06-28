@@ -370,7 +370,7 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                                 user_email,
                                 userRole, // user_role - 사용자
                                 userTypeCode.toString(), // user_type
-                                inviteCode,
+                                // inviteCode,
                                 _youthAge, // youthAge_code
                                 _parentsAge, // parentsAge_code
                                 _emd, //emd_class_code

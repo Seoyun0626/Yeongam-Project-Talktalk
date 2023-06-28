@@ -219,14 +219,14 @@ router.get("/signup", function(req, res) {
           message: '성공적으로 등록된 사용자'
         }); // kth
       }
-      else if (result == 100){
-        console.log('mobile-router signup fail');
-        // res.redirect('/mobile/auth/signup');
-        res.json({
-          resp: false,
-          message: '등록 실패'
-      }); // kth
-      } 
+      // else if (result == 100){
+      //   console.log('mobile-router signup fail');
+      //   // res.redirect('/mobile/auth/signup');
+      //   res.json({
+      //     resp: false,
+      //     message: '등록 실패'
+      // }); // kth
+      // } 
 
     } catch(error) {
       console.log('mobile-router signup error:'+error);

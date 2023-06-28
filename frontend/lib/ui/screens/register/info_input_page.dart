@@ -27,7 +27,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
   late TextEditingController userAgainPWController;
   late TextEditingController userEmailController;
   late TextEditingController userNameController;
-  late TextEditingController inviteCodeController;
+  // late TextEditingController inviteCodeController;
   // late TextEditingController userPhoneNumberController;
   late int userTypeCode; // 사용자 유형
   final String userRole = '1';
@@ -52,7 +52,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
     userAgainPWController = TextEditingController();
     userEmailController = TextEditingController();
     userNameController = TextEditingController();
-    inviteCodeController = TextEditingController();
+    // inviteCodeController = TextEditingController();
     // userPhoneNumberController = TextEditingController();
     // emd = '0';
     // youthAge = '5';
@@ -72,7 +72,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
     userAgainPWController.dispose();
     userEmailController.dispose();
     userNameController.dispose();
-    inviteCodeController.dispose();
+    // inviteCodeController.dispose();
     // userPhoneNumberController.dispose();
     super.dispose();
   }
@@ -289,19 +289,19 @@ class _InfoInputPageState extends State<InfoInputPage> {
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
                         color: Colors.black),
-                    const SizedBox(height: 40.0),
+                    // const SizedBox(height: 40.0),
                     // 친구 초대
-                    const TextCustom(
-                      text: '친구 초대 코드를 입력해주세요.',
-                      fontSize: 17,
-                      maxLines: 2,
-                    ),
-                    const SizedBox(height: 1.0),
-                    TextFieldNaru(
-                      controller: inviteCodeController,
-                      hintText: '친구 초대 코드',
-                      // validator: RequiredValidator(errorText: '이름을 입력해주세요.'),
-                    ),
+                    // const TextCustom(
+                    //   text: '친구 초대 코드를 입력해주세요.',
+                    //   fontSize: 17,
+                    //   maxLines: 2,
+                    // ),
+                    // // const SizedBox(height: 1.0),
+                    // TextFieldNaru(
+                    //   controller: inviteCodeController,
+                    //   hintText: '친구 초대 코드',
+                    //   // validator: RequiredValidator(errorText: '이름을 입력해주세요.'),
+                    // ),
                     const SizedBox(height: 40.0),
 
                     // // 전화번호
@@ -545,8 +545,8 @@ class _InfoInputPageState extends State<InfoInputPage> {
                             );
                           } else if (_keyForm.currentState != null &&
                               _keyForm.currentState!.validate()) {
-                            String inviteCode = '';
-                            inviteCode = inviteCodeController.text.trim();
+                            // String inviteCode = '';
+                            // inviteCode = inviteCodeController.text.trim();
 
                             String _youthAge = youthAge ?? '5';
                             String _parentsAge = parentsAge ?? '6';
@@ -567,7 +567,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                                 userAgainPWController.text.trim(),
                                 userRole, // user_role - 사용자
                                 userTypeCode.toString(), // user_type
-                                inviteCode,
+                                // inviteCode,
                                 // userPhoneNumberController.text.trim(),
                                 _youthAge, // youthAge_code
                                 _parentsAge, // parentsAge_code

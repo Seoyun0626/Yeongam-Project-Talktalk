@@ -46,7 +46,7 @@ exports.getCodedetail = async function(req, res) {
 
   exports.getEvents = async function(req, res) {
     try{
-      console.log(req.body);
+      // console.log(req.body);
       var result = await code_service.getEvents(req);
       // console.log(result);
       return result;

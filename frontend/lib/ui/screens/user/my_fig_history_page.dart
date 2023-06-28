@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
 import 'package:teentalktalk/domain/models/response/response_event.dart';
-import 'package:teentalktalk/domain/models/response/response_fig.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/domain/services/user_services.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
+import 'package:teentalktalk/domain/models/response/response_fig.dart';
 
 class MyFigHistoryPage extends StatefulWidget {
   const MyFigHistoryPage({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _MyFigHistoryPageState extends State<MyFigHistoryPage> {
   Future<void> _updateFigCount() async {
     final authBloc = BlocProvider.of<AuthBloc>(context);
     if (authBloc.state is SuccessAuthentication) {
-      FigResponse figCountData = await userService.updateFigCount();
+      ResponseEvent figCountData = await userService.updateFigCount();
       setState(() {
         figCount = figCountData.figCount;
       });
@@ -136,7 +136,7 @@ class _FigHistoryState extends State<_FigHistory>
   }
 
   Future<void> _getFigHistory() async {
-    ResponseEvent figHistoryData = await eventService.getFigHistoryByUser();
+    ResponseFig figHistoryData = await eventService.getFigHistoryByUser();
     setState(() {
       figRewardList = figHistoryData.rewardData;
       figUsagedList = figHistoryData.usageData;

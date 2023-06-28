@@ -77,7 +77,7 @@ exports.getEvents = async function(req, res) {
     var eid = req.params.eid;
     var query = "SELECT eid, event_name, fig_payment FROM webdb.tb_event where eid = '" + eid + "'";
     var rows = await conn.query(query); // 쿼리 실행
-    console.log(rows);
+    // console.log(rows);
     return rows;
   }
   catch(error){

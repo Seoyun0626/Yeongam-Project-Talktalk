@@ -6,7 +6,6 @@ const verifyToken = require("../../middleware/verify_token");
 
 
 // 무화과 지급 - 출석체크
-// giveFigForAttendance
 router.post("/give-fig-for-attendance", verifyToken, async function(req, res){
   try {
     // console.log('mobile give fig');
@@ -24,7 +23,6 @@ router.post("/give-fig-for-attendance", verifyToken, async function(req, res){
 });
 
 // 무화과 지급 - 친구초대
-// giveFigForInvitation
 router.post("/give-fig-for-invitation", verifyToken, async function(req, res) {
   try {
     var result = await mobile_event_controller.giveFigForInvitation(req, res);
@@ -58,6 +56,71 @@ router.post("/give-fig-for-invitation", verifyToken, async function(req, res) {
 // 무화과 지급 - 주간 무화과 챌린지
 // giveFigForWeeklyChanllenge
 
+
+// 가입 24시간 이내 여부 확인
+router.get("/check-user-within-24h", verifyToken, async function(req, res){
+  try {
+    // console.log('mobile check-user-within-24h');
+    var result = await mobile_event_controller.checkUserWithin24Hours(req, res);
+    // console.log(result);
+
+    if (result){
+      res.json({
+        resp : true,
+        message : 'check-user-within-24h : true',
+      });
+    } else {
+      res.json({
+        resp : false,
+        message : 'check-user-within-24h :',
+      });
+    }
+  } catch(error){
+    console.log('mobile-event-router check-user-within-24h error:' + error);
+  }
+});
+
+
+// 이벤트 참여 내역 확인
+router.get("/check-event-participation-available/:eid", verifyToken, async function(req, res){
+  try {
+    // console.log('mobile check-event-participation');
+    var result = await mobile_event_controller.checkEventParticipation(req, res);
+    // console.log(result);
+
+    if (req.params.eid === '6') {
+      if (result > 3) {
+        res.json({
+          resp: false,
+          message: '최대 3명까지만 초대할 수 있어요.',
+          partCount : result
+        });
+      } else {
+        res.json({
+          resp: true,
+          message: 'check-event-participation: true',
+          partCount : result
+        });
+      }
+    } else {
+      if (result > 0) {
+        res.json({
+          resp: false,
+          message: 'check-event-participation: false',
+        });
+      } else {
+        res.json({
+          resp: true,
+          message: 'check-event-participation: true',
+        });
+      }
+    }
+  } catch(error){
+    console.log('mobile-event-router check-event-participation error:' + error);
+  }
+});
+
+
 // 출석 체크 내역 가져오기
 router.get("/get-attendance", verifyToken, async function(req, res){
   try {
@@ -69,8 +132,7 @@ router.get("/get-attendance", verifyToken, async function(req, res){
       resp : true,
       message : 'get-attendance',
       attendaceLog : result
-    })
-
+    });
   } catch(error){
     console.log('mobile-event-router get-attendance error:' + error);
 

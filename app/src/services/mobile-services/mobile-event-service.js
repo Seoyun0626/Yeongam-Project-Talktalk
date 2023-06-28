@@ -22,33 +22,8 @@ exports.giveFigForAttendance = async function(req, res) {
   }
 };
 
-exports.giveFigForInvitation = async function(req, res) {
-  var conn;
-  try {
-    conn = await db.getConnection();
-    var invite_code = req.body.invite_code;
-    var invitee_uid = req.idPerson;
-    var query = `CALL webdb.SP_GIVE_FIG_FOR_INVITATION(?,?)`;
-    var result = await conn.query(query, [invitee_uid, invite_code]);
-    // console.log(result);
-    if (result && result.affectedRows > 0 && result.inviter_uid !== null) {
-      return 'success'; // 유효한 코드
-    } else {
-      return 'invalidCode'; // 유효하지 않은 코드
-    }
-  } catch(error) {
-    console.log('mobile-event-service giveFigForInvitation:'+error);
-    return 'error';
-  } finally {
-    if(conn) conn.end();
-  }
-};
-
-
-
 // 출석체크 기록 가져오기
 // tb_attendance_log에서 uid로 날짜 return -> frontend에서 day 리스트로 받아 temp_days에 저장
-
 exports.getAttendance = async function(req, res) {
   var resultcode = 0;
   var conn;
@@ -73,6 +48,86 @@ exports.getAttendance = async function(req, res) {
   }
   return resultcode;
 };
+
+// 무화과 지급 - 친구초대
+exports.giveFigForInvitation = async function(req, res) {
+  var conn;
+  try {
+    conn = await db.getConnection();
+    var invite_code = req.body.invite_code;
+    var invitee_uid = req.idPerson;
+    var query = `CALL webdb.SP_GIVE_FIG_FOR_INVITATION(?,?)`;
+    var result = await conn.query(query, [invitee_uid, invite_code]);
+    // console.log(result.inviter_uid);
+    if (result && result.affectedRows > 0 && result.inviter_uid!= null && result.inviter_uid != undefined) {
+      return 'success'; // 유효한 코드
+    } else {
+      return 'invalidCode'; // 유효하지 않은 코드
+    }
+  } catch(error) {
+    console.log('mobile-event-service giveFigForInvitation:'+error);
+    return 'error';
+  } finally {
+    if(conn) conn.end();
+  }
+};
+
+// 가입 24시간 이내 여부 확인
+exports.checkUserWithin24Hours = async function(req, res){
+  var conn;
+  try {
+    conn = await db.getConnection();
+    var uid =req.idPerson;
+    var query = 'SELECT ins_date FROM webdb.tb_user WHERE uid = ?';
+    var userData = await conn.query(query, [uid]);
+    var insDate = userData[0].ins_date;
+    // console.log(insDate);
+    var currendDate = new Date();
+    // console.log(currendDate);
+// 
+    // 가입일과 현지 시각 비교
+    var isWithin24Hours = (currendDate - insDate) < (24 * 60 * 60 * 1000); // 단위 : 밀리초
+    // console.log(isWithin24Hours);
+    return isWithin24Hours;
+
+  } catch(error){
+    console.log('mobile-event-service checkUserWithin24Hours: ' + error);
+    return false;
+  } finally {
+    if(conn) conn.end();
+  }
+};
+
+// 초대 인원 확인
+
+// 이벤트 참여 내역 확인
+exports.checkEventParticipation = async function(req, rese) {
+  var conn;
+  try {
+    conn = await db.getConnection();
+    var uid = req.idPerson;
+    var eid = req.params.eid;
+    var query = `SELECT COUNT(*) AS count FROM webdb.tb_event_part WHERE uid = ? AND eid = ?`;
+    var rows = await conn.query(query, [uid, eid]);
+    var result = rows[0].count;
+    // console.log(rows);
+    // console.log(rows[0].count);
+
+    // if(rows && rows[0].count > 0) {
+    //   result = false;// 참여 내역 있음
+    // } 
+
+    return result;
+
+  } catch(error){
+    console.log('mobile-event-service checkEventParticipation:'+error);
+    return 'error';
+  } finally {
+    if(conn) conn.end();
+  }
+};
+
+
 
 
 

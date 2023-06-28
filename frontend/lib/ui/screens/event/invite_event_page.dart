@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:teentalktalk/domain/blocs/user/user_bloc.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_access_denied.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,8 +18,64 @@ class InviteEventPage extends StatefulWidget {
 }
 
 class _InviteEventPageState extends State<InviteEventPage> {
+  late int inviteCount = 0;
+  late String inviteCountString = '';
+  late bool isInvitePossible = false;
+
   String generateInviteCode(String uid) {
     return uid.substring(0, 8);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadInviationStatus();
+  }
+
+  Future<void> loadInviationStatus() async {
+    var response = await eventService.checkEventParticipation('6');
+    setState(() {
+      inviteCount = response.partCount!;
+      inviteCountString = inviteCount.toString();
+      isInvitePossible = response.resp;
+    });
+    // print(inviteCount);
+  }
+
+  List<Widget> buildInviteCountContainers() {
+    List<Widget> inviteCountContainers = [];
+
+    for (int i = 1; i <= 3; i++) {
+      bool isActive = i <= inviteCount;
+
+      Container inviteCountContainer = Container(
+        width: 60.w,
+        height: 60.h,
+        decoration: BoxDecoration(
+          color: isActive
+              ? const Color.fromRGBO(255, 227, 91, 1)
+              : const Color.fromRGBO(247, 248, 250, 1),
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: ThemeColors.basic,
+            width: 0.5,
+            style: BorderStyle.solid,
+          ),
+        ),
+        child: Center(
+          child: TextCustom(
+            text: i.toString(),
+            fontSize: 24.sp,
+            fontWeight: FontWeight.bold,
+            color: ThemeColors.basic,
+          ),
+        ),
+      );
+
+      inviteCountContainers.add(inviteCountContainer);
+    }
+
+    return inviteCountContainers;
   }
 
   // void showToast(String message) {
@@ -144,7 +202,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
                                 ),
                               )))),
                       Padding(
-                        padding: EdgeInsets.only(right: 21.w, bottom: 20.h),
+                        padding: EdgeInsets.only(right: 21.w),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -174,6 +232,50 @@ class _InviteEventPageState extends State<InviteEventPage> {
                           ],
                         ),
                       ),
+                      Neumorphic(
+                          margin: EdgeInsets.only(
+                              left: 21.w, right: 21.w, bottom: 20.h),
+                          style: NeumorphicStyle(
+                              shape: NeumorphicShape.flat,
+                              depth: 1,
+                              shadowDarkColor: Colors.grey,
+                              shadowLightColor: Colors.grey[100],
+                              color: Colors.white),
+                          child: Container(
+                              padding: EdgeInsets.only(top: 20.h, bottom: 10.h),
+                              // height: 60.h,
+                              child: Center(
+                                  child: Column(
+                                children: [
+                                  TextCustom(
+                                    text: '현재 가입한 친구 $inviteCountString명',
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  SizedBox(
+                                    height: 5.h,
+                                  ),
+                                  TextCustom(
+                                    text: '최대 3명까지 초대할 수 있어요',
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: ThemeColors.basic,
+                                  ),
+                                  SizedBox(
+                                    height: 20.h,
+                                  ),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: buildInviteCountContainers()
+
+                                      // ],
+                                      ),
+                                  SizedBox(
+                                    height: 15.h,
+                                  ),
+                                ],
+                              )))),
 
                       SizedBox(
                         height: 50.h,
@@ -187,7 +289,14 @@ class _InviteEventPageState extends State<InviteEventPage> {
                                 depth: 2,
                                 lightSource: LightSource.topLeft,
                                 color: ThemeColors.secondary),
-                            onPressed: () {},
+                            onPressed: () {
+                              // print(isInvitePossible);
+                              if (!isInvitePossible) {
+                                modalAccessDenied(
+                                    context, '최대 3명까지만 초대할 수 있어요.',
+                                    onPressed: () {});
+                              }
+                            },
                             child: Center(
                               child: TextCustom(
                                 text: "카카오톡으로 초대하기",
