@@ -193,7 +193,7 @@ exports.getEventDetail_update = async function(req, res) {
   try{
     conn = await db.getConnection();
     var event_code = req.params.id;
-    var query = "select eid,event_name,fig_payment from webdb.tb_event where eid = '" + event_code + "'";
+    var query = "select * from webdb.tb_event where eid = '" + event_code + "'";
     var rows = await conn.query(query); // 쿼리 실행
     return rows;
   }catch(error){
@@ -205,8 +205,8 @@ exports.updateEventDetail = async function(req, res) {
   try{
     conn = await db.getConnection();
     var eid = req.params.id.split(":")[1];
-    var { event_name, fig_payment } = req.body;
-    var query = "update webdb.tb_event set event_name = '" + event_name + "', fig_payment = '" + fig_payment + "' where eid = '" + eid + "'";
+    var { event_name, fig_payment, event_start_date, event_end_date } = req.body;
+    var query = "update webdb.tb_event set event_name = '" + event_name + "', fig_payment = '" + fig_payment + "', event_start_date = '"+event_start_date+"', event_end_date = '"+event_end_date+"' where eid = '" + eid + "'";
     var rows = await conn.query(query); // 쿼리 실행
     return rows;
   } catch(error){

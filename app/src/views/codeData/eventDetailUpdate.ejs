@@ -23,6 +23,8 @@
                         <th>EID</th>
                         <th>이벤트명</th>
                         <th>지급량</th>
+                        <th>이벤트 시작일</th>
+                        <th>이벤트 종료일</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +32,8 @@
                         <td><%=code_data[0].eid%></td>
                         <td><input type="text" name="event_name" value="<%=code_data[0].event_name%>"></td>
                         <td><input type="text" name="fig_payment" value="<%=code_data[0].fig_payment%>"></td>
+                        <td><input type="date" name="event_start_date" value="<%=start_date%>"></td>
+                        <td><input type="date" name="event_end_date" value="<%=end_date%>"></td>
                     </tr>
                 </tbody>
             </table>

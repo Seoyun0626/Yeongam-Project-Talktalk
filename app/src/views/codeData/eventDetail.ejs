@@ -35,8 +35,8 @@
                         <td><%=code_data[i].eid%></td>
                         <td><%=code_data[i].event_name%> </td>
                         <td><%=code_data[i].fig_payment%> </td>
-                        <td><%=code_data[i].event_start_date%></td>
-                        <td><%=code_data[i].event_end_date%></td>
+                        <td><%= `${code_data[i].event_start_date.getFullYear()}` + `-`+ `${code_data[i].event_start_date.getMonth()+1}` + `-`+ `${code_data[i].event_start_date.getDate()}`%></td>
+                        <td><%= `${code_data[i].event_end_date.getFullYear()}` + `-`+ `${code_data[i].event_end_date.getMonth()+1}` + `-`+ `${code_data[i].event_end_date.getDate()}`%></td>
                         <td><a href="/admin/codeData/eventDetail/update/<%=code_data[i].eid %>">수정</a></td>
                     </tr> 
                 <% } %>

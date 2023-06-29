@@ -55,7 +55,6 @@ router.post('/detail/insert/:id', asyncHandler(async function (req, res) {
 
 router.get('/eventDetail', ensureAuth, asyncHandler(async function (req, res) {
     var code_data = await code_controller.getEventDetail(req, res);
-    console.log(code_data);
     res.render('codeData/eventDetail', {
         code_data:code_data,
     });
@@ -63,9 +62,22 @@ router.get('/eventDetail', ensureAuth, asyncHandler(async function (req, res) {
 
 router.get('/eventDetail/update/:id', ensureAuth, asyncHandler(async function (req, res) {
     var code_data = await code_controller.getEventDetail_update(req, res);
+    // 접수 기간
+    var start_month = code_data[0].event_start_date.getMonth()+1;
+    if(start_month < 10) start_month = '0'+start_month;
+    var start_date = code_data[0].event_start_date.getDate();
+    if(start_date < 10) start_date = '0'+start_date;
+    var start_day = code_data[0].event_start_date.getFullYear()+'-'+start_month+'-'+start_date;
+    var end_month = code_data[0].event_end_date.getMonth()+1;
+    if(end_month < 10) end_month = '0'+end_month;
+    var end_date = code_data[0].event_end_date.getDate();
+    if(end_date < 10) end_date = '0'+end_date;
+    var end_day = code_data[0].event_end_date.getFullYear()+'-'+end_month+'-'+end_date;
     res.render('codeData/eventDetailUpdate', {
         code_data:code_data,
         params:req.params.id,
+        start_date:start_day,
+        end_date:end_day,
     });
 }, 'codeData-router eventDetailUpdate/ error:'));
 router.post('/eventDetail/update/:id', asyncHandler(async function (req, res) {
