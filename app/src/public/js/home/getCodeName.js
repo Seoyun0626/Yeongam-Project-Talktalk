@@ -39,7 +39,9 @@ exports.emd_code_to_name = function (emd_class_code,code_data){
 
 // 권한코드 -> 권한
 exports.role_code_to_class =  function (role_code){
-    if(role_code == 0) return "관리자";
-    else if(role_code == 1) return "일반 회원";
-    //최고 관리자?
+    if(role_code == 0) return "일반 회원";
+    else if(role_code == 1) return "최고관리자";
+    else if(role_code == 2) return "부관리자";
+    else if(role_code == 3) return "정책관리자";
+    else return "정보 없음";
 }

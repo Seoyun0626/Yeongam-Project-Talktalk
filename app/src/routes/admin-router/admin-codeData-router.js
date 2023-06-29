@@ -55,6 +55,7 @@ router.post('/detail/insert/:id', asyncHandler(async function (req, res) {
 
 router.get('/eventDetail', ensureAuth, asyncHandler(async function (req, res) {
     var code_data = await code_controller.getEventDetail(req, res);
+    console.log(code_data);
     res.render('codeData/eventDetail', {
         code_data:code_data,
     });

@@ -180,7 +180,7 @@ exports.getEventDetail = async function(req, res) {
   try{
     conn = await db.getConnection();
     var event_code = req.params.id;
-    var query = "select eid,event_name,fig_payment from webdb.tb_event";
+    var query = "select * from webdb.tb_event";
     var rows = await conn.query(query); // 쿼리 실행
     // console.log(rows);
     return rows;
