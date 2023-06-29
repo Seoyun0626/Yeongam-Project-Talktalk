@@ -35,8 +35,9 @@ exports.fetchEventPartByUid = async function(req, res) {
     var query = 'SELECT uid FROM webdb.tb_user where userid="'+userid+'"';
     var uid = await conn.query(query); // 쿼리 실행
     var uid_test = uid[0]['uid'];
-    query = 'select event_part_no,acquired_time,event_name,fig_payment from webdb.tb_event_part as a inner join webdb.tb_event as b on a.eid = b.eid where a.uid ="'+uid_test+'"'; // "3d06c817-d8ee-43be-be7b-226c0a4d6695";'
+    query = 'select a.event_part_no, a.aquired_time, b.event_name, b.fig_payment from webdb.tb_event_part as a inner join webdb.tb_event as b on a.eid = b.eid where a.uid ="'+uid_test+'"'; // "3d06c817-d8ee-43be-be7b-226c0a4d6695";'
     var rows = await conn.query(query); // 쿼리 실행
+    console.log(query);
     return rows;
   } catch(error) {
     console.log('dataif-service fetchEventPartByUid:'+error);

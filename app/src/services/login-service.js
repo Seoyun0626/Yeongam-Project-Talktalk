@@ -87,9 +87,10 @@ exports.signUp = async function(req, res) {
     }
     query = "SELECT eid, fig_payment FROM webdb.tb_event WHERE eid = 2 OR eid = 6 OR eid = 7;"; // 무화과 지급량 받아오기
     var figPayment = await conn.query(query); // 쿼리 실행
-    welcomeTalk = figPayment[0].fig_payment;
-    inviteFriend = figPayment[1].fig_payment;
-    recommender = figPayment[2].fig_payment; // 추천인 무화과 지급량 설정
+    welcomeTalk = parseInt(figPayment[0].fig_payment);
+    inviteFriend = parseInt(figPayment[1].fig_payment);
+    recommender = parseInt(figPayment[2].fig_payment); // 추천인 무화과 지급량 설정
+    const uidUser = uuid();
     if (rows[0] == undefined) {
       // invite코드의 유저에 무화과 추가
       if(inviteCode != '') {
@@ -101,21 +102,23 @@ exports.signUp = async function(req, res) {
           return resultcode;
         }
         // int형식으로 무화과 추가후 varchar로 변환
-        inv[0].fig = parseInt(inv[0].fig) + 1;
+        inv[0].fig = parseInt(inv[0].fig) + inviteFriend;
         inv[0].fig = inv[0].fig.toString();
-        query = "UPDATE webdb.tb_user SET fig='"+inv[0].fig+"' WHERE userid='"+inviteCode+"';";
+        query = "UPDATE webdb.tb_user SET fig='"+inv[0].fig+"' WHERE userid='"+inviteCode+"';"; // 추천인에게 무화과 지급
         var figUpdate = await conn.query(query); // 쿼리 실행
-        var eid = 1; // TODO:무화과 이벤트 번호, 바꿔야함
-        query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+inv[0].uid+"');";
+        var eid = 6; // TODO:무화과 이벤트 번호, 바꿔야함
+        query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+inv[0].uid+"');"; // 추천인에게 무화과 지급 이벤트 기록
         // console.log(query);
         var eventPart = await conn.query(query); // 쿼리 실행
-        fig+=1; //TODO: 지급 무화과 수 변경 필요
+        fig+=recommender;
         fig = fig.toString();
+        eid = 7;
+        query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+uidUser+"');"; // 추천인 입력 이벤트 기록
+        rows = await conn.query(query); // 쿼리 실행
       }
         hasher({
             password: password
         }, async (err, pass, salt, hash) => {
-          const uidUser = uuid();
           var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code, fig) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"', '"+fig+"')";
           var rows = await conn.query(query); // 쿼리 실행
           console.log('회원가입 성공');
