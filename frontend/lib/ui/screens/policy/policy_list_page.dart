@@ -5,9 +5,12 @@ import 'package:teentalktalk/data/env/env.dart';
 import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
 import 'package:teentalktalk/domain/blocs/user/user_bloc.dart';
 import 'package:teentalktalk/domain/models/response/response_policy.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/domain/services/policy_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_scrap.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_detail_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_search_filter_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
@@ -645,6 +648,7 @@ class _PolicyBarState extends State<PolicyBar> {
 // 정책 리스트
 class ListViewPolicy extends StatefulWidget {
   final Policy policies;
+
   const ListViewPolicy({
     Key? key,
     required this.policies,
@@ -793,7 +797,7 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                           width: 50,
                           height: 80,
                           child: _ScrapUnscrap(
-                            uidPolicy: policies.uid,
+                            uidPolicy: policies.pid,
                             countScraps: policies.count_scraps,
                           ),
                         )
@@ -805,12 +809,13 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
 // 정책 스크랩
 class _ScrapUnscrap extends StatefulWidget {
   final String uidPolicy; // 정책 고유번호
-
   final int countScraps; // 스크랩 수
 
-  const _ScrapUnscrap(
-      {Key? key, required this.uidPolicy, required this.countScraps})
-      : super(key: key);
+  const _ScrapUnscrap({
+    Key? key,
+    required this.uidPolicy,
+    required this.countScraps,
+  }) : super(key: key);
   @override
   State<_ScrapUnscrap> createState() => _ScrapUnscrapState();
 }
@@ -839,6 +844,36 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
     }
   }
 
+  Future<void> _handleScrapUnscrap() async {
+    final policyBloc = BlocProvider.of<PolicyBloc>(context);
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+    final userState = BlocProvider.of<UserBloc>(context).state;
+    final uidUser = userState.user?.uid;
+    final uidPolicy = widget.uidPolicy;
+
+    if (authState is LogOut) {
+      modalCheckLogin(context);
+      // modalCheckLogin().showBottomDialog(context);
+    } else {
+      if (uidUser != null) {
+        // Check if it's the first scrap
+
+        policyBloc.add(
+          OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
+        );
+        setState(() {
+          _isScrapped = !_isScrapped;
+        });
+
+        if (_isScrapped) {
+          modalScrap(context);
+        } else {
+          // modalUnScrap();
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final policyBloc = BlocProvider.of<PolicyBloc>(context);
@@ -853,19 +888,21 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
       children: [
         IconButton(
           onPressed: () {
-            if (authState is LogOut) {
-              modalCheckLogin(context);
-              // modalCheckLogin().showBottomDialog(context);
-            } else {
-              if (uidUser != null) {
-                policyBloc.add(
-                  OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
-                );
-                setState(() {
-                  _isScrapped = !_isScrapped;
-                });
-              }
-            }
+            _handleScrapUnscrap();
+
+            // if (authState is LogOut) {
+            //   modalCheckLogin(context);
+            //   // modalCheckLogin().showBottomDialog(context);
+            // } else {
+            //   if (uidUser != null) {
+            //     policyBloc.add(
+            //       OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
+            //     );
+            //     setState(() {
+            //       _isScrapped = !_isScrapped;
+            //     });
+            //   }
+            // }
           },
           icon: Icon(
             _isScrapped ? Icons.bookmark : Icons.bookmark_border_outlined,

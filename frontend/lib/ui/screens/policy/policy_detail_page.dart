@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:teentalktalk/data/env/env.dart';
 import 'package:teentalktalk/domain/models/response/response_policy.dart';
+import 'package:teentalktalk/ui/helpers/firebase_dynamiclink.dart';
 import 'package:teentalktalk/ui/helpers/get_mobile_code_data.dart';
 import 'package:teentalktalk/ui/helpers/kakao_sdk_share.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
@@ -56,6 +57,7 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
     final String imgName = policies.img;
     final String imgUrl = '${Environment.urlApiServer}/upload/policy/$imgName';
 
+    final String policyId = policies.pid;
     final String policyName = policies.policy_name;
     final String policyContent = policies.content;
     final String policyLink = policies.policy_link;
@@ -98,8 +100,9 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                   padding: const EdgeInsets.only(right: 20),
                   onPressed: () async {
                     // _shareURL();
+                    String dynamicLink = await buildDynamicLink(policyId);
                     KakaoShareServices.kakaoSharePolicy(
-                        policyName, imgUrl, policyLink);
+                        policyName, imgUrl, dynamicLink);
                     // KakaoShareServices.kakaoSharePolicy();
                   },
                 ),

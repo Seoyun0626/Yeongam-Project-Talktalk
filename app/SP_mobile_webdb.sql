@@ -105,3 +105,17 @@ BEGIN
     -- code_valid 반환
     SELECT code_valid;
 END
+
+CREATE DEFINER=`webservice`@`%` PROCEDURE `SP_GIVE_FIG_FOR_WEEKLY_FIG_CHALLENGE`(IN USER_ID VARCHAR(100), IN EVENT_ID VARCHAR(100))
+BEGIN
+	INSERT INTO tb_event_part (eid, uid)
+		VALUES (EVENT_ID, USER_ID);
+
+		UPDATE tb_user
+		SET fig = fig + (
+			SELECT tb_event.fig_payment
+			FROM tb_event
+			WHERE eid = EVENT_ID
+		)
+		WHERE uid = USER_ID;
+END

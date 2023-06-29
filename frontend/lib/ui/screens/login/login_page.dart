@@ -201,18 +201,18 @@ class _LoginPageState extends State<LoginPage> {
                       // border: Border.all()
                       backgroundColor: Colors.yellow,
                       onPressed: () async {
-                        modalBasic(context, '준비 중입니다');
-                        // bool loginSuccess =
-                        //     await KakaoLoginServices.kakaoLogin();
+                        // modalBasic(context, '준비 중입니다');
+                        bool loginSuccess =
+                            await KakaoLoginServices.kakaoLogin();
 
-                        // if (loginSuccess) {
-                        //   Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             userTypePage(isKakaoLogin: true),
-                        //       ));
-                        // }
+                        if (loginSuccess) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    userTypePage(isKakaoLogin: true),
+                              ));
+                        }
                       },
                     ),
                     const SizedBox(height: 5.0),

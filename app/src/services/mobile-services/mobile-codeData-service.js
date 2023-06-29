@@ -81,7 +81,7 @@ exports.getEvents = async function(req, res) {
     return rows;
   }
   catch(error){
-    console.log('codeData-controller getCodedetail error:'+error);
+    console.log('codeData-controller getEvents error:'+error);
   }
 };
 

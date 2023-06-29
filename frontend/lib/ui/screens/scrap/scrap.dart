@@ -2,17 +2,51 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teentalktalk/data/env/env.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/domain/models/response/response_policy.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/domain/services/policy_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/screens/login/login_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_detail_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-class ScrapPage extends StatelessWidget {
+class ScrapPage extends StatefulWidget {
   const ScrapPage({Key? key}) : super(key: key);
+
+  @override
+  State<ScrapPage> createState() => _ScrapPageState();
+}
+
+class _ScrapPageState extends State<ScrapPage> {
+  late bool _isFirstScrap = false;
+  late int _scrappedPolicyCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+
+    if (authState is SuccessAuthentication) {
+      _checkFirstScrap();
+    }
+  }
+
+  Future<void> _checkFirstScrap() async {
+    var resp = await eventService.checkEventParticipation('4');
+    setState(() {
+      _isFirstScrap = resp.resp;
+    });
+    print(_isFirstScrap);
+    print(_scrappedPolicyCount); // 수정 필요
+    if (_isFirstScrap && _scrappedPolicyCount >= 1) {
+      eventService.giveFigForWeeklyFigChallenge('4');
+      // ignore: use_build_context_synchronously
+      modalGetFig(context, '4');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,18 +103,27 @@ class ScrapPage extends StatelessWidget {
                                             snapshot.data!.isEmpty) {
                                           return _ListWithoutPolicy();
                                         }
-                                        return !snapshot.hasData
-                                            ? const _ShimerLoading()
-                                            : ListView.builder(
-                                                physics:
-                                                    const NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount:
-                                                    snapshot.data!.length,
-                                                itemBuilder: (_, i) =>
-                                                    ListViewPolicy(
-                                                        policies:
-                                                            snapshot.data![i]));
+
+                                        if (!snapshot.hasData) {
+                                          return const _ShimerLoading();
+                                        } else {
+                                          _scrappedPolicyCount =
+                                              snapshot.data!.length;
+
+                                          // print(_isFirstScrap);
+                                          // print(_scrappedPolicyCount);
+
+                                          return ListView.builder(
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              shrinkWrap: true,
+                                              itemCount: _scrappedPolicyCount,
+                                              // snapshot.data!.length,
+                                              itemBuilder: (_, i) =>
+                                                  ListViewPolicy(
+                                                    policies: snapshot.data![i],
+                                                  ));
+                                        }
                                       })))));
                         } else {
                           // modalCheckLogin(context);
@@ -144,6 +187,7 @@ class ScrapPage extends StatelessWidget {
 // 정책 리스트
 class ListViewPolicy extends StatefulWidget {
   final Policy policies;
+
   // final Map<String, dynamic> codeData;
   // final Future<dynamic> codeData;
 
@@ -151,6 +195,7 @@ class ListViewPolicy extends StatefulWidget {
   const ListViewPolicy({
     Key? key,
     required this.policies,
+
     // required this.codeData
   }) : super(key: key);
 
@@ -283,7 +328,7 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                           width: 50,
                           height: 80,
                           child: _ScrapUnscrap(
-                            uidPolicy: policies.uid,
+                            uidPolicy: policies.pid,
                             countScraps: policies.count_scraps,
                           ),
                         )
@@ -306,12 +351,12 @@ class _ScrapUnscrap extends StatefulWidget {
   final String uidPolicy; // 정책 고유번호
   final int countScraps; // 스크랩 수
 
-  const _ScrapUnscrap(
-      {Key? key,
-      required this.uidPolicy,
-      // required this.uidUser,
-      required this.countScraps})
-      : super(key: key);
+  const _ScrapUnscrap({
+    Key? key,
+    required this.uidPolicy,
+    // required this.uidUser,
+    required this.countScraps,
+  }) : super(key: key);
   @override
   State<_ScrapUnscrap> createState() => _ScrapUnscrapState();
 }
@@ -337,6 +382,36 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
       setState(() {
         _isScrapped = false;
       });
+    }
+  }
+
+  Future<void> _handleScrapUnscrap() async {
+    final policyBloc = BlocProvider.of<PolicyBloc>(context);
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+    final userState = BlocProvider.of<UserBloc>(context).state;
+    final uidUser = userState.user?.uid;
+    final uidPolicy = widget.uidPolicy;
+
+    if (authState is LogOut) {
+      modalCheckLogin(context);
+      // modalCheckLogin().showBottomDialog(context);
+    } else {
+      if (uidUser != null) {
+        // Check if it's the first scrap
+
+        policyBloc.add(
+          OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
+        );
+        setState(() {
+          _isScrapped = !_isScrapped;
+        });
+
+        // if (_isScrapped) {
+        //   modalScrap(context);
+        // } else {
+        // modalUnScrap();
+        // }
+      }
     }
   }
 

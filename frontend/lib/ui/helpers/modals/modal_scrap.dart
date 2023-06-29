@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:teentalktalk/ui/screens/scrap/scrap.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -54,6 +55,12 @@ void modalScrap(
             InkWell(
               onTap: () {
                 // Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ScrapPage(),
+                  ),
+                );
               },
               child: Container(
                 width: 200.w,
