@@ -43,3 +43,6 @@ pubspec.lock
 
 frontend/build/
 frontend/.dart_tool/flutter_build/
+
+app/src/public/upload/banner
+app/src/public/upload/policy
