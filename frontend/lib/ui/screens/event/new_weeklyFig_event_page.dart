@@ -8,9 +8,9 @@ import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:teentalktalk/ui/screens/event/fig_market_page.dart';
 import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/01_week_page.dart';
-import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/02_week_page.dart';
+import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/00_week_page.dart';
 import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/03_week_page.dart';
-import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/04_week_page.dart';
+import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/02_week_page.dart';
 
 import 'package:teentalktalk/ui/screens/user/my_fig_history_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
@@ -29,7 +29,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
   late bool hasWeek01Participated = false;
   late bool hasWeek02Participated = false;
   late bool hasWeek03Participated = false;
-  late bool hasWeek04Participated = false;
+  // late bool hasWeek04Participated = false;
 
   @override
   void initState() {
@@ -46,12 +46,12 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
     var week01 = await eventService.checkEventParticipation('2');
     var week02 = await eventService.checkEventParticipation('3');
     var week03 = await eventService.checkEventParticipation('4');
-    var week04 = await eventService.checkEventParticipation('5');
+    // var week04 = await eventService.checkEventParticipation('5');
     setState(() {
       hasWeek01Participated = !week01.resp;
       hasWeek02Participated = !week02.resp;
       hasWeek03Participated = !week03.resp;
-      hasWeek04Participated = !week04.resp;
+      // hasWeek04Participated = !week04.resp;
     });
     // print(hasWeek01Participated);
   }
@@ -60,20 +60,20 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
   Widget build(BuildContext context) {
     final authState = BlocProvider.of<AuthBloc>(context).state;
 
-    int week = 1;
+    int week = 2;
     // 이벤트 참여 여부
     List<bool> getWeekCheckList = [
       hasWeek01Participated,
       hasWeek02Participated,
       hasWeek03Participated,
-      hasWeek04Participated
+      // hasWeek04Participated
     ];
 
     List<String> challengeList = [
       "웰컴 청소년 톡talk",
-      "톡talk 알림 허용하기",
+      // "톡talk 알림 허용하기",
+      "관심있는 정책 스크랩하기",
       "친구에게 정책 공유하기",
-      "관심있는 정책 스크랩하기"
     ];
 
     return MaterialApp(
@@ -292,7 +292,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
 
                 // 첫째주  - 웰컴 청소년톡talk
                 challengeWidget(
-                    text: week >= 1 ? challengeList[0] : "어떤 미션이 기다리고 있을까요?",
+                    text: week >= 1 ? challengeList[0] : "다음주 미션은 무엇일까요?",
                     imagePath: 'images/event_icon/icon_01.svg',
                     isEvent: week == 1 ? true : false,
                     week: week,
@@ -300,18 +300,18 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                     isCheck: getWeekCheckList[0]),
 
                 SizedBox(height: 27.h),
-                // 둘째주  - 알림 허용하기
+                // 둘째주  - 친구에게 정책 공유
                 challengeWidget(
-                    text: week >= 2 ? challengeList[1] : "어떤 미션이 기다리고 있을까요?",
+                    text: week >= 2 ? challengeList[1] : "다음주 미션은 무엇일까요?",
                     imagePath: 'images/event_icon/icon_02.svg',
                     isEvent: week == 2 ? true : false,
                     week: week,
                     isPastEvent: week > 2,
                     isCheck: getWeekCheckList[1]),
                 SizedBox(height: 27.h),
-                // 셋째주  - 친구에게 정책 공유
+                // 셋째주  - 친구에게 정책 스크랩
                 challengeWidget(
-                    text: week >= 3 ? challengeList[2] : "어떤 미션이 기다리고 있을까요?",
+                    text: week >= 3 ? challengeList[2] : "다음주 미션은 무엇일까요?",
                     imagePath: 'images/event_icon/icon_03.svg',
                     isEvent: week == 3 ? true : false,
                     week: week,
@@ -319,14 +319,14 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                     isCheck: getWeekCheckList[2]),
                 SizedBox(height: 27.h),
                 // 넷째주  - 관심 있는 정책 스크랩
-                challengeWidget(
-                    text: week >= 4 ? challengeList[3] : "어떤 미션이 기다리고 있을까요?",
-                    imagePath: 'images/event_icon/icon_04.svg',
-                    isEvent: week == 4 ? true : false,
-                    week: week,
-                    isPastEvent: week > 4,
-                    isCheck: getWeekCheckList[3]),
-                SizedBox(height: 27.h),
+                // challengeWidget(
+                //     text: week >= 4 ? challengeList[3] : "어떤 미션이 기다리고 있을까요?",
+                //     imagePath: 'images/event_icon/icon_04.svg',
+                //     isEvent: week == 4 ? true : false,
+                //     week: week,
+                //     isPastEvent: week > 4,
+                //     isCheck: getWeekCheckList[3]),
+                // SizedBox(height: 27.h),
                 Container(
                   padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
                   child: Column(
@@ -530,15 +530,15 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                 ),
               );
               break;
-            case 4:
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      FourthWeekMissionPage(hasParticipated: isCheck),
-                ),
-              );
-              break;
+            // case 4:
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //       builder: (context) =>
+            //           ThirdWeekMissionPage(hasParticipated: isCheck),
+            //     ),
+            //   );
+            //   break;
             default:
               // 기본적으로 첫주차 페이지로 이동
               Navigator.push(

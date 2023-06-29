@@ -9,6 +9,7 @@ import 'package:teentalktalk/domain/models/response/response_policy.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/domain/services/policy_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_event.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_logout.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
@@ -61,10 +62,16 @@ class _HomePageState extends State<HomePage> {
   void navigateToEventPage() {
     // print(isEventParticipationAvailable);
     if (isEventParticipationAvailable) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const newWeeklyFigEventPage()),
-      );
+      modalEvent(context,
+          onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const newWeeklyFigEventPage()),
+              ));
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const newWeeklyFigEventPage()),
+      // );
     }
   }
 

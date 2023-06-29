@@ -13,13 +13,14 @@ import 'package:teentalktalk/ui/screens/event/attendance_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/event_list_page.dart';
 import 'package:teentalktalk/ui/screens/event/new_weeklyFig_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/weeklyFig_event_page.dart';
-import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
+import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/screens/register/user_type_page.dart';
+import 'package:teentalktalk/ui/screens/settings/settings_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
-class FourthWeekMissionPage extends StatelessWidget {
-  const FourthWeekMissionPage({Key? key, required this.hasParticipated})
+class ZeroWeekMissionPage extends StatelessWidget {
+  const ZeroWeekMissionPage({Key? key, required this.hasParticipated})
       : super(key: key);
   final bool hasParticipated;
 
@@ -87,7 +88,7 @@ class FourthWeekMissionPage extends StatelessWidget {
                                 ),
                               ),
                               StrokeText(
-                                text: "정책 스크랩",
+                                text: "톡talk 알림 허용",
                                 textStyle: TextStyle(
                                     fontSize: 30.sp,
                                     fontFamily: 'CookieRun',
@@ -104,10 +105,10 @@ class FourthWeekMissionPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [
                                   TextCustom(
-                                    text: '관심있는 ',
+                                    text: '청소년 톡talk ',
                                   ),
                                   TextCustom(
-                                    text: '정책 스크랩',
+                                    text: 'PUSH 알림 허용',
                                     fontWeight: FontWeight.bold,
                                   ),
                                   TextCustom(
@@ -125,7 +126,7 @@ class FourthWeekMissionPage extends StatelessWidget {
                                     text: '무화과 ',
                                   ),
                                   TextCustom(
-                                    text: '3개',
+                                    text: '2개',
                                     fontWeight: FontWeight.bold,
                                   ),
                                   TextCustom(
@@ -137,7 +138,7 @@ class FourthWeekMissionPage extends StatelessWidget {
                                 height: 20.h,
                               ),
                               TextCustom(
-                                text: '기간 : 2023.07.26 ~ 2023.08.01',
+                                text: '기간 : 2023.07.12 ~ 2023.07.18',
                                 fontSize: 13.sp,
                               ),
                             ]),
@@ -176,11 +177,11 @@ class FourthWeekMissionPage extends StatelessWidget {
                                   ),
                                   Row(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Icon(
-                                        Icons.person_outline_rounded,
+                                        Icons.notifications_none_rounded,
                                         color: ThemeColors.fig_pink,
                                         size: 70.sp,
                                       ),
@@ -196,12 +197,11 @@ class FourthWeekMissionPage extends StatelessWidget {
                                             height: 5.h,
                                           ),
                                           const TextCustom(
-                                              text: '2. 복지검색 페이지 이동'),
+                                              text: '2. 설정 페이지 이동'),
                                           SizedBox(
                                             height: 5.h,
                                           ),
-                                          const TextCustom(
-                                              text: '3. 관심있는 정책 스크랩하기'),
+                                          const TextCustom(text: '3. 알림 허용하기'),
                                         ],
                                       ),
                                     ],
@@ -216,7 +216,6 @@ class FourthWeekMissionPage extends StatelessWidget {
                                     fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
-
                                   SizedBox(
                                     height: 10.h,
                                   ),
@@ -228,7 +227,7 @@ class FourthWeekMissionPage extends StatelessWidget {
                                     height: 5.h,
                                   ),
                                   TextCustom(
-                                    text: '- 정책 스크랩 시 무화과가 자동 지급됩니다.',
+                                    text: '- 알림 허용 시 무화과가 자동 지급됩니다.',
                                     fontSize: 12.sp,
                                   ),
                                   SizedBox(
@@ -259,26 +258,19 @@ class FourthWeekMissionPage extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      PolicyListPage(
-                                                          selectedCodes:
-                                                              SelectedCodes(
-                                                        policyInstitution: [],
-                                                        policyTarget: [],
-                                                        policyField: [],
-                                                        policyCharacter: [],
-                                                        // policyArea: []
-                                                      ))));
+                                                      // const userTypePage(isKakaoLogin: false,)
+                                                      const SettingsPage()));
                                           // eventService
                                           //     .giveFigForWeeklyFigChallenge(
-                                          //         '4'); //eid
+                                          //         '3'); //eid
                                           // Navigator.pushAndRemoveUntil(
                                           //     context,
                                           //     MaterialPageRoute(
                                           //       builder: (context) =>
-                                          //           const newWeeklyFigEventPage(),
+                                          //           const HomePage(),
                                           //     ),
                                           //     (_) => false);
-                                          // modalGetFig(context, '4'); //eid
+                                          // modalGetFig(context, '3'); //eid
                                         }
                                       },
                                       child: Center(
@@ -313,8 +305,8 @@ class FourthWeekMissionPage extends StatelessWidget {
                                               ]),
                                           child: TextCustom(
                                             text: hasParticipated
-                                                ? "참여완료"
-                                                : "정책 스크랩하러 가기",
+                                                ? "참여 완료"
+                                                : "알림 허용하러 가기",
                                             fontSize: 20.sp,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

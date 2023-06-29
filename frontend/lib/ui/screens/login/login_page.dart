@@ -5,11 +5,13 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/ui/helpers/kakao_sdk_login.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_basic.dart';
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/screens/login/find_pw_page.dart';
 import 'package:teentalktalk/ui/screens/login/find_id_page.dart';
 import 'package:teentalktalk/ui/screens/register/terms_agree_page.dart';
+import 'package:teentalktalk/ui/screens/register/user_type_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
