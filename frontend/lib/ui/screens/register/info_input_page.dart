@@ -30,11 +30,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
   // late TextEditingController inviteCodeController;
   // late TextEditingController userPhoneNumberController;
   late int userTypeCode; // 사용자 유형
-<<<<<<< Updated upstream
   final String userRole = '0';
-=======
-  final String userRole = '4';
->>>>>>> Stashed changes
   String? emd;
   String? youthAge;
   String? parentsAge;

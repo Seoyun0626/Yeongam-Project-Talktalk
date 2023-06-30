@@ -21,12 +21,8 @@ class KakaoExtraInfoPage extends StatefulWidget {
 }
 
 class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
-<<<<<<< Updated upstream
   late TextEditingController inviteCodeController;
   final String userRole = '0';
-=======
-  final String userRole = '4';
->>>>>>> Stashed changes
   String? emd;
   String? youthAge;
   String? parentsAge;

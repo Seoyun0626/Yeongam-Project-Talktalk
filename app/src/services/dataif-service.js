@@ -4,11 +4,7 @@ var bkfd2Password = require('pbkdf2-password');
 const nodemailer = require("nodemailer");
 var hasher = bkfd2Password();
 const url = require('url');
-<<<<<<< Updated upstream
 // const { uuid } = require('uuidv4');
-=======
-// const { v4: uuidv4 } = require('uuid');
->>>>>>> Stashed changes
 const { v4: uuidv4 } = require('uuid');
 var utils = require('../utils/utils');
 var fs = require('fs');

@@ -13,11 +13,7 @@ CREATE  `SP_GET_USER_BY_ID`(IN ID VARCHAR(255))
 BEGIN
     SELECT u.userid, u.user_name, u.user_type, u.youthAge_code, u.parentsAge_code, u.sex_class_code, u.emd_class_code, u.user_email, u.fig
     FROM webdb.tb_user u
-<<<<<<< Updated upstream
     WHERE u.uid = ID AND u.user_role = 0;
-=======
-    WHERE u.uid = ID AND u.user_role = 4; -- 사용자 권한 1->4 변경됨
->>>>>>> Stashed changes
 END
 
 
