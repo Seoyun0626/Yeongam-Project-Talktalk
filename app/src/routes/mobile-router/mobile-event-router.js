@@ -100,33 +100,38 @@ router.get("/check-user-within-24h", verifyToken, async function(req, res){
 router.get("/check-event-participation-available/:eid", verifyToken, async function(req, res){
   try {
     // console.log('mobile check-event-participation');
+    var eid = req.params.eid;
     var result = await mobile_event_controller.checkEventParticipation(req, res);
     // console.log(result);
 
-    if (req.params.eid === '6') {
+    if (req.params.eid === '5') {
       if (result > 3) {
         res.json({
           resp: false,
           message: '최대 3명까지만 초대할 수 있어요.',
-          partCount : result
+          partCount : result,
+          eid : eid
         });
       } else {
         res.json({
           resp: true,
-          message: 'check-event-participation: true',
-          partCount : result
+          message: '친구 초대 가능',
+          partCount : result,
+          eid : eid
         });
       }
     } else {
       if (result > 0) {
         res.json({
           resp: false,
-          message: 'check-event-participation: false',
+          message: '이미 참여한 이벤트입니다.',
+          eid : eid
         });
       } else {
         res.json({
           resp: true,
-          message: 'check-event-participation: true',
+          message: '이벤트 참여 가능합니다.',
+          eid : eid
         });
       }
     }

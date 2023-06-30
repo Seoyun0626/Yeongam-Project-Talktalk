@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:async';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:teentalktalk/data/env/env.dart';
+import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
 import 'package:teentalktalk/domain/models/response/response_policy.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/firebase_dynamiclink.dart';
 import 'package:teentalktalk/ui/helpers/get_mobile_code_data.dart';
 import 'package:teentalktalk/ui/helpers/kakao_sdk_share.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
@@ -26,6 +30,27 @@ class DetailPolicyPage extends StatefulWidget {
 }
 
 class _DetailPolicyState extends State<DetailPolicyPage> {
+  late bool hasEventParticipated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+    if (authState is SuccessAuthentication) {
+      checkEventParticipation();
+    }
+  }
+
+  Future<void> checkEventParticipation() async {
+    // true -> 참여 기록 없음. 참여 가능
+    // false -> 참여 기록 있음. 참여 불가능
+    var resp = await eventService.checkEventParticipation('4');
+    setState(() {
+      hasEventParticipated = resp.resp;
+    });
+    // print(hasEventParticipated);
+  }
+
   Future<void> _shareURL() async {
     await FlutterShare.share(
       title: 'Example share',
@@ -99,6 +124,10 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                   ),
                   padding: const EdgeInsets.only(right: 20),
                   onPressed: () async {
+                    if (hasEventParticipated) {
+                      eventService.giveFigForWeeklyFigChallenge('4');
+                      modalGetFig(context, '4');
+                    }
                     // _shareURL();
                     String dynamicLink = await buildDynamicLink(policyId);
                     KakaoShareServices.kakaoSharePolicy(
@@ -247,7 +276,7 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
               ),
               Container(
                 // 상세내용
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                 width: size,
                 color: Colors.white,
                 child: Html(
@@ -263,6 +292,7 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
+                margin: const EdgeInsets.only(bottom: 20),
                 width: size,
                 color: Colors.white,
                 child: BtnNaru(

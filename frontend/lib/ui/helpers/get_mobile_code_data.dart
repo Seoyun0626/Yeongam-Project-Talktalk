@@ -58,6 +58,8 @@ getMobileCodeService.getCodeDetailList('policy_institution_code');
     }
     return result;
   }
+
+  // 이벤트 코드 풀 끊김 해결
 }
 
 final getMobileCodeService = getMobileCodeFunctions();

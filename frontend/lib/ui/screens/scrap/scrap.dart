@@ -22,7 +22,7 @@ class ScrapPage extends StatefulWidget {
 
 class _ScrapPageState extends State<ScrapPage> {
   late bool _isFirstScrap = false;
-  late int _scrappedPolicyCount = 0;
+  // late int _scrappedPolicyCount = 0;
 
   @override
   void initState() {
@@ -35,16 +35,22 @@ class _ScrapPageState extends State<ScrapPage> {
   }
 
   Future<void> _checkFirstScrap() async {
-    var resp = await eventService.checkEventParticipation('4');
+    var resp = await eventService.checkEventParticipation('3');
     setState(() {
       _isFirstScrap = resp.resp;
     });
-    print(_isFirstScrap);
-    print(_scrappedPolicyCount); // 수정 필요
-    if (_isFirstScrap && _scrappedPolicyCount >= 1) {
-      eventService.giveFigForWeeklyFigChallenge('4');
+
+    if (_isFirstScrap) {
+      _giveFigIfScrappedPolicyExists();
+    }
+  }
+
+  Future<void> _giveFigIfScrappedPolicyExists() async {
+    var policies = await policyService.getScrappedPolicy();
+    if (policies.isNotEmpty) {
+      eventService.giveFigForWeeklyFigChallenge('3');
       // ignore: use_build_context_synchronously
-      modalGetFig(context, '4');
+      modalGetFig(context, '3');
     }
   }
 
@@ -107,17 +113,23 @@ class _ScrapPageState extends State<ScrapPage> {
                                         if (!snapshot.hasData) {
                                           return const _ShimerLoading();
                                         } else {
-                                          _scrappedPolicyCount =
-                                              snapshot.data!.length;
+                                          // _scrappedPolicyCount =
+                                          //     snapshot.data!.length;
 
-                                          // print(_isFirstScrap);
-                                          // print(_scrappedPolicyCount);
+                                          // if (_isFirstScrap &&
+                                          //     _scrappedPolicyCount >= 1) {
+                                          //   eventService
+                                          //       .giveFigForWeeklyFigChallenge(
+                                          //           '3');
+                                          //   // ignore: use_build_context_synchronously
+                                          //   modalGetFig(context, '3');
+                                          // }
 
                                           return ListView.builder(
                                               physics:
                                                   const NeverScrollableScrollPhysics(),
                                               shrinkWrap: true,
-                                              itemCount: _scrappedPolicyCount,
+                                              itemCount: snapshot.data!.length,
                                               // snapshot.data!.length,
                                               itemBuilder: (_, i) =>
                                                   ListViewPolicy(

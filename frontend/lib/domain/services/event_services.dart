@@ -67,7 +67,7 @@ class EventServices {
             '${Environment.urlApi}/event/check-event-participation-available/$eid'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
     // print('checkEventParticipation');
-    // print(resp.body);
+    print(resp.body);
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }

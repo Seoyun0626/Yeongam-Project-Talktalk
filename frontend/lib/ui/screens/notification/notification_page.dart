@@ -76,7 +76,6 @@ class _NotificationPageState extends State<NotificationPage> {
             onPressed: () => Navigator.pop(context),
           ),
         ),
-<<<<<<< Updated upstream
         body: SafeArea(child: Container()
 
             // Padding(
@@ -94,23 +93,5 @@ class _NotificationPageState extends State<NotificationPage> {
             //         ])),
 
             ));
-=======
-        body: SafeArea(
-          child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      // =>
-                      // FlutterLocalNotification.showNotification(),
-                      child: const Text("알림 보내기"),
-                    ),
-                    _buildNotificationListTile()
-                  ])),
-        ));
->>>>>>> Stashed changes
   }
 }
