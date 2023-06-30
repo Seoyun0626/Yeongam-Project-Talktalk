@@ -3,7 +3,8 @@ var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
 const nodemailer = require("nodemailer");
 
-const { uuid } = require('uuidv4');
+// const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 // const jwt = require('jsonwebtoken');
 
 // 로그인 확인
@@ -90,7 +91,7 @@ exports.signUp = async function(req, res) {
     welcomeTalk = parseInt(figPayment[0].fig_payment);
     inviteFriend = parseInt(figPayment[1].fig_payment);
     recommender = parseInt(figPayment[2].fig_payment); // 추천인 무화과 지급량 설정
-    const uidUser = uuid();
+    const uidUser = uuidv4();
     if (rows[0] == undefined) {
       // invite코드의 유저에 무화과 추가
       // if(inviteCode != '') {

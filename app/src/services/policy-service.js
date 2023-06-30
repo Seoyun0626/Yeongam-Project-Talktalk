@@ -2,7 +2,8 @@ var db = require('../utils/db');
 var multer = require('multer');
 const path = require("path");
 var fs = require("fs");
-const { uuid } = require('uuidv4');
+// const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 
 exports.fetchData = async function(req, res) {
     var conn;
@@ -81,7 +82,7 @@ exports.updatePolicy = async function(req, res) {
         console.log('policy-service updatePolicy db getConnection');
         var query;
         // imgCheck가 on상태라면 기존 이미지를 그대로 사용하고, off라면 새로운 이미지를 사용한다.
-        const uidPolicy = uuid(); // 정책 고유 번호
+        const uidPolicy = uuidv4(); // 정책 고유 번호
         if(req.body.imgCheck == 'on') {
             query = "update webdb.tb_policy set uid = '"+uidPolicy+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
         }
@@ -202,7 +203,7 @@ exports.upload = async function(req, res) {
         //     resultcode = 7;
         //     return resultcode;
         // }
-        const uidPolicy = uuid(); // 정책 고유 번호
+        const uidPolicy = uuidv4(); // 정책 고유 번호
         var query = "INSERT INTO webdb.tb_policy (uid, policy_name, policy_target_code, policy_institution_code, min_fund, max_fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link) VALUES "
           + "('"+uidPolicy+"', '" + name + "', '" + target + "', '" + policy_institution_code + "', '" + min_fund + "', '" + max_fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "', '" + policy_link + "');";
         var rows = await conn.query(query); // 쿼리 실행

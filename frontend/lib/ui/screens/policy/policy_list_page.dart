@@ -856,8 +856,6 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
       // modalCheckLogin().showBottomDialog(context);
     } else {
       if (uidUser != null) {
-        // Check if it's the first scrap
-
         policyBloc.add(
           OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
         );

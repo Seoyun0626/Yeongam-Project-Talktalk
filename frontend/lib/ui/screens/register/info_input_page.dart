@@ -30,7 +30,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
   // late TextEditingController inviteCodeController;
   // late TextEditingController userPhoneNumberController;
   late int userTypeCode; // 사용자 유형
-  final String userRole = '1';
+  final String userRole = '0';
   String? emd;
   String? youthAge;
   String? parentsAge;

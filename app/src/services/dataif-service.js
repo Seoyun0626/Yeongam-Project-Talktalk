@@ -4,7 +4,8 @@ var bkfd2Password = require('pbkdf2-password');
 const nodemailer = require("nodemailer");
 var hasher = bkfd2Password();
 const url = require('url');
-const { uuid } = require('uuidv4');
+// const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 var utils = require('../utils/utils');
 var fs = require('fs');
 const { response } = require('express');
@@ -297,7 +298,7 @@ exports.update = async function(req, res) {
     hasher(
       {password:req.body.password}, async function(err, pass, salt, hash) {
         // query += 'password="'+hash+'", salt="'+salt+'" where userid="'+userid+'"';
-        const uidUser = uuid();
+        const uidUser = uuidv4();
         var query = 'update webdb.tb_user set uid = "'+uidUser+'", userpw="'+hash+'", salt="'+salt+'", user_name="'+req.body.name+'", user_email="'+req.body.user_email+'", user_role="'+req.body.user_role+'", user_type="'+req.body.user_type+'", emd_class_code="'+req.body.emd_class_code+'", youthAge_code = "'+req.body.youthAge_code+'", parentsAge_code = "'+req.body.parentsAge_code+'" where userid="'+userid+'"';
         var rows = await conn.query(query);
       }
