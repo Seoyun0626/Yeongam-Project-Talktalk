@@ -33,6 +33,18 @@ pubspec.lock
 **/windows/flutter/generated_plugins.cmake
 **/Podfile.lock
 
+# Flutter/Dart/Pub related
+**/doc/api/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.fvm/flutter_sdk
+.packages
+.pub-cache/
+.pub/
+build/
+coverage/
+lib/generated_plugin_registrant.dart
 
 
 # Build artifacts
@@ -42,7 +54,8 @@ pubspec.lock
 *.stamp
 
 frontend/build/
-frontend/.dart_tool/flutter_build/
+frontend/.dart_tool/
 
 app/src/public/upload/banner
 app/src/public/upload/policy
+
