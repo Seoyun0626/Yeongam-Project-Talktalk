@@ -55,6 +55,7 @@ lib/generated_plugin_registrant.dart
 
 frontend/build/
 frontend/.dart_tool/
+frontend/dart_tool/
 
 app/src/public/upload/banner
 app/src/public/upload/policy
