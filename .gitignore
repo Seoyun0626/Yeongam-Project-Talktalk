@@ -1,3 +1,9 @@
+frontend/build/
+frontend/.dart_tool/
+
+app/src/public/upload/banner
+app/src/public/upload/policy
+
 # Node.js
 node_modules/
 npm-debug.log
@@ -53,10 +59,4 @@ lib/generated_plugin_registrant.dart
 *.bin
 *.stamp
 
-frontend/build/
-frontend/.dart_tool/
-frontend/dart_tool/
-
-app/src/public/upload/banner
-app/src/public/upload/policy
 
