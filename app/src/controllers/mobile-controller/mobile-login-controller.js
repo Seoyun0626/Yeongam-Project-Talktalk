@@ -24,15 +24,27 @@ exports.SignIn = async function(req, res) {
   }
 };
 
-//카카오 가입
-exports.KakaoLogIn = async function(req, res) {
+//카카오 로그인
+exports.KakaoSignIn = async function(req, res) {
   try{
 
-    const result = await mobile_login_service.KakaoLogIn(req);
+    const result = await mobile_login_service.KakaoSignIn(req);
    
     return result;
   } catch(error) {
-    console.log('mobile-login-controller SignIn:'+error);
+    console.log('mobile-login-controller KakaoSignIn:'+error);
+  }
+};
+
+//카카오 가입
+exports.KakaoSignUp = async function(req, res) {
+  try{
+
+    const result = await mobile_login_service.KakaoSignUp(req);
+   
+    return result;
+  } catch(error) {
+    console.log('mobile-login-controller KakaoSignUp:'+error);
   }
 };
 

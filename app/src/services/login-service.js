@@ -3,7 +3,10 @@ var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
 const nodemailer = require("nodemailer");
 
+<<<<<<< Updated upstream
 // const { uuid } = require('uuidv4');
+=======
+>>>>>>> Stashed changes
 const { v4: uuidv4 } = require('uuid');
 // const jwt = require('jsonwebtoken');
 

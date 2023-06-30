@@ -1,7 +1,7 @@
 var db = require('../../utils/db');
 const { v4: uuidv4 } = require('uuid');
 const path = require("path");
-// const { uuid } = require('uuidv4');
+// const { v4: uuidv4 } = require('uuid');
 
 // exports.getAllPolicy = async function(req, res) {
 //     var conn;

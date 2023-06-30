@@ -8,7 +8,9 @@ import 'package:teentalktalk/ui/widgets/widgets.dart';
 // kth 수정 : 밑에 수정 전 코드 주석처리 해놓음
 
 class termsAgreePage extends StatefulWidget {
-  const termsAgreePage({Key? key}) : super(key: key);
+  const termsAgreePage({Key? key, required this.isKakaoLogin})
+      : super(key: key);
+  final bool isKakaoLogin;
 
   @override
   State<termsAgreePage> createState() => _termsAgreePageState();
@@ -140,8 +142,8 @@ class _termsAgreePageState extends State<termsAgreePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const userTypePage(
-                              isKakaoLogin: false,
+                            builder: (context) => userTypePage(
+                              isKakaoLogin: widget.isKakaoLogin,
                             ),
                           ));
                     } else {

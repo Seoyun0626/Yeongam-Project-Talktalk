@@ -2,7 +2,10 @@ var db = require('../utils/db');
 var multer = require('multer');
 const path = require("path");
 var fs = require("fs");
+<<<<<<< Updated upstream
 // const { uuid } = require('uuidv4');
+=======
+>>>>>>> Stashed changes
 const { v4: uuidv4 } = require('uuid');
 
 exports.fetchData = async function(req, res) {

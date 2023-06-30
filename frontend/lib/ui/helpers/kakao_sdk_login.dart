@@ -80,10 +80,10 @@ class KakaoLoginService {
       final String user_name = user.kakaoAccount?.profile?.nickname ?? '';
       final String user_email = user.kakaoAccount?.email ?? '';
 
-      print('사용자 정보 요청 성공'
-          '\n회원번호: $user_id'
-          '\n닉네임: $user_name'
-          '\n이메일: $user_email');
+      // print('사용자 정보 요청 성공'
+      //     '\n회원번호: $user_id'
+      //     '\n닉네임: $user_name'
+      //     '\n이메일: $user_email');
 
       return {
         'user_id': user_id,

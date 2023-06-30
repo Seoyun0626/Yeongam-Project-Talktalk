@@ -34,6 +34,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       OnGetUserAuthenticationEvent event, Emitter<UserState> emit) async {
     try {
       final data = await userService.getUserById();
+      print(data);
       print('_onGetUserAuthentication');
       emit(state.copyWith(user: data.user));
     } catch (e) {
@@ -98,7 +99,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           event.sex_class_code);
       // print(event);
       // print(resp.resp);
-      print(resp.message);
+      // print(resp.message);
       print(resp.resp);
 
       if (resp.resp) {

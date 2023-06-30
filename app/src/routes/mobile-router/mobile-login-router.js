@@ -48,13 +48,57 @@ router.post("/login", async function(req, res) {
   }
 });
 
+// 카카오 로그인
+router.post("/kakao-signin", async function(req, res) {
+  try{
+    // 로그인 확인을 위해 컨트롤러 호출
+    // console.log('mobile-router', req.body);
+    var result = await mobile_login_controller.KakaoSignIn(req, res);
+
+    console.log('login mobile-router kakao signin result : ', result.data);
+    // console.log(result);
+    var uid = result.data.uid;
+    // console.log(uid);
+    let token = generateJsonWebToken(uid);
+    
+    // console.log(token);
+    if (result.code == 0){
+      res.json({
+        resp : true,
+        message : '로그인 성공',
+        token : token
+      }) 
+    } 
+    
+    // else if (result.code == 100) {
+    //   res.json({
+    //     resp : false,
+    //     message : '비밀번호가 일치하지 않습니다',
+    //     token : token
+    //   })
+    // } else if (result.code == 200) {
+      
+    //     res.json({
+    //       resp : false,
+    //       message : '아이디가 일치하지 않습니다',
+    //       token : token
+    //     })
+      
+    // }
+    
+  } catch(error) {
+    console.log('mobile-router kakao signin:'+error);
+  }
+});
+
+
 // 카카오 가입
 router.post("/kakao-signup", async function(req, res) {
   try{
     // 사용자등록 컨트롤러 호출
     console.log('mobile-router kakao signup');
     
-    var result = await mobile_login_controller.KakaoLogIn(req, res);
+    var result = await mobile_login_controller.KakaoSignUp(req, res);
     // console.log(result);
     //res.send({errMsg:result});
     //if(result==0) res.json({success: true, msg:'등록하였습니다.'});
@@ -77,7 +121,7 @@ router.post("/kakao-signup", async function(req, res) {
     } 
 
   } catch(error) {
-    console.log('mobile-router signup error:'+error);
+    console.log('mobile-router kakao signup error:'+error);
   }
 });
 

@@ -209,8 +209,9 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    userTypePage(isKakaoLogin: true),
+                                builder: (context) => const termsAgreePage(
+                                    isKakaoLogin:
+                                        true), //userTypePage(isKakaoLogin: true),
                               ));
                         }
                       },
@@ -241,8 +242,9 @@ class _LoginPageState extends State<LoginPage> {
                               onTap: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const termsAgreePage(),
+                                    builder: (context) => const termsAgreePage(
+                                      isKakaoLogin: false,
+                                    ),
                                   )),
                               child: const TextCustom(text: '회원가입'))
                         ]),

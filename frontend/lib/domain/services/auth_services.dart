@@ -10,6 +10,17 @@ class AuthServices {
         headers: {'Accept': 'application/json'},
         body: {'userid': userid, 'userpw': password});
     // print('auth_services login');
+    print(resp.body);
+
+    return ResponseLogin.fromJson(jsonDecode(resp.body));
+  }
+
+  Future<ResponseLogin> kakaoLogin(String user_id, String user_email) async {
+    final resp = await http.post(
+        Uri.parse('${Environment.urlApi}/login/kakao-signin'),
+        headers: {'Accept': 'application/json'},
+        body: {'userid': user_id, 'user_email': user_email});
+    // print('auth_services login');
     // print(resp.body);
 
     return ResponseLogin.fromJson(jsonDecode(resp.body));
