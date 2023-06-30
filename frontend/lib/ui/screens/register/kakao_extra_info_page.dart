@@ -21,7 +21,7 @@ class KakaoExtraInfoPage extends StatefulWidget {
 
 class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
   late TextEditingController inviteCodeController;
-  final String userRole = '1';
+  final String userRole = '0';
   String? emd;
   String? youthAge;
   String? parentsAge;
