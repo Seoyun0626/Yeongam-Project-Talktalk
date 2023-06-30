@@ -26,14 +26,14 @@ class FirstWeekMissionPage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromRGBO(249, 248, 189, 1),
+        backgroundColor: ThemeColors.third,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Color.fromRGBO(249, 248, 189, 1),
+          backgroundColor: ThemeColors.third,
           leading: IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: ThemeColors.fig_pink,
+                color: ThemeColors.primary,
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -65,7 +65,7 @@ class FirstWeekMissionPage extends StatelessWidget {
                             // height: 50.h,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: ThemeColors.fig_pink, width: 2.w),
+                                  color: ThemeColors.primary, width: 2.w),
                               color: Colors.white,
                             ),
                             child: Column(children: [
@@ -73,7 +73,7 @@ class FirstWeekMissionPage extends StatelessWidget {
                                 margin: EdgeInsets.all(5.w),
                                 padding: EdgeInsets.all(5.w),
                                 decoration: const BoxDecoration(
-                                    color: ThemeColors.fig_pink,
+                                    color: Color.fromRGBO(245, 117, 33, 0.8),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
                                 child: TextCustom(
@@ -89,8 +89,8 @@ class FirstWeekMissionPage extends StatelessWidget {
                                     fontFamily: 'CookieRun',
                                     fontWeight: FontWeight.w700,
                                     letterSpacing: 2,
-                                    color: ThemeColors.fig_green),
-                                strokeColor: ThemeColors.basic,
+                                    color: ThemeColors.primary),
+                                strokeColor: Colors.transparent,
                                 strokeWidth: 2,
                               ),
                               SizedBox(
@@ -177,7 +177,7 @@ class FirstWeekMissionPage extends StatelessWidget {
                                     children: [
                                       Icon(
                                         Icons.person_outline_rounded,
-                                        color: ThemeColors.fig_pink,
+                                        color: ThemeColors.primary,
                                         size: 70.sp,
                                       ),
                                       SizedBox(
@@ -202,7 +202,7 @@ class FirstWeekMissionPage extends StatelessWidget {
                                     ],
                                   ),
                                   Divider(
-                                    color: ThemeColors.fig_pink,
+                                    color: ThemeColors.primary,
                                     height: 30.h,
                                     thickness: 1,
                                   ),
@@ -280,10 +280,10 @@ class FirstWeekMissionPage extends StatelessWidget {
                                               20.w, 10.h, 20.w, 10.h),
                                           decoration: BoxDecoration(
                                               color: const Color.fromRGBO(
-                                                  198,
-                                                  30,
-                                                  54,
-                                                  0.5), //ThemeColors.fig_pink,
+                                                  245,
+                                                  117,
+                                                  33,
+                                                  0.8), //ThemeColors.fig_pink,
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(30.r),
                                               ),
