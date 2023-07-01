@@ -183,3 +183,50 @@ exports.checkAttendance = async function(req, res) {
   }
   return resultcode;
 };
+
+exports.fetchFeedback = async function(req, res) {
+  var resultcode = 0;
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var query = 'SELECT * FROM webdb.tb_feedback';
+    var rows = await conn.query(query); // 쿼리 실행
+    resultcode = 1;
+    return rows;
+  } catch(error) {
+    console.log('login-service fetchFeedback:'+error);
+  }
+  return rows;
+};
+
+exports.feedRegi = async function(req, res) {
+  var resultcode = 0;
+  var conn;
+  try{
+    // console.log(req.session.user)
+    conn = await db.getConnection();
+    var query = 'insert into webdb.tb_feedback (tester, feedback_name, feedback_content) values ("'+req.session.user.data.user_name+'", "'+req.body.name+'", "'+req.body.content+'")';
+    var rows = await conn.query(query); // 쿼리 실행
+    resultcode = 1;
+    return rows;
+  } catch(error) {
+    console.log('login-service feedRegi:'+error);
+  }
+  return rows;
+};
+
+exports.feedDel = async function(req, res) {
+  var resultcode = 0;
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var query = 'delete from webdb.tb_feedback where board_idx="'+req.params.id+'"';
+    var rows = await conn.query(query); // 쿼리 실행
+    resultcode = 1;
+    return rows;
+  }
+  catch(error) {
+    console.log('login-service feedDel:'+error);
+  }
+  return rows;
+};

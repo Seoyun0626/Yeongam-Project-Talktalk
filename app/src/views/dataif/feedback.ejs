@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/dataif/memPage.css">
+  <link rel="stylesheet" href="/css/home/layout.css">
+  <script src="/ckeditor/build/ckeditor.js"></script>
+</head>
+<body>
+  <div class='common-background-bar background-bar-memManage'></div>
+  <div class='common-border-bar border-bar-memManage'></div>
+  <%- include('../layout.ejs') %>
+<section>
+    <div>
+        <div class="pagename">회원 정보 관리</div>
+        <br>
+        <form action="/admin/dataif/" method="search" class="ui form">
+          <div class="fields">
+            <div class="field">
+              <select class="ui dropdown">
+                <option value="id">아이디</option>
+              </select>
+            </div>
+            <div class="field">
+              <input type="search" name="search" id="search" placeholder="검색어를 입력하세요">
+            </div>
+            <div class="field">
+              <button id="search_btn" type="submit" class="ui button">검색</button>
+            </div>
+          </div>
+        </form>
+        <table id="mem_table">
+          <thead>
+            <tr>
+                <th>등록자</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>조회</th>
+                <th>삭제</th>
+          </tr>
+        </thead>
+          <tbody>
+            <!-- 페이지 별로 -->
+          <% for(var i=0; i<posts.length; i++){ %>
+            <tr>
+              <td><%= posts[i].tester %></td>
+              <td><%= posts[i].feedback_name %></td>
+              <td><%= posts[i].feedback_content %></td>
+              <td><a href="/admin/auth/feedView/<%= posts[i].board_idx %>">조회</a></td>
+              <td><a href="/admin/auth/feedDel/<%= posts[i].board_idx %>" onclick="return delMem()">삭제</a></td>
+              <script>
+                function delMem(){
+                  if(confirm("정말 삭제하시겠습니까?")){
+                    return true;
+                  }else{
+                    return false;
+                  }
+                }
+              </script>
+            </tr>
+          <% } %>
+          </tbody>
+        </table>
+        <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/auth/feedRegi'">등록</button>
+    </div>
+</section>
+</div>
+</body>
+
+</html>

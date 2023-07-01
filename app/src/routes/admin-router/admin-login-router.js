@@ -149,4 +149,47 @@ router.get('/calendar', async function (req, res) {
   }
 });
 
+
+// 피드백 수집
+router.get('/feedback', async function (req, res) {
+  try{
+    var result = await login_controller.fetchFeedback(req, res);
+    res.render('dataif/feedback', {
+      posts : result
+    });
+  }
+  catch(error) {
+    console.log('login-router feedback error:'+error);
+  }
+});
+
+router.get('/feedRegi', async function (req, res) {
+  try{
+    res.render('dataif/feedRegi');
+  }
+  catch(error) {
+    console.log('login-router feedback error:'+error);
+  }
+});
+
+router.post('/feedRegi', async function (req, res) {
+  try{
+    var result = await login_controller.feedRegi(req, res);
+    res.redirect('/admin/auth/feedback');
+  } catch(error) {
+    console.log('login-router feedback error:'+error);
+  }
+});
+
+router.get('/feedDel/:id', async function (req, res) {
+  try{
+    var result = await login_controller.feedDel(req, res);
+    res.redirect('/admin/auth/feedback');
+  }
+  catch(error) {
+    console.log('login-router feedback error:'+error);
+  }
+});
+
+
 module.exports = router;

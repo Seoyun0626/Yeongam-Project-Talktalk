@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/semantic/layout.css">
+  <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/policy/banner.css">
+  <link rel="stylesheet" href="/css/home/layout.css">
+  <script src="/ckeditor/build/ckeditor.js"></script>
+</head>
+
+<body>
+    <div class='common-background-bar background-bar-banner'></div>
+    <div class='common-border-bar border-bar-banner'></div>
+    <%- include('../layout.ejs') %>
+<section>
+    <div class="pagename">피드백 등록</div>
+    <form action="/admin/auth/feedRegi" method="post">
+        <div class="ui form">
+            <div class="inline fields">
+              <label>제목</label>
+              <div class="four wide field">
+                <input type="text" name="name" id="feedback_title" placeholder="제목을 입력하세요">
+              </div>
+            </div>
+        </div>
+        <div class="ui form">
+            <div class="inline fields">
+              <label>내용</label>
+              <div class="four wide field">
+                <textarea name="content" id="feedback_content" placeholder="내용을 입력하세요"></textarea>
+              </div>
+            </div>
+        </div>
+
+        <button class="ui button" type="submit" onclick="return btn()">등록</button>
+        <script>
+            function btn(){
+                if(confirm("정말 등록하시겠습니까?")){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        </script>
+    </form>
+</section>
+</body>
+</html>
