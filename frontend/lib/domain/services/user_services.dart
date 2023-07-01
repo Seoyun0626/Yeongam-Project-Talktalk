@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:teentalktalk/data/env/env.dart';
-import 'package:teentalktalk/domain/models/response/response_event.dart';
-import 'package:teentalktalk/domain/models/response/response_fig.dart';
+import 'package:teentalktalk/domain/models/response/response_user_fig_count.dart';
+import 'package:teentalktalk/domain/models/response/response_fig_history.dart';
 import 'package:teentalktalk/ui/helpers/debouncer.dart';
 import 'package:teentalktalk/data/storage/secure_storage.dart';
 import 'package:teentalktalk/domain/models/response/default_response.dart';
@@ -159,16 +159,16 @@ class UserServices {
   }
 
   // tb_user에서 사용자 무화과 개수 가져오기/업데이트
-  Future<ResponseEvent> updateFigCount() async {
+  Future<ResponseUserFigCount> updateFigCount() async {
     final token = await secureStorage.readToken();
 
     // print('getFigCount');
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/user/get-fig-count'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
-    // print(resp.body);
+    print(resp.body);
 
-    return ResponseEvent.fromJson(jsonDecode(resp.body));
+    return ResponseUserFigCount.fromJson(jsonDecode(resp.body));
   }
 }
 

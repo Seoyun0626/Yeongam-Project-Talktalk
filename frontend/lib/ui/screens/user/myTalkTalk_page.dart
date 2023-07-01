@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:teentalktalk/domain/models/response/response_event.dart';
-import 'package:teentalktalk/domain/models/response/response_fig.dart';
+import 'package:teentalktalk/domain/models/response/response_user_fig_count.dart';
+import 'package:teentalktalk/domain/models/response/response_fig_history.dart';
 import 'package:teentalktalk/domain/services/user_services.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:teentalktalk/ui/screens/event/enter_invite_code_page.dart';
@@ -465,7 +465,7 @@ class _MyFigState extends State<_MyFig> {
   Future<void> _updateFigCount() async {
     final authBloc = BlocProvider.of<AuthBloc>(context);
     if (authBloc.state is SuccessAuthentication) {
-      ResponseEvent figCountData = await userService.updateFigCount();
+      ResponseUserFigCount figCountData = await userService.updateFigCount();
       setState(() {
         figCount = figCountData.figCount;
       });

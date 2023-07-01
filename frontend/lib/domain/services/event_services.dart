@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:teentalktalk/data/storage/secure_storage.dart';
 import 'package:teentalktalk/domain/models/response/default_response.dart';
+import 'package:teentalktalk/domain/models/response/response_user_fig_count.dart';
 import 'package:teentalktalk/domain/models/response/response_event.dart';
-import 'package:teentalktalk/domain/models/response/response_fig.dart';
+import 'package:teentalktalk/domain/models/response/response_fig_history.dart';
 import 'package:teentalktalk/data/env/env.dart';
 
 class EventServices {
@@ -90,7 +91,7 @@ class EventServices {
   }
 
   // 사용자 무화과 내역 가져오기(지급, 사용)
-  Future<ResponseFig> getFigHistoryByUser() async {
+  Future<ResponseFigHistory> getFigHistoryByUser() async {
     final token = await secureStorage.readToken();
 
     // print('getFigHistoryByUser');
@@ -99,7 +100,7 @@ class EventServices {
         headers: {'Accept': 'application/json', 'xxx-token': token!});
     // print(resp.body);
 
-    return ResponseFig.fromJson(jsonDecode(resp.body));
+    return ResponseFigHistory.fromJson(jsonDecode(resp.body));
   }
 }
 
