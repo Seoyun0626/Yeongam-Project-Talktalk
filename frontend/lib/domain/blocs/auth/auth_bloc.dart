@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:teentalktalk/data/storage/secure_storage.dart';
 import 'package:teentalktalk/domain/services/auth_services.dart';
+import 'package:teentalktalk/ui/helpers/kakao_sdk_login.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -49,7 +50,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onKakaoLogin(
       OnKakaoLoginEvent event, Emitter<AuthState> emit) async {
-    emit(SuccessAuthentication());
+    try {
+      emit(LoadingAuthentication());
+      print("_onKakaoLogin");
+
+      final data =
+          await authServices.kakaoLogin(event.userid, event.user_email);
+
+      print(data.resp);
+      await Future.delayed(const Duration(milliseconds: 350));
+
+      if (data.resp) {
+        await secureStorage.deleteSecureStorage();
+        await secureStorage.persistenToken(data.token!);
+        emit(SuccessAuthentication());
+      } else {
+        emit(FailureAuthentication(data.message));
+      }
+    } catch (e) {
+      emit(FailureAuthentication(e.toString()));
+    }
   }
 
   Future<void> _onCheckingLogin(

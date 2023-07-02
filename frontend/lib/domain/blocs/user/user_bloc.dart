@@ -102,7 +102,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       print(resp.resp);
 
       if (resp.resp) {
-        emit(SuccessUserState());
+        emit(SuccessKakaoUserState());
       } else {
         emit(FailureUserState(resp.message));
       }

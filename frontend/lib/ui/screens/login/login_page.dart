@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 // import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/domain/services/auth_services.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/kakao_sdk_login.dart';
@@ -60,23 +63,35 @@ class _LoginPageState extends State<LoginPage> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         print(state);
-        // if (state is LoadingAuthentication) {
-        //   modalLoading(context, '확인 중...');
-        //   // Navigator.of(context).pop();
-        // } else
 
-        if (state is FailureAuthentication) {
-          modalWarning(context, '다시 로그인해주세요');
-        } else if (state is SuccessAuthentication) {
+        if (state is SuccessAuthentication) {
           userBloc.add(OnGetUserAuthenticationEvent());
-
-          Navigator.of(context).pop();
           Navigator.pushAndRemoveUntil(
             context,
             routeFade(page: const HomePage()),
             (_) => false,
           );
+        } else if (state is FailureAuthentication) {
+          modalWarning(context, '다시 로그인해주세요');
         }
+
+        // if (state is LoadingAuthentication) {
+        //   modalLoading(context, '확인 중...');
+        //   // Navigator.of(context).pop();
+        // } else
+
+        // if (state is FailureAuthentication) {
+        //   modalWarning(context, '다시 로그인해주세요');
+        // } else if (state is SuccessAuthentication) {
+        //   userBloc.add(OnGetUserAuthenticationEvent());
+
+        //   Navigator.of(context).pop();
+        //   Navigator.pushAndRemoveUntil(
+        //     context,
+        //     routeFade(page: const HomePage()),
+        //     (_) => false,
+        //   );
+        // }
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -201,17 +216,31 @@ class _LoginPageState extends State<LoginPage> {
                       // border: Border.all()
                       backgroundColor: Colors.yellow,
                       onPressed: () async {
-                        // modalBasic(context, '준비 중입니다');
                         bool loginSuccess =
                             await KakaoLoginServices.kakaoLogin();
-
                         if (loginSuccess) {
-                          Navigator.push(
+                          Map<String, String> userInfo =
+                              await KakaoLoginServices.kakaoGetUserInfo();
+                          // 카카오 계정 중복 체크
+                          final bool isFirstKakaoLogin =
+                              await authServices.checkDuplicateID(
+                                  userInfo['user_id']!); // db에서 계정 중복 확인
+                          if (!isFirstKakaoLogin) {
+                            // 가입한 계정이 없으면 가입
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    userTypePage(isKakaoLogin: true),
-                              ));
+                                    const userTypePage(isKakaoLogin: true),
+                              ),
+                            );
+                          } else {
+                            // 가입한 계정이 있으면 로그인
+                            authBloc.add(OnKakaoLoginEvent(
+                                userInfo['user_id'] ?? '',
+                                userInfo['user_email'] ?? ''));
+                          }
                         }
                       },
                     ),

@@ -17,14 +17,14 @@ import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:stroke_text/stroke_text.dart';
 
-class newWeeklyFigEventPage extends StatefulWidget {
-  const newWeeklyFigEventPage({Key? key}) : super(key: key);
+class NewWeeklyFigEventPage extends StatefulWidget {
+  const NewWeeklyFigEventPage({Key? key}) : super(key: key);
 
   @override
-  State<newWeeklyFigEventPage> createState() => _newWeeklyFigEventPageState();
+  State<NewWeeklyFigEventPage> createState() => _NewWeeklyFigEventPageState();
 }
 
-class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
+class _NewWeeklyFigEventPageState extends State<NewWeeklyFigEventPage> {
   // 주차별 이벤트 참여 했는지 안했는지
   late bool hasWeek01Participated = false;
   late bool hasWeek02Participated = false;
@@ -60,7 +60,11 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
   Widget build(BuildContext context) {
     final authState = BlocProvider.of<AuthBloc>(context).state;
 
+    // 이벤트 기간 반영
+    // 1.웰컴 2.스크랩 3.공유
+    // 현재 날짜가 이벤트 기간 내 해당되면 버튼 활성화
     int week = 1;
+
     // 이벤트 참여 여부
     List<bool> getWeekCheckList = [
       hasWeek01Participated,

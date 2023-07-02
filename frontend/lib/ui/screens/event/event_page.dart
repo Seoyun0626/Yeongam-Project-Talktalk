@@ -203,7 +203,7 @@ class _weeklyFigEvent extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const newWeeklyFigEventPage(),
+                builder: (context) => const NewWeeklyFigEventPage(),
               ));
         },
         child: Container(

@@ -48,13 +48,51 @@ router.post("/login", async function(req, res) {
   }
 });
 
+
+// 카카오 로그인
+router.post("/kakao-signin", async function(req, res) {
+  try{
+    // 로그인 확인을 위해 컨트롤러 호출
+    // console.log('mobile-router kakao-signin', req.body);
+    var result = await mobile_login_controller.KakaoSignIn(req, res);
+
+    // console.log('login mobile-router result : ', result.data);
+
+    var uid = result.data.uid;
+    // console.log(uid);
+    let token = generateJsonWebToken(uid);
+    
+    // console.log(token);
+    if (result.code == 0){
+      res.json({
+        resp : true,
+        message : '로그인 성공',
+        token : token
+      }) 
+    } else if (result.code == 200) {
+      
+        res.json({
+          resp : false,
+          message : '일치하는 사용자 정보를 찾을 수 없습니다.',
+          token : token
+        })
+      
+    }
+    
+  } catch(error) {
+    console.log('mobile-router login:'+error);
+  }
+});
+
+
+
 // 카카오 가입
 router.post("/kakao-signup", async function(req, res) {
   try{
     // 사용자등록 컨트롤러 호출
     console.log('mobile-router kakao signup');
     
-    var result = await mobile_login_controller.KakaoLogIn(req, res);
+    var result = await mobile_login_controller.KakaoSignUp(req, res);
     // console.log(result);
     //res.send({errMsg:result});
     //if(result==0) res.json({success: true, msg:'등록하였습니다.'});
@@ -234,7 +272,7 @@ router.get("/signup", function(req, res) {
   });
 
 
-  router.post("/checkDuplicateID", async function(req,res){
+  router.get("/checkDuplicateID/:userid", async function(req,res){
     try{
       var result = await mobile_login_controller.checkDuplicateID(req, res);
       if(result==0){
@@ -245,7 +283,7 @@ router.get("/signup", function(req, res) {
         }); // kth
       }
       else if (result == 100){
-        console.log('mobile-login-router checkDuplicateID fail');
+        console.log('');
         res.json({
           resp: true,
           message: '이미 존재하는 아이디입니다'

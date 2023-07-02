@@ -15,11 +15,21 @@ class AuthServices {
     return ResponseLogin.fromJson(jsonDecode(resp.body));
   }
 
-  Future<bool> checkDuplicateID(String userid) async {
+  Future<ResponseLogin> kakaoLogin(String userid, String user_email) async {
     final resp = await http.post(
-      Uri.parse('${Environment.urlApi}/login/checkDuplicateID'),
+        Uri.parse('${Environment.urlApi}/login/kakao-signin'),
+        headers: {'Accept': 'application/json'},
+        body: {'userid': userid, 'user_email': user_email});
+    // print('auth_services kakaoLogin');
+    // print(resp.body);
+
+    return ResponseLogin.fromJson(jsonDecode(resp.body));
+  }
+
+  Future<bool> checkDuplicateID(String userid) async {
+    final resp = await http.get(
+      Uri.parse('${Environment.urlApi}/login/checkDuplicateID/$userid'),
       headers: {'Accept': 'application/json'},
-      body: {'userid': userid},
     );
     return ResponseLogin.fromJson(jsonDecode(resp.body)).resp;
   }
