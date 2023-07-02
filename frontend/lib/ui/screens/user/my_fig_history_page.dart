@@ -210,14 +210,13 @@ class _FigHistoryState extends State<_FigHistory>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextCustom(
-                                text: reward.event_name, //"출석 체크",
+                                text: reward.event_name,
                                 fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                             SizedBox(height: 8.h),
                             TextCustom(
-                              text: reward.acquired_time
-                                  .substring(0, 10), //"2023.03.24 13:44",
+                              text: reward.acquired_time.substring(0, 10),
                               fontSize: 15,
                             )
                           ],
