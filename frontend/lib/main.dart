@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:teentalktalk/ui/helpers/firebase_messaging.dart';
 import 'package:teentalktalk/ui/screens/intro/checking_login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -16,6 +18,12 @@ void main() async {
 
   // Firebase DynamicLink
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // Firebase Messaging 초기화
+  await FirebaseMessagingService.initializeFirebaseMessaging();
+  await FirebaseMessagingService.requestFirebaseNotificationPermission();
+  String? fcmToken = await FirebaseMessagingService.getFirebaseToken();
+  print('FCM 토큰: $fcmToken');
 
   // Kakao SDK
   KakaoSdk.init(
