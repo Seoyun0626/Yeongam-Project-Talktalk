@@ -37,8 +37,10 @@ class AuthServices {
   Future<ResponseLogin> renewLogin() async {
     final token = await secureStorage.readToken();
 
-    final resp = await http.get(Uri.parse('${Environment.urlApi}/renew-login'),
+    final resp = await http.get(
+        Uri.parse('${Environment.urlApi}/login/renew-login'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
+    // print(resp.body);
     return ResponseLogin.fromJson(jsonDecode(resp.body));
   }
 }

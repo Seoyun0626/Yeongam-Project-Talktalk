@@ -188,6 +188,18 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "firebase_in_app_messaging",
+      "rootUri": "file:///Users/taeheekim/.pub-cache/hosted/pub.dev/firebase_in_app_messaging-0.7.3+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_in_app_messaging_platform_interface",
+      "rootUri": "file:///Users/taeheekim/.pub-cache/hosted/pub.dev/firebase_in_app_messaging_platform_interface-0.2.4+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///Users/taeheekim/Documents/development/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -866,7 +878,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-06-30T10:55:37.233116Z",
+  "generated": "2023-07-03T01:34:15.359253Z",
   "generator": "pub",
   "generatorVersion": "2.19.0"
 }

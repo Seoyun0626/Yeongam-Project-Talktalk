@@ -6,6 +6,7 @@ import 'package:teentalktalk/domain/models/response/response_user_fig_count.dart
 import 'package:teentalktalk/domain/models/response/response_fig_history.dart';
 import 'package:teentalktalk/domain/services/user_services.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_logout.dart';
 import 'package:teentalktalk/ui/screens/event/enter_invite_code_page.dart';
 import 'package:teentalktalk/ui/screens/event/event_page.dart';
 import 'package:teentalktalk/ui/screens/intro/checking_login_page.dart';
@@ -211,7 +212,7 @@ class _LogInOutUserNameState extends State<_LogInOutUserName> {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
-    final authBloc = BlocProvider.of<AuthBloc>(context);
+    // final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (_, state) {
@@ -274,13 +275,7 @@ class _LogInOutUserNameState extends State<_LogInOutUserName> {
                   ),
                 ),
                 onTap: () {
-                  authBloc.add(OnLogOutEvent());
-                  userBloc.add(OnLogOutUser());
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    routeFade(page: const CheckingLoginPage()),
-                    (_) => false,
-                  );
+                  modalLogout(context);
                 },
               ),
             ],
@@ -366,8 +361,8 @@ class _LogInOut extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userBloc = BlocProvider.of<UserBloc>(context);
-    final authBloc = BlocProvider.of<AuthBloc>(context);
+    // final userBloc = BlocProvider.of<UserBloc>(context);
+    // final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
       if (state is LogOut) {
@@ -419,24 +414,12 @@ class _LogInOut extends StatelessWidget {
             ),
           ),
           onTap: () {
-            authBloc.add(OnLogOutEvent());
-            userBloc.add(OnLogOutUser());
-            // Navigator.pushAndRemoveUntil(
-            //   context,
-            //   routeFade(page: const CheckingLoginPage()),
-            //   (_) => false,
-            // );
-            // Navigator.pushNamedAndRemoveUntil(
-            //   context,
+            modalLogout(context);
+
+            // Navigator.of(context).pushNamedAndRemoveUntil(
             //   CheckingLoginPage.routeName,
             //   (_) => false,
-
             // );
-
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              CheckingLoginPage.routeName,
-              (_) => false,
-            );
           },
         );
       }

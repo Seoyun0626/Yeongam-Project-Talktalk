@@ -296,13 +296,14 @@ router.get("/signup", function(req, res) {
   });
 
   router.get("/renew-login", verifyToken, function(req, res) {
+    // console.log('renew-login');
     try {
 
       const token = generateJsonWebToken( req.idPerson );
 
       return res.json({
           resp: true,
-          message: 'Bienvenido a Social Frave',
+          message: '청소년 톡talk에 오신 걸 환영합니다.',
           token: token
       }); 
       
