@@ -170,6 +170,17 @@ class UserServices {
 
     return ResponseUserFigCount.fromJson(jsonDecode(resp.body));
   }
+
+  Future<DefaultResponse> deleteUser() async {
+    final token = await secureStorage.readToken();
+    // print(token);
+    // print('ResponseUser - getUserById');
+    final resp = await http.get(
+        Uri.parse('${Environment.urlApi}/user/delete-user'),
+        headers: {'Accept': 'application/json', 'xxx-token': token!});
+
+    return DefaultResponse.fromJson(jsonDecode(resp.body));
+  }
 }
 
 final userService = UserServices();

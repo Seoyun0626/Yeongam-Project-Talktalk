@@ -6,6 +6,7 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
 import 'package:teentalktalk/ui/screens/event/fig_market_page.dart';
 import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/01_week_page.dart';
 import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/00_week_page.dart';
@@ -208,11 +209,12 @@ class _NewWeeklyFigEventPageState extends State<NewWeeklyFigEventPage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FigMarketPage(),
-                        ));
+                    modalPreparing(context);
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const FigMarketPage(),
+                    //     ));
                   },
                   child: Container(
                     padding: const EdgeInsets.all(20),

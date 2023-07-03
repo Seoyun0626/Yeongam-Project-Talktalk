@@ -93,6 +93,19 @@ router.get("/get-user-by-id", verifyToken, async function(req, res){
     }
   });
 
+  router.get("/delete-user", verifyToken, async function (req, res) {
+    try {
+      var result = await mobile_user_controller.deleteUser(req, res);
+  
+      res.json({
+        resp:true,
+        message : 'delete user',
+      })
+    } catch (error) {
+      console.log('mobile-user-router get fig count error:' + error);
+    }
+  });
+
  
  
 

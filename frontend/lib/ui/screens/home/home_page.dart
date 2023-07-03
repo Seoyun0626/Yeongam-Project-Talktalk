@@ -46,9 +46,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     final authState = BlocProvider.of<AuthBloc>(context).state;
 
-    if (authState is SuccessAuthentication) {
-      checkEventParticipation();
-    }
+    // if (authState is SuccessAuthentication) {
+    //   checkEventParticipation();
+    // }
   }
 
   Future<void> checkEventParticipation() async {

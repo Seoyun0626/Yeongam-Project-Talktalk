@@ -36,3 +36,12 @@ exports.getFigCount = async function(req, res){
     console.log('mobile-user-controller get fig count:'+error);
   }
 }
+
+exports.deleteUser = async function(req, res){
+  try{
+    var result = await mobile_user_service.deleteUser(req, res);
+    return result;
+  } catch(error) {
+    console.log('mobile-user-controller delete user:'+error);
+  }
+}

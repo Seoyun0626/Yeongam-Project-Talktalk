@@ -41,7 +41,7 @@ alter table `webdb`.`tb_user` add primary key `uid`;
 
 CREATE TABLE webdb.`tb_policy` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` VARCHAR(100) NOT NULL, -- 정책 고유 번호 컬럼 추가 쿼리 : alter table `tb_policy` add `uid` varchar(100) NOT NULL after `board_idx` ;
+  `uid` VARCHAR(100) NOT NULL, -- 정책 고유 번호 컬럼 추가 쿼리 : alter table `tb_policy` add `uid` varchar(100) NOT NULL after `board_idx` ; // pid로 이름 변경
   `policy_name` varchar(50) NOT NULL,
   `policy_target_code` varchar(2) NOT NULL,
   `policy_institution_code` varchar(2) NOT NULL,
