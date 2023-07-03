@@ -203,7 +203,7 @@ class _weeklyFigEvent extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const newWeeklyFigEventPage(),
+                builder: (context) => const NewWeeklyFigEventPage(),
               ));
         },
         child: Container(
@@ -280,7 +280,7 @@ class _clickBattle extends StatelessWidget {
               )),
           SizedBox(height: 20.h),
           const Text(
-            '클릭해보세요',
+            '준비 중입니다', //'클릭해보세요',
             style: TextStyle(
                 color: ThemeColors.primary,
                 fontFamily: 'CookieRun',

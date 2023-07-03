@@ -29,19 +29,24 @@ CREATE TABLE webdb.`tb_user` (
   `del_chk` varchar(1) NOT NULL DEFAULT 'N',
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`board_idx`) USING BTREE 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
--- 최고 관리자 id 설정
-insert into tb_user (userid, uid, userpw, user_name, user_role, user_type, salt) values ('admin', '7f06c817-d8ee-43be-be7b-226c0a4d3432', 'NNNq1ZZBr3kfAIhMCxsxAn7LWe73aPjZEblZHtFPn0DNysXK8qGUXBewTNhkFzeaaBmS0qi2sWws89Ra/iTNjaQrZjIzkRswFLOy5qhOGWa6CKujexk8L/Yv07wMTGRF2ZTK8301Z5QLqawDWjTgt5hyUtabSK0kmS06+s1VAHg=', 'admin', '0', '0', 'yFfmKDozNt6TLMf+9tOni7zbrnqTOZqZWmF1i57q2rNMS5pMlxqAVdiJwPyVWBDKYT5G6wa4V389/tsSS/Ydeg==');
--- 아이디 : admin, 비밀번호 : 1234
+  -- PRIMARY KEY (`board_idx`) USING BTREE 
+  PRIMARY KEY (`board_idx`, `uid`) USING BTREE
 
--- **PK 추가 :  uid
-alter table `webdb`.`tb_user` add primary key `uid`;
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 최고 관리자 id 설정 - 아이디 : admin2, 비밀번호 : 1234
+insert into tb_user (userid, uid, userpw, user_name, user_role, user_type, salt) values ('admin2', '7f06c817-d8ee-43be-be7b-226c0a4d3432', 'NNNq1ZZBr3kfAIhMCxsxAn7LWe73aPjZEblZHtFPn0DNysXK8qGUXBewTNhkFzeaaBmS0qi2sWws89Ra/iTNjaQrZjIzkRswFLOy5qhOGWa6CKujexk8L/Yv07wMTGRF2ZTK8301Z5QLqawDWjTgt5hyUtabSK0kmS06+s1VAHg=', 'admin', '1', '0', 'yFfmKDozNt6TLMf+9tOni7zbrnqTOZqZWmF1i57q2rNMS5pMlxqAVdiJwPyVWBDKYT5G6wa4V389/tsSS/Ydeg==');
+-- insert into tb_user (userid, uid, userpw, user_name, user_role, user_type, salt) values ('admin', '7f06c817-d8ee-43be-be7b-226c0a4d3432', 'NNNq1ZZBr3kfAIhMCxsxAn7LWe73aPjZEblZHtFPn0DNysXK8qGUXBewTNhkFzeaaBmS0qi2sWws89Ra/iTNjaQrZjIzkRswFLOy5qhOGWa6CKujexk8L/Yv07wMTGRF2ZTK8301Z5QLqawDWjTgt5hyUtabSK0kmS06+s1VAHg=', 'admin', '1', '0', 'yFfmKDozNt6TLMf+9tOni7zbrnqTOZqZWmF1i57q2rNMS5pMlxqAVdiJwPyVWBDKYT5G6wa4V389/tsSS/Ydeg==');
+
+
+-- 기존 테이블에서 PK 추가 :  uid
+-- alter table `webdb`.`tb_user` add primary key `uid`;
+-- ALTER TABLE webdb.tb_user DROP PRIMARY KEY, ADD PRIMARY KEY (board_idx, uid); 실행
 
 
 CREATE TABLE webdb.`tb_policy` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` VARCHAR(100) NOT NULL, -- 정책 고유 번호 컬럼 추가 쿼리 : alter table `tb_policy` add `uid` varchar(100) NOT NULL after `board_idx` ;
+  `uid` VARCHAR(100) NOT NULL, -- 정책 고유 번호 컬럼 추가 쿼리 : alter table `tb_policy` add `uid` varchar(100) NOT NULL after `board_idx` ; // pid로 이름 변경
   `policy_name` varchar(50) NOT NULL,
   `policy_target_code` varchar(2) NOT NULL,
   `policy_institution_code` varchar(2) NOT NULL,
@@ -61,9 +66,10 @@ CREATE TABLE webdb.`tb_policy` (
   `img` varchar(30) NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`board_idx`) USING BTREE 
+  --PRIMARY KEY (`board_idx`) USING BTREE 
+  PRIMARY KEY (`board_idx`, `uid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
--- **PK 추가 : uid
+-- **기존 테이블에서 PK 추가 : uid
 alter table `webdb`.`tb_policy` add primary key `uid`;
 
 
@@ -160,11 +166,14 @@ CREATE TABLE webdb.`tb_event`(
   `eid` varchar(100) NOT NULL,
   `event_name` varchar(100) NOT NULL,
   `fig_payment` varchar(4) NOT NULL,
+  `event_start_date` timestamp NOT NULL,
+  `event_end_date` timestamp NOT NULL,
   `event_reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `event_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`board_idx`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into webdb.tb_event (eid,event_name,fig_payment) values('1','출석체크','1'),('2','웰컴 청소년 톡talk','10'),('3','톡talk 알림 허용','2'),('4','정책 스크랩','3'),('5','정책 공유','3'),('6','친구 초대','3'),('7','추천인 입력','10');
+insert into webdb.tb_event (eid,event_name,fig_payment,event_start_date,event_end_date) values('1','출석체크','1','2023-07-05 00:00:00','2023-08-01 00:00:00'),('2','웰컴 청소년 톡talk','10','2023-07-05 00:00:00','2023-07-11 00:00:00'),('3','정책 스크랩','2','2023-07-12 00:00:00','2023-07-18 00:00:00'),('4','정책 공유','3','2023-07-19 00:00:00','2023-07-25 00:00:00'),('5','친구 초대','3','2023-07-05 00:00:00','2023-08-01 00:00:00'),('6','추천인 입력','10','2023-07-05 00:00:00','2023-08-01 00:00:00');
+-- insert into webdb.tb_event (eid,event_name,fig_payment,event_start_date,event_end_date) values('1','출석체크','1','2023-07-05 00:00:00','2023-08-01 00:00:00'),('2','웰컴 청소년 톡talk','10','2023-07-05 00:00:00','2023-07-11 00:00:00'),('3','톡talk 알림 허용','2','2023-07-12 00:00:00','2023-07-18 00:00:00'),('4','정책 스크랩','3','2023-07-19 00:00:00','2023-07-25 00:00:00'),('5','정책 공유','3','2023-07-26 00:00:00','2023-08-01 00:00:00'),('6','친구 초대','3','2023-07-05 00:00:00','2023-08-01 00:00:00'),('7','추천인 입력','10','2023-07-05 00:00:00','2023-08-01 00:00:00');
 
 CREATE TABLE webdb.`tb_event_part`(
   `event_part_no` int(11) NOT NULL AUTO_INCREMENT,
@@ -173,6 +182,15 @@ CREATE TABLE webdb.`tb_event_part`(
   `acquired_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 오타 aquired -> acquired
   PRIMARY KEY (`event_part_no`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 출석 체크
+CREATE TABLE tb_attendance_logs (
+  -- `uid_attendance` VARCHAR(100) PRIMARY KEY,
+  `user_uid` VARCHAR(100) NOT NULL,
+  `attendance_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  -- PRIMARY KEY (user_uid, attendance_date),
+  FOREIGN KEY(user_uid) REFERENCES webdb.`tb_user`(`uid`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 기존 tb_policy_scrap drop
 -- 쿼리 : drop table tb_policy_scrap;
@@ -193,6 +211,7 @@ CREATE TABLE webdb.`tb_policy_scrap` (
 ALTER TABLE `webdb.tb_user` ADD INDEX (`uid`);
 ALTER TABLE `webdb.tb_policy` ADD INDEX (`uid`);
 
+
 -- 그 다음 새로 create하기
 CREATE TABLE webdb.`tb_policy_scrap`
 (
@@ -207,12 +226,9 @@ CREATE TABLE webdb.`tb_policy_scrap`
 	FOREIGN KEY(policy_uid) REFERENCES webdb.`tb_policy`(`uid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 외래 키 제약 조건 삭제
+-- ALTER TABLE tb_policy_scrap DROP FOREIGN KEY 외래_키_제약_조건_이름;
+ALTER TABLE tb_policy_scrap DROP FOREIGN KEY tb_policy_scrap_ibfk_1;
+ALTER TABLE tb_attendance_logs DROP FOREIGN KEY tb_attendance_logs_ibfk_1;
 
--- 출석 체크
-CREATE TABLE tb_attendance_logs (
-  -- `uid_attendance` VARCHAR(100) PRIMARY KEY,
-  `user_uid` VARCHAR(100) NOT NULL,
-  `attendance_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  -- PRIMARY KEY (user_uid, attendance_date),
-  FOREIGN KEY(user_uid) REFERENCES webdb.`tb_user`(`uid`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

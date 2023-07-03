@@ -132,9 +132,7 @@ exports.updateCodeDetail = async function(req, res) {
     var code = req.params.id.split(":")[1];
     var detail = req.params.id.split(":")[2];
     // console.log(req.params.id);
-    var code_detail_name = req.body.code_detail_name;
-    var code_detail_desc = req.body.code_detail_desc;
-    var code_detail_use_yn = req.body.code_detail_use_yn;
+    var { code_detail_name, code_detail_desc, code_detail_use_yn } = req.body;
     var query = "update webdb.tb_common_code_detail set code_detail_name = '" + code_detail_name + "', code_detail_desc = '" + code_detail_desc + "', code_detail_use_yn = '" + code_detail_use_yn + "' where code = '" + code + "' and code_detail = '" + detail + "'";
     // console.log(query);
     var rows = await conn.query(query); // 쿼리 실행
@@ -149,9 +147,7 @@ exports.insertCodeDetail = async function(req, res) {
   try{
     conn = await db.getConnection();
     var code = req.params.id.split(":")[1];
-    var code_detail_name = req.body.code_detail_name;
-    var code_detail_desc = req.body.code_detail_desc;
-    var code_detail_use_yn = req.body.code_detail_use_yn;
+    var { code_detail_name, code_detail_desc, code_detail_use_yn } = req.body;
     // code_detail 최댓값 받아 오기
     var query = "select max(code_detail) from webdb.tb_common_code_detail where code = '" + code + "'";
     var max_codeDetail = await conn.query(query);
@@ -179,3 +175,41 @@ exports.getCodeData_update = async function(req, res) {
     console.log('codeData-controller getCodeData_update error:'+error);
     }
   };
+
+exports.getEventDetail = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var event_code = req.params.id;
+    var query = "select * from webdb.tb_event";
+    var rows = await conn.query(query); // 쿼리 실행
+    // console.log(rows);
+    return rows;
+  } catch(error){
+    console.log('codeData-controller getEventDetail error:'+error);
+  }
+};
+
+exports.getEventDetail_update = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var event_code = req.params.id;
+    var query = "select * from webdb.tb_event where eid = '" + event_code + "'";
+    var rows = await conn.query(query); // 쿼리 실행
+    return rows;
+  }catch(error){
+    console.log('codeData-controller getEventDetail_update error:'+error);
+  }
+};
+
+exports.updateEventDetail = async function(req, res) {
+  try{
+    conn = await db.getConnection();
+    var eid = req.params.id.split(":")[1];
+    var { event_name, fig_payment, event_start_date, event_end_date } = req.body;
+    var query = "update webdb.tb_event set event_name = '" + event_name + "', fig_payment = '" + fig_payment + "', event_start_date = '"+event_start_date+"', event_end_date = '"+event_end_date+"' where eid = '" + eid + "'";
+    var rows = await conn.query(query); // 쿼리 실행
+    return rows;
+  } catch(error){
+    console.log('codeData-controller updateEventDetail error:'+error);
+  }
+};

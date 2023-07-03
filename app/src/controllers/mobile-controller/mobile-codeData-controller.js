@@ -43,3 +43,14 @@ exports.getCodedetail = async function(req, res) {
       console.log('code-controller getUserData:'+error);
     }
   };
+
+  exports.getEventData = async function(req, res) {
+    try{
+      // console.log(req.body);
+      var result = await code_service.getEventData(req);
+      // console.log(result);
+      return result;
+    } catch(error) {
+      console.log('code-controller getEventData:'+error);
+    }
+  };

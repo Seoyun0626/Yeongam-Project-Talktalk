@@ -66,25 +66,42 @@ try{
 
 };
 
-  //   if (!passwordMatch){
-  //     json.code = 100;
-  //     json.msg = "비밀번호 일치하지 않습니다.";
-  //     json.data = {};
-  //     return json;
-  //   } else {
-      
-  //     json.data = userdb[0];
-  //     return json;
-  //   }
-  // }else {
-  //   // 아이디 일치 X
-  //   json.code = 200;
-  //   json.msg = "ID 일치하지 않습니다.";
-  //   json.data = {};
-  //   return json;
+// 카카오 로그인
+exports.KakaoSignIn = async function(req) {
+  var conn;
+  try {
+    var json = {};
+    json.code = 0;
+    const id = req.body.userid;
+    const user_email = req.body.user_email;
+    // console.log(id, user_email);
+    conn = await db.getConnection();
+    console.log('login-service KakaoSignIn db getConnection');
+  
+    // 사용자 정보(아이디, 이메일)
+    const userdb = await conn.query("SELECT uid, userid, user_email FROM webdb.tb_user WHERE userid = ? AND user_email = ?;", [id, user_email]);
+  
+    if (userdb && userdb[0]) {
+      json.data = userdb[0];
+      return json;
+    } else {
+      json.code = 200;
+      json.msg = "일치하는 사용자 정보를 찾을 수 없습니다.";
+      json.data = {};
+      return json;
+    }
+  } catch(error) {
+    console.log('mobile-login-service KakaoSignIn:', error);
+  } finally {
+    if (conn) conn.end();
+  }
+};
+
+
+
 
   // 카카오 가입
-  exports.KakaoLogIn = async function(req) {
+  exports.KakaoSignUp = async function(req) {
     var resultcode = 0;
     var conn;
     try{
@@ -94,36 +111,23 @@ try{
       console.log(req.body);
       const {userid,user_name, user_email, user_role, user_type, invite_code, youthAge_code, parentsAge_code, emd_class_code, sex_class_code} = req.body;
     
-      
-
-  
-      // invite코드의 유저에 무화과 추가
-      if(invite_code != '') {
-        query = "SELECT fig,uid FROM webdb.tb_user where userid='" + invite_code + "' ;";
-        var rows = await conn.query(query); // 쿼리 실행
-        if(rows[0] == undefined) {
-          console.log('존재하지 않는 코드입니다.');
-          resultcode = 100;
-          return resultcode;
-        }
-        // int형식으로 무화과 추가후 varchar로 변환
-        rows[0].fig = parseInt(rows[0].fig) + 1;
-        rows[0].fig = rows[0].fig.toString();
-        query = "UPDATE webdb.tb_user SET fig='"+rows[0].fig+"' WHERE userid='"+invite_code+"';";
-        var figUpdate = await conn.query(query); // 쿼리 실행
-        var eid = 1; // 무화과 이벤트 번호, 바꿔야함
-        query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+rows[0].uid+"');";
-        // console.log(query);
-        var eventPart = await conn.query(query); // 쿼리 실행
-      }
+    // uid 생성 및 중복 체크
+    do {
+      var uid = uuidv4();
+      var uidPrefix = uid.slice(0,8); // 앞 8자리 중복 체크 (초대코드로 사용 예정)
+      var countQuery = "SELECT COUNT(*) AS count FROM webdb.tb_user WHERE uid LIKE '" + uidPrefix + "%';";
+      var countResult = await conn.query(countQuery);
+      var count = countResult[0].count;
+      // console.log(count);
+    } while (count > 0);
 
       query = "SELECT COUNT(*) AS count FROM webdb.tb_user WHERE userid='" + userid + "' ;";
       var userExists = await conn.query(query); // 쿼리 실행
 
       if (userExists[0].count > 0) {
-        console.log('카카오 로그인');
-        // resultcode = 200;
-        // return;
+        console.log('해당 계정으로 가입된 아이디가 이미 존재합니다.');
+        resultcode = 100;
+        return resultcode;
       } else {
         var pass = '';
         var salt = '';
@@ -132,7 +136,8 @@ try{
         // console.log(uid);
         await conn.query(`CALL webdb.SP_REGISTER_USER(?,?,?,?,?,?,?,?,?,?,?,?,?);`, [uid, userid, pass, salt, user_name, user_email, user_role, user_type, youthAge_code, parentsAge_code, sex_class_code, emd_class_code, randomNumber ]);
       }
-  
+
+    
       
     } catch(error) {
       console.log('mobile-login-service SignUp:'+error);
@@ -202,26 +207,26 @@ exports.signUp = async function(req, res) {
 
  
 
-    // 친구 초대
-    // invite코드의 유저에 무화과 추가
-    if(invite_code != '') {
-      query = "SELECT fig,uid FROM webdb.tb_user where userid='" + invite_code + "' ;";
-      var rows = await conn.query(query); // 쿼리 실행
-      if(rows[0] == undefined) {
-        console.log('존재하지 않는 코드입니다.');
-        resultcode = 100;
-        return resultcode;
-      }
-      // int형식으로 무화과 추가후 varchar로 변환
-      rows[0].fig = parseInt(rows[0].fig) + 1;
-      rows[0].fig = rows[0].fig.toString();
-      query = "UPDATE webdb.tb_user SET fig='"+rows[0].fig+"' WHERE userid='"+invite_code+"';";
-      var figUpdate = await conn.query(query); // 쿼리 실행
-      var eid = 6; // 무화과 이벤트 번호, 바꿔야함
-      query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+rows[0].uid+"');";
-      // console.log(query);
-      var eventPart = await conn.query(query); // 쿼리 실행
-    }
+    // // 친구 초대
+    // // invite코드의 유저에 무화과 추가
+    // if(invite_code != '') {
+    //   query = "SELECT fig,uid FROM webdb.tb_user where userid='" + invite_code + "' ;";
+    //   var rows = await conn.query(query); // 쿼리 실행
+    //   if(rows[0] == undefined) {
+    //     console.log('존재하지 않는 코드입니다.');
+    //     resultcode = 100;
+    //     return resultcode;
+    //   }
+    //   // int형식으로 무화과 추가후 varchar로 변환
+    //   rows[0].fig = parseInt(rows[0].fig) + 1;
+    //   rows[0].fig = rows[0].fig.toString();
+    //   query = "UPDATE webdb.tb_user SET fig='"+rows[0].fig+"' WHERE userid='"+invite_code+"';";
+    //   var figUpdate = await conn.query(query); // 쿼리 실행
+    //   var eid = 6; // 무화과 이벤트 번호, 바꿔야함
+    //   query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+rows[0].uid+"');";
+    //   // console.log(query);
+    //   var eventPart = await conn.query(query); // 쿼리 실행
+    // }
 
   } catch(error) {
     console.log('mobile-login-service SignUp:'+error);
@@ -240,7 +245,7 @@ exports.checkDuplicateID = async function(req, res) {
   try {
     conn = await db.getConnection();
     console.log('mobile-login-service checkDuplicateID');
-    var id = req.body.userid;
+    var id = req.params.userid;
     // console.log(id);
     var query = "SELECT userid FROM webdb.tb_user WHERE userid=?;"
     var checkdb = await conn.query(query, [id]);

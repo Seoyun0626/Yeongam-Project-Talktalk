@@ -192,7 +192,7 @@ class PolicyServices {
   // }
   Future<List<Policy>> getScrappedPolicy() async {
     final token = await secureStorage.readToken();
-    print('getScrappedPolicy');
+    // print('getScrappedPolicy');
 
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/policy/get-scrapped-policy'),

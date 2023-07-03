@@ -4,8 +4,8 @@ var router = express.Router();
 var mobile_event_controller = require("../../controllers/mobile-controller/mobile-event-controller");
 const verifyToken = require("../../middleware/verify_token");
 
+
 // 무화과 지급 - 출석체크
-// giveFigForAttendance
 router.post("/give-fig-for-attendance", verifyToken, async function(req, res){
   try {
     // console.log('mobile give fig');
@@ -23,26 +23,123 @@ router.post("/give-fig-for-attendance", verifyToken, async function(req, res){
 });
 
 // 무화과 지급 - 친구초대
-// giveFigForInvitation
-router.post("/give-fig-for-invitation", verifyToken, async function(req, res){
+router.post("/give-fig-for-invitation", verifyToken, async function(req, res) {
   try {
-    // console.log('mobile give fig');
     var result = await mobile_event_controller.giveFigForInvitation(req, res);
-    // console.log('mobile-event-router give-fig', result);
-    res.json({
-      resp : true,
-      message : 'give fig for invitation'
-    })
-
-  } catch(error){
+    // console.log(result);
+    if (result == 1) {
+      res.json({
+        resp: true,
+        message: 'give fig for invitation'
+      });
+    } else if (result == 0) {
+      res.json({
+        resp: false,
+        message: '유효하지 않은 코드입니다.'
+      });
+    } else {
+      res.json({
+        resp: false,
+        message: 'Failure give fig for invitation'
+      });
+    }
+  } catch(error) {
     console.log('mobile-event-router give-fig error:' + error);
-
+    res.json({
+      resp: false,
+      message: 'Failure give fig for invitation'
+    });
   }
 });
 
 
 // 무화과 지급 - 주간 무화과 챌린지
-// giveFigForWeeklyChanllenge
+// giveFigForWeeklyFigChallenge
+router.post("/give-fig-for-weekly", verifyToken, async function(req, res){
+  try {
+    // console.log('mobile give fig');
+    var result = await mobile_event_controller.giveFigForWeeklyFigChallenge(req, res);
+    // console.log('mobile-event-router give-fig', result);
+    res.json({
+      resp : true,
+      message : 'give fig for weekly fig challenge'
+    })
+
+  } catch(error){
+    console.log('mobile-event-router give-fig-for-weekly-fig-hallenge error:' + error);
+
+  }
+});
+
+
+// 가입 24시간 이내 여부 확인
+router.get("/check-user-within-24h", verifyToken, async function(req, res){
+  try {
+    // console.log('mobile check-user-within-24h');
+    var result = await mobile_event_controller.checkUserWithin24Hours(req, res);
+    // console.log(result);
+
+    if (result){
+      res.json({
+        resp : true,
+        message : 'check-user-within-24h : true',
+      });
+    } else {
+      res.json({
+        resp : false,
+        message : 'check-user-within-24h :',
+      });
+    }
+  } catch(error){
+    console.log('mobile-event-router check-user-within-24h error:' + error);
+  }
+});
+
+
+// 이벤트 참여 내역 확인
+router.get("/check-event-participation-available/:eid", verifyToken, async function(req, res){
+  try {
+    // console.log('mobile check-event-participation');
+    var eid = req.params.eid;
+    var result = await mobile_event_controller.checkEventParticipation(req, res);
+    // console.log(result);
+
+    if (req.params.eid === '5') {
+      if (result > 3) {
+        res.json({
+          resp: false,
+          message: '최대 3명까지만 초대할 수 있어요.',
+          partCount : result,
+          eid : eid
+        });
+      } else {
+        res.json({
+          resp: true,
+          message: '친구 초대 가능',
+          partCount : result,
+          eid : eid
+        });
+      }
+    } else {
+      if (result > 0) {
+        res.json({
+          resp: false,
+          message: '이미 참여한 이벤트입니다.',
+          eid : eid
+        });
+      } else {
+        res.json({
+          resp: true,
+          message: '이벤트 참여 가능합니다.',
+          eid : eid
+        });
+      }
+    }
+  } catch(error){
+    console.log('mobile-event-router check-event-participation error:' + error);
+  }
+});
+
 
 // 출석 체크 내역 가져오기
 router.get("/get-attendance", verifyToken, async function(req, res){
@@ -55,8 +152,7 @@ router.get("/get-attendance", verifyToken, async function(req, res){
       resp : true,
       message : 'get-attendance',
       attendaceLog : result
-    })
-
+    });
   } catch(error){
     console.log('mobile-event-router get-attendance error:' + error);
 

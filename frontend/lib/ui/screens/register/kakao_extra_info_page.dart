@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/ui/helpers/kakao_sdk_login.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_success_register.dart';
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
@@ -20,8 +22,7 @@ class KakaoExtraInfoPage extends StatefulWidget {
 }
 
 class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
-  late TextEditingController inviteCodeController;
-  final String userRole = '1';
+  final String userRole = '0';
   String? emd;
   String? youthAge;
   String? parentsAge;
@@ -38,27 +39,25 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
   late String user_email = '';
 
   @override
-  // void initState() {
-  //   super.initState();
-  //   KakaoLoginServices.kakaoGetUserInfo().then((userInfo) {
-  //     setState(() {
-  //       user_id = userInfo['user_id'] ?? '';
-  //       user_name = userInfo['user_name'] ?? '';
-  //       user_email = userInfo['user_email'] ?? '';
-  //     });
-  //   });
-  //   inviteCodeController = TextEditingController();
-  //   youthAgeList = getMobileCodeService.getCodeDetailList('youthAge_code');
-  //   parentsAgeList = getMobileCodeService.getCodeDetailList('parentsAge_code');
-  //   sexList = getMobileCodeService.getCodeDetailList('sex_class_code');
-  //   emdList = getMobileCodeService.getCodeDetailList('emd_class_code');
-  // }
+  void initState() {
+    super.initState();
+    KakaoLoginServices.kakaoGetUserInfo().then((userInfo) {
+      setState(() {
+        user_id = userInfo['user_id'] ?? '';
+        user_name = userInfo['user_name'] ?? '';
+        user_email = userInfo['user_email'] ?? '';
+      });
+    });
+    youthAgeList = getMobileCodeService.getCodeDetailList('youthAge_code');
+    parentsAgeList = getMobileCodeService.getCodeDetailList('parentsAge_code');
+    sexList = getMobileCodeService.getCodeDetailList('sex_class_code');
+    emdList = getMobileCodeService.getCodeDetailList('emd_class_code');
+  }
 
-  // @override
-  // void dispose() {
-  //   inviteCodeController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,26 +68,30 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
 
     return BlocListener<UserBloc, UserState>(
         listener: (context, state) {
+          print('kakao info page');
           print(state);
           // if (state is LoadingUserState) {
           //   modalLoading(context, '로드 중');
           //   Navigator.pop(context);
           // } else
 
-          if (state is SuccessUserState) {
-            // Navigator.pop(context);
-            modalSuccess(
+          if (state is SuccessKakaoUserState) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ),
+                (_) => false);
+            modalSuccessRegister(
               context,
-              '회원가입이 완료되었습니다',
-              onPressed: () => Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
-                  (_) => false),
             );
           } else if (state is FailureUserState) {
             Navigator.pop(context);
+            Navigator.pushAndRemoveUntil(
+              context,
+              routeFade(page: const HomePage()),
+              (_) => false,
+            );
             errorMessageSnack(context, state.error);
           }
         },
@@ -127,17 +130,7 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                       const SizedBox(
                         height: 30,
                       ), // 친구 초대
-                      const TextCustom(
-                        text: '친구 초대 코드를 입력해주세요.',
-                        fontSize: 17,
-                        maxLines: 2,
-                      ),
-                      const SizedBox(height: 1.0),
-                      TextFieldNaru(
-                        controller: inviteCodeController,
-                        hintText: '친구 초대 코드',
-                        // validator: RequiredValidator(errorText: '이름을 입력해주세요.'),
-                      ),
+
                       const SizedBox(height: 40.0),
 
                       // 거주지
@@ -335,18 +328,9 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                           width: size.width,
                           colorText: Colors.white,
                           fontWeight: FontWeight.bold,
-                          onPressed: () {
-                            // print(userRole);
-                            // print(userTypeCode);
-                            // print(youthAge);
-                            // print(parentsAge);
-                            // print(emd);
-                            // print(sex);
-
-                            // if (_keyForm.currentState != null &&
-                            //     _keyForm.currentState!.validate()) {
+                          onPressed: () async {
                             String inviteCode = '';
-                            inviteCode = inviteCodeController.text.trim();
+
                             String _youthAge = youthAge ?? '5';
                             String _parentsAge = parentsAge ?? '6';
                             String _emd = emd ?? '0';
@@ -357,7 +341,7 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                             // print(user_email);
                             // print(userRole);
                             // print(userTypeCode);
-                            // print(inviteCode);
+
                             // print(youthAge);
                             // print(parentsAge);
                             // print(youthAge);
@@ -370,15 +354,11 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                                 user_email,
                                 userRole, // user_role - 사용자
                                 userTypeCode.toString(), // user_type
-                                inviteCode,
                                 _youthAge, // youthAge_code
                                 _parentsAge, // parentsAge_code
                                 _emd, //emd_class_code
                                 _sex // sex_class_code
                                 ));
-
-                            authBloc.add(OnKakaoLoginEvent());
-                            // }
                           }),
                     ],
                   ))),

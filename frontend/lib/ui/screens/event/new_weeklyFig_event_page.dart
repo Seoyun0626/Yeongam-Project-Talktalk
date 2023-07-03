@@ -4,48 +4,90 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
 import 'package:teentalktalk/ui/screens/event/fig_market_page.dart';
 import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/01_week_page.dart';
-import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/02_week_page.dart';
+import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/00_week_page.dart';
 import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/03_week_page.dart';
-import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/04_week_page.dart';
+import 'package:teentalktalk/ui/screens/event/weekly_fig_mission/02_week_page.dart';
 
 import 'package:teentalktalk/ui/screens/user/my_fig_history_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:stroke_text/stroke_text.dart';
 
-class newWeeklyFigEventPage extends StatefulWidget {
-  const newWeeklyFigEventPage({Key? key}) : super(key: key);
+class NewWeeklyFigEventPage extends StatefulWidget {
+  const NewWeeklyFigEventPage({Key? key}) : super(key: key);
 
   @override
-  State<newWeeklyFigEventPage> createState() => _newWeeklyFigEventPageState();
+  State<NewWeeklyFigEventPage> createState() => _NewWeeklyFigEventPageState();
 }
 
-class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
+class _NewWeeklyFigEventPageState extends State<NewWeeklyFigEventPage> {
+  // 주차별 이벤트 참여 했는지 안했는지
+  late bool hasWeek01Participated = false;
+  late bool hasWeek02Participated = false;
+  late bool hasWeek03Participated = false;
+  // late bool hasWeek04Participated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+    if (authState is SuccessAuthentication) {
+      checkEventParticipation();
+    }
+  }
+
+  Future<void> checkEventParticipation() async {
+    // true -> 참여 기록 없음. 참여 가능
+    // false -> 참여 기록 있음. 참여 불가능
+    var week01 = await eventService.checkEventParticipation('2');
+    var week02 = await eventService.checkEventParticipation('3');
+    var week03 = await eventService.checkEventParticipation('4');
+    // var week04 = await eventService.checkEventParticipation('5');
+    setState(() {
+      hasWeek01Participated = !week01.resp;
+      hasWeek02Participated = !week02.resp;
+      hasWeek03Participated = !week03.resp;
+      // hasWeek04Participated = !week04.resp;
+    });
+    // print(hasWeek01Participated);
+  }
+
   @override
   Widget build(BuildContext context) {
     final authState = BlocProvider.of<AuthBloc>(context).state;
 
-    int week = 3;
+    // 이벤트 기간 반영
+    // 1.웰컴 2.스크랩 3.공유
+    // 현재 날짜가 이벤트 기간 내 해당되면 버튼 활성화
+    int week = 1;
+
     // 이벤트 참여 여부
-    List<bool> getWeekCheckList = [false, false, false, false];
+    List<bool> getWeekCheckList = [
+      hasWeek01Participated,
+      hasWeek02Participated,
+      hasWeek03Participated,
+      // hasWeek04Participated
+    ];
 
     List<String> challengeList = [
       "웰컴 청소년 톡talk",
-      "톡talk 알림 허용하기",
+      // "톡talk 알림 허용하기",
+      "관심있는 정책 스크랩하기",
       "친구에게 정책 공유하기",
-      "관심있는 정책 스크랩하기"
     ];
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: ThemeColors.third,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Colors.white,
+            backgroundColor: ThemeColors.third, //Colors.white,
             leading: IconButton(
                 icon: const Icon(
                   Icons.arrow_back_ios_new_rounded,
@@ -71,9 +113,9 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                       fontSize: 40.sp,
                       fontFamily: 'CookieRun',
                       fontWeight: FontWeight.w700,
-                      color: ThemeColors.fig_green),
-                  strokeColor: ThemeColors.basic,
-                  strokeWidth: 2,
+                      color: ThemeColors.primary),
+                  strokeColor: Colors.transparent,
+                  // strokeWidth: 2,
                 ),
                 SizedBox(
                   height: 15.h,
@@ -81,7 +123,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                 Container(
                   padding: EdgeInsets.all(7.w),
                   decoration: const BoxDecoration(
-                      color: ThemeColors.fig_pink,
+                      color: Color.fromRGBO(
+                          245, 117, 33, 0.8), //ThemeColors.primary,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: TextCustom(
                     text: '미션 참여하면 무화과 포인트 드려요',
@@ -142,7 +185,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                                 children: [
                                   TextCustom(
                                     text: "무화과 포인트",
-                                    color: ThemeColors.fig_pink,
+                                    color: ThemeColors.primary,
                                     fontWeight: FontWeight.w800,
                                     maxLines: 2,
                                     height: 1.5.h,
@@ -166,11 +209,12 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FigMarketPage(),
-                        ));
+                    modalPreparing(context);
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const FigMarketPage(),
+                    //     ));
                   },
                   child: Container(
                     padding: const EdgeInsets.all(20),
@@ -198,7 +242,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                                 children: [
                                   TextCustom(
                                     text: "무화과 잡화점",
-                                    color: ThemeColors.fig_pink,
+                                    color: ThemeColors.primary,
                                     fontWeight: FontWeight.w800,
                                     maxLines: 2,
                                     height: 1.5.h,
@@ -233,7 +277,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                 ),
                 Container(
                   padding: EdgeInsets.all(7.w),
-                  color: ThemeColors.fig_green,
+                  color: Colors.transparent,
                   child: TextCustom(
                     text: '이번주 미션에 참여해보세요!',
                     color: Colors.black,
@@ -246,35 +290,16 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                 ),
                 Icon(
                   Icons.keyboard_double_arrow_down_rounded,
-                  color: ThemeColors.fig_pink,
+                  color: ThemeColors.primary,
                   size: 88.h,
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                // Container(
-                //   child: week == 1
-                //       ? SvgPicture.asset(
-                //           'images/event_icon/weekly_event/1_week_new.svg',
-                //           width: 300.w)
-                //       : week == 2
-                //           ? SvgPicture.asset(
-                //               'images/event_icon/weekly_event/2_week_new.svg',
-                //               width: 300.w)
-                //           : week == 3
-                //               ? SvgPicture.asset(
-                //                   'images/event_icon/weekly_event/3_week_new.svg',
-                //                   width: 300.w)
-                //               : week == 4
-                //                   ? SvgPicture.asset(
-                //                       'images/event_icon/weekly_event/4_week_new.svg',
-                //                       width: 300.w)
-                //                   : Container(),
-                // ),
-                // SizedBox(height: 40.h),
+
                 // 첫째주  - 웰컴 청소년톡talk
                 challengeWidget(
-                    text: week >= 1 ? challengeList[0] : "어떤 미션이 기다리고 있을까요?",
+                    text: week >= 1 ? challengeList[0] : "다음주 미션은 무엇일까요?",
                     imagePath: 'images/event_icon/icon_01.svg',
                     isEvent: week == 1 ? true : false,
                     week: week,
@@ -282,18 +307,18 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                     isCheck: getWeekCheckList[0]),
 
                 SizedBox(height: 27.h),
-                // 둘째주  - 알림 허용하기
+                // 둘째주  - 친구에게 정책 공유
                 challengeWidget(
-                    text: week >= 2 ? challengeList[1] : "어떤 미션이 기다리고 있을까요?",
+                    text: week >= 2 ? challengeList[1] : "다음주 미션은 무엇일까요?",
                     imagePath: 'images/event_icon/icon_02.svg',
                     isEvent: week == 2 ? true : false,
                     week: week,
                     isPastEvent: week > 2,
                     isCheck: getWeekCheckList[1]),
                 SizedBox(height: 27.h),
-                // 셋째주  - 친구에게 정책 공유
+                // 셋째주  - 친구에게 정책 스크랩
                 challengeWidget(
-                    text: week >= 3 ? challengeList[2] : "어떤 미션이 기다리고 있을까요?",
+                    text: week >= 3 ? challengeList[2] : "다음주 미션은 무엇일까요?",
                     imagePath: 'images/event_icon/icon_03.svg',
                     isEvent: week == 3 ? true : false,
                     week: week,
@@ -301,14 +326,14 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                     isCheck: getWeekCheckList[2]),
                 SizedBox(height: 27.h),
                 // 넷째주  - 관심 있는 정책 스크랩
-                challengeWidget(
-                    text: week >= 4 ? challengeList[3] : "어떤 미션이 기다리고 있을까요?",
-                    imagePath: 'images/event_icon/icon_04.svg',
-                    isEvent: week == 4 ? true : false,
-                    week: week,
-                    isPastEvent: week > 4,
-                    isCheck: getWeekCheckList[3]),
-                SizedBox(height: 27.h),
+                // challengeWidget(
+                //     text: week >= 4 ? challengeList[3] : "어떤 미션이 기다리고 있을까요?",
+                //     imagePath: 'images/event_icon/icon_04.svg',
+                //     isEvent: week == 4 ? true : false,
+                //     week: week,
+                //     isPastEvent: week > 4,
+                //     isCheck: getWeekCheckList[3]),
+                // SizedBox(height: 27.h),
                 Container(
                   padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
                   child: Column(
@@ -316,7 +341,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Divider(
-                          color: ThemeColors.fig_pink,
+                          color: ThemeColors.primary,
                           height: 30.h,
                           thickness: 1,
                         ),
@@ -334,8 +359,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                         TextCustom(
                           text: '주간 무화과 챌린지란?',
                           fontSize: 15.sp,
-                          color: ThemeColors.fig_pink,
-                          fontWeight: FontWeight.bold,
+                          color: ThemeColors.primary,
+                          fontWeight: FontWeight.w800,
                         ),
                         SizedBox(
                           height: 15.h,
@@ -381,10 +406,10 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                         ),
                       ]),
                 ),
-                Image.asset(
-                  'images/yeongam_logo.jpg',
-                  width: 100.w,
-                )
+                // Image.asset(
+                //   'images/yeongam_logo.jpg',
+                //   width: 100.w,
+                // )
               ],
             )),
           ),
@@ -400,6 +425,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
     bool isCheck = false, // 이벤트 참여 여부
   }) {
     if (isPastEvent && !isEvent) {
+      // 종료된 이벤트 and 이번주 이벤트 아님
       return Stack(
         children: [
           Container(
@@ -407,7 +433,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
             width: 300.w,
             height: 50.h,
             decoration: BoxDecoration(
-              border: Border.all(color: ThemeColors.fig_pink, width: 2.w),
+              border: Border.all(color: ThemeColors.primary, width: 2.w),
               color: Colors.white,
               borderRadius: BorderRadius.circular(20.r),
             ),
@@ -433,8 +459,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
             width: 300.w,
             height: 50.h,
             decoration: BoxDecoration(
-              border: Border.all(color: ThemeColors.fig_pink, width: 2.w),
-              color: const Color.fromRGBO(229, 138, 151, 0.7),
+              border: Border.all(color: ThemeColors.primary, width: 2.w),
+              color: const Color.fromRGBO(245, 117, 33, 0.6),
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Align(
@@ -452,12 +478,13 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
         ],
       );
     } else if (!isEvent) {
+      // 이번주 이벤트 아님
       return Container(
         padding: EdgeInsets.only(left: 10.w, right: 10.w),
         width: 300.w,
         height: 50.h,
         decoration: BoxDecoration(
-          border: Border.all(color: ThemeColors.fig_pink, width: 2.w),
+          border: Border.all(color: ThemeColors.primary, width: 2.w),
           color: Colors.white,
           borderRadius: BorderRadius.circular(20.r),
         ),
@@ -478,6 +505,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
         ),
       );
     } else {
+      // 이번주 이벤트
       return InkWell(
         onTap: () {
           // 해당 주차 페이지로 이동
@@ -486,7 +514,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const FirstWeekMissionPage(),
+                  builder: (context) =>
+                      FirstWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
               break;
@@ -494,7 +523,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SecondWeekMissionPage(),
+                  builder: (context) =>
+                      SecondWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
               break;
@@ -502,24 +532,27 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ThirdWeekMissionPage(),
+                  builder: (context) =>
+                      ThirdWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
               break;
-            case 4:
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const FourthWeekMissionPage(),
-                ),
-              );
-              break;
+            // case 4:
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //       builder: (context) =>
+            //           ThirdWeekMissionPage(hasParticipated: isCheck),
+            //     ),
+            //   );
+            //   break;
             default:
               // 기본적으로 첫주차 페이지로 이동
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const FirstWeekMissionPage(),
+                  builder: (context) =>
+                      FirstWeekMissionPage(hasParticipated: isCheck),
                 ),
               );
           }
@@ -529,7 +562,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
           width: 300.w,
           height: 50.h,
           decoration: BoxDecoration(
-            border: Border.all(color: ThemeColors.fig_pink, width: 2.w),
+            border: Border.all(color: ThemeColors.primary, width: 2.w),
             color: Colors.white,
             borderRadius: BorderRadius.circular(20.r),
           ),
@@ -554,7 +587,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                     ? InkWell(
                         child: Icon(
                           Icons.arrow_forward_ios_rounded,
-                          color: ThemeColors.fig_pink,
+                          color: ThemeColors.primary,
                           size: 20.sp,
                         ),
                       )

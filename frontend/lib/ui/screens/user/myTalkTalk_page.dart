@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:teentalktalk/domain/models/response/default_response.dart';
-import 'package:teentalktalk/domain/models/response/response_fig.dart';
+import 'package:teentalktalk/domain/models/response/response_user_fig_count.dart';
+import 'package:teentalktalk/domain/models/response/response_fig_history.dart';
 import 'package:teentalktalk/domain/services/user_services.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_logout.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
 import 'package:teentalktalk/ui/screens/event/enter_invite_code_page.dart';
 import 'package:teentalktalk/ui/screens/event/event_page.dart';
 import 'package:teentalktalk/ui/screens/intro/checking_login_page.dart';
@@ -20,14 +22,14 @@ import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MyPage extends StatefulWidget {
-  const MyPage({Key? key}) : super(key: key);
+class MyTalkTalkPage extends StatefulWidget {
+  const MyTalkTalkPage({Key? key}) : super(key: key);
 
   @override
-  State<MyPage> createState() => _MyPageState();
+  State<MyTalkTalkPage> createState() => _MyTalkTalkPageState();
 }
 
-class _MyPageState extends State<MyPage> {
+class _MyTalkTalkPageState extends State<MyTalkTalkPage> {
 // class MyPage extends StatelessWidget {
   // final viewModel = MainViewModel(KakaoLogin()); // 카카오 로그인
 
@@ -137,38 +139,38 @@ class _MyPageState extends State<MyPage> {
                                 }
                               },
                             ),
-                            ListTile(
-                              contentPadding: const EdgeInsets.all(5),
-                              leading: Image.asset(
-                                'images/Fig2.png',
-                                width: 40.w,
-                                height: 40.h,
-                              ),
+                            // ListTile(
+                            //   contentPadding: const EdgeInsets.all(5),
+                            //   leading: Image.asset(
+                            //     'images/Fig2.png',
+                            //     width: 40.w,
+                            //     height: 40.h,
+                            //   ),
 
-                              // SvgPicture.asset(
-                              //   'images/Fig.svg',
-                              //   width: 35.w,
-                              //   height: 35.h,
-                              // ),
-                              // subtitle: TextCustom(
-                              //   text: "미션 성공하고",
-                              //   fontSize: 10.sp,
-                              // ),
-                              title: TextCustom(
-                                text: "무화과 따러가기",
-                                fontSize: 18.sp,
-                              ),
-                              trailing: const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: ThemeColors.basic),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const EventPage(),
-                                    ));
-                              },
-                            ),
+                            //   // SvgPicture.asset(
+                            //   //   'images/Fig.svg',
+                            //   //   width: 35.w,
+                            //   //   height: 35.h,
+                            //   // ),
+                            //   // subtitle: TextCustom(
+                            //   //   text: "미션 성공하고",
+                            //   //   fontSize: 10.sp,
+                            //   // ),
+                            //   title: TextCustom(
+                            //     text: "무화과 따러가기",
+                            //     fontSize: 18.sp,
+                            //   ),
+                            //   trailing: const Icon(
+                            //       Icons.arrow_forward_ios_rounded,
+                            //       color: ThemeColors.basic),
+                            //   onTap: () {
+                            //     Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //           builder: (context) => const EventPage(),
+                            //         ));
+                            //   },
+                            // ),
                             ListTile(
                               contentPadding: const EdgeInsets.all(5),
                               leading: Image.asset(
@@ -184,7 +186,9 @@ class _MyPageState extends State<MyPage> {
                                 Icons.arrow_forward_ios_rounded,
                                 color: ThemeColors.basic,
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                modalPreparing(context);
+                              },
                             ),
                           ]),
                         ),
@@ -211,7 +215,7 @@ class _LogInOutUserNameState extends State<_LogInOutUserName> {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
     final userBloc = BlocProvider.of<UserBloc>(context);
-    final authBloc = BlocProvider.of<AuthBloc>(context);
+    // final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (_, state) {
@@ -274,13 +278,7 @@ class _LogInOutUserNameState extends State<_LogInOutUserName> {
                   ),
                 ),
                 onTap: () {
-                  authBloc.add(OnLogOutEvent());
-                  userBloc.add(OnLogOutUser());
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    routeFade(page: const CheckingLoginPage()),
-                    (_) => false,
-                  );
+                  modalLogout(context);
                 },
               ),
             ],
@@ -366,8 +364,8 @@ class _LogInOut extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userBloc = BlocProvider.of<UserBloc>(context);
-    final authBloc = BlocProvider.of<AuthBloc>(context);
+    // final userBloc = BlocProvider.of<UserBloc>(context);
+    // final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
       if (state is LogOut) {
@@ -419,24 +417,12 @@ class _LogInOut extends StatelessWidget {
             ),
           ),
           onTap: () {
-            authBloc.add(OnLogOutEvent());
-            userBloc.add(OnLogOutUser());
-            // Navigator.pushAndRemoveUntil(
-            //   context,
-            //   routeFade(page: const CheckingLoginPage()),
-            //   (_) => false,
-            // );
-            // Navigator.pushNamedAndRemoveUntil(
-            //   context,
+            modalLogout(context);
+
+            // Navigator.of(context).pushNamedAndRemoveUntil(
             //   CheckingLoginPage.routeName,
             //   (_) => false,
-
             // );
-
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              CheckingLoginPage.routeName,
-              (_) => false,
-            );
           },
         );
       }
@@ -465,7 +451,7 @@ class _MyFigState extends State<_MyFig> {
   Future<void> _updateFigCount() async {
     final authBloc = BlocProvider.of<AuthBloc>(context);
     if (authBloc.state is SuccessAuthentication) {
-      FigResponse figCountData = await userService.updateFigCount();
+      ResponseUserFigCount figCountData = await userService.updateFigCount();
       setState(() {
         figCount = figCountData.figCount;
       });
@@ -677,11 +663,12 @@ class _FigMarket extends StatelessWidget {
                 width: 120.w,
                 height: 30.h,
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FigMarketPage(),
-                      ));
+                  modalPreparing(context);
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const FigMarketPage(),
+                  //     ));
                 },
               ),
             ),

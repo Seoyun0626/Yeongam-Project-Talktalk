@@ -25,5 +25,24 @@ router.get('/get-code-data', async function(req, res){
       })
     }
   });
+
+  // 이벤트 코드
+  router.get('/get-event-data/:eid', async function(req, res){
+    try{
+      var result = await mobile_codeData_controller.getEventData(req, res);
+      // console.log(result);
+      res.json({
+        resp:true,
+        message : 'get event data',
+        eventData : result
+      })
+    } catch(error){
+      console.log('policy-router get-event data error:'+error);
+      res.json({
+        resp:false,
+        message : 'Failure get event data'
+      })
+    }
+  });
   
   module.exports = router;

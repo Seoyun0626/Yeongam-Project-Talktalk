@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
+import 'package:teentalktalk/domain/blocs/user/user_bloc.dart';
+import 'package:teentalktalk/ui/helpers/animation_route.dart';
+import 'package:teentalktalk/ui/screens/home/home_page.dart';
+import 'package:teentalktalk/ui/screens/intro/checking_login_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -54,7 +60,7 @@ void modalLogout(
               children: [
                 InkWell(
                   onTap: () {
-                    // Navigator.pop(context);
+                    Navigator.pop(context);
                   },
                   child: Container(
                     width: 100.w,
@@ -73,7 +79,16 @@ void modalLogout(
                 ),
                 InkWell(
                   onTap: () {
+                    final userBloc = BlocProvider.of<UserBloc>(context);
+                    final authBloc = BlocProvider.of<AuthBloc>(context);
                     // Navigator.pop(context);
+                    authBloc.add(OnLogOutEvent());
+                    userBloc.add(OnLogOutUser());
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      routeFade(page: const HomePage()),
+                      (_) => false,
+                    );
                   },
                   child: Container(
                     width: 100.w,

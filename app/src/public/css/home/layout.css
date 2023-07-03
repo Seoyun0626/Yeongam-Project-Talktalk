@@ -120,6 +120,10 @@ a {
 .공지사항 { top: 570px; }
 .통계 { top: 605px; }
 .출석체크 { top: 686px; }
+.로그아웃{
+  top: 680px;
+  left: 50px;
+}
 
   
   .ellipse5 {
@@ -182,7 +186,7 @@ a {
     height: calc(100vh - 50px); /* Subtract the top offset */
     margin: 0;
     position: absolute;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
   /* 확대 시 좌우 스크롤 바 */

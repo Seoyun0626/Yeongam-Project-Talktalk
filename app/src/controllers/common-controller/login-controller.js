@@ -55,3 +55,28 @@ exports.checkAttendance = async function(req, res) {
 };
 
 
+exports.fetchFeedback = async function(req, res) {
+  try{
+    var result = await login_service.fetchFeedback(req);
+    return result;
+  } catch(error) {
+    console.log('login-controller fetchFeedback:'+error);
+  }
+};
+
+exports.feedRegi = async function(req, res) {
+  try{
+    var result = await login_service.feedRegi(req);
+    return result;
+  } catch(error) {
+    console.log('login-controller feedRegi:'+error);
+  }
+};
+exports.feedDel = async function(req, res) {
+  try{
+    var result = await login_service.feedDel(req);
+    return result;
+  } catch(error) {
+    console.log('login-controller feedDel:'+error);
+  }
+}

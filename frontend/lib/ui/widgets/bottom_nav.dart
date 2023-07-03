@@ -86,7 +86,8 @@ class BottomNavigation extends StatelessWidget {
               iconText: '마이 톡톡',
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const MyPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const MyTalkTalkPage()),
                   (_) => false)),
 
           // _ItemProfile()

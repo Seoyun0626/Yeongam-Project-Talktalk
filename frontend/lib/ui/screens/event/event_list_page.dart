@@ -102,7 +102,7 @@ class _EventListPageState extends State<EventListPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const newWeeklyFigEventPage(),
+                                    const NewWeeklyFigEventPage(),
                               ));
                         } else if (index == 2) {
                           if (authState is LogOut) {

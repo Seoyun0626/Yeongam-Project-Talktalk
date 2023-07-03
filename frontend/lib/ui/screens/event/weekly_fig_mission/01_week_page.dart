@@ -2,35 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stroke_text/stroke_text.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
-import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
-import 'package:teentalktalk/ui/screens/event/attendance_event_page.dart';
-import 'package:teentalktalk/ui/screens/event/event_list_page.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_access_denied.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/screens/event/new_weeklyFig_event_page.dart';
-import 'package:teentalktalk/ui/screens/event/weeklyFig_event_page.dart';
+import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/screens/login/login_page.dart';
-import 'package:teentalktalk/ui/screens/register/user_type_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class FirstWeekMissionPage extends StatelessWidget {
-  const FirstWeekMissionPage({Key? key}) : super(key: key);
+  const FirstWeekMissionPage({Key? key, required this.hasParticipated})
+      : super(key: key);
+  final bool hasParticipated;
 
   @override
   Widget build(BuildContext context) {
+    // print(hasParticipated);
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+    final bool isLogIn = authState is SuccessAuthentication;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromRGBO(249, 248, 189, 1),
+        backgroundColor: ThemeColors.third,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Color.fromRGBO(249, 248, 189, 1),
+          backgroundColor: ThemeColors.third,
           leading: IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: ThemeColors.fig_pink,
+                color: ThemeColors.primary,
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -62,7 +65,7 @@ class FirstWeekMissionPage extends StatelessWidget {
                             // height: 50.h,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: ThemeColors.fig_pink, width: 2.w),
+                                  color: ThemeColors.primary, width: 2.w),
                               color: Colors.white,
                             ),
                             child: Column(children: [
@@ -70,7 +73,7 @@ class FirstWeekMissionPage extends StatelessWidget {
                                 margin: EdgeInsets.all(5.w),
                                 padding: EdgeInsets.all(5.w),
                                 decoration: const BoxDecoration(
-                                    color: ThemeColors.fig_pink,
+                                    color: Color.fromRGBO(245, 117, 33, 0.8),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
                                 child: TextCustom(
@@ -86,8 +89,8 @@ class FirstWeekMissionPage extends StatelessWidget {
                                     fontFamily: 'CookieRun',
                                     fontWeight: FontWeight.w700,
                                     letterSpacing: 2,
-                                    color: ThemeColors.fig_green),
-                                strokeColor: ThemeColors.basic,
+                                    color: ThemeColors.primary),
+                                strokeColor: Colors.transparent,
                                 strokeWidth: 2,
                               ),
                               SizedBox(
@@ -118,7 +121,7 @@ class FirstWeekMissionPage extends StatelessWidget {
                                     text: '무화과 ',
                                   ),
                                   TextCustom(
-                                    text: '5개',
+                                    text: '10개',
                                     fontWeight: FontWeight.bold,
                                   ),
                                   TextCustom(
@@ -174,7 +177,7 @@ class FirstWeekMissionPage extends StatelessWidget {
                                     children: [
                                       Icon(
                                         Icons.person_outline_rounded,
-                                        color: ThemeColors.fig_pink,
+                                        color: ThemeColors.primary,
                                         size: 70.sp,
                                       ),
                                       SizedBox(
@@ -199,7 +202,7 @@ class FirstWeekMissionPage extends StatelessWidget {
                                     ],
                                   ),
                                   Divider(
-                                    color: ThemeColors.fig_pink,
+                                    color: ThemeColors.primary,
                                     height: 30.h,
                                     thickness: 1,
                                   ),
@@ -241,12 +244,32 @@ class FirstWeekMissionPage extends StatelessWidget {
                                   ),
                                   TextButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    // const userTypePage(isKakaoLogin: false,)
-                                                    const LoginPage()));
+                                        if (isLogIn) {
+                                          if (hasParticipated) {
+                                            modalAccessDenied(
+                                                context, "이미 참여한 이벤트입니다.",
+                                                onPressed: () {});
+                                          } else {
+                                            eventService
+                                                .giveFigForWeeklyFigChallenge(
+                                                    '2'); // 출석체크 eid
+                                            Navigator.pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const HomePage(),
+                                                ),
+                                                (_) => false);
+                                            modalGetFig(context, '2');
+                                          }
+                                        } else {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      // const userTypePage(isKakaoLogin: false,)
+                                                      const LoginPage()));
+                                        }
                                       },
                                       child: Center(
                                         child: Container(
@@ -257,10 +280,10 @@ class FirstWeekMissionPage extends StatelessWidget {
                                               20.w, 10.h, 20.w, 10.h),
                                           decoration: BoxDecoration(
                                               color: const Color.fromRGBO(
-                                                  198,
-                                                  30,
-                                                  54,
-                                                  0.5), //ThemeColors.fig_pink,
+                                                  245,
+                                                  117,
+                                                  33,
+                                                  0.8), //ThemeColors.fig_pink,
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(30.r),
                                               ),
@@ -279,34 +302,17 @@ class FirstWeekMissionPage extends StatelessWidget {
                                                 ),
                                               ]),
                                           child: TextCustom(
-                                            text: "무화과 받기",
+                                            text: isLogIn && !hasParticipated
+                                                ? "무화과 받기"
+                                                : isLogIn && hasParticipated
+                                                    ? "참여 완료"
+                                                    : "회원가입하러가기",
                                             fontSize: 20.sp,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       )),
-                                  // NeumorphicButton(
-                                  //     margin: EdgeInsets.only(
-                                  //         left: 20.w, right: 20.w),
-                                  //     style: NeumorphicStyle(
-                                  //         shape: NeumorphicShape.concave,
-                                  //         boxShape:
-                                  //             NeumorphicBoxShape.roundRect(
-                                  //                 BorderRadius.circular(30.r)),
-
-                                  //         depth: 2,
-                                  //         lightSource: LightSource.topLeft,
-                                  //         color: ThemeColors.fig_pink),
-                                  //     onPressed: () {},
-                                  //     child: Center(
-                                  //       child: TextCustom(
-                                  //         text: "회원가입하러 가기",
-                                  //         fontSize: 24.sp,
-                                  //         color: Colors.white,
-                                  //         fontWeight: FontWeight.bold,
-                                  //       ),
-                                  //     )),
                                   SizedBox(
                                     height: 30.h,
                                   ),

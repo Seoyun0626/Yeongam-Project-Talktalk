@@ -35,16 +35,17 @@ router.post("/login", async function(req, res) {
 
 // 로그아웃
 router.get("/logout", function(req, res) {
-  //console.log("clear cookie");
+  console.log("clear cookie");
   // 로그아웃 쿠키 삭제
   res.clearCookie('userid');
   res.clearCookie('username');
   // 세션정보 삭제
-  //console.log("destroy session");
+  console.log("destroy session");
   req.session.destroy();
   //res.sendFile(path.join(__dirname, "../public/login.html"));
-  req.logout();
-  res.redirect('/');
+  req.logout(() => {
+    res.redirect('/admin/auth/login');
+  });
 });
 
 
@@ -147,5 +148,48 @@ router.get('/calendar', async function (req, res) {
     console.log('login-router login error:'+error);
   }
 });
+
+
+// 피드백 수집
+router.get('/feedback', async function (req, res) {
+  try{
+    var result = await login_controller.fetchFeedback(req, res);
+    res.render('dataif/feedback', {
+      posts : result
+    });
+  }
+  catch(error) {
+    console.log('login-router feedback error:'+error);
+  }
+});
+
+router.get('/feedRegi', async function (req, res) {
+  try{
+    res.render('dataif/feedRegi');
+  }
+  catch(error) {
+    console.log('login-router feedback error:'+error);
+  }
+});
+
+router.post('/feedRegi', async function (req, res) {
+  try{
+    var result = await login_controller.feedRegi(req, res);
+    res.redirect('/admin/auth/feedback');
+  } catch(error) {
+    console.log('login-router feedback error:'+error);
+  }
+});
+
+router.get('/feedDel/:id', async function (req, res) {
+  try{
+    var result = await login_controller.feedDel(req, res);
+    res.redirect('/admin/auth/feedback');
+  }
+  catch(error) {
+    console.log('login-router feedback error:'+error);
+  }
+});
+
 
 module.exports = router;

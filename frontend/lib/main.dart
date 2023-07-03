@@ -1,13 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:teentalktalk/ui/helpers/firebase_messaging.dart';
 import 'package:teentalktalk/ui/screens/intro/checking_login_page.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-// import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   // 웹 환경에서 카카오 로그인을 정상적으로 완료하려면 runApp() 호출 전 아래 메서드 호출 필요
@@ -15,7 +17,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Firebase DynamicLink
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // Firebase Messaging 초기화
+  await FirebaseMessagingService.initializeFirebaseMessaging();
+  await FirebaseMessagingService.requestFirebaseNotificationPermission();
+  String? fcmToken = await FirebaseMessagingService.getFirebaseToken();
+  print('FCM 토큰: $fcmToken');
 
   // Kakao SDK
   KakaoSdk.init(
@@ -72,14 +80,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                   create: (_) => AuthBloc()..add(OnCheckingLoginEvent())),
               BlocProvider(create: (_) => UserBloc()),
               BlocProvider(create: (_) => PolicyBloc()),
-              // BlocProvider(create: (_) => StoryBloc()),
-              // BlocProvider(create: (_) => ChatBloc()),
             ],
             child: const MaterialApp(
                 debugShowCheckedModeBanner: false,
                 title: ' 영암군 청소년 복지 정책 제공',
-                home: CheckingLoginPage() //HomePage(),
-                ),
+                home: CheckingLoginPage()),
           );
         });
   }

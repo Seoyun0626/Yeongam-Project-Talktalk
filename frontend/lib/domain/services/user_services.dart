@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:teentalktalk/data/env/env.dart';
-import 'package:teentalktalk/domain/models/response/response_fig.dart';
+import 'package:teentalktalk/domain/models/response/response_user_fig_count.dart';
+import 'package:teentalktalk/domain/models/response/response_fig_history.dart';
 import 'package:teentalktalk/ui/helpers/debouncer.dart';
 import 'package:teentalktalk/data/storage/secure_storage.dart';
 import 'package:teentalktalk/domain/models/response/default_response.dart';
@@ -28,7 +29,7 @@ class UserServices {
     String userpw2,
     String userRole,
     String userType,
-    String inviteCode,
+    // String inviteCode,
     String youthageCode,
     String parentsageCode,
     String emdClassCode,
@@ -45,7 +46,7 @@ class UserServices {
       'userpw2': userpw2,
       'user_role': userRole,
       'user_type': userType,
-      'invite_code': inviteCode,
+      // 'invite_code': inviteCode,
       'youthAge_code': youthageCode,
       'parentsAge_code': parentsageCode,
       'emd_class_code': emdClassCode,
@@ -63,7 +64,7 @@ class UserServices {
     String userEmail,
     String userRole, //기본 - 선택 X
     String userType, //기본 - 선택 X
-    String inviteCode,
+    // String inviteCode,
     String youthageCode, //기본 - 선택 X
     String parentsageCode, //기본 - 선택 X
     String emdClassCode, //기본 - 선택 X
@@ -80,7 +81,7 @@ class UserServices {
       // 'userpw2': userpw2,
       'user_role': userRole,
       'user_type': userType,
-      'invite_code': inviteCode,
+      // 'invite_code': inviteCode,
       'youthAge_code': youthageCode,
       'parentsAge_code': parentsageCode,
       'emd_class_code': emdClassCode,
@@ -158,16 +159,27 @@ class UserServices {
   }
 
   // tb_user에서 사용자 무화과 개수 가져오기/업데이트
-  Future<FigResponse> updateFigCount() async {
+  Future<ResponseUserFigCount> updateFigCount() async {
     final token = await secureStorage.readToken();
 
     // print('getFigCount');
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/user/get-fig-count'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
-    // print(resp.body);
+    print(resp.body);
 
-    return FigResponse.fromJson(jsonDecode(resp.body));
+    return ResponseUserFigCount.fromJson(jsonDecode(resp.body));
+  }
+
+  Future<DefaultResponse> deleteUser() async {
+    final token = await secureStorage.readToken();
+    // print(token);
+    // print('ResponseUser - getUserById');
+    final resp = await http.get(
+        Uri.parse('${Environment.urlApi}/user/delete-user'),
+        headers: {'Accept': 'application/json', 'xxx-token': token!});
+
+    return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 }
 

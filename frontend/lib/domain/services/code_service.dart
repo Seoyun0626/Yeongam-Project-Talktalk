@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:teentalktalk/data/env/env.dart';
+import 'package:teentalktalk/domain/models/response/default_response.dart';
+import 'package:teentalktalk/domain/models/response/response_event.dart';
 
 class codeServices {
   Map<String, String> _setHeaders() =>
@@ -12,42 +14,20 @@ class codeServices {
         Uri.parse('${Environment.urlApi}/codeData/get-code-data'),
         headers:
             _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
-    // print('code_services getCodeData');
-    // print(resp.body);
     var result = jsonDecode(resp.body);
-    // var data = json.decode(resp.body);
-    // // List result = data['policies'] as List;
-
-    // var dataResponse = json.decode(resp.body);
-    // var data = dataResponse['codes'];
-    // var result = data.map((x) => commonCode.fromJson(x)).toList();
-
-    return result; //ResponseCode.fromJson(jsonDecode(resp.body)).codes;
+    return result;
   }
 
-  // getCodeName(String codeType, String code) {
-  //   print(data);
-  //   late String codeDetailName = '';
-  //   // var len = data['codes'][codeType];
-  //   // print(len);
+  // 이벤트 정보 불러오기
+  Future<ResponseEvent> getEventData(String eid) async {
+    // print('getEventData');
+    final resp = await http.get(
+        Uri.parse('${Environment.urlApi}/codeData/get-event-data/$eid'),
+        headers: {'Accept': 'application/json'});
+    // print(resp.body);
 
-  //   for (int i = 0; i < 6; i++) {
-  //     var codeDetail = data['codes'][codeType][i]['code_detail'];
-  //     if (codeDetail == code) {
-  //       codeDetailName = data['codes'][codeType][i]['code_detail_name'];
-  //       print(codeDetailName);
-  //       return codeDetailName;
-  //     }
-  //   }
-  // }
-
-  // getInstitutionCodeData(String code) async {
-  //   var data = await codeService.getCodeData('policy_institution_code', '01');
-  //   // print(data);
-  //   return data;
-  // }
+    return ResponseEvent.fromJson(jsonDecode(resp.body));
+  }
 }
-
-//
 
 final codeService = codeServices();

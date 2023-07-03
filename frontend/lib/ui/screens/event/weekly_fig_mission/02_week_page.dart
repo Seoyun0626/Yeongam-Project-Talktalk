@@ -5,32 +5,39 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stroke_text/stroke_text.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/domain/services/event_services.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_access_denied.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/screens/event/attendance_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/event_list_page.dart';
 import 'package:teentalktalk/ui/screens/event/new_weeklyFig_event_page.dart';
 import 'package:teentalktalk/ui/screens/event/weeklyFig_event_page.dart';
+import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
 import 'package:teentalktalk/ui/screens/register/user_type_page.dart';
-import 'package:teentalktalk/ui/screens/settings/settings_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 class SecondWeekMissionPage extends StatelessWidget {
-  const SecondWeekMissionPage({Key? key}) : super(key: key);
+  const SecondWeekMissionPage({Key? key, required this.hasParticipated})
+      : super(key: key);
+  final bool hasParticipated;
 
   @override
   Widget build(BuildContext context) {
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+    final bool isLogIn = authState is SuccessAuthentication;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromRGBO(249, 248, 189, 1),
+        backgroundColor: ThemeColors.third,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Color.fromRGBO(249, 248, 189, 1),
+          backgroundColor: ThemeColors.third,
           leading: IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios_new_rounded,
-                color: ThemeColors.fig_pink,
+                color: ThemeColors.primary,
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -62,7 +69,7 @@ class SecondWeekMissionPage extends StatelessWidget {
                             // height: 50.h,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: ThemeColors.fig_pink, width: 2.w),
+                                  color: ThemeColors.primary, width: 2.w),
                               color: Colors.white,
                             ),
                             child: Column(children: [
@@ -70,7 +77,7 @@ class SecondWeekMissionPage extends StatelessWidget {
                                 margin: EdgeInsets.all(5.w),
                                 padding: EdgeInsets.all(5.w),
                                 decoration: const BoxDecoration(
-                                    color: ThemeColors.fig_pink,
+                                    color: Color.fromRGBO(245, 117, 33, 0.8),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
                                 child: TextCustom(
@@ -80,14 +87,14 @@ class SecondWeekMissionPage extends StatelessWidget {
                                 ),
                               ),
                               StrokeText(
-                                text: "톡talk 알림 허용",
+                                text: "정책 스크랩",
                                 textStyle: TextStyle(
                                     fontSize: 30.sp,
                                     fontFamily: 'CookieRun',
                                     fontWeight: FontWeight.w700,
                                     letterSpacing: 2,
-                                    color: ThemeColors.fig_green),
-                                strokeColor: ThemeColors.basic,
+                                    color: ThemeColors.primary),
+                                strokeColor: Colors.transparent,
                                 strokeWidth: 2,
                               ),
                               SizedBox(
@@ -97,10 +104,10 @@ class SecondWeekMissionPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [
                                   TextCustom(
-                                    text: '청소년 톡talk ',
+                                    text: '관심있는 ',
                                   ),
                                   TextCustom(
-                                    text: 'PUSH 알림 허용',
+                                    text: '정책 스크랩',
                                     fontWeight: FontWeight.bold,
                                   ),
                                   TextCustom(
@@ -118,7 +125,7 @@ class SecondWeekMissionPage extends StatelessWidget {
                                     text: '무화과 ',
                                   ),
                                   TextCustom(
-                                    text: '2개',
+                                    text: '3개',
                                     fontWeight: FontWeight.bold,
                                   ),
                                   TextCustom(
@@ -169,12 +176,12 @@ class SecondWeekMissionPage extends StatelessWidget {
                                   ),
                                   Row(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Icon(
-                                        Icons.notifications_none_rounded,
-                                        color: ThemeColors.fig_pink,
+                                        Icons.person_outline_rounded,
+                                        color: ThemeColors.primary,
                                         size: 70.sp,
                                       ),
                                       SizedBox(
@@ -189,17 +196,18 @@ class SecondWeekMissionPage extends StatelessWidget {
                                             height: 5.h,
                                           ),
                                           const TextCustom(
-                                              text: '2. 설정 페이지 이동'),
+                                              text: '2. 복지검색 페이지 이동'),
                                           SizedBox(
                                             height: 5.h,
                                           ),
-                                          const TextCustom(text: '3. 알림 허용하기'),
+                                          const TextCustom(
+                                              text: '3. 관심있는 정책 스크랩하기'),
                                         ],
                                       ),
                                     ],
                                   ),
                                   Divider(
-                                    color: ThemeColors.fig_pink,
+                                    color: ThemeColors.primary,
                                     height: 30.h,
                                     thickness: 1,
                                   ),
@@ -208,6 +216,7 @@ class SecondWeekMissionPage extends StatelessWidget {
                                     fontSize: 18.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
+
                                   SizedBox(
                                     height: 10.h,
                                   ),
@@ -219,7 +228,7 @@ class SecondWeekMissionPage extends StatelessWidget {
                                     height: 5.h,
                                   ),
                                   TextCustom(
-                                    text: '- 알림 허용 시 무화과가 자동 지급됩니다.',
+                                    text: '- 정책 스크랩 시 무화과가 자동 지급됩니다.',
                                     fontSize: 12.sp,
                                   ),
                                   SizedBox(
@@ -241,11 +250,36 @@ class SecondWeekMissionPage extends StatelessWidget {
                                   ),
                                   TextButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const SettingsPage()));
+                                        if (isLogIn && hasParticipated) {
+                                          modalAccessDenied(
+                                              context, "이미 참여한 이벤트입니다.",
+                                              onPressed: () {});
+                                        } else {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PolicyListPage(
+                                                          selectedCodes:
+                                                              SelectedCodes(
+                                                        policyInstitution: [],
+                                                        policyTarget: [],
+                                                        policyField: [],
+                                                        policyCharacter: [],
+                                                        // policyArea: []
+                                                      ))));
+                                          // eventService
+                                          //     .giveFigForWeeklyFigChallenge(
+                                          //         '4'); //eid
+                                          // Navigator.pushAndRemoveUntil(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           const newWeeklyFigEventPage(),
+                                          //     ),
+                                          //     (_) => false);
+                                          // modalGetFig(context, '4'); //eid
+                                        }
                                       },
                                       child: Center(
                                         child: Container(
@@ -256,10 +290,10 @@ class SecondWeekMissionPage extends StatelessWidget {
                                               20.w, 10.h, 20.w, 10.h),
                                           decoration: BoxDecoration(
                                               color: const Color.fromRGBO(
-                                                  198,
-                                                  30,
-                                                  54,
-                                                  0.5), //ThemeColors.fig_pink,
+                                                  245,
+                                                  117,
+                                                  33,
+                                                  0.8), //ThemeColors.fig_pink,
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(30.r),
                                               ),
@@ -278,7 +312,9 @@ class SecondWeekMissionPage extends StatelessWidget {
                                                 ),
                                               ]),
                                           child: TextCustom(
-                                            text: "알림 허용하러 가기",
+                                            text: hasParticipated
+                                                ? "참여완료"
+                                                : "정책 스크랩하러 가기",
                                             fontSize: 20.sp,
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:teentalktalk/ui/helpers/attendance_event_controller.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -200,7 +201,7 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                                   ? Colors.grey
                                   : const Color.fromRGBO(247, 248, 250, 1)),
                           onPressed: () {
-                            controller.handleAttendanceCheck();
+                            controller.handleAttendanceCheck(context);
                           },
                           child: Row(
                             // crossAxisAlignment: CrossAxisAlignment.center,
@@ -215,13 +216,9 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                               ),
                               SizedBox(width: 8.w),
                               TextCustom(
-                                text: controller.isCheckedAttendance.value
-                                    ? "이미 출석하였습니다"
-                                    : "오늘의 무화과 받기",
+                                text: "오늘의 무화과 받기",
                                 fontSize: 15.sp,
-                                color: controller.isCheckedAttendance.value
-                                    ? Colors.white
-                                    : Colors.black,
+                                color: Colors.black,
                               )
                             ],
                           ),

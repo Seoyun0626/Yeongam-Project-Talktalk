@@ -33,7 +33,7 @@ class PolicyBloc extends Bloc<PolicyEvent, PolicyState> {
 
   Future<void> _scrapOrUnscrapPolicy(
       OnScrapOrUnscrapPolicy event, Emitter<PolicyState> emit) async {
-    // print('_scrapOrUnscrapPolicy');
+    print('_scrapOrUnscrapPolicy');
     try {
       emit(LoadingPolicy());
       // print('after Loading Policy');

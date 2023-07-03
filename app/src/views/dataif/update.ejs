@@ -22,7 +22,7 @@
               <div class="inline fields">
                 <label>이름  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
                 <div class="four wide field">
-                  <input type="text" name="name" id="update_name" value="<%= post.name %>">
+                  <input type="text" name="name" id="update_name" value="<%= post.user_name %>">
                 </div>
                 <label>아이디</label>
                 <div class="four wide field">
@@ -49,8 +49,10 @@
                 <label>권한구분</label>
                 <div class="four wide field">
                   <select class="ui fluid dropdown" name="user_role" id="user_role">
-                    <option value="0">관리자</option>
-                    <option value="1">사용자</option>
+                    <option value="0">사용자</option>
+                    <option value="1">최고관리자</option>
+                    <option value="2">부관리자</option>
+                    <option value="3">정책관리자</option>
                   </select>
                 </div>
                 <label>회원구분</label>

@@ -2,7 +2,8 @@ var db = require('../utils/db');
 var multer = require('multer');
 const path = require("path");
 var fs = require("fs");
-const { uuid } = require('uuidv4');
+// const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 
 exports.fetchData = async function(req, res) {
     var conn;
@@ -81,7 +82,7 @@ exports.updatePolicy = async function(req, res) {
         console.log('policy-service updatePolicy db getConnection');
         var query;
         // imgCheck가 on상태라면 기존 이미지를 그대로 사용하고, off라면 새로운 이미지를 사용한다.
-        const uidPolicy = uuid(); // 정책 고유 번호
+        const uidPolicy = uuidv4(); // 정책 고유 번호
         if(req.body.imgCheck == 'on') {
             query = "update webdb.tb_policy set uid = '"+uidPolicy+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
         }
@@ -172,18 +173,8 @@ exports.upload = async function(req, res) {
         // DB에 저장
         conn = await db.getConnection();
         console.log('policy-service upload db getConnection');
-        var name = req.body.name;
-        var target = req.body.target;
-        var policy_institution_code = req.body.policy_institution_code;
-        var min_fund = req.body.min_fund;
-        var max_fund = req.body.max_fund;
-        var content = req.body.content;
-        var application_start_date = req.body.application_start_date;
-        var application_end_date = req.body.application_end_date;
-        var policy_field_code = req.body.policy_field_code;
-        var policy_character_code = req.body.policy_character_code;
-        var policy_link = req.body.policy_link;
-        console.log(req.body);
+        var { name, target, policy_institution_code, min_fund, max_fund, content, application_start_date, application_end_date, 
+            policy_field_code, policy_character_code, policy_link } = req.body; 
         if(name == null || name == undefined || name == '') {
             resultcode = 1;
             return resultcode;
@@ -212,7 +203,7 @@ exports.upload = async function(req, res) {
         //     resultcode = 7;
         //     return resultcode;
         // }
-        const uidPolicy = uuid(); // 정책 고유 번호
+        const uidPolicy = uuidv4(); // 정책 고유 번호
         var query = "INSERT INTO webdb.tb_policy (uid, policy_name, policy_target_code, policy_institution_code, min_fund, max_fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link) VALUES "
           + "('"+uidPolicy+"', '" + name + "', '" + target + "', '" + policy_institution_code + "', '" + min_fund + "', '" + max_fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "', '" + policy_link + "');";
         var rows = await conn.query(query); // 쿼리 실행
@@ -232,6 +223,15 @@ exports.banner = async function(req, res) {
     var conn;
     var resultcode = 0;
     try{
+        // 베너의 개수가 6개 이상이면 업로드 불가
+        conn = await db.getConnection();
+        console.log('policy-service banner db getConnection');
+        var query = "SELECT count(*) as cnt FROM webdb.tb_banner;";
+        var banner_count = await conn.query(query); // 쿼리 실행
+        if(banner_count[0].cnt >= 6) {
+            resultcode = 1;
+            return resultcode;
+        }
         var temp = Date.now();
         // 이미지 업로드
         var upload = multer({ 

@@ -8,94 +8,57 @@ String responseEventToJson(ResponseEvent data) => json.encode(data.toJson());
 class ResponseEvent {
   bool resp;
   String message;
-  List<FigReward> rewardData;
-  List<FigUsage> usageData;
+  List<EventData> eventData;
 
-  ResponseEvent(
-      {required this.resp,
-      required this.message,
-      required this.rewardData,
-      required this.usageData});
+  ResponseEvent({
+    required this.resp,
+    required this.message,
+    required this.eventData,
+  });
 
   factory ResponseEvent.fromJson(Map<String, dynamic> json) => ResponseEvent(
         resp: json["resp"],
         message: json["message"],
-        rewardData: List<FigReward>.from(
-            json["figReward"].map((x) => FigReward.fromJson(x))),
-        usageData: List<FigUsage>.from(
-            json["figUsage"].map((x) => FigUsage.fromJson(x))),
+        eventData: List<EventData>.from(
+            json["eventData"].map((x) => EventData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "resp": resp,
         "message": message,
-        "figReward": List<dynamic>.from(rewardData.map((x) => x.toJson())),
-        "figUsage": List<dynamic>.from(usageData.map((x) => x.toJson())),
+        "eventData": List<dynamic>.from(eventData.map((x) => x.toJson())),
       };
 }
 
-// 지급 내역
-class FigReward {
-  int event_part_no;
-  // String eid;
-  String acquired_time; // 지급 일시
+// 이벤트 정보
+class EventData {
+  String eid; // 이벤트 아이디
   String event_name; // 이벤트 이름
-  String fig_payment; // 무화과 개수
+  String fig_payment; // 지급 무화과 개수
+  String event_start_date; // 이벤트 시작 날짜
+  String event_end_date; // 이벤트 끝 날짜
 
-  FigReward({
-    required this.event_part_no,
-    // required this.eid,
-    required this.acquired_time,
+  EventData({
+    required this.eid,
     required this.event_name,
     required this.fig_payment,
+    required this.event_start_date,
+    required this.event_end_date,
   });
 
-  factory FigReward.fromJson(Map<String, dynamic> json) => FigReward(
-        event_part_no: json["event_part_no"],
-        // eid: json["eid"],
-        acquired_time: json["acquired_time"],
+  factory EventData.fromJson(Map<String, dynamic> json) => EventData(
+        eid: json["eid"],
         event_name: json["event_name"],
         fig_payment: json["fig_payment"],
+        event_start_date: json["event_start_date"],
+        event_end_date: json["event_end_date"],
       );
 
   Map<String, dynamic> toJson() => {
-        "event_part_no": event_part_no,
-        // "eid": eid,
-        "acquired_time": acquired_time,
+        "eid": eid,
         "event_name": event_name,
         "fig_payment": fig_payment,
-      };
-}
-
-// 사용 내역
-class FigUsage {
-  int fig_usage_no;
-  String fig_used_date; // 사용 일시
-  String product_name; // 제품 이름
-  String product_cost; // 제품 비용
-  String product_stock; // 제품 재고
-
-  FigUsage({
-    required this.fig_usage_no,
-    required this.fig_used_date,
-    required this.product_name,
-    required this.product_cost,
-    required this.product_stock,
-  });
-
-  factory FigUsage.fromJson(Map<String, dynamic> json) => FigUsage(
-        fig_usage_no: json["fig_usage_no"],
-        fig_used_date: json["fig_used_date"],
-        product_name: json["product_name"],
-        product_cost: json["product_cost"],
-        product_stock: json["product_stock"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "fig_usage_no": fig_usage_no,
-        "fig_used_date": fig_used_date,
-        "product_name": product_name,
-        "product_cost": product_cost,
-        "product_stock": product_stock,
+        "event_start_date": event_start_date,
+        "event_end_date": event_end_date,
       };
 }

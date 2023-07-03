@@ -32,7 +32,7 @@ class ResponsePolicy {
 
 class Policy {
   int board_idx;
-  String uid;
+  String pid;
   String policy_institution_code; // 주최측
   String policy_name; // 정책 이름
   String application_start_date; // 모집 시작 날짜
@@ -48,7 +48,7 @@ class Policy {
 
   Policy({
     required this.board_idx,
-    required this.uid,
+    required this.pid,
     required this.policy_institution_code,
     required this.policy_name,
     required this.application_start_date,
@@ -65,7 +65,7 @@ class Policy {
 
   factory Policy.fromJson(Map<String, dynamic> json) => Policy(
       board_idx: json["board_idx"],
-      uid: json["uid"],
+      pid: json["uid"],
       application_start_date: json["application_start_date"],
       application_end_date: json["application_end_date"],
       img: json["img"],
@@ -81,7 +81,7 @@ class Policy {
 
   Map<String, dynamic> toJson() => {
         "board_idx": board_idx,
-        "uid": uid,
+        "uid": pid,
         "policy_supervision": policy_institution_code,
         "policy_name": policy_name,
         "application_start_date": application_start_date,

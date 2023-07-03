@@ -1,113 +1,33 @@
 var policy_service = require("../../services/policy-service");
 
-// 회원가입 컨트롤러
-// exports.signUp = async function(req, res) {
-//     try{
-//       var result = await policy_service.signUp(req);
-//       return result;
-//     } catch(error) {
-//       console.log('login-controller login_check:'+error);
-//     }
-//   };
-
-exports.upload = async function(req, res) {
-    try{
-      var result = await policy_service.upload(req);
-      return result;
-    } catch(error) {
-      console.log('policy-controller login_check:'+error);
-    }
-  };
-
-exports.fetchpolicyByidx = async function(req, res) {
-  try{
-    var result = await policy_service.fetchpolicyByidx(req);
-    // console.log(result);
+// 고차 함수
+async function executeService(service, req, res, serviceName) {
+  try {
+    var result = await service(req, res);
     return result;
-  } catch(error) {
-    console.log('policy-controller fetchpolicyByidx:'+error);
+  } catch (error) {
+    console.log(`policy-controller ${serviceName} error: ${error}`);
   }
-};
+}
 
-exports.updatePolicy = async function(req, res) {
-  try{
-    var result = await policy_service.updatePolicy(req);
-    // console.log(result);
-    return result;
-  } catch(error) {
-    console.log('policy-controller updatePolicy:'+error);
-  }
-};
+exports.upload = (req, res) => executeService(policy_service.upload, req, res, 'upload');
 
-exports.deletePolicy = async function(req, res) {
-  try{
-    var result = await policy_service.deletePolicy(req);
-    // console.log(result);
-    return result;
-  } catch(error) {
-    console.log('policy-controller deletePolicy:'+error);
-  }
-};
-exports.fetchpolicyImgByidx = async function(req, res) {
-  try{
-    var result = await policy_service.fetchpolicyImgByidx(req);
-    // console.log(result);
-    return result;
-  } catch(error) {
-    console.log('policy-controller fetchpolicyByidx:'+error);
-  }
-};
+exports.fetchpolicyByidx = (req, res) => executeService(policy_service.fetchpolicyByidx, req, res, 'fetchpolicyByidx');
 
+exports.updatePolicy = (req, res) => executeService(policy_service.updatePolicy, req, res, 'updatePolicy');
 
-exports.banner = async function(req, res) {
-    try{
-      var result = await policy_service.banner(req);
-      return result;
-    } catch(error) {
-      console.log('policy-controller login_check:'+error);
-    }
-  };
-exports.fetchBannerData = async function(req, res) {
-    try{
-      var result = await policy_service.fetchBannerData(req);
-      return result;
-    } catch(error) {
-      console.log('policy-controller login_check:'+error);
-    }
-  };
+exports.deletePolicy = (req, res) => executeService(policy_service.deletePolicy, req, res, 'deletePolicy');
 
-exports.deleteBanner = async function(req, res) {
-    try{
-      var result = await policy_service.deleteBanner(req);
-      return result;
-    } catch(error) {
-      console.log('policy-controller login_check:'+error);
-    }
-  };
-exports.fetchBannerImg = async function(req, res) {
-    try{
-      var result = await policy_service.fetchBannerImg(req);
-      return result;
-    } catch(error) {
-      console.log('policy-controller login_check:'+error);
-    }
-  };
-  
+exports.fetchpolicyImgByidx = (req, res) => executeService(policy_service.fetchpolicyImgByidx, req, res, 'fetchpolicyImgByidx');
 
-exports.fetchData = async function(req, res) {
-    try{
-      var result = await policy_service.fetchData(req);
-      return result;
-    } catch(error) {
-      console.log('policy-controller login_check:'+error);
-    }
-  };
+exports.banner = (req, res) => executeService(policy_service.banner, req, res, 'banner');
 
-exports.fetchCodeData = async function(req, res) {
-    try{
-      var result = await policy_service.fetchCodeData(req);
-      return result;
-    } catch(error) {
-      console.log('policy-controller login_check:'+error);
-    }
-  };
+exports.fetchBannerData = (req, res) => executeService(policy_service.fetchBannerData, req, res, 'fetchBannerData');
+
+exports.deleteBanner = (req, res) => executeService(policy_service.deleteBanner, req, res, 'deleteBanner');
+
+exports.fetchBannerImg = (req, res) => executeService(policy_service.fetchBannerImg, req, res, 'fetchBannerImg');
+
+exports.fetchData = (req, res) => executeService(policy_service.fetchData, req, res, 'fetchData');
+
+exports.fetchCodeData = (req, res) => executeService(policy_service.fetchCodeData, req, res, 'fetchCodeData');

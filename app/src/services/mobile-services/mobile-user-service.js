@@ -10,7 +10,7 @@ exports.getUserById = async function(req) {
         conn = await db.getConnection();
         // console.log('mobile-user-service getUserById');
 
-        // console.log('getUserById req.idPerson: ', req.idPerson); // uid
+        console.log('getUserById req.idPerson: ', req.idPerson); // uid
         const userdb = await conn.query(`CALL webdb.SP_GET_USER_BY_ID(?);`, [req.idPerson]);
         console.log(userdb[0][0]);
         const result = userdb[0][0]
@@ -78,6 +78,26 @@ exports.getUserById = async function(req) {
       if (conn) conn.end();
     }
   };
+
+
+  
+
+  exports.deleteUser = async function(req, res) {
+    var conn;
+    try{
+      conn = await db.getConnection();
+      console.log('dataif-service delete:'+req.idPerson);
+      var uid = req.idPerson;
+      var query = `CALL webdb.SP_DELETE_USER(?)`;
+      var rows = await conn.query(query, [uid]);
+      return rows;
+    } catch(error) {
+      console.log('dataif-service delete:'+error);
+    } finally {
+      if (conn) conn.end();
+    }
+  };
+  
 
   /*
   export const changePassword = async (req: Request, res: Response): Promise<Response> => {

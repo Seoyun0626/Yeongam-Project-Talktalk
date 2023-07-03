@@ -3,7 +3,8 @@ var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
 const nodemailer = require("nodemailer");
 
-const { uuid } = require('uuidv4');
+// const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 // const jwt = require('jsonwebtoken');
 
 // 로그인 확인
@@ -20,7 +21,7 @@ try{
   var rows = await conn.query(query); // 쿼리 실행 
   if (rows[0]) {
       // 관리자만 접속 가능하도록 처리
-      if(rows[0].user_role != 0) {
+      if(rows[0].user_role == 0) {
         json.code = 100;
         json.msg = "관리자만 접속 가능합니다.";
         json.data = {};
@@ -70,11 +71,7 @@ exports.signUp = async function(req, res) {
   try{
     conn = await db.getConnection();
     // console.log('login-service SignUp db getConnection')
-    var userid = req.body.userid;
-    var password = req.body.password;
-    var password2 = req.body.password2;
-    var name = req.body.name;
-    var inviteCode = req.body.invite_code;
+    var { userid, password, password2, name, invite_code: inviteCode } = req.body;
     var fig = 0;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
@@ -86,35 +83,43 @@ exports.signUp = async function(req, res) {
     if(password != password2) {
         // 비밀번호가 일치하지 않음
         console.log('비밀번호가 일치하지 않습니다.');
-        resultcode = 100;
+        resultcode = 200;
         return resultcode;
     }
+    query = "SELECT eid, fig_payment FROM webdb.tb_event WHERE eid = 2 OR eid = 6 OR eid = 7;"; // 무화과 지급량 받아오기
+    var figPayment = await conn.query(query); // 쿼리 실행
+    welcomeTalk = parseInt(figPayment[0].fig_payment);
+    inviteFriend = parseInt(figPayment[1].fig_payment);
+    recommender = parseInt(figPayment[2].fig_payment); // 추천인 무화과 지급량 설정
+    const uidUser = uuidv4();
     if (rows[0] == undefined) {
       // invite코드의 유저에 무화과 추가
-      if(inviteCode != '') {
-        query = "SELECT fig,uid FROM webdb.tb_user where userid='" + inviteCode + "' ;";
-        var inv = await conn.query(query); // 쿼리 실행
-        if(inv[0] == undefined) {
-          console.log('존재하지 않는 코드입니다.');
-          resultcode = 100;
-          return resultcode;
-        }
-        // int형식으로 무화과 추가후 varchar로 변환
-        inv[0].fig = parseInt(inv[0].fig) + 1;
-        inv[0].fig = inv[0].fig.toString();
-        query = "UPDATE webdb.tb_user SET fig='"+inv[0].fig+"' WHERE userid='"+inviteCode+"';";
-        var figUpdate = await conn.query(query); // 쿼리 실행
-        var eid = 1; // TODO:무화과 이벤트 번호, 바꿔야함
-        query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+inv[0].uid+"');";
-        // console.log(query);
-        var eventPart = await conn.query(query); // 쿼리 실행
-        fig+=1; //TODO: 지급 무화과 수 변경 필요
-        fig = fig.toString();
-      }
+      // if(inviteCode != '') {
+      //   query = "SELECT fig,uid FROM webdb.tb_user where userid='" + inviteCode + "' ;";
+      //   var inv = await conn.query(query); // 쿼리 실행
+      //   if(inv[0] == undefined) {
+      //     console.log('존재하지 않는 코드입니다.');
+      //     resultcode = 100;
+      //     return resultcode;
+      //   }
+      //   // int형식으로 무화과 추가후 varchar로 변환
+      //   inv[0].fig = parseInt(inv[0].fig) + inviteFriend;
+      //   inv[0].fig = inv[0].fig.toString();
+      //   query = "UPDATE webdb.tb_user SET fig='"+inv[0].fig+"' WHERE userid='"+inviteCode+"';"; // 추천인에게 무화과 지급
+      //   var figUpdate = await conn.query(query); // 쿼리 실행
+      //   var eid = 6; // TODO:무화과 이벤트 번호, 바꿔야함
+      //   query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+inv[0].uid+"');"; // 추천인에게 무화과 지급 이벤트 기록
+      //   // console.log(query);
+      //   var eventPart = await conn.query(query); // 쿼리 실행
+      //   fig+=recommender;
+      //   fig = fig.toString();
+      //   eid = 7;
+      //   query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+uidUser+"');"; // 추천인 입력 이벤트 기록
+      //   rows = await conn.query(query); // 쿼리 실행
+      // }
         hasher({
             password: password
         }, async (err, pass, salt, hash) => {
-          const uidUser = uuid();
           var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code, fig) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"', '"+fig+"')";
           var rows = await conn.query(query); // 쿼리 실행
           console.log('회원가입 성공');
@@ -122,7 +127,7 @@ exports.signUp = async function(req, res) {
     } else {
         // 이미 있음
         console.log('이미 존재하는 아이디입니다.');
-        resultcode = 100;
+        resultcode = 300;
     }
   } catch(error) {
     console.log('login-service SignUp:'+error);
@@ -147,8 +152,6 @@ exports.getAttendance = async function(req, res) {
     // uid를 통해 출석기록 받아오기
     var query = 'SELECT * FROM webdb.tb_attendance_logs where user_uid="'+uid[0].uid+'"';
     var attendanceLog = await conn.query(query); // 쿼리 실행
-    console.log(attendanceLog);
-
     if(attendanceLog.length){
       resultcode = 1;
     } else resultcode = 0;
@@ -179,4 +182,51 @@ exports.checkAttendance = async function(req, res) {
     if (conn) conn.end();
   }
   return resultcode;
+};
+
+exports.fetchFeedback = async function(req, res) {
+  var resultcode = 0;
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var query = 'SELECT * FROM webdb.tb_feedback';
+    var rows = await conn.query(query); // 쿼리 실행
+    resultcode = 1;
+    return rows;
+  } catch(error) {
+    console.log('login-service fetchFeedback:'+error);
+  }
+  return rows;
+};
+
+exports.feedRegi = async function(req, res) {
+  var resultcode = 0;
+  var conn;
+  try{
+    // console.log(req.session.user)
+    conn = await db.getConnection();
+    var query = 'insert into webdb.tb_feedback (tester, feedback_name, feedback_content) values ("'+req.session.user.data.user_name+'", "'+req.body.name+'", "'+req.body.content+'")';
+    var rows = await conn.query(query); // 쿼리 실행
+    resultcode = 1;
+    return rows;
+  } catch(error) {
+    console.log('login-service feedRegi:'+error);
+  }
+  return rows;
+};
+
+exports.feedDel = async function(req, res) {
+  var resultcode = 0;
+  var conn;
+  try{
+    conn = await db.getConnection();
+    var query = 'delete from webdb.tb_feedback where board_idx="'+req.params.id+'"';
+    var rows = await conn.query(query); // 쿼리 실행
+    resultcode = 1;
+    return rows;
+  }
+  catch(error) {
+    console.log('login-service feedDel:'+error);
+  }
+  return rows;
 };
