@@ -139,38 +139,38 @@ class _MyTalkTalkPageState extends State<MyTalkTalkPage> {
                                 }
                               },
                             ),
-                            ListTile(
-                              contentPadding: const EdgeInsets.all(5),
-                              leading: Image.asset(
-                                'images/Fig2.png',
-                                width: 40.w,
-                                height: 40.h,
-                              ),
+                            // ListTile(
+                            //   contentPadding: const EdgeInsets.all(5),
+                            //   leading: Image.asset(
+                            //     'images/Fig2.png',
+                            //     width: 40.w,
+                            //     height: 40.h,
+                            //   ),
 
-                              // SvgPicture.asset(
-                              //   'images/Fig.svg',
-                              //   width: 35.w,
-                              //   height: 35.h,
-                              // ),
-                              // subtitle: TextCustom(
-                              //   text: "미션 성공하고",
-                              //   fontSize: 10.sp,
-                              // ),
-                              title: TextCustom(
-                                text: "무화과 따러가기",
-                                fontSize: 18.sp,
-                              ),
-                              trailing: const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: ThemeColors.basic),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const EventPage(),
-                                    ));
-                              },
-                            ),
+                            //   // SvgPicture.asset(
+                            //   //   'images/Fig.svg',
+                            //   //   width: 35.w,
+                            //   //   height: 35.h,
+                            //   // ),
+                            //   // subtitle: TextCustom(
+                            //   //   text: "미션 성공하고",
+                            //   //   fontSize: 10.sp,
+                            //   // ),
+                            //   title: TextCustom(
+                            //     text: "무화과 따러가기",
+                            //     fontSize: 18.sp,
+                            //   ),
+                            //   trailing: const Icon(
+                            //       Icons.arrow_forward_ios_rounded,
+                            //       color: ThemeColors.basic),
+                            //   onTap: () {
+                            //     Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //           builder: (context) => const EventPage(),
+                            //         ));
+                            //   },
+                            // ),
                             ListTile(
                               contentPadding: const EdgeInsets.all(5),
                               leading: Image.asset(
