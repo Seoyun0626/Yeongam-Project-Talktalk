@@ -10,6 +10,7 @@ import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/kakao_sdk_login.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_basic.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/screens/login/find_pw_page.dart';
 import 'package:teentalktalk/ui/screens/login/find_id_page.dart';
@@ -259,19 +260,25 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const FindIDPage(),
-                                  )),
+                              onTap: () {
+                                modalPreparing(context);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) => const FindIDPage(),
+                                //     ));
+                              },
                               child: const TextCustom(text: '아이디 찾기')),
                           InkWell(
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const FindPasswordPage(),
-                                  )),
+                              onTap: () {
+                                modalPreparing(context);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) =>
+                                //           const FindPasswordPage(),
+                                //     ));
+                              },
                               child: const TextCustom(text: '비밀번호 찾기')),
                           InkWell(
                               onTap: () => Navigator.push(

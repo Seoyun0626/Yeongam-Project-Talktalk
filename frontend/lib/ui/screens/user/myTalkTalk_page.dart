@@ -7,6 +7,7 @@ import 'package:teentalktalk/domain/models/response/response_fig_history.dart';
 import 'package:teentalktalk/domain/services/user_services.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_logout.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
 import 'package:teentalktalk/ui/screens/event/enter_invite_code_page.dart';
 import 'package:teentalktalk/ui/screens/event/event_page.dart';
 import 'package:teentalktalk/ui/screens/intro/checking_login_page.dart';
@@ -185,7 +186,9 @@ class _MyTalkTalkPageState extends State<MyTalkTalkPage> {
                                 Icons.arrow_forward_ios_rounded,
                                 color: ThemeColors.basic,
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                modalPreparing(context);
+                              },
                             ),
                           ]),
                         ),
@@ -660,11 +663,12 @@ class _FigMarket extends StatelessWidget {
                 width: 120.w,
                 height: 30.h,
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FigMarketPage(),
-                      ));
+                  modalPreparing(context);
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const FigMarketPage(),
+                  //     ));
                 },
               ),
             ),

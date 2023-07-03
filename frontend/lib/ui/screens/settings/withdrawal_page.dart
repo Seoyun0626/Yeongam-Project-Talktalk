@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_withdrawal.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -32,17 +34,20 @@ class WithdrawalPage extends StatelessWidget {
               child: Column(children: [
                 Expanded(
                   child: Align(
-                      alignment: Alignment.bottomCenter,
+                      alignment: Alignment.center,
                       child: BtnNaru(
+                          margin: EdgeInsets.only(top: 20.h, bottom: 20.h),
                           text: '탈퇴하기',
-                          width: 350,
-                          height: 50,
-                          fontSize: 20,
+                          width: 120.w,
+                          height: 50.h,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
                           colorText: Colors.white,
                           // backgroundColor:
                           //     completeAgree ? ThemeColors.primary : Colors.grey,
-                          onPressed: () {})),
+                          onPressed: () {
+                            modalWithdrawal(context);
+                          })),
                 )
               ]),
             )));

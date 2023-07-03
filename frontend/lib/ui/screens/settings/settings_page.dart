@@ -1,5 +1,6 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
 import 'package:teentalktalk/ui/screens/settings/notice_page.dart';
 import 'package:teentalktalk/ui/screens/settings/withdrawal_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
@@ -69,11 +70,12 @@ class SettingsPage extends StatelessWidget {
                   color: ThemeColors.basic,
                 ),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const NoticePage(),
-                      ));
+                  modalPreparing(context);
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const NoticePage(),
+                  //     ));
                 },
               ),
               ListTile(
@@ -87,11 +89,12 @@ class SettingsPage extends StatelessWidget {
                   color: ThemeColors.basic,
                 ),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const WithdrawalPage(),
-                      ));
+                  modalPreparing(context);
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const WithdrawalPage(),
+                  //     ));
                 },
               ),
             ]),

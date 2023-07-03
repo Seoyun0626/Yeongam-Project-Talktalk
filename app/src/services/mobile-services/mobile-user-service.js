@@ -79,6 +79,26 @@ exports.getUserById = async function(req) {
     }
   };
 
+
+  
+
+  exports.deleteUser = async function(req, res) {
+    var conn;
+    try{
+      conn = await db.getConnection();
+      console.log('dataif-service delete:'+req.idPerson);
+      var uid = req.idPerson;
+      var query = `CALL webdb.SP_DELETE_USER(?)`;
+      var rows = await conn.query(query, [uid]);
+      return rows;
+    } catch(error) {
+      console.log('dataif-service delete:'+error);
+    } finally {
+      if (conn) conn.end();
+    }
+  };
+  
+
   /*
   export const changePassword = async (req: Request, res: Response): Promise<Response> => {
 

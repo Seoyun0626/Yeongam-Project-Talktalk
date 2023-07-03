@@ -280,7 +280,7 @@ class _clickBattle extends StatelessWidget {
               )),
           SizedBox(height: 20.h),
           const Text(
-            '클릭해보세요',
+            '준비 중입니다', //'클릭해보세요',
             style: TextStyle(
                 color: ThemeColors.primary,
                 fontFamily: 'CookieRun',
