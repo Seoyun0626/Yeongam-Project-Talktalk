@@ -161,7 +161,7 @@ router.post('/push', ensureAuth, asyncHandler(async function (req, res) {
     console.log('푸시 알림이 성공적으로 전송되었습니다:', response.data);
     res.redirect('/admin/push'); // 알림 전송 후 리디렉션할 경로를 설정합니다.
   } catch (error) {
-    console.error('푸시 알림 전송 중 오류가 발생했습니다:', error);
+    // console.error('푸시 알림 전송 중 오류가 발생했습니다:', error);
     res.redirect('/admin/push'); // 오류 발생 시 리디렉션할 경로를 설정합니다.
   }
 }));
