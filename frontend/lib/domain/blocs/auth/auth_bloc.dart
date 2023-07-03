@@ -50,14 +50,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onKakaoLogin(
       OnKakaoLoginEvent event, Emitter<AuthState> emit) async {
-<<<<<<< HEAD
-    print(event.user_id);
-    print(event.user_email);
-    final data = await authServices.kakaoLogin(event.user_id, event.user_email);
-    // print('_onLogin data.resp');
-    print(data.resp);
-    emit(SuccessAuthentication());
-=======
     try {
       emit(LoadingAuthentication());
       print("_onKakaoLogin");
@@ -78,7 +70,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } catch (e) {
       emit(FailureAuthentication(e.toString()));
     }
->>>>>>> KTH
   }
 
   Future<void> _onCheckingLogin(

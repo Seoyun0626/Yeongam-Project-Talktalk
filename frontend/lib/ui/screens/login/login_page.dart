@@ -232,12 +232,6 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-<<<<<<< HEAD
-                                builder: (context) => const termsAgreePage(
-                                    isKakaoLogin:
-                                        true), //userTypePage(isKakaoLogin: true),
-                              ));
-=======
                                 builder: (context) =>
                                     const userTypePage(isKakaoLogin: true),
                               ),
@@ -248,7 +242,6 @@ class _LoginPageState extends State<LoginPage> {
                                 userInfo['user_id'] ?? '',
                                 userInfo['user_email'] ?? ''));
                           }
->>>>>>> KTH
                         }
                       },
                     ),

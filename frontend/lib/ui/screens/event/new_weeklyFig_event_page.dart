@@ -61,15 +61,11 @@ class _NewWeeklyFigEventPageState extends State<NewWeeklyFigEventPage> {
   Widget build(BuildContext context) {
     final authState = BlocProvider.of<AuthBloc>(context).state;
 
-<<<<<<< HEAD
-    int week = 1;
-=======
     // 이벤트 기간 반영
     // 1.웰컴 2.스크랩 3.공유
     // 현재 날짜가 이벤트 기간 내 해당되면 버튼 활성화
     int week = 1;
 
->>>>>>> KTH
     // 이벤트 참여 여부
     List<bool> getWeekCheckList = [
       hasWeek01Participated,

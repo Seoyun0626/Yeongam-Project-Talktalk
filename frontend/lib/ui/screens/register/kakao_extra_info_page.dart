@@ -3,10 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/ui/helpers/kakao_sdk_login.dart';
-<<<<<<< HEAD
-=======
 import 'package:teentalktalk/ui/helpers/modals/modal_success_register.dart';
->>>>>>> KTH
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
@@ -51,15 +48,6 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
         user_email = userInfo['user_email'] ?? '';
       });
     });
-<<<<<<< HEAD
-=======
-    youthAgeList = getMobileCodeService.getCodeDetailList('youthAge_code');
-    parentsAgeList = getMobileCodeService.getCodeDetailList('parentsAge_code');
-    sexList = getMobileCodeService.getCodeDetailList('sex_class_code');
-    emdList = getMobileCodeService.getCodeDetailList('emd_class_code');
-  }
->>>>>>> KTH
-
     youthAgeList = getMobileCodeService.getCodeDetailList('youthAge_code');
     parentsAgeList = getMobileCodeService.getCodeDetailList('parentsAge_code');
     sexList = getMobileCodeService.getCodeDetailList('sex_class_code');
@@ -87,53 +75,6 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
           //   Navigator.pop(context);
           // } else
 
-<<<<<<< HEAD
-          if (state is SuccessUserState) {
-            // Navigator.pop(context);
-            // KakaoLoginServices.kakaoGetUserInfo();
-
-            authBloc.add(OnKakaoLoginEvent(user_id, user_email));
-            userBloc.add(OnGetUserAuthenticationEvent());
-            BlocListener<AuthBloc, AuthState>(listener: (context, state) {
-              print(state);
-
-              if (state is FailureAuthentication) {
-                modalWarning(context, '다시 로그인해주세요');
-              } else if (state is SuccessAuthentication) {
-                // userBloc.add(OnGetUserAuthenticationEvent());
-
-                // Navigator.of(context).pop();
-
-                // Navigator.pushAndRemoveUntil(
-                //   context,
-                //   routeFade(page: const HomePage()),
-                //   (_) => false,
-                // );
-
-                modalSuccess(
-                  context,
-                  '회원가입이 완료되었습니다',
-                  onPressed: () => Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                      (_) => false),
-                );
-              }
-            });
-
-            // modalSuccess(
-            //   context,
-            //   '회원가입이 완료되었습니다',
-            //   onPressed: () => Navigator.pushAndRemoveUntil(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder: (context) => const HomePage(),
-            //       ),
-            //       (_) => false),
-            // );
-=======
           if (state is SuccessKakaoUserState) {
             Navigator.pushAndRemoveUntil(
                 context,
@@ -144,7 +85,6 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
             modalSuccessRegister(
               context,
             );
->>>>>>> KTH
           } else if (state is FailureUserState) {
             Navigator.pop(context);
             Navigator.pushAndRemoveUntil(
@@ -419,11 +359,6 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                                 _emd, //emd_class_code
                                 _sex // sex_class_code
                                 ));
-<<<<<<< HEAD
-
-                            // }
-=======
->>>>>>> KTH
                           }),
                     ],
                   ))),
