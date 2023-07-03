@@ -110,10 +110,11 @@ class _HomePageState extends State<HomePage> {
                       color: ThemeColors.primary,
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const NotificationPage()));
+                      modalPreparing(context);
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const NotificationPage()));
                     }),
                 IconButton(
                     icon: Icon(
