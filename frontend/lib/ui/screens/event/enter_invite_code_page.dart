@@ -41,7 +41,7 @@ class _InviteCodePageState extends State<InviteCodePage> {
   }
 
   Future<void> checkEventParticipationAvailability() async {
-    var response_part = await eventService.checkEventParticipation('7');
+    var response_part = await eventService.checkEventParticipation('6');
     var response_time = await eventService.checkUserWithin24Hours();
 
     if (response_part.resp == true) {
@@ -96,7 +96,7 @@ class _InviteCodePageState extends State<InviteCodePage> {
                   builder: (context) => const MyTalkTalkPage(),
                 ),
                 (_) => false);
-            modalGetFig(context, '7');
+            modalGetFig(context, '6');
           }
         },
         child: Scaffold(

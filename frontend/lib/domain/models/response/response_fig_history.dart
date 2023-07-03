@@ -1,24 +1,25 @@
-
 import 'dart:convert';
 
-ResponseFig responseFigFromJson(String str) =>
-    ResponseFig.fromJson(json.decode(str));
+ResponseFigHistory responseFigHistoryFromJson(String str) =>
+    ResponseFigHistory.fromJson(json.decode(str));
 
-String responseFigToJson(ResponseFig data) => json.encode(data.toJson());
+String responseFigHistoryToJson(ResponseFigHistory data) =>
+    json.encode(data.toJson());
 
-class ResponseFig {
+class ResponseFigHistory {
   bool resp;
   String message;
   List<FigReward> rewardData;
   List<FigUsage> usageData;
 
-  ResponseFig(
+  ResponseFigHistory(
       {required this.resp,
       required this.message,
       required this.rewardData,
       required this.usageData});
 
-  factory ResponseFig.fromJson(Map<String, dynamic> json) => ResponseFig(
+  factory ResponseFigHistory.fromJson(Map<String, dynamic> json) =>
+      ResponseFigHistory(
         resp: json["resp"],
         message: json["message"],
         rewardData: List<FigReward>.from(

@@ -3,6 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/ui/helpers/kakao_sdk_login.dart';
+<<<<<<< HEAD
+=======
+import 'package:teentalktalk/ui/helpers/modals/modal_success_register.dart';
+>>>>>>> KTH
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
@@ -21,7 +25,6 @@ class KakaoExtraInfoPage extends StatefulWidget {
 }
 
 class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
-  late TextEditingController inviteCodeController;
   final String userRole = '0';
   String? emd;
   String? youthAge;
@@ -48,6 +51,14 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
         user_email = userInfo['user_email'] ?? '';
       });
     });
+<<<<<<< HEAD
+=======
+    youthAgeList = getMobileCodeService.getCodeDetailList('youthAge_code');
+    parentsAgeList = getMobileCodeService.getCodeDetailList('parentsAge_code');
+    sexList = getMobileCodeService.getCodeDetailList('sex_class_code');
+    emdList = getMobileCodeService.getCodeDetailList('emd_class_code');
+  }
+>>>>>>> KTH
 
     youthAgeList = getMobileCodeService.getCodeDetailList('youthAge_code');
     parentsAgeList = getMobileCodeService.getCodeDetailList('parentsAge_code');
@@ -76,6 +87,7 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
           //   Navigator.pop(context);
           // } else
 
+<<<<<<< HEAD
           if (state is SuccessUserState) {
             // Navigator.pop(context);
             // KakaoLoginServices.kakaoGetUserInfo();
@@ -121,6 +133,18 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
             //       ),
             //       (_) => false),
             // );
+=======
+          if (state is SuccessKakaoUserState) {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ),
+                (_) => false);
+            modalSuccessRegister(
+              context,
+            );
+>>>>>>> KTH
           } else if (state is FailureUserState) {
             Navigator.pop(context);
             Navigator.pushAndRemoveUntil(
@@ -364,16 +388,7 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                           width: size.width,
                           colorText: Colors.white,
                           fontWeight: FontWeight.bold,
-                          onPressed: () {
-                            // print(userRole);
-                            // print(userTypeCode);
-                            // print(youthAge);
-                            // print(parentsAge);
-                            // print(emd);
-                            // print(sex);
-
-                            // if (_keyForm.currentState != null &&
-                            //     _keyForm.currentState!.validate()) {
+                          onPressed: () async {
                             String inviteCode = '';
 
                             String _youthAge = youthAge ?? '5';
@@ -404,8 +419,11 @@ class _KakaoExtraInfoPageState extends State<KakaoExtraInfoPage> {
                                 _emd, //emd_class_code
                                 _sex // sex_class_code
                                 ));
+<<<<<<< HEAD
 
                             // }
+=======
+>>>>>>> KTH
                           }),
                     ],
                   ))),

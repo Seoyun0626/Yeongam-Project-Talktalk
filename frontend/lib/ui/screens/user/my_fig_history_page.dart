@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
-import 'package:teentalktalk/domain/models/response/response_event.dart';
+import 'package:teentalktalk/domain/models/response/response_user_fig_count.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/domain/services/user_services.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
-import 'package:teentalktalk/domain/models/response/response_fig.dart';
+import 'package:teentalktalk/domain/models/response/response_fig_history.dart';
 
 class MyFigHistoryPage extends StatefulWidget {
   const MyFigHistoryPage({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _MyFigHistoryPageState extends State<MyFigHistoryPage> {
   Future<void> _updateFigCount() async {
     final authBloc = BlocProvider.of<AuthBloc>(context);
     if (authBloc.state is SuccessAuthentication) {
-      ResponseEvent figCountData = await userService.updateFigCount();
+      ResponseUserFigCount figCountData = await userService.updateFigCount();
       setState(() {
         figCount = figCountData.figCount;
       });
@@ -136,7 +136,8 @@ class _FigHistoryState extends State<_FigHistory>
   }
 
   Future<void> _getFigHistory() async {
-    ResponseFig figHistoryData = await eventService.getFigHistoryByUser();
+    ResponseFigHistory figHistoryData =
+        await eventService.getFigHistoryByUser();
     setState(() {
       figRewardList = figHistoryData.rewardData;
       figUsagedList = figHistoryData.usageData;
@@ -209,14 +210,13 @@ class _FigHistoryState extends State<_FigHistory>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             TextCustom(
-                                text: reward.event_name, //"출석 체크",
+                                text: reward.event_name,
                                 fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                             SizedBox(height: 8.h),
                             TextCustom(
-                              text: reward.acquired_time
-                                  .substring(0, 10), //"2023.03.24 13:44",
+                              text: reward.acquired_time.substring(0, 10),
                               fontSize: 15,
                             )
                           ],

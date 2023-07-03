@@ -48,15 +48,16 @@ router.post("/login", async function(req, res) {
   }
 });
 
+
 // 카카오 로그인
 router.post("/kakao-signin", async function(req, res) {
   try{
     // 로그인 확인을 위해 컨트롤러 호출
-    // console.log('mobile-router', req.body);
+    // console.log('mobile-router kakao-signin', req.body);
     var result = await mobile_login_controller.KakaoSignIn(req, res);
 
-    console.log('login mobile-router kakao signin result : ', result.data);
-    // console.log(result);
+    // console.log('login mobile-router result : ', result.data);
+
     var uid = result.data.uid;
     // console.log(uid);
     let token = generateJsonWebToken(uid);
@@ -68,28 +69,21 @@ router.post("/kakao-signin", async function(req, res) {
         message : '로그인 성공',
         token : token
       }) 
-    } 
-    
-    // else if (result.code == 100) {
-    //   res.json({
-    //     resp : false,
-    //     message : '비밀번호가 일치하지 않습니다',
-    //     token : token
-    //   })
-    // } else if (result.code == 200) {
+    } else if (result.code == 200) {
       
-    //     res.json({
-    //       resp : false,
-    //       message : '아이디가 일치하지 않습니다',
-    //       token : token
-    //     })
+        res.json({
+          resp : false,
+          message : '일치하는 사용자 정보를 찾을 수 없습니다.',
+          token : token
+        })
       
-    // }
+    }
     
   } catch(error) {
-    console.log('mobile-router kakao signin:'+error);
+    console.log('mobile-router login:'+error);
   }
 });
+
 
 
 // 카카오 가입
@@ -121,7 +115,7 @@ router.post("/kakao-signup", async function(req, res) {
     } 
 
   } catch(error) {
-    console.log('mobile-router kakao signup error:'+error);
+    console.log('mobile-router signup error:'+error);
   }
 });
 
@@ -278,7 +272,7 @@ router.get("/signup", function(req, res) {
   });
 
 
-  router.post("/checkDuplicateID", async function(req,res){
+  router.get("/checkDuplicateID/:userid", async function(req,res){
     try{
       var result = await mobile_login_controller.checkDuplicateID(req, res);
       if(result==0){
@@ -289,7 +283,7 @@ router.get("/signup", function(req, res) {
         }); // kth
       }
       else if (result == 100){
-        console.log('mobile-login-router checkDuplicateID fail');
+        console.log('');
         res.json({
           resp: true,
           message: '이미 존재하는 아이디입니다'
@@ -302,13 +296,14 @@ router.get("/signup", function(req, res) {
   });
 
   router.get("/renew-login", verifyToken, function(req, res) {
+    // console.log('renew-login');
     try {
 
       const token = generateJsonWebToken( req.idPerson );
 
       return res.json({
           resp: true,
-          message: 'Bienvenido a Social Frave',
+          message: '청소년 톡talk에 오신 걸 환영합니다.',
           token: token
       }); 
       

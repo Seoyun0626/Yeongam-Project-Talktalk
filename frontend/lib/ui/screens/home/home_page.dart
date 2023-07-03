@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       isEventParticipationAvailable = response.resp;
     });
-    navigateToEventPage();
+    // navigateToEventPage();
   }
 
   void navigateToEventPage() {
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const newWeeklyFigEventPage()),
+                    builder: (context) => const NewWeeklyFigEventPage()),
               ));
       // Navigator.push(
       //   context,
@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                   //   text: 'test',
                   //   width: 300,
                   //   onPressed: () {
-                  //     modalSuccessRegister(context, onPressed: () {});
+                  //     modalGetFig(context, '6');
                   //   },
                   // ),
                   // 배너 슬라이드

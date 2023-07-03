@@ -16,6 +16,12 @@ class KakaoLoginService {
       try {
         await UserApi.instance.loginWithKakaoTalk();
         print('카카오톡으로 로그인 성공');
+
+        // 기존 가입 여부 판단
+        // 동일한 아이디나 이메일를 가진 user가 tb_user에
+        // 있으면 자동 로그인 후 홈페이지
+        // 없으면 kakao extra info 받아서 자동 로그인 후 홈페이지
+
         return true;
       } catch (error) {
         print('카카오톡으로 로그인 실패 $error');
@@ -29,6 +35,9 @@ class KakaoLoginService {
         try {
           await UserApi.instance.loginWithKakaoAccount();
           print('카카오계정으로 로그인 성공');
+
+          //
+
           return true;
         } catch (error) {
           print('카카오계정으로 로그인 실패 $error');
@@ -95,43 +104,6 @@ class KakaoLoginService {
       return {};
     }
   }
-
-  // Future<void> kakaoUserRegisterInfo(context) async {
-  //   final authBloc = BlocProvider.of<AuthBloc>(context);
-
-  //   try {
-  //     User user = await UserApi.instance.me();
-
-  //     final String user_id = user.id.toString();
-  //     final String user_name = user.kakaoAccount?.profile?.nickname ?? '';
-  //     final String user_email = user.kakaoAccount?.email ?? '';
-  //     const String user_role = '1';
-  //     const String user_type = '0'; // 선택안함
-  //     const String _inviteCode = '';
-  //     const String _youthAge = '5';
-  //     const String _parentsAge = '6';
-  //     const String _emd = '0';
-  //     const String _sex = '2';
-
-  //     authBloc.add(OnRegisterKakaoUserEvent(
-  //         user_id,
-  //         user_name,
-  //         user_email,
-  //         user_role,
-  //         user_type,
-  //         _inviteCode,
-  //         _youthAge,
-  //         _parentsAge,
-  //         _emd,
-  //         _sex));
-  //     print('사용자 정보 요청 성공'
-  //         '\n회원번호: ${user_id}'
-  //         '\n닉네임: ${user_name}'
-  //         '\n이메일: ${user_email}');
-  //   } catch (error) {
-  //     print('사용자 정보 요청 실패 $error');
-  //   }
-  // }
 }
 
 final KakaoLoginServices = KakaoLoginService();

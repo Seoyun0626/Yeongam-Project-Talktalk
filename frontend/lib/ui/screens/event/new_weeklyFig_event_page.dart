@@ -17,14 +17,14 @@ import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 import 'package:stroke_text/stroke_text.dart';
 
-class newWeeklyFigEventPage extends StatefulWidget {
-  const newWeeklyFigEventPage({Key? key}) : super(key: key);
+class NewWeeklyFigEventPage extends StatefulWidget {
+  const NewWeeklyFigEventPage({Key? key}) : super(key: key);
 
   @override
-  State<newWeeklyFigEventPage> createState() => _newWeeklyFigEventPageState();
+  State<NewWeeklyFigEventPage> createState() => _NewWeeklyFigEventPageState();
 }
 
-class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
+class _NewWeeklyFigEventPageState extends State<NewWeeklyFigEventPage> {
   // 주차별 이벤트 참여 했는지 안했는지
   late bool hasWeek01Participated = false;
   late bool hasWeek02Participated = false;
@@ -60,7 +60,15 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
   Widget build(BuildContext context) {
     final authState = BlocProvider.of<AuthBloc>(context).state;
 
+<<<<<<< HEAD
     int week = 1;
+=======
+    // 이벤트 기간 반영
+    // 1.웰컴 2.스크랩 3.공유
+    // 현재 날짜가 이벤트 기간 내 해당되면 버튼 활성화
+    int week = 1;
+
+>>>>>>> KTH
     // 이벤트 참여 여부
     List<bool> getWeekCheckList = [
       hasWeek01Participated,
@@ -79,10 +87,10 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: ThemeColors.third,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Colors.white,
+            backgroundColor: ThemeColors.third, //Colors.white,
             leading: IconButton(
                 icon: const Icon(
                   Icons.arrow_back_ios_new_rounded,
@@ -108,9 +116,9 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                       fontSize: 40.sp,
                       fontFamily: 'CookieRun',
                       fontWeight: FontWeight.w700,
-                      color: ThemeColors.fig_green),
-                  strokeColor: ThemeColors.basic,
-                  strokeWidth: 2,
+                      color: ThemeColors.primary),
+                  strokeColor: Colors.transparent,
+                  // strokeWidth: 2,
                 ),
                 SizedBox(
                   height: 15.h,
@@ -118,7 +126,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                 Container(
                   padding: EdgeInsets.all(7.w),
                   decoration: const BoxDecoration(
-                      color: ThemeColors.fig_pink,
+                      color: Color.fromRGBO(
+                          245, 117, 33, 0.8), //ThemeColors.primary,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: TextCustom(
                     text: '미션 참여하면 무화과 포인트 드려요',
@@ -179,7 +188,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                                 children: [
                                   TextCustom(
                                     text: "무화과 포인트",
-                                    color: ThemeColors.fig_pink,
+                                    color: ThemeColors.primary,
                                     fontWeight: FontWeight.w800,
                                     maxLines: 2,
                                     height: 1.5.h,
@@ -235,7 +244,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                                 children: [
                                   TextCustom(
                                     text: "무화과 잡화점",
-                                    color: ThemeColors.fig_pink,
+                                    color: ThemeColors.primary,
                                     fontWeight: FontWeight.w800,
                                     maxLines: 2,
                                     height: 1.5.h,
@@ -270,7 +279,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                 ),
                 Container(
                   padding: EdgeInsets.all(7.w),
-                  color: ThemeColors.fig_green,
+                  color: Colors.transparent,
                   child: TextCustom(
                     text: '이번주 미션에 참여해보세요!',
                     color: Colors.black,
@@ -283,7 +292,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                 ),
                 Icon(
                   Icons.keyboard_double_arrow_down_rounded,
-                  color: ThemeColors.fig_pink,
+                  color: ThemeColors.primary,
                   size: 88.h,
                 ),
                 SizedBox(
@@ -334,7 +343,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Divider(
-                          color: ThemeColors.fig_pink,
+                          color: ThemeColors.primary,
                           height: 30.h,
                           thickness: 1,
                         ),
@@ -352,8 +361,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                         TextCustom(
                           text: '주간 무화과 챌린지란?',
                           fontSize: 15.sp,
-                          color: ThemeColors.fig_pink,
-                          fontWeight: FontWeight.bold,
+                          color: ThemeColors.primary,
+                          fontWeight: FontWeight.w800,
                         ),
                         SizedBox(
                           height: 15.h,
@@ -399,10 +408,10 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                         ),
                       ]),
                 ),
-                Image.asset(
-                  'images/yeongam_logo.jpg',
-                  width: 100.w,
-                )
+                // Image.asset(
+                //   'images/yeongam_logo.jpg',
+                //   width: 100.w,
+                // )
               ],
             )),
           ),
@@ -426,7 +435,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
             width: 300.w,
             height: 50.h,
             decoration: BoxDecoration(
-              border: Border.all(color: ThemeColors.fig_pink, width: 2.w),
+              border: Border.all(color: ThemeColors.primary, width: 2.w),
               color: Colors.white,
               borderRadius: BorderRadius.circular(20.r),
             ),
@@ -452,8 +461,8 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
             width: 300.w,
             height: 50.h,
             decoration: BoxDecoration(
-              border: Border.all(color: ThemeColors.fig_pink, width: 2.w),
-              color: const Color.fromRGBO(229, 138, 151, 0.7),
+              border: Border.all(color: ThemeColors.primary, width: 2.w),
+              color: const Color.fromRGBO(245, 117, 33, 0.6),
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Align(
@@ -477,7 +486,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
         width: 300.w,
         height: 50.h,
         decoration: BoxDecoration(
-          border: Border.all(color: ThemeColors.fig_pink, width: 2.w),
+          border: Border.all(color: ThemeColors.primary, width: 2.w),
           color: Colors.white,
           borderRadius: BorderRadius.circular(20.r),
         ),
@@ -555,7 +564,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
           width: 300.w,
           height: 50.h,
           decoration: BoxDecoration(
-            border: Border.all(color: ThemeColors.fig_pink, width: 2.w),
+            border: Border.all(color: ThemeColors.primary, width: 2.w),
             color: Colors.white,
             borderRadius: BorderRadius.circular(20.r),
           ),
@@ -580,7 +589,7 @@ class _newWeeklyFigEventPageState extends State<newWeeklyFigEventPage> {
                     ? InkWell(
                         child: Icon(
                           Icons.arrow_forward_ios_rounded,
-                          color: ThemeColors.fig_pink,
+                          color: ThemeColors.primary,
                           size: 20.sp,
                         ),
                       )

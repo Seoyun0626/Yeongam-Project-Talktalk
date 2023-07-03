@@ -3,21 +3,7 @@ var mobile_login_service = require("../../services/mobile-services/mobile-login-
 // 로그인
 exports.SignIn = async function(req, res) {
   try{
-    // console.log('login-controller', req.body);
     const result = await mobile_login_service.SignIn(req);
-    // console.log('mobile-login-controller SignIn:', result.code);    
-    // if (result.code == 0) {
-      // console.log("mobile-login-controller SiginIn 로그인 성공");
-      // // 로그인 성공시 쿠키 생성
-      // res.cookie('userid', result.data.userid);
-      // res.cookie('username', result.data.user_name, {
-      //   maxAge: 60 * 60 * 1000, // 만료 시간
-      //   path: "/" // 쿠키가 전송될 경로
-      // });
-      // // 로그인 후 사용자 정보를 세션에 저장
-      // req.session.user = result;
-    // }
-    // console.log('login-controller result', result);
     return result;
   } catch(error) {
     console.log('mobile-login-controller SignIn:'+error);
@@ -27,14 +13,13 @@ exports.SignIn = async function(req, res) {
 //카카오 로그인
 exports.KakaoSignIn = async function(req, res) {
   try{
-
     const result = await mobile_login_service.KakaoSignIn(req);
-   
     return result;
   } catch(error) {
-    console.log('mobile-login-controller KakaoSignIn:'+error);
+    console.log('mobile-login-controller SignIn:'+error);
   }
 };
+
 
 //카카오 가입
 exports.KakaoSignUp = async function(req, res) {
@@ -44,7 +29,7 @@ exports.KakaoSignUp = async function(req, res) {
    
     return result;
   } catch(error) {
-    console.log('mobile-login-controller KakaoSignUp:'+error);
+    console.log('mobile-login-controller SignIn:'+error);
   }
 };
 

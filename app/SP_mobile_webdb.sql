@@ -69,7 +69,7 @@ BEGIN
     -- 초대 인원수 확인
     SELECT COUNT(*) INTO inviter_count
     FROM tb_event_part
-    WHERE uid = inviter_uid AND eid = '6';
+    WHERE uid = inviter_uid AND eid = '5';
     
     -- 초대자 인원수가 3명을 초과하는 경우
     IF inviter_count > 3 THEN
@@ -80,14 +80,14 @@ BEGIN
     IF code_valid = 1 THEN
         -- 이벤트 내역 추가
 		INSERT INTO tb_event_part (eid, uid)
-        VALUES (6, inviter_uid), (7, invitee_uid);
+        VALUES (5, inviter_uid), (6, invitee_uid);
         
         -- 초대자 inviter에게 무화과 지급
         UPDATE tb_user
         SET fig = fig + (
             SELECT tb_event.fig_payment
             FROM tb_event
-            WHERE eid = '6'
+            WHERE eid = '5'
         )
         WHERE uid = inviter_uid;
         
@@ -96,7 +96,7 @@ BEGIN
         SET fig = fig + (
             SELECT tb_event.fig_payment
             FROM tb_event
-            WHERE eid = '7'
+            WHERE eid = '6'
         )
         WHERE uid = invitee_uid;
 	

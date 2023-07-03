@@ -34,7 +34,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
   }
 
   Future<void> loadInviationStatus() async {
-    var response = await eventService.checkEventParticipation('6');
+    var response = await eventService.checkEventParticipation('5');
     setState(() {
       inviteCount = response.partCount ?? 0;
       inviteCountString = inviteCount.toString();

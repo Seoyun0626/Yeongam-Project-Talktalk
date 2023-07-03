@@ -25,6 +25,8 @@ class LoadingEditUserState extends UserState {}
 
 class SuccessUserState extends UserState {}
 
+class SuccessKakaoUserState extends UserState {}
+
 class FailureUserState extends UserState {
   final String error;
 
