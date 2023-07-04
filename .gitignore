@@ -1,8 +1,8 @@
 frontend/build/
 frontend/.dart_tool/
 
-app/src/public/upload/banner
-app/src/public/upload/policy
+./app/src/public/upload/banner
+./app/src/public/upload/policy
 
 # Node.js
 node_modules/

@@ -20,7 +20,6 @@ exports.fetchData = async function(req, res) {
     }
 };
 
-
 //policy-upload창에서 필요한 코드 정보들 가져오기
 exports.fetchCodeData = async function(req, res) {
     var conn;
@@ -155,7 +154,6 @@ exports.upload = async function(req, res) {
             storage: multer.diskStorage({
                 destination: function (req, file, cb) {
                     cb(null, './src/public/upload/policy'); //../app/src/public/upload/policy
-                    
                 },
                 filename: function (req, file, cb) {
                     temp = temp + path.extname(file.originalname);
@@ -175,34 +173,11 @@ exports.upload = async function(req, res) {
         console.log('policy-service upload db getConnection');
         var { name, target, policy_institution_code, min_fund, max_fund, content, application_start_date, application_end_date, 
             policy_field_code, policy_character_code, policy_link } = req.body; 
-        if(name == null || name == undefined || name == '') {
-            resultcode = 1;
-            return resultcode;
-        }
-        if(min_fund == null || min_fund == undefined || min_fund == '') {
-            resultcode = 3;
-            return resultcode;
-        }
-        if(max_fund == null || max_fund == undefined || max_fund == '') {
-            resultcode = 4;
-            return resultcode;
-        }
-        // if(content == null || content == undefined || content == '') {
-        //     resultcode = 4;
-        //     return resultcode;
-        // }
-        if(application_start_date == null || application_start_date == undefined || application_start_date == '') {
-            resultcode = 5;
-            return resultcode;
-        }
-        if(application_end_date == null || application_end_date == undefined || application_end_date == '') {
-            resultcode = 6;
-            return resultcode;
-        }
-        // if(content == null || content == undefined || content == '') {
-        //     resultcode = 7;
-        //     return resultcode;
-        // }
+        if (!name) return 1; 
+        if (!min_fund) return 3;
+        if (!max_fund) return 4;
+        if (!application_start_date) return 5;
+        if (!application_end_date) return 6;              
         const uidPolicy = uuidv4(); // 정책 고유 번호
         var query = "INSERT INTO webdb.tb_policy (uid, policy_name, policy_target_code, policy_institution_code, min_fund, max_fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link) VALUES "
           + "('"+uidPolicy+"', '" + name + "', '" + target + "', '" + policy_institution_code + "', '" + min_fund + "', '" + max_fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "', '" + policy_link + "');";

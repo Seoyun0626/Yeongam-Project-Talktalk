@@ -34,10 +34,8 @@ CREATE TABLE webdb.`tb_user` (
 
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
--- 최고 관리자 id 설정 - 아이디 : admin2, 비밀번호 : 1234
-insert into tb_user (userid, uid, userpw, user_name, user_role, user_type, salt) values ('admin2', '7f06c817-d8ee-43be-be7b-226c0a4d3432', 'NNNq1ZZBr3kfAIhMCxsxAn7LWe73aPjZEblZHtFPn0DNysXK8qGUXBewTNhkFzeaaBmS0qi2sWws89Ra/iTNjaQrZjIzkRswFLOy5qhOGWa6CKujexk8L/Yv07wMTGRF2ZTK8301Z5QLqawDWjTgt5hyUtabSK0kmS06+s1VAHg=', 'admin', '1', '0', 'yFfmKDozNt6TLMf+9tOni7zbrnqTOZqZWmF1i57q2rNMS5pMlxqAVdiJwPyVWBDKYT5G6wa4V389/tsSS/Ydeg==');
--- insert into tb_user (userid, uid, userpw, user_name, user_role, user_type, salt) values ('admin', '7f06c817-d8ee-43be-be7b-226c0a4d3432', 'NNNq1ZZBr3kfAIhMCxsxAn7LWe73aPjZEblZHtFPn0DNysXK8qGUXBewTNhkFzeaaBmS0qi2sWws89Ra/iTNjaQrZjIzkRswFLOy5qhOGWa6CKujexk8L/Yv07wMTGRF2ZTK8301Z5QLqawDWjTgt5hyUtabSK0kmS06+s1VAHg=', 'admin', '1', '0', 'yFfmKDozNt6TLMf+9tOni7zbrnqTOZqZWmF1i57q2rNMS5pMlxqAVdiJwPyVWBDKYT5G6wa4V389/tsSS/Ydeg==');
-
+-- 최고 관리자 id 설정 - 아이디 : admin, 비밀번호 : 1234
+insert into tb_user (userid, uid, userpw, user_name, user_role, user_type, salt) values ('admin', '7f06c817-d8ee-43be-be7b-226c0a4d3432', 'NNNq1ZZBr3kfAIhMCxsxAn7LWe73aPjZEblZHtFPn0DNysXK8qGUXBewTNhkFzeaaBmS0qi2sWws89Ra/iTNjaQrZjIzkRswFLOy5qhOGWa6CKujexk8L/Yv07wMTGRF2ZTK8301Z5QLqawDWjTgt5hyUtabSK0kmS06+s1VAHg=', 'admin', '1', '0', 'yFfmKDozNt6TLMf+9tOni7zbrnqTOZqZWmF1i57q2rNMS5pMlxqAVdiJwPyVWBDKYT5G6wa4V389/tsSS/Ydeg==');
 
 -- 기존 테이블에서 PK 추가 :  uid
 -- alter table `webdb`.`tb_user` add primary key `uid`;

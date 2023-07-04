@@ -148,7 +148,8 @@ router.post('/push', ensureAuth, asyncHandler(async function (req, res) {
     //   key1: 'value1',
     //   key2: 'value2',
     // },
-    registration_ids: ['RegistrationToken1', 'RegistrationToken2', 'RegistrationToken3'], // 여러 명에게 보낼 경우 RegistrationToken을 배열로 설정
+    to : 'RegistrationToken', // RegistrationToken을 설정
+    // registration_ids: ['RegistrationToken1', 'RegistrationToken2', 'RegistrationToken3'], // 여러 명에게 보낼 경우 RegistrationToken을 배열로 설정
   };
   try {
     const response = await axios.post(fcmUrl, message, {

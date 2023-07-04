@@ -52,10 +52,8 @@ exports.resetPW = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
-    // url에서 userid 받아오기 params.id
     var userid = req.params.id;
-    // // 확인 이메일을 보내기 위해 이메일 주소 받아오기
-    var query = 'SELECT user_email,uid FROM webdb.tb_user where userid="'+userid+'"';
+    // // 확인 이메일을 보내기 위해 이메일 주소 받아오기r where userid="'+userid+'"';
     var rows = await conn.query(query); // 쿼리 실행
     var email = rows[0].user_email;
     // var uid = rows[0].uid;
@@ -227,8 +225,6 @@ exports.fetchDataByUserid = async function(req, res) {
   try{
     conn = await db.getConnection();
     var searchUser = req.url.split('=')[1]; //바꿔야 하나?
-    // console.log(searchUser);
-    // if(req.params.id==undefined || req.url.split('?')[1].split('=')[0] == "search") req.params.id=req.url.split('/')[1].split('=')[1];
     var query = 'SELECT * FROM webdb.tb_user where userid="'+searchUser+'"';
     var rows = await conn.query(query); // 쿼리 실행
     // console.log(rows[0]);
@@ -255,17 +251,9 @@ exports.excelData = async function(req, res,xlData) {
       }, async function(err, pass, salt, hash) {
         if (err) throw err;
         // Store the password, salt, and hash in the "db"
-        var userid = xlData[i].userid;
         var password = hash;
-        var name = xlData[i].name;
         var salt = salt;
-        var user_role = xlData[i].user_role;
-        var user_email = xlData[i].user_email;
-        var user_type = xlData[i].user_type;
-        var youthAge_code = xlData[i].youthAge_code;
-        var parentsAge_code = xlData[i].parentsAge_code;
-        var emd_class_code = xlData[i].emd_class_code;
-        var sex_class_code = xlData[i].sex_class_code;
+        const { userid, name, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code } = xlData[i];
         var query = "INSERT INTO webdb.tb_user (userid, userpw, name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code) values ('"+userid+"', '"+password+"', '"+name+"', '"+salt+"', '"+user_role+"', '"+user_email+"', '"+user_type+"', '"+youthAge_code+"', '"+parentsAge_code+"', '"+emd_class_code+"', '"+sex_class_code+"')";
         rows = await conn.query(query); // 쿼리 실행
       });
@@ -297,7 +285,6 @@ exports.update = async function(req, res) {
     }
     hasher(
       {password:req.body.password}, async function(err, pass, salt, hash) {
-        // query += 'password="'+hash+'", salt="'+salt+'" where userid="'+userid+'"';
         const uidUser = uuidv4();
         var query = 'update webdb.tb_user set uid = "'+uidUser+'", userpw="'+hash+'", salt="'+salt+'", user_name="'+req.body.name+'", user_email="'+req.body.user_email+'", user_role="'+req.body.user_role+'", user_type="'+req.body.user_type+'", emd_class_code="'+req.body.emd_class_code+'", youthAge_code = "'+req.body.youthAge_code+'", parentsAge_code = "'+req.body.parentsAge_code+'" where userid="'+userid+'"';
         var rows = await conn.query(query);
