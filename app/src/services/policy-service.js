@@ -115,8 +115,12 @@ exports.deletePolicy = async function(req, res) {
     try{
         conn = await db.getConnection();
         console.log('policy-service deletePolicy db getConnection');
-        var query = "DELETE FROM webdb.tb_policy where board_idx='"+req.params.id+"';";
-        var rows = await conn.query(query); // 쿼리 실행
+        var policy_uid = await conn.query("select uid from webdb.tb_policy where board_idx='"+req.params.id+"';");
+        var policy_uid = policy_uid[0].uid;
+        var query = "DELETE FROM webdb.tb_policy_scrap where policy_uid='"+policy_uid+"';";
+        var rows = await conn.query(query);
+        query = "DELETE FROM webdb.tb_policy where board_idx='"+req.params.id+"';";
+        rows = await conn.query(query); // 쿼리 실행
         //삭제가 제대로 되었는 지 확인
         query = "SELECT * FROM webdb.tb_policy where board_idx='"+req.params.id+"';";
         rows = await conn.query(query); // 쿼리 실행
