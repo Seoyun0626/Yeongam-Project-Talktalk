@@ -87,11 +87,17 @@ exports.updatePolicy = async function(req, res) {
         }
         else {
             var policy_img = await conn.query("select img from webdb.tb_policy where board_idx='"+req.params.id+"';");
-            console.log(policy_img[0].img);
             query = "UPDATE webdb.tb_policy SET uid = '"+uidPolicy+"', img='"+temp+"', policy_name='"+req.body.name+"', content='"+req.body.content+"', min_fund='"+req.body.min_fund+"', max_fund='"+req.body.max_fund+"', policy_target_code='"+req.body.target+"', policy_institution_code='"+req.body.policy_institution_code+"', application_start_date='"+req.body.application_start_date+"', application_end_date='"+req.body.application_end_date+"', policy_field_code='"+req.body.policy_field_code+"', policy_character_code='"+req.body.policy_character_code+"', policy_institution_code='"+req.body.policy_institution_code+"' where board_idx='"+req.params.id+"';";
-            fs.unlink('./src/public/upload/policy/'+policy_img[0].img, function(err){
-                if(err) throw err;
-                console.log('file deleted');
+            var imagePath = './src/public/upload/policy/'+policy_img[0].img;
+            fs.access(imagePath, fs.constants.F_OK, function (err) {
+                if (!err) {
+                    fs.unlink(imagePath, function (err) { //정책 이미지 삭제
+                        if (err) throw err;
+                        console.log('file deleted');
+                    });
+                } else {
+                    console.log('no file');
+                }
             });
         }
         var rows = await conn.query(query); // 쿼리 실행
