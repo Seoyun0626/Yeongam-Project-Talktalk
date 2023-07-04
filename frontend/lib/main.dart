@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,7 @@ void main() async {
   await FirebaseMessagingService.initializeFirebaseMessaging();
   await FirebaseMessagingService.requestFirebaseNotificationPermission();
   String? fcmToken = await FirebaseMessagingService.getFirebaseToken();
-  print('FCM 토큰: $fcmToken');
+  // print('FCM 토큰: $fcmToken');
 
   // Kakao SDK
   KakaoSdk.init(

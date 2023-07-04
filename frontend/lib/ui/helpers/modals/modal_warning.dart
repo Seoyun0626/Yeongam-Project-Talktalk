@@ -8,7 +8,7 @@ void modalWarning(BuildContext context, String text) {
     barrierDismissible: false,
     barrierColor: Colors.black12,
     builder: (context) => AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       content: SizedBox(
         height: 250,
         child: Column(
@@ -16,7 +16,7 @@ void modalWarning(BuildContext context, String text) {
             Row(
               children: const [
                 Text(
-                  '청소년 tTalk',
+                  '청소년 톡talk',
                   style: TextStyle(
                       color: ThemeColors.primary,
                       fontFamily: 'CookieRun',

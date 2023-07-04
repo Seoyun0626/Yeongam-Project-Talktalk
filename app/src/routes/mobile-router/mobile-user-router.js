@@ -8,7 +8,7 @@ const verifyToken = require("../../middleware/verify_token");
 
 router.get("/get-user-by-id", verifyToken, async function(req, res){
     try{
-    console.log('mobile-router get user by id');
+    // console.log('mobile-router get user by id');
     var result = await mobile_user_controller.getUserById(req, res);
     // console.log(result);
 
@@ -31,7 +31,7 @@ router.get("/get-user-by-id", verifyToken, async function(req, res){
 
   router.put("/change-email", verifyToken, async function(req, res){
     try{
-      console.log('mobile-router change email');
+      // console.log('mobile-router change email');
       var result = await mobile_user_controller.changeEmail(req, res);
       // console.log(result);
   
@@ -56,7 +56,7 @@ router.get("/get-user-by-id", verifyToken, async function(req, res){
 
   router.put("/change-extra-info", verifyToken, async function(req, res){
     try{
-      console.log('mobile-router  change-extra-info');
+      // console.log('mobile-router  change-extra-info');
       var result = await mobile_user_controller.changeExtraInfo(req, res);
       // console.log(result);
   

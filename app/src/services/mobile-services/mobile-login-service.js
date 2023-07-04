@@ -76,7 +76,7 @@ exports.KakaoSignIn = async function(req) {
     const user_email = req.body.user_email;
     // console.log(id, user_email);
     conn = await db.getConnection();
-    console.log('login-service KakaoSignIn db getConnection');
+    // console.log('login-service KakaoSignIn db getConnection');
   
     // 사용자 정보(아이디, 이메일)
     const userdb = await conn.query("SELECT uid, userid, user_email FROM webdb.tb_user WHERE userid = ? AND user_email = ?;", [id, user_email]);
@@ -244,7 +244,7 @@ exports.checkDuplicateID = async function(req, res) {
 
   try {
     conn = await db.getConnection();
-    console.log('mobile-login-service checkDuplicateID');
+    // console.log('mobile-login-service checkDuplicateID');
     var id = req.params.userid;
     // console.log(id);
     var query = "SELECT userid FROM webdb.tb_user WHERE userid=?;"

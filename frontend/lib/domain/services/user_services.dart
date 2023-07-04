@@ -166,7 +166,7 @@ class UserServices {
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/user/get-fig-count'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
-    print(resp.body);
+    // print(resp.body);
 
     return ResponseUserFigCount.fromJson(jsonDecode(resp.body));
   }

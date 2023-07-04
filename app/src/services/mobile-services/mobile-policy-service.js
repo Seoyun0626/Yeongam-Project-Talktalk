@@ -25,7 +25,7 @@ exports.getAllPolicy = async function(req, res) {
     var conn;
     try {
         conn = await db.getConnection();
-        console.log('policy-service getAllPolicy db getConnection');
+        // console.log('policy-service getAllPolicy db getConnection');
 
         var query;
         var sortOrderCode = req.params.sortOrderCode;
@@ -322,16 +322,16 @@ exports.getAllPolicyForSearch = async function(req, res) {
 
 
 exports.scrapOrUnscrapPolicy = async function(req, res) {
-    console.log('policy_service scrapOrUnscrapPolicy', req.body);
+    // console.log('policy_service scrapOrUnscrapPolicy', req.body);
     var resultcode = 0; // scrap
     try{
 
         const { uidPolicy, uidUser } = req.body;
         const conn = await db.getConnection();
-        console.log('policy-service scrapOrUnscrapPolicy db getConnection');
+        // console.log('policy-service scrapOrUnscrapPolicy db getConnection');
         const isScrapdb = await conn.query('SELECT COUNT(uid_scraps) AS uid_scraps FROM webdb.tb_policy_scrap WHERE user_uid = ? AND policy_uid = ? LIMIT 1', [req.idPerson, uidPolicy]);
 
-        console.log(isScrapdb[0]);
+        // console.log(isScrapdb[0]);
 
         //스크랩취소(unscrap)
         if (isScrapdb[0].uid_scraps > 0) {
@@ -367,7 +367,7 @@ exports.scrapOrUnscrapPolicy = async function(req, res) {
     var conn;
     try{
         conn = await db.getConnection();
-        console.log('policy-service getScappedPolicy db getConnection');
+        // console.log('policy-service getScappedPolicy db getConnection');
         // console.log(req.idPerson);
         const policydb = await conn.query(`CALL webdb.SP_GET_SCRAPPED_POLICY(?);`, [req.idPerson]);
         // console.log(policydb[0]);
