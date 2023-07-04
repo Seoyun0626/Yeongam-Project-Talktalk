@@ -78,13 +78,17 @@
         <!-- 페이징 아이콘 -->
         <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/auth/signup'">등록</button>
         <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/dataif/excel'">다운로드</button>
-        <!-- <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/dataif/excelup'">업로드</button> -->
-        <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->
         <div id="mem_paging">
           <div class="ui pagination menu">
               <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">이전</a>
-            <% var startPage = Math.max(page - 2, 1); %>
-            <% var endPage = Math.min(page + 2, totalPage); %>
+            <% var startPage = Math.max(page - 1, 1); %>
+            <% var endPage = Math.min(page + 1, totalPage); %>
+            <% if (startPage === 1) { %>
+              <% endPage = Math.min(3, totalPage); %>
+            <% } %>
+            <% if (endPage === totalPage) { %>
+              <% startPage = Math.max(endPage - 2, 1); %>
+            <% } %>
             <% for (var i = startPage; i <= endPage; i++) { %>
               <% if (i === page) { %>
                 <a class="active item"><%=i %></a>

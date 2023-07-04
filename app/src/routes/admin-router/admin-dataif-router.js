@@ -41,6 +41,7 @@ router.get('/', ensureAuth, asyncHandler(async function (req, res) {
   }
   var code_data = await code_controller.getUserCodeName();
   // console.log(req.session);
+  crtpage = parseInt(crtpage); //현재 페이지
   res.render('dataif/mem',
     {
       posts: result,
