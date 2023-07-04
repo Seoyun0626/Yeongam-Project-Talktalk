@@ -100,7 +100,7 @@ class UserServices {
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/user/get-user-by-id'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
-
+    // print(resp.body);
     return ResponseUser.fromJson(jsonDecode(resp.body));
   }
 
