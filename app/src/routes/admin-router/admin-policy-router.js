@@ -154,4 +154,10 @@ router.get('/banner/delete/:id', ensureAuth, asyncHandler(async function (req, r
     res.redirect('/admin/policy/banner');
 }, 'policy-router banner delete/ error:'));
 
+router.get('/regTest', function(req, res) {
+    console.log('regTest');
+    var result = policy_controller.regTest(req, res);
+    res.redirect('/admin/policy/show');
+});
+
 module.exports = router;

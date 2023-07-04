@@ -38,6 +38,7 @@ exports.fetchDataUserUpdate = (req, res) => executeService(dataif_service.fetchD
 
 exports.update = (req, res) => executeService(dataif_service.update, req, res, 'update');
 
+
 exports.deleteUser = (req, res) => executeService(dataif_service.deleteUser, req, res, 'deleteUser');
 
 exports.excelData = (...args) => executeMultipleArgsService(dataif_service.excelData, 'excelData', ...args);

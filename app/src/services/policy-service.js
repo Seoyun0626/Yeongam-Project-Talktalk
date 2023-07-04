@@ -301,6 +301,23 @@ exports.fetchBannerImg = async function(req, res) {
     }
 };
 
+exports.regTest = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service regTest db getConnection');     
+        const uidPolicy = uuidv4(); // 정책 고유 번호
+        // 정책 임의 등록
+        var query = "INSERT INTO webdb.tb_policy (uid, policy_name, policy_target_code, policy_institution_code, min_fund, max_fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link) VALUES ('"+uidPolicy+"', 'name1', '00', '00', '1000', '10000', 'content1', 'img1.png', '2020-01-01', '2020-01-01', '01', '01', 'link1');";
+        var rows = await conn.query(query); // 쿼리 실행
+        console.log('policy-service regTest success');
+        return rows;
+    } catch(error) {
+        console.log('policy-service regTest:'+error);
+    } finally {
+        conn.release();
+    }
+};
 
 // mobile-service
 // exports.getAllPolicy = async function(req, res) {
