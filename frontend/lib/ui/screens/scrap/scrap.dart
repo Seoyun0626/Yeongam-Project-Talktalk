@@ -404,26 +404,17 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
     final uidUser = userState.user?.uid;
     final uidPolicy = widget.uidPolicy;
 
-    if (authState is LogOut) {
-      modalCheckLogin(context);
-      // modalCheckLogin().showBottomDialog(context);
-    } else {
+    if (authState is SuccessAuthentication) {
       if (uidUser != null) {
-        // Check if it's the first scrap
-
         policyBloc.add(
           OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
         );
         setState(() {
           _isScrapped = !_isScrapped;
         });
-
-        // if (_isScrapped) {
-        //   modalScrap(context);
-        // } else {
-        // modalUnScrap();
-        // }
       }
+    } else {
+      modalCheckLogin(context);
     }
   }
 
@@ -441,10 +432,7 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
       children: [
         IconButton(
           onPressed: () {
-            if (authState is LogOut) {
-              modalCheckLogin(context);
-              // modalCheckLogin().showBottomDialog(context);
-            } else {
+            if (authState is SuccessAuthentication) {
               if (uidUser != null) {
                 policyBloc.add(
                   OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
@@ -454,6 +442,8 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
                   print(_isScrapped);
                 });
               }
+            } else {
+              modalCheckLogin(context);
             }
           },
           icon: Icon(

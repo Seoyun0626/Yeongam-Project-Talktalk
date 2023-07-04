@@ -851,10 +851,7 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
     final uidUser = userState.user?.uid;
     final uidPolicy = widget.uidPolicy;
 
-    if (authState is LogOut) {
-      modalCheckLogin(context);
-      // modalCheckLogin().showBottomDialog(context);
-    } else {
+    if (authState is SuccessAuthentication) {
       if (uidUser != null) {
         policyBloc.add(
           OnScrapOrUnscrapPolicy(uidPolicy, uidUser),
@@ -869,6 +866,8 @@ class _ScrapUnscrapState extends State<_ScrapUnscrap> {
           // modalUnScrap();
         }
       }
+    } else {
+      modalCheckLogin(context);
     }
   }
 

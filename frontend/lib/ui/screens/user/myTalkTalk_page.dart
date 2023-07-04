@@ -127,15 +127,15 @@ class _MyTalkTalkPageState extends State<MyTalkTalkPage> {
                                 color: ThemeColors.basic,
                               ),
                               onTap: () {
-                                if (authState is LogOut) {
-                                  modalCheckLogin(context);
-                                } else {
+                                if (authState is SuccessAuthentication) {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             const InviteCodePage(),
                                       ));
+                                } else {
+                                  modalCheckLogin(context);
                                 }
                               },
                             ),
@@ -219,23 +219,7 @@ class _LogInOutUserNameState extends State<_LogInOutUserName> {
 
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (_, state) {
-        if (state is LogOut) {
-          return InkWell(
-            child: Row(
-              children: const [
-                TextCustom(
-                  text: '로그인해주세요',
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
-                ),
-                Icon(Icons.arrow_forward_ios_rounded)
-              ],
-            ),
-            onTap: () {
-              Navigator.push(context, routeSlide(page: const LoginPage()));
-            },
-          );
-        } else {
+        if (state is SuccessAuthentication) {
           String username = userBloc.state.user?.user_name ?? '사용자 이름';
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -283,150 +267,25 @@ class _LogInOutUserNameState extends State<_LogInOutUserName> {
               ),
             ],
           );
-        }
-      },
-    );
-  }
-}
-
-// 사용자 이름
-class _UserName extends StatelessWidget {
-  const _UserName({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // final authBloc = BlocProvider.of<AuthBloc>(context);
-
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (_, state) {
-        if (state is LogOut) {
-          // modalCheckLogin().showBottomDialog(context);
-          return InkWell(
-              child: Row(
-                children: const [
-                  TextCustom(
-                    text: '로그인해주세요',
-                    fontSize: 22,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  Icon(Icons.arrow_forward_ios_rounded)
-                ],
-              ),
-              onTap: () {
-                // Navigator.pushAndRemoveUntil(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const LoginPage(),
-                //     ),
-                //     (_) => false);
-                Navigator.push(context, routeSlide(page: const LoginPage()));
-              });
         } else {
-          return BlocBuilder<UserBloc, UserState>(builder: (_, state) {
-            if (state.user?.user_name != null) {
-              return InkWell(
-                  child: Row(
-                    children: [
-                      TextCustom(
-                        text: state.user!.user_name != ''
-                            ? state.user!.user_name
-                            : '사용자',
-                        fontSize: 25,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      const Icon(Icons.arrow_forward_ios_rounded)
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const PrivacySettingPage(),
-                        ));
-                  });
-            } else {
-              return Container();
-            }
-          });
+          return InkWell(
+            child: Row(
+              children: const [
+                TextCustom(
+                  text: '로그인해주세요',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                ),
+                Icon(Icons.arrow_forward_ios_rounded)
+              ],
+            ),
+            onTap: () {
+              Navigator.push(context, routeSlide(page: const LoginPage()));
+            },
+          );
         }
       },
     );
-  }
-}
-
-// 로그인/로그아웃 버튼
-class _LogInOut extends StatelessWidget {
-  const _LogInOut({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // final userBloc = BlocProvider.of<UserBloc>(context);
-    // final authBloc = BlocProvider.of<AuthBloc>(context);
-
-    return BlocBuilder<AuthBloc, AuthState>(builder: (_, state) {
-      if (state is LogOut) {
-        return InkWell(
-          child: Container(
-            // height: 50,
-            padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: ThemeColors.primary,
-                width: 2,
-              ),
-            ),
-            child: const TextCustom(
-              text: '로그인',
-              color: Colors.black,
-              fontSize: 13,
-            ),
-          ),
-          onTap: () {
-            // Navigator.pushAndRemoveUntil(
-            //     context,
-            //     MaterialPageRoute(
-            //       builder: (context) => const LoginPage(),
-            //     ),
-            //     (_) => false);
-            Navigator.push(context, routeSlide(page: const LoginPage()));
-          },
-        );
-      } else {
-        return InkWell(
-          child: Container(
-            // height: 50,
-            padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: ThemeColors.primary,
-                width: 2,
-              ),
-            ),
-            child: const TextCustom(
-              text: '로그아웃',
-              color: Colors.black,
-              fontSize: 13,
-            ),
-          ),
-          onTap: () {
-            modalLogout(context);
-
-            // Navigator.of(context).pushNamedAndRemoveUntil(
-            //   CheckingLoginPage.routeName,
-            //   (_) => false,
-            // );
-          },
-        );
-      }
-    });
   }
 }
 

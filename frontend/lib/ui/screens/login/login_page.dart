@@ -64,35 +64,21 @@ class _LoginPageState extends State<LoginPage> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         print(state);
+        // if (state is LoadingAuthentication) {
+        //   modalLoading(context, '확인 중...');
+        //   Navigator.of(context).pop();
+        // } else
 
         if (state is SuccessAuthentication) {
-          userBloc.add(OnGetUserAuthenticationEvent());
           Navigator.pushAndRemoveUntil(
             context,
             routeFade(page: const HomePage()),
             (_) => false,
           );
+          userBloc.add(OnGetUserAuthenticationEvent());
         } else if (state is FailureAuthentication) {
           modalWarning(context, '다시 로그인해주세요');
         }
-
-        // if (state is LoadingAuthentication) {
-        //   modalLoading(context, '확인 중...');
-        //   // Navigator.of(context).pop();
-        // } else
-
-        // if (state is FailureAuthentication) {
-        //   modalWarning(context, '다시 로그인해주세요');
-        // } else if (state is SuccessAuthentication) {
-        //   userBloc.add(OnGetUserAuthenticationEvent());
-
-        //   Navigator.of(context).pop();
-        //   Navigator.pushAndRemoveUntil(
-        //     context,
-        //     routeFade(page: const HomePage()),
-        //     (_) => false,
-        //   );
-        // }
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,

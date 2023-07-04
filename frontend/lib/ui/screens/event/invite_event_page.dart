@@ -24,7 +24,12 @@ class _InviteEventPageState extends State<InviteEventPage> {
   late bool isInvitePossible = false; //초대 가능 여부
 
   String generateInviteCode(String uid) {
-    return uid.substring(0, 8);
+    // uid 없을 때 처리
+
+    print(uid);
+    String invite_code = uid.substring(0, 8);
+    print(invite_code);
+    return invite_code;
   }
 
   @override
@@ -93,6 +98,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    // server 연결해서 로그인 후 유저 정보 안받아와짐
     final userBloc = BlocProvider.of<UserBloc>(context);
     late String inviteCode = generateInviteCode(userBloc.state.user!.uid);
 

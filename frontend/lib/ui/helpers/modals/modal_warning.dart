@@ -16,7 +16,7 @@ void modalWarning(BuildContext context, String text) {
             Row(
               children: const [
                 Text(
-                  '청소년 tTalk',
+                  '청소년 톡talk',
                   style: TextStyle(
                       color: ThemeColors.primary,
                       fontFamily: 'CookieRun',

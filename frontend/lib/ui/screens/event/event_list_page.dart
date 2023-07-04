@@ -105,14 +105,14 @@ class _EventListPageState extends State<EventListPage> {
                                     const NewWeeklyFigEventPage(),
                               ));
                         } else if (index == 2) {
-                          if (authState is LogOut) {
-                            modalCheckLogin(context);
-                          } else {
+                          if (authState is SuccessAuthentication) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const InviteEventPage(),
                                 ));
+                          } else {
+                            modalCheckLogin(context);
                           }
                         }
                       },

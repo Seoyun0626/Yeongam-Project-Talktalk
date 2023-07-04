@@ -141,14 +141,14 @@ class _attendanceEvent extends StatelessWidget {
       // margin: EdgeInsets.only(left: 12.w, right: 12.w),
       child: InkWell(
         onTap: () {
-          if (authState is LogOut) {
-            modalCheckLogin(context);
-          } else {
+          if (authState is SuccessAuthentication) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const AttendanceEventPage(),
                 ));
+          } else {
+            modalCheckLogin(context);
           }
         },
         child: Container(
