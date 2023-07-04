@@ -302,6 +302,10 @@ exports.deleteUser = async function(req, res) {
   try{
     conn = await db.getConnection();
     console.log('dataif-service delete:'+req.params.id);
+    var user_uid = await conn.query("select uid from webdb.tb_user where userid='"+req.params.id+"';");
+    var user_uid = user_uid[0].uid;
+    var query = "DELETE FROM webdb.tb_policy_scrap where user_uid='"+user_uid+"';";
+    var rows = await conn.query(query);
     var query = 'delete from webdb.tb_user where userid="'+req.params.id+'"';
     console.log(query);
     var rows = await conn.query(query);
