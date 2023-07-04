@@ -100,13 +100,20 @@ router.post('/update/:id', asyncHandler(async function (req, res) {
 router.get('/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
     var policy_img = await policy_controller.fetchpolicyImgByidx(req, res); //정책 이미지 가져오기
     var result = await policy_controller.deletePolicy(req, res); //정책 삭제
-    fs.unlink('./src/public/upload/policy/'+policy_img[0].img, function(err){ //정책 이미지 삭제
-        if(err) throw err;
-        console.log('file deleted');
+
+    var imagePath = './src/public/upload/policy/' + policy_img[0].img;
+    fs.access(imagePath, fs.constants.F_OK, function (err) {
+        if (!err) {
+            fs.unlink(imagePath, function (err) { //정책 이미지 삭제
+                if (err) throw err;
+                console.log('file deleted');
+            });
+        } else {
+            console.log('no file');
+        }
     });
     console.log(result);
     if(result == 0) { //성공 시 메시지 출력 후 정책 페이지로 이동
-        // req.flash('success_msg', '정책이 삭제되었습니다.');
         res.redirect('/admin/policy/show');
     } else { //실패 시 에러 메시지 출력 후 정책 페이지로 이동
         res.render('error', {
@@ -133,9 +140,16 @@ router.post('/banner', asyncHandler(async function (req, res) {
 router.get('/banner/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
     var banner_img = await policy_controller.fetchBannerImg(req, res);
     var result = await policy_controller.deleteBanner(req, res);
-    fs.unlink('./src/public/upload/banner/'+banner_img[0].banner_img, function(err){
-        if(err) throw err;
-        console.log('file deleted');
+    var imagePath = './src/public/upload/banner/' + banner_img[0].banner_img;
+    fs.access(imagePath, fs.constants.F_OK, function (err) {
+        if (!err) {
+            fs.unlink(imagePath, function (err) { //정책 이미지 삭제
+                if (err) throw err;
+                console.log('file deleted');
+            });
+        } else {
+            console.log('no file');
+        }
     });
     res.redirect('/admin/policy/banner');
 }, 'policy-router banner delete/ error:'));
