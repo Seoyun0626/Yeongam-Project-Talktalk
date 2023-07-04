@@ -32,6 +32,7 @@ router.get('/show', ensureAuth, asyncHandler(async function (req, res) {
         result = result.slice(start, end); //현재 페이지에 보여줄 정책 수만큼 가져옴
     }
     var code_data = await code_controller.getPolicyName();
+    crtpage = parseInt(crtpage);
     res.render('policy/show', {
         posts:result,
         user:req.user,

@@ -60,22 +60,23 @@
     <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->
     <div id="policy_paging">
       <div class="ui pagination menu">
-        <!-- <a class="icon item" href="/admin/policy/show/?page=1">처음</a> -->
-        <% var prev = page-1; %>
-        <% if(prev < 1){ prev = 1; } %>
-        <a class="icon item" href="/admin/policy/show/?page=<%=prev %>">이전</a>
-        <!-- 현재 페이지 기준 5페이지만 보여주기 -->
-        <% var startPage = page-3; %>
-        <% var endPage = page+3; %>
-        <% if(startPage < 1){ startPage = 1; } %>
-        <% if(endPage > totalPage){ endPage = totalPage; } %>
-        <% for(var i=startPage; i<=endPage; i++){ %>
-          <a class="item" href="/admin/policy/show/?page=<%=i %>"><%=i %></a>
+          <a class="icon item" href="/admin/policy/show/?page=<%=page-1 %>">이전</a>
+        <% var startPage = Math.max(page - 1, 1); %>
+        <% var endPage = Math.min(page + 1, totalPage); %>
+        <% if (startPage === 1) { %>
+          <% endPage = Math.min(3, totalPage); %>
         <% } %>
-        <% var next = page+1; %>
-        <% if(next > totalPage){ next = totalPage; } %>
-        <a class="icon item" href="/admin/policy/show/?page=<%=next %>">다음</a>
-        <!-- <a class="icon item" href="/admin/policy/show/?page=<%=totalPage %>">끝</a> -->
+        <% if (endPage === totalPage) { %>
+          <% startPage = Math.max(endPage - 2, 1); %>
+        <% } %>
+        <% for (var i = startPage; i <= endPage; i++) { %>
+          <% if (i === page) { %>
+            <a class="active item"><%=i %></a>
+          <% } else { %>
+            <a class="item" href="/admin/policy/show/?page=<%=i %>"><%=i %></a>
+          <% } %>
+        <% } %>
+          <a class="icon item" href="/admin/policy/show/?page=<%=page+1 %>">다음</a>
       </div>
     </div>
 </section>
