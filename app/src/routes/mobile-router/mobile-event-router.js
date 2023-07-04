@@ -144,7 +144,7 @@ router.get("/check-event-participation-available/:eid", verifyToken, async funct
 // 출석 체크 내역 가져오기
 router.get("/get-attendance", verifyToken, async function(req, res){
   try {
-    console.log('mobile get-attendance');
+    // console.log('mobile get-attendance');
     var result = await mobile_event_controller.getAttendance(req, res);
     // result = result.slice(0, result.length - 1);
     // console.log('mobile-event-router get-attendance', result);

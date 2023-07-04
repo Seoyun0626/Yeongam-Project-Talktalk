@@ -113,7 +113,7 @@ exports.giveFigForWeeklyFigChallenge = async function(req, res) {
     var uid = req.idPerson;
     var query = `CALL webdb.SP_GIVE_FIG_FOR_WEEKLY_FIG_CHALLENGE(?,?)`;
     var result = await conn.query(query, [uid, eid]);
-    console.log(result);
+    // console.log(result);
     return result
 
 

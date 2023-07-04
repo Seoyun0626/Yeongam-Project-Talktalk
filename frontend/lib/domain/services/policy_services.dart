@@ -148,7 +148,7 @@ class PolicyServices {
         Uri.parse('${Environment.urlApi}/policy/scrap-or-unscrap-policy'),
         headers: {'Accept': 'application/json', 'xxx-token': token!},
         body: {'uidPolicy': uidPolicy, 'uidUser': uidUser});
-    print(resp.body);
+    // print(resp.body);
 
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
