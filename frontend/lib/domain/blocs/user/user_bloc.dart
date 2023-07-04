@@ -64,8 +64,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           event.sex_class_code);
       // print(event);
       // print(resp.resp);
-      print(resp.message);
-      print(resp.resp);
+      // print(resp.message);
+      // print(resp.resp);
 
       if (resp.resp) {
         emit(SuccessUserState());
@@ -100,7 +100,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       // print(event);
       // print(resp.resp);
       // print(resp.message);
-      print(resp.resp);
+      // print(resp.resp);
 
       if (resp.resp) {
         emit(SuccessKakaoUserState());

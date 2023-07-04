@@ -15,7 +15,7 @@ void modalScrap(
     builder: (context) => AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       content: SizedBox(
-        height: 200.h,
+        height: 190.h,
         width: 300.w,
         child: Column(
           children: [
@@ -54,13 +54,14 @@ void modalScrap(
             SizedBox(height: 20.0.h),
             InkWell(
               onTap: () {
-                // Navigator.pop(context);
+                // print('hh');
+                Navigator.pop(context);
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ScrapPage(),
-                  ),
-                );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ScrapPage(),
+                    ));
+                // Navigator.pop(context);
               },
               child: Container(
                 width: 200.w,

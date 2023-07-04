@@ -10,13 +10,12 @@ class KakaoLoginService {
   // X -> 카카오계정으로 로그인
   Future<bool> kakaoLogin() async {
     bool talkInstalled = await isKakaoTalkInstalled();
-    // print(talkInstalled);
 // 카카오톡 실행이 가능하면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
     if (talkInstalled) {
+      // print(talkInstalled);
       try {
         await UserApi.instance.loginWithKakaoTalk();
         print('카카오톡으로 로그인 성공');
-
         // 기존 가입 여부 판단
         // 동일한 아이디나 이메일를 가진 user가 tb_user에
         // 있으면 자동 로그인 후 홈페이지

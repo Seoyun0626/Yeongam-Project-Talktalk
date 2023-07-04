@@ -12,7 +12,7 @@ exports.getUserById = async function(req) {
 
         console.log('getUserById req.idPerson: ', req.idPerson); // uid
         const userdb = await conn.query(`CALL webdb.SP_GET_USER_BY_ID(?);`, [req.idPerson]);
-        console.log(userdb[0][0]);
+        // console.log(userdb[0][0]);
         const result = userdb[0][0]
         
         return result;
