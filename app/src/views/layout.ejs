@@ -21,7 +21,16 @@
   <!-- <a href="/admin/codeData/announce"><div id='공지사항' class='common-style 공지사항'>공지사항</div></a>
   <a href="/admin/codeData/statistic"><div id='통계' class='common-style 통계'>통계</div></a> -->
   
-  <a href="/admin/auth/logout"><div id='로그아웃' class='common-style 로그아웃'>로그아웃</div></a>
+  <a href="/admin/auth/logout" onclick="return logout()"><div id='로그아웃' class='common-style 로그아웃'>로그아웃</div></a>
+  <script>
+    function logout() {
+      if (confirm('로그아웃 하시겠습니까?')) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+  </script>
   
   <!-- <a href="/admin/auth/attendance">
   <div id="출석체크" class="출석체크">출석 체크(테스트)</div></a> -->
