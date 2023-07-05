@@ -57,7 +57,7 @@ try{
 } catch(error) {
   console.log('login-service SignIn:'+error);
 } finally {
-  if (conn) conn.end();
+  if (conn) conn.release();
 }
 
 };
@@ -112,9 +112,8 @@ exports.signUp = async function(req, res) {
   } catch(error) {
     console.log('login-service SignUp:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
-  
   return resultcode;
 };
 
@@ -139,7 +138,7 @@ exports.getAttendance = async function(req, res) {
   } catch(error) {
     console.log('login-service getAttendance:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
   return resultcode;
 };
@@ -159,7 +158,7 @@ exports.checkAttendance = async function(req, res) {
   } catch(error) {
     console.log('login-service checkAttendance:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
   return resultcode;
 };
@@ -175,6 +174,8 @@ exports.fetchFeedback = async function(req, res) {
     return rows;
   } catch(error) {
     console.log('login-service fetchFeedback:'+error);
+  } finally {
+    if (conn) conn.release();
   }
   return rows;
 };
@@ -191,6 +192,8 @@ exports.feedRegi = async function(req, res) {
     return rows;
   } catch(error) {
     console.log('login-service feedRegi:'+error);
+  } finally {
+    if (conn) conn.release();
   }
   return rows;
 };
@@ -207,6 +210,8 @@ exports.feedDel = async function(req, res) {
   }
   catch(error) {
     console.log('login-service feedDel:'+error);
+  } finally {
+    if (conn) conn.release();
   }
   return rows;
 };

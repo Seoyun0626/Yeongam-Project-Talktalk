@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Page</title>
+  <link rel="stylesheet" href="/semantic/semantic.min.css">
+  <link rel="stylesheet" href="/css/home/dataif/memPage.css">
+  <link rel="stylesheet" href="/css/home/layout.css">
+  <script src="/ckeditor/build/ckeditor.js"></script>
+</head>
+<body>
+  <div class='common-background-bar background-bar-memManage'></div>
+  <div class='common-border-bar border-bar-memManage'></div>
+  <%- include('../layout.ejs') %>
+<section>
+    <div>
+        <div class="pagename">회원 정보 관리</div>
+        <br>
+        <form action="/admin/dataif/findID" method="post" name="findID" id="findID">
+            <div class="ui form">
+                <div class="inline fields">
+                    <label>이름</label>
+                    <div class="four wide field">
+                        <input type="text" name="name" id="name" placeholder="이름">
+                    </div>
+                    <label>이메일</label>
+                    <div class="four wide field">
+                        <input type="text" name="email" id="email" placeholder="이메일">
+                    </div>
+                </div>
+            </div>
+        </form>   
+</section>

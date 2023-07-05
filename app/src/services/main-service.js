@@ -33,7 +33,7 @@ exports.dashboard = async function(req, res) {
   } catch(error) {
     console.log('main-service dashboard:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
   
   return resultcode;
@@ -52,7 +52,7 @@ exports.getFile = async function(req, res) {
   } catch(error) {
     console.log('main-service getFile:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
   
   return resultData;
@@ -77,7 +77,7 @@ exports.getProject = async function(req, res) {
   } catch(error) {
     console.log('main-service getProject:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
   
   return resultData;
@@ -96,7 +96,7 @@ exports.getSubproject = async function(req, res) {
   } catch(error) {
     console.log('main-service getSubproject:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
   
   return resultData;
@@ -116,7 +116,7 @@ exports.getPowersave = async function(req, res) {
   } catch(error) {
     console.log('main-service getSubproject:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
   
   return resultData;
@@ -134,7 +134,7 @@ exports.getSensorName = async function(req, res) {
   } catch(error) {
     console.log('main-service getSensorName:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -192,7 +192,7 @@ exports.sensorData = async function(req, res) {
   } catch(error) {
     console.log('main-service sensorData:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 
 };
@@ -261,7 +261,7 @@ exports.prjectData = async function(req, res) {
   } catch(error) {
     console.log('projectboard-service fetchData:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -277,6 +277,6 @@ exports.getControlCommand = async function(req, res) {
   } catch(error) {
     console.log('main-service getControlCommand:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };

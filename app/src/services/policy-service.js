@@ -46,7 +46,7 @@ exports.fetchpolicyByidx = async function(req, res) {
     } catch(error) {
       console.log('dataif-service fetchpolicyByidx:'+error);
     } finally {
-      if (conn) conn.end();
+      if (conn) conn.release();
     }
   };
 
@@ -198,7 +198,7 @@ exports.upload = async function(req, res) {
         console.log('policy-service upload:'+error);
         resultcode = 100;
     } finally {
-        if (conn) conn.end();
+        if (conn) conn.release();
     }
 };
 
@@ -251,6 +251,8 @@ exports.banner = async function(req, res) {
     } catch(error) {
         console.log('policy-service banner:'+error);
         resultcode = 100;
+    } finally {
+        if (conn) conn.release();
     }
 };
 

@@ -15,17 +15,22 @@ exports.fetchData = async function(req, res) {
 
 
 exports.fetchPolicyData = async function(req, res) {
+  var conn;
     try {
-        var result = await db.query('SELECT policy_target_code,policy_target_name,policy_institution_code,policy_institution_name FROM webdb.tb_policy_target_code, webdb.tb_policy_institution_code');
-        // var result = await db.query('SELECT policy_target_code,policy_target_name FROM webdb.tb_policy_target_code,webdb.tb_policy_institution_code,webdb.tb_policy_character_code,webdb.tb_policy_field_code');
+        conn = await db.getConnection();
+        var query = "SELECT policy_target_code,policy_target_name,policy_institution_code,policy_institution_name FROM webdb.tb_policy_target_code, webdb.tb_policy_institution_code";
+        var result = await conn.query(query);
         return result;
     } catch (error) {
         console.log('codeData-controller fetchPolicyData error:'+error);
+    } finally {
+      if (conn) conn.release();
     }
-}
+};
 
 
 exports.getPolicyName = async function(req, res) {
+  var conn;
     try {
         conn = await db.getConnection();
         var json = {};
@@ -35,10 +40,13 @@ exports.getPolicyName = async function(req, res) {
         return json;
     } catch (error) {
         console.log('codeData-controller getPolicyName error:'+error);
+    } finally {
+      if(conn) conn.release();
     }
 };
 
 exports.getUserCodeName = async function(req, res) {
+  var conn;
     try {
         conn = await db.getConnection();
         var json = {};
@@ -61,10 +69,13 @@ exports.getUserCodeName = async function(req, res) {
         return json;
     } catch (error) {
         console.log('codeData-controller getUserCodeName error:'+error);
+    } finally {
+      if(conn) conn.release();
     }
 };
 
 exports.getCodeData = async function(req, res) {
+  var conn;
     try {
       conn = await db.getConnection();
       // 공통코드별로 상세코드를 가져와 json으로 만들어서 리턴
@@ -92,10 +103,13 @@ exports.getCodeData = async function(req, res) {
       return json;
     } catch (error) {
         console.log('codeData-controller getCodeData error:'+error);
+    } finally {
+      if(conn) conn.release();
     }
 };
 
 exports.getCodedetail = async function(req, res) {
+  var conn;
   try{
     conn = await db.getConnection();
     var code = req.params.id;
@@ -107,11 +121,14 @@ exports.getCodedetail = async function(req, res) {
   }
   catch(error){
     console.log('codeData-controller getCodedetail error:'+error);
+  } finally {
+    if(conn) conn.release();
   }
 };
 
 
 exports.getCodedetail_update = async function(req, res) {
+  var conn;
   try{
     conn = await db.getConnection();
     var code = req.params.id.split(":")[1];
@@ -123,10 +140,13 @@ exports.getCodedetail_update = async function(req, res) {
   }
   catch(error){
     console.log('codeData-controller getCodedetail_update error:'+error);
+  } finally {
+    if(conn) conn.release();
   }
 };
 
 exports.updateCodeDetail = async function(req, res) {
+  var conn;
   try{
     conn = await db.getConnection();
     var code = req.params.id.split(":")[1];
@@ -140,10 +160,13 @@ exports.updateCodeDetail = async function(req, res) {
     return rows;
   } catch(error){
     console.log('codeData-controller updateCodeDetail error:'+error);
+    } finally {
+      if(conn) conn.release();
     }
   };
 
 exports.insertCodeDetail = async function(req, res) {
+  var conn;
   try{
     conn = await db.getConnection();
     var code = req.params.id.split(":")[1];
@@ -160,10 +183,13 @@ exports.insertCodeDetail = async function(req, res) {
     return rows;
   } catch(error){
     console.log('codeData-controller insertCodeDetail error:'+error);
+    } finally {
+      if(conn) conn.release();
     }
   };
 
 exports.getCodeData_update = async function(req, res) {
+  var conn;
   try{
     conn = await db.getConnection();
     var code = req.params.id;
@@ -173,10 +199,13 @@ exports.getCodeData_update = async function(req, res) {
     return rows;
   } catch(error){
     console.log('codeData-controller getCodeData_update error:'+error);
+    } finally {
+      if(conn) conn.release();
     }
   };
 
 exports.getEventDetail = async function(req, res) {
+  var conn;
   try{
     conn = await db.getConnection();
     var event_code = req.params.id;
@@ -186,10 +215,13 @@ exports.getEventDetail = async function(req, res) {
     return rows;
   } catch(error){
     console.log('codeData-controller getEventDetail error:'+error);
+  } finally {
+    if(conn) conn.release();
   }
 };
 
 exports.getEventDetail_update = async function(req, res) {
+  var conn;
   try{
     conn = await db.getConnection();
     var event_code = req.params.id;
@@ -198,10 +230,13 @@ exports.getEventDetail_update = async function(req, res) {
     return rows;
   }catch(error){
     console.log('codeData-controller getEventDetail_update error:'+error);
+  } finally {
+    if(conn) conn.release();
   }
 };
 
 exports.updateEventDetail = async function(req, res) {
+  var conn;
   try{
     conn = await db.getConnection();
     var eid = req.params.id.split(":")[1];
@@ -211,5 +246,7 @@ exports.updateEventDetail = async function(req, res) {
     return rows;
   } catch(error){
     console.log('codeData-controller updateEventDetail error:'+error);
+  } finally {
+    if(conn) conn.release();
   }
 };

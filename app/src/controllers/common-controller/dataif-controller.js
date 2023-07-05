@@ -42,3 +42,8 @@ exports.update = (req, res) => executeService(dataif_service.update, req, res, '
 exports.deleteUser = (req, res) => executeService(dataif_service.deleteUser, req, res, 'deleteUser');
 
 exports.excelData = (...args) => executeMultipleArgsService(dataif_service.excelData, 'excelData', ...args);
+
+
+
+// 테스트
+exports.findID = (req, res) => executeService(dataif_service.findID, req, res, 'findID');

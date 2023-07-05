@@ -169,32 +169,13 @@ router.post('/push', ensureAuth, asyncHandler(async function (req, res) {
   }
 }));
 
-// router.get('/excelup', async function (req, res) {
-//   try {
-//     if (req.session.user == undefined) {
-//       res.redirect('/admin/auth/login');
-//       return;
-//     }
-//     // 엑셀 파일 읽기
-//     var workbook = XLSX.readFile('user_data.xlsx');
-//     var sheet_name_list = workbook.SheetNames;
-//     var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-//     // 엑셀 파일 데이터 DB에 저장
-//     var result = await dataif_controller.excelData(req, res, xlData);
-//     res.redirect('/admin/dataif');
-//   } catch (error) {
-//     console.log('dataif-router / error:' + error);
-//   }
-// });
-
-
-// router.get('/datapermit', async function (req, res) {
-//   try {
-//     var result = await dataif_controller.fetchData(req, res);
-//     res.render('dataif/datapermit', { posts: result });
-//   } catch (error) {
-//     console.log('dataif-router /datapermit error:' + error);
-//   }
-// });
+// 아이디 찾기
+router.post('/findID', asyncHandler(async function (req, res) {
+  var result = await dataif_controller.findID(req, res);
+  res.render('dataif/findID', { posts: result });
+}, 'dataif-router / error:'));
+router.get('/findID', asyncHandler(async function (req, res) {
+  res.render('dataif/findID');
+}, 'dataif-router / error:'));
 
 module.exports = router;

@@ -25,7 +25,7 @@ exports.fetchFigUsageByUid = async function(req, res) {
   } catch(error) {
     console.log('dataif-service fetchFigDataByUid:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 exports.fetchEventPartByUid = async function(req, res) {
@@ -42,7 +42,7 @@ exports.fetchEventPartByUid = async function(req, res) {
   } catch(error) {
     console.log('dataif-service fetchEventPartByUid:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -75,7 +75,7 @@ exports.resetPW = async function(req, res) {
         console.log('dataif-service resetPW:'+error);
         resultcode = 0;
       } finally {
-        if (conn) conn.end();
+        if (conn) conn.release();
       }
     });
     // return tempPW;
@@ -106,7 +106,7 @@ exports.resetPW = async function(req, res) {
     console.log('dataif-service resetPW:'+error);
     response.send({resultcode: resultcode});
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -121,7 +121,7 @@ exports.fetchData = async function(req, res) {
   } catch(error) {
     console.log('dataif-service fetchData:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -138,7 +138,7 @@ exports.fetchTermData = async function(req, res) {
   } catch(error) {
     console.log('dataif-service fetchTermData:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 if(!String.prototype.trim) {
@@ -197,7 +197,7 @@ exports.updateTermData = async function(req, res) {
   } catch(error) {
     console.log('dataif-service updateTermData:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -213,7 +213,7 @@ exports.fetchDataUserUpdate = async function(req, res) {
   } catch(error) {
     console.log('dataif-service fetchDataUserUpdate:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -232,7 +232,7 @@ exports.fetchDataByUserid = async function(req, res) {
   } catch(error) {
     console.log('dataif-service fetchDataByUserid:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -262,7 +262,7 @@ exports.excelData = async function(req, res,xlData) {
   } catch(error) {
     console.log('dataif-service excelData:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -293,7 +293,7 @@ exports.update = async function(req, res) {
   } catch(error) {
     console.log('dataif-service update:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 exports.deleteUser = async function(req, res) {
@@ -312,8 +312,40 @@ exports.deleteUser = async function(req, res) {
     console.log('dataif-service delete:'+error);
     res.status(500).send('Internal Server Error');
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
 
+//테스트
+exports.findID = async function(req, res) {
+  var conn;
+  try{
+    let transporter = nodemailer.createTransport({
+      service: 'naver',
+      host: 'smtp.naver.com',
+      port: 587,
+      auth: {
+          user: process.env.NODEMAILER_USER,
+          pass: process.env.NODEMAILER_PASS
+      }
+        });
+        let mailOptions = {
+          from: process.env.NODEMAILER_USER,
+          to: email,
+          subject: '비밀번호 초기화',
+          text: '임시 비밀번호는 '+tempPW+'입니다.'
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+  } catch(error) {
+    console.log('dataif-service findID:'+error);
+  } finally {
+    if (conn) conn.release();
+  }
+}
