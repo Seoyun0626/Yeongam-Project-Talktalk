@@ -387,23 +387,27 @@ class _ListWithoutBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
 
-    return Container(
-        height: 150.h,
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(20),
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.grey.withOpacity(0.5),
-          //     spreadRadius: 1.r,
-          //     blurRadius: 5.r,
-          //     offset: const Offset(0, 3),
-          //   ),
-          // ],
-        ),
-        padding: const EdgeInsets.all(15).w,
-        // margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-        child: Container());
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Image.asset('images/default_banner.png'));
+
+    // Container(
+    //     height: 150.h,
+    //     decoration: BoxDecoration(
+    //       // color: Colors.grey[200],
+    //       borderRadius: BorderRadius.circular(20),
+    //       // boxShadow: [
+    //       //   BoxShadow(
+    //       //     color: Colors.grey.withOpacity(0.5),
+    //       //     spreadRadius: 1.r,
+    //       //     blurRadius: 5.r,
+    //       //     offset: const Offset(0, 3),
+    //       //   ),
+    //       // ],
+    //     ),
+    //     padding: const EdgeInsets.all(15).w,
+    //     // margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+    //     child: Container());
   }
 }
 

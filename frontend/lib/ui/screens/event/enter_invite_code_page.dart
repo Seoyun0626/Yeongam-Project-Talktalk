@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
@@ -164,7 +165,8 @@ class _InviteCodePageState extends State<InviteCodePage> {
                       const SizedBox(
                         height: 40,
                       ),
-                      TextField(
+                      TextFormField(
+                        validator: RequiredValidator(errorText: '코드를 입력해주세요'),
                         controller: inviteCodeController,
                         obscureText: false,
                         cursorColor: ThemeColors.primary,
