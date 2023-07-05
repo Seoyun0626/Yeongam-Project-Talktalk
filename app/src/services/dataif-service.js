@@ -277,7 +277,6 @@ exports.update = async function(req, res) {
       console.log('dataif-service update: empty data');
       return resultcode;
     }
-    // var query = 'update webdb.tb_user set name="'+req.body.name+'", email="'+req.body.email+'", user_role="'+req.body.user_role+'", age_class_code="'+req.body.age_class_code+'", emd_class_code="'+req.body.emd_class_code+'",';
     if(req.body.password != req.body.password2) {
       resultcode=100;
       console.log('dataif-service update: password not match');
@@ -286,8 +285,8 @@ exports.update = async function(req, res) {
     hasher(
       {password:req.body.password}, async function(err, pass, salt, hash) {
         const uidUser = uuidv4();
-        var query = 'update webdb.tb_user set uid = "'+uidUser+'", userpw="'+hash+'", salt="'+salt+'", user_name="'+req.body.name+'", user_email="'+req.body.user_email+'", user_role="'+req.body.user_role+'", user_type="'+req.body.user_type+'", emd_class_code="'+req.body.emd_class_code+'", youthAge_code = "'+req.body.youthAge_code+'", parentsAge_code = "'+req.body.parentsAge_code+'" where userid="'+userid+'"';
-        var rows = await conn.query(query);
+        var query = 'update webdb.tb_user set uid = ?, userpw=?, salt=?, user_name=?, user_email=?, user_role=?, user_type=?, emd_class_code=?, youthAge_code = ?, parentsAge_code = ? where userid=?';
+        await conn.query(query, [uidUser, hash, salt, req.body.name, req.body.user_email, req.body.user_role, req.body.user_type, req.body.emd_class_code, req.body.youthAge_code, req.body.parentsAge_code, userid]);      
       }
     );
     return resultcode;
@@ -302,16 +301,16 @@ exports.deleteUser = async function(req, res) {
   try{
     conn = await db.getConnection();
     console.log('dataif-service delete:'+req.params.id);
-    var user_uid = await conn.query("select uid from webdb.tb_user where userid='"+req.params.id+"';");
-    var user_uid = user_uid[0].uid;
-    var query = "DELETE FROM webdb.tb_policy_scrap where user_uid='"+user_uid+"';";
-    var rows = await conn.query(query);
-    var query = 'delete from webdb.tb_user where userid="'+req.params.id+'"';
-    console.log(query);
-    var rows = await conn.query(query);
+    var user = await conn.query('SELECT uid FROM webdb.tb_user WHERE userid = ?', [req.params.id]);
+    var user_uid = user[0].uid;
+    const deletePolicyScrapQuery = 'DELETE FROM webdb.tb_policy_scrap WHERE user_uid = ?';
+    await conn.query(deletePolicyScrapQuery, [user_uid]);
+    const deleteUserQuery = 'DELETE FROM webdb.tb_user WHERE userid = ?';
+    await conn.query(deleteUserQuery, [req.params.id]);
     return rows;
   } catch(error) {
     console.log('dataif-service delete:'+error);
+    res.status(500).send('Internal Server Error');
   } finally {
     if (conn) conn.end();
   }
