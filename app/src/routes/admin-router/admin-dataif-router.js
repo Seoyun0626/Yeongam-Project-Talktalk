@@ -26,6 +26,7 @@ router.get('/', ensureAuth, asyncHandler(async function (req, res) {
     var result = await dataif_controller.fetchDataByUserid(req, res);
   } else if (urltype == '?page') { //페이지 이동
     crtpage = req.url.split('=')[1]; //현재 페이지
+    // 순서 수정
     var result = await dataif_controller.fetchData(req, res);
     if (crtpage == undefined) crtpage = 1; //현재 페이지가 없으면 1페이지로 설정
     if (crtpage < 1) crtpage = 1; //현재 페이지가 1보다 작으면 1페이지로 설정

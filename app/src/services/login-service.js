@@ -87,6 +87,15 @@ exports.signUp = async function(req, res) {
         return resultcode;
     }
     const uidUser = uuidv4();
+    // uid 중복 체크 -> while문으로 uid 중복 체크하는 것으로 변경
+    query = "SELECT uid FROM webdb.tb_user where uid like '"+uidUser.substring(0,8)+"%' ;";
+    uid_check = await conn.query(query); // 쿼리 실행
+    if(uid_check[0] != undefined) {
+      // 앞의 8자리가 tb_user의 uid의 앞 8자리와 같은 경우
+      console.log('uid 중복');
+      resultcode = 200;
+      return resultcode;
+    }
     if (rows[0] == undefined) {
         hasher({
             password: password
