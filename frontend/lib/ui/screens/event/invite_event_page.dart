@@ -21,14 +21,14 @@ class InviteEventPage extends StatefulWidget {
 class _InviteEventPageState extends State<InviteEventPage> {
   late int inviteCount = 0;
   late String inviteCountString = '';
-  late bool isInvitePossible = false; //초대 가능 여부
+  late bool isInvitePossible = false; //초대 가능 여부 - 불가
 
   String generateInviteCode(String uid) {
     // uid 없을 때 처리
 
-    print(uid);
+    // print(uid);
     String invite_code = uid.substring(0, 8);
-    print(invite_code);
+    // print(invite_code);
     return invite_code;
   }
 
@@ -252,7 +252,7 @@ class _InviteEventPageState extends State<InviteEventPage> {
                                 lightSource: LightSource.topLeft,
                                 color: ThemeColors.secondary),
                             onPressed: () {
-                              // print(isInvitePossible);
+                              print(isInvitePossible);
                               if (!isInvitePossible) {
                                 modalAccessDenied(
                                     context, '최대 3명까지만 초대할 수 있어요.',

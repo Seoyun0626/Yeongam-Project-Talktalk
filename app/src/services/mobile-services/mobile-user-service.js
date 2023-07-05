@@ -9,8 +9,7 @@ exports.getUserById = async function(req) {
     try {
         conn = await db.getConnection();
         // console.log('mobile-user-service getUserById');
-
-        console.log('getUserById req.idPerson: ', req.idPerson); // uid
+        // console.log('getUserById req.idPerson: ', req.idPerson); // uid
         const userdb = await conn.query(`CALL webdb.SP_GET_USER_BY_ID(?);`, [req.idPerson]);
         // console.log(userdb[0][0]);
         const result = userdb[0][0]
@@ -21,7 +20,7 @@ exports.getUserById = async function(req) {
     } catch (err) {
         console.log('mobile-login-service getUserById:'+ err);
     } finally {
-      if(conn) conn.end();
+      if(conn) conn.release();
     }
   
   }
@@ -40,7 +39,7 @@ exports.getUserById = async function(req) {
     } catch (err) {
         console.log('mobile-login-service change-email:'+ err);
     } finally {
-      if(conn) conn.end();
+      if(conn) conn.release();
     }
   }
   exports.changeExtraInfo = async function(req, res){
@@ -58,7 +57,7 @@ exports.getUserById = async function(req) {
     } catch (err) {
         console.log('mobile-login-service change-extra-info:'+ err);
     } finally {
-      if(conn) conn.end();
+      if(conn) conn.release();
     }
   }
 
@@ -75,7 +74,7 @@ exports.getUserById = async function(req) {
     } catch(error) {
       console.log('mobile-user-service getFigCount:'+error);
     } finally {
-      if (conn) conn.end();
+      if (conn) conn.release();
     }
   };
 
@@ -94,7 +93,7 @@ exports.getUserById = async function(req) {
     } catch(error) {
       console.log('dataif-service delete:'+error);
     } finally {
-      if (conn) conn.end();
+      if (conn) conn.release();
     }
   };
   
@@ -122,7 +121,7 @@ exports.getUserById = async function(req) {
 
         await conn.query('UPDATE users SET passwordd = ? WHERE person_uid = ?', [ newPass, req.idPerson ]);
 
-        conn.end();
+        conn.release();
 
         return res.json({
             resp: true,

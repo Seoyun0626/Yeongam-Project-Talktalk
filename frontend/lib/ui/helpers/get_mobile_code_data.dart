@@ -1,4 +1,6 @@
-// import 'package:flutter/animation.dart';
+// import 'package:flutter/animation.dart'
+
+import 'package:teentalktalk/domain/models/response/response_event.dart';
 import 'package:teentalktalk/domain/services/code_service.dart';
 
 class CodeDetailData {
@@ -21,11 +23,19 @@ class CodeDetailData {
 
 class getMobileCodeFunctions {
   late Map<String, dynamic> codeData = {};
+  late List<EventData> eventData = [];
 
   void getCodeData() async {
     var data = await codeService.getCodeData();
     codeData = data;
     // print(codeData);
+  }
+
+  void getEventData() async {
+    ResponseEvent EventData = await codeService.getEventData();
+    eventData = EventData.eventData;
+    // print(eventData);
+    // return eventData;
   }
 
 /*
@@ -60,6 +70,16 @@ getMobileCodeService.getCodeDetailList('policy_institution_code');
   }
 
   // 이벤트 코드 풀 끊김 해결
+
+  List<EventData> getEventDetail(String eid) {
+    List<EventData> matchingEvents = [];
+    for (var event in eventData) {
+      if (event.eid == eid) {
+        matchingEvents.add(event);
+      }
+    }
+    return matchingEvents;
+  }
 }
 
 final getMobileCodeService = getMobileCodeFunctions();

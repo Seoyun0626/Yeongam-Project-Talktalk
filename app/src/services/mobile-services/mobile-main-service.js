@@ -13,6 +13,6 @@ exports.getBannerData = async function(req, res) {
     } catch(error) {
         console.log('policy-service fetchBannerData:'+error);
     } finally {
-        conn.release();
-    }
+        if (conn) conn.release();
+      }
 };

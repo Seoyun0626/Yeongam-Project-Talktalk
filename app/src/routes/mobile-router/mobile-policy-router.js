@@ -175,7 +175,7 @@ router.get('/get-all-policy-for-search', async function(req, res) {
   }})
 
   router.get('/check-policy-scrapped/:uidPolicy', verifyToken, async function(req, res){
-    console.log('check-policy-scrapped');
+    // console.log('check-policy-scrapped');
     try{
       // console.log(req.params.uidPolicy)
       const result = await mobile_policy_controller.checkPolicyScrapped(req,res);

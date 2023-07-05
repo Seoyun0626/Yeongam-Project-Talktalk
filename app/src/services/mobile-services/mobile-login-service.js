@@ -21,7 +21,7 @@ try{
   // console.log(id, password);
 
   conn = await db.getConnection();
-  console.log('login-service SignIn db getConnection');
+  // console.log('login-service SignIn db getConnection');
   
   // 사용자 정보(아이디, 비밀번호, salt)
   const userdb = await conn.query("SELECT uid, userid, userpw, salt FROM webdb.tb_user WHERE userid= ?;", [id]);
@@ -61,7 +61,7 @@ try{
 } catch(error) {
   console.log('mobile-login-service SignIn:'+error);
 } finally {
-  if (conn) conn.end();
+  if (conn) conn.release();
 }
 
 };
@@ -93,7 +93,7 @@ exports.KakaoSignIn = async function(req) {
   } catch(error) {
     console.log('mobile-login-service KakaoSignIn:', error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -142,7 +142,7 @@ exports.KakaoSignIn = async function(req) {
     } catch(error) {
       console.log('mobile-login-service SignUp:'+error);
     } finally {
-      if (conn) conn.end();
+      if (conn) conn.release();
     }
     
     return resultcode;
@@ -231,7 +231,7 @@ exports.signUp = async function(req, res) {
   } catch(error) {
     console.log('mobile-login-service SignUp:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
   
   return resultcode;
@@ -262,7 +262,7 @@ exports.checkDuplicateID = async function(req, res) {
   } catch(err){
     console.log('mobile-login-service checkDuplicateId:' + err);
   } finally{
-    if(conn) conn.end();
+    if(conn) conn.release();
   }
 };
 
@@ -297,7 +297,7 @@ exports.login_check = async function(req, res) {
   } catch(error) {
     console.log('login-service login_check:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 
@@ -321,10 +321,10 @@ exports.date_check = async function(req, res) {
     console.log('date_check');
     conn = await db.getConnection();
     var userid = req.user.userid;
-    var query = "SELECT case when Timestampdiff(hour, Date_format(Str_to_date(a.strt_date, '%Y%m%d'),'%Y-%m-%d'),now()) >= 0 and Timestampdiff(hour, Date_format(Str_to_date(a.end_date, '%Y%m%d'),'%Y-%m-%d'),now()) <= 0 then "
-      +"Timestampdiff(hour, now(), Date_format(Str_to_date(a.end_date, '%Y%m%d'),'%Y-%m-%d')) else 0 end expr"
-//      +"when Timestampdiff(hour, Date_format(Str_to_date(a.strt_date, '%Y%m%d'),'%Y-%m-%d'),now()) < 0 and Timestampdiff(hour, Date_format(Str_to_date(a.end_date, '%Y%m%d'),'%Y-%m-%d'),now()) <= 0 then "
-//      +"Timestampdiff(hour, now(),Date_format(Str_to_date(a.end_date, '%Y%m%d'),'%Y-%m-%d')) else 0 end expr"
+    var query = "SELECT case when Timestampdiff(hour, Date_format(Str_to_date(a.strt_date, '%Y%m%d'),'%Y-%m-%d'),now()) >= 0 and Timestampdiff(hour, Date_format(Str_to_date(a.release_date, '%Y%m%d'),'%Y-%m-%d'),now()) <= 0 then "
+      +"Timestampdiff(hour, now(), Date_format(Str_to_date(a.release_date, '%Y%m%d'),'%Y-%m-%d')) else 0 release expr"
+//      +"when Timestampdiff(hour, Date_format(Str_to_date(a.strt_date, '%Y%m%d'),'%Y-%m-%d'),now()) < 0 and Timestampdiff(hour, Date_format(Str_to_date(a.release_date, '%Y%m%d'),'%Y-%m-%d'),now()) <= 0 then "
+//      +"Timestampdiff(hour, now(),Date_format(Str_to_date(a.release_date, '%Y%m%d'),'%Y-%m-%d')) else 0 release expr"
       +", a.strt_date FROM webdb.tb_dataif a inner join webdb.tb_sensor b on a.sensor_board_idx=b.board_idx inner join webdb.tb_device c on b.dev_board_idx=c.board_idx where a.permit_type in ('Y', 'S') and a.ins_id='"+userid+"' and b.sen_mng_no='"+req.body.sensorid+"'";
     var rows = await conn.query(query); // 쿼리 실행
     var expr=0;
@@ -342,7 +342,7 @@ exports.date_check = async function(req, res) {
   } catch(error) {
     console.log('login-service date_check:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };
 */

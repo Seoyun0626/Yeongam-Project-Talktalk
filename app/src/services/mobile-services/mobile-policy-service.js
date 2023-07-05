@@ -47,7 +47,7 @@ exports.getAllPolicy = async function(req, res) {
             query = "SELECT * FROM webdb.tb_policy ORDER BY count_scraps ASC;";
         } else if (sortOrderCode === '5') {
             // 마감일 순으로 정렬
-            query = "SELECT * FROM webdb.tb_policy ORDER BY application_end_date ASC;";
+            query = "SELECT * FROM webdb.tb_policy ORDER BY application_release_date ASC;";
         }  
         else if (sortOrderCode === '6') {
             // 등록 순으로 정렬
@@ -67,8 +67,10 @@ exports.getAllPolicy = async function(req, res) {
     } catch(error) {
         console.log('policy-service getAllPolicy:'+error);
     } finally {
-        conn.release();
+        if (conn) conn.release();
+        // conn.release();
     }
+
 }
 
 
@@ -106,7 +108,7 @@ exports.getSearchPolicy = async function(req, res) {
         //     query += " ORDER BY count_scraps ASC;";
         // } else if (sortOrderCode === '5') {
         //     // 마감일 순으로 정렬
-        //     query += " ORDER BY application_end_date ASC;";
+        //     query += " ORDER BY application_release_date ASC;";
         // } else if (sortOrderCode === '6') {
         //     // 등록 순으로 정렬
         //     query += " ORDER BY board_idx ASC;";
@@ -120,7 +122,7 @@ exports.getSearchPolicy = async function(req, res) {
     } catch(error){
         console.log('policy-service getSearchPolicy:'+error);
     } finally {
-        conn.release();
+        if (conn) conn.release();   
     }
 }
 
@@ -277,7 +279,7 @@ exports.getPolicyBySelect = async function(req, res){
             query += " ORDER BY count_scraps ASC;";
         } else if (sortOrderCode === '5') {
             // 마감일 순으로 정렬
-            query += " ORDER BY application_end_date ASC;";
+            query += " ORDER BY application_release_date ASC;";
         } else if (sortOrderCode === '6') {
             // 등록 순으로 정렬
             query += " ORDER BY board_idx ASC;";
@@ -297,8 +299,8 @@ exports.getPolicyBySelect = async function(req, res){
     catch(error){
         console.log('policy-service getSelectPolicy:'+error);
     } finally {
-        conn.release();
-     }
+        if (conn) conn.release();   
+    }
 }
 
 
@@ -316,7 +318,7 @@ exports.getAllPolicyForSearch = async function(req, res) {
     } catch(error) {
         console.log('policy-service getAllPolicyForSearch:'+error);
     } finally {
-        conn.release();
+        if (conn) conn.release();   
     }
 }
 
@@ -341,7 +343,7 @@ exports.scrapOrUnscrapPolicy = async function(req, res) {
 
 
 
-            conn.end();
+            conn.release();
             resultcode = 1; // unscrap
         return resultcode; //res.status(200).json({ resultcode });
         }
@@ -353,7 +355,7 @@ exports.scrapOrUnscrapPolicy = async function(req, res) {
        
 
 
-        conn.end();
+        conn.release();
         return resultcode; //res.status(200).json({ resultcode });
   
     } catch(error) {
@@ -376,7 +378,7 @@ exports.scrapOrUnscrapPolicy = async function(req, res) {
     } catch(error) {
         console.log('policy-service getScappedPolicy:'+error);
     } finally {
-        conn.release();
+        if (conn) conn.release();   
     }
     };
 
@@ -404,7 +406,7 @@ exports.scrapOrUnscrapPolicy = async function(req, res) {
                 isScrapped : 0
             };
         } finally {
-            conn.release();
+            if (conn) conn.release();   
         }
     };
 

@@ -9,6 +9,8 @@ exports.fetchData = async function(req, res) {
         return result;
     } catch (error) {
         console.log('codeData-controller fetchData error:'+error);
+    } finally {
+      if(conn) conn.release();
     }
 };
 
@@ -20,6 +22,8 @@ exports.fetchPolicyData = async function(req, res) {
         return result;
     } catch (error) {
         console.log('codeData-controller fetchPolicyData error:'+error);
+    } finally {
+      if(conn) conn.release();
     }
 }
 
@@ -53,6 +57,8 @@ exports.getCodeData = async function(req, res) {
       return json;
     } catch (error) {
         console.log('codeData-controller getCodeData error:'+error);
+    } finally {
+      if(conn) conn.release();
     }
 };
 
@@ -68,6 +74,8 @@ exports.getCodedetail = async function(req, res) {
   }
   catch(error){
     console.log('codeData-controller getCodedetail error:'+error);
+  } finally {
+    if(conn) conn.release();
   }
 };
 
@@ -76,13 +84,15 @@ exports.getEventData = async function(req, res) {
     conn = await db.getConnection();
     var eid = req.params.eid;
     // console.log('getEventData db connection');
-    var query = "SELECT eid, event_name, fig_payment, event_start_date, event_end_date FROM webdb.tb_event where eid = '" + eid + "'";
+    var query = "SELECT eid, event_name, fig_payment, event_start_date, event_end_date FROM webdb.tb_event";
     var rows = await conn.query(query); // 쿼리 실행
     // console.log(rows);
     return rows;
   }
   catch(error){
     console.log('codeData-controller getEvents error:'+error);
+  } finally {
+    if(conn) conn.release();
   }
 };
 

@@ -19,10 +19,11 @@ class codeServices {
   }
 
   // 이벤트 정보 불러오기
-  Future<ResponseEvent> getEventData(String eid) async {
+
+  Future<ResponseEvent> getEventData() async {
     // print('getEventData');
     final resp = await http.get(
-        Uri.parse('${Environment.urlApi}/codeData/get-event-data/$eid'),
+        Uri.parse('${Environment.urlApi}/codeData/get-event-data'),
         headers: {'Accept': 'application/json'});
     // print(resp.body);
 

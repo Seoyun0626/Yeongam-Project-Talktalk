@@ -3,13 +3,13 @@ var db = require('../../utils/db');
 
 // 무화과 지급(이벤트 참여)
 // tb_event_part에 기록 추가, tb_user의 fig열 update
-exports.giveFigForAttendance = async function(req, res) {
+exports.giveFigForAttreleaseance = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
     // var eid = req.params.eid;
     var uid = req.idPerson;
-    var query = `CALL webdb.SP_GIVE_FIG_FOR_ATTENDANCE(?)`;
+    var query = `CALL webdb.SP_GIVE_FIG_FOR_ATTreleaseANCE(?)`;
     var result = await conn.query(query, [uid]);
     // console.log(result);
     return result
@@ -18,13 +18,13 @@ exports.giveFigForAttendance = async function(req, res) {
   } catch(error) {
     console.log('mobile-event-service giveFig:'+error);
   } finally {
-    if(conn) conn.end();
+    if(conn) conn.release();
   }
 };
 
 // 출석체크 기록 가져오기
-// tb_attendance_log에서 uid로 날짜 return -> frontend에서 day 리스트로 받아 temp_days에 저장
-exports.getAttendance = async function(req, res) {
+// tb_attreleaseance_log에서 uid로 날짜 return -> frontrelease에서 day 리스트로 받아 temp_days에 저장
+exports.getAttreleaseance = async function(req, res) {
   var resultcode = 0;
   var conn;
   try{
@@ -32,19 +32,19 @@ exports.getAttendance = async function(req, res) {
     var uid = req.idPerson;
     
     // uid를 통해 출석기록 받아오기
-    // var query = 'SELECT * FROM webdb.tb_attendance_logs WHERE user_uid = "' + uid + '"';
-    var query = 'SELECT DATE_FORMAT(attendance_date, "%Y-%m-%d") AS attendance_date FROM webdb.tb_attendance_logs WHERE user_uid = "' + uid + '"';
-    var attendanceLog = await conn.query(query); // 쿼리 실행
-    // console.log(attendanceLog);
+    // var query = 'SELECT * FROM webdb.tb_attreleaseance_logs WHERE user_uid = "' + uid + '"';
+    var query = 'SELECT DATE_FORMAT(attreleaseance_date, "%Y-%m-%d") AS attreleaseance_date FROM webdb.tb_attreleaseance_logs WHERE user_uid = "' + uid + '"';
+    var attreleaseanceLog = await conn.query(query); // 쿼리 실행
+    // console.log(attreleaseanceLog);
 
-    if(attendanceLog.length){
+    if(attreleaseanceLog.length){
       resultcode = 1;
     } else resultcode = 0;
-    return attendanceLog;
+    return attreleaseanceLog;
   } catch(error) {
-    console.log('mobile-event-service getAttendance:'+error);
+    console.log('mobile-event-service getAttreleaseance:'+error);
   } finally {
-    if (conn) conn.end();
+    if(conn) conn.release();
   }
   return resultcode;
 };
@@ -73,7 +73,7 @@ exports.giveFigForInvitation = async function(req, res) {
     console.log('mobile-event-service giveFigForInvitation:'+error);
     return 'error';
   } finally {
-    if(conn) conn.end();
+    if(conn) conn.release();
   }
 };
 
@@ -87,11 +87,11 @@ exports.checkUserWithin24Hours = async function(req, res){
     var userData = await conn.query(query, [uid]);
     var insDate = userData[0].ins_date;
     // console.log(insDate);
-    var currendDate = new Date();
-    // console.log(currendDate);
+    var currreleaseDate = new Date();
+    // console.log(currreleaseDate);
 // 
     // 가입일과 현지 시각 비교
-    var isWithin24Hours = (currendDate - insDate) < (24 * 60 * 60 * 1000); // 단위 : 밀리초
+    var isWithin24Hours = (currreleaseDate - insDate) < (24 * 60 * 60 * 1000); // 단위 : 밀리초
     // console.log(isWithin24Hours);
     return isWithin24Hours;
 
@@ -99,7 +99,7 @@ exports.checkUserWithin24Hours = async function(req, res){
     console.log('mobile-event-service checkUserWithin24Hours: ' + error);
     return false;
   } finally {
-    if(conn) conn.end();
+    if(conn) conn.release();
   }
 };
 
@@ -120,7 +120,7 @@ exports.giveFigForWeeklyFigChallenge = async function(req, res) {
   } catch(error) {
     console.log('mobile-event-service giveFig:'+error);
   } finally {
-    if(conn) conn.end();
+    if(conn) conn.release();
   }
 };
 
@@ -147,7 +147,7 @@ exports.checkEventParticipation = async function(req, rese) {
     console.log('mobile-event-service checkEventParticipation:'+error);
     return 'error';
   } finally {
-    if(conn) conn.end();
+    if(conn) conn.release();
   }
 };
 
@@ -168,7 +168,7 @@ exports.fetchFigUsageByUser = async function(req, res) {
     } catch(error) {
       console.log('mobile-event-service fetchFigUsageByUser:'+error);
     } finally {
-      if (conn) conn.end();
+      if (conn) conn.release();
     }
   };
 
@@ -185,6 +185,6 @@ exports.fetchFigRewardByUser = async function(req, res) {
   } catch(error) {
     console.log('mobile-event-service fetchFigRewardByUser:'+error);
   } finally {
-    if (conn) conn.end();
+    if (conn) conn.release();
   }
 };

@@ -105,7 +105,7 @@ router.get("/check-event-participation-available/:eid", verifyToken, async funct
     // console.log(result);
 
     if (req.params.eid === '5') {
-      if (result > 3) {
+      if (result >= 3) {
         res.json({
           resp: false,
           message: '최대 3명까지만 초대할 수 있어요.',
