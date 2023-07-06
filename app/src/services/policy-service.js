@@ -321,6 +321,21 @@ exports.regTest = async function(req, res) {
     }
 };
 
+exports.fetchpolicy = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service fetchpolicy db getConnection');
+        var query = "SELECT * FROM webdb.tb_policy;";
+        var rows = await conn.query(query); // 쿼리 실행
+        return rows;
+    } catch(error) {
+        console.log('policy-service fetchpolicy:'+error);
+    } finally {
+        conn.release();
+    }
+};
+
 // mobile-service
 // exports.getAllPolicy = async function(req, res) {
 //     var conn;

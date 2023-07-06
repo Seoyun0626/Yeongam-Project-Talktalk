@@ -1,6 +1,8 @@
 const path = require("path");
 var express = require("express");
 var fs = require("fs");
+var XLSX = require('xlsx');
+var json2csv = require('json2csv').parse;
 var router = express.Router();
 var policy_controller = require("../../controllers/common-controller/policy-controller");
 var code_controller = require("../../controllers/common-controller/codeData-controller");
@@ -160,5 +162,27 @@ router.get('/regTest', function(req, res) {
     var result = policy_controller.regTest(req, res);
     res.redirect('/admin/policy/show');
 });
+
+//정책 정보 엑셀 다운로드
+router.get('/csv', ensureAuth, asyncHandler(async function (req, res) {
+  try {
+    // 정책 데이터 가져오기
+    var result = await policy_controller.fetchpolicy(req, res);
+    
+    var fields = ['board_idx', 'policy_name', 'policy_target_code', 'policy_institution_code', 'policy_field_code', 'policy_character_code', 'min_fund', 'max_fund', 'application_start_date', 'application_end_date'];
+    var csv = json2csv(result, { fields: fields });
+
+    fs.writeFile('data.csv', csv, function(err) {
+      if (err) throw err;
+      console.log('File saved');
+    });
+    
+    res.download('data.csv');
+  } catch (error) {
+    console.error('policy-router excel/ error:', error);
+    res.status(500).send('Internal Server Error');
+  }
+}));
+
 
 module.exports = router;

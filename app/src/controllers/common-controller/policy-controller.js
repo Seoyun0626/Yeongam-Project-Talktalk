@@ -33,3 +33,5 @@ exports.fetchData = (req, res) => executeService(policy_service.fetchData, req, 
 exports.fetchCodeData = (req, res) => executeService(policy_service.fetchCodeData, req, res, 'fetchCodeData');
 
 exports.regTest = (req, res) => executeService(policy_service.regTest, req, res, 'regTest');
+
+exports.fetchpolicy = (req, res) => executeService(policy_service.fetchpolicy, req, res, 'fetchpolicy');

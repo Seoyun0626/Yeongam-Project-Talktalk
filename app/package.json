@@ -12,6 +12,7 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
     "fs-extra": "^11.1.0",
+    "json2csv": "^6.0.0-alpha.2",
     "json2xls": "^0.1.2",
     "jsonwebtoken": "^8.5.1",
     "mariadb": "^2.5.3",
