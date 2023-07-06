@@ -7,13 +7,13 @@ const pool = mariadb.createPool({
   database: config.database,
   allowPublicKeyRetrieval: true,
   connectionLimit: 50,
-  autoreconnect: true,
+  autoreconnect: true,//?
 });
 
 pool.getConnection(function(err, connection){
   if( err ){
       console.log('error when connecting to db:', err);
-      setTimeout(handleDisconnect, 2000);
+      setTimeout(handleDisconnect, 2000); //?
       if( err.code === 'PROTOCOL_CONNECTION_LOST' ) console.log('DATABASE CONNECTION WAS CLOSED');
       if( err.code === 'ER_CON_COUNT_ERROR' ) console.log('DATABASE HAS TO MANY CONNECTIONS');
       if( err.code === 'ECONNREFUSED' ) console.log('DATABASE CONNECTION WAS REFUSED');

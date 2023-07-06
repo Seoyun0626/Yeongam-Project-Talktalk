@@ -321,28 +321,15 @@ exports.deleteUser = async function(req, res) {
 exports.findID = async function(req, res) {
   var conn;
   try{
-    let transporter = nodemailer.createTransport({
-      service: 'naver',
-      host: 'smtp.naver.com',
-      port: 587,
-      auth: {
-          user: process.env.NODEMAILER_USER,
-          pass: process.env.NODEMAILER_PASS
-      }
-        });
-        let mailOptions = {
-          from: process.env.NODEMAILER_USER,
-          to: email,
-          subject: '비밀번호 초기화',
-          text: '임시 비밀번호는 '+tempPW+'입니다.'
-      };
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+    var email = req.body.email;
+    var name = req.body.name;
+    conn = await db.getConnection();
+    var query = 'SELECT userid FROM webdb.tb_user where user_email = ? and name = ?';
+    var rows = await conn.query(query, [email, name]); // 쿼리 실행
+    if(rows.length==0) {
+      console.log('dataif-service findID: no data');
+      return rows;
+    }
   } catch(error) {
     console.log('dataif-service findID:'+error);
   } finally {

@@ -1,6 +1,7 @@
 const path = require("path");
 var express = require("express");
 const axios = require('axios');
+const nodemailer = require("nodemailer");
 var json2xls = require('json2xls');
 var fs = require('fs');
 var XLSX = require('xlsx');
@@ -177,5 +178,38 @@ router.post('/findID', asyncHandler(async function (req, res) {
 router.get('/findID', asyncHandler(async function (req, res) {
   res.render('dataif/findID');
 }, 'dataif-router / error:'));
+
+
+router.post('/sendAuthNum', asyncHandler(async function (req, res) {
+  // 인증번호 생성
+  var email = req.body.email;
+  var tempPW = Math.floor(Math.random() * 1000000)+100000;
+  console.log(tempPW);
+  let transporter = nodemailer.createTransport({
+    service: 'naver',
+    host: 'smtp.naver.com',
+    port: 587,
+    auth: {
+        user: process.env.NODEMAILER_USER,
+        pass: process.env.NODEMAILER_PASS
+    }
+      });
+      let mailOptions = {
+        from: process.env.NODEMAILER_USER,
+        to: email,
+        subject: '요청하신 인증번호입니다.',
+        text: '인증번호 : '+tempPW+''
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+          console.log(error);
+      } else {
+          console.log('Email sent: ' + info.response);
+      }
+  });
+  // 인증번호 저장
+  var result = await dataif_controller.saveAuthNum(req, res, tempPW);
+  res.redirect('/admin/findPW');
+  }, 'dataif-router / error:'));
 
 module.exports = router;
