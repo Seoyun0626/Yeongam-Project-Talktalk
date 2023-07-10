@@ -21,7 +21,7 @@ try{
   if (rows[0]) {
       // 관리자만 접속 가능하도록 처리
       if(rows[0].user_role == 0) {
-        json.code = 100;
+        json.code = 200;
         json.msg = "관리자만 접속 가능합니다.";
         json.data = {};
         console.log('login-service SignIn - 관리자만 접속 가능합니다.');

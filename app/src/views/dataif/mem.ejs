@@ -38,8 +38,7 @@
             <th>권한</th>
             <th>거주지</th>
             <th>사용자 구분</th>
-            <th>등록 일시</th>
-            <th>수정 일시</th>
+            <th>가입일</th>
             <th>무화과</th>
             <!-- <th>푸시</th>
             <th>이메일</th>
@@ -49,36 +48,41 @@
           </tr>
         </thead>
           <tbody>
-            <!-- 페이지 별로 -->
-          <% for(var i=0; i<posts.length; i++){ %>
-            <tr>
-              <td><%= posts[i].userid %></td>
-              <td><%= posts[i].user_name %></td>
-              <td><%= role_code_to_class(posts[i].user_role) %></td>
-              <td><%= emd_code_to_name(posts[i].emd_class_code,code_data) %></td>
-              <td><%= user_type_to_name(posts[i].user_type,code_data) %></td>
-              <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
-              <td><%= `${posts[i].upd_date.getFullYear()}` + `-`+ `${posts[i].upd_date.getMonth()+1}` + `-`+ `${posts[i].upd_date.getDate()}`%></td>
-              <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>"><%=posts[i].fig%></a></td>
-              <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
-              <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
-              <script>
-                function delMem(){
-                  if(confirm("정말 삭제하시겠습니까?")){
-                    return true;
-                  }else{
-                    return false;
-                  }
-                }
-              </script>
-            </tr>
-          <% } %>
+            <% if (posts.length === 0) { %>
+              <tr>
+                <td colspan="10">조회된 데이터가 없습니다.</td>
+              </tr>
+            <% } else { %>
+              <% for(var i=0; i<posts.length; i++){ %>
+                <tr>
+                  <td><%= posts[i].userid %></td>
+                  <td><%= posts[i].user_name %></td>
+                  <td><%= role_code_to_class(posts[i].user_role) %></td>
+                  <td><%= emd_code_to_name(posts[i].emd_class_code,code_data) %></td>
+                  <td><%= user_type_to_name(posts[i].user_type,code_data) %></td>
+                  <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
+                  <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>"><%=posts[i].fig%></a></td>
+                  <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
+                  <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
+                  <script>
+                    function delMem(){
+                      if(confirm("정말 삭제하시겠습니까?")){
+                        return true;
+                      }else{
+                        return false;
+                      }
+                    }
+                  </script>
+                </tr>
+                <% } %>
+              <% } %>
           </tbody>
         </table>
         <!-- 페이징 아이콘 -->
         <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/auth/signup'">등록</button>
         <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/dataif/excel'">다운로드</button>
         <div id="mem_paging">
+          <% if (totalPage > 1) { %> <!-- 전체 페이지가 1페이지 이상일 경우에만 페이징 표시 -->
           <div class="ui pagination menu">
               <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">이전</a>
             <% var startPage = Math.max(page - 1, 1); %>
@@ -98,6 +102,7 @@
             <% } %>
               <a class="icon item" href="/admin/dataif/?page=<%=page+1 %>">다음</a>
           </div>
+          <% } %>
         </div>
     </div>
 </section>

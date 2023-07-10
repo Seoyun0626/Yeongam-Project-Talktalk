@@ -29,24 +29,30 @@
             </tr>
         </thead>
         <tbody>
-            <% for(var i=0; i<banner.length; i++) { %>
+            <% if (banner.length === 0) { %>
                 <tr>
-                    <td><%= i+1 %></td>
-                    <td><%= banner[i].banner_name %></td>
-                    <!-- <td><img src="<%= banner[i].img %>" alt="1"></td> -->
-                    <td><%= banner[i].banner_link %></td>
-                    <td><%= `${banner[i].ins_date.getFullYear()}` + `-`+ `${banner[i].ins_date.getMonth()+1}` + `-`+ `${banner[i].ins_date.getDate()}`%></td>
-                    <td><a href="/admin/policy/banner/delete/<%= banner[i].board_idx %>" onclick="return delBan()">삭제</a></td>
-                    <script>
-                      function delBan(){
-                        if(confirm("정말 삭제하시겠습니까?")){
-                          return true;
-                        }else{
-                          return false;
-                        }
-                      }
-                    </script>
+                  <td colspan="10">조회된 데이터가 없습니다.</td>
                 </tr>
+              <% } else { %>
+                <% for(var i=0; i<  banner.length; i++) { %>
+                    <tr>
+                        <td><%= i+1 %></td>
+                        <td><%= banner[i].banner_name %></td>
+                        <!-- <td><img src="<%= banner[i].img %>" alt="1"></td> -->
+                        <td><%= banner[i].banner_link %></td>
+                        <td><%= `${banner[i].ins_date.getFullYear()}` + `-`+ `${banner[i].ins_date.getMonth()+1}` + `-`+ `${banner[i].ins_date.getDate()}`%></td>
+                        <td><a href="/admin/policy/banner/delete/<%= banner[i].board_idx %>" onclick="return delBan()">삭제</a></td>
+                        <script>
+                        function delBan(){
+                            if(confirm("정말 삭제하시겠습니까?")){
+                            return true;
+                            }else{
+                            return false;
+                            }
+                        }
+                        </script>
+                    </tr>
+                <% } %> 
             <% } %>
         </tbody>
     </table>

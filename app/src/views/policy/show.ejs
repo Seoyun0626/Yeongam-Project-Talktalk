@@ -30,27 +30,33 @@
                 </tr>
             </thead>
             <tbody>
-            <% for(var i=0; i< posts.length; i++){ %>
+            <% if (posts.length === 0) { %>
               <tr>
-                <td><%= i+1 %></td>
-                <td><%= posts[i].policy_name %></td>
-                <!-- <td><%= posts[i].policy_target_code %></td> -->
-                <td><%= codeName(posts[i].policy_target_code,code_data).policy_target_code_name %></td>
-                <td><%= `${posts[i].application_start_date.getFullYear()}` + `-`+ `${posts[i].application_start_date.getMonth()+1}` + `-`+ `${posts[i].application_start_date.getDate()}`%></td>
-                <td><%= `${posts[i].application_end_date.getFullYear()}` + `-`+ `${posts[i].application_end_date.getMonth()+1}` + `-`+ `${posts[i].application_end_date.getDate()}`%></td>
-                <td><a href="/admin/policy/update/<%=posts[i].board_idx %>">수정</a></td>
-                <td><a href="/admin/policy/delete/<%= posts[i].board_idx %>" onclick="return delPol()">삭제</a></td>
-                <script>
-                  function delPol(){
-                    if(confirm("정말 삭제하시겠습니까?")){
-                      return true;
-                    }else{
-                      return false;
-                    }
-                  }
-                </script>
+                <td colspan="10">조회된 데이터가 없습니다.</td>
               </tr>
-            <!-- </form> -->
+            <% } else { %>
+              <% for(var i=0; i< posts.length; i++){ %>
+                <tr>
+                  <td><%= i+1 %></td>
+                  <td><%= posts[i].policy_name %></td>
+                  <!-- <td><%= posts[i].policy_target_code %></td> -->
+                  <td><%= codeName(posts[i].policy_target_code,code_data).policy_target_code_name %></td>
+                  <td><%= `${posts[i].application_start_date.getFullYear()}` + `-`+ `${posts[i].application_start_date.getMonth()+1}` + `-`+ `${posts[i].application_start_date.getDate()}`%></td>
+                  <td><%= `${posts[i].application_end_date.getFullYear()}` + `-`+ `${posts[i].application_end_date.getMonth()+1}` + `-`+ `${posts[i].application_end_date.getDate()}`%></td>
+                  <td><a href="/admin/policy/update/<%=posts[i].board_idx %>">수정</a></td>
+                  <td><a href="/admin/policy/delete/<%= posts[i].board_idx %>" onclick="return delPol()">삭제</a></td>
+                  <script>
+                    function delPol(){
+                      if(confirm("정말 삭제하시겠습니까?")){
+                        return true;
+                      }else{
+                        return false;
+                      }
+                    }
+                  </script>
+                </tr>
+              <!-- </form> -->
+              <% } %>
             <% } %>
             </tbody>
         </table>
@@ -61,7 +67,8 @@
     <!-- <button class="ui button" id="policy_reg_test" onclick="location.href='/admin/policy/regTest'">테스트</button> -->
     <!-- <button class="ui button" id="add_users" onclick="regiAll()">일괄 등록</button> -->
     <div id="policy_paging">
-      <div class="ui pagination menu">
+      <% if (totalPage > 1) { %> <!-- 전체 페이지가 1페이지 이상일 경우에만 페이징 표시 -->
+      <div class="ui pagination menu">        
           <a class="icon item" href="/admin/policy/show/?page=<%=page-1 %>">이전</a>
         <% var startPage = Math.max(page - 1, 1); %>
         <% var endPage = Math.min(page + 1, totalPage); %>
@@ -80,5 +87,6 @@
         <% } %>
           <a class="icon item" href="/admin/policy/show/?page=<%=page+1 %>">다음</a>
       </div>
+      <% } %>
     </div>
 </section>
