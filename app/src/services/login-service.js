@@ -3,8 +3,7 @@ var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
 const nodemailer = require("nodemailer");
 
-// const { uuid } = require('uuidv4');
-const { v4: uuidv4 } = require('uuid');
+const { uuid } = require('uuidv4');
 // const jwt = require('jsonwebtoken');
 
 // 로그인 확인
@@ -38,8 +37,8 @@ try{
               salt: userSalt
           }, (err, pass, salt, hash) => {
               if (hash != userPass) {
-                json.code = 100;
-                json.msg = "패스워드 일치하지 않습니다.(운영환경 : ID 및 비밀번호가 일치하지 않습니다)";
+                json.code = 200;
+                json.msg = "패스워드가 일치하지 않습니다.";
                 json.data = {};
               } else {
                 // console.log('login-service json.code', json.code);
@@ -49,15 +48,15 @@ try{
           });
       });
   } else {
-      json.code = 100;
-      json.msg = "ID 일치하지 않습니다.";
+      json.code = 300;
+      json.msg = "존재하지 않는 ID입니다.";
       json.data = {};
       return json;
   }
 } catch(error) {
   console.log('login-service SignIn:'+error);
 } finally {
-  if (conn) conn.release();
+  if (conn) conn.end();
 }
 
 };
@@ -83,23 +82,40 @@ exports.signUp = async function(req, res) {
     if(password != password2) {
         // 비밀번호가 일치하지 않음
         console.log('비밀번호가 일치하지 않습니다.');
-        resultcode = 200;
+        resultcode = 100;
         return resultcode;
     }
-    const uidUser = uuidv4();
-    // uid 중복 체크 -> while문으로 uid 중복 체크하는 것으로 변경
-    query = "SELECT uid FROM webdb.tb_user where uid like '"+uidUser.substring(0,8)+"%' ;";
-    uid_check = await conn.query(query); // 쿼리 실행
-    if(uid_check[0] != undefined) {
-      // 앞의 8자리가 tb_user의 uid의 앞 8자리와 같은 경우
-      console.log('uid 중복');
-      resultcode = 200;
-      return resultcode;
-    }
+    query = "SELECT eid, fig_payment FROM webdb.tb_event WHERE eid = 2 OR eid = 6 OR eid = 7;"; // 무화과 지급량 받아오기
+    var figPayment = await conn.query(query); // 쿼리 실행
+    welcomeTalk = figPayment[0].fig_payment;
+    inviteFriend = figPayment[1].fig_payment;
+    recommender = figPayment[2].fig_payment; // 추천인 무화과 지급량 설정
     if (rows[0] == undefined) {
+      // invite코드의 유저에 무화과 추가
+      if(inviteCode != '') {
+        query = "SELECT fig,uid FROM webdb.tb_user where userid='" + inviteCode + "' ;";
+        var inv = await conn.query(query); // 쿼리 실행
+        if(inv[0] == undefined) {
+          console.log('존재하지 않는 코드입니다.');
+          resultcode = 100;
+          return resultcode;
+        }
+        // int형식으로 무화과 추가후 varchar로 변환
+        inv[0].fig = parseInt(inv[0].fig) + 1;
+        inv[0].fig = inv[0].fig.toString();
+        query = "UPDATE webdb.tb_user SET fig='"+inv[0].fig+"' WHERE userid='"+inviteCode+"';";
+        var figUpdate = await conn.query(query); // 쿼리 실행
+        var eid = 1; // TODO:무화과 이벤트 번호, 바꿔야함
+        query = "insert into webdb.tb_event_part(eid,uid) values('"+eid+"','"+inv[0].uid+"');";
+        // console.log(query);
+        var eventPart = await conn.query(query); // 쿼리 실행
+        fig+=1; //TODO: 지급 무화과 수 변경 필요
+        fig = fig.toString();
+      }
         hasher({
             password: password
         }, async (err, pass, salt, hash) => {
+          const uidUser = uuid();
           var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code, fig) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"', '"+fig+"')";
           var rows = await conn.query(query); // 쿼리 실행
           console.log('회원가입 성공');
@@ -107,13 +123,14 @@ exports.signUp = async function(req, res) {
     } else {
         // 이미 있음
         console.log('이미 존재하는 아이디입니다.');
-        resultcode = 300;
+        resultcode = 100;
     }
   } catch(error) {
     console.log('login-service SignUp:'+error);
   } finally {
-    if (conn) conn.release();
+    if (conn) conn.end();
   }
+  
   return resultcode;
 };
 
@@ -138,7 +155,7 @@ exports.getAttendance = async function(req, res) {
   } catch(error) {
     console.log('login-service getAttendance:'+error);
   } finally {
-    if (conn) conn.release();
+    if (conn) conn.end();
   }
   return resultcode;
 };
@@ -158,60 +175,7 @@ exports.checkAttendance = async function(req, res) {
   } catch(error) {
     console.log('login-service checkAttendance:'+error);
   } finally {
-    if (conn) conn.release();
+    if (conn) conn.end();
   }
   return resultcode;
-};
-
-exports.fetchFeedback = async function(req, res) {
-  var resultcode = 0;
-  var conn;
-  try{
-    conn = await db.getConnection();
-    var query = 'SELECT * FROM webdb.tb_feedback';
-    var rows = await conn.query(query); // 쿼리 실행
-    resultcode = 1;
-    return rows;
-  } catch(error) {
-    console.log('login-service fetchFeedback:'+error);
-  } finally {
-    if (conn) conn.release();
-  }
-  return rows;
-};
-
-exports.feedRegi = async function(req, res) {
-  var resultcode = 0;
-  var conn;
-  try{
-    // console.log(req.session.user)
-    conn = await db.getConnection();
-    var query = 'insert into webdb.tb_feedback (tester, feedback_name, feedback_content) values ("'+req.session.user.data.user_name+'", "'+req.body.name+'", "'+req.body.content+'")';
-    var rows = await conn.query(query); // 쿼리 실행
-    resultcode = 1;
-    return rows;
-  } catch(error) {
-    console.log('login-service feedRegi:'+error);
-  } finally {
-    if (conn) conn.release();
-  }
-  return rows;
-};
-
-exports.feedDel = async function(req, res) {
-  var resultcode = 0;
-  var conn;
-  try{
-    conn = await db.getConnection();
-    var query = 'delete from webdb.tb_feedback where board_idx="'+req.params.id+'"';
-    var rows = await conn.query(query); // 쿼리 실행
-    resultcode = 1;
-    return rows;
-  }
-  catch(error) {
-    console.log('login-service feedDel:'+error);
-  } finally {
-    if (conn) conn.release();
-  }
-  return rows;
 };

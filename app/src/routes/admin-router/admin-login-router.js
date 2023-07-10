@@ -20,12 +20,14 @@ router.get('/login', function (req, res) {
 });
 router.post("/login", async function(req, res) {
   try{
-    // 로그인 확인을 위해 컨트롤러 호출
+    // 로그인 확인을 위해 컨트롤러 호출)
+    //json 형식으로 결과값을 받아옴
     var result = await login_controller.SignIn(req, res);
+    // result.code 값을 login.ejs로 전달
     if(result.code == 0){
-      res.redirect('/admin/dataif');
+      res.status(200).send({ message: '로그인에 성공했습니다.', code: result.code });
     } else {
-      res.redirect('/admin/auth/login');
+      res.status(result.code).send({ message: result.msg, code: result.code });
     }
   } catch(error) {
     console.log('login-router login:'+error);
@@ -148,48 +150,5 @@ router.get('/calendar', async function (req, res) {
     console.log('login-router login error:'+error);
   }
 });
-
-
-// 피드백 수집
-router.get('/feedback', async function (req, res) {
-  try{
-    var result = await login_controller.fetchFeedback(req, res);
-    res.render('dataif/feedback', {
-      posts : result
-    });
-  }
-  catch(error) {
-    console.log('login-router feedback error:'+error);
-  }
-});
-
-router.get('/feedRegi', async function (req, res) {
-  try{
-    res.render('dataif/feedRegi');
-  }
-  catch(error) {
-    console.log('login-router feedback error:'+error);
-  }
-});
-
-router.post('/feedRegi', async function (req, res) {
-  try{
-    var result = await login_controller.feedRegi(req, res);
-    res.redirect('/admin/auth/feedback');
-  } catch(error) {
-    console.log('login-router feedback error:'+error);
-  }
-});
-
-router.get('/feedDel/:id', async function (req, res) {
-  try{
-    var result = await login_controller.feedDel(req, res);
-    res.redirect('/admin/auth/feedback');
-  }
-  catch(error) {
-    console.log('login-router feedback error:'+error);
-  }
-});
-
 
 module.exports = router;
