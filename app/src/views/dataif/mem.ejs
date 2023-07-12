@@ -27,10 +27,21 @@
               <input type="search" name="search" id="search" placeholder="검색어를 입력하세요">
             </div>
             <div class="field">
-              <button id="search_btn" type="submit" class="ui button">검색</button>
+              <button id="search_btn" type="submit" class="ui button" onclick="return validateSearch()">검색</button>
             </div>
           </div>
         </form>
+        <script>
+          function validateSearch() {
+            var searchInput = document.getElementById("search").value;
+            if (searchInput.trim() === "") {
+              alert("검색어를 입력해주세요.");
+              document.getElementById("search").focus();
+              return false;
+            }
+            return true;
+          }
+        </script>
         <table id="mem_table">
           <thead>
             <tr><th>아이디</th>
@@ -61,7 +72,7 @@
                   <td><%= emd_code_to_name(posts[i].emd_class_code,code_data) %></td>
                   <td><%= user_type_to_name(posts[i].user_type,code_data) %></td>
                   <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
-                  <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>"><%=posts[i].fig%></a></td>
+                  <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>" style="color: #0000FF; text-decoration: underline;"><%=posts[i].fig%></a></td>
                   <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
                   <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
                   <script>
