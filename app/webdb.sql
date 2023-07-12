@@ -209,8 +209,6 @@ CREATE TABLE webdb.`tb_policy_scrap` (
 ALTER TABLE `webdb.tb_user` ADD INDEX (`uid`);
 ALTER TABLE `webdb.tb_policy` ADD INDEX (`uid`);
 
-
--- 그 다음 새로 create하기
 CREATE TABLE webdb.`tb_policy_scrap`
 (
 	`uid_scraps` VARCHAR(100) PRIMARY KEY,
@@ -223,6 +221,8 @@ CREATE TABLE webdb.`tb_policy_scrap`
 	FOREIGN KEY(user_uid) REFERENCES webdb.`tb_user`(`uid`),
 	FOREIGN KEY(policy_uid) REFERENCES webdb.`tb_policy`(`uid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 -- 외래 키 제약 조건 삭제
 -- ALTER TABLE tb_policy_scrap DROP FOREIGN KEY 외래_키_제약_조건_이름;
