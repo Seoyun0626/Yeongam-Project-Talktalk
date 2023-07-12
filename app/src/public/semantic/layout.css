@@ -24,10 +24,13 @@ a {
   margin-left: 10px;
 }
 .pagename{
-  font-size: 15px;
+  font-weight: bold;
+  font-size: 26px;
+  padding: 20px;
+  /* font-size: 15px;
   font-weight: bold;
   margin-bottom: 20px;
-  margin-left: 10px;
+  margin-left: 10px; */
 }
 #adminpage{
   color: black;

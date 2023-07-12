@@ -19,25 +19,25 @@
             <form action="/admin/auth/signup" method="post" name="frm_signup" id="frm_signup">
               <div class="ui form">
                 <div class="inline fields">
-                  <label>이름  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
-                  <div class="four wide field">
-                    <input type="text" name="name" id="user_name" placeholder="이름"">
+                  <label class="one wide field">이름</label>
+                  <div class="four wide field" style="margin-right: 20px;">
+                    <input type="text" name="name" id="user_name" placeholder="이름">
                   </div>
-                  <label>아이디</label>
+                  <label class="one wide field">아이디</label>
                   <div class="four wide field">
-                    <input type="text" name="userid" id="userid" placeholder="아이디"">
+                    <input type="text" name="userid" id="userid" placeholder="아이디">
                   </div>
                 </div>
               </div>
               <br>
               <div class="ui form">
                 <div class="inline fields">
-                  <label>비밀번호</label>
-                  <div class="four wide field">
-                    <input name="password" id="user_password" type="password" placeholder="비밀번호"">
+                  <label class="one wide field">비밀번호</label>
+                  <div class="four wide field" style="margin-right: 20px;">
+                    <input name="password" id="user_password" type="password" placeholder="비밀번호">
                   </div>
                   <div class="four wide field">
-                  <input name="password2" id="user_password2" type="password" placeholder="비밀번호 확인"">
+                    <input name="password2" id="user_password2" type="password" placeholder="비밀번호 확인">
                   </div>
                 </div>
               </div>
@@ -45,8 +45,8 @@
               <!-- 드롭다운 -->
               <div class="ui form">
                 <div class="inline fields">
-                  <label>권한구분</label>
-                  <div class="four wide field">
+                  <label class="one wide field">권한구분</label>
+                  <div class="four wide field" style="margin-right: 20px;">
                     <select class="ui fluid dropdown" name="user_role" id="user_role">
                       <option value="0">사용자</option>
                       <option value="1">최고관리자</option>
@@ -54,7 +54,7 @@
                       <option value="3">정책관리자</option>
                     </select>
                   </div>
-                  <label>회원구분</label>
+                  <label class="one wide field">회원구분</label>
                   <div class="four wide field">
                     <select class="ui fluid dropdown" name="user_type" id="user_type">
                       <%for(var i=0; i<code_data.user_type.length; i++){%>
@@ -67,15 +67,15 @@
               <br>
               <div class="ui form">
                 <div class="inline fields">
-                  <label>연령대</label>
-                  <div class="four wide field">
+                  <label class="one wide field">연령대</label>
+                  <div class="four wide field" style="margin-right: 20px;">
                     <select class="ui fluid dropdown" name="parentsAge_code" id="parentsAge_code">
                       <%for(var i=0; i<code_data.parentsAge_code.length; i++){%>
                         <option value="<%=code_data.parentsAge_code[i].code_detail%>"><%=code_data.parentsAge_code[i].code_detail_name%></option>
                       <%}%>
                     </select>
                   </div>
-                  <label>학교</label>
+                  <label class="one wide field">학교</label>
                   <div class="four wide field">
                     <select class="ui fluid dropdown" name="youthAge_code" id="youthAge_code">
                       <%for(var i=0; i<code_data.youthAge_code.length; i++){%>
@@ -88,15 +88,15 @@
               <br>
               <div class="ui form">
                 <div class="inline fields">
-                  <label>거주지</label>
-                  <div class="four wide field">
+                  <label class="one wide field">거주지</label>
+                  <div class="four wide field" style="margin-right: 20px;">
                     <select class="ui fluid dropdown" name="emd_class_code" id="emd_class_code">
                       <%for(var i=0; i<code_data.emd_class_code.length; i++){%>
                         <option value="<%=code_data.emd_class_code[i].code_detail%>"><%=code_data.emd_class_code[i].code_detail_name%></option>
                       <%}%>
                     </select>
                   </div>
-                  <label>성별</label>
+                  <label class="one wide field">성별</label>
                   <div class="four wide field">
                     <select class="ui fluid dropdown" name="sex_class_code" id="sex_class_code">
                       <option value="0">남자</option>
@@ -109,87 +109,69 @@
               <br>
               <div class="ui form">
                 <div class="inline fields">
-                  <label>이메일</label>
-                  <div class="four wide field">
-                    <input type="text" name="user_email" id="user_email" placeholder="이메일"">
+                  <label class="one wide field">이메일</label>
+                  <div class="four wide field" style="margin-right: 20px;">
+                    <input type="text" name="user_email" id="user_email" placeholder="이메일">
                   </div>
                 </div>
               </div>
-              <!-- <div class="ui form">
-                <div class="inline fields">
-                  <label>추천인</label>
-                  <div class="four wide field">
-                    <input type="text" name="invite_code" id="invite_code" placeholder="추천인 아이디">
-                  </div>
-                </div>
-              </div> -->
-                  <br><br>
-                  <!-- <input type="checkbox" name="popup_agree" id="popup_agree">
-                  <label>팝업</label>
-                  <input type="checkbox" name="email_agree" id="email_agree">
-                  <label>이메일</label>
-                  <input type="checkbox" name="sms_agree" id="sms_agree">
-                  <label>문자</label> -->
-                <div>
-                    <button class="ui button" type="submit" onclick="return btn()">등록</button>
-                    <!-- 회원 등록 버튼 경고창 -->
-                    <script>
-                      function btn() {
-                          if (!confirm("회원 등록 하시겠습니까??")) {
-                              alert("취소 하였습니다.");
-                              return false;
-                          } else {
-                            if(document.getElementById("user_name").value == ""){
-                              alert("이름을 입력해주세요.");
-                              return false;
-                            }
-                            if(document.getElementById("user_id").value == ""){
-                              alert("아이디를 입력해주세요.");
-                              return false;
-                            }
-                            if(document.getElementById("user_password").value == ""){
-                              alert("비밀번호를 입력해주세요.");
-                              return false;
-                            }
-                            if(document.getElementById("user_password2").value == ""){
-                              alert("비밀번호를 확인을 입력해주세요.");
-                              return false;
-                            }
-                            if(document.getElementById("user_password").value != document.getElementById("user_password2").value){
-                              alert("비밀번호가 일치하지 않습니다.");
-                              return false;
-                            }
-                            if(document.getElementById("user_email").value == ""){
-                              alert("이메일을 입력해주세요.");
-                              return false;
-                            }
-                            // if(document.getElementById("user_email").value.indexOf("@") == -1){
-                            //   alert("이메일 형식이 아닙니다.");
-                            //   return false;
-                            // }
-                            alert($("#user_name").value+"님 회원 등록 되었습니다.");
-                            return true;
-                          }
-                      }
-                    </script>
-                    <!-- <button class="ui button" type="button" onclick="location.href='/admin/auth/login'">취소</button> -->
-                    <button class="ui button" type="button" onclick="return cancel()">취소</button>
-                    <script>
-                      function cancel() {
-                          if (!confirm("취소 하시겠습니까??")) {
-                              return false;
-                          } else {
-                            alert("취소 하였습니다.");
-                            location.href='/admin/dataif';
-                          }
-                      }
-                    </script>
-                </div>
+              <br><br>
+              <div>
+                  <button class="ui button" type="submit" onclick="return btn()">등록</button>
+                  <button class="ui button" type="button" onclick="return cancel()">취소</button>
+              </div>
             </form>
         </div>
     </div>
 </section>
 </div>
-</body>
+<script>
+  function btn() {
+    if (document.getElementById("user_name").value.trim() === "") {
+      alert("이름을 입력해주세요.");
+      document.getElementById("user_name").focus();
+      return false;
+    }
+    if (document.getElementById("userid").value.trim() === "") {
+      alert("아이디를 입력해주세요.");
+      document.getElementById("userid").focus();
+      return false;
+    }
+    if (document.getElementById("user_password").value.trim() === "") {
+      alert("비밀번호를 입력해주세요.");
+      document.getElementById("user_password").focus();
+      return false;
+    }
+    if (document.getElementById("user_password2").value.trim() === "") {
+      alert("비밀번호 확인을 입력해주세요.");
+      document.getElementById("user_password2").focus();
+      return false;
+    }
+    if (document.getElementById("user_password").value !== document.getElementById("user_password2").value) {
+      alert("비밀번호가 일치하지 않습니다.");
+      document.getElementById("user_password").focus();
+      return false;
+    }
+    if (document.getElementById("user_email").value.trim() === "") {
+      alert("이메일을 입력해주세요.");
+      document.getElementById("user_email").focus();
+      return false;
+    }
+    if (!confirm("회원 등록 하시겠습니까?")) {
+      return false;
+    } else {
+      // alert($("#user_name").value + "님 회원 등록 되었습니다.");
+      return true;
+    }
+  }
 
+  function cancel() {
+    if (!confirm("입력 데이터를 취소하시겠습니까?")) {
+      return false;
+    } else {
+      location.href = '/admin/dataif';
+    }
+  }
+</script>
+</body>
 </html>
