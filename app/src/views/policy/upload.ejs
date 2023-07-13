@@ -148,9 +148,11 @@
   </div>
 </section>
 <script>
+  // 모바일에서 파일 업로드를 위한 코드
   ClassicEditor
     .create( document.querySelector( '#editor' ), {
       // 에디터 설정
+      autoGrow: false,
       dataProcessor: {
         htmlOutputProcessor: {
           // 데이터 처리 방식 설정
