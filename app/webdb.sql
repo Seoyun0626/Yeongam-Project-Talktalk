@@ -68,7 +68,7 @@ CREATE TABLE webdb.`tb_policy` (
   PRIMARY KEY (`board_idx`, `uid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- **기존 테이블에서 PK 추가 : uid
-alter table `webdb`.`tb_policy` add primary key `uid`;
+-- alter table `webdb`.`tb_policy` add primary key `uid`;
 
 
 
