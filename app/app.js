@@ -9,6 +9,11 @@ const dotenv = require("dotenv"); //환경변수
 // const createServer = require('http'); //http 서버
 // const {promisfy} = require('promisfy'); //비동기 처리
 
+// chatgpt 모듈
+const openai = require('openai');
+
+
+
 dotenv.config();
 
 const app = express(); //express 객체 생성
