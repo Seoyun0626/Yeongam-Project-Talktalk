@@ -168,16 +168,25 @@ router.get('/csv', ensureAuth, asyncHandler(async function (req, res) {
   try {
     // 정책 데이터 가져오기
     var result = await policy_controller.fetchpolicy(req, res);
-    
-    var fields = ['board_idx', 'policy_name', 'policy_target_code', 'policy_institution_code', 'policy_field_code', 'policy_character_code', 'min_fund', 'max_fund', 'application_start_date', 'application_end_date'];
+    var fields = ['board_idx', 'policy_name', 'policy_target_code', 'policy_institution_code', 'policy_field_code', 'policy_character_code', 'min_fund', 'max_fund', 'application_start_date', 'application_end_date', 'content'];
     var csv = json2csv(result, { fields: fields });
 
-    fs.writeFile('data.csv', csv, function(err) {
-      if (err) throw err;
-      console.log('File saved');
-    });
+    // fs.writeFile('data.csv', csv, function(err) {
+    //   if (err) throw err;
+    //   console.log('File saved');
+    // });
     
-    res.download('data.csv');
+    // res.download('data.csv');
+
+    fs.writeFile('data.csv', csv, function(err) {
+        if (err) {
+          console.error('File saving error:', err);
+          res.status(500).send('Internal Server Error');
+        } else {
+          console.log('File saved');
+          res.download('data.csv');
+        }
+      });
   } catch (error) {
     console.error('policy-router excel/ error:', error);
     res.status(500).send('Internal Server Error');
