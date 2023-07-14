@@ -193,5 +193,8 @@ router.get('/csv', ensureAuth, asyncHandler(async function (req, res) {
   }
 }));
 
+router.get('/gptPage', asyncHandler(async function (req, res) {
+    res.render('policy/gpt');
+}, 'policy-router gptPage/ error:'));
 
 module.exports = router;

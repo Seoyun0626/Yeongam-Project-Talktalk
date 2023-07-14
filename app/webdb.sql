@@ -91,6 +91,7 @@ insert into tb_common_code (code,code_name,code_english_name) values('06','정�
 insert into tb_common_code (code,code_name,code_english_name) values('07','기관','policy_institution_code');
 insert into tb_common_code (code,code_name,code_english_name) values('08','분야','policy_field_code');
 insert into tb_common_code (code,code_name,code_english_name) values('09','정책 성격','policy_character_code');
+insert into tb_common_code (code,code_name,code_english_name) values('10','탈퇴 사유','withdrawal_reason_code');
 
 -- 공통 코드 설계
 create table webdb.`tb_common_code_detail`(
@@ -111,7 +112,7 @@ insert into tb_common_code_detail (code,code_detail,code_detail_name) values('06
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('07','00','영암군'),('07','01','청소년 수련관'),('07','02','방과후 아카데미'),('07','03','청소년상담복지센터'),('07','04','학교밖지원센터'),('07','05','삼호읍청소년문화의집');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('08','00','학업'),('08','01','상담'),('08','02','취업/이직'),('08','03','생활비'),('08','04','건강'),('08','05','주거'),('08','06','결혼/양육'),('08','07','청소년활동'),('08','08','학교밖청소년'),('08','09','돌봄');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('09','00','지원.보조금/연금'),('09','01','도움/서비스'),('09','02','장학제도'),('09','03','분양/임대'),('09','04','공모전'),('09','05','대출/금융');
-
+insert into tb_common_code_detail (code,code_detail,code_detail_name) values('10','00','앱 사용법을 모르겠어요'),('10','01','더이상 쓰지 않는 앱이에요'),('10','02','불편해요'),('10','03','앱 속도가 너무 느려요'),('10','04','보안이 걱정돼요'),('10','05','오류 때문에 쓸 수 없어요'),('10','06','알림이 너무 많아요'),('10','07','기타(텍스트 입력)');
 
 CREATE TABLE webdb.`tb_terms` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
@@ -223,6 +224,12 @@ CREATE TABLE webdb.`tb_policy_scrap`
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+create table webdb.`tb_withdraw`(
+  `withdraw_reason` varchar(2) not null,
+  `withdraw_date` timestamp not null default current_timestamp,
+  `etc` varchar(100) null,
+  PRIMARY KEY (`board_idx`) USING BTREE
+)engine=InnoDB default charset=utf8;
 
 -- 외래 키 제약 조건 삭제
 -- ALTER TABLE tb_policy_scrap DROP FOREIGN KEY 외래_키_제약_조건_이름;
