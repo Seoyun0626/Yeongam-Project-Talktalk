@@ -284,9 +284,9 @@ exports.update = async function(req, res) {
     }
     hasher(
       {password:req.body.password}, async function(err, pass, salt, hash) {
-        const uidUser = uuidv4();
-        var query = 'update webdb.tb_user set uid = ?, userpw=?, salt=?, user_name=?, user_email=?, user_role=?, user_type=?, emd_class_code=?, youthAge_code = ?, parentsAge_code = ? where userid=?';
-        await conn.query(query, [uidUser, hash, salt, req.body.name, req.body.user_email, req.body.user_role, req.body.user_type, req.body.emd_class_code, req.body.youthAge_code, req.body.parentsAge_code, userid]);      
+        // const uidUser = uuidv4();
+        var query = 'update webdb.tb_user set  userpw=?, salt=?, user_name=?, user_email=?, user_role=?, user_type=?, emd_class_code=?, youthAge_code = ?, parentsAge_code = ? where userid=?';
+        await conn.query(query, [ hash, salt, req.body.name, req.body.user_email, req.body.user_role, req.body.user_type, req.body.emd_class_code, req.body.youthAge_code, req.body.parentsAge_code, userid]);      
       }
     );
     return resultcode;
@@ -324,12 +324,13 @@ exports.findID = async function(req, res) {
     var email = req.body.email;
     var name = req.body.name;
     conn = await db.getConnection();
-    var query = 'SELECT userid FROM webdb.tb_user where user_email = ? and name = ?';
-    var rows = await conn.query(query, [email, name]); // 쿼리 실행
+    var query = 'SELECT userid FROM webdb.tb_user where user_email="'+email+'" and user_name="'+name+'"';
+    var rows = await conn.query(query); // 쿼리 실행
     if(rows.length==0) {
       console.log('dataif-service findID: no data');
       return rows;
     }
+    return rows[0].userid;
   } catch(error) {
     console.log('dataif-service findID:'+error);
   } finally {

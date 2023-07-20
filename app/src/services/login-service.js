@@ -17,7 +17,7 @@ try{
   var userid = req.body.userid; //req.body.id -> req.body.userid
   var password = req.body.password;
   var query = "SELECT userid, userpw, salt, user_name, user_role FROM webdb.tb_user where userid='" + userid + "' ;";
-  var rows = await conn.query(query); // 쿼리 실행 
+  var rows = await conn.query(query); // 쿼리 실행
   if (rows[0]) {
       // 관리자만 접속 가능하도록 처리
       if(rows[0].user_role == 0) {
@@ -65,25 +65,28 @@ try{
 
 // 회원가입
 exports.signUp = async function(req, res) {
-  var resultcode = 0;
   var conn;
+  var resultcode = 0;
   try{
+    var json = {};
+    json.code = 0;
     conn = await db.getConnection();
     // console.log('login-service SignUp db getConnection')
-    var { userid, password, password2, name, invite_code: inviteCode } = req.body;
+    var { userid, password, password2, name } = req.body;
     var fig = 0;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
     if(name=='' || req.body.email=='' || req.body.password=='' || req.body.password2=='') {
-      resultcode=100;
+      json.code = 200;
       console.log('dataif-service update: empty data');
-      return resultcode;
+      return json;
     }
     if(password != password2) {
         // 비밀번호가 일치하지 않음
+        json.code = 200;
+        json.msg = "비밀번호가 일치하지 않습니다.";
         console.log('비밀번호가 일치하지 않습니다.');
-        resultcode = 100;
-        return resultcode;
+        return json;
     }
     if (rows[0] == undefined) {
         hasher({
@@ -92,15 +95,23 @@ exports.signUp = async function(req, res) {
           const uidUser = uuid();
           var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code, fig) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"', '"+fig+"')";
           var rows = await conn.query(query); // 쿼리 실행
-          console.log('회원가입 성공');
+          console.log('회원 등록에 성공했습니다.');
+          json.code = 0;
+          json.msg = "회원 등록에 성공했습니다.";
+          return json;
         });
     } else {
         // 이미 있음
         console.log('이미 존재하는 아이디입니다.');
-        resultcode = 100;
+        json.code = 100;
+        json.msg = "이미 존재하는 아이디입니다.";
+        return json;
     }
   } catch(error) {
     console.log('login-service SignUp:'+error);
+    json.code = 200;
+    json.msg = "회원가입 실패";
+    return json;
   } finally {
     if (conn) conn.end();
   }

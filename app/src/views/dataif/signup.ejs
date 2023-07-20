@@ -121,6 +121,37 @@
                   <button class="ui button" type="button" onclick="return cancel()">취소</button>
               </div>
             </form>
+            <script>
+              document.getElementById("frm_signup").addEventListener('submit', function(event) {
+                event.preventDefault();
+                fetch('/admin/auth/signup', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  userid: document.getElementById("userid").value,
+                  user_password: document.getElementById("user_password").value,
+                  user_name: document.getElementById("user_name").value,
+                  user_role: document.getElementById("user_role").value,
+                  user_type: document.getElementById("user_type").value,
+                  parentsAge_code: document.getElementById("parentsAge_code").value,
+                  youthAge_code: document.getElementById("youthAge_code").value,
+                  emd_class_code: document.getElementById("emd_class_code").value,
+                  sex_class_code: document.getElementById("sex_class_code").value
+                })
+              }).then(response => response.json())
+              .then(data => {
+                if(data.code === 0){
+                  alert("회원가입이 완료되었습니다.");
+                  window.location.href = "/admin/dataif";
+                }else{
+                  alert(data.message);
+                }
+              })
+              .catch(error => console.error('Error:', error));
+              });
+              </script>
         </div>
     </div>
 </section>
