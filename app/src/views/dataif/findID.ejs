@@ -64,5 +64,20 @@
                 </div>
             </div>
             <button class="ui button" type="submit">찾기</button>
-        </form>   
+        </form> 
+        <script>
+            // id 값을 가져와서 표시하는 함수
+            function displayId() {
+              var id = '<%= id %>'; // id 값 받아오기
+        
+              if (id) {
+                var idElement = document.createElement('p');
+                idElement.textContent = '회원님의 아이디는 : ' + id + ' 입니다.';
+                document.getElementById('findID').prepend(idElement);
+              }
+            }
+        
+            // 페이지 로드 시 displayId 함수 호출
+            window.addEventListener('DOMContentLoaded', displayId);
+          </script>  
 </section>

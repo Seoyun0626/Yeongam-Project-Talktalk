@@ -61,18 +61,19 @@ router.get("/signup", ensureAuth, asyncHandler(async function (req, res) {
 router.post("/signup", async function(req, res) {
   try{
     // 사용자등록 컨트롤러 호출
+    console.log(req.body)
     var result = await login_controller.signUp(req, res);
-    console.log('login-router signup result:'+result);
-    if(result==0){
+    console.log('login-router signup result:'+result.code);
+    if (result.code == 0) {
       console.log('login-router signup success');
-      res.redirect('/admin/dataif');
-    }
-    else{
+      res.status(200).send({ message: '회원 등록에 성공했습니다.'});
+    } else {
       console.log('login-router signup fail');
-      res.redirect('/admin/auth/signup');
+      res.status(400).send({ message: result.msg, code: result.code });
     }
   } catch(error) {
-    console.log('login-router signup error:'+error);
+    console.log('login-router signup error:', error);
+    res.status(500).send({ message: '회원 등록 중 오류가 발생했습니다.', code: -1 });
   }
 });
 

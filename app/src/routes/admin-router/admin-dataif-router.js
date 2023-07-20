@@ -173,12 +173,15 @@ router.post('/push', ensureAuth, asyncHandler(async function (req, res) {
 // 아이디 찾기
 router.post('/findID', asyncHandler(async function (req, res) {
   var result = await dataif_controller.findID(req, res);
-  res.render('dataif/findID', { posts: result });
+  res.redirect('/admin/dataif/findID/' + result);
 }, 'dataif-router / error:'));
 router.get('/findID', asyncHandler(async function (req, res) {
-  res.render('dataif/findID');
+  res.render('dataif/findID', { id: '' });
 }, 'dataif-router / error:'));
-
+router.get('/findID/:id', asyncHandler(async function (req, res) {
+  var id = req.params.id;
+  res.render('dataif/findID', { id: id });
+}, 'dataif-router / error:'));
 
 router.post('/sendAuthNum', asyncHandler(async function (req, res) {
   // 인증번호 생성
