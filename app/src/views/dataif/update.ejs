@@ -49,10 +49,10 @@
                 <label class="one wide field">권한구분</label>
                 <div class="four wide field" style="margin-right: 20px;">
                   <select class="ui fluid dropdown" name="user_role" id="user_role">
-                    <option value="0">사용자</option>
-                    <option value="1">최고관리자</option>
-                    <option value="2">부관리자</option>
-                    <option value="3">정책관리자</option>
+                    <option value="0" <% if (post.user_role === '0') { %>selected<% } %>>사용자</option>
+                    <option value="1" <% if (post.user_role === '1') { %>selected<% } %>>최고관리자</option>
+                    <option value="2" <% if (post.user_role === '2') { %>selected<% } %>>부관리자</option>
+                    <option value="3" <% if (post.user_role === '3') { %>selected<% } %>>정책관리자</option>
                   </select>
                 </div>
                 <label>회원구분</label>
@@ -116,9 +116,10 @@
                 <label>성별</label>
                 <div class="four wide field">
                   <select class="ui fluid dropdown" name="sex_class_code" id="sex_class_code">
-                    <option value="0">남자</option>
-                    <option value="1">여자</option>
-                    <option value="2">선택 안함</option>
+                    <option value="0" <% if (post.sex_class_code === '0') { %>selected<% } %>>남자</option>
+                    <option value="1" <% if (post.sex_class_code === '1') { %>selected<% } %>>여자</option>
+                    <option value="2" <% if (post.sex_class_code === '2') { %>selected<% } %>>선택 안함</option>
+                  </select>
                   </select>
                 </div>
               </div>
@@ -155,7 +156,6 @@
                     <script>
                       function btn() {
                           if (!confirm("수정 하시겠습니까??")) {
-                              alert("취소 하였습니다.");
                               return false;
                           } else {
                             if(document.getElementById("update_name").value == ""){
