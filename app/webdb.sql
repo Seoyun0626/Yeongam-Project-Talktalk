@@ -9,6 +9,7 @@ flush privileges;
 
 DROP TABLE IF EXISTS webdb.`tb_user`;
 
+-- 회원 정보
 CREATE TABLE webdb.`tb_user` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(100) NOT NULL,
@@ -41,7 +42,7 @@ insert into tb_user (userid, uid, userpw, user_name, user_role, user_type, salt)
 -- alter table `webdb`.`tb_user` add primary key `uid`;
 -- ALTER TABLE webdb.tb_user DROP PRIMARY KEY, ADD PRIMARY KEY (board_idx, uid); 실행
 
-
+-- 정책 정보
 CREATE TABLE webdb.`tb_policy` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `uid` VARCHAR(100) NOT NULL, -- 정책 고유 번호 컬럼 추가 쿼리 : alter table `tb_policy` add `uid` varchar(100) NOT NULL after `board_idx` ; // pid로 이름 변경
@@ -62,6 +63,7 @@ CREATE TABLE webdb.`tb_policy` (
   `max_fund` int(10) NOT NULL,
   `content` varchar(1000) NULL,
   `img` varchar(30) NULL,
+  `register_uid` varchar(100) NOT NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   --PRIMARY KEY (`board_idx`) USING BTREE 
@@ -114,6 +116,7 @@ insert into tb_common_code_detail (code,code_detail,code_detail_name) values('08
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('09','00','지원.보조금/연금'),('09','01','도움/서비스'),('09','02','장학제도'),('09','03','분양/임대'),('09','04','공모전'),('09','05','대출/금융');
 insert into tb_common_code_detail (code,code_detail,code_detail_name) values('10','00','앱 사용법을 모르겠어요'),('10','01','더이상 쓰지 않는 앱이에요'),('10','02','불편해요'),('10','03','앱 속도가 너무 느려요'),('10','04','보안이 걱정돼요'),('10','05','오류 때문에 쓸 수 없어요'),('10','06','알림이 너무 많아요'),('10','07','기타(텍스트 입력)');
 
+-- 이용 약관
 CREATE TABLE webdb.`tb_terms` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `terms` text NOT NULL,
@@ -124,7 +127,7 @@ CREATE TABLE webdb.`tb_terms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 insert into tb_terms (terms,privacy) value('회원 가입 약관','개인 정보 처리 방침');
 
-
+-- 배너 정보
 CREATE TABLE webdb.`tb_banner` (
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `banner_name` varchar(30) NULL,
@@ -135,6 +138,7 @@ CREATE TABLE webdb.`tb_banner` (
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 무화과 사용 내역
 CREATE TABLE webdb.`tb_fig_usage`(
   `fig_usage_no` int(11) NOT NULL AUTO_INCREMENT,
   `pid` varchar(100) NOT NULL,
@@ -143,7 +147,7 @@ CREATE TABLE webdb.`tb_fig_usage`(
   PRIMARY KEY (`fig_usage_no`) USING BTREE,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+-- 무화과 잡화점 상품 정보
 CREATE TABLE webdb.`tb_product`(
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `pid` varchar(100) NOT NULL,
@@ -160,6 +164,7 @@ CREATE TABLE webdb.`tb_product`(
   PRIMARY KEY (`board_idx`) USING BTREE 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 이벤트 정보
 CREATE TABLE webdb.`tb_event`(
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `eid` varchar(100) NOT NULL,
@@ -182,7 +187,7 @@ CREATE TABLE webdb.`tb_event_part`(
   PRIMARY KEY (`event_part_no`) USING BTREE ,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 출석 체크
+-- 출석 체크 기록
 CREATE TABLE tb_attendance_logs (
   -- `uid_attendance` VARCHAR(100) PRIMARY KEY,
   `user_uid` VARCHAR(100) NOT NULL,
@@ -205,7 +210,7 @@ CREATE TABLE webdb.`tb_policy_scrap` (
 */
 
 
--- 스크랩 (new)
+-- 정책 스크랩 (new)
 -- add index (tb_policy와 tb_user의 uid 컬럼을 Foregin key로 가져오기 위해)
 ALTER TABLE `webdb.tb_user` ADD INDEX (`uid`);
 ALTER TABLE `webdb.tb_policy` ADD INDEX (`uid`);
@@ -223,12 +228,32 @@ CREATE TABLE webdb.`tb_policy_scrap`
 	FOREIGN KEY(policy_uid) REFERENCES webdb.`tb_policy`(`uid`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+-- 탈퇴 내역
 create table webdb.`tb_withdrawal_logs`(
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
   `withdrawal_reason_code` varchar(2) not null,
   `withdrawal_date` timestamp not null default current_timestamp,
   `etc` varchar(200) null,
+  PRIMARY KEY (`board_idx`) USING BTREE
+)engine=InnoDB default charset=utf8;
+
+-- 공지사항
+create table webdb.`tb_notice`(
+  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  `content` varchar(200) NOT NULL,
+  `register_uid` varchar(100) NOT NULL,
+  `ins_date` timestamp not null default current_timestamp,
+  PRIMARY KEY (`board_idx`) USING BTREE
+)engine=InnoDB default charset=utf8;
+
+-- 개발 건의
+create table webdb.`tb_suggestion`(
+  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  `content` varchar(200) NOT NULL,
+  `register_uid` varchar(100) NOT NULL,
+  `ins_date` timestamp not null default current_timestamp,
   PRIMARY KEY (`board_idx`) USING BTREE
 )engine=InnoDB default charset=utf8;
 
