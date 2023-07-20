@@ -1,5 +1,8 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
 import 'package:teentalktalk/ui/screens/settings/notice_page.dart';
 import 'package:teentalktalk/ui/screens/settings/withdrawal_page.dart';
@@ -11,6 +14,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -18,9 +23,10 @@ class SettingsPage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
+            centerTitle: true,
             title: const TextCustom(
               text: '설정',
-              color: Colors.black,
+              color: ThemeColors.basic,
               fontSize: 20,
               fontWeight: FontWeight.w600,
             ),
@@ -70,12 +76,12 @@ class SettingsPage extends StatelessWidget {
                   color: ThemeColors.basic,
                 ),
                 onTap: () {
-                  modalPreparing(context);
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const NoticePage(),
-                  //     ));
+                  // modalPreparing(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NoticePage(),
+                      ));
                 },
               ),
               ListTile(
@@ -89,12 +95,15 @@ class SettingsPage extends StatelessWidget {
                   color: ThemeColors.basic,
                 ),
                 onTap: () {
-                  modalPreparing(context);
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const WithdrawalPage(),
-                  //     ));
+                  if (authState is LogOut) {
+                    modalCheckLogin(context);
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const WithdrawalPage(),
+                        ));
+                  }
                 },
               ),
             ]),

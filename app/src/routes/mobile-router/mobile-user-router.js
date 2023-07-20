@@ -93,6 +93,23 @@ router.get("/get-user-by-id", verifyToken, async function(req, res){
     }
   });
 
+
+
+  router.post("/save-withdrawal-log", verifyToken, async function(req, res){
+    try {
+      var result = await mobile_user_controller.saveWithdrawalLog(req, res);
+  
+      res.json({
+        resp : true,
+        message : 'save withdrawal log'
+      })
+  
+    } catch(error){
+      console.log('mobile-event-router save-withdrawal-log error:' + error);
+  
+    }
+  });
+
   router.get("/delete-user", verifyToken, async function (req, res) {
     try {
       var result = await mobile_user_controller.deleteUser(req, res);

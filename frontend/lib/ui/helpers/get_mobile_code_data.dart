@@ -28,7 +28,7 @@ class getMobileCodeFunctions {
   void getCodeData() async {
     var data = await codeService.getCodeData();
     codeData = data;
-    // print(codeData);
+    // print(codeData['codes']['withdrawal_reason_code']);
   }
 
   void getEventData() async {

@@ -37,6 +37,15 @@ exports.getFigCount = async function(req, res){
   }
 }
 
+exports.saveWithdrawalLog =  async function(req, res){
+  try{
+    var result = await mobile_user_service.saveWithdrawalLog(req, res);
+    return result;
+  } catch(error) {
+    console.log('mobile-user-controller save withdrawal log:'+error);
+  }
+}
+
 exports.deleteUser = async function(req, res){
   try{
     var result = await mobile_user_service.deleteUser(req, res);

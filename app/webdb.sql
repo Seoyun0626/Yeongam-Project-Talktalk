@@ -140,7 +140,7 @@ CREATE TABLE webdb.`tb_fig_usage`(
   `pid` varchar(100) NOT NULL,
   `uid` varchar(100) NOT NULL,
   `fig_used_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`fig_usage_no`) USING BTREE
+  PRIMARY KEY (`fig_usage_no`) USING BTREE,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -179,7 +179,7 @@ CREATE TABLE webdb.`tb_event_part`(
   `eid` varchar(100) NOT NULL,
   `uid` varchar(100) NOT NULL,
   `acquired_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 오타 aquired -> acquired
-  PRIMARY KEY (`event_part_no`) USING BTREE 
+  PRIMARY KEY (`event_part_no`) USING BTREE ,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 출석 체크
@@ -224,10 +224,11 @@ CREATE TABLE webdb.`tb_policy_scrap`
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-create table webdb.`tb_withdraw`(
-  `withdraw_reason` varchar(2) not null,
-  `withdraw_date` timestamp not null default current_timestamp,
-  `etc` varchar(100) null,
+create table webdb.`tb_withdrawal_logs`(
+  `board_idx` int(11) NOT NULL AUTO_INCREMENT,
+  `withdrawal_reason_code` varchar(2) not null,
+  `withdrawal_date` timestamp not null default current_timestamp,
+  `etc` varchar(200) null,
   PRIMARY KEY (`board_idx`) USING BTREE
 )engine=InnoDB default charset=utf8;
 

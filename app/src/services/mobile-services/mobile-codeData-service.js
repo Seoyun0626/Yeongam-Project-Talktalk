@@ -51,6 +51,8 @@ exports.getCodeData = async function(req, res) {
       json.policy_field_code = await conn.query(query);
       var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 9";
       json.policy_character_code = await conn.query(query);
+      var query = "SELECT b.code_detail, b.code_detail_name, b.code_detail_desc, b.code_detail_use_yn , a.code_english_name, a.code_desc, a.code_name, a.code_use_yn  FROM webdb.tb_common_code as a inner join webdb.tb_common_code_detail as b on a.code = b.code where a.code = 10";
+      json.withdrawal_reason_code = await conn.query(query);
       var query = "select code,code_name,code_english_name, code_desc, code_use_yn from webdb.tb_common_code;"
       json.code_data_name = await conn.query(query);
       

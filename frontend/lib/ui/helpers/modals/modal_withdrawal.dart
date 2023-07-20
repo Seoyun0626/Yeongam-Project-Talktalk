@@ -11,8 +11,7 @@ import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
 void modalWithdrawal(
-  BuildContext context,
-) {
+    BuildContext context, String withdrawalReasonCode, String etc) {
   showDialog(
     useRootNavigator: true,
     context: context,
@@ -80,12 +79,15 @@ void modalWithdrawal(
                 ),
                 InkWell(
                   onTap: () {
+                    // 탈퇴 사유 저장
+                    userService.saveWithdrawalLog(withdrawalReasonCode, etc);
                     userService.deleteUser();
                     Navigator.pushAndRemoveUntil(
                       context,
                       routeFade(page: const HomePage()),
                       (_) => false,
                     );
+                    //로그아웃처리 추가
                   },
                   child: Container(
                     width: 100.w,

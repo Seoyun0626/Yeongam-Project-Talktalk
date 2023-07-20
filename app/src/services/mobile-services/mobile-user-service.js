@@ -78,20 +78,38 @@ exports.getUserById = async function(req) {
     }
   };
 
-
+  exports.saveWithdrawalLog = async function(req, res) {
+    var conn;
+    try{
+      conn = await db.getConnection();
+      var code = req.body.withdrawal_reason_code;
+      var etc = req.body.etc;
+  
+      var query = `INSERT INTO webdb.tb_withdrawal_logs (withdrawal_reason_code, withdrawal_date, etc) VALUES (?, CURRENT_TIMESTAMP, ?)`;
+      var result = await conn.query(query, [code, etc]);
+      return result
+    } catch(error) {
+      console.log('mobile-user-service saveWithdrawalLog:'+error);
+    } finally {
+      if(conn) conn.release();
+    }
+  };
   
 
   exports.deleteUser = async function(req, res) {
     var conn;
     try{
       conn = await db.getConnection();
-      console.log('dataif-service delete:'+req.idPerson);
+      console.log('mobile-user-service delete user :'+req.idPerson);
       var uid = req.idPerson;
-      var query = `CALL webdb.SP_DELETE_USER(?)`;
-      var rows = await conn.query(query, [uid]);
+      console.log(uid);
+      const deletePolicyScrapQuery = 'DELETE FROM webdb.tb_policy_scrap WHERE user_uid = ?';
+      await conn.query(deletePolicyScrapQuery, [uid]);
+      const deleteUserQuery = 'DELETE FROM webdb.tb_user WHERE uid = ?';
+      await conn.query(deleteUserQuery, [uid]);
       return rows;
     } catch(error) {
-      console.log('dataif-service delete:'+error);
+      console.log('mobile-user-service delete user:'+error);
     } finally {
       if (conn) conn.release();
     }

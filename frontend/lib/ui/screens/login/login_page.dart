@@ -240,23 +240,23 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           InkWell(
                               onTap: () {
-                                modalPreparing(context);
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) => const FindIDPage(),
-                                //     ));
+                                // modalPreparing(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const FindIDPage(),
+                                    ));
                               },
                               child: const TextCustom(text: '아이디 찾기')),
                           InkWell(
                               onTap: () {
-                                modalPreparing(context);
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) =>
-                                //           const FindPasswordPage(),
-                                //     ));
+                                // modalPreparing(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const FindPasswordPage(),
+                                    ));
                               },
                               child: const TextCustom(text: '비밀번호 찾기')),
                           InkWell(
