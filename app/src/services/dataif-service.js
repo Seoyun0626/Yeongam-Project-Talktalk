@@ -301,8 +301,21 @@ exports.deleteUser = async function(req, res) {
   try{
     conn = await db.getConnection();
     console.log('dataif-service delete:'+req.params.id);
-    var user = await conn.query('SELECT uid FROM webdb.tb_user WHERE userid = ?', [req.params.id]);
+    var user = await conn.query('SELECT uid FROM webdb.tb_user WHERE userid = ?', [req.params.id])
+
     var user_uid = user[0].uid;
+
+    // 유저의 스크랩 목록 받아오기
+    const scrapQuery = 'SELECT * FROM webdb.tb_policy_scrap WHERE user_uid = ?';
+    const scrapRows = await conn.query(scrapQuery, [user_uid]); // 스크랩 목록
+
+    // 유저의 스크랩 policy_uid에 따라 스크랩 수 감소
+    for (var i = 0; i < scrapRows.length; i++) {
+      const policy_uid = scrapRows[i].policy_uid;
+      const policyQuery = 'UPDATE webdb.tb_policy SET scrap_count = scrap_count - 1 WHERE policy_uid = ?'; // 스크랩 수 감소
+      await conn.query(policyQuery, [policy_uid]);
+    }
+
     const deletePolicyScrapQuery = 'DELETE FROM webdb.tb_policy_scrap WHERE user_uid = ?';
     await conn.query(deletePolicyScrapQuery, [user_uid]);
     const deleteUserQuery = 'DELETE FROM webdb.tb_user WHERE userid = ?';
