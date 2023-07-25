@@ -47,7 +47,7 @@ exports.getAllPolicy = async function(req, res) {
             query = "SELECT * FROM webdb.tb_policy ORDER BY count_scraps ASC;";
         } else if (sortOrderCode === '5') {
             // 마감일 순으로 정렬
-            query = "SELECT * FROM webdb.tb_policy ORDER BY application_release_date ASC;";
+            query = "SELECT * FROM webdb.tb_policy ORDER BY application_end_date ASC;";
         }  
         else if (sortOrderCode === '6') {
             // 등록 순으로 정렬
@@ -279,7 +279,7 @@ exports.getPolicyBySelect = async function(req, res){
             query += " ORDER BY count_scraps ASC;";
         } else if (sortOrderCode === '5') {
             // 마감일 순으로 정렬
-            query += " ORDER BY application_release_date ASC;";
+            query += " ORDER BY application_end_date ASC;";
         } else if (sortOrderCode === '6') {
             // 등록 순으로 정렬
             query += " ORDER BY board_idx ASC;";

@@ -100,9 +100,9 @@ exports.getUserById = async function(req) {
     var conn;
     try{
       conn = await db.getConnection();
-      console.log('mobile-user-service delete user :'+req.idPerson);
+      // console.log('mobile-user-service delete user :'+req.idPerson);
       var uid = req.idPerson;
-      console.log(uid);
+      // console.log(uid);
       const deletePolicyScrapQuery = 'DELETE FROM webdb.tb_policy_scrap WHERE user_uid = ?';
       await conn.query(deletePolicyScrapQuery, [uid]);
       const deleteUserQuery = 'DELETE FROM webdb.tb_user WHERE uid = ?';

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
 import 'package:teentalktalk/domain/blocs/user/user_bloc.dart';
+import 'package:teentalktalk/domain/services/dataif_services.dart';
 import 'package:teentalktalk/domain/services/user_services.dart';
 import 'package:teentalktalk/ui/helpers/animation_route.dart';
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
@@ -81,13 +82,23 @@ void modalWithdrawal(
                   onTap: () {
                     // 탈퇴 사유 저장
                     userService.saveWithdrawalLog(withdrawalReasonCode, etc);
+
+                    // 계정 삭체
                     userService.deleteUser();
+
+                    // 로그아웃
+                    final userBloc = BlocProvider.of<UserBloc>(context);
+                    final authBloc = BlocProvider.of<AuthBloc>(context);
+
+                    authBloc.add(OnLogOutEvent());
+                    userBloc.add(OnLogOutUser());
+
+                    // 홈 화면 이동
                     Navigator.pushAndRemoveUntil(
                       context,
                       routeFade(page: const HomePage()),
                       (_) => false,
                     );
-                    //로그아웃처리 추가
                   },
                   child: Container(
                     width: 100.w,

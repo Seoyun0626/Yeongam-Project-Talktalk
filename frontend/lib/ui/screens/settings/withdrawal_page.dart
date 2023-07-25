@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:teentalktalk/domain/services/user_services.dart';
 import 'package:teentalktalk/ui/helpers/get_mobile_code_data.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_withdrawal.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
@@ -90,7 +88,6 @@ class _WithdrawalPageState extends State<WithdrawalPage> {
         ),
         body: SafeArea(
           child: SingleChildScrollView(
-            // Wrap the entire content with SingleChildScrollView
             child: Padding(
               padding: EdgeInsets.all(20.h),
               child: Column(

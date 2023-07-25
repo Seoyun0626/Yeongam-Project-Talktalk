@@ -43,6 +43,11 @@ exports.deleteUser = (req, res) => executeService(dataif_service.deleteUser, req
 
 exports.excelData = (...args) => executeMultipleArgsService(dataif_service.excelData, 'excelData', ...args);
 
+// 개발 제안 이메일 전송
+exports.sendSuggestionEmail = (req, res) => executeService(dataif_service.sendSuggestionEmail, req, res, 'sendSuggestionEmail');
+
+// 문의사항 등록
+exports.submitInquiry = (req, res) => executeService(dataif_service.submitInquiry, req, res, 'submitInquiry');
 
 
 // 테스트

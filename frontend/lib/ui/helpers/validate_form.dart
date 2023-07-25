@@ -1,8 +1,8 @@
 import 'package:form_field_validator/form_field_validator.dart';
 
 final validatedEmail = MultiValidator([
-  RequiredValidator(errorText: '이메일을 입력해주세요.'),
-  EmailValidator(errorText: '유효한 이메일을 입력하세요.')
+  RequiredValidator(errorText: '*이메일을 입력해주세요.'),
+  EmailValidator(errorText: '*유효한 이메일을 입력하세요.')
 ]);
 
 final passwordValidator =

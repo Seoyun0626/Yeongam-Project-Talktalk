@@ -329,6 +329,66 @@ exports.deleteUser = async function(req, res) {
   }
 };
 
+// 사용자 개발 제안 이메일 전송 - 수정 필요
+exports.sendSuggestionEmail = async function(req, res) {
+  const {user_email, title, content} = req.body;
+
+  try{
+    let transporter = nodemailer.createTransport({
+      service : 'naver',
+      host: 'smtp.naver.com',
+      port : 587, 
+      auth : {
+        user: process.env.NODEMAILER_USER,
+        pass: process.env.NODEMAILER_PASS,
+      },
+    });
+
+    let mailOptions = {
+      from : user_email,
+      to : process.env.NODEMAILER_USER,
+      subject : title,
+      text: content,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    return {
+      resp: true,
+      message: '이메일이 성공적으로 전송되었습니다.',
+    };
+
+  } catch(error) {
+    console.log('dataif-service sendSuggestionEmail:'+error);
+  } 
+};
+
+  // 문의사항 등록
+  exports.submitInquiry = async function(req, res) {
+    var conn;
+    try{
+      conn = await db.getConnection();
+      // console.log(req.body);
+      var register_email = req.body.email;
+      var code = req.body.inquiry_type_code;
+      var content = req.body.content;
+  
+      var query = `INSERT INTO webdb.tb_inquiry (inquiry_type_code, content, register_email, ins_date) VALUES (?, ?, ?, CURRENT_TIMESTAMP)`;
+      var result = await conn.query(query, [code, content, register_email]);
+      return result
+
+    } catch(error) {
+      console.log('dataif-service submitInquiry:'+error);
+    } finally {
+      if(conn) conn.release();
+    }
+  };
+
+
+
+
+
+
 
 //테스트
 exports.findID = async function(req, res) {

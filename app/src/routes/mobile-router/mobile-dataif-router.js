@@ -8,25 +8,63 @@ var dataif_controller = require("../../controllers/common-controller/dataif-cont
 const verifyToken = require("../../middleware/verify_token");
 
 
+// router.get("/delete-user", verifyToken, async function (req, res) {
+//   try {
+//     var result = await dataif_controller.deleteUser(req, res);
+
+//     res.json({
+//       resp:true,
+//       message : 'delete user',
+//     })
+//   } catch (error) {
+//     console.log('mobile-user-router get fig count error:' + error);
+//   }
+// });
 
 
 router.get('/terms', async function(req, res){
     try{
-    //   if(req.session.user == undefined){
-    //     res.redirect('/admin/auth/login');
-    //     return;
-    //   }
       var result = await dataif_controller.fetchTermData(req, res);
       res.json({
         resp:true,
-        message : 'get search policies',
+        message : 'get terms',
         termsData : result
       })
-    //   console.log(result);
-    //   res.render('dataif/terms', {posts:result});
     }
     catch(error) {
-      console.log('dataif-router /terms error:'+error);
+      console.log('dataif-router get term error:'+error);
+    }
+  });
+  
+  // 개발 제안 등록
+  router.post('/suggestion', async function(req, res) {
+    try {
+      // console.log(req.body);
+      const result = await dataif_controller.sendSuggestionEmail(req, res);
+      console.log(result);
+      res.json(result);
+    } catch (error) {
+      console.log('mobile dataif-router send suggestion email error:' + error);
+      res.json({
+        resp: false,
+        message: '이메일 전송에 실패했습니다.',
+      });
+    }
+  });
+
+  // 고객센터 문의사항 등록
+  router.post("/submit-inquiry", async function(req, res){
+    try {
+      var result = await dataif_controller.submitInquiry(req, res);
+      // console.log(result);
+      res.json({
+        resp : true,
+        message : 'submit-inquiry'
+      })
+  
+    } catch(error){
+      console.log('mobile-event-router submit-inquiry error:' + error);
+  
     }
   });
 
