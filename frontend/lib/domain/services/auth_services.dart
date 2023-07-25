@@ -40,7 +40,7 @@ class AuthServices {
     final resp = await http.get(
         Uri.parse('${Environment.urlApi}/login/renew-login'),
         headers: {'Accept': 'application/json', 'xxx-token': token!});
-    // print(resp.body);
+    print(resp.body);
     return ResponseLogin.fromJson(jsonDecode(resp.body));
   }
 }
