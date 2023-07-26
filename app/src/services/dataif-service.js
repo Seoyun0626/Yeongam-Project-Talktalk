@@ -53,7 +53,7 @@ exports.resetPW = async function(req, res) {
   try{
     conn = await db.getConnection();
     var userid = req.params.id;
-    // // 확인 이메일을 보내기 위해 이메일 주소 받아오기r where userid="'+userid+'"';
+    // 확인 이메일을 보내기 위해 이메일 주소 받아오기r where userid="'+userid+'"';
     var rows = await conn.query(query); // 쿼리 실행
     var email = rows[0].user_email;
     // var uid = rows[0].uid;
@@ -312,7 +312,7 @@ exports.deleteUser = async function(req, res) {
     // 유저의 스크랩 policy_uid에 따라 스크랩 수 감소
     for (var i = 0; i < scrapRows.length; i++) {
       const policy_uid = scrapRows[i].policy_uid;
-      const policyQuery = 'UPDATE webdb.tb_policy SET scrap_count = scrap_count - 1 WHERE policy_uid = ?'; // 스크랩 수 감소
+      const policyQuery = 'UPDATE webdb.tb_policy SET is_scrapped = is_scrapped - 1 WHERE policy_uid = ?'; // 스크랩 수 감소
       await conn.query(policyQuery, [policy_uid]);
     }
 

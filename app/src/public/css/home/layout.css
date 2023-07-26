@@ -1,195 +1,151 @@
-@font-face {
-    font-family: 'CookieRun-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-/* 공통, 하이퍼링크 색상 고정 */
-a {
-    text-decoration: none;
-    color: black;
-  }
-  
-  .ck-editor__editable_inline {
-    min-height: 300px;
-  }
-  
-  .vector {
-    height: 41px;
-    width: 803px;
-    left: 330px;
-    top: 40px;
-    position: absolute;
-  }
-  
-  .frame {
-    background-color: #ffffff;
-    height: 1024px;
-    width: 1px;
-    padding: 0px;
-    left: 253px;
-    position: relative;
-  }
-  
-  .vector3 {
-    height: 1024px;
-    height: 1024px;
-    left: 0px;
-    top: 0px;
-    position: absolute;
-  }
-  
-  .관리자페이지 {
-    color: #000000;
-    text-align: left;
-    vertical-align: text-top;
-    font-size: 12px;
-    font-family: Inter;
-    line-height: auto;
-    font-weight: bold;
-    border-style: hidden;
-    outline: none;
-    left: 17px;
-    top: 32px;
-    position: absolute;
-    width: 81px;
-  }
-  
-  .청소년톡talk {
-    color: #000000;
-    text-align: left;
-    vertical-align: text-top;
-    font-size: 35px;
-    font-family: 'CookieRun-Regular';
-    left: 25px;
-    top: 56px;
-    padding-top: 8px;
-    width: 200px;
-    height: 34px;
-    position: absolute;
-    line-height: auto;
-    border-style: hidden;
-    outline: none;
-  }
-
-  .common-manager-style {
-    color: #000000;
-    text-align: left;
-    vertical-align: text-top;
-    left: 43px;
-    height: 29px;
-    width: 95px;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: Inter;
-    position: absolute;
-    line-height: auto;
-    border-style: hidden;
-    outline: none;
-  }
-  .회원관리 {
-    top: 142px;
-  }
-  .정책관리 {
-    top: 325px;
-  }
-  .운영관리 {
-    top: 481px;
-  }
-  
-  .common-style {
-    color: #000000;
-    text-align: left;
-    vertical-align: text-top;
-    font-size: 16px;
-    font-family: Inter;
-    width: 122px;
-    height: 24px;
-    position: absolute;
-    line-height: auto;
-    border-style: hidden;
-    outline: none;
-    left: 63px;
-}
-.회원정보관리 { top: 195px; }
-.회원가입설정 { top: 230px; }
-.푸시알림 { top: 265px; }
-.정책정보관리 { top: 380px; }
-.배너등록 { top: 415px; }
-.코드정보관리 { top: 535px; }
-.공지사항 { top: 570px; }
-.통계 { top: 605px; }
-.출석체크 { top: 686px; }
-.로그아웃{
-  top: 680px;
-  left: 50px;
+/* Reset default margin and padding for all elements */
+* {
+  margin: 0;
+  padding: 0;
 }
 
-  
-  .ellipse5 {
-    background-color: #8fe479;
-    height: 52px;
-    width: 52px;
-    top: 38px;
-    left: 1266px;
-    position: absolute;
-    border-radius: 50%;
-  }
-
-  /* 선택 분류 */
-.common-background-bar {
-    background-color: #FBEEE7;
-    height: 37px;
-    width: 253px;
-    left: 0px;
-    position: absolute;
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Add justify-content */
+  padding-left: 20px;
+  align-items: flex-start; /* Change 'center' to 'flex-start' */
+  height: 94px;
+  border-bottom: 0.50px #D9D9D9 solid; /* Add a line below the title-container */
 }
-.common-border-bar {
-    background-color: #f0ccb4;
-    height: 37px;
-    width: 5px;
-    left: 249px;
-    position: absolute;
+
+.title {
+  color: #F57521;
+  text-align: left;
+  font-size: 11px;
+  font-family: Pretendard;
+  font-weight: 700;
 }
-.background-bar-memManage { top: 185px; }
-.border-bar-memManage { top: 185px; }
-.background-bar-terms { top: 220px; }
-.border-bar-terms { top: 220px; }
-.background-bar-push { top: 255px; }
-.border-bar-push { top: 255px; }
-.background-bar-policyManage { top: 370px; }
-.border-bar-policyManage { top: 370px; }
-.background-bar-banner { top: 405px; }
-.border-bar-banner { top: 405px; }
-.background-bar-codeManage { top: 525px; }
-.border-bar-codeManage { top: 525px; }
+
+.title-bar {
+  color: #F57521;
+  font-size: 30px;
+  font-family: Pretendard;
+  font-weight: 700;
+  margin-top: 7px;
+}
 
 
-  nav {
-    /* position:absolute; */
-    background-color: #ffffff;
-    padding: 0px;
-    float: left;
-    width: 20vw;
-    margin: 0px;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-  }
-  
-  section {
-    float: left;
-    top: 50px;
-    left: 340px;
-    width: 75vw;
-    background-color: white;
-    height: calc(100vh - 50px); /* Subtract the top offset */
-    margin: 0;
-    position: absolute;
-    /* overflow: hidden; */
-  }
+/* Styles for the main container */
+.container {
+  width: 100%;
+  max-width: 1920px;
+  min-height: 100vh;
+  background: #F5F5F5;
+  display: flex;
+}
 
-  /* 확대 시 좌우 스크롤 바 */
-  body {
-    overflow-x: auto;
-  }
+/* Sidebar styles */
+.sidebar {
+  flex: 0 0 234px;
+  min-height: 100vh;
+  background: #FBEEE7;
+  border-right: 0.50px #D9D9D9 solid;
+  display: flex;
+  flex-direction: column;
+}
+/* Styles for category-item */
+.category-item {
+  display: flex;
+  justify-content: space-between; /* 우측에 화살표 위치 */
+  align-items: center;
+  margin-bottom: 10px; /* 메뉴 아이템 사이의 간격을 줄임 */
+  cursor: pointer;
+}
+
+.category-title {
+  color: black;
+  font-size: 16px; /* 글자 크기를 키움 */
+  font-family: Pretendard;
+  font-weight: bold; /* 굵은 글꼴 */
+  word-wrap: break-word;
+  margin-left: 10px; /* 글자를 왼쪽으로 10px 띄움 */
+}
+
+/* Styles for arrow-button */
+.arrow-button {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black; /* 펼쳐진 모양의 화살표 */
+  border-bottom: 5px solid transparent;
+  margin-right: 10px; /* 우측 간격 추가 */
+  transition: transform 0.2s ease; /* 부드러운 효과를 위한 transition 추가 */
+}
+
+/* Styles for arrow pointing downwards */
+.arrow-button.arrow-down {
+  transform: rotate(90deg); /* 펼쳐진 상태에서 아래로 향하도록 회전 */
+}
+
+/* Styles for menu-items-container */
+.menu-items-container {
+  display: none;
+  margin-left: 10px; /* 글자들을 왼쪽으로 10px 띄움 */
+}
+
+/* Styles for expanded menu-items-container */
+.menu-items-container.active {
+  display: block;
+  margin-top: 5px; /* 제목과 메뉴 아이템들 사이의 간격을 줄임 */
+}
+
+.menu-item {
+  padding-left: 10px; /* 글자들을 왼쪽으로 10px 띄움 */
+}
+
+
+.menu-item:hover {
+  background: #F57521;
+  color: white;
+}
+
+/* Logout button styles */
+.logout-btn {
+  margin-top: auto;
+  padding: 8px 10px;
+  background: #FFDCCA;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #585856;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.logout-btn:hover {
+  background: #F57521;
+  color: white;
+}
+
+
+/* Main content styles */
+.content {
+  flex: 1;
+  max-width: calc(100% - 234px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content title styles */
+.content-title {
+  height: 94px;
+  color: black;
+  font-size: 24px;
+  font-family: Pretendard;
+  font-weight: 600;
+  margin-bottom: 24px;
+  background: #FBEEE7;
+  display: flex; /* Add display flex to content-title */
+  align-items: center; /* 수직 가운데 정렬 */
+  padding-left: 24px;
+}

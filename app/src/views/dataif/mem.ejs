@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <title>Admin Page</title>
-  <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/dataif/memPage.css">
   <link rel="stylesheet" href="/css/home/layout.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
@@ -12,111 +11,107 @@
   <div class='common-background-bar background-bar-memManage'></div>
   <div class='common-border-bar border-bar-memManage'></div>
   <%- include('../layout.ejs') %>
-<section>
-    <div>
-        <div class="pagename">회원 정보 관리</div>
-        <br>
-        <form action="/admin/dataif/" method="search" class="ui form">
-          <div class="fields">
-            <div class="field">
-              <select class="ui dropdown">
-                <option value="id">아이디</option>
-              </select>
-            </div>
-            <div class="field">
-              <input type="search" name="search" id="search" placeholder="검색어를 입력하세요">
-            </div>
-            <div class="field">
-              <button id="search_btn" type="submit" class="ui button" onclick="return validateSearch()">검색</button>
-            </div>
-          </div>
-        </form>
-        <script>
-          function validateSearch() {
-            var searchInput = document.getElementById("search").value;
-            if (searchInput.trim() === "") {
-              alert("검색어를 입력해주세요.");
-              document.getElementById("search").focus();
-              return false;
-            }
-            return true;
-          }
-        </script>
-        <table id="mem_table">
-          <thead>
-            <tr><th>아이디</th>
-            <th>이름</th>
-            <th>권한</th>
-            <th>거주지</th>
-            <th>사용자 구분</th>
-            <th>가입일</th>
-            <th>무화과</th>
-            <!-- <th>푸시</th>
-            <th>이메일</th>
-            <th>sms</th> -->
-            <th>수정</th>
-            <th>삭제</th>
-          </tr>
-        </thead>
-          <tbody>
-            <% if (posts.length === 0) { %>
-              <tr>
-                <td colspan="10">조회된 데이터가 없습니다.</td>
-              </tr>
-            <% } else { %>
-              <% for(var i=0; i<posts.length; i++){ %>
-                <tr>
-                  <td><%= posts[i].userid %></td>
-                  <td><%= posts[i].user_name %></td>
-                  <td><%= role_code_to_class(posts[i].user_role) %></td>
-                  <td><%= emd_code_to_name(posts[i].emd_class_code,code_data) %></td>
-                  <td><%= user_type_to_name(posts[i].user_type,code_data) %></td>
-                  <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
-                  <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>" style="color: #0000FF; text-decoration: underline;"><%=posts[i].fig%></a></td>
-                  <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
-                  <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
-                  <script>
-                    function delMem(){
-                      if(confirm("정말 삭제하시겠습니까?")){
-                        return true;
-                      }else{
-                        return false;
-                      }
-                    }
-                  </script>
-                </tr>
-                <% } %>
-              <% } %>
-          </tbody>
-        </table>
-        <!-- 페이징 아이콘 -->
-        <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/auth/signup'">등록</button>
-        <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/dataif/excel'">다운로드</button>
-        <div id="mem_paging">
-          <% if (totalPage > 1) { %> <!-- 전체 페이지가 1페이지 이상일 경우에만 페이징 표시 -->
-          <div class="ui pagination menu">
-              <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">이전</a>
-            <% var startPage = Math.max(page - 1, 1); %>
-            <% var endPage = Math.min(page + 1, totalPage); %>
-            <% if (startPage === 1) { %>
-              <% endPage = Math.min(3, totalPage); %>
-            <% } %>
-            <% if (endPage === totalPage) { %>
-              <% startPage = Math.max(endPage - 2, 1); %>
-            <% } %>
-            <% for (var i = startPage; i <= endPage; i++) { %>
-              <% if (i === page) { %>
-                <a class="active item"><%=i %></a>
-              <% } else { %>
-                <a class="item" href="/admin/dataif/?page=<%=i %>"><%=i %></a>
-              <% } %>
-            <% } %>
-              <a class="icon item" href="/admin/dataif/?page=<%=page+1 %>">다음</a>
-          </div>
-          <% } %>
+  <div class="content">
+    <div class="content-title">회원 가입 설정</div>
+    <form action="/admin/dataif/" method="search" class="ui form">
+      <div class="fields">
+        <div class="field">
+          <select class="ui dropdown">
+            <option value="id">아이디</option>
+          </select>
         </div>
+        <div class="field">
+          <input type="search" name="search" id="search" placeholder="검색어를 입력하세요">
+        </div>
+        <div class="field">
+          <button id="search_btn" type="submit" class="ui button" onclick="return validateSearch()">검색</button>
+        </div>
+      </div>
+    </form>
+    <script>
+      function validateSearch() {
+        var searchInput = document.getElementById("search").value;
+        if (searchInput.trim() === "") {
+          alert("검색어를 입력해주세요.");
+          document.getElementById("search").focus();
+          return false;
+        }
+        return true;
+      }
+    </script>
+    <table id="mem_table">
+      <thead>
+        <tr><th>아이디</th>
+        <th>이름</th>
+        <th>권한</th>
+        <th>거주지</th>
+        <th>사용자 구분</th>
+        <th>가입일</th>
+        <th>무화과</th>
+        <!-- <th>푸시</th>
+        <th>이메일</th>
+        <th>sms</th> -->
+        <th>수정</th>
+        <th>삭제</th>
+      </tr>
+    </thead>
+      <tbody>
+        <% if (posts.length === 0) { %>
+          <tr>
+            <td colspan="10">조회된 데이터가 없습니다.</td>
+          </tr>
+        <% } else { %>
+          <% for(var i=0; i<posts.length; i++){ %>
+            <tr>
+              <td><%= posts[i].userid %></td>
+              <td><%= posts[i].user_name %></td>
+              <td><%= role_code_to_class(posts[i].user_role) %></td>
+              <td><%= emd_code_to_name(posts[i].emd_class_code,code_data) %></td>
+              <td><%= user_type_to_name(posts[i].user_type,code_data) %></td>
+              <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
+              <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>" style="color: #0000FF; text-decoration: underline;"><%=posts[i].fig%></a></td>
+              <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
+              <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
+              <script>
+                function delMem(){
+                  if(confirm("정말 삭제하시겠습니까?")){
+                    return true;
+                  }else{
+                    return false;
+                  }
+                }
+              </script>
+            </tr>
+            <% } %>
+          <% } %>
+      </tbody>
+    </table>
+    <!-- 페이징 아이콘 -->
+    <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/auth/signup'">등록</button>
+    <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/dataif/excel'">다운로드</button>
+    <div id="mem_paging">
+      <% if (totalPage > 1) { %> <!-- 전체 페이지가 1페이지 이상일 경우에만 페이징 표시 -->
+      <div class="ui pagination menu">
+          <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">이전</a>
+        <% var startPage = Math.max(page - 1, 1); %>
+        <% var endPage = Math.min(page + 1, totalPage); %>
+        <% if (startPage === 1) { %>
+          <% endPage = Math.min(3, totalPage); %>
+        <% } %>
+        <% if (endPage === totalPage) { %>
+          <% startPage = Math.max(endPage - 2, 1); %>
+        <% } %>
+        <% for (var i = startPage; i <= endPage; i++) { %>
+          <% if (i === page) { %>
+            <a class="active item"><%=i %></a>
+          <% } else { %>
+            <a class="item" href="/admin/dataif/?page=<%=i %>"><%=i %></a>
+          <% } %>
+        <% } %>
+          <a class="icon item" href="/admin/dataif/?page=<%=page+1 %>">다음</a>
+      </div>
+      <% } %>
     </div>
-</section>
 </div>
 </body>
 
