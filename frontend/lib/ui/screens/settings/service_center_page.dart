@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:teentalktalk/domain/services/dataif_services.dart';
 import 'package:teentalktalk/ui/helpers/get_mobile_code_data.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_access_denied.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_success.dart';
 import 'package:teentalktalk/ui/helpers/validate_form.dart';
@@ -17,11 +18,12 @@ class ServiceCenterPage extends StatefulWidget {
 
 class _ServiceCenterPageState extends State<ServiceCenterPage> {
   final _keyForm = GlobalKey<FormState>();
-  String selectedValue = '질문 유형을 선택헤주세요'; // 사용자가 선택한 값 저장
+  String selectedValue = '질문 유형을 선택해주세요'; // 사용자가 선택한 값 저장
   String selectedCode = '';
   List<CodeDetailData> questionTypeList = [];
   String content = ''; // 기타(직접입력)
   String email = '';
+  bool isEmailAgreed = false;
 
   @override
   void initState() {
@@ -235,6 +237,44 @@ class _ServiceCenterPageState extends State<ServiceCenterPage> {
                             ),
                           )),
                     ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: isEmailAgreed,
+                              onChanged: (value) {
+                                setState(() {
+                                  isEmailAgreed = value!;
+                                });
+                              },
+                              activeColor: ThemeColors.primary,
+                            ),
+                            TextCustom(
+                              text: '이메일 정보 제공 동의',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13.sp,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 45.w,
+                            ),
+                            TextCustom(
+                              text: '질문에 대한 답변을 받으려면\n이메일 정보 제공에 동의해주세요.',
+                              maxLines: 2,
+                              color: ThemeColors.basic,
+                              fontSize: 13.sp,
+                              height: 1.3,
+                            )
+                          ],
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -249,20 +289,25 @@ class _ServiceCenterPageState extends State<ServiceCenterPage> {
           fontSize: 20.sp,
           fontWeight: FontWeight.bold,
           colorText: Colors.white,
-          backgroundColor: isQuestionTypeSelected
+          backgroundColor: isQuestionTypeSelected && isEmailAgreed
               ? ThemeColors.primary
               : const Color.fromRGBO(217, 217, 217, 1),
           onPressed: () async {
-            if (_keyForm.currentState!.validate()) {
-              final response = await dataIfService.submitInquiry(
-                  email, selectedCode, content);
-              if (response.resp) {
-                // ignore: use_build_context_synchronously
-                modalAccessDenied(context, "문의사항이 성공적으로 등록되었습니다.",
-                    onPressed: () {
-                  Navigator.pop(context);
-                });
-              } else {}
+            if (isQuestionTypeSelected && isEmailAgreed) {
+              if (_keyForm.currentState!.validate()) {
+                final response = await dataIfService.submitInquiry(
+                    email, selectedCode, content);
+                if (response.resp) {
+                  // ignore: use_build_context_synchronously
+                  modalAccessDenied(context, "문의사항이 성공적으로 등록되었습니다.",
+                      onPressed: () {
+                    Navigator.pop(context);
+                  });
+                } else {}
+              }
+            } else {
+              modalAccessDenied(context, '질문 유형을 선택하고 이메일 정보 제공에 동의해주세요',
+                  onPressed: () {});
             }
           },
         ),

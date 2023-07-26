@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:teentalktalk/domain/services/dataif_services.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_access_denied.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_basic.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -19,6 +21,7 @@ class _SuggestionPageState extends State<SuggestionPage> {
   String email = '';
   String title = '';
   String content = '';
+  bool isEmailAgreed = false;
 
   bool isButtonEnabled() {
     return email.isNotEmpty && title.isNotEmpty && content.isNotEmpty;
@@ -209,6 +212,44 @@ class _SuggestionPageState extends State<SuggestionPage> {
                             ),
                           )),
                     ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: isEmailAgreed,
+                              onChanged: (value) {
+                                setState(() {
+                                  isEmailAgreed = value!;
+                                });
+                              },
+                              activeColor: ThemeColors.primary,
+                            ),
+                            TextCustom(
+                              text: '이메일 정보 제공 동의',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13.sp,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 45.w,
+                            ),
+                            TextCustom(
+                              text: '질문에 대한 답변을 받으려면\n이메일 정보 제공에 동의해주세요.',
+                              maxLines: 2,
+                              color: ThemeColors.basic,
+                              fontSize: 13.sp,
+                              height: 1.3,
+                            )
+                          ],
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -227,9 +268,15 @@ class _SuggestionPageState extends State<SuggestionPage> {
                 ? ThemeColors.primary
                 : const Color.fromRGBO(217, 217, 217, 1),
             onPressed: () {
-              if (_keyForm.currentState!.validate()) {
-                // 이메일 보내는 동작
-                dataIfService.sendSuggestionEmail(email, title, content);
+              if (!isEmailAgreed) {
+                modalAccessDenied(context, '이메일 정보 제공에 동의해주세요',
+                    onPressed: () {});
+              } else {
+                if (_keyForm.currentState!.validate()) {
+                  modalPreparing(context);
+                  // 이메일 보내는 동작
+                  // dataIfService.sendSuggestionEmail(email, title, content);
+                }
               }
             }),
       ),
