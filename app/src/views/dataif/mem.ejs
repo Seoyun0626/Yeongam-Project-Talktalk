@@ -5,29 +5,49 @@
   <title>Admin Page</title>
   <link rel="stylesheet" href="/css/home/dataif/memPage.css">
   <link rel="stylesheet" href="/css/home/layout.css">
+  <link rel="stylesheet" href="/css/home/dataif/memPage.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="/ckeditor/build/ckeditor.js"></script>
 </head>
 <body>
   <div class='common-background-bar background-bar-memManage'></div>
   <div class='common-border-bar border-bar-memManage'></div>
-  <%- include('../layout.ejs') %>
-  <div class="content">
-    <div class="content-title">회원 가입 설정</div>
-    <form action="/admin/dataif/" method="search" class="ui form">
-      <div class="fields">
-        <div class="field">
-          <select class="ui dropdown">
-            <option value="id">아이디</option>
-          </select>
-        </div>
-        <div class="field">
-          <input type="search" name="search" id="search" placeholder="검색어를 입력하세요">
-        </div>
-        <div class="field">
-          <button id="search_btn" type="submit" class="ui button" onclick="return validateSearch()">검색</button>
-        </div>
+  <%- include('../layout.ejs', { pageTitle: '회원 가입 설정' }) %>
+  <form action="/admin/dataif/" method="search" class="ui form">
+    <div class="fields">
+      <!-- 드롭다운 -->
+      <div class="dropdown-container">
+        <div class="dropdown-title">아이디</div>
+        <div class="arrow-icon"></div>
       </div>
-    </form>
+      <!-- 입력 창 -->
+      <div class="input-container">
+        <input type="search" name="search" id="search" placeholder="검색어를 입력하세요">
+      </div>
+      <!-- 검색 버튼 -->
+      <div class="search-btn" id="search_btn" type="submit" onclick="return validateSearch()">
+        <div class="search-icon-container">
+          <div class="search-icon">
+            <div class="search-icon-bar1"></div>
+            <div class="search-icon-bar2"></div>
+          </div>
+        </div>
+        <div class="search-text">검색</div>
+      </div>
+      <!-- 다운로드 버튼 -->
+      <div class="download-btn" id="mem_reg_btn" onclick="location.href='/admin/dataif/excel'">
+        <div class="download-icon">
+          <div class="download-icon-shape"></div>
+          <img class="download-icon-image" src="https://via.placeholder.com/5x7">
+        </div>
+        <div class="download-text">다운로드</div>
+      </div>
+      <!-- 등록 버튼 -->
+      <div class="register-btn" id="mem_reg_btn" onclick="location.href='/admin/auth/signup'">
+        <div class="register-text">등록</div>
+      </div>
+    </div>
+  </form>
     <script>
       function validateSearch() {
         var searchInput = document.getElementById("search").value;
@@ -86,9 +106,6 @@
           <% } %>
       </tbody>
     </table>
-    <!-- 페이징 아이콘 -->
-    <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/auth/signup'">등록</button>
-    <button class="ui button" id="mem_reg_btn" onclick="location.href='/admin/dataif/excel'">다운로드</button>
     <div id="mem_paging">
       <% if (totalPage > 1) { %> <!-- 전체 페이지가 1페이지 이상일 경우에만 페이징 표시 -->
       <div class="ui pagination menu">
@@ -112,6 +129,7 @@
       </div>
       <% } %>
     </div>
+  </div>
 </div>
 </body>
 

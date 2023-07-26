@@ -1,81 +1,190 @@
-/* 테이블 */
-#mem_paging {
-  padding-left: 380px;
-  margin-top: 15px;
-  /* text-align: center; */
+/* 스타일 설정 */
+/* 드롭다운 스타일 */
+.dropdown-container {
+  width: 100px; /* 크기 수정 */
+  height: 25px; /* 크기 수정 */
+  padding: 6px 12px; /* 패딩 수정 */
+  background: white;
+  border: 0.5px solid #C9C9C9;
+  border-radius: 8px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 }
 
-
-#mem_reg_btn{
-  float: left;
-  margin-top: 15px;
+.dropdown-title {
+  color: #585856;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 500;
+  word-wrap: break-word;
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    color: #333;
-  }
-  .pagename {
-    font-weight: bold;
-    font-size: 26px;
-    padding: 20px;
-    /* color: #FFAB94; */
-  }
-  a {
-    text-decoration: none;
-    color: black;
-    }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 15px 3px;
-  }
-  table th,
-  table td {
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-  }
-  table th {
-    background-color: #F57521;
-    color: #fff;
-    border: none;
-  }
-  .ui.button {
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    font-weight: bold;
-  }
-  .ui.button.orange {
-    background-color: #F57521 ;
-    color: #fff;
-  }
-  .ui.button:hover {
-    background-color: #fff ;
-    box-shadow: 0 1px 10px rgba(70, 130, 180, 0.4);
-  }
-  .ui.pagination.menu {
-    justify-content: center;
-    padding: 20px 0;
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-  }
-  .ui.pagination.menu .item {
-    padding: 8px 16px;
-    margin: 0 4px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    transition: all 0.3s ease;
-  }
-  .ui.pagination.menu .item:hover {
-    background-color: #f0f0f0;
-    box-shadow: none;
-  }
+.arrow-icon {
+  width: 5.36px;
+  height: 9.44px;
+  transform: rotate(90deg);
+  transform-origin: 0 0;
+  background: black;
+}
+
+/* 입력 창 스타일 */
+.input-container {
+  width: 140px; /* 크기 수정 */
+  height: 25px; /* 크기 수정 */
+  margin-left: 10px;
+  padding: 6px 12px; /* 패딩 수정 */
+  background: white;
+  border: 0.5px solid #C9C9C9;
+  border-radius: 8px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-text {
+  color: #585856;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 500;
+  word-wrap: break-word;
+}
+
+#search {
+  width: 150px; /* 크기 수정 */
+  height: 25px; /* 크기 수정 */
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 500;
+}
+
+/* 검색 버튼 스타일 */
+.search-btn {
+  width: 60px; /* 크기 수정 */
+  height: 25px; /* 크기 수정 */
+  margin-left: 5px;
+  padding: 6px 12px; /* 패딩 수정 */
+  background: #8E8F92;
+  border-radius: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  display: inline-flex;
+  cursor: pointer;
+  display: inline-flex; /* 한 줄에 나타내기 위해 inline-flex 사용 */
+  transition: background-color 0.3s ease; /* hover 효과 설정 */
+}
+.search-btn:hover {
+  background: #a9a9a9; /* hover 배경 색상 변경 */
+}
+
+.search-icon-container {
+  width: 14px; /* 크기 수정 */
+  height: 14px; /* 크기 수정 */
+  position: relative;
+}
+
+.search-icon {
+  width: 8.22px;
+  height: 0.75px;
+  left: 0px;
+  top: 5.5px; /* 위치 수정 */
+  position: absolute;
+  background: white;
+}
+
+.search-icon-bar2 {
+  width: 5.17px;
+  height: 7.38px;
+  left: 4.17px;
+  top: 1.96px;
+  position: absolute;
+  background: url("https://via.placeholder.com/5x7");
+}
+
+.search-text {
+  text-align: center;
+  color: white;
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 14px; /* 버튼 텍스트 크기 조정 */
+  padding-top: 12px; /* 버튼 내부 상단 여백 조정 */
+  padding-bottom: 12px; /* 버튼 내부 하단 여백 조정 */
+  word-wrap: break-word;
+}
+
+/* 다운로드 버튼 스타일 */
+.download-btn {
+  width: 75px; /* 크기 수정 */
+  padding: 6px 12px; /* 패딩 수정 */
+  background: #8E8F92;
+  margin-left: 15px;
+  border-radius: 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px; /* 변경된 높이 */
+  display: inline-flex; /* 한 줄에 나타내기 위해 inline-flex 사용 */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* hover 효과 설정 */
+}
+.download-text {
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 600;
+  word-wrap: break-word;
+  padding-top: 12px; /* 버튼 내부 상단 여백 조정 */
+  padding-bottom: 12px; /* 버튼 내부 하단 여백 조정 */
+}
+#download-btn:hover {
+  background: #b0b0b0; /* hover 배경 색상 변경 */
+}
+
+.download-icon {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+.download-icon img {
+  width: 9.33px;
+  height: 9.33px;
+  left: 3.33px;
+  top: 3.33px;
+  position: absolute;
+  border: 0.75px white solid;
+}
+/* 등록 버튼 스타일 */
+.register-btn {
+  width: 50px; /* 크기 수정 */
+  padding: 6px 12px; /* 패딩 수정 */
+  background: #F57521;
+  margin-left: 610px; /* 버튼 간격 조정 */
+  border-radius: 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px; /* 변경된 높이 */
+  display: inline-flex; /* 한 줄에 나타내기 위해 inline-flex 사용 */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* hover 효과 설정 */
+}
+
+.register-text {
+  text-align: center;
+  color: white;
+  font-family: Pretendard;
+  font-weight: 600;
+  word-wrap: break-word;
+  font-size: 15px; /* 버튼 텍스트 크기 조정 */
+  padding-top: 12px; /* 버튼 내부 상단 여백 조정 */
+  padding-bottom: 12px; /* 버튼 내부 하단 여백 조정 */
+}
+.register-btn:hover {
+  background: #F79862;
+}
