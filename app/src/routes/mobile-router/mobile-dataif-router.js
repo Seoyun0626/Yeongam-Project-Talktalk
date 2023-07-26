@@ -41,8 +41,12 @@ router.get('/terms', async function(req, res){
     try {
       // console.log(req.body);
       const result = await dataif_controller.sendSuggestionEmail(req, res);
-      console.log(result);
-      res.json(result);
+      // console.log(result);
+
+      res.json({
+        resp: true,
+        message: '이메일이 성공적으로 전송되었습니다.',
+      });
     } catch (error) {
       console.log('mobile dataif-router send suggestion email error:' + error);
       res.json({

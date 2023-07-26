@@ -30,12 +30,11 @@ class DataIfServices {
 
   // 사용자 개발 제안 메일 보내기
   Future<DefaultResponse> sendSuggestionEmail(
-      String user_email, String title, String content) async {
+      String title, String content) async {
     final resp = await http
         .post(Uri.parse('${Environment.urlApi}/dataif/suggestion'), headers: {
       'Accept': 'application/json',
     }, body: {
-      'user_email': user_email, // 사용자 이메일
       'title': title, // 제목
       'content': content, // 내용
     });

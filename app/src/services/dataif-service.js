@@ -54,6 +54,7 @@ exports.resetPW = async function(req, res) {
     conn = await db.getConnection();
     var userid = req.params.id;
     // // 확인 이메일을 보내기 위해 이메일 주소 받아오기r where userid="'+userid+'"';
+    var query = 'select * from webdb.tb_user where userid = "' + userid+ '"';
     var rows = await conn.query(query); // 쿼리 실행
     var email = rows[0].user_email;
     // var uid = rows[0].uid;
@@ -91,7 +92,7 @@ exports.resetPW = async function(req, res) {
         let mailOptions = {
           from: process.env.NODEMAILER_USER,
           to: email,
-          subject: '비밀번호 초기화',
+          subject: '[청소년 톡talk] 비밀번호 초기화',
           text: '임시 비밀번호는 '+tempPW+'입니다.'
       };
       transporter.sendMail(mailOptions, function(error, info){
@@ -271,6 +272,7 @@ exports.update = async function(req, res) {
   var resultcode=0;
   try{
     conn = await db.getConnection();
+    // console.log(req.body);
     var userid = req.params.id;
     if(req.body.name=='' || req.body.email=='' || req.body.password=='' || req.body.password2=='') {
       resultcode=100;
@@ -296,6 +298,7 @@ exports.update = async function(req, res) {
     if (conn) conn.release();
   }
 };
+
 exports.deleteUser = async function(req, res) {
   var conn;
   try{
@@ -331,9 +334,11 @@ exports.deleteUser = async function(req, res) {
 
 // 사용자 개발 제안 이메일 전송 - 수정 필요
 exports.sendSuggestionEmail = async function(req, res) {
-  const {user_email, title, content} = req.body;
-
+  var resultcode = 0;
   try{
+    const title = req.body.title;
+    const content = req.body.content;
+
     let transporter = nodemailer.createTransport({
       service : 'naver',
       host: 'smtp.naver.com',
@@ -345,22 +350,19 @@ exports.sendSuggestionEmail = async function(req, res) {
     });
 
     let mailOptions = {
-      from : user_email,
+      from :process.env.NODEMAILER_USER, //user_email, 
       to : process.env.NODEMAILER_USER,
-      subject : title,
+      subject : '[청소년 톡talk 사용자 제안] '+title,
       text: content,
     };
-
-    await transporter.sendMail(mailOptions);
-
-    return {
-      resp: true,
-      message: '이메일이 성공적으로 전송되었습니다.',
-    };
-
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent: ' + info.response);
+    resultcode = 1;
   } catch(error) {
     console.log('dataif-service sendSuggestionEmail:'+error);
-  } 
+  }
+  // console.log(resultcode);
+  return resultcode;
 };
 
   // 문의사항 등록
@@ -383,11 +385,6 @@ exports.sendSuggestionEmail = async function(req, res) {
       if(conn) conn.release();
     }
   };
-
-
-
-
-
 
 
 //테스트

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -18,13 +20,11 @@ class SuggestionPage extends StatefulWidget {
 
 class _SuggestionPageState extends State<SuggestionPage> {
   final _keyForm = GlobalKey<FormState>();
-  String email = '';
   String title = '';
   String content = '';
-  bool isEmailAgreed = false;
 
   bool isButtonEnabled() {
-    return email.isNotEmpty && title.isNotEmpty && content.isNotEmpty;
+    return title.isNotEmpty && content.isNotEmpty;
   }
 
   @override
@@ -99,43 +99,43 @@ class _SuggestionPageState extends State<SuggestionPage> {
                     SizedBox(
                       height: 20.h,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5.h),
-                      child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-                          decoration: BoxDecoration(
-                            // color: ThemeColors.third,
-                            borderRadius: BorderRadius.circular(10.r),
-                            border: Border.all(
-                              color: const Color.fromRGBO(217, 217, 217, 1),
-                            ),
-                          ),
-                          width: size.width,
-                          height: 50.h,
-                          child: Center(
-                            child: TextFormField(
-                              maxLength: 50,
-                              validator: validatedEmail,
-                              style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontFamily: 'NanumSquareRound'),
-                              onChanged: (value) {
-                                setState(() {
-                                  email = value;
-                                });
-                              },
-                              decoration: InputDecoration(
-                                  hintText: '답변 받으실 이메일을 입력해주세요',
-                                  border: InputBorder.none,
-                                  counterText: '',
-                                  errorStyle: TextStyle(
-                                      color: ThemeColors.primary,
-                                      fontSize: 8.sp),
-                                  contentPadding:
-                                      EdgeInsets.symmetric(vertical: 0.2.h)),
-                            ),
-                          )),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(vertical: 5.h),
+                    //   child: Container(
+                    //       padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+                    //       decoration: BoxDecoration(
+                    //         // color: ThemeColors.third,
+                    //         borderRadius: BorderRadius.circular(10.r),
+                    //         border: Border.all(
+                    //           color: const Color.fromRGBO(217, 217, 217, 1),
+                    //         ),
+                    //       ),
+                    //       width: size.width,
+                    //       height: 50.h,
+                    //       child: Center(
+                    //         child: TextFormField(
+                    //           maxLength: 50,
+                    //           validator: validatedEmail,
+                    //           style: TextStyle(
+                    //               fontSize: 15.sp,
+                    //               fontFamily: 'NanumSquareRound'),
+                    //           onChanged: (value) {
+                    //             setState(() {
+                    //               email = value;
+                    //             });
+                    //           },
+                    //           decoration: InputDecoration(
+                    //               hintText: '답변 받으실 이메일을 입력해주세요',
+                    //               border: InputBorder.none,
+                    //               counterText: '',
+                    //               errorStyle: TextStyle(
+                    //                   color: ThemeColors.primary,
+                    //                   fontSize: 8.sp),
+                    //               contentPadding:
+                    //                   EdgeInsets.symmetric(vertical: 0.2.h)),
+                    //         ),
+                    //       )),
+                    // ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.h),
                       child: Container(
@@ -179,7 +179,6 @@ class _SuggestionPageState extends State<SuggestionPage> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 16.0.w, vertical: 12.0.h),
                           decoration: BoxDecoration(
-                            // color: ThemeColors.third,
                             borderRadius: BorderRadius.circular(10.r),
                             border: Border.all(
                               color: const Color.fromRGBO(217, 217, 217, 1),
@@ -212,44 +211,44 @@ class _SuggestionPageState extends State<SuggestionPage> {
                             ),
                           )),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Checkbox(
-                              value: isEmailAgreed,
-                              onChanged: (value) {
-                                setState(() {
-                                  isEmailAgreed = value!;
-                                });
-                              },
-                              activeColor: ThemeColors.primary,
-                            ),
-                            TextCustom(
-                              text: '이메일 정보 제공 동의',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13.sp,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 45.w,
-                            ),
-                            TextCustom(
-                              text: '질문에 대한 답변을 받으려면\n이메일 정보 제공에 동의해주세요.',
-                              maxLines: 2,
-                              color: ThemeColors.basic,
-                              fontSize: 13.sp,
-                              height: 1.3,
-                            )
-                          ],
-                        )
-                      ],
-                    )
+                    // Column(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   children: [
+                    //     Row(
+                    //       crossAxisAlignment: CrossAxisAlignment.center,
+                    //       children: [
+                    //         Checkbox(
+                    //           value: isEmailAgreed,
+                    //           onChanged: (value) {
+                    //             setState(() {
+                    //               isEmailAgreed = value!;
+                    //             });
+                    //           },
+                    //           activeColor: ThemeColors.primary,
+                    //         ),
+                    //         TextCustom(
+                    //           text: '이메일 정보 제공 동의',
+                    //           fontWeight: FontWeight.bold,
+                    //           fontSize: 13.sp,
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     Row(
+                    //       children: [
+                    //         SizedBox(
+                    //           width: 45.w,
+                    //         ),
+                    //         TextCustom(
+                    //           text: '질문에 대한 답변을 받으려면\n이메일 정보 제공에 동의해주세요.',
+                    //           maxLines: 2,
+                    //           color: ThemeColors.basic,
+                    //           fontSize: 13.sp,
+                    //           height: 1.3,
+                    //         )
+                    //       ],
+                    //     )
+                    //   ],
+                    // )
                   ],
                 ),
               ),
@@ -267,16 +266,15 @@ class _SuggestionPageState extends State<SuggestionPage> {
             backgroundColor: isButtonEnabled()
                 ? ThemeColors.primary
                 : const Color.fromRGBO(217, 217, 217, 1),
-            onPressed: () {
-              if (!isEmailAgreed) {
-                modalAccessDenied(context, '이메일 정보 제공에 동의해주세요',
-                    onPressed: () {});
-              } else {
-                if (_keyForm.currentState!.validate()) {
-                  modalPreparing(context);
-                  // 이메일 보내는 동작
-                  // dataIfService.sendSuggestionEmail(email, title, content);
-                }
+            onPressed: () async {
+              if (_keyForm.currentState!.validate()) {
+                final response =
+                    await dataIfService.sendSuggestionEmail(title, content);
+                if (response.resp) {
+                  modalAccessDenied(context, '소중한 의견 감사합니다.', onPressed: () {
+                    Navigator.pop(context);
+                  });
+                } else {}
               }
             }),
       ),
