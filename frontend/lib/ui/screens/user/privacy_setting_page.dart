@@ -4,6 +4,7 @@ import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/ui/screens/user/email_edit_page.dart';
 import 'package:teentalktalk/ui/screens/user/extra_info_edit_page.dart';
+import 'package:teentalktalk/ui/screens/user/pw_edit_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -88,12 +89,12 @@ class _PrivacySettingPageState extends State<PrivacySettingPage> {
                                     SizedBox(
                                       width: 30,
                                     ),
+                                    // 추가 정보 변경 버튼
                                     _UserInfoEditButton(
-                                      editCode: 1,
+                                      editCode: 2,
                                     ),
                                   ],
                                 ),
-
                                 SizedBox(
                                   height: 30,
                                 ),
@@ -180,6 +181,14 @@ class _UserInfoState extends State<_UserInfo> {
                   fontSize: 15,
                   color: ThemeColors.basic,
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextCustom(
+                  text: '비밀번호',
+                  fontSize: 15,
+                  color: ThemeColors.basic,
+                ),
               ],
             ),
             const SizedBox(
@@ -216,11 +225,19 @@ class _UserInfoState extends State<_UserInfo> {
                     const SizedBox(
                       width: 20,
                     ),
+                    // 이메일 변경 버튼
                     const _UserInfoEditButton(
                       editCode: 0,
                     ),
                   ],
-                )
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                // 비밀번호 변경 버튼
+                const _UserInfoEditButton(
+                  editCode: 1,
+                ),
               ],
             ),
           ],
@@ -379,15 +396,10 @@ class _UserInfoEditButtonState extends State<_UserInfoEditButton> {
 
     return InkWell(
       child: Container(
-        // height: 50,
         padding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
         decoration: BoxDecoration(
           color: const Color.fromRGBO(245, 245, 245, 1),
           borderRadius: BorderRadius.circular(20),
-          // border: Border.all(
-          //   color: ThemeColors.primary,
-          //   width: 2,
-          // ),
         ),
         child: const TextCustom(
           text: '변경',
@@ -397,15 +409,19 @@ class _UserInfoEditButtonState extends State<_UserInfoEditButton> {
       ),
       onTap: () {
         if (editCode == 0) {
+          // 이메일 변경
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const EditEmailPage()),
           );
-          // Navigator.pushAndRemoveUntil(
-          //     context,
-          //     MaterialPageRoute(builder: (context) => const EditEmailPage()),
-          //     (_) => false);
         } else if (editCode == 1) {
+          // 비밀번호 변경
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const EditPasswordPage()),
+          );
+        } else if (editCode == 2) {
+          // 추가 정보 변경
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const EditExtraInfoPage()),

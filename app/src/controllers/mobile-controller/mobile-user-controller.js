@@ -10,12 +10,21 @@ exports.getUserById = async function(req, res) {
     }
   }
 
+exports.changePassword = async function(req, res){
+  try{
+    var result = await mobile_user_service.changePassword(req, res);
+    return result;
+  } catch(error) {
+    console.log('mobile-user-controller change password:'+error);
+  }
+}
+
 exports.changeEmail = async function(req, res){
   try{
     var result = await mobile_user_service.changeEmail(req, res);
     return result;
   } catch(error) {
-    console.log('mobile-user-controller change extra info:'+error);
+    console.log('mobile-user-controller change email:'+error);
   }
 }
 

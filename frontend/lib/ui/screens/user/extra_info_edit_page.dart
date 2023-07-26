@@ -77,12 +77,12 @@ class _EditExtraInfoPageState extends State<EditExtraInfoPage> {
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
-            title: const TextCustom(
-              text: '개인 정보 설정',
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
+            // title: const TextCustom(
+            //   text: '개인 정보 설정',
+            //   color: Colors.black,
+            //   fontSize: 20,
+            //   fontWeight: FontWeight.w600,
+            // ),
             leading: IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios_new_outlined,
