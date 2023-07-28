@@ -12,10 +12,9 @@
 <body>
   <div class='common-background-bar background-bar-memManage'></div>
   <div class='common-border-bar border-bar-memManage'></div>
-  <%- include('../layout.ejs') %>
+  <%- include('../layout.ejs', { pageTitle: '회원 수정' }) %>
 <section>
     <div>
-        <div class="pagename">회원 수정</div>
         <div>
           <form action="/admin/dataif/update/<%=post.userid %>" method="post" name="frm_signup" id="frm_signup">
             <div class="ui form">

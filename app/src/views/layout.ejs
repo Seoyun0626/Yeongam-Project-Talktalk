@@ -1,8 +1,8 @@
 <div class="container">
   <div class="sidebar">
     <div class="title-container">
-      <div class="title">관리자 페이지</div>
-      <div class="title-bar">청소년 톡talk</div>
+      <a href="/admin/dataif"><div class="title">관리자 페이지</div></a>
+      <a href="/admin/dataif"><div class="title-bar">청소년 톡talk</div></a>
     </div>
     <br>
     <!-- Menu items -->
@@ -11,8 +11,8 @@
       <div class="arrow-button"></div>
     </div>
     <div class="menu-items-container" id="member">
-      <div class="menu-item">회원 정보 관리</div>
-      <div class="menu-item">회원 가입 설정</div>
+      <a href="/admin/dataif"><div class="menu-item">회원 정보 관리</div></a>
+      <a href="/admin/dataif/terms"><div class="menu-item">회원 가입 설정</div></a>
       <br>
     </div>
     
@@ -21,8 +21,8 @@
       <div class="arrow-button"></div>
     </div>
     <div class="menu-items-container" id="policy">
-      <div class="menu-item">정책 정보 관리</div>
-      <div class="menu-item">배너 관리</div>
+      <a href="/admin/policy/show"><div class="menu-item">정책 정보 관리</div></a>
+      <a href="/admin/policy/banner"><div class="menu-item">배너 관리</div></a>
       <br>
     </div>
     
@@ -31,7 +31,7 @@
       <div class="arrow-button"></div>
     </div>
     <div class="menu-items-container" id="operation">
-      <div class="menu-item">코드 정보 관리</div>
+      <a href="/admin/codeData/show"><div class="menu-item">코드 정보 관리</div></a>
     </div>
     
     
@@ -56,7 +56,16 @@
           <div style="width: 12px; height: 14px; left: 6px; top: 0px; position: absolute; border: 0.60px #585856 solid"></div>
         </div>
       </div>
-      <div>관리자 페이지 로그 아웃</div>
+      <a href="/admin/auth/logout" onclick="return logout()"><div id='로그아웃' class='common-style 로그아웃'>관리자 페이지 로그 아웃</div></a>
+      <script>
+        function logout() {
+          if (confirm('로그아웃 하시겠습니까?')) {
+            return true;
+          } else {
+            return false;
+          }
+        };
+      </script>
     </div>
   </div>
   <div class="content">

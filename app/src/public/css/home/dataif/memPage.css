@@ -188,3 +188,121 @@
 .register-btn:hover {
   background: #F79862;
 }
+/* 테이블 스타일 */
+#mem_table {
+  width: 100%;
+  border-collapse: collapse; /* 테두리 겹침 방지 */
+  margin-top: 10px; /* 테이블과 다른 요소들 간격 조정 */
+  text-align: center; /* 셀 내용 중앙 정렬 */
+}
+
+#mem_table th, #mem_table td {
+  border-bottom: 1px solid #C9C9C9; /* 각 행을 구분하는 선 */
+  padding: 8px; /* 셀 안의 내용과 셀 테두리 간격 설정 */
+}
+
+#mem_table th {
+  background-color: rgba(240, 241, 247, 0.50); /* 테이블 제목 배경색 설정 */
+}
+
+#mem_table td {
+  background-color: white; /* 테이블 셀 배경색 설정 */
+}
+
+
+/* 페이징 버튼 스타일 */
+.ui.pagination.menu {
+  margin-top: 20px; /* 페이징과 테이블 간격 조정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ui.pagination.menu a {
+  width: 21px;
+  height: 21px;
+  margin: 0 5px; /* 각 버튼 사이의 간격 조정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #CBCBCB;
+  text-decoration: none;
+  color: #787878;
+  font-size: 15px;
+  font-family: Pretendard;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.ui.pagination.menu a.active {
+  background: #F57521;
+  color: white;
+  font-weight: 600;
+}
+
+.ui.pagination.menu .left-arrow {
+  transform: rotate(-180deg);
+  transform-origin: 0 0;
+}
+
+.ui.pagination.menu .right-arrow {
+  transform: rotate(0deg);
+  transform-origin: 0 0;
+}
+
+
+/* 이전 버튼 아이콘 스타일 */
+.icon.item.left-arrow .fas.fa-chevron-left {
+  font-size: 1.3rem; /* 아이콘 크기 조절 */
+  color: #A6A6A6; /* 연한 회색 색상 설정 */
+  transform: rotate(-180deg); /* 아이콘을 역방향으로 회전하여 < 모양으로 보이도록 설정 */
+  background: none; /* 배경 제거 */
+}
+
+/* 다음 버튼 아이콘 스타일 */
+.icon.item.right-arrow .fas.fa-chevron-right {
+  font-size: 1.3rem; /* 아이콘 크기 조절 */
+  color: #A6A6A6; /* 연한 회색 색상 설정 */
+  background: none; /* 배경 제거 */
+}
+
+/* 페이징 버튼 숫자 스타일 */
+.ui.pagination.menu a.item {
+  color: #A6A6A6; /* 연한 회색 색상 설정 */
+  font-family: Pretendard; /* 원하는 폰트 설정 */
+  font-weight: 400; /* 폰트 두께 설정 */
+  word-wrap: break-word;
+  margin: 0 5px; /* 숫자 간격 조절 */
+  cursor: pointer;
+  background: none; /* 배경 제거 */
+}
+
+/* 선택된 페이지 숫자 스타일 */
+.ui.pagination.menu a.active.item {
+  color: #F57521; /* 선택된 숫자 색상 설정 */
+  font-weight: 600; /* 선택된 숫자 폰트 두께 설정 */
+  background: none; /* 배경 제거 */
+}
+
+
+/* 드롭다운 메뉴 숨김 스타일 */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  border: 1px solid #C9C9C9;
+  border-radius: 8px;
+  width: 100px;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* 드롭다운 버튼 클릭 시 나타나는 스타일 */
+.dropdown-container.active .dropdown-menu {
+  display: block;
+}

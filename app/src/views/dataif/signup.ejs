@@ -3,18 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <title>Admin Page</title>
-  <link rel="stylesheet" href="/semantic/layout.css">
-  <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/layout.css">
+  <link rel="stylesheet" href="/css/home/dataif/signup.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
 </head>
 <body>
   <div class='common-background-bar background-bar-memManage'></div>
   <div class='common-border-bar border-bar-memManage'></div>
-  <%- include('../layout.ejs') %>
+  <%- include('../layout.ejs', { pageTitle: '회원 등록' }) %>
 <section>
     <div>
-        <div class="pagename">회원 등록</div>
         <div>
             <form action="/admin/auth/signup" method="post" name="frm_signup" id="frm_signup">
               <div class="ui form">
@@ -135,6 +133,7 @@
                   user_name: document.getElementById("user_name").value,
                   user_role: document.getElementById("user_role").value,
                   user_type: document.getElementById("user_type").value,
+                  user_email: document.getElementById("user_email").value,
                   parentsAge_code: document.getElementById("parentsAge_code").value,
                   youthAge_code: document.getElementById("youthAge_code").value,
                   emd_class_code: document.getElementById("emd_class_code").value,

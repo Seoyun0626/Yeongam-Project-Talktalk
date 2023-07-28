@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="/css/home/dataif/memPage.css">
   <link rel="stylesheet" href="/css/home/layout.css">
   <link rel="stylesheet" href="/css/home/dataif/memPage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="/ckeditor/build/ckeditor.js"></script>
 </head>
 <body>
   <div class='common-background-bar background-bar-memManage'></div>
@@ -17,9 +17,26 @@
     <div class="fields">
       <!-- 드롭다운 -->
       <div class="dropdown-container">
-        <div class="dropdown-title">아이디</div>
-        <div class="arrow-icon"></div>
+        <div class="dropdown-button">아이디</div>
+        <div class="dropdown-menu">
+          <!-- 드롭다운 메뉴 아이템들을 추가 -->
+          <div class="dropdown-item">아이디</div>
+          <div class="dropdown-item">이름</div>
+          <div class="dropdown-item">권한</div>
+          <!-- 추가 메뉴 아이템들 -->
+        </div>
       </div>
+      <script>
+        // 클릭 이벤트를 처리하는 함수
+        function toggleDropdown() {
+          var dropdownMenu = document.querySelector(".dropdown-menu");
+          dropdownMenu.classList.toggle("active");
+        }
+      
+        // 클릭 이벤트 연결
+        var dropdownButton = document.querySelector(".dropdown-button");
+        dropdownButton.addEventListener("click", toggleDropdown);
+      </script>      
       <!-- 입력 창 -->
       <div class="input-container">
         <input type="search" name="search" id="search" placeholder="검색어를 입력하세요">
@@ -109,7 +126,9 @@
     <div id="mem_paging">
       <% if (totalPage > 1) { %> <!-- 전체 페이지가 1페이지 이상일 경우에만 페이징 표시 -->
       <div class="ui pagination menu">
-          <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">이전</a>
+        <a class="icon item" href="/admin/dataif/?page=<%=page-1 %>">
+          <i class="fas fa-chevron-left"></i>
+        </a>
         <% var startPage = Math.max(page - 1, 1); %>
         <% var endPage = Math.min(page + 1, totalPage); %>
         <% if (startPage === 1) { %>
@@ -125,7 +144,9 @@
             <a class="item" href="/admin/dataif/?page=<%=i %>"><%=i %></a>
           <% } %>
         <% } %>
-          <a class="icon item" href="/admin/dataif/?page=<%=page+1 %>">다음</a>
+        <a class="icon item" href="/admin/dataif/?page=<%=page+1 %>">
+          <i class="fas fa-chevron-right"></i> <!-- Font Awesome 다음 버튼 아이콘 -->
+        </a>
       </div>
       <% } %>
     </div>

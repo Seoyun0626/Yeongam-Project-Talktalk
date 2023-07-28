@@ -3,7 +3,7 @@ var bkfd2Password = require('pbkdf2-password');
 var hasher = bkfd2Password();
 const nodemailer = require("nodemailer");
 
-const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 // const jwt = require('jsonwebtoken');
 
 // 로그인 확인
@@ -92,8 +92,8 @@ exports.signUp = async function(req, res) {
         hasher({
             password: password
         }, async (err, pass, salt, hash) => {
-          const uidUser = uuid();
-          var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code, fig) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"', '"+fig+"')";
+          const uidUser = uuidv4();
+          var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code, fig) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.user_name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"', '"+fig+"')";
           var rows = await conn.query(query); // 쿼리 실행
           console.log('회원 등록에 성공했습니다.');
           json.code = 0;
@@ -107,6 +107,7 @@ exports.signUp = async function(req, res) {
         json.msg = "이미 존재하는 아이디입니다.";
         return json;
     }
+    return json;
   } catch(error) {
     console.log('login-service SignUp:'+error);
     json.code = 200;
@@ -115,8 +116,6 @@ exports.signUp = async function(req, res) {
   } finally {
     if (conn) conn.end();
   }
-  
-  return resultcode;
 };
 
 
