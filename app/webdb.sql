@@ -243,8 +243,8 @@ create table webdb.`tb_withdrawal_logs`(
 -- 공지사항
 create table webdb.`tb_notice`(
   `board_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL,
-  `content` varchar(200) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `content` varchar(500) NOT NULL,
   `register_uid` varchar(100) NOT NULL,
   `ins_date` timestamp not null default current_timestamp,
   PRIMARY KEY (`board_idx`) USING BTREE
