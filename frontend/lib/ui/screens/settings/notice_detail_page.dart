@@ -1,21 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'dart:async';
-import 'package:flutter_share/flutter_share.dart';
-import 'package:teentalktalk/data/env/env.dart';
-import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
 import 'package:teentalktalk/domain/models/response/response_notice.dart';
-import 'package:teentalktalk/domain/models/response/response_policy.dart';
-import 'package:teentalktalk/domain/services/event_services.dart';
-import 'package:teentalktalk/ui/helpers/firebase_dynamiclink.dart';
-import 'package:teentalktalk/ui/helpers/get_mobile_code_data.dart';
-import 'package:teentalktalk/ui/helpers/kakao_sdk_share.dart';
-import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class DetailNoticePage extends StatefulWidget {
   const DetailNoticePage(
