@@ -66,7 +66,7 @@ router.post("/signup", async function(req, res) {
     console.log('login-router signup result:'+result.code);
     if (result.code == 0) {
       console.log('login-router signup success');
-      res.status(200).send({ message: '회원 등록에 성공했습니다.'});
+      res.status(200).send({ message: '회원 등록에 성공했습니다.', code: 0});
     } else {
       console.log('login-router signup fail');
       res.status(400).send({ message: result.msg, code: result.code });

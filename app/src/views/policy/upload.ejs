@@ -11,9 +11,8 @@
 <body>
   <div class='common-background-bar background-bar-policyManage'></div>
   <div class='common-border-bar border-bar-policyManage'></div>
-  <%- include('../layout.ejs') %>
+  <%- include('../layout.ejs', { pageTitle: '정책 등록' }) %>
 <section>
-  <div class="pagename">정책 등록</div>
   <div>
     <form action="/admin/policy/upload" method="post" enctype="multipart/form-data">
       <div class="ui form">

@@ -12,9 +12,8 @@
 <body>
   <div class='common-background-bar background-bar-policyManage'></div>
   <div class='common-border-bar border-bar-policyManage'></div>
-  <%- include('../layout.ejs') %>
+  <%- include('../layout.ejs', { pageTitle: '정책 수정' }) %>
 <section>
-  <div class="pagename">정책 수정</div>
   <div>
     <form action="/admin/policy/update/<%=post.board_idx %>" method="post" enctype="multipart/form-data">
       <div class="ui form">
