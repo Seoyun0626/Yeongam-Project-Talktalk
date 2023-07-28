@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:teentalktalk/domain/services/notice_services.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -60,7 +61,9 @@ class NoticePage extends StatelessWidget {
                       color: ThemeColors.basic,
                       height: 3,
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      noticeService.getNoticeData();
+                    },
                   ),
                 )
               ]),

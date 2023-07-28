@@ -141,7 +141,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           event.currentPassword, event.newPassword);
 
       await Future.delayed(const Duration(milliseconds: 450));
-      print(data.resp);
+      // print(data.resp);
 
       if (data.resp) {
         emit(SuccessUserState());

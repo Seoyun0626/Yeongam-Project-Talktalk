@@ -34,8 +34,8 @@ router.get("/get-user-by-id", verifyToken, async function(req, res){
       console.log('mobile-router change password');
       var result = await mobile_user_controller.changePassword(req, res);
       console.log(result);
-  
       switch (result) {
+        
         case 1:
           res.json({
             resp: true,

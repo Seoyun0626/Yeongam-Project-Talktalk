@@ -210,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                               await KakaoLoginServices.kakaoGetUserInfo();
                           // 카카오 계정 중복 체크
                           final bool isFirstKakaoLogin =
-                              await authServices.checkDuplicateID(
+                              await authService.checkDuplicateID(
                                   userInfo['user_id']!); // db에서 계정 중복 확인
                           if (!isFirstKakaoLogin) {
                             // 가입한 계정이 없으면 가입
