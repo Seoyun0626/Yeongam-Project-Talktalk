@@ -314,7 +314,7 @@ exports.deleteUser = async function(req, res) {
     // 유저의 스크랩 policy_uid에 따라 스크랩 수 감소
     for (var i = 0; i < scrapRows.length; i++) {
       const policy_uid = scrapRows[i].policy_uid;
-      const policyQuery = 'UPDATE webdb.tb_policy SET is_scrapped = is_scrapped - 1 WHERE policy_uid = ?'; // 스크랩 수 감소
+      const policyQuery = 'UPDATE webdb.tb_policy SET count_scraps = count_scraps - 1 WHERE uid = ?'; // 스크랩 수 감소
       await conn.query(policyQuery, [policy_uid]);
     }
 

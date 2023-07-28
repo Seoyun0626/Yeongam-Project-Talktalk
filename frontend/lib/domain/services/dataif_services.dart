@@ -15,7 +15,7 @@ class DataIfServices {
         Uri.parse('${Environment.urlApi}/dataif/submit-inquiry'),
         headers: {'Accept': 'application/json'},
         body: {'email': email, 'inquiry_type_code': code, 'content': content});
-    print(resp.body);
+    // print(resp.body);
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 
@@ -38,7 +38,7 @@ class DataIfServices {
       'title': title, // 제목
       'content': content, // 내용
     });
-    print(resp.body);
+    // print(resp.body);
     return DefaultResponse.fromJson(jsonDecode(resp.body));
   }
 }

@@ -39,6 +39,8 @@ try{
               if (hash != userPass) {
                 json.code = 200;
                 json.msg = "패스워드가 일치하지 않습니다.";
+                console.log(userPass)
+                console.log(hash)
                 json.data = {};
               } else {
                 // console.log('login-service json.code', json.code);
@@ -76,7 +78,8 @@ exports.signUp = async function(req, res) {
     var fig = 0;
     var query = "SELECT userid FROM webdb.tb_user where userid='" + userid + "' ;";
     var rows = await conn.query(query); // 쿼리 실행
-    if(name=='' || req.body.email=='' || req.body.password=='' || req.body.password2=='') {
+    console.log(req.body.user_email)
+    if(name=='' || req.body.user_email=='' || req.body.password=='' || req.body.password2=='') {
       json.code = 200;
       console.log('dataif-service update: empty data');
       return json;
@@ -95,6 +98,7 @@ exports.signUp = async function(req, res) {
           const uidUser = uuidv4();
           var query = "INSERT INTO webdb.tb_user (uid, userid, userpw, user_name, salt, user_role, user_email, user_type, youthAge_code, parentsAge_code, emd_class_code, sex_class_code, fig) values ('"+uidUser+"', '"+req.body.userid+"','"+hash+"','"+req.body.user_name+"', '"+salt+"', '"+req.body.user_role+"', '"+req.body.user_email+"', '"+req.body.user_type+"', '"+req.body.youthAge_code+"','"+req.body.parentsAge_code+"', '"+req.body.emd_class_code+"', '"+req.body.sex_class_code+"', '"+fig+"')";
           var rows = await conn.query(query); // 쿼리 실행
+          console.log(query)
           console.log('회원 등록에 성공했습니다.');
           json.code = 0;
           json.msg = "회원 등록에 성공했습니다.";

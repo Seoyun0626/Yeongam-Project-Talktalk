@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // print(event.userid);
       // print(event.userpw);
 
-      final data = await authServices.login(event.userid, event.userpw);
+      final data = await authService.login(event.userid, event.userpw);
       // print('_onLogin data.resp');
       print(data.resp);
       await Future.delayed(const Duration(milliseconds: 350));
@@ -57,8 +57,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(LoadingAuthentication());
       print("_onKakaoLogin");
 
-      final data =
-          await authServices.kakaoLogin(event.userid, event.user_email);
+      final data = await authService.kakaoLogin(event.userid, event.user_email);
 
       print(data.resp);
       await Future.delayed(const Duration(milliseconds: 350));
@@ -86,7 +85,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (token != null) {
         // 사용자 토큰이 있ㅇ르 때 renewLogin 호출
-        final data = await authServices.renewLogin();
+        final data = await authService.renewLogin();
 
         if (data.resp) {
           // 토큰이 유효하고 사용자 정보를 받아온 경우

@@ -52,7 +52,7 @@ router.get("/logout", function(req, res) {
 
 
 // 사용자등록
-router.get("/signup", ensureAuth, asyncHandler(async function (req, res) {
+router.get("/signup",ensureAuth, asyncHandler(async function (req, res) {
   var code_data = await code_controller.getCodeData(req, res);
   res.render('dataif/signup', {title: '회원가입', sess: req.session,
     code_data: code_data
@@ -61,8 +61,8 @@ router.get("/signup", ensureAuth, asyncHandler(async function (req, res) {
 router.post("/signup", async function(req, res) {
   try{
     // 사용자등록 컨트롤러 호출
-    console.log(req.body)
     var result = await login_controller.signUp(req, res);
+    // console.log(result);
     console.log('login-router signup result:'+result.code);
     if (result.code == 0) {
       console.log('login-router signup success');
