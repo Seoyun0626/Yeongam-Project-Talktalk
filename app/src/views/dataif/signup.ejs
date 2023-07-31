@@ -131,14 +131,14 @@
                   </div>
                 </div>
               </div>
-              <div style="width: 112px; height: 45px; padding-left: 40px; padding-right: 40px; padding-top: 12px; padding-bottom: 12px; background: #F57521; border-radius: 60px; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-                <div style="text-align: center; color: white; font-size: 18px; font-family: Pretendard; font-weight: 600; word-wrap: break-word">등록</div>
+              <div class="button-container">
+                <button class="register-button" type="submit" onclick="return btn()">
+                  <div class="register-text">등록</div>
+                </div>
+                <button class="register-button" type="button" onclick="return cancel()">
+                  <div class="register-text">취소</div>
+                </div>
               </div>
-              <div>
-                  <button class="ui button" type="submit" onclick="return btn()">등록</button>
-                  <button class="ui button" type="button" onclick="return cancel()">취소</button>
-              </div>
-              
             </form>
             <script>
               document.getElementById("frm_signup").addEventListener('submit', function(event) {

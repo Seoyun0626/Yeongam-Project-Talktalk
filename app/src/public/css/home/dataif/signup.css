@@ -32,7 +32,7 @@ input:-webkit-autofill {
   }
   
   .input-container {
-    width: 316px;
+    width: 250px;
     height: 34px;
     background: white;
     border-radius: 8px;
@@ -41,13 +41,12 @@ input:-webkit-autofill {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding-left: 20px;
     margin-left : 10px;
     margin-top: 8px;
   }
   
   .input-container input {
-    width: 300px;
+    width: 200px;
     height: 34px;
     background: transparent;
     border: none;
@@ -63,9 +62,35 @@ input:-webkit-autofill {
   }
   
   
+/* 등록 버튼 */
+  .register-button {
+    width: 80px;
+    height: 30px;
+    background: #F57521;
+    border-radius: 15px;;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .register-button:hover {
+    background-color: #E05D1F; /* Change background color on hover */
+  }
+  .register-text {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-family: Pretendard;
+    font-weight: 600;
+    word-wrap: break-word;
+  }
+  .button-container {
+    display: inline-flex;
+    margin-top: 10px;
+  }
 
   .dropdown-container {
-    width: 200px;
+    width: 150px;
     height: 34px;
     background: white;
     border-radius: 8px;

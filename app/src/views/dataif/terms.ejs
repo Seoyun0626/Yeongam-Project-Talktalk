@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <title>Admin Page</title>
   <link rel="stylesheet" href="/css/home/layout.css">
-  <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/dataif/terms.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
   <script> 
@@ -27,7 +26,9 @@
 <section>
     <div>
       <form action="/admin/dataif/terms" method="post">
+        <label for="terms">회원 가입 약관</label><br>
         <textarea name="terms" id="terms" cols="100" rows="10" ><%= posts[0].terms %></textarea><br>
+        <label for="privacy">개인정보 처리방침</label><br>
         <textarea name="privacy" id="privacy" cols="100" rows="10"><%= posts[0].privacy %></textarea><br>
         <input type="submit" value="저장" onclick="return btn()">
       </form>
