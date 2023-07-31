@@ -66,7 +66,6 @@ CREATE TABLE webdb.`tb_policy` (
   `register_uid` varchar(100) NOT NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  --PRIMARY KEY (`board_idx`) USING BTREE 
   PRIMARY KEY (`board_idx`, `uid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- **기존 테이블에서 PK 추가 : uid
@@ -147,7 +146,7 @@ CREATE TABLE webdb.`tb_fig_usage`(
   `pid` varchar(100) NOT NULL,
   `uid` varchar(100) NOT NULL,
   `fig_used_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`fig_usage_no`) USING BTREE,
+  PRIMARY KEY (`fig_usage_no`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 무화과 잡화점 상품 정보
@@ -187,7 +186,7 @@ CREATE TABLE webdb.`tb_event_part`(
   `eid` varchar(100) NOT NULL,
   `uid` varchar(100) NOT NULL,
   `acquired_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 오타 aquired -> acquired
-  PRIMARY KEY (`event_part_no`) USING BTREE ,
+  PRIMARY KEY (`event_part_no`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 출석 체크 기록
@@ -215,8 +214,8 @@ CREATE TABLE webdb.`tb_policy_scrap` (
 
 -- 정책 스크랩 (new)
 -- add index (tb_policy와 tb_user의 uid 컬럼을 Foregin key로 가져오기 위해)
-ALTER TABLE `webdb.tb_user` ADD INDEX (`uid`);
-ALTER TABLE `webdb.tb_policy` ADD INDEX (`uid`);
+ALTER TABLE `tb_user` ADD INDEX (`uid`);
+ALTER TABLE `tb_policy` ADD INDEX (`uid`);
 
 CREATE TABLE webdb.`tb_policy_scrap`
 (

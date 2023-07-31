@@ -155,6 +155,7 @@ class _UserInfoState extends State<_UserInfo> {
         // 이름
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // 제목
             Column(
@@ -197,6 +198,7 @@ class _UserInfoState extends State<_UserInfo> {
             // 값
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextCustom(
                   text: userBloc.state.user!.user_name,
@@ -216,6 +218,7 @@ class _UserInfoState extends State<_UserInfo> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextCustom(
                       text: userBloc.state.user!.user_email,
@@ -292,8 +295,9 @@ class _UserExtraInfoState extends State<_UserExtraInfo> {
         // 이름
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // 제목
+            // 사용자 유형
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [

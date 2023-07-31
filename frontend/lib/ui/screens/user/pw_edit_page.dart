@@ -69,11 +69,6 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
             modalSuccess(context, '저장되었습니다!', onPressed: () {
               Navigator.pop(context);
               Navigator.pop(context);
-              // Navigator.pushReplacement(
-              //   context,
-              //   routeFade(page: const PrivacySettingPage()),
-              //   result: emailController.text.trim(),
-              // );
             });
           }
         },

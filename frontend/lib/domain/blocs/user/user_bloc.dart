@@ -143,10 +143,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       await Future.delayed(const Duration(milliseconds: 450));
       // print(data.resp);
 
+      final dataUser = await userService.getUserById();
+
       if (data.resp) {
         emit(SuccessUserState());
+        emit(state.copyWith(user: dataUser.user));
       } else {
         emit(FailureUserState(data.message));
+        emit(state.copyWith(user: dataUser.user));
       }
     } catch (e) {
       emit(FailureUserState(e.toString()));

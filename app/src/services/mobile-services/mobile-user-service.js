@@ -24,149 +24,97 @@ exports.getUserById = async function (req) {
   }
 };
 
-//   export const changePassword = async (req: Request, res: Response): Promise<Response> => {
 
-//     try {
-
-//         const { currentPassword, newPassword }: IChangePassword = req.body;
-
-//         const conn = await connect();
-
-//         const passdb = await conn.query<RowDataPacket[]>('SELECT passwordd FROM users WHERE person_uid = ?', [req.idPerson]);
-
-//         if( ! bcrypt.compareSync( currentPassword, passdb[0][0].passwordd ) ){
-//             return res.status(400).json({
-//                 resp: false,
-//                 message: 'La contraseña no coincide'
-//             });
-//         }
-
-//         const salt = bcrypt.genSaltSync();
-//         const newPass = bcrypt.hashSync( newPassword, salt );
-
-//         await conn.query('UPDATE users SET passwordd = ? WHERE person_uid = ?', [ newPass, req.idPerson ]);
-
-//         conn.end();
-
-//         return res.json({
-//             resp: true,
-//             message: 'Password changed successfully',
-//         });
-
-//     } catch(err) {
-//         return res.status(500).json({
-//             resp: false,
-//             message: err
-//         });
-//     }
-
-// }
-
-exports.changePassword = async function (req, res) {
+exports.changePassword = async function (req) {
   var conn;
   var resultcode = 0;
   try {
-    const uid = req.idPerson;
     conn = await db.getConnection();
-    console.log(req.body);
-    const { currentPass, newPass } = req.body;
+    const uid = req.idPerson;
+    const currentPass = req.body.currentPassword;
+    const newPass = req.body.newPassword;
 
-    // 현재 비밀번호 확인
-    // 사용자 정보(비밀번호, salt)
+    // 사용자 정보(비밀번호, salt) 불러오기
     const userdb = await conn.query(
       "SELECT userpw, salt FROM webdb.tb_user WHERE uid= ?;",
       [uid]
     );
 
     if (userdb && userdb[0]) {
-      var userPass = userdb[0].userpw;
-      var userSalt = userdb[0].salt;
-      // const result = await new Promise((resolve, reject) => {
-      //   hasher(
-      //     {
-      //       password: currentPass,
-      //       salt: userSalt,
-      //     },
-      //     async (err, pass, salt, hash) => {
+      const userPass = userdb[0].userpw;
+      const userSalt = userdb[0].salt;
 
-      //       if (err) {
-      //         console.log("mobile-user-service change password:" + err);
-      //         resultcode = 200; // 암호화 오류 발생
-      //       } else if (hash !== userPass) {
-      //         resultcode = 100; // 현재 비밀번호 불일치
-      //       } else {
-      //         // 현재 비밀번호 일치 -> 새 비밀번호와 다른지 확인
-      //         hasher(
-      //           { password: newPass },
-      //           async function (err, pass, salt, hash) {
-      //             if (err) {
-      //               console.log("mobile-user-service change password:" + err);
-      //               resultcode = 200; // 암호화 오류 발생
-      //             } else if (hash === userPass) {
-      //               resultcode = 300; // 새 비밀번호와 현재 비밀번호 일치: 비밀번호 변경 불가
-      //             } else {
-      //               try {
-      //                 // 새 비밀번호 변경, salt값도 변경
-      //                 query =
-      //                   "UPDATE webdb.tb_user SET userpw= ? , salt= ? WHERE uid= ?";
-      //                 rows = await conn.query(query, [hash, salt, uid]); // 쿼리 실행
-      //                 resultcode = 1; // 비밀번호 변경 성공
-      //                 console.log(
-      //                   "mobile-user-service change password:" + resultcode
-      //                 );
-      //               } catch (error) {
-      //                 console.log(
-      //                   "mobile-user-service change password:" + error
-      //                 );
-      //                 resultcode = 200; // 쿼리 실행 에러
-      //               }
-      //             }
-      //             resolve(resultcode);
-      //           }
-      //         );
-      //       }
-      //       resolve(resultcode);
-      //     }
-      //   );
-      // });
+      // 현재 비밀번호가 일치하는지 확인
+      // true : 일치 -> 비밀번호 변경 가능
+      // false : 불일치 -> 비밀번호 변경 불가능 "기존 비밀번호가 일치하지 않습니다."
+      const isCurrentPasswordMatch = await verifyPassword(currentPass, userPass, userSalt);
+      if (!isCurrentPasswordMatch) {
+        resultcode =  100; // 현재 비밀번호 불일치
+        return resultcode;
+      } else if (isCurrentPasswordMatch){
+        // 현재 비밀번호와 새 비밀번호가 일치하는지 확인
+        // true : 일치 -> 비밀번호 변경 불가능 "현재 비밀번호와 같습니다. 다르게 설정해주세요"
+        // false : 불일치 -> 비밀번호 변경 가능
+        const isNewPasswordMatch = await verifyPassword(newPass, userPass, userSalt);
 
-      hasher(
-        { password: newPass },
-        async function (err, pass, salt, hash) {
-          if (err) {
-            console.log("mobile-user-service change password:" + err);
-            resultcode = 200; // 암호화 오류 발생
-          } else if (hash === userPass) {
-            resultcode = 300; // 새 비밀번호와 현재 비밀번호 일치: 비밀번호 변경 불가
-          } else {
-            try {
-              // 새 비밀번호 변경, salt값도 변경
-              query =
-                "UPDATE webdb.tb_user SET userpw= ? , salt= ? WHERE uid= ?";
-              rows = await conn.query(query, [hash, salt, uid]); // 쿼리 실행
-              resultcode = 1; // 비밀번호 변경 성공
-              console.log(
-                "mobile-user-service change password:" + resultcode
-              );
-            } catch (error) {
-              console.log(
-                "mobile-user-service change password:" + error
-              );
-              resultcode = 200; // 쿼리 실행 에러
-            }
+        if (isNewPasswordMatch) {
+          resultcode = 300; // 새 비밀번호와 현재 비밀번호 일치 -> 비밀번호 변경 불가
+          return resultcode;
+        } else if (!isNewPasswordMatch){
+          try { // 새 비밀번호를 해싱하고 salt값도 변경하여 저장
+            const { password: newHash, salt } = await hashPassword(newPass);
+            const query =
+              "UPDATE webdb.tb_user SET userpw= ? , salt= ? WHERE uid= ?";
+            await conn.query(query, [newHash, salt, uid]); // 쿼리 실행
+            console.log(
+              "mobile-user-service change password: 비밀번호가 성공적으로 변경되었습니다."
+            );
+            resultcode = 1; // 비밀번호 변경 성공
+          } catch (error) {
+            console.log("mobile-user-service change password:" + error);
+            resultcode = 200; // 쿼리 실행 에러
           }
         }
-      );
-      
-      
-    }
-    return resultcode;
-  } catch (err) {
-    console.log("mobile-login-service change-password:" + err);
+        }
+      }
+    return resultcode; 
+  } catch (error) { // 사용자 정보를 찾을 수 없음
+    console.log("mobile-user-service change password:" + error);
+    resultcode = 200;
+    return resultcode; // 쿼리 실행 에러
   } finally {
     if (conn) conn.release();
   }
 };
+
+function verifyPassword(password, hashedPassword, salt) {
+  return new Promise((resolve, reject) => {
+    hasher({ password, salt }, (err, pass, salt, hash) => {
+      // console.log(pass);
+      // console.log(hash);
+      // console.log(hashedPassword);
+      // console.log(hash == hashedPassword);
+      // console.log('---------------');
+      if (err) {
+        reject(err);
+      } else {
+        resolve(hash === hashedPassword);
+      }
+    });
+  });
+}
+
+async function hashPassword(newPass) {
+  return new Promise((resolve, reject) => {
+    hasher({ password: newPass }, (err, pass, salt, hash) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve({ password: hash, salt });
+      }
+    });
+  });
+}
 
 exports.changeEmail = async function (req, res) {
   var conn;

@@ -165,33 +165,8 @@ class _PolicyListPageState extends State<PolicyListPage> {
     final String selectedCharacterCodeDetail =
         policyCharacter?.isNotEmpty == true ? policyCharacter![0].code : '';
 
-    // print(selectedInstitutionCodeName + selectedInstitutionCodeDetail);
-    // print(selectedTargetCodeName + selectedTargetCodeDetail);
-    // print(selectedFieldCodeName + selectedFieldCodeDetail);
-    // print(selectedCharacterCodeName + selectedCharacterCodeDetail);
-
-    // // 지역
-    // final String selectedAreaCodeName =
-    //     widget.selectedCodes.policyInstitution?.isNotEmpty == true
-    //         ? widget.selectedCodes.policyArea![0].codeName
-    //         : '';
-    // final String selectedAreaCodeDetail =
-    //     widget.selectedCodes.policyInstitution?.isNotEmpty == true
-    //         ? widget.selectedCodes.policyArea![0].code
-    //         : '';
-
     return BlocListener<PolicyBloc, PolicyState>(
-        listener: (context, state) {
-          // if (state is LoadingPolicy) {
-          //   modalLoadingShort(context);
-          // }
-
-          // else if (state is SuccessPolicyScrap) {
-          //   modalSuccess(context, '스크랩 완료', onPressed: () {
-          //     // Navigator.of(context).pop();
-          //   });
-          // }
-        },
+        listener: (context, state) {},
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
@@ -717,6 +692,12 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                             child: Image.network(
                               imgUrl,
                               fit: BoxFit.fill,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                  'images/default_policy_img.png',
+                                  fit: BoxFit.fill,
+                                );
+                              },
                             ),
                             // Image(
                             //   image: AssetImage(imgUrl),
