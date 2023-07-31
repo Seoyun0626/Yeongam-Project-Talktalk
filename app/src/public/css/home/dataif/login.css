@@ -7,15 +7,22 @@ body {
   align-items: center;
   height: 100vh;
 }
+/* 폰트 사용 */
+@font-face {
+  font-family: 'CookieRun-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 .AdminLogin {
-  width: 350px; /* 좌우 여백을 넓힌 너비 */
-  height: 400px;
+  width: 250px; /* 좌우 여백을 넓힌 너비 */
+  height: 330px;
   background: white;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
   border: 0.50px #D9D9D9 solid;
-  padding: 40px;
+  padding: 30px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -64,10 +71,11 @@ input[type="password"] {
 
 .TalkLogo {
   width: 100%;
-  font-size: 36px;
+  font-size: 30px;
   font-family: Pretendard;
   font-weight: 600;
   color: #F57521;
+  font-family: CookieRun-Regular;
   margin-bottom: 10px;
 }
 

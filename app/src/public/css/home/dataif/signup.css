@@ -9,9 +9,10 @@ input:-webkit-autofill {
   
   .label-field {
     width: 140px;
-    height: 61px;
+    height: 50px;
     background: rgba(240, 241, 247, 0.50);
     border: 0.50px #C9C9C9 solid;
+    border-left: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -22,16 +23,17 @@ input:-webkit-autofill {
   
   .input-field {
     flex: 1;
-    height: 61px;
+    height: 50px;
     background: rgba(255, 255, 255, 0.50);
     border: 0.50px #C9C9C9 solid;
+    border-right: none;
     align-items: center;
     justify-content: center;
   }
   
   .input-container {
     width: 316px;
-    height: 45px;
+    height: 34px;
     background: white;
     border-radius: 8px;
     border: 0.50px #C9C9C9 solid;
@@ -41,11 +43,12 @@ input:-webkit-autofill {
     gap: 10px;
     padding-left: 20px;
     margin-left : 10px;
+    margin-top: 8px;
   }
   
   .input-container input {
     width: 300px;
-    height: 45px;
+    height: 34px;
     background: transparent;
     border: none;
     outline: none;
@@ -59,3 +62,46 @@ input:-webkit-autofill {
     color: #000; /* Change the color to black */
   }
   
+  
+
+  .dropdown-container {
+    width: 200px;
+    height: 34px;
+    background: white;
+    border-radius: 8px;
+    border: 0.50px #C9C9C9 solid;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 20px;
+    margin-left: 10px;
+    margin-top: 8px;
+    position: relative;
+  }
+  
+  .ui.fluid.dropdown {
+    flex: 1;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-family: Pretendard;
+    font-weight: 500;
+    color: #000;
+    appearance: none;
+  }
+
+/* 드롭다운 아이콘 스타일 */
+.dropdown-icon {
+  font-size: 14px;
+  color: #000;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* 드롭다운 메뉴 열었을 때의 아이콘 스타일 */
+.dropdown-container.open .dropdown-icon {
+  transform: rotate(180deg);
+}  
