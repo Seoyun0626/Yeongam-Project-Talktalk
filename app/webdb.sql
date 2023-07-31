@@ -63,7 +63,7 @@ CREATE TABLE webdb.`tb_policy` (
   `max_fund` int(10) NOT NULL,
   `content` varchar(1000) NULL,
   `img` varchar(30) NULL,
-  `register_uid` varchar(100) NOT NULL,
+  `register_uid` varchar(100) NULL,
   `ins_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `upd_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   --PRIMARY KEY (`board_idx`) USING BTREE 
