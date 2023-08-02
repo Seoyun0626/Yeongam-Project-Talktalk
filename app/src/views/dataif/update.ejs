@@ -3,8 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <title>Admin Page</title>
-  <link rel="stylesheet" href="/semantic/layout.css">
-  <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/dataif/update.css">
   <link rel="stylesheet" href="/css/home/layout.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
@@ -17,45 +15,51 @@
     <div>
         <div>
           <form action="/admin/dataif/update/<%=post.userid %>" method="post" name="frm_signup" id="frm_signup">
-            <div class="ui form">
-              <div class="inline fields">
-                <label class="one wide field">이름</label>
-                <div class="four wide field" style="margin-right: 20px;">
+            <div class="form-row">
+              <div class="label-field">이름</div>
+              <div class="input-field">
+                <div class="input-container">
                   <input type="text" name="name" id="update_name" value="<%= post.user_name %>">
                 </div>
-                <label>아이디</label>
-                <div class="four wide field">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="label-field">아이디</div>
+              <div class="input-field">
+                <div class="input-container">
                   <%= post.userid %>
                 </div>
               </div>
             </div>
-            <br>
-            <div class="ui form">
-              <div class="inline fields">
-                <label class="one wide field">비밀번호</label>
-                <div class="four wide field" style="margin-right: 20px;">
-                  <input name="password" id="update_password" type="password" placeholder="비밀번호"">
+            <div class="form-row">
+              <div class="label-field">비밀번호</div>
+              <div class="input-field">
+                <div class="input-container">
+                  <input name="password" id="update_password" type="password" placeholder="비밀번호를 입력해주세요">
                 </div>
-                <div class="four wide field">
-                <input name="password2" id="update_password2" type="password" placeholder="비밀번호 확인"">
+                <div class="input-container">
+                  <input name="password2" id="update_password2" type="password" placeholder="비밀번호 확인"">
                 </div>
               </div>
             </div>
-            <br>
-            <!-- 드롭다운 -->
-            <div class="ui form">
-              <div class="inline fields">
-                <label class="one wide field">권한구분</label>
-                <div class="four wide field" style="margin-right: 20px;">
+            <div class="form-row">
+              <div class="label-field">권한구분</div>
+              <div class="input-field">
+                <div class="dropdown-container">
                   <select class="ui fluid dropdown" name="user_role" id="user_role">
                     <option value="0" <% if (post.user_role === '0') { %>selected<% } %>>사용자</option>
                     <option value="1" <% if (post.user_role === '1') { %>selected<% } %>>최고관리자</option>
                     <option value="2" <% if (post.user_role === '2') { %>selected<% } %>>부관리자</option>
                     <option value="3" <% if (post.user_role === '3') { %>selected<% } %>>정책관리자</option>
                   </select>
+                  <div class="dropdown-icon">&#9660;</div>
                 </div>
-                <label>회원구분</label>
-                <div class="four wide field">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="label-field">회원구분</div>
+              <div class="input-field">
+                <div class="dropdown-container">
                   <select class="ui fluid dropdown" name="user_type" id="user_type">
                     <%for(var i=0; i<code_data.user_type.length; i++){%>
                       <%if(code_data.user_type[i].code_detail == post.user_type){%>
@@ -65,14 +69,14 @@
                       <%}%>
                     <%}%>
                   </select>
+                  <div class="dropdown-icon">&#9660;</div>
                 </div>
               </div>
             </div>
-            <br>
-            <div class="ui form">
-              <div class="inline fields">
-                <label class="one wide field">연령대</label>
-                <div class="four wide field" style="margin-right: 20px;">
+            <div class="form-row">
+              <div class="label-field">연령대</div>
+              <div class="input-field">
+                <div class="dropdown-container">
                   <select class="ui fluid dropdown" name="parentsAge_code" id="parentsAge_code">
                     <%for(var i=0; i<code_data.parentsAge_code.length; i++){%>
                       <%if(code_data.parentsAge_code[i].code_detail == post.parentsAge_code){%>
@@ -82,9 +86,14 @@
                       <%}%>
                     <%}%>
                   </select>
+                  <div class="dropdown-icon">&#9660;</div>
                 </div>
-                <label>학교</label>
-                <div class="four wide field">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="label-field">학교</div>
+              <div class="input-field">
+                <div class="dropdown-container">
                   <select class="ui fluid dropdown" name="youthAge_code" id="youthAge_code">
                     <%for(var i=0; i<code_data.youthAge_code.length; i++){%>
                       <%if(code_data.youthAge_code[i].code_detail == post.youthAge_code){%>
@@ -94,14 +103,14 @@
                       <%}%>
                     <%}%>
                   </select>
+                  <div class="dropdown-icon">&#9660;</div>
                 </div>
               </div>
             </div>
-            <br>
-            <div class="ui form">
-              <div class="inline fields">
-                <label class="one wide field">거주지</label>
-                <div class="four wide field" style="margin-right: 20px;">
+            <div class="form-row">
+              <div class="label-field">거주지</div>
+              <div class="input-field">
+                <div class="dropdown-container">
                   <select class="ui fluid dropdown" name="emd_class_code" id="emd_class_code">
                     <%for(var i=0; i<code_data.emd_class_code.length; i++){%>
                       <%if(code_data.emd_class_code[i].code_detail == post.emd_class_code){%>
@@ -111,45 +120,46 @@
                       <%}%>
                     <%}%>
                   </select>
+                    <div class="dropdown-icon">&#9660;</div>
                 </div>
-                <label>성별</label>
-                <div class="four wide field">
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="label-field">성별</div>
+              <div class="input-field">
+                <div class="dropdown-container">
                   <select class="ui fluid dropdown" name="sex_class_code" id="sex_class_code">
                     <option value="0" <% if (post.sex_class_code === '0') { %>selected<% } %>>남자</option>
                     <option value="1" <% if (post.sex_class_code === '1') { %>selected<% } %>>여자</option>
                     <option value="2" <% if (post.sex_class_code === '2') { %>selected<% } %>>선택 안함</option>
                   </select>
-                  </select>
+                    <div class="dropdown-icon">&#9660;</div>
                 </div>
               </div>
             </div>
-            <br>
-            <div class="ui form">
-              <div class="inline fields">
-                <label class="one wide field">이메일</label>
-                <div class="four wide field" style="margin-right: 20px;">
+            <div class="form-row">
+              <div class="label-field">이메일</div>
+              <div class="input-field">
+                <div class="input-container">
                   <input type="text" name="user_email" id="update_email" value="<%= post.user_email %>">
                 </div>
-                <a href="/admin/dataif/resetPW/<%= post.userid %>" onclick="reset_password()">비밀번호 초기화(test)</a>
-                <script>
-                  function reset_password() {
-                    if (!confirm("비밀번호를 초기화 하시겠습니까??")) {
-                      alert("취소 하였습니다.");
-                      return false;
-                    } else {
-                      document.getElementById("update_password").value = "1234";
-                    }
-                  }
-                </script>
               </div>
             </div>
+              <script>
+                function reset_password() {
+                  if (!confirm("비밀번호를 초기화 하시겠습니까??")) {
+                    alert("취소 하였습니다.");
+                    return false;
+                  } else {
+                    document.getElementById("update_password").value = "1234";
+                  }
+                }
+              </script>
+            </div>
+            <a href="/admin/dataif/resetPW/<%= post.userid %>" onclick="reset_password()">비밀번호 초기화(test)</a>
+            </div>
                   <br>
-                  <!-- <input type="checkbox" name="popup_agree" id="popup_agree">
-                  <label>팝업</label>
-                  <input type="checkbox" name="email_agree" id="email_agree">
-                  <label>이메일</label>
-                  <input type="checkbox" name="sms_agree" id="sms_agree">
-                  <label>문자</label> -->
                 <div>
                     <button class="ui button" type="submit" onclick="btn()">수정</button>
                     <script>
@@ -192,7 +202,6 @@
                           if (!confirm("취소 하시겠습니까??")) {
                               return false;
                           } else {
-                            alert("취소 하였습니다.");
                             location.href='/admin/dataif';
                           }
                       }
