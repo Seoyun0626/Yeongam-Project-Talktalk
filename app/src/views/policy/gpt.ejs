@@ -12,8 +12,9 @@
 <body>
   <div class='common-background-bar background-bar-banner'></div>
   <div class='common-border-bar border-bar-banner'></div>
-  <%- include('../layout.ejs') %>
+  <%- include('../layout.ejs', { pageTitle: 'GPT' }) %>
   <section>
+    <!-- 테스트 페이지 -->
     <div id="chat-container">
       <div id="chat-log"></div>
       <input type="text" id="user-input" placeholder="Type your message..." />

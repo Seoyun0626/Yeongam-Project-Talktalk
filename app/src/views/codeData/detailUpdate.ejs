@@ -13,9 +13,8 @@
     <%- include('../layout.ejs', { pageTitle: '상세 코드 수정' }) %>
 <section>
     <div>
-        <div class="pagename">상세 코드 수정</div>
         <form action="/admin/codeData/detail/update/:<%=common_code%>:<%= detail_code%> %>" method="post">
-            <table id="code_detail_table">
+            <table class="codeData_table" id="code_detail_table">
                 <thead>
                     <tr>
                         <!-- <th>공통 코드</th> -->

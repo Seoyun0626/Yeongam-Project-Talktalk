@@ -3,9 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <title>Admin Page</title>
-  <link rel="stylesheet" href="/semantic/layout.css">
-  <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/layout.css">
+  <link rel="stylesheet" href="/css/home/policy/upload.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
 </head>
 <body>
@@ -15,109 +14,121 @@
 <section>
   <div>
     <form action="/admin/policy/upload" method="post" enctype="multipart/form-data">
-      <div class="ui form">
-        <div class="inline fields">
-          <label>정책 이름</label>
-          <div class="four wide field">
+      <div class="form-row">
+        <div class="label-field">정책 이름</div>
+        <div class="input-field">
+          <div class="input-container">
             <input type="text" name="name" id="name" placeholder="정책 이름">
           </div>
         </div>
       </div>
-      <br>
-      <div class="ui form">
-        <div class="inline fields">
-          <label>지원금&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
-          <div class="four wide field">
+      <div class="form-row">
+        <div class="label-field">지원금</div>
+        <div class="input-field">
+          <div class="input-container">
             <input type="text" name="min_fund" id="min_fund" placeholder="최소 금액">
           </div>
           <label>~</label>
-          <div class="four wide field">
+          <div class="input-container">
             <input type="text" name="max_fund" id="max_fund" placeholder="최대 금액">
           </div>
         </div>
       </div>
-      <br>
-      <div class="ui form">
-        <div class="inline fields">
-          <label>정책 대상</label>
-          <div class="four wide field">
-              <select class="ui fluid dropdown" name="target" id="target">
-                <%for(var i=0; i<code_data.policy_target_code.length; i++){%>
-                  <option value="<%=code_data.policy_target_code[i].code_detail%>"><%=code_data.policy_target_code[i].code_detail_name%></option>
-                <%}%>
-              </select>
+      <div class="form-row">
+        <div class="label-field">정책 대상</div>
+        <div class="input-field">
+          <div class="dropdown-container">
+            <select class="ui fluid dropdown" name="target" id="target">
+              <%for(var i=0; i<code_data.policy_target_code.length; i++){%>
+                <option value="<%=code_data.policy_target_code[i].code_detail%>"><%=code_data.policy_target_code[i].code_detail_name%></option>
+              <%}%>
+            </select>
+              <div class="dropdown-icon">&#9660;</div>
           </div>
-          <label>주관 기관</label>
-          <div class="four wide field">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="label-field">주관 기관</div>
+        <div class="input-field">
+          <div class="dropdown-container">
             <select class="ui fluid dropdown" name="policy_institution_code" id="policy_institution_code">
               <%for(var i=0; i<code_data.policy_institution_code.length; i++){%>
                 <option value="<%=code_data.policy_institution_code[i].code_detail%>"><%=code_data.policy_institution_code[i].code_detail_name%></option>
               <%}%>
             </select>
+              <div class="dropdown-icon">&#9660;</div>
           </div>
         </div>
       </div>
-      <br>
-      <div class="ui form">
-        <div class="inline fields">
-          <!-- 접수시작일 기본값을 현재 날짜로 설정 -->
-          <% var today = new Date(); %>
-          <% var year = today.getFullYear(); %>
-          <% var month = today.getMonth()+1; %>
-          <% var date = today.getDate(); %>
-          <% if(month<10){ month = "0"+month; } %>
-          <% if(date<10){ date = "0"+date; } %>
-          <% var today = year+"-"+month+"-"+date; %>
-          <label>접수 시작</label>
-          <div class="four wide field">
+      <!-- 접수시작일 기본값을 현재 날짜로 설정 -->
+      <% var today = new Date(); %>
+      <% var year = today.getFullYear(); %>
+      <% var month = today.getMonth()+1; %>
+      <% var date = today.getDate(); %>
+      <% if(month<10){ month = "0"+month; } %>
+      <% if(date<10){ date = "0"+date; } %>
+      <% var today = year+"-"+month+"-"+date; %>
+      <div class="form-row">
+        <div class="label-field">접수 시작</div>
+        <div class="input-field">
+          <div class="dropdown-container">
             <input type="date" name="application_start_date" id="application_start_date" value="<%=today%>">
-          </div>
-          <label>접수 마감</label>
-          <div class="four wide field">
-            <input type="date" name="application_end_date" id="application_end_date" value="<%=today%>">
+            <div class="dropdown-icon">&#9660;</div>
           </div>
         </div>
       </div>
-      <br>
-      <div class="ui form">
-        <div class="inline fields">
-          <label>정책 분야</label>
-          <div class="four wide field">
+      <div class="form-row">
+        <div class="label-field">접수 마감</div>
+        <div class="input-field">
+          <div class="dropdown-container">
+            <input type="date" name="application_end_date" id="application_end_date" value="<%=today%>">
+            <div class="dropdown-icon">&#9660;</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="label-field">정책 분야</div>
+        <div class="input-field">
+          <div class="dropdown-container">
             <select class="ui fluid dropdown" name="policy_field_code" id="policy_field_code">
               <%for(var i=0; i<code_data.policy_field_code.length; i++){%>
                 <option value="<%=code_data.policy_field_code[i].code_detail%>"><%=code_data.policy_field_code[i].code_detail_name%></option>
               <%}%>
             </select>
+              <div class="dropdown-icon">&#9660;</div>
           </div>
-          <label>정책 성격</label>
-          <div class="four wide field">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="label-field">정책 성격</div>
+        <div class="input-field">
+          <div class="dropdown-container">
             <select class="ui fluid dropdown" name="policy_character_code" id="policy_character_code">
               <%for(var i=0; i<code_data.policy_character_code.length; i++){%>
                 <option value="<%=code_data.policy_character_code[i].code_detail%>"><%=code_data.policy_character_code[i].code_detail_name%></option>
               <%}%>
             </select>
+              <div class="dropdown-icon">&#9660;</div>
           </div>
         </div>
       </div>
-      <br>
-      <div class="ui form">
-        <div class="inline fields">
-          <label>정책 링크</label>
-          <div class="nine wide field">
+      <div class="form-row">
+        <div class="label-field">정책 링크</div>
+        <div class="input-field">
+          <div class="dropdown-container">
             <input type="text" name="policy_link" id="policy_link" placeholder="정책 링크">
           </div>
         </div>
       </div>
-      <br>
-      <input type="hidden" name="content" id="content">
-      <div class="ui form">
-        <div class="inline fields">
-          <label>정책 사진</label>
-          <div class="nine wide field">
+      <div class="form-row">
+        <div class="label-field">정책 사진</div>
+        <div class="input-field">
+          <div class="dropdown-container">
             <input type="file" name="imgFile" id="imgFile" accept="image/*">
           </div>
         </div>
       </div>
+      <input type="hidden" name="content" id="content">
       <div class="ui form">        
         <textarea id="editor"></textarea>
       </div>

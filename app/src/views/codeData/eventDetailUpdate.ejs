@@ -13,9 +13,8 @@
     <%- include('../layout.ejs', { pageTitle: '이벤트 수정' }) %>
 <section>
     <div>
-        <div class="pagename">이벤트 수정</div>
         <form action="/admin/codeData/eventDetail/update/:<%= code_data[0].eid %> %>" method="post">
-            <table id="code_detail_table">
+            <table class="codeData_table" id="code_detail_table">
                 <thead>
                     <tr>
                         <th>EID</th>
