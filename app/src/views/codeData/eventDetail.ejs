@@ -3,16 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <title>Admin Page</title>
-  <link rel="stylesheet" href="/semantic/layout.css">
-  <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/layout.css">
   <link rel="stylesheet" href="/css/home/codeData/codeData.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
 </head>
 <body>
     <div class='common-background-bar background-bar-codeManage'></div>
-    <div class='common-border-bar border-bar-codeManage'></div>    
-  <%- include('../layout.ejs') %>
+    <div class='common-border-bar border-bar-codeManage'></div>     
+    <%- include('../layout.ejs', { pageTitle: '무화과 이벤트' }) %>
 <section>
     <div>
         <div class="pagename">무화과 이벤트</div>
