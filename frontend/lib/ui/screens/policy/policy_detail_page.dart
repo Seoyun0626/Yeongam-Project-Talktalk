@@ -51,11 +51,12 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
     // print(hasEventParticipated);
   }
 
-  Future<void> _shareURL() async {
+  Future<void> _shareURL(String policyName, String img, String policyId) async {
+    String dynamicLink = await buildDynamicLink(policyId);
     await FlutterShare.share(
-      title: 'Example share',
+      title: policyName,
       text: 'URL 복사하기',
-      linkUrl: '',
+      linkUrl: dynamicLink,
       // chooserTitle: 'Example Chooser Title',
     );
   }
@@ -128,11 +129,10 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                       eventService.giveFigForWeeklyFigChallenge('4');
                       modalGetFig(context, '4');
                     }
-                    // _shareURL();
-                    String dynamicLink = await buildDynamicLink(policyId);
-                    KakaoShareServices.kakaoSharePolicy(
-                        policyName, imgUrl, dynamicLink);
-                    // KakaoShareServices.kakaoSharePolicy();
+                    _shareURL(policyName, imgUrl, policyId);
+
+                    // KakaoShareServices.kakaoSharePolicy(
+                    //     policyName, imgUrl, dynamicLink);
                   },
                 ),
               ]),

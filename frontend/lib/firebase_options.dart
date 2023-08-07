@@ -67,8 +67,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '544962029679',
     projectId: 'teentalktalk-8e9d6',
     storageBucket: 'teentalktalk-8e9d6.appspot.com',
-    iosClientId: '544962029679-0ujfndnmfsuj9r8ks6ukaq1gecvvcrc6.apps.googleusercontent.com',
-    iosBundleId: 'com.example.login',
+    iosClientId:
+        '544962029679-0ujfndnmfsuj9r8ks6ukaq1gecvvcrc6.apps.googleusercontent.com',
+    iosBundleId: 'com.example.teenTalkTalk',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '544962029679',
     projectId: 'teentalktalk-8e9d6',
     storageBucket: 'teentalktalk-8e9d6.appspot.com',
-    iosClientId: '544962029679-0ujfndnmfsuj9r8ks6ukaq1gecvvcrc6.apps.googleusercontent.com',
-    iosBundleId: 'com.example.login',
+    iosClientId:
+        '544962029679-0ujfndnmfsuj9r8ks6ukaq1gecvvcrc6.apps.googleusercontent.com',
+    iosBundleId: 'com.example.teenTalkTalk',
   );
 }
