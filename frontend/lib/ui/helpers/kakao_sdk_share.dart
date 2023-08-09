@@ -20,7 +20,7 @@ class KakaoShareService {
   FeedTemplate getSharePolicyTemplate(
       String policyName, String policyImgLink, String link) {
     // print(policyImgLink);
-    // print(link);
+    print('getSharePolicyTemplate $link');
     Content content = Content(
         title: policyName,
         imageUrl: Uri.parse(policyImgLink),

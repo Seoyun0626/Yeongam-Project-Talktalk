@@ -73,6 +73,26 @@ exports.getAllPolicy = async function(req, res) {
 
 }
 
+exports.getPolicyById = async function(req, res) {
+    var conn;
+    try {
+        conn = await db.getConnection();
+        console.log('policy-service getPolicyById db getConnection');
+        var policyId = req.params.policyId;
+        
+        query = 'SELECT * FROM webdb.tb_policy WHERE uid = ?';
+        var rows = await conn.query(query, [policyId]); // 쿼리 실행
+        console.log(rows[0]);
+        return rows;
+    } catch(error) {
+        console.log('policy-service getPolicyById:'+error);
+    } finally {
+        if (conn) conn.release();
+        // conn.release();
+    }
+
+}
+
 
 
 

@@ -34,6 +34,14 @@ class PolicyServices {
     return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
   }
 
+  Future<List<Policy>> getPolicyById(String policyId) async {
+    final resp = await http.get(
+        Uri.parse('${Environment.urlApi}/policy/get-policy-by-id/$policyId'),
+        headers:
+            _setHeaders()); // {'Accept': 'application/json'}); //, 'xxx-token': token!});
+    return ResponsePolicy.fromJson(jsonDecode(resp.body)).policies;
+  }
+
   // // 코드 데이터
   // Future getCodeData() async {
   //   final resp = await http.get(

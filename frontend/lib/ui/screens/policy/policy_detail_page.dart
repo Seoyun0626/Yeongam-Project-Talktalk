@@ -6,6 +6,7 @@ import 'package:teentalktalk/data/env/env.dart';
 import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
 import 'package:teentalktalk/domain/models/response/response_policy.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
+import 'package:teentalktalk/domain/services/policy_services.dart';
 import 'package:teentalktalk/ui/helpers/firebase_dynamiclink.dart';
 import 'package:teentalktalk/ui/helpers/get_mobile_code_data.dart';
 import 'package:teentalktalk/ui/helpers/kakao_sdk_share.dart';
@@ -19,9 +20,9 @@ class DetailPolicyPage extends StatefulWidget {
   const DetailPolicyPage(
     this.policies, {
     Key? key,
-    // required this.codeData
   }) : super(key: key);
   final Policy policies;
+
   // final Map<String, dynamic> codeData;
   // final Future< dynamic> codeData;
 
@@ -53,12 +54,16 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
 
   Future<void> _shareURL(String policyName, String img, String policyId) async {
     String dynamicLink = await buildDynamicLink(policyId);
-    await FlutterShare.share(
-      title: policyName,
-      text: 'URL 복사하기',
-      linkUrl: dynamicLink,
-      // chooserTitle: 'Example Chooser Title',
-    );
+    try {
+      await FlutterShare.share(
+        title: policyName,
+        text: 'URL 복사하기',
+        linkUrl: dynamicLink,
+        // chooserTitle: 'Example Chooser Title',
+      );
+    } catch (e) {
+      print('Error sharing : $e');
+    }
   }
 
   @override
@@ -129,10 +134,11 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                       eventService.giveFigForWeeklyFigChallenge('4');
                       modalGetFig(context, '4');
                     }
-                    _shareURL(policyName, imgUrl, policyId);
-
-                    // KakaoShareServices.kakaoSharePolicy(
-                    //     policyName, imgUrl, dynamicLink);
+                    // _shareURL(policyName, imgUrl, policyId);
+                    policyService.getPolicyById(policyId);
+                    String dynamicLink = await buildDynamicLink(policyId);
+                    KakaoShareServices.kakaoSharePolicy(
+                        policyName, imgUrl, dynamicLink);
                   },
                 ),
               ]),
