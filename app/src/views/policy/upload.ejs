@@ -41,9 +41,11 @@
                 <option value="<%=code_data.policy_target_code[i].code_detail%>"><%=code_data.policy_target_code[i].code_detail_name%></option>
               <%}%>
             </select>
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.8123 1.91394L5.73399 5.99225C5.48372 6.24251 5.07796 6.24251 4.8277 5.99225L0.749389 1.91394C0.499124 1.66367 0.499124 1.25791 0.749389 1.00764C0.999655 0.75738 1.40542 0.75738 1.65568 1.00765L5.28084 4.63281L8.90601 1.00765C9.15628 0.75738 9.56204 0.75738 9.8123 1.00765C10.0626 1.25791 10.0626 1.66367 9.8123 1.91394Z" fill="black"/>
-            </svg>
+            <div class="dropdown-icon-container"> <!-- Add a container around the icon -->
+              <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.8123 1.91394L5.73399 5.99225C5.48372 6.24251 5.07796 6.24251 4.8277 5.99225L0.749389 1.91394C0.499124 1.66367 0.499124 1.25791 0.749389 1.00764C0.999655 0.75738 1.40542 0.75738 1.65568 1.00765L5.28084 4.63281L8.90601 1.00765C9.15628 0.75738 9.56204 0.75738 9.8123 1.00765C10.0626 1.25791 10.0626 1.66367 9.8123 1.91394Z" fill="black"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -56,7 +58,11 @@
                 <option value="<%=code_data.policy_institution_code[i].code_detail%>"><%=code_data.policy_institution_code[i].code_detail_name%></option>
               <%}%>
             </select>
-              <div class="dropdown-icon">&#9660;</div>
+            <div class="dropdown-icon-container"> <!-- Add a container around the icon -->
+              <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.8123 1.91394L5.73399 5.99225C5.48372 6.24251 5.07796 6.24251 4.8277 5.99225L0.749389 1.91394C0.499124 1.66367 0.499124 1.25791 0.749389 1.00764C0.999655 0.75738 1.40542 0.75738 1.65568 1.00765L5.28084 4.63281L8.90601 1.00765C9.15628 0.75738 9.56204 0.75738 9.8123 1.00765C10.0626 1.25791 10.0626 1.66367 9.8123 1.91394Z" fill="black"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -99,7 +105,11 @@
                 <option value="<%=code_data.policy_field_code[i].code_detail%>"><%=code_data.policy_field_code[i].code_detail_name%></option>
               <%}%>
             </select>
-              <div class="dropdown-icon">&#9660;</div>
+            <div class="dropdown-icon-container"> <!-- Add a container around the icon -->
+              <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.8123 1.91394L5.73399 5.99225C5.48372 6.24251 5.07796 6.24251 4.8277 5.99225L0.749389 1.91394C0.499124 1.66367 0.499124 1.25791 0.749389 1.00764C0.999655 0.75738 1.40542 0.75738 1.65568 1.00765L5.28084 4.63281L8.90601 1.00765C9.15628 0.75738 9.56204 0.75738 9.8123 1.00765C10.0626 1.25791 10.0626 1.66367 9.8123 1.91394Z" fill="black"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -112,14 +122,18 @@
                 <option value="<%=code_data.policy_character_code[i].code_detail%>"><%=code_data.policy_character_code[i].code_detail_name%></option>
               <%}%>
             </select>
-              <div class="dropdown-icon">&#9660;</div>
+            <div class="dropdown-icon-container"> <!-- Add a container around the icon -->
+              <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.8123 1.91394L5.73399 5.99225C5.48372 6.24251 5.07796 6.24251 4.8277 5.99225L0.749389 1.91394C0.499124 1.66367 0.499124 1.25791 0.749389 1.00764C0.999655 0.75738 1.40542 0.75738 1.65568 1.00765L5.28084 4.63281L8.90601 1.00765C9.15628 0.75738 9.56204 0.75738 9.8123 1.00765C10.0626 1.25791 10.0626 1.66367 9.8123 1.91394Z" fill="black"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
       <div class="form-row">
         <div class="label-field">정책 링크</div>
         <div class="input-field">
-          <div class="dropdown-container">
+          <div class="input-container">
             <input type="text" name="policy_link" id="policy_link" placeholder="정책 링크">
           </div>
         </div>
@@ -127,7 +141,7 @@
       <div class="form-row">
         <div class="label-field">정책 사진</div>
         <div class="input-field">
-          <div class="dropdown-container">
+          <div class="input-container">
             <input type="file" name="imgFile" id="imgFile" accept="image/*">
           </div>
         </div>

@@ -119,7 +119,13 @@ input:-webkit-autofill {
     color: #000;
     appearance: none;
   }
-
+  .dropdown-icon-container {
+    position: absolute;
+    top: 50%;
+    right: 8px; /* Adjust this value to move the icon away from the right edge */
+    transform: translateY(-50%);
+  }
+  
 /* 드롭다운 아이콘 스타일 */
 .dropdown-icon {
   font-size: 14px;
