@@ -74,9 +74,10 @@ input:-webkit-autofill {
   color: #000;
 }
 
-  
-
-  
+.file-container {
+  width: 100px;
+  padding-left: 15px;
+}
 /* 등록 버튼 */
 .register-button {
     width: 80px;
