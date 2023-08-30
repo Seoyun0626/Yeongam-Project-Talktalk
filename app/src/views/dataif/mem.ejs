@@ -102,7 +102,9 @@
               <td><%= user_type_to_name(posts[i].user_type,code_data) %></td>
               <td><%= `${posts[i].ins_date.getFullYear()}` + `-`+ `${posts[i].ins_date.getMonth()+1}` + `-`+ `${posts[i].ins_date.getDate()}`%></td>
               <td><a href="/admin/dataif/figManage/<%=posts[i].userid%>" style="color: #0000FF; text-decoration: underline;"><%=posts[i].fig%></a></td>
-              <td><a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a></td>
+              <td>
+                <a href="/admin/dataif/update/<%=posts[i].userid %>">수정</a>
+              </td>
               <td><a href="/admin/dataif/delete/<%= posts[i].userid %>" onclick="return delMem()">삭제</a></td>
               <script>
                 function delMem(){
