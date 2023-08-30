@@ -45,6 +45,10 @@ input:-webkit-autofill {
     margin-top: 8px;
   }
   
+.file-container {
+  width: 100px;
+  padding-left: 15px;
+}
   .input-container input {
     width: 200px;
     height: 34px;

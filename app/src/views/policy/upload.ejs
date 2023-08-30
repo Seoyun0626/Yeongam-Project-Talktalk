@@ -148,8 +148,14 @@
         </div> -->
         <br>
         <div>
-          <button class="ui button" type="submit" onclick="return btn()">등록</button>
-          <button class="ui button" type="button" onclick="return cancel()">취소</button>
+          <div class="button-container">
+            <button class="register-button" type="submit" onclick="return btn()">
+              <div class="register-text">등록</div>
+            </div>
+            <button class="register-button" type="button" onclick="return cancel()">
+              <div class="register-text">취소</div>
+            </div>
+          </div>
           <script>
             function cancel() {
                 if (!confirm("취소 하시겠습니까??")) {
