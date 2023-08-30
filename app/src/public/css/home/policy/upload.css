@@ -30,9 +30,8 @@ input:-webkit-autofill {
     align-items: center;
     justify-content: center;
   }
-  
   .input-container {
-    width: 250px;
+    width: 170px;
     height: 34px;
     background: white;
     border-radius: 8px;
@@ -56,10 +55,25 @@ input:-webkit-autofill {
     font-weight: 500;
     color: #000; /* Change the color to black */
   }
-  
+  .input-container input[type="text"] {
+    padding-left: 20px; /* 왼쪽 패딩 설정 */
+  }
   .input-container input::placeholder {
     color: #000; /* Change the color to black */
   }
+  /* '접수 시작'과 '접수 마감' input 요소 스타일 */
+.input-container input[type="date"] {
+  width: 110px; /* 너비 조정 */
+  height: 34px;
+  background: white;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: Pretendard;
+  font-weight: 500;
+  color: #000;
+}
+
   
 
   
@@ -126,11 +140,12 @@ input:-webkit-autofill {
     transform: translateY(-50%);
   }
   
-/* 드롭다운 아이콘 스타일 */
+
+/* 아이콘 스타일 */
 .dropdown-icon {
   font-size: 14px;
   color: #000;
-  margin-right: 10px;
+  margin-left: 10px; /* 왼쪽 여백 조정 */
   display: flex;
   align-items: center;
 }
