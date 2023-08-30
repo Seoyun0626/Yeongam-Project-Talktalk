@@ -160,8 +160,7 @@ def user_interact(query, model, msg_prompt_init):
                 recom_msg += f"{v}\n"
             count += 1
                 
-        print(f"{recom_msg}") 
-  
+        print(recom_msg)
 
     # 3-2. 설명이면
     elif 'desc' in user_intent:
@@ -183,7 +182,7 @@ def user_interact(query, model, msg_prompt_init):
                 desc_msg += f"{v}\n"
             count += 1
 
-        print(f"{desc_msg}")
+        print(desc_msg)
 # query = input()
 query = sys.argv[1]  # 첫 번째 인자가 userQuery
 user_interact(query, model, copy.deepcopy(msg_prompt))
