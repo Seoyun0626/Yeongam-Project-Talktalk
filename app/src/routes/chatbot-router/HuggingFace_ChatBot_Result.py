@@ -29,6 +29,7 @@ import warnings # 경고문 없애기 위한 라이브러리
 warnings.filterwarnings("ignore", message="Creating a tensor from a list of numpy.ndarrays is extremely slow.")
 
 
+sys.stdout.reconfigure(encoding='utf-8')
 ''' 1. OpenAI API 불러오기 '''
 load_dotenv()
 openai.api_key = os.getenv("api_key")
@@ -184,7 +185,7 @@ def user_interact(query, model, msg_prompt_init):
 
         print(desc_msg)
 # query = input()
-query = sys.argv[1]  # 첫 번째 인자가 userQuery
+query = sys.argv[1]  # 첫 번째 커맨드 라인 인자로 전달된 쿼리
 user_interact(query, model, copy.deepcopy(msg_prompt))
 desired_answer = input("원하시는 답변이 되셨나요? (yes/no): ")
 if desired_answer.lower() == "yes":

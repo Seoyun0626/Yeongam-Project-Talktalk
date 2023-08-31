@@ -18,8 +18,10 @@ router.post('/get-response', asyncHandler(async function (req, res) {
     var userQuery = req.body.query;
     userQuery = iconv.encode(userQuery, 'euc-kr');
     try {
-        const pythonProcess = spawn('python', [__dirname + '/HuggingFace_ChatBot_Result.py', userQuery]);
-        // console.log('pythonProcess:', pythonProcess);
+        const pythonProcess = spawn('python', [__dirname + '/HuggingFace_ChatBot_Result.py', userQuery], {
+            stdio: ['pipe', 'pipe', 'pipe'], // stdin, stdout, stderr
+            encoding: 'utf-8', // 인코딩 설정
+          });
         pythonProcess.stdout.on('data', (data) => {
             console.log(`stdout: ${data}`);
         });
