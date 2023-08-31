@@ -1,12 +1,16 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
 import 'package:teentalktalk/ui/helpers/get_mobile_code_data.dart';
+import 'package:teentalktalk/ui/screens/event/enter_invite_code_page.dart';
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_detail_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
+import 'package:teentalktalk/ui/screens/user/myTalkTalk_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../helpers/animation_route.dart';
 
 class CheckingLoginPage extends StatefulWidget {
@@ -75,7 +79,7 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
     final PendingDynamicLinkData? data =
         await FirebaseDynamicLinks.instance.getInitialLink();
     final Uri? deepLink = data?.link;
-    print('_initDynamicLinks : $deepLink');
+    // print('_initDynamicLinks : $deepLink');
 
     if (deepLink != null) {
       _handleDynamicLink(deepLink);
@@ -83,12 +87,12 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
   }
 
   void _handleDynamicLink(Uri deepLink) {
+    // 정책 링크로 접근
     // 딥링크의 경로가 비어 있지 않고, 첫 번째 경로 세그먼트가 'policy'와 일치하는지 확인
     if (deepLink.pathSegments.isNotEmpty &&
         deepLink.pathSegments.first == 'policy') {
       final Map<String, String> queryParams = deepLink.queryParameters;
       final String? policyId = queryParams['policyId'];
-      print(policyId);
 
       // 정책 ID가 존재하는 경우에만 정책 상세 페이지로 이동
       if (policyId != null) {
@@ -106,33 +110,51 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
             ),
           ),
         );
-      } else {
-        // 정책 ID가 없거나 경로가 일치하지 않는 경우, 에러 메시지를 표시하거나 처리
-        print(' 정책 ID가 없거나 경로가 일치하지 않는 경우');
+      } else if (deepLink.pathSegments.isNotEmpty &&
+          deepLink.pathSegments.first == 'invitation') {
+        final Map<String, String> queryParams = deepLink.queryParameters;
+        final String? invite_code = queryParams['code'];
+        // print(invite_code);
+
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MyTalkTalkPage(),
+            ));
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final userBloc = BlocProvider.of<UserBloc>(context);
-
     return Scaffold(
-        body: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-                color: Colors.red,
-                gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    colors: [
-                      ThemeColors.secondary,
-                      ThemeColors.primary,
-                      Colors.white
-                    ])),
-            child: Container()));
+        backgroundColor: ThemeColors.primary,
+        body: Center(
+          child: SvgPicture.asset(
+            'images/icon_logo.svg',
+          ),
+        ));
+  }
+}
 
-    // return BlocListener<AuthBloc, AuthState>(
+
+// Container(
+//             height: MediaQuery.of(context).size.height,
+//             width: MediaQuery.of(context).size.width,
+//             decoration: const BoxDecoration(
+//                 color: Colors.red,
+//                 gradient: LinearGradient(
+//                     begin: Alignment.bottomCenter,
+//                     colors: [
+//                       ThemeColors.secondary,
+//                       ThemeColors.primary,
+//                       Colors.white
+//                     ])),
+//             child: Container())
+
+
+
+// return BlocListener<AuthBloc, AuthState>(
     //   listener: (context, state) {
     //     // print(state);
 
@@ -200,5 +222,3 @@ class _CheckingLoginPageState extends State<CheckingLoginPage>
     //   ],
     // ),
     // ),
-  }
-}

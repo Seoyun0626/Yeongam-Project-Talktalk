@@ -30,8 +30,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // print(event.userpw);
 
       final data = await authService.login(event.userid, event.userpw);
-      // print('_onLogin data.resp');
-      print(data.resp);
+
+      // print('_onLogin');
+      // print(data.resp);
       await Future.delayed(const Duration(milliseconds: 350));
 
       if (data.resp) {

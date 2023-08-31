@@ -17,6 +17,7 @@ import 'package:teentalktalk/ui/helpers/modals/modal_scrap.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_success_register.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_unscrap.dart';
 import 'package:teentalktalk/ui/screens/event/new_weeklyFig_event_page.dart';
+import 'package:teentalktalk/ui/screens/login/no_login_page.dart';
 import 'package:teentalktalk/ui/screens/notification/notification_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_detail_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_list_page.dart';
@@ -49,6 +50,10 @@ class _HomePageState extends State<HomePage> {
     // if (authState is SuccessAuthentication) {
     //   checkEventParticipation();
     // }
+  }
+
+  void dispose() {
+    super.dispose();
   }
 
   Future<void> checkEventParticipation() async {
@@ -137,6 +142,11 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                               builder: (context) => const LoginPage()),
                         );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const NoLoginPage()),
+                        // );
                       } else {
                         // 로그인 상태일 경우 MyPage로 이동
                         Navigator.push(

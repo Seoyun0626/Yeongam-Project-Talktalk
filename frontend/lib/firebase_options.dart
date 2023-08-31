@@ -69,7 +69,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'teentalktalk-8e9d6.appspot.com',
     iosClientId:
         '544962029679-0ujfndnmfsuj9r8ks6ukaq1gecvvcrc6.apps.googleusercontent.com',
-    iosBundleId: 'com.example.teenTalkTalk',
+    iosBundleId: 'com.naru.teenTalkTalk',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -80,6 +80,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'teentalktalk-8e9d6.appspot.com',
     iosClientId:
         '544962029679-0ujfndnmfsuj9r8ks6ukaq1gecvvcrc6.apps.googleusercontent.com',
-    iosBundleId: 'com.example.teenTalkTalk',
+    iosBundleId: 'com.naru.teenTalkTalk',
   );
 }

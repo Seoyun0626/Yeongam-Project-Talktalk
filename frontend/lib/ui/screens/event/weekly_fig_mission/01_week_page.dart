@@ -10,6 +10,7 @@ import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/screens/event/new_weeklyFig_event_page.dart';
 import 'package:teentalktalk/ui/screens/home/home_page.dart';
 import 'package:teentalktalk/ui/screens/login/login_page.dart';
+import 'package:teentalktalk/ui/screens/login/no_login_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -269,6 +270,12 @@ class FirstWeekMissionPage extends StatelessWidget {
                                                   builder: (context) =>
                                                       // const userTypePage(isKakaoLogin: false,)
                                                       const LoginPage()));
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //         builder: (context) =>
+                                          //             // const userTypePage(isKakaoLogin: false,)
+                                          //             const NoLoginPage()));
                                         }
                                       },
                                       child: Center(

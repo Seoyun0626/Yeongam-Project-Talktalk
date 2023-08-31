@@ -11,6 +11,7 @@ import 'package:teentalktalk/ui/screens/event/enter_invite_code_page.dart';
 import 'package:teentalktalk/ui/screens/login/login_page.dart';
 import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/domain/blocs/blocs.dart';
+import 'package:teentalktalk/ui/screens/login/no_login_page.dart';
 import 'package:teentalktalk/ui/screens/settings/settings_page.dart';
 import 'package:teentalktalk/ui/screens/user/my_fig_history_page.dart';
 import 'package:teentalktalk/ui/screens/user/privacy_setting_page.dart';
@@ -251,6 +252,7 @@ class _LogInOutUserNameState extends State<_LogInOutUserName> {
             ),
             onTap: () {
               Navigator.push(context, routeSlide(page: const LoginPage()));
+              // Navigator.push(context, routeSlide(page: const NoLoginPage()));
             },
           );
         }

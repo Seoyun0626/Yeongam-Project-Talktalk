@@ -83,6 +83,7 @@ void modalLogout(
                     // Navigator.pop(context);
                     authBloc.add(OnLogOutEvent());
                     userBloc.add(OnLogOutUser());
+
                     Navigator.pushAndRemoveUntil(
                       context,
                       routeFade(page: const HomePage()),

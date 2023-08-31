@@ -5,6 +5,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:teentalktalk/domain/blocs/user/user_bloc.dart';
 import 'package:teentalktalk/domain/services/event_services.dart';
+import 'package:teentalktalk/ui/helpers/firebase_dynamiclink.dart';
 import 'package:teentalktalk/ui/helpers/kakao_sdk_share.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_access_denied.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
@@ -251,15 +252,18 @@ class _InviteEventPageState extends State<InviteEventPage> {
                                 depth: 2,
                                 lightSource: LightSource.topLeft,
                                 color: ThemeColors.secondary),
-                            onPressed: () {
+                            onPressed: () async {
                               print(isInvitePossible);
                               if (!isInvitePossible) {
                                 modalAccessDenied(
                                     context, '최대 3명까지만 초대할 수 있어요.',
                                     onPressed: () {});
                               } else {
+                                String dynamicLink =
+                                    await buildInvitationDynamicLink(
+                                        inviteCode);
                                 KakaoShareServices.kakaoInviteFreinds(
-                                    inviteCode);
+                                    inviteCode, dynamicLink);
                               }
                             },
                             child: Center(

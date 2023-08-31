@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:teentalktalk/ui/helpers/helpers.dart';
 
 import 'package:teentalktalk/ui/screens/event/event_page.dart';
 import 'package:teentalktalk/ui/screens/scrap/scrap.dart';

@@ -1,4 +1,4 @@
-package com.example.teenTalkTalk
+package com.naru.teenTalkTalk
 
 import io.flutter.embedding.android.FlutterActivity
 

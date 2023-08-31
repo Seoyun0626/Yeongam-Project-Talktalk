@@ -8,6 +8,7 @@ import 'package:teentalktalk/ui/helpers/helpers.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_getFig.dart';
 import 'package:teentalktalk/ui/screens/login/login_page.dart';
+import 'package:teentalktalk/ui/screens/login/no_login_page.dart';
 import 'package:teentalktalk/ui/screens/policy/policy_detail_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
@@ -167,6 +168,10 @@ class _ScrapPageState extends State<ScrapPage> {
                                               context,
                                               routeSlide(
                                                   page: const LoginPage()));
+                                          // Navigator.push(
+                                          //     context,
+                                          //     routeSlide(
+                                          //         page: const NoLoginPage()));
                                         },
                                         child: const TextCustom(
                                           text: '로그인',

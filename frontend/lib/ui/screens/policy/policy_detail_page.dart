@@ -53,7 +53,7 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
   }
 
   Future<void> _shareURL(String policyName, String img, String policyId) async {
-    String dynamicLink = await buildDynamicLink(policyId);
+    String dynamicLink = await buildPolicyDynamicLink(policyId);
     try {
       await FlutterShare.share(
         title: policyName,
@@ -136,7 +136,7 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                     }
                     // _shareURL(policyName, imgUrl, policyId);
                     policyService.getPolicyById(policyId);
-                    String dynamicLink = await buildDynamicLink(policyId);
+                    String dynamicLink = await buildPolicyDynamicLink(policyId);
                     KakaoShareServices.kakaoSharePolicy(
                         policyName, imgUrl, dynamicLink);
                   },

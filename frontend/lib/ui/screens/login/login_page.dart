@@ -44,14 +44,16 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    idController.clear();
-    idController.dispose();
-    passwordController.clear();
-    passwordController.dispose();
-    // idFocusNode.unfocus();
-    idFocusNode.dispose();
-    // pwFocusNode.unfocus();
-    pwFocusNode.dispose();
+    if (mounted) {
+      idController.clear();
+      idController.dispose();
+      passwordController.clear();
+      passwordController.dispose();
+      idFocusNode.unfocus();
+      idFocusNode.dispose();
+      pwFocusNode.unfocus();
+      pwFocusNode.dispose();
+    }
     super.dispose();
   }
 
@@ -63,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        print(state);
+        // print(state);
         // if (state is LoadingAuthentication) {
         //   modalLoading(context, '확인 중...');
         //   Navigator.of(context).pop();
@@ -75,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
             routeFade(page: const HomePage()),
             (_) => false,
           );
+
           userBloc.add(OnGetUserAuthenticationEvent());
         } else if (state is FailureAuthentication) {
           modalWarning(context, '다시 로그인해주세요');

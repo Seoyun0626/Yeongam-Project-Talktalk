@@ -7,13 +7,33 @@
     <list default="true" id="49ea026d-eeb6-4297-a9c2-66ac16087dc0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/login/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/login/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/profile/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GoogleService-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GoogleService-Info.plist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/data/env/env.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/env/env.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/firebase_options.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase_options.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/helpers/firebase_dynamiclink.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/helpers/firebase_dynamiclink.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/helpers/kakao_sdk_share.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/helpers/kakao_sdk_share.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/helpers/modals/modal_checkLogin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/helpers/modals/modal_checkLogin.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/helpers/modals/modal_success_register.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/helpers/modals/modal_success_register.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screens/event/invite_event_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/event/invite_event_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screens/event/weekly_fig_mission/01_week_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/event/weekly_fig_mission/01_week_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screens/home/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/home/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screens/intro/checking_login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/intro/checking_login_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ui/screens/policy/policy_detail_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/policy/policy_detail_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screens/scrap/scrap.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/scrap/scrap.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ui/screens/user/myTalkTalk_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ui/screens/user/myTalkTalk_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/linux/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Configs/AppInfo.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Runner/Configs/AppInfo.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/GoogleService-Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Runner/GoogleService-Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/runner/Runner.rc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/runner/Runner.rc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
