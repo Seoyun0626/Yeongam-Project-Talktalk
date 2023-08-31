@@ -132,14 +132,6 @@ router.get('/banner', ensureAuth, asyncHandler(async function (req, res) {
     var result = await policy_controller.fetchBannerData(req,res);
     res.render('policy/banner', {banner:result});
 }, 'policy-router banner/ error:'));
-router.post('/banner', asyncHandler(async function (req, res) {
-    var result = await policy_controller.banner(req,res);
-    if(result == 0) { //성공
-        res.redirect('/admin/policy/banner');
-    } else { //실패
-        res.redirect('/admin/policy/banner');
-    }
-}, 'policy-router banner/ error:'));
 router.get('/banner/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
     var banner_img = await policy_controller.fetchBannerImg(req, res);
     var result = await policy_controller.deleteBanner(req, res);
@@ -156,6 +148,18 @@ router.get('/banner/delete/:id', ensureAuth, asyncHandler(async function (req, r
     });
     res.redirect('/admin/policy/banner');
 }, 'policy-router banner delete/ error:'));
+
+router.get('/banner/upload', ensureAuth, asyncHandler(async function (req, res) {
+    res.render('policy/banner-upload');
+}, 'policy-router banner upload/ error:'));
+router.post('/banner/upload', asyncHandler(async function (req, res) {
+    var result = await policy_controller.banner(req,res);
+    if(result == 0) { //성공
+        res.redirect('/admin/policy/banner');
+    } else { //실패
+        res.redirect('/admin/policy/banner/upload');
+    }
+}, 'policy-router banner/ error:'));
 
 router.get('/regTest', function(req, res) {
     console.log('regTest');

@@ -242,7 +242,6 @@ exports.banner = async function(req, res) {
                 console.log('multer error:' + err);
             }
         });
-
         conn = await db.getConnection();
         console.log('policy-service banner db getConnection:', req.body);
         // console.log(req.body);

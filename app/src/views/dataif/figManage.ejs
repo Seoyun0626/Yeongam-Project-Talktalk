@@ -3,20 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <title>Admin Page</title>
-  <link rel="stylesheet" href="/semantic/layout.css">
-  <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/dataif/figManage.css">
   <link rel="stylesheet" href="/css/home/layout.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
 </head>
 <body>
-  <div class='common-background-bar background-bar-memManage'></div>
-  <div class='common-border-bar border-bar-memManage'></div>
   <%- include('../layout.ejs', { pageTitle: '무화과 사용 내역' }) %>
 <section>
     <div>
       <!-- <div class="pagename"><%=userid %></div> -->
-      <table>
+      <table id="fig_payment_table">
         <tr>
           <th>번호</th>
           <th>상품명</th>
@@ -36,7 +32,7 @@
       </table>
       <br><br>
       <div class="pagename">이벤트 참여 내역</div>
-      <table>
+      <table id="event_part_table">
         <tr>
           <th>번호</th>
           <th>이벤트명</th>

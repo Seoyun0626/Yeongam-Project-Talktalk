@@ -1,18 +1,15 @@
 //공용 모듈1
 const express = require('express'); //express
+const axios = require('axios'); // axios 라이브러리 import
 const bodyParser = require('body-parser'); //body-parser
 const dotenv = require("dotenv"); //환경변수
+const openai = require('openai');
 
 //모바일 모듈
 // const cors = require('cors'); //cors
 // const path = require('path'); //경로
 // const createServer = require('http'); //http 서버
 // const {promisfy} = require('promisfy'); //비동기 처리
-
-// chatgpt 모듈
-const openai = require('openai');
-
-
 
 dotenv.config();
 
@@ -39,6 +36,8 @@ const routerMobileCode = require("./src/routes/mobile-router/mobile-codeData-rou
 const routerMobileUser = require("./src/routes/mobile-router/mobile-user-router");
 const routerMobileDataif = require("./src/routes/mobile-router/mobile-dataif-router");
 const routerMobileEvent = require("./src/routes/mobile-router/mobile-event-router");
+
+const routerChatBot = require("./src/routes/chatbot-router/chatbot-router");
 
 //앱 세팅
 app.set("views", "./src/views"); //템플릿 파일 경로(views)
@@ -80,5 +79,8 @@ app.use("/mobile/codeData",routerMobileCode); // 모바일
 app.use("/mobile/user",routerMobileUser); // 모바일
 app.use("/mobile/dataif", routerMobileDataif); //모바일
 app.use("/mobile/event", routerMobileEvent); //모바일
+
+app.use("/chatbot", routerChatBot); //챗봇
+
 
 module .exports = app;

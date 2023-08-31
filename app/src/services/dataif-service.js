@@ -286,8 +286,8 @@ exports.update = async function(req, res) {
     hasher(
       {password:req.body.password}, async function(err, pass, salt, hash) {
         // const uidUser = uuidv4();
-        var query = 'update webdb.tb_user set  userpw=?, salt=?, user_name=?, user_email=?, user_role=?, user_type=?, emd_class_code=?, youthAge_code = ?, parentsAge_code = ? where userid=?';
-        await conn.query(query, [ hash, salt, req.body.name, req.body.user_email, req.body.user_role, req.body.user_type, req.body.emd_class_code, req.body.youthAge_code, req.body.parentsAge_code, userid]);      
+        var query = 'update webdb.tb_user set  userpw=?, salt=?, user_name=?, user_email=?, user_role=?, user_type=?, emd_class_code=?, youthAge_code = ?, parentsAge_code = ?, sex_class_code = ? where userid=?';
+        await conn.query(query, [ hash, salt, req.body.name, req.body.user_email, req.body.user_role, req.body.user_type, req.body.emd_class_code, req.body.youthAge_code, req.body.parentsAge_code, req.body.sex_class_code, userid]);      
       }
     );
     return resultcode;
