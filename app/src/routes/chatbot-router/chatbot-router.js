@@ -1,6 +1,7 @@
 const path = require("path");
 var express = require("express");
 var router = express.Router();
+var iconv  = require('iconv-lite');
 
 const ensureAuth = require("../../utils/middleware/ensureAuth");
 const asyncHandler = require("../../utils/middleware/asyncHandler");
@@ -14,8 +15,8 @@ router.get('/', asyncHandler(async function (req, res) {
 // Chatbot 요청을 처리하는 라우트 추가
 
 router.post('/get-response', asyncHandler(async function (req, res) {
-    const userQuery = req.body.query;
-
+    var userQuery = req.body.query;
+    userQuery = iconv.encode(userQuery, 'euc-kr');
     try {
         const pythonProcess = spawn('python', [__dirname + '/HuggingFace_ChatBot_Result.py', userQuery]);
         // console.log('pythonProcess:', pythonProcess);
@@ -29,13 +30,11 @@ router.post('/get-response', asyncHandler(async function (req, res) {
         pythonProcess.on('close', (code) => {
             console.log(`child process exited with code ${code}`);
         });
-        // console.log('pythonProcess:', pythonProcess);
         // 파이썬 코드의 출력을 수신
         let botResponse = '';
         pythonProcess.stdout.on('data', (data) => {
             botResponse += data.toString();
         });
-        // console.log('botResponse:', botResponse);
         pythonProcess.on('close', (code) => {
             console.log(`Python process exited with code ${code}`);
             // 클라이언트에 응답을 전달

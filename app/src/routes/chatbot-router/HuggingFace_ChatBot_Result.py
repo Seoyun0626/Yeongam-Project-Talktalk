@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 import pandas as pd
 import numpy as np
@@ -23,7 +24,6 @@ from transformers import GPT2TokenizerFast
 from PIL import Image
 from typing import List, Tuple, Dict
 from dotenv import load_dotenv
-
 ''' 추가한 코드 : 챗봇 답변 시에 출력되는 경고문 삭제를 위한 코드 '''
 import warnings # 경고문 없애기 위한 라이브러리
 warnings.filterwarnings("ignore", message="Creating a tensor from a list of numpy.ndarrays is extremely slow.")
