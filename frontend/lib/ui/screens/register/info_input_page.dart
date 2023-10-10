@@ -189,7 +189,7 @@ class _InfoInputPageState extends State<InfoInputPage> {
                                   ),
                                 );
                               } else {
-                                isDuplicate = await authServices
+                                isDuplicate = await authService
                                     .checkDuplicateID(userIDController.text);
                                 // print(isDuplicate);
 

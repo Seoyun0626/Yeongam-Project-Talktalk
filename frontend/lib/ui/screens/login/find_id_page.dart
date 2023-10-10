@@ -92,7 +92,9 @@ class _FindIDPageState extends State<FindIDPage> {
                   colorText: Colors.white,
                   fontWeight: FontWeight.bold,
                   width: size.width,
-                  onPressed: () {},
+                  onPressed: () {
+                    // user_services.dart로 이동
+                  },
                 ),
               ],
             ),

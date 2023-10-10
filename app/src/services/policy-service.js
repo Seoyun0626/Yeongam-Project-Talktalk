@@ -187,10 +187,14 @@ exports.upload = async function(req, res) {
         if (!min_fund) return 3;
         if (!max_fund) return 4;
         if (!application_start_date) return 5;
-        if (!application_end_date) return 6;              
+        if (!application_end_date) return 6;             
+        // register_uid 받아오기
+        register_userid = req.session.user.data.userid; 
+        register_uid = await conn.query("select uid from webdb.tb_user where userid='"+register_userid+"';");
+        register_uid = register_uid[0].uid;
         const uidPolicy = uuidv4(); // 정책 고유 번호
-        var query = "INSERT INTO webdb.tb_policy (uid, policy_name, policy_target_code, policy_institution_code, min_fund, max_fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link) VALUES "
-          + "('"+uidPolicy+"', '" + name + "', '" + target + "', '" + policy_institution_code + "', '" + min_fund + "', '" + max_fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "', '" + policy_link + "');";
+        var query = "INSERT INTO webdb.tb_policy (uid, policy_name, policy_target_code, policy_institution_code, min_fund, max_fund, content, img, application_start_date, application_end_date, policy_field_code, policy_character_code, policy_link, register_uid) VALUES "
+          + "('"+uidPolicy+"', '" + name + "', '" + target + "', '" + policy_institution_code + "', '" + min_fund + "', '" + max_fund + "', '" + content + "', '" + temp + "', '" + application_start_date + "', '" + application_end_date + "', '" + policy_field_code + "', '" + policy_character_code + "', '" + policy_link + "', '" + register_uid + "');";
         var rows = await conn.query(query); // 쿼리 실행
         console.log('policy-service upload success');
         return resultcode; //0이면 성공
@@ -238,7 +242,6 @@ exports.banner = async function(req, res) {
                 console.log('multer error:' + err);
             }
         });
-
         conn = await db.getConnection();
         console.log('policy-service banner db getConnection:', req.body);
         // console.log(req.body);

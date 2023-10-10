@@ -29,6 +29,24 @@ router.get('/get-all-policy/:sortOrderCode', async function(req, res){
       })
   }
   });
+
+  router.get('/get-policy-by-id/:policyId', async function(req, res){
+    try{
+      console.log(req.params.policyId);
+      var result = await mobile_policy_controller.getPolicyById(req,res);
+      res.json({
+        resp:true,
+        message : 'get policy by id',
+        policies : result,
+      })
+  } catch(error) {
+      console.log('policy-router get-policy-by-id error:'+error);
+      res.json({
+        resp:false,
+        message : 'Failure get-policy-by-id'
+      })
+  }
+  });
   
   
   

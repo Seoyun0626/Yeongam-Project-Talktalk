@@ -132,14 +132,6 @@ router.get('/banner', ensureAuth, asyncHandler(async function (req, res) {
     var result = await policy_controller.fetchBannerData(req,res);
     res.render('policy/banner', {banner:result});
 }, 'policy-router banner/ error:'));
-router.post('/banner', asyncHandler(async function (req, res) {
-    var result = await policy_controller.banner(req,res);
-    if(result == 0) { //성공
-        res.redirect('/admin/policy/banner');
-    } else { //실패
-        res.redirect('/admin/policy/banner');
-    }
-}, 'policy-router banner/ error:'));
 router.get('/banner/delete/:id', ensureAuth, asyncHandler(async function (req, res) {
     var banner_img = await policy_controller.fetchBannerImg(req, res);
     var result = await policy_controller.deleteBanner(req, res);
@@ -157,6 +149,18 @@ router.get('/banner/delete/:id', ensureAuth, asyncHandler(async function (req, r
     res.redirect('/admin/policy/banner');
 }, 'policy-router banner delete/ error:'));
 
+router.get('/banner/upload', ensureAuth, asyncHandler(async function (req, res) {
+    res.render('policy/banner-upload');
+}, 'policy-router banner upload/ error:'));
+router.post('/banner/upload', asyncHandler(async function (req, res) {
+    var result = await policy_controller.banner(req,res);
+    if(result == 0) { //성공
+        res.redirect('/admin/policy/banner');
+    } else { //실패
+        res.redirect('/admin/policy/banner/upload');
+    }
+}, 'policy-router banner/ error:'));
+
 router.get('/regTest', function(req, res) {
     console.log('regTest');
     var result = policy_controller.regTest(req, res);
@@ -168,21 +172,33 @@ router.get('/csv', ensureAuth, asyncHandler(async function (req, res) {
   try {
     // 정책 데이터 가져오기
     var result = await policy_controller.fetchpolicy(req, res);
-    
-    var fields = ['board_idx', 'policy_name', 'policy_target_code', 'policy_institution_code', 'policy_field_code', 'policy_character_code', 'min_fund', 'max_fund', 'application_start_date', 'application_end_date'];
+    var fields = ['board_idx', 'policy_name', 'policy_target_code', 'policy_institution_code', 'policy_field_code', 'policy_character_code', 'min_fund', 'max_fund', 'application_start_date', 'application_end_date', 'content'];
     var csv = json2csv(result, { fields: fields });
 
-    fs.writeFile('data.csv', csv, function(err) {
-      if (err) throw err;
-      console.log('File saved');
-    });
+    // fs.writeFile('data.csv', csv, function(err) {
+    //   if (err) throw err;
+    //   console.log('File saved');
+    // });
     
-    res.download('data.csv');
+    // res.download('data.csv');
+
+    fs.writeFile('data.csv', csv, function(err) {
+        if (err) {
+          console.error('File saving error:', err);
+          res.status(500).send('Internal Server Error');
+        } else {
+          console.log('File saved');
+          res.download('data.csv');
+        }
+      });
   } catch (error) {
     console.error('policy-router excel/ error:', error);
     res.status(500).send('Internal Server Error');
   }
 }));
 
+router.get('/gptPage', asyncHandler(async function (req, res) {
+    res.render('policy/gpt');
+}, 'policy-router gptPage/ error:'));
 
 module.exports = router;

@@ -11,7 +11,23 @@ exports.getBannerData = async function(req, res) {
         // console.log(rows);
         return rows;
     } catch(error) {
-        console.log('policy-service fetchBannerData:'+error);
+        console.log('main-service getBannerData:'+error);
+    } finally {
+        if (conn) conn.release();
+      }
+};
+
+exports.getNoticeData = async function(req, res) {
+    var conn;
+    try{
+        conn = await db.getConnection();
+        console.log('policy-service getNoticeData db getConnection');
+        var query = "SELECT * FROM webdb.tb_notice;";
+        var rows = await conn.query(query); // 쿼리 실행
+        // console.log(rows);
+        return rows;
+    } catch(error) {
+        console.log('main-service getNoticeData:'+error);
     } finally {
         if (conn) conn.release();
       }

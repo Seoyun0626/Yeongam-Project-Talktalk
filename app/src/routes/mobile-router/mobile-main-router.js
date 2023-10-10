@@ -21,7 +21,27 @@ router.get('/banner', async function (req, res) {
         console.log('mobile-router banner error:'+error);
         res.json({
           resp:false,
-          message : 'Failure get-policy-banner policies'
+          message : 'Failure get banners'
+        })
+    }
+  });
+
+  // 공지사항
+  router.get('/notice', async function (req, res) {
+    try{
+        var result = await mobile_main_controller.getNoticeData(req,res);
+
+        res.json({
+          resp:true,
+          message : 'get notice data',
+          notices : result
+        })
+        }
+    catch(error) {
+        console.log('mobile-router banner error:'+error);
+        res.json({
+          resp:false,
+          message : 'Failure get-notice-data'
         })
     }
   });

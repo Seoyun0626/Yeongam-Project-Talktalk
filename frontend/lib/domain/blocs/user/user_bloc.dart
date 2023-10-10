@@ -34,7 +34,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       OnGetUserAuthenticationEvent event, Emitter<UserState> emit) async {
     try {
       final data = await userService.getUserById();
-      print(data);
       print('_onGetUserAuthentication');
       emit(state.copyWith(user: data.user));
     } catch (e) {
@@ -141,16 +140,53 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           event.currentPassword, event.newPassword);
 
       await Future.delayed(const Duration(milliseconds: 450));
+      // print(data.resp);
+
+      final dataUser = await userService.getUserById();
 
       if (data.resp) {
         emit(SuccessUserState());
+        emit(state.copyWith(user: dataUser.user));
       } else {
         emit(FailureUserState(data.message));
+        emit(state.copyWith(user: dataUser.user));
       }
     } catch (e) {
       emit(FailureUserState(e.toString()));
     }
   }
+
+  // Future<void> _changePassword( OnChangePasswordEvent event, Emitter<UserState> emit ) async {
+
+  //   try {
+
+  //     emit( LoadingUserState() );
+
+  //     final data = await userService.changePassword(event.currentPassword, event.newPassword);
+
+  //     await Future.delayed(const Duration(milliseconds: 450));
+
+  //     final dataUser = await userService.getUserById();
+
+  //     if( data.resp ){
+
+  //       emit( SuccessUserState() );
+
+  //       emit( state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
+
+  //     }else{
+
+  //       emit( FailureUserState(data.message) );
+
+  //       emit( state.copyWith(user: dataUser.user, postsUser: dataUser.postsUser));
+
+  //     }
+
+  //   } catch (e) {
+  //     emit(FailureUserState(e.toString()));
+  //   }
+
+  // }
 
   Future<void> _changeEmail(
       OnChangeEmailEvent event, Emitter<UserState> emit) async {

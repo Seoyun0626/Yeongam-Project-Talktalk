@@ -3,20 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <title>Admin Page</title>
-  <link rel="stylesheet" href="/semantic/layout.css">
-  <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/layout.css">
   <link rel="stylesheet" href="/css/home/codeData/codeData.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
 </head>
 <body>
-    <div class='common-background-bar background-bar-codeManage'></div>
-    <div class='common-border-bar border-bar-codeManage'></div>    
-  <%- include('../layout.ejs') %>
+  <%- include('../layout.ejs', { pageTitle: '상세 코드 관리' }) %>
 <section>
     <div>
-        <div class="pagename">상세 코드 관리</div>
-        <table id="code_detail_table">
+        <table class="codeData_table" id="code_detail_table">
             <thead>
                 <tr>
                     <!-- <th>공통 코드</th> -->

@@ -13,6 +13,16 @@ exports.getAllPolicy = async function(req, res) {
       }
     };
 
+exports.getPolicyById = async function(req, res) {
+  try{
+      var result = await mobile_policy_service.getPolicyById(req,res);
+      // console.log(result);
+      return result;
+    } catch(error) {
+      console.log('policy-controller getPolicyById:'+error);
+    }
+  };
+
 
 
 

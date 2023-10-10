@@ -43,6 +43,20 @@ exports.deleteUser = (req, res) => executeService(dataif_service.deleteUser, req
 
 exports.excelData = (...args) => executeMultipleArgsService(dataif_service.excelData, 'excelData', ...args);
 
+// 개발 제안 이메일 전송
+// exports.sendSuggestionEmail = (req, res) => executeService(dataif_service.sendSuggestionEmail, req, res, 'sendSuggestionEmail');
+exports.sendSuggestionEmail = async function(req, res){
+  try{
+    var result = await dataif_service.sendSuggestionEmail(req);
+    return result;
+  } catch(error) {
+    console.log('dataif-controller sendSuggestionEmail:'+error);
+  }
+}
+
+
+// 문의사항 등록
+exports.submitInquiry = (req, res) => executeService(dataif_service.submitInquiry, req, res, 'submitInquiry');
 
 
 // 테스트

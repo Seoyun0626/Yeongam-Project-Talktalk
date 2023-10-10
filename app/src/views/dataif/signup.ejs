@@ -3,124 +3,172 @@
 <head>
   <meta charset="utf-8" />
   <title>Admin Page</title>
-  <link rel="stylesheet" href="/semantic/layout.css">
-  <link rel="stylesheet" href="/semantic/semantic.min.css">
   <link rel="stylesheet" href="/css/home/layout.css">
+  <link rel="stylesheet" href="/css/home/dataif/signup.css">
   <script src="/ckeditor/build/ckeditor.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-  <div class='common-background-bar background-bar-memManage'></div>
-  <div class='common-border-bar border-bar-memManage'></div>
-  <%- include('../layout.ejs') %>
+  <%- include('../layout.ejs', { pageTitle: '회원 등록' }) %>
 <section>
     <div>
-        <div class="pagename">회원 등록</div>
         <div>
             <form action="/admin/auth/signup" method="post" name="frm_signup" id="frm_signup">
-              <div class="ui form">
-                <div class="inline fields">
-                  <label class="one wide field">이름</label>
-                  <div class="four wide field" style="margin-right: 20px;">
-                    <input type="text" name="name" id="user_name" placeholder="이름">
-                  </div>
-                  <label class="one wide field">아이디</label>
-                  <div class="four wide field">
-                    <input type="text" name="userid" id="userid" placeholder="아이디">
+              <div class="form-row">
+                <div class="label-field">이름</div>
+                <div class="input-field">
+                  <div class="input-container">
+                    <input type="text" name="name" id="user_name" placeholder="이름을 입력해 주세요">
                   </div>
                 </div>
               </div>
-              <br>
-              <div class="ui form">
-                <div class="inline fields">
-                  <label class="one wide field">비밀번호</label>
-                  <div class="four wide field" style="margin-right: 20px;">
-                    <input name="password" id="user_password" type="password" placeholder="비밀번호">
-                  </div>
-                  <div class="four wide field">
-                    <input name="password2" id="user_password2" type="password" placeholder="비밀번호 확인">
+              <div class="form-row">
+                <div class="label-field">아이디</div>
+                <div class="input-field">
+                  <div class="input-container">
+                    <input type="text" name="userid" id="userid" placeholder="아이디를 입력해주세요.">
                   </div>
                 </div>
               </div>
-              <br>
-              <!-- 드롭다운 -->
-              <div class="ui form">
-                <div class="inline fields">
-                  <label class="one wide field">권한구분</label>
-                  <div class="four wide field" style="margin-right: 20px;">
+              <div class="form-row">
+                <div class="label-field">비밀번호</div>
+                <div class="input-field">
+                  <div class="input-container">
+                    <input type="password" name="password" id="user_password" placeholder="비밀번호를 입력해주세요.">
+                  </div>
+                  <div class="input-container">
+                    <input type="password" name="password2" id="user_password2" placeholder="비밀번호 확인">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="label-field">권한구분</div>
+                <div class="input-field">
+                  <div class="dropdown-container">
                     <select class="ui fluid dropdown" name="user_role" id="user_role">
                       <option value="0">사용자</option>
                       <option value="1">최고관리자</option>
                       <option value="2">부관리자</option>
                       <option value="3">정책관리자</option>
                     </select>
+                    <div class="dropdown-icon">&#9660;</div>
                   </div>
-                  <label class="one wide field">회원구분</label>
-                  <div class="four wide field">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="label-field">회원구분</div>
+                <div class="input-field">
+                  <div class="dropdown-container">
                     <select class="ui fluid dropdown" name="user_type" id="user_type">
                       <%for(var i=0; i<code_data.user_type.length; i++){%>
                         <option value="<%=code_data.user_type[i].code_detail%>"><%=code_data.user_type[i].code_detail_name%></option>
                       <%}%>
                     </select>
+                    <div class="dropdown-icon">&#9660;</div>
                   </div>
                 </div>
               </div>
-              <br>
-              <div class="ui form">
-                <div class="inline fields">
-                  <label class="one wide field">연령대</label>
-                  <div class="four wide field" style="margin-right: 20px;">
+              <div class="form-row">
+                <div class="label-field">연령대</div>
+                <div class="input-field">
+                  <div class="dropdown-container">
                     <select class="ui fluid dropdown" name="parentsAge_code" id="parentsAge_code">
                       <%for(var i=0; i<code_data.parentsAge_code.length; i++){%>
                         <option value="<%=code_data.parentsAge_code[i].code_detail%>"><%=code_data.parentsAge_code[i].code_detail_name%></option>
                       <%}%>
                     </select>
+                    <div class="dropdown-icon">&#9660;</div>
                   </div>
-                  <label class="one wide field">학교</label>
-                  <div class="four wide field">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="label-field">학교</div>
+                <div class="input-field">
+                  <div class="dropdown-container">
                     <select class="ui fluid dropdown" name="youthAge_code" id="youthAge_code">
                       <%for(var i=0; i<code_data.youthAge_code.length; i++){%>
                         <option value="<%=code_data.youthAge_code[i].code_detail%>"><%=code_data.youthAge_code[i].code_detail_name%></option>
                       <%}%>
                     </select>
+                    <div class="dropdown-icon">&#9660;</div>
                   </div>
                 </div>
               </div>
-              <br>
-              <div class="ui form">
-                <div class="inline fields">
-                  <label class="one wide field">거주지</label>
-                  <div class="four wide field" style="margin-right: 20px;">
-                    <select class="ui fluid dropdown" name="emd_class_code" id="emd_class_code">
-                      <%for(var i=0; i<code_data.emd_class_code.length; i++){%>
-                        <option value="<%=code_data.emd_class_code[i].code_detail%>"><%=code_data.emd_class_code[i].code_detail_name%></option>
-                      <%}%>
-                    </select>
-                  </div>
-                  <label class="one wide field">성별</label>
-                  <div class="four wide field">
-                    <select class="ui fluid dropdown" name="sex_class_code" id="sex_class_code">
-                      <option value="0">남자</option>
-                      <option value="1">여자</option>
-                      <option value="2">선택 안함</option>
-                    </select>
+              <div class="form-row">
+                <div class="label-field">거주지</div>
+                <div class="input-field">
+                  <div class="dropdown-container">
+                      <select class="ui fluid dropdown" name="emd_class_code" id="emd_class_code">
+                        <%for(var i=0; i<code_data.emd_class_code.length; i++){%>
+                          <option value="<%=code_data.emd_class_code[i].code_detail%>"><%=code_data.emd_class_code[i].code_detail_name%></option>
+                        <%}%>
+                      </select>
+                      <div class="dropdown-icon">&#9660;</div>
                   </div>
                 </div>
               </div>
-              <br>
-              <div class="ui form">
-                <div class="inline fields">
-                  <label class="one wide field">이메일</label>
-                  <div class="four wide field" style="margin-right: 20px;">
-                    <input type="text" name="user_email" id="user_email" placeholder="이메일">
+              <div class="form-row">
+                <div class="label-field">성별</div>
+                <div class="input-field">
+                  <div class="dropdown-container">
+                      <select class="ui fluid dropdown" name="sex_class_code" id="sex_class_code">
+                        <option value="0">남자</option>
+                        <option value="1">여자</option>
+                        <option value="2">선택 안함</option>
+                      </select>
+                      <div class="dropdown-icon">&#9660;</div>
                   </div>
                 </div>
               </div>
-              <br><br>
-              <div>
-                  <button class="ui button" type="submit" onclick="return btn()">등록</button>
-                  <button class="ui button" type="button" onclick="return cancel()">취소</button>
+              <div class="form-row">
+                <div class="label-field">이메일</div>
+                <div class="input-field">
+                  <div class="input-container">
+                      <input type="text" name="user_email" id="user_email" placeholder="이메일 주소를 입력해주세요.">
+                  </div>
+                </div>
+              </div>
+              <div class="button-container">
+                <button class="register-button" type="submit" onclick="return btn()">
+                  <div class="register-text">등록</div>
+                </div>
+                <button class="register-button" type="button" onclick="return cancel()">
+                  <div class="register-text">취소</div>
+                </div>
               </div>
             </form>
+            <script>
+              document.getElementById("frm_signup").addEventListener('submit', function(event) {
+                event.preventDefault();
+                fetch('/admin/auth/signup', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  userid: document.getElementById("userid").value,
+                  user_password: document.getElementById("user_password").value,
+                  user_name: document.getElementById("user_name").value,
+                  user_role: document.getElementById("user_role").value,
+                  user_type: document.getElementById("user_type").value,
+                  user_email: document.getElementById("user_email").value,
+                  parentsAge_code: document.getElementById("parentsAge_code").value,
+                  youthAge_code: document.getElementById("youthAge_code").value,
+                  emd_class_code: document.getElementById("emd_class_code").value,
+                  sex_class_code: document.getElementById("sex_class_code").value
+                })
+              }).then(response => response.json())
+              .then(data => {
+                if(data.code === 0){
+                  alert("회원가입이 완료되었습니다.");
+                  window.location.href = "/admin/dataif";
+                }else{
+                  alert(data.message);
+                }
+              })
+              .catch(error => console.error('Error:', error));
+              });
+              </script>
         </div>
     </div>
 </section>

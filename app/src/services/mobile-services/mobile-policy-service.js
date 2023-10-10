@@ -47,7 +47,7 @@ exports.getAllPolicy = async function(req, res) {
             query = "SELECT * FROM webdb.tb_policy ORDER BY count_scraps ASC;";
         } else if (sortOrderCode === '5') {
             // 마감일 순으로 정렬
-            query = "SELECT * FROM webdb.tb_policy ORDER BY application_release_date ASC;";
+            query = "SELECT * FROM webdb.tb_policy ORDER BY application_end_date ASC;";
         }  
         else if (sortOrderCode === '6') {
             // 등록 순으로 정렬
@@ -66,6 +66,26 @@ exports.getAllPolicy = async function(req, res) {
         return rows;
     } catch(error) {
         console.log('policy-service getAllPolicy:'+error);
+    } finally {
+        if (conn) conn.release();
+        // conn.release();
+    }
+
+}
+
+exports.getPolicyById = async function(req, res) {
+    var conn;
+    try {
+        conn = await db.getConnection();
+        console.log('policy-service getPolicyById db getConnection');
+        var policyId = req.params.policyId;
+        
+        query = 'SELECT * FROM webdb.tb_policy WHERE uid = ?';
+        var rows = await conn.query(query, [policyId]); // 쿼리 실행
+        console.log(rows[0]);
+        return rows;
+    } catch(error) {
+        console.log('policy-service getPolicyById:'+error);
     } finally {
         if (conn) conn.release();
         // conn.release();
@@ -279,7 +299,7 @@ exports.getPolicyBySelect = async function(req, res){
             query += " ORDER BY count_scraps ASC;";
         } else if (sortOrderCode === '5') {
             // 마감일 순으로 정렬
-            query += " ORDER BY application_release_date ASC;";
+            query += " ORDER BY application_end_date ASC;";
         } else if (sortOrderCode === '6') {
             // 등록 순으로 정렬
             query += " ORDER BY board_idx ASC;";

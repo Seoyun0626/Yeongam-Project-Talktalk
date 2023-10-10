@@ -171,6 +171,19 @@ class UserServices {
     return ResponseUserFigCount.fromJson(jsonDecode(resp.body));
   }
 
+  // 탈퇴 사유 내역 기록
+  Future<DefaultResponse> saveWithdrawalLog(String code, String etc) async {
+    final token = await secureStorage.readToken();
+    // print("saveWithdrawalLog");
+    final resp = await http.post(
+        Uri.parse('${Environment.urlApi}/user/save-withdrawal-log'),
+        headers: {'Accept': 'application/json', 'xxx-token': token!},
+        body: {'withdrawal_reason_code': code, 'etc': etc});
+    // print(resp.body);
+    return DefaultResponse.fromJson(jsonDecode(resp.body));
+  }
+
+  // 사용자 탈퇴
   Future<DefaultResponse> deleteUser() async {
     final token = await secureStorage.readToken();
     // print(token);

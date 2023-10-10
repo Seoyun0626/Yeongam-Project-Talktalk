@@ -53,7 +53,7 @@ exports.resetPW = async function(req, res) {
   try{
     conn = await db.getConnection();
     var userid = req.params.id;
-    // // 확인 이메일을 보내기 위해 이메일 주소 받아오기r where userid="'+userid+'"';
+    // 확인 이메일을 보내기 위해 이메일 주소 받아오기r where userid="'+userid+'"';
     var rows = await conn.query(query); // 쿼리 실행
     var email = rows[0].user_email;
     // var uid = rows[0].uid;
@@ -91,7 +91,7 @@ exports.resetPW = async function(req, res) {
         let mailOptions = {
           from: process.env.NODEMAILER_USER,
           to: email,
-          subject: '비밀번호 초기화',
+          subject: '[청소년 톡talk] 비밀번호 초기화',
           text: '임시 비밀번호는 '+tempPW+'입니다.'
       };
       transporter.sendMail(mailOptions, function(error, info){
@@ -271,6 +271,7 @@ exports.update = async function(req, res) {
   var resultcode=0;
   try{
     conn = await db.getConnection();
+    // console.log(req.body);
     var userid = req.params.id;
     if(req.body.name=='' || req.body.email=='' || req.body.password=='' || req.body.password2=='') {
       resultcode=100;
@@ -284,9 +285,9 @@ exports.update = async function(req, res) {
     }
     hasher(
       {password:req.body.password}, async function(err, pass, salt, hash) {
-        const uidUser = uuidv4();
-        var query = 'update webdb.tb_user set uid = ?, userpw=?, salt=?, user_name=?, user_email=?, user_role=?, user_type=?, emd_class_code=?, youthAge_code = ?, parentsAge_code = ? where userid=?';
-        await conn.query(query, [uidUser, hash, salt, req.body.name, req.body.user_email, req.body.user_role, req.body.user_type, req.body.emd_class_code, req.body.youthAge_code, req.body.parentsAge_code, userid]);      
+        // const uidUser = uuidv4();
+        var query = 'update webdb.tb_user set  userpw=?, salt=?, user_name=?, user_email=?, user_role=?, user_type=?, emd_class_code=?, youthAge_code = ?, parentsAge_code = ?, sex_class_code = ? where userid=?';
+        await conn.query(query, [ hash, salt, req.body.name, req.body.user_email, req.body.user_role, req.body.user_type, req.body.emd_class_code, req.body.youthAge_code, req.body.parentsAge_code, req.body.sex_class_code, userid]);      
       }
     );
     return resultcode;
@@ -296,13 +297,27 @@ exports.update = async function(req, res) {
     if (conn) conn.release();
   }
 };
+
 exports.deleteUser = async function(req, res) {
   var conn;
   try{
     conn = await db.getConnection();
     console.log('dataif-service delete:'+req.params.id);
-    var user = await conn.query('SELECT uid FROM webdb.tb_user WHERE userid = ?', [req.params.id]);
+    var user = await conn.query('SELECT uid FROM webdb.tb_user WHERE userid = ?', [req.params.id])
+
     var user_uid = user[0].uid;
+
+    // 유저의 스크랩 목록 받아오기
+    const scrapQuery = 'SELECT * FROM webdb.tb_policy_scrap WHERE user_uid = ?';
+    const scrapRows = await conn.query(scrapQuery, [user_uid]); // 스크랩 목록
+
+    // 유저의 스크랩 policy_uid에 따라 스크랩 수 감소
+    for (var i = 0; i < scrapRows.length; i++) {
+      const policy_uid = scrapRows[i].policy_uid;
+      const policyQuery = 'UPDATE webdb.tb_policy SET count_scraps = count_scraps - 1 WHERE uid = ?'; // 스크랩 수 감소
+      await conn.query(policyQuery, [policy_uid]);
+    }
+
     const deletePolicyScrapQuery = 'DELETE FROM webdb.tb_policy_scrap WHERE user_uid = ?';
     await conn.query(deletePolicyScrapQuery, [user_uid]);
     const deleteUserQuery = 'DELETE FROM webdb.tb_user WHERE userid = ?';
@@ -316,6 +331,60 @@ exports.deleteUser = async function(req, res) {
   }
 };
 
+// 사용자 개발 제안 이메일 전송 - 수정 필요
+exports.sendSuggestionEmail = async function(req, res) {
+  var resultcode = 0;
+  try{
+    const title = req.body.title;
+    const content = req.body.content;
+
+    let transporter = nodemailer.createTransport({
+      service : 'naver',
+      host: 'smtp.naver.com',
+      port : 587, 
+      auth : {
+        user: process.env.NODEMAILER_USER,
+        pass: process.env.NODEMAILER_PASS,
+      },
+    });
+
+    let mailOptions = {
+      from :process.env.NODEMAILER_USER, //user_email, 
+      to : process.env.NODEMAILER_USER,
+      subject : '[청소년 톡talk 사용자 제안] '+title,
+      text: content,
+    };
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent: ' + info.response);
+    resultcode = 1;
+  } catch(error) {
+    console.log('dataif-service sendSuggestionEmail:'+error);
+  }
+  // console.log(resultcode);
+  return resultcode;
+};
+
+  // 문의사항 등록
+  exports.submitInquiry = async function(req, res) {
+    var conn;
+    try{
+      conn = await db.getConnection();
+      // console.log(req.body);
+      var register_email = req.body.email;
+      var code = req.body.inquiry_type_code;
+      var content = req.body.content;
+  
+      var query = `INSERT INTO webdb.tb_inquiry (inquiry_type_code, content, register_email, ins_date) VALUES (?, ?, ?, CURRENT_TIMESTAMP)`;
+      var result = await conn.query(query, [code, content, register_email]);
+      return result
+
+    } catch(error) {
+      console.log('dataif-service submitInquiry:'+error);
+    } finally {
+      if(conn) conn.release();
+    }
+  };
+
 
 //테스트
 exports.findID = async function(req, res) {
@@ -324,12 +393,13 @@ exports.findID = async function(req, res) {
     var email = req.body.email;
     var name = req.body.name;
     conn = await db.getConnection();
-    var query = 'SELECT userid FROM webdb.tb_user where user_email = ? and name = ?';
-    var rows = await conn.query(query, [email, name]); // 쿼리 실행
+    var query = 'SELECT userid FROM webdb.tb_user where user_email="'+email+'" and user_name="'+name+'"';
+    var rows = await conn.query(query); // 쿼리 실행
     if(rows.length==0) {
       console.log('dataif-service findID: no data');
       return rows;
     }
+    return rows[0].userid;
   } catch(error) {
     console.log('dataif-service findID:'+error);
   } finally {

@@ -44,14 +44,16 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    idController.clear();
-    idController.dispose();
-    passwordController.clear();
-    passwordController.dispose();
-    // idFocusNode.unfocus();
-    idFocusNode.dispose();
-    // pwFocusNode.unfocus();
-    pwFocusNode.dispose();
+    if (mounted) {
+      idController.clear();
+      idController.dispose();
+      passwordController.clear();
+      passwordController.dispose();
+      idFocusNode.unfocus();
+      idFocusNode.dispose();
+      pwFocusNode.unfocus();
+      pwFocusNode.dispose();
+    }
     super.dispose();
   }
 
@@ -63,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        print(state);
+        // print(state);
         // if (state is LoadingAuthentication) {
         //   modalLoading(context, '확인 중...');
         //   Navigator.of(context).pop();
@@ -75,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
             routeFade(page: const HomePage()),
             (_) => false,
           );
+
           userBloc.add(OnGetUserAuthenticationEvent());
         } else if (state is FailureAuthentication) {
           modalWarning(context, '다시 로그인해주세요');
@@ -210,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
                               await KakaoLoginServices.kakaoGetUserInfo();
                           // 카카오 계정 중복 체크
                           final bool isFirstKakaoLogin =
-                              await authServices.checkDuplicateID(
+                              await authService.checkDuplicateID(
                                   userInfo['user_id']!); // db에서 계정 중복 확인
                           if (!isFirstKakaoLogin) {
                             // 가입한 계정이 없으면 가입
@@ -240,23 +243,23 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           InkWell(
                               onTap: () {
-                                modalPreparing(context);
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) => const FindIDPage(),
-                                //     ));
+                                // modalPreparing(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const FindIDPage(),
+                                    ));
                               },
                               child: const TextCustom(text: '아이디 찾기')),
                           InkWell(
                               onTap: () {
-                                modalPreparing(context);
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) =>
-                                //           const FindPasswordPage(),
-                                //     ));
+                                // modalPreparing(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const FindPasswordPage(),
+                                    ));
                               },
                               child: const TextCustom(text: '비밀번호 찾기')),
                           InkWell(

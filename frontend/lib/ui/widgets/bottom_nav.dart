@@ -31,6 +31,10 @@ class BottomNavigation extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => const HomePage()),
                   (_) => false)),
+
+          // Navigator.pushAndRemoveUntil(
+          //     context, routeSlide(page: const HomePage()), (_) => false)),
+
           _ItemButtom(
               i: 2,
               index: index,

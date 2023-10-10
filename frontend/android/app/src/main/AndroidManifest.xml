@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.login">
+    package="com.naru.teenTalkTalk">
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Provide required visibility configuration for API level 30 and above -->
     <queries>
@@ -17,7 +17,7 @@
     <application
         android:label="청소년 톡talk"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/icon_launcher">
 
         <!-- Firebase Messaging 및 Analytics 자동 초기화 비활성화 -->
         <meta-data

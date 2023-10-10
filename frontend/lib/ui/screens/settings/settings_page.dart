@@ -1,7 +1,12 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:teentalktalk/domain/blocs/auth/auth_bloc.dart';
+import 'package:teentalktalk/ui/helpers/modals/modal_checkLogin.dart';
 import 'package:teentalktalk/ui/helpers/modals/modal_preparing.dart';
 import 'package:teentalktalk/ui/screens/settings/notice_page.dart';
+import 'package:teentalktalk/ui/screens/settings/service_center_page.dart';
+import 'package:teentalktalk/ui/screens/settings/terms_page.dart';
 import 'package:teentalktalk/ui/screens/settings/withdrawal_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
@@ -11,6 +16,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authState = BlocProvider.of<AuthBloc>(context).state;
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -18,9 +25,10 @@ class SettingsPage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.white,
             elevation: 0,
+            centerTitle: true,
             title: const TextCustom(
               text: '설정',
-              color: Colors.black,
+              color: ThemeColors.basic,
               fontSize: 20,
               fontWeight: FontWeight.w600,
             ),
@@ -70,6 +78,70 @@ class SettingsPage extends StatelessWidget {
                   color: ThemeColors.basic,
                 ),
                 onTap: () {
+                  // modalPreparing(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NoticePage(),
+                      ));
+                },
+              ),
+              ListTile(
+                contentPadding: const EdgeInsets.only(left: 30, right: 30),
+                title: TextCustom(
+                  text: "고객 센터",
+                  fontSize: 18.sp,
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: ThemeColors.basic,
+                ),
+                onTap: () {
+                  if (authState is LogOut) {
+                    modalCheckLogin(context);
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ServiceCenterPage(),
+                        ));
+                  }
+                },
+              ),
+              ListTile(
+                contentPadding: const EdgeInsets.only(left: 30, right: 30),
+                title: TextCustom(
+                  text: "서비스 이용약관",
+                  fontSize: 18.sp,
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: ThemeColors.basic,
+                ),
+                onTap: () {
+                  // modalPreparing(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ServiceTermsPage(),
+                      ));
+                },
+              ),
+              Container(
+                height: 2.h,
+                color: Colors.grey[200],
+              ),
+              ListTile(
+                contentPadding: const EdgeInsets.only(left: 30, right: 30),
+                title: TextCustom(
+                  text: "버전 관리",
+                  fontSize: 18.sp,
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: ThemeColors.basic,
+                ),
+                onTap: () {
                   modalPreparing(context);
                   // Navigator.push(
                   //     context,
@@ -89,12 +161,15 @@ class SettingsPage extends StatelessWidget {
                   color: ThemeColors.basic,
                 ),
                 onTap: () {
-                  modalPreparing(context);
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const WithdrawalPage(),
-                  //     ));
+                  if (authState is LogOut) {
+                    modalCheckLogin(context);
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const WithdrawalPage(),
+                        ));
+                  }
                 },
               ),
             ]),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teentalktalk/ui/screens/login/login_page.dart';
+import 'package:teentalktalk/ui/screens/login/no_login_page.dart';
 import 'package:teentalktalk/ui/themes/theme_colors.dart';
 import 'package:teentalktalk/ui/widgets/widgets.dart';
 
@@ -78,6 +79,11 @@ void modalCheckLogin(BuildContext context) {
                             MaterialPageRoute(
                                 builder: (context) => const LoginPage()),
                           );
+                          // Navigator.pushReplacement(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const NoLoginPage()),
+                          // );
                         },
                       ))
                 ],

@@ -74,16 +74,21 @@ class PolicyListPage extends StatefulWidget {
     Key? key,
     required this.selectedCodes,
     this.selectedSortOrder,
+    this.policyId,
   }) : super(key: key);
 
   final SelectedCodes selectedCodes;
   late policySortOrder? selectedSortOrder;
+  final String? policyId;
 
   @override
   State<PolicyListPage> createState() => _PolicyListPageState();
 }
 
 class _PolicyListPageState extends State<PolicyListPage> {
+  late String? policyId;
+  late String selectedSortOrderCode = '0';
+  late Policy sharedPolicy;
   bool _isSelectingCategory = false;
   late int policyCount = 0; // 검색 결과 수
 
@@ -101,6 +106,13 @@ class _PolicyListPageState extends State<PolicyListPage> {
   @override
   void initState() {
     super.initState();
+    policyId = widget.policyId;
+    selectedSortOrderCode = widget.selectedSortOrder?.code ?? '0';
+
+    // 정책 공유 링크를 통해 들어온 경우 해당 정책 정보 불러오기
+    if (policyId != null) {
+      getSharedPolicy(policyId!);
+    }
 
     // 홈페이지 카테고리 선택 또는 검색 상세 조건 선택
     if ((widget.selectedCodes.policyField != null &&
@@ -126,6 +138,22 @@ class _PolicyListPageState extends State<PolicyListPage> {
     }
   }
 
+  Future<void> getSharedPolicy(String policyId) async {
+    List<Policy> policies = await policyService.getPolicyById(policyId);
+    if (policies.isNotEmpty) {
+      sharedPolicy = policies[0];
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailPolicyPage(
+            sharedPolicy,
+          ),
+        ),
+      );
+    }
+  }
+
   void updateSelectedSortOrder(policySortOrder? newSortOrder) {
     setState(() {
       widget.selectedSortOrder = newSortOrder;
@@ -134,7 +162,7 @@ class _PolicyListPageState extends State<PolicyListPage> {
 
   @override
   Widget build(BuildContext context) {
-    String selectedSortOrderCode = widget.selectedSortOrder?.code ?? '0';
+    // String selectedSortOrderCode = widget.selectedSortOrder?.code ?? '0';
     // print(_isSelectingCategory);
 
     final policyInstitution = widget.selectedCodes.policyInstitution;
@@ -165,33 +193,8 @@ class _PolicyListPageState extends State<PolicyListPage> {
     final String selectedCharacterCodeDetail =
         policyCharacter?.isNotEmpty == true ? policyCharacter![0].code : '';
 
-    // print(selectedInstitutionCodeName + selectedInstitutionCodeDetail);
-    // print(selectedTargetCodeName + selectedTargetCodeDetail);
-    // print(selectedFieldCodeName + selectedFieldCodeDetail);
-    // print(selectedCharacterCodeName + selectedCharacterCodeDetail);
-
-    // // 지역
-    // final String selectedAreaCodeName =
-    //     widget.selectedCodes.policyInstitution?.isNotEmpty == true
-    //         ? widget.selectedCodes.policyArea![0].codeName
-    //         : '';
-    // final String selectedAreaCodeDetail =
-    //     widget.selectedCodes.policyInstitution?.isNotEmpty == true
-    //         ? widget.selectedCodes.policyArea![0].code
-    //         : '';
-
     return BlocListener<PolicyBloc, PolicyState>(
-        listener: (context, state) {
-          // if (state is LoadingPolicy) {
-          //   modalLoadingShort(context);
-          // }
-
-          // else if (state is SuccessPolicyScrap) {
-          //   modalSuccess(context, '스크랩 완료', onPressed: () {
-          //     // Navigator.of(context).pop();
-          //   });
-          // }
-        },
+        listener: (context, state) {},
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
@@ -663,6 +666,9 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
   Widget build(BuildContext context) {
     final Policy policies = widget.policies;
 
+    // 정책 고유 번호
+    final String policyId = policies.pid;
+
     // 기관
     final String policyInstitution = getMobileCodeService.getCodeDetailName(
         "policy_institution_code", policies.policy_institution_code);
@@ -698,12 +704,16 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
               padding: const EdgeInsets.all(7), // 카드 안쪽
               child: InkWell(
                   splashColor: ThemeColors.primary.withAlpha(30),
-                  onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailPolicyPage(policies),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailPolicyPage(
+                          policies,
                         ),
                       ),
+                    );
+                  },
                   child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -717,6 +727,12 @@ class _ListViewPolicyState extends State<ListViewPolicy> {
                             child: Image.network(
                               imgUrl,
                               fit: BoxFit.fill,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                  'images/default_policy_img.png',
+                                  fit: BoxFit.fill,
+                                );
+                              },
                             ),
                             // Image(
                             //   image: AssetImage(imgUrl),
