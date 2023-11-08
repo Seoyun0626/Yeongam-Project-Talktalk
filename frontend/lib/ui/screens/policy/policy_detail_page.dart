@@ -181,6 +181,7 @@ class _DetailPolicyState extends State<DetailPolicyPage> {
                 child: TextCustom(
                     text: policyName,
                     color: Colors.black,
+                    maxLines: 2,
                     fontSize: 25,
                     fontWeight: FontWeight.w800),
               ),

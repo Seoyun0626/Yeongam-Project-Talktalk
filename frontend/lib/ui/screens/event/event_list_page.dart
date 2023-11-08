@@ -44,9 +44,9 @@ class _EventListPageState extends State<EventListPage> {
       '친구 초대하고 함께 무화과 받기'
     ];
     List<String> bannerDateList = [
-      '2021.07.01 ~ 2023.07.31',
-      '2021.07.01 ~ 2023.07.31',
-      '2021.07.01 ~ 2023.07.31'
+      '2021.10.01 ~ 2023.10.31',
+      '2021.10.01 ~ 2023.10.31',
+      '2021.10.01 ~ 2023.10.31',
     ];
 
     // EventController controller = EventController();
