@@ -58,7 +58,7 @@ class _AttendanceEventPageState extends State<AttendanceEventPage> {
                   height: 5.h,
                 ),
                 TextCustom(
-                    text: "2023.07.05 ~ 2023.07.31",
+                    text: "2023.10.01 ~ 2023.10.31",
                     color: Colors.white,
                     fontSize: 12.sp),
                 SizedBox(

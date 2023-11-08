@@ -385,7 +385,7 @@ class BannerSlide extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           child: Image.network(
             bannerImgUrl,
-            fit: BoxFit.cover,
+            fit: BoxFit.fitWidth,
           )),
     );
   }
