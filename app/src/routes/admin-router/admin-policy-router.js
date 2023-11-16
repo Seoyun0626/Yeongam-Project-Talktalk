@@ -11,10 +11,11 @@ var codeName = require('../../public/js/home/getCodeName');
 const { json } = require("body-parser");
 
 const ensureAuth = require("../../utils/middleware/ensureAuth");
+const accessAuth = require("../../utils/middleware/accessAuth");
 const asyncHandler = require("../../utils/middleware/asyncHandler");
 const e = require("connect-flash");
 
-router.get('/show', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/show', ensureAuth, accessAuth(1), asyncHandler(async function (req, res) {
     var crtpage = 1;
     var totalPage = 1;
     var pageSize = 8; //한 페이지에 보여줄 정책 수
