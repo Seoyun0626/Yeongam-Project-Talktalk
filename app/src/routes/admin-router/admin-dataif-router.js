@@ -19,7 +19,7 @@ var codeName = require('../../public/js/home/getCodeName');
 const passport = require('passport');
 
 //로그인 시 출력하는 화면
-router.get('/', ensureAuth, asyncHandler(async function (req, res) {
+router.get('/', ensureAuth, accessAuth(2), asyncHandler(async function (req, res) {
   var urltype = req.url.split('/')[1].split('=')[0];
   var crtpage = 1;
   var totalPage = 1;
